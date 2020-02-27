@@ -1,13 +1,10 @@
-# Duke Project Template
+# Project Template for the tP
 
 This is a project template for a small CLI Java project. It uses Gradle for build automation and GitHub Actions for CI.
 
 ## Setting up in Intellij
 
-Prerequisites: 
-* JDK 11
-* Update Intellij to the most recent version
-
+Prerequisites: JDK 11, update Intellij to the most recent version
 
 1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
 1. Set up the correct JDK version
