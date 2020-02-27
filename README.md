@@ -4,7 +4,9 @@ This is a project template for a small CLI Java project. It uses Gradle for buil
 
 ## Setting up in Intellij
 
-Prerequisites: JDK 11
+Prerequisites: 
+* JDK 11
+* Update Intellij to the most recent version
 
 1. Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
 1. Set up the correct JDK version
