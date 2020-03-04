@@ -24,7 +24,8 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList, ArrayList<Chore> choreList) throws KitchenHelperException {
+    public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
+                                 ArrayList<Chore> choreList) throws KitchenHelperException {
         return super.execute(ingredientList, recipeList, choreList);
     }
 }

@@ -10,7 +10,8 @@ public class InvalidCommand extends Command {
     
     private static final String MESSAGE_INVALID = "Invalid Command";
 
-    public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList, ArrayList<Chore> choreList) {
+    public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
+                                 ArrayList<Chore> choreList) {
         return new CommandResult(MESSAGE_INVALID);
     }
 }

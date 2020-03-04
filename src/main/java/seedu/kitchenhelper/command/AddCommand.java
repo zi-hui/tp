@@ -8,14 +8,22 @@ import seedu.kitchenhelper.object.ingredient.Ingredient;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Perform addition-related commands.
+ */
 public class AddCommand extends Command {
     
     public static final String COMMAND_WORD = "add";
     public HashMap<String[], Integer> parsedIngr;
 
+    /**
+     * Set the object's type.
+     *
+     * @param object full user input string excluding the action word.
+     */
     public void setTypeOfObject(String object) {
         String[] attributes = object.split("\\s+");
-        if(attributes[0].equalsIgnoreCase("recipe")) {
+        if (attributes[0].equalsIgnoreCase("recipe")) {
             objectType = "recipe";
         } else if (attributes[0].equalsIgnoreCase("ingredient")) {
             objectType = "ingredient";
@@ -24,6 +32,13 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * Set the attributes of the Command class.
+     *
+     * @param rawString full user input string.
+     * @param ingrAndQty a hashmap of ingredient with [ingredientName, ingredientCategory] as key
+     *                   and ingredientQuantity as value
+     */
     public void setAttributesOfCmd(String rawString, HashMap<String[], Integer> ingrAndQty) {
         setTypeOfObject(rawString);
         setObjectVariables(rawString);
@@ -35,7 +50,7 @@ public class AddCommand extends Command {
         objectVariables = rawString;
     }
 
-    public void setAction(){
+    public void setAction() {
         actionType = COMMAND_WORD;
     }
     
@@ -48,7 +63,8 @@ public class AddCommand extends Command {
         Recipe freshRecipe = new Recipe();
         freshRecipe.setRecipeName(attributes);
         freshRecipe.addIngredientsToRecipe(parsedIngr);
-        return freshRecipe.recipeName + " Recipe has been created with " + freshRecipe.recipeIngrQty + " ingredients inside.";
+        return freshRecipe.recipeName + " Recipe has been created with "
+                + freshRecipe.recipeIngrQty + " ingredients inside.";
     }
     
     public void addChores(String attributes) {
@@ -56,7 +72,8 @@ public class AddCommand extends Command {
     }
     
     @Override
-    public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList, ArrayList<Chore> choreList) throws KitchenHelperException {
+    public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
+                                 ArrayList<Chore> choreList) throws KitchenHelperException {
         return super.execute(ingredientList, recipeList, choreList);
     }
 }

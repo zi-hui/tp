@@ -48,11 +48,18 @@ public class Parser {
         }
     }
 
+    /**
+     * Prepares the addition of ingredients into recipe.
+     *
+     * @param attributes full user input string.
+     * @return hashmap of a formatted list of ingredients.
+     * @throws KitchenHelperException if the command is invalid
+     */
     public HashMap<String[], Integer> prepareAddRecipe(String attributes) throws KitchenHelperException {
         HashMap<String[], Integer> ingrAndQty = new HashMap<>();
-        String ingredientList = "";
+        String ingredientList;
         try {
-            ingredientList = attributes.substring(attributes.indexOf("/i")+3);
+            ingredientList = attributes.substring(attributes.indexOf("/i") + 3);
             String[] splitedIngr = ingredientList.split("[,][\\s]");
             for (String item : splitedIngr) {
                 String[] ingrContent = item.split(":");

@@ -7,6 +7,9 @@ import seedu.kitchenhelper.object.ingredient.Ingredient;
 
 import java.util.ArrayList;
 
+/**
+ * Abstract class to represent user's command.
+ */
 public abstract class Command {
     
     public static String actionType; //add, delete, list
@@ -20,12 +23,23 @@ public abstract class Command {
         return "";
     }
 
-    public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList, ArrayList<Chore> choreList) throws KitchenHelperException {
+    /**
+     * Runs the command given by user.
+     *
+     * @param ingredientList list of ingrdients.
+     * @param recipeList list of recipes.
+     * @param choreList list of chores.
+     * @return cmdResult response given to user after successful execution.
+     * @throws KitchenHelperException if the command is invalid.
+     */
+    public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
+                                 ArrayList<Chore> choreList) throws KitchenHelperException {
         //throw new UnsupportedOperationException();
         String feedbackToUser = "";
         if (actionType.equals(AddCommand.COMMAND_WORD) && objectType.equals("recipe")) {
             feedbackToUser = addRecipe(objectVariables, recipeList);
-        } else if (actionType.equals(AddCommand.COMMAND_WORD) && objectType.equals("ingredient")) { // change here for your part!
+        } else if (actionType.equals(AddCommand.COMMAND_WORD) && objectType.equals("ingredient")) {
+            // change here for your part!
             System.out.println("hello add ingr");
         } else if (actionType.equals(AddCommand.COMMAND_WORD) && objectType.equals("chore")) {
             System.out.println("hello add chore");
