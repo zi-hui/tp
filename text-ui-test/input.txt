@@ -1,0 +1,2 @@
+add recipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable
+add recipe /n Rice Ball /i Rice
