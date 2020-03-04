@@ -7,6 +7,13 @@ import seedu.kitchenhelper.command.DeleteCommand;
 import seedu.kitchenhelper.command.HelpCommand;
 import seedu.kitchenhelper.command.ExitCommand;
 import seedu.kitchenhelper.command.InvalidCommand;
+import seedu.kitchenhelper.exception.KitchenHelperException;
+
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Parse user input.
@@ -18,14 +25,16 @@ public class Parser {
      * @param input full user input string.
      * @return the command based on the user input.
      */
-    public Command parseUserCommand(String input) {
+    public Command parseUserCommand(String input) throws KitchenHelperException {
         String[] userInputs = splitInputLine(input, " ");
         final String commandWord = userInputs[0];
         final String parameters = userInputs[1];
-        
         switch (commandWord.toLowerCase()) {
         case AddCommand.COMMAND_WORD:
-            return new AddCommand();
+            AddCommand addCmd = new AddCommand();
+            HashMap<String[], Integer> ingrAndQty = prepareAddRecipe(parameters);
+            addCmd.setAttributesOfCmd(parameters, ingrAndQty);
+            return addCmd;
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
         case DeleteCommand.COMMAND_WORD:
@@ -37,6 +46,25 @@ public class Parser {
         default:
             return new InvalidCommand();
         }
+    }
+
+    public HashMap<String[], Integer> prepareAddRecipe(String attributes) throws KitchenHelperException {
+        HashMap<String[], Integer> ingrAndQty = new HashMap<>();
+        String ingredientList = "";
+        try {
+            ingredientList = attributes.substring(attributes.indexOf("/i")+3);
+            String[] splitedIngr = ingredientList.split("[,][\\s]");
+            for (String item : splitedIngr) {
+                String[] ingrContent = item.split(":");
+                String[] nameAndType = new String[2];
+                nameAndType[0] = ingrContent[0];
+                nameAndType[1] = ingrContent[2];
+                ingrAndQty.put(nameAndType, Integer.parseInt(ingrContent[1]));
+            }
+        } catch (IndexOutOfBoundsException e) {
+            throw new KitchenHelperException("Invalid Command");
+        }
+        return ingrAndQty;
     }
     
     //@@author AY1920S2-CS2113T-M16-2-reused
