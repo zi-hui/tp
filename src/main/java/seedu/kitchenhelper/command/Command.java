@@ -26,7 +26,7 @@ public abstract class Command {
     /**
      * Runs the command given by user.
      *
-     * @param ingredientList list of ingrdients.
+     * @param ingredientList list of ingredients.
      * @param recipeList list of recipes.
      * @param choreList list of chores.
      * @return cmdResult response given to user after successful execution.
