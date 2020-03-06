@@ -14,7 +14,11 @@ public class Ui {
     private static final String LS = System.lineSeparator();
     
     private static final String DIVIDER = "===================================================";
-    
+
+    public void printDivider() {
+        System.out.println(DIVIDER);
+    }
+
     /**
      * Format of a comment input line. Comment lines are silently consumed when reading user input.
      */
@@ -31,6 +35,10 @@ public class Ui {
     public Ui(InputStream in, PrintStream out) {
         this.in = new Scanner(in);
         this.out = out;
+    }
+
+    public void printInvalidCmd() {
+        System.out.println("Invalid Command, please check your format!");
     }
     
     //@@author AY1920S2-CS2113T-M16-2-reused
