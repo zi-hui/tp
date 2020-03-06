@@ -1,6 +1,5 @@
 package seedu.kitchenhelper.parser;
 
-import seedu.kitchenhelper.KitchenHelper;
 import seedu.kitchenhelper.command.Command;
 import seedu.kitchenhelper.command.AddCommand;
 import seedu.kitchenhelper.command.AddInventoryCommand;
@@ -11,11 +10,8 @@ import seedu.kitchenhelper.command.ExitCommand;
 import seedu.kitchenhelper.command.InvalidCommand;
 import seedu.kitchenhelper.exception.KitchenHelperException;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.Collections;
+
 import java.util.HashMap;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

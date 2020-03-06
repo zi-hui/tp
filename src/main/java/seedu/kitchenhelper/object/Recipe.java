@@ -1,6 +1,5 @@
 package seedu.kitchenhelper.object;
 
-import seedu.kitchenhelper.exception.KitchenHelperException;
 import seedu.kitchenhelper.object.ingredient.Dairy;
 import seedu.kitchenhelper.object.ingredient.Drink;
 import seedu.kitchenhelper.object.ingredient.Fruit;
