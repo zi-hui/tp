@@ -82,7 +82,7 @@ public class Parser {
      * @param attributes full user input string.
      * @return the prepared command.
      */
-    public Command prepareAddInventory(String attributes) {
+    private Command prepareAddInventory(String attributes) {
         try {
             // Regex for checking the format of add inventory
             String addInventoryRegex =
