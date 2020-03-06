@@ -1,0 +1,10 @@
+===================================================
+Hello! I'm KitchenHelper here
+What can I do for you?
+===================================================
+add recipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable
+Chicken Salad Recipe has been created with 2 ingredients inside.
+===================================================
+exit
+Exiting KitchenHelper as requested ...
+===================================================
