@@ -87,7 +87,7 @@ public class Parser {
             // Regex for checking the format of add inventory
             String addInventoryRegex =
                     "/n [a-zA-Z]+ /c [a-zA-Z]+ /q [0-9]+ /p \\d+(\\.\\d{1,2})? /e \\d{4}-\\d{2}-\\d{2}";
-            if (!checkValidFormat(attributes, addInventoryRegex)) {
+            if (!isValidUserInputFormat(attributes, addInventoryRegex)) {
                 throw new KitchenHelperException("Invalid Add Inventory Format");
             }
             String[] nameAndOthers = attributes.split("/c\\s", 2);
@@ -132,7 +132,7 @@ public class Parser {
      * @param regex      quantifier to check if valid.
      * @return true if it match, otherwise false.
      */
-    private boolean checkValidFormat(String attributes, String regex) {
+    private boolean isValidUserInputFormat(String attributes, String regex) {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(attributes);
         boolean isMatch = matcher.matches();
