@@ -2,6 +2,7 @@ package seedu.kitchenhelper.parser;
 
 import seedu.kitchenhelper.command.Command;
 import seedu.kitchenhelper.command.AddCommand;
+import seedu.kitchenhelper.command.AddInventoryCommand;
 import seedu.kitchenhelper.command.ListCommand;
 import seedu.kitchenhelper.command.DeleteCommand;
 import seedu.kitchenhelper.command.HelpCommand;
@@ -9,11 +10,10 @@ import seedu.kitchenhelper.command.ExitCommand;
 import seedu.kitchenhelper.command.InvalidCommand;
 import seedu.kitchenhelper.exception.KitchenHelperException;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.Collections;
+
 import java.util.HashMap;
-import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Parse user input.
@@ -35,6 +35,8 @@ public class Parser {
             HashMap<String[], Integer> ingrAndQty = prepareAddRecipe(parameters);
             addCmd.setAttributesOfCmd(parameters, ingrAndQty);
             return addCmd;
+        case AddInventoryCommand.COMMAND_WORD:
+            return prepareAddInventory(parameters);
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
         case DeleteCommand.COMMAND_WORD:
@@ -47,7 +49,7 @@ public class Parser {
             return new InvalidCommand();
         }
     }
-
+    
     /**
      * Prepares the addition of ingredients into recipe.
      *
@@ -74,6 +76,38 @@ public class Parser {
         return ingrAndQty;
     }
     
+    /**
+     * Prepares the addition of ingredient into inventory.
+     *
+     * @param attributes full user input string.
+     * @return the prepared command.
+     */
+    private Command prepareAddInventory(String attributes) {
+        try {
+            // Regex for checking the format of add inventory
+            String addInventoryRegex =
+                    "/n [a-zA-Z]+ /c [a-zA-Z]+ /q [0-9]+ /p \\d+(\\.\\d{1,2})? /e \\d{4}-\\d{2}-\\d{2}";
+            if (!isValidUserInputFormat(attributes, addInventoryRegex)) {
+                throw new KitchenHelperException("Invalid Add Inventory Format");
+            }
+            String[] nameAndOthers = attributes.split("/c\\s", 2);
+            String itemName = nameAndOthers[0].split("/n\\s+")[1].trim();
+            String[] categoryAndOthers = nameAndOthers[1].split("\\s+/q\\s+");
+            String category = categoryAndOthers[0].trim();
+            String[] quantityAndOthers = categoryAndOthers[1].split("\\s+/p\\s+");
+            int quantity = Integer.parseInt(quantityAndOthers[0]);
+            String[] priceAndExpiry = quantityAndOthers[1].split("\\s+/e\\s+");
+            double price = Double.parseDouble(priceAndExpiry[0]);
+            String expiry = priceAndExpiry[1];
+            
+            return new AddInventoryCommand(itemName, category, quantity, price, expiry);
+        } catch (KitchenHelperException khe) {
+            return new InvalidCommand(
+                    String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, AddInventoryCommand.COMMAND_FORMAT));
+            
+        }
+    }
+    
     //@@author AY1920S2-CS2113T-M16-2-reused
     //Reused from
     //https://github.com/nus-cs2113-AY1920S2/contacts/blob/master/src/main/java/Contacts1.java
@@ -90,4 +124,21 @@ public class Parser {
         return split.length == 2 ? split : new String[]{split[0], ""}; // else no parameters
     }
     //@@author
+    
+    /**
+     * Checks if the input string matches the regex.
+     *
+     * @param attributes the user input string.
+     * @param regex      quantifier to check if valid.
+     * @return true if it match, otherwise false.
+     */
+    private boolean isValidUserInputFormat(String attributes, String regex) {
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(attributes);
+        boolean isMatch = matcher.matches();
+        if (isMatch) {
+            return true;
+        }
+        return false;
+    }
 }
