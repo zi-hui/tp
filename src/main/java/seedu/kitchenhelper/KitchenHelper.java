@@ -29,11 +29,7 @@ public class KitchenHelper {
     
     private void run() {
         start();
-        try {
-            runCommandLoopUntilExitCommand();
-        } catch (KitchenHelperException e) {
-            ui.printInvalidCmd();
-        }
+        runCommandLoopUntilExitCommand();
         exit();
     }
     
@@ -41,18 +37,24 @@ public class KitchenHelper {
         System.exit(0);
     }
     
-    private void runCommandLoopUntilExitCommand() throws KitchenHelperException {
+    private void runCommandLoopUntilExitCommand() {
         Command command;
-        String userCommandInput;
+        String userCommandInput = "";
+
         do {
-            // takes in the user's input
-            userCommandInput = ui.getUserCommand();
-            // parse input to return obj of the corresponding
-            // type of command (i.e add/ delete/ list/ help / exit)
-            command = new Parser().parseUserCommand(userCommandInput);
-            CommandResult result = executeCommand(command);
-            ui.showResultToUser(result);
-            ui.printDivider();
+            try {
+                // takes in the user's input
+                userCommandInput = ui.getUserCommand();
+                // parse input to return obj of the corresponding
+                // type of command (i.e add/ delete/ list/ help / exit)
+                command = new Parser().parseUserCommand(userCommandInput);
+                CommandResult result = executeCommand(command);
+                ui.showResultToUser(result);
+                ui.printDivider();
+            } catch (KitchenHelperException e) {
+                ui.printInvalidCmd();
+                ui.printDivider();
+            }
         } while (!userCommandInput.equalsIgnoreCase(ExitCommand.COMMAND_WORD));
         
     }
