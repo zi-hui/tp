@@ -54,7 +54,17 @@ public abstract class Ingredient {
     public int getQuantity() {
         return quantity;
     }
-    
+
+    /**
+     * Setters for quantity.
+     *
+     * @param quantity quantity of ingredient
+     */
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
     /**
      * Getters for price.
      *
