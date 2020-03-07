@@ -56,9 +56,9 @@ public abstract class Ingredient {
     }
 
     /**
-     * Setters for quantity
+     * Setters for quantity.
      *
-     * @param quantity
+     * @param quantity quantity of ingredient
      */
 
     public void setQuantity(int quantity) {
