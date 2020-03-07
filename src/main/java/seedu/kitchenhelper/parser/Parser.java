@@ -110,21 +110,21 @@ public class Parser {
      */
 
     private HashMap<String, String> prepareDeleteParams(String attributes) throws KitchenHelperException {
-        HashMap <String, String> deleteParam = new HashMap<>();
+        HashMap<String, String> deleteParam = new HashMap<>();
         try {
             String [] typeAndName = attributes.split("/n\\s", 2);
             deleteParam.put("type", typeAndName[0].trim());
             String [] nameAndQuantity = typeAndName[1].split("/q\\s", 2);
             deleteParam.put("nameToDelete", nameAndQuantity[0].trim());
-            if (nameAndQuantity.length > 1){
+            if (nameAndQuantity.length > 1) {
                 deleteParam.put("quantity", nameAndQuantity[1].trim());
             } else {
                 deleteParam.put("quantity", "-1");
             }
         } catch (IndexOutOfBoundsException e) {
-            if (deleteParam.get("type").equalsIgnoreCase("ingredient")){
+            if (deleteParam.get("type").equalsIgnoreCase("ingredient")) {
                 throw new KitchenHelperException("delete ingredient /n INGREDIENT [/q QUANTITY]");
-            } else if (deleteParam.get("type").equalsIgnoreCase("recipe")){
+            } else if (deleteParam.get("type").equalsIgnoreCase("recipe")) {
                 throw new KitchenHelperException("delete recipe /n RECIPENAME");
             }
             throw new KitchenHelperException("");

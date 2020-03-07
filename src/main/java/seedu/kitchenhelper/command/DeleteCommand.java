@@ -14,7 +14,7 @@ public class DeleteCommand extends Command {
     public static int quantity;
 
     /**
-     * Set the Object Type for the Command
+     * Set the Object Type for the Command.
      *
      * @param object the name of the object type
      */
@@ -31,12 +31,12 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Set the other parameters for the DeleteCommand
+     * Set the other parameters for the DeleteCommand.
      *
      * @param attributes all the parameters for DeleteCommand
      */
 
-    public void setDeleteParams(HashMap<String, String> attributes){
+    public void setDeleteParams(HashMap<String, String> attributes) {
         setAction();
         setTypeOfObject(attributes.get("type"));
         setOtherAttributes(attributes);
@@ -52,7 +52,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Set the other parameters for the DeleteCommand
+     * Set the other parameters for the DeleteCommand.
      *
      * @param attributes all the parameters for DeleteCommand
      */
@@ -75,7 +75,7 @@ public class DeleteCommand extends Command {
         int count = 0;
         for (Ingredient ingredient : ingredientsList) {
             if (ingredient.getIngredientName().equalsIgnoreCase(ingredientName)) {
-                if (quantity <= -1){
+                if (quantity <= -1) {
                     ingredientsList.remove(ingredient);
                     feedbackToUser = ingredientName + " has been deleted.";
                 } else {
@@ -86,7 +86,7 @@ public class DeleteCommand extends Command {
             }
         }
 
-        if (count < 1){
+        if (count < 1) {
             feedbackToUser = "This ingredient does not exist! Please type in a correct ingredient name.";
         }
 
@@ -108,8 +108,8 @@ public class DeleteCommand extends Command {
         for (Recipe recipe : recipeList) {
             System.out.println(recipe.getRecipeName());
             if (recipe.getRecipeName().equalsIgnoreCase(recipeName.trim())) {
-                    recipeList.remove(recipe);
-                    count += 1;
+                recipeList.remove(recipe);
+                count += 1;
             }
         }
         if (count == 1) {
