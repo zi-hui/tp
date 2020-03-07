@@ -34,6 +34,7 @@ public abstract class Command {
     public String listIngredients(ArrayList<Ingredient> ingredientsList) {
         return "";
     }
+
     public String listRecipe(String objectVariables, ArrayList<Recipe> recipeList) {
         return "";
     }
@@ -46,6 +47,7 @@ public abstract class Command {
      * @return cmdResult response given to user after successful execution.
      * @throws KitchenHelperException if the command is invalid.
      */
+
     public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
                                  ArrayList<Chore> choreList) throws KitchenHelperException {
         //throw new UnsupportedOperationException();
@@ -61,9 +63,9 @@ public abstract class Command {
             feedbackToUser = deleteRecipe(objectVariables, recipeList);
         } else if (actionType.equals(DeleteCommand.COMMAND_WORD) && objectType.equals("ingredient")) {
             feedbackToUser = deleteIngredient(objectVariables, ingredientList);
-        } else if(actionType.equals(ListCommand.COMMAND_WORD) && objectType.equals("ingredient")){
+        } else if (actionType.equals(ListCommand.COMMAND_WORD) && objectType.equals("ingredient")) {
             feedbackToUser = listIngredients(ingredientList);
-        } else if(actionType.equals(ListCommand.COMMAND_WORD) && objectType.equals("recipe")) {
+        } else if (actionType.equals(ListCommand.COMMAND_WORD) && objectType.equals("recipe")) {
             feedbackToUser = listRecipe(objectVariables, recipeList);
         }
         CommandResult cmdResult = new CommandResult(feedbackToUser);

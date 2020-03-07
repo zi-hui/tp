@@ -123,17 +123,18 @@ public class Parser {
 
     private HashMap<String, String> prepareListParams(String attributes) throws KitchenHelperException {
         HashMap<String, String> listParam = new HashMap<>();
-        try{
+        try {
             String[] typeName = attributes.split("\\s", 2);
             listParam.put("type", typeName[0].trim());
-            if (typeName.length == 2){
+            if (typeName.length == 2) {
                 listParam.put("item", typeName[1].trim());
             }
-        }catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             throw new KitchenHelperException(ListCommand.COMMAND_FORMAT);
         }
         return listParam;
     }
+
     private HashMap<String, String> prepareDeleteParams(String attributes) throws KitchenHelperException {
         HashMap<String, String> deleteParam = new HashMap<>();
         try {

@@ -75,7 +75,7 @@ public class Recipe {
         return recipeName;
     }
 
-    public ArrayList<Ingredient> getRecipeItem(){
+    public ArrayList<Ingredient> getRecipeItem() {
         return this.recipeItems;
     }
 }
