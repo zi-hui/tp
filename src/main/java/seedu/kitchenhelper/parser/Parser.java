@@ -14,6 +14,7 @@ import seedu.kitchenhelper.exception.KitchenHelperException;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 /**
  * Parse user input.
  */
@@ -89,7 +90,7 @@ public class Parser {
         try {
             // Regex for checking the format of add inventory
             String addInventoryRegex =
-                    "/n [a-zA-Z]+ /c [a-zA-Z]+ /q [0-9]+ /p \\d+(\\.\\d{1,2})? /e \\d{4}-\\d{2}-\\d{2}";
+                    "/n [a-zA-Z]+( [a-zA-Z]+)* /c [a-zA-Z]+ /q [0-9]+ /p \\d+(\\.\\d{1,2})? /e \\d{4}-\\d{2}-\\d{2}";
             if (!isValidUserInputFormat(attributes, addInventoryRegex)) {
                 throw new KitchenHelperException("Invalid Add Inventory Format");
             }
@@ -109,7 +110,7 @@ public class Parser {
                     String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, AddInventoryCommand.COMMAND_FORMAT));
         }
     }
-
+    
     /**
      * Prepares the deletion of recipe and ingredients from the lists.
      *
@@ -117,13 +118,12 @@ public class Parser {
      * @return hashmap of a formatted list of parameters to be deleted.
      * @throws KitchenHelperException if the command is invalid
      */
-
     private HashMap<String, String> prepareDeleteParams(String attributes) throws KitchenHelperException {
         HashMap<String, String> deleteParam = new HashMap<>();
         try {
-            String [] typeAndName = attributes.split("/n\\s", 2);
+            String[] typeAndName = attributes.split("/n\\s", 2);
             deleteParam.put("type", typeAndName[0].trim());
-            String [] nameAndQuantity = typeAndName[1].split("/q\\s", 2);
+            String[] nameAndQuantity = typeAndName[1].split("/q\\s", 2);
             deleteParam.put("nameToDelete", nameAndQuantity[0].trim());
             if (nameAndQuantity.length > 1) {
                 deleteParam.put("quantity", nameAndQuantity[1].trim());

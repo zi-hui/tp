@@ -79,6 +79,7 @@ public class AddInventoryCommand extends Command {
         case Miscellaneous.INGREDIENT_WORD:
             // Fallthrough
         default:
+            this.categoryName = Miscellaneous.INGREDIENT_WORD;
             ingredientList.add(new Miscellaneous(ingredientName, categoryName, quantity, price, expiry));
             break;
         }
