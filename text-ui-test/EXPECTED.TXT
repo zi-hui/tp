@@ -20,7 +20,7 @@ Adds a ingredient to the inventory list. /n INGREDIENT /c CATEGORY /q QUANTITY /
 Example: addinventory /n Beef /c Meat /q 1 /p 13.5 /e 2020-02-13
 ===================================================
 delete recipe /n Chicken Salad
-This recipe does not exist! Please type in a correct recipe name.
+Chicken Salad has been deleted.
 ===================================================
 delete ingredient /n Beef /q 2
 The quantity of Beef has been changed!
