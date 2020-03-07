@@ -31,7 +31,12 @@ public abstract class Command {
         return "";
     }
 
-
+    public String listIngredients(ArrayList<Ingredient> ingredientsList) {
+        return "";
+    }
+    public String listRecipe(String objectVariables, ArrayList<Recipe> recipeList) {
+        return "";
+    }
     /**
      * Runs the command given by user.
      *
@@ -56,6 +61,10 @@ public abstract class Command {
             feedbackToUser = deleteRecipe(objectVariables, recipeList);
         } else if (actionType.equals(DeleteCommand.COMMAND_WORD) && objectType.equals("ingredient")) {
             feedbackToUser = deleteIngredient(objectVariables, ingredientList);
+        } else if(actionType.equals(ListCommand.COMMAND_WORD) && objectType.equals("ingredient")){
+            feedbackToUser = listIngredients(ingredientList);
+        } else if(actionType.equals(ListCommand.COMMAND_WORD) && objectType.equals("recipe")) {
+            feedbackToUser = listRecipe(objectVariables, recipeList);
         }
         CommandResult cmdResult = new CommandResult(feedbackToUser);
         return cmdResult;
