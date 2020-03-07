@@ -104,9 +104,6 @@ public class DeleteCommand extends Command {
     public String deleteRecipe(String recipeName, ArrayList<Recipe> recipeList) {
         String feedbackToUser;
         int count = 0;
-        int index = 0;
-
-        index = recipeList.indexOf(recipeName);
 
         for (Recipe recipe : recipeList) {
             if (recipe.getRecipeName().equalsIgnoreCase(recipeName.trim())) {
@@ -114,7 +111,7 @@ public class DeleteCommand extends Command {
             }
             count += 1;
         }
-        if (count <= (recipeList.size() -1) && (count >= 0)) {
+        if (count <= (recipeList.size() - 1) && (count >= 0)) {
             recipeList.remove(recipeList.get(count));
             feedbackToUser = recipeName + " has been deleted.";
         } else {
