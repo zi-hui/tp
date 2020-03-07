@@ -72,4 +72,10 @@ public abstract class Ingredient {
     public String getExpiryDate() {
         return expiryDate;
     }
+
+    @Override
+    public String toString() {
+        return "/n " + getIngredientName() + " /q " + getQuantity() +
+                " /e " + getExpiryDate() + " /s " + getCategoryName() + " /p " + getPrice();
+    }
 }
