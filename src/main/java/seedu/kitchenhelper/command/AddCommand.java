@@ -67,8 +67,16 @@ public class AddCommand extends Command {
                 + freshRecipe.recipeIngrQty + " ingredients inside.";
     }
     
-    public void addChores(String attributes) {
-    
+    @Override
+    public String addChore(String objectVariables, ArrayList<Chore> choreList) {
+        String[] descriptionAndDate = objectVariables.split(" /by ");
+        String description = descriptionAndDate[0];
+        String date = descriptionAndDate[1];
+        Chore newChore = new Chore(description, date);
+        newChore.setEditType(COMMAND_WORD);
+        String feedbackToUser = String.format(Chore.MESSAGE_SUCCESS,
+                newChore.editType, choreList.size(), newChore.checkSingular(choreList));
+        return feedbackToUser;
     }
     
     @Override

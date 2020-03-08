@@ -23,6 +23,10 @@ public abstract class Command {
         return "";
     }
 
+    public String addChore(String objectVariables, ArrayList<Chore> choreList) throws KitchenHelperException {
+        return "";
+    }
+
     public String deleteRecipe(String objectVariables, ArrayList<Recipe> recipeList) {
         return "";
     }
@@ -51,7 +55,7 @@ public abstract class Command {
             // change here for your part!
             System.out.println("hello add ingr");
         } else if (actionType.equals(AddCommand.COMMAND_WORD) && objectType.equals("chore")) {
-            System.out.println("hello add chore");
+            feedbackToUser = addChore(objectVariables, choreList);
         } else if (actionType.equals(DeleteCommand.COMMAND_WORD) && objectType.equals("recipe")) {
             feedbackToUser = deleteRecipe(objectVariables, recipeList);
         } else if (actionType.equals(DeleteCommand.COMMAND_WORD) && objectType.equals("ingredient")) {
