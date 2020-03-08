@@ -24,6 +24,7 @@ You have added this chore:
 [x] buy groceries(by: Tuesday 12pm)
 Now you have 1 chore in the list.
 ===================================================
+list chore
 Here are the chores in your list:
 1. [x] buy groceries(by: Tuesday 12pm)
 
