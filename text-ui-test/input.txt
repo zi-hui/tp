@@ -4,6 +4,7 @@ addinventory /n Kailan /c Vegetable /q 30 /p 30.45 /e 2020-03-12
 addinventory /n HLMilk /c Dairy /q 3 /p 12.2 /e 2020-03-14
 addinventory /n Milo /c Drink /q 30 /p 10 /e 2020-012-20
 add chore buy groceries /by Tuesday 12pm
+list chore
 delete recipe /n Chicken Salad
 delete ingredient /n Beef /q 2
 delete ingredient /n Kailan
