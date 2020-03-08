@@ -1,23 +1,23 @@
 package seedu.kitchenhelper.parser;
 
-import seedu.kitchenhelper.command.Command;
 import seedu.kitchenhelper.command.AddCommand;
 import seedu.kitchenhelper.command.AddInventoryCommand;
-import seedu.kitchenhelper.command.ListCommand;
 import seedu.kitchenhelper.command.DeleteCommand;
-import seedu.kitchenhelper.command.HelpCommand;
 import seedu.kitchenhelper.command.ExitCommand;
+import seedu.kitchenhelper.command.HelpCommand;
 import seedu.kitchenhelper.command.InvalidCommand;
-import seedu.kitchenhelper.exception.KitchenHelperException;
+import seedu.kitchenhelper.command.ListCommand;
+import seedu.kitchenhelper.command.Command;
 
+import seedu.kitchenhelper.exception.KitchenHelperException;
 
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 /**
  * Parse user input.
  */
+
 public class Parser {
     /**
      * Parses user input into command for execution.
@@ -38,9 +38,15 @@ public class Parser {
         case AddInventoryCommand.COMMAND_WORD:
             return prepareAddInventory(parameters);
         case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            ListCommand listCmd = new ListCommand();
+            HashMap<String, String> listParams = prepareListParams(parameters);
+            listCmd.setListParams(listParams);
+            return listCmd;
         case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommand();
+            DeleteCommand deleteCmd = new DeleteCommand();
+            HashMap<String, String> deleteParams = prepareDeleteParams(parameters);
+            deleteCmd.setDeleteParams(deleteParams);
+            return deleteCmd;
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
         case ExitCommand.COMMAND_WORD:
@@ -104,8 +110,52 @@ public class Parser {
         } catch (KitchenHelperException khe) {
             return new InvalidCommand(
                     String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, AddInventoryCommand.COMMAND_FORMAT));
-            
         }
+    }
+
+    /**
+     * Prepares the deletion of recipe and ingredients from the lists.
+     *
+     * @param attributes full user input string.
+     * @return hashmap of a formatted list of parameters to be deleted.
+     * @throws KitchenHelperException if the command is invalid
+     */
+
+    private HashMap<String, String> prepareListParams(String attributes) throws KitchenHelperException {
+        HashMap<String, String> listParam = new HashMap<>();
+        try {
+            String[] typeName = attributes.split("\\s", 2);
+            listParam.put("type", typeName[0].trim());
+            if (typeName.length == 2) {
+                listParam.put("item", typeName[1].trim());
+            }
+        } catch (IndexOutOfBoundsException e) {
+            throw new KitchenHelperException(ListCommand.COMMAND_FORMAT);
+        }
+        return listParam;
+    }
+
+    private HashMap<String, String> prepareDeleteParams(String attributes) throws KitchenHelperException {
+        HashMap<String, String> deleteParam = new HashMap<>();
+        try {
+            String [] typeAndName = attributes.split("/n\\s", 2);
+            deleteParam.put("type", typeAndName[0].trim());
+            String [] nameAndQuantity = typeAndName[1].split("/q\\s", 2);
+            deleteParam.put("nameToDelete", nameAndQuantity[0].trim());
+            if (nameAndQuantity.length > 1) {
+                deleteParam.put("quantity", nameAndQuantity[1].trim());
+            } else {
+                deleteParam.put("quantity", "-1");
+            }
+        } catch (IndexOutOfBoundsException e) {
+            if (deleteParam.get("type").equalsIgnoreCase("ingredient")) {
+                throw new KitchenHelperException("delete ingredient /n INGREDIENT [/q QUANTITY]");
+            } else if (deleteParam.get("type").equalsIgnoreCase("recipe")) {
+                throw new KitchenHelperException("delete recipe /n RECIPENAME");
+            }
+            throw new KitchenHelperException("");
+        }
+        return deleteParam;
     }
     
     //@@author AY1920S2-CS2113T-M16-2-reused

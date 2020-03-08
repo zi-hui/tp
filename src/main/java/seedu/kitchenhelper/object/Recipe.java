@@ -70,4 +70,12 @@ public class Recipe {
         String recipeNameAndIngr = attributes.substring(attributes.indexOf("/n") + 3, attributes.indexOf("/i") - 1);
         recipeName = recipeNameAndIngr;
     }
+
+    public String getRecipeName() {
+        return recipeName;
+    }
+
+    public ArrayList<Ingredient> getRecipeItem() {
+        return this.recipeItems;
+    }
 }
