@@ -62,13 +62,13 @@ public class ListCommand extends Command {
 
     public String listRecipe(String itemNumber, ArrayList<Recipe> recipeArrayList) {
         int itemNum = Integer.parseInt(itemNumber) - 1;
-        String result = "Recipe Name : " + recipeArrayList.get(itemNum).getRecipeName()
-                + "\nHere is the list of Ingredients in Recipe:"
+        String result = "\nHere is the list of Ingredients in Recipe:"
                 + "\nFormat : Ingredient Name | Ingredient Category | Quantity | Price | Expiry\n";
-        Recipe recipeItem = recipeArrayList.get(itemNum);
-        if (recipeItem.getRecipeItem().size() == 0) {
+        if (recipeArrayList.size() == 0 || (itemNum + 1) > recipeArrayList.size()) {
             result += "The Recipe List is currently empty.";
         } else {
+            Recipe recipeItem = recipeArrayList.get(itemNum);
+            result += "Recipe Name : " + recipeArrayList.get(itemNum).getRecipeName() + "\n";
             for (int i = 0; i < recipeItem.getRecipeItem().size(); i++) {
                 Ingredient ingredientObj = recipeItem.getRecipeItem().get(i);
                 result += ingredientObj.getIngredientName() + " | " + ingredientObj.getCategoryName()
