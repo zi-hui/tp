@@ -135,6 +135,12 @@ public class Parser {
             if (typeName.length == 2) {
                 listParam.put("item", typeName[1].trim());
             }
+            if (listParam.get("type").equalsIgnoreCase("recipe") && typeName.length != 2) {
+                throw new KitchenHelperException("list recipe <integer>");
+            }
+            if (listParam.get("type").isEmpty()) {
+                throw new KitchenHelperException("list <type>");
+            }
         } catch (IndexOutOfBoundsException e) {
             throw new KitchenHelperException(ListCommand.COMMAND_FORMAT);
         }
