@@ -95,11 +95,11 @@ class ParserTest {
     }
     
     String showToConsole(String... message) {
-        String output = "";
+        StringBuilder output = new StringBuilder();
         for (String m : message) {
-            output += m;
+            output.append(m);
         }
-        return output;
+        return output.toString();
     }
     
 }
