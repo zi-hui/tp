@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class AddInventoryCommand extends Command {
     
     public static final String COMMAND_WORD = "addinventory";
-    private static final String MESSAGE_SUCCESS =
+    public static final String MESSAGE_SUCCESS =
             "You have added Ingredient:%s Category:%s Quantity:%d Price:$%.2f Expiry:%s to the inventory list";
     public static final String COMMAND_DESC = "Adds a ingredient to the inventory list.";
     public static final String COMMAND_PARAMETER = "/n INGREDIENT /c CATEGORY /q QUANTITY /p PRICE /e EXPIRY";
@@ -56,7 +56,7 @@ public class AddInventoryCommand extends Command {
      * @param category       category of the ingredient.
      * @param ingredientList the ArrayList to store ingredients.
      */
-    private void addToCategory(String category, ArrayList<Ingredient> ingredientList) {
+    public void addToCategory(String category, ArrayList<Ingredient> ingredientList) {
         switch (category.toLowerCase()) {
         case Meat.INGREDIENT_WORD:
             ingredientList.add(new Meat(ingredientName, categoryName, quantity, price, expiry));

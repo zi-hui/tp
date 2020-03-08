@@ -86,7 +86,7 @@ public class Parser {
      * @param attributes full user input string.
      * @return the prepared command.
      */
-    private Command prepareAddInventory(String attributes) {
+    public Command prepareAddInventory(String attributes) {
         try {
             // Regex for checking the format of add inventory
             String addInventoryRegex =
@@ -165,7 +165,7 @@ public class Parser {
      * @param regex      quantifier to check if valid.
      * @return true if it match, otherwise false.
      */
-    private boolean isValidUserInputFormat(String attributes, String regex) {
+    public boolean isValidUserInputFormat(String attributes, String regex) {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(attributes);
         boolean isMatch = matcher.matches();
