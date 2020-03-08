@@ -120,8 +120,15 @@ public class DeleteCommand extends Command {
         return feedbackToUser;
     }
     
-    public void deleteChores(String attributes) {
-    
+    @Override
+    public String deleteChore(String numberToDelete, ArrayList<Chore> choreList) {
+        int number = Integer.parseInt(numberToDelete.trim());
+        Chore choreToDelete = choreList.get(number-1);
+        choreList.remove(choreToDelete);
+        choreToDelete.setEditType(COMMAND_WORD);
+        String feedbackToUser = String.format(Chore.MESSAGE_SUCCESS,
+                choreToDelete.editType, choreToDelete, choreList.size(), choreToDelete.checkSingular(choreList));
+        return feedbackToUser;
     }
 
     /**

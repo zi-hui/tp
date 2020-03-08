@@ -69,13 +69,15 @@ public class AddCommand extends Command {
     
     @Override
     public String addChore(String objectVariables, ArrayList<Chore> choreList) {
-        String[] descriptionAndDate = objectVariables.split(" /by ");
+        String[] objectTypeAndOthers = objectVariables.split("chore ", 2);
+        String[] descriptionAndDate = objectTypeAndOthers[1].trim().split("/by ");
         String description = descriptionAndDate[0];
         String date = descriptionAndDate[1];
         Chore newChore = new Chore(description, date);
+        choreList.add(newChore);
         newChore.setEditType(COMMAND_WORD);
         String feedbackToUser = String.format(Chore.MESSAGE_SUCCESS,
-                newChore.editType, choreList.size(), newChore.checkSingular(choreList));
+                newChore.editType, newChore, choreList.size(), newChore.checkSingular(choreList));
         return feedbackToUser;
     }
     

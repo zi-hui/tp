@@ -35,6 +35,10 @@ public abstract class Command {
         return "";
     }
 
+    public String deleteChore(String objectVariables, ArrayList<Chore> choreList) {
+        return "";
+    }
+
 
     /**
      * Runs the command given by user.
@@ -60,6 +64,8 @@ public abstract class Command {
             feedbackToUser = deleteRecipe(objectVariables, recipeList);
         } else if (actionType.equals(DeleteCommand.COMMAND_WORD) && objectType.equals("ingredient")) {
             feedbackToUser = deleteIngredient(objectVariables, ingredientList);
+        } else if (actionType.equals(DeleteCommand.COMMAND_WORD) && objectType.equals("chore")) {
+            feedbackToUser = deleteChore(objectVariables, choreList);
         }
         CommandResult cmdResult = new CommandResult(feedbackToUser);
         return cmdResult;

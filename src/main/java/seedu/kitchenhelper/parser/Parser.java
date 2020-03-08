@@ -64,6 +64,12 @@ public class Parser {
         HashMap<String[], Integer> ingrAndQty = new HashMap<>();
         String ingredientList;
         try {
+            if (attributes.indexOf("/i") == -1) {
+                String[] splitAttributes = attributes.split(" ", 2);
+                if (splitAttributes[0].equalsIgnoreCase("chore")) {
+                    return ingrAndQty;
+                }
+            }
             ingredientList = attributes.substring(attributes.indexOf("/i") + 3);
             String[] splitedIngr = ingredientList.split("[,][\\s]");
             for (String item : splitedIngr) {
@@ -121,14 +127,21 @@ public class Parser {
     private HashMap<String, String> prepareDeleteParams(String attributes) throws KitchenHelperException {
         HashMap<String, String> deleteParam = new HashMap<>();
         try {
-            String [] typeAndName = attributes.split("/n\\s", 2);
-            deleteParam.put("type", typeAndName[0].trim());
-            String [] nameAndQuantity = typeAndName[1].split("/q\\s", 2);
-            deleteParam.put("nameToDelete", nameAndQuantity[0].trim());
-            if (nameAndQuantity.length > 1) {
-                deleteParam.put("quantity", nameAndQuantity[1].trim());
-            } else {
+            if (attributes.indexOf("/n") == -1) {
+                String [] typeAndNumber = attributes.split(" ", 2);
+                deleteParam.put("type", typeAndNumber[0].trim());
+                deleteParam.put("nameToDelete", typeAndNumber[1].trim());
                 deleteParam.put("quantity", "-1");
+            } else {
+                String [] typeAndName = attributes.split("/n\\s", 2);
+                deleteParam.put("type", typeAndName[0].trim());
+                String [] nameAndQuantity = typeAndName[1].split("/q\\s", 2);
+                deleteParam.put("nameToDelete", nameAndQuantity[0].trim());
+                if (nameAndQuantity.length > 1) {
+                    deleteParam.put("quantity", nameAndQuantity[1].trim());
+                } else {
+                    deleteParam.put("quantity", "-1");
+                }
             }
         } catch (IndexOutOfBoundsException e) {
             if (deleteParam.get("type").equalsIgnoreCase("ingredient")) {

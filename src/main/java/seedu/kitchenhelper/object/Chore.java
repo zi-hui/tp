@@ -7,7 +7,7 @@ public class Chore {
     public String date;
     public boolean isDone;
     public String editType;
-    public static final String MESSAGE_SUCCESS = "You have %s this task:\n%s\n Now you have %s task%s in the list.";
+    public static final String MESSAGE_SUCCESS = "You have %s this chore:\n%s\nNow you have %s chore%s in the list.";
 
     public Chore(String description, String date) {
         this.description = description;
@@ -19,7 +19,7 @@ public class Chore {
          if (command.equals("add"))  {
              this.editType = "added";
          } else {
-             this.editType = "removed";
+             this.editType = "deleted";
          }
     }
 
