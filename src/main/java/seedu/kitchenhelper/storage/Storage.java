@@ -58,47 +58,63 @@ public class Storage {
             Double price = Double.parseDouble(getExpiry[0]);
             String expiry = getExpiry[1];
 
-            switch (category) {
-            case "Dairy":
-                Ingredient diary = new Dairy(name, category, quantity, price, expiry);
-                ingredientList.add(diary);
-                break;
-            case "Drink": {
-                Ingredient drink = new Drink(name, category, quantity, price, expiry);
-                ingredientList.add(drink);
-                break;
-            }
-            case "Fruit": {
-                Ingredient fruit = new Fruit(name, category, quantity, price, expiry);
-                ingredientList.add(fruit);
-                ;
-                break;
-            }
-            case "Meat": {
-                Ingredient meat = new Meat(name, category, quantity, price, expiry);
-                ingredientList.add(meat);
-                break;
-            }
-            case "Miscellaneous": {
-                Ingredient miscellaneous = new Miscellaneous(name, category, quantity, price, expiry);
-                ingredientList.add(miscellaneous);
-                break;
-            }
-            case "Staple": {
-                Ingredient staple = new Staple(name, category, quantity, price, expiry);
-                ingredientList.add(staple);
-                break;
-            }
-            case "Vegetable": {
-                Ingredient vegetable = new Vegetable(name, category, quantity, price, expiry);
-                ingredientList.add(vegetable);
-                break;
-            }
-            default:
-                throw new IllegalStateException("Unexpected value: " + category);
-            }
+            loadingIngredients(name, category, quantity, price, expiry, ingredientList);
         }
         return ingredientList;
+    }
+
+    /**
+     * Loads the ingredient into the ArrayList according to the category type.
+     *
+     * @param name name of the ingredient.
+     * @param category category of the ingredient.
+     * @param quantity number of serving of ingredient.
+     * @param price cost of the ingredient.
+     * @param expiry ingredient expiry date.
+     * @param ingredientList the ArrayList to store ingredients.
+     */
+    private void loadingIngredients(String name, String category, Integer quantity, Double price, String expiry,
+                                    ArrayList<Ingredient> ingredientList) {
+
+        switch (category) {
+        case "Dairy":
+            Ingredient diary = new Dairy(name, category, quantity, price, expiry);
+            ingredientList.add(diary);
+            break;
+        case "Drink": {
+            Ingredient drink = new Drink(name, category, quantity, price, expiry);
+            ingredientList.add(drink);
+            break;
+        }
+        case "Fruit": {
+            Ingredient fruit = new Fruit(name, category, quantity, price, expiry);
+            ingredientList.add(fruit);
+            ;
+            break;
+        }
+        case "Meat": {
+            Ingredient meat = new Meat(name, category, quantity, price, expiry);
+            ingredientList.add(meat);
+            break;
+        }
+        case "Miscellaneous": {
+            Ingredient miscellaneous = new Miscellaneous(name, category, quantity, price, expiry);
+            ingredientList.add(miscellaneous);
+            break;
+        }
+        case "Staple": {
+            Ingredient staple = new Staple(name, category, quantity, price, expiry);
+            ingredientList.add(staple);
+            break;
+        }
+        case "Vegetable": {
+            Ingredient vegetable = new Vegetable(name, category, quantity, price, expiry);
+            ingredientList.add(vegetable);
+            break;
+        }
+        default:
+            throw new IllegalStateException("Unexpected value: " + category);
+        }
     }
 
     /**
