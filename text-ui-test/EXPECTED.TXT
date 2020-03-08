@@ -20,7 +20,6 @@ Adds a ingredient to the inventory list. /n INGREDIENT /c CATEGORY /q QUANTITY /
 Example: addinventory /n Beef /c Meat /q 1 /p 13.5 /e 2020-02-13
 ===================================================
 add chore buy groceries /by Tuesday 12pm
-Adds a chore to the chore list.
 You have added this chore:
 [x] buy groceries(by: Tuesday 12pm)
 Now you have 1 chore in the list.
@@ -38,8 +37,8 @@ delete ingredient /n Kailan
 Kailan has been deleted.
 ===================================================
 delete chore 1
-You have added this chore:
-buy groceries (by: Tuesday 12pm)
+You have deleted this chore:
+[x] buy groceries(by: Tuesday 12pm)
 Now you have 0 chores in the list.
 ===================================================
 exit
