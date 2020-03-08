@@ -16,22 +16,22 @@ public class Chore {
     }
 
     public void setEditType(String command) {
-         if (command.equals("add"))  {
-             this.editType = "added";
-         } else {
-             this.editType = "deleted";
-         }
+        if (command.equals("add")) {
+            this.editType = "added";
+        } else {
+            this.editType = "deleted";
+        }
     }
 
-    public boolean markAsDone(){
+    public boolean markAsDone() {
         return isDone = true;
     }
 
     public String getStatusIcon() {
         if (isDone) {
-            return "\u2713";
+            return "/";
         } else {
-            return "\u2718";
+            return "x";
         }
     }
 

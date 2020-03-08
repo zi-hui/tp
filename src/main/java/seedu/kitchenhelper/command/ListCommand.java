@@ -89,7 +89,7 @@ public class ListCommand extends Command {
         } else {
             feedbackToUser = "Here are the chores in your list:\n";
             for (int i = 0; i < choreList.size(); ++i) {
-                feedbackToUser += (Integer.toString(i+1) + ". " + choreList.get(i) + "\n");
+                feedbackToUser += (Integer.toString(i + 1) + ". " + choreList.get(i) + "\n");
             }
         }
         return feedbackToUser;

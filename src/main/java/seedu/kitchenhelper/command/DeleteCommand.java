@@ -125,7 +125,7 @@ public class DeleteCommand extends Command {
         String feedbackToUser;
         try {
             int number = Integer.parseInt(numberToDelete.trim());
-            Chore choreToDelete = choreList.get(number-1);
+            Chore choreToDelete = choreList.get(number - 1);
             choreList.remove(choreToDelete);
             choreToDelete.setEditType(COMMAND_WORD);
             feedbackToUser = String.format(Chore.MESSAGE_SUCCESS,
