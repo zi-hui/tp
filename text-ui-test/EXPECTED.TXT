@@ -29,7 +29,7 @@ Here are the chores in your list:
 1. [✘] buy groceries (by: Tuesday 12pm)
 ===================================================
 delete recipe /n Chicken Salad
-This recipe does not exist! Please type in a correct recipe name.
+Chicken Salad has been deleted.
 ===================================================
 delete ingredient /n Beef /q 2
 The quantity of Beef has been changed!
