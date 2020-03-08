@@ -26,7 +26,7 @@ buy groceries (by: Tuesday 12pm)
 Now you have 1 chore in the list.
 ===================================================
 Here are the chores in your list:
-1. [✘] buy groceries (by: Tuesday 12pm) 
+1. [✘] buy groceries (by: Tuesday 12pm)
 ===================================================
 delete recipe /n Chicken Salad
 This recipe does not exist! Please type in a correct recipe name.
