@@ -106,13 +106,13 @@ public class DeleteCommand extends Command {
         int count = 0;
 
         for (Recipe recipe : recipeList) {
-            System.out.println(recipe.getRecipeName());
             if (recipe.getRecipeName().equalsIgnoreCase(recipeName.trim())) {
-                recipeList.remove(recipe);
-                count += 1;
+                break;
             }
+            count += 1;
         }
-        if (count == 1) {
+        if (count <= (recipeList.size() - 1) && (count >= 0)) {
+            recipeList.remove(recipeList.get(count));
             feedbackToUser = recipeName + " has been deleted.";
         } else {
             feedbackToUser = "This recipe does not exist! Please type in a correct recipe name.";
@@ -134,7 +134,7 @@ public class DeleteCommand extends Command {
      */
 
     @Override
-    public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
+    public CommandResult    execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
                                  ArrayList<Chore> choreList) throws KitchenHelperException {
         return super.execute(ingredientList, recipeList, choreList);
     }

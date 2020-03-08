@@ -63,6 +63,7 @@ public class AddCommand extends Command {
         Recipe freshRecipe = new Recipe();
         freshRecipe.setRecipeName(attributes);
         freshRecipe.addIngredientsToRecipe(parsedIngr);
+        recipeList.add(freshRecipe);
         return freshRecipe.recipeName + " Recipe has been created with "
                 + freshRecipe.recipeIngrQty + " ingredients inside.";
     }
