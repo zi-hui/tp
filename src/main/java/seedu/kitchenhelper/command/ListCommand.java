@@ -61,7 +61,7 @@ public class ListCommand extends Command {
     }
 
     public String listRecipe(String itemNumber, ArrayList<Recipe> recipeArrayList) {
-        int itemNum = Integer.valueOf(itemNumber) - 1;
+        int itemNum = Integer.parseInt(itemNumber) - 1;
         String result = "Recipe Name : " + recipeArrayList.get(itemNum).getRecipeName()
                 + "\nHere is the list of Ingredients in Recipe:"
                 + "\nFormat : Ingredient Name | Ingredient Category | Portion | Price | Expiry\n";
