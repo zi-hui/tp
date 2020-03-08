@@ -38,7 +38,10 @@ public class Parser {
         case AddInventoryCommand.COMMAND_WORD:
             return prepareAddInventory(parameters);
         case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            ListCommand listCmd = new ListCommand();
+            HashMap<String, String> listParams = prepareListParams(parameters);
+            listCmd.setListParams(listParams);
+            return listCmd;
         case DeleteCommand.COMMAND_WORD:
             DeleteCommand deleteCmd = new DeleteCommand();
             HashMap<String, String> deleteParams = prepareDeleteParams(parameters);
@@ -117,6 +120,20 @@ public class Parser {
      * @return hashmap of a formatted list of parameters to be deleted.
      * @throws KitchenHelperException if the command is invalid
      */
+
+    private HashMap<String, String> prepareListParams(String attributes) throws KitchenHelperException {
+        HashMap<String, String> listParam = new HashMap<>();
+        try {
+            String[] typeName = attributes.split("\\s", 2);
+            listParam.put("type", typeName[0].trim());
+            if (typeName.length == 2) {
+                listParam.put("item", typeName[1].trim());
+            }
+        } catch (IndexOutOfBoundsException e) {
+            throw new KitchenHelperException(ListCommand.COMMAND_FORMAT);
+        }
+        return listParam;
+    }
 
     private HashMap<String, String> prepareDeleteParams(String attributes) throws KitchenHelperException {
         HashMap<String, String> deleteParam = new HashMap<>();

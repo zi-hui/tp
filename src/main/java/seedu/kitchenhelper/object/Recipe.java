@@ -74,4 +74,8 @@ public class Recipe {
     public String getRecipeName() {
         return recipeName;
     }
+
+    public ArrayList<Ingredient> getRecipeItem() {
+        return this.recipeItems;
+    }
 }
