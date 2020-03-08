@@ -40,7 +40,7 @@ public class ListCommand extends Command {
 
     public String listIngredients(ArrayList<Ingredient> ingredientList) {
         String result = "Here is the list of Ingredients in Inventory:\n"
-                + "Format : Ingredient Name | Portion | Price | Expiry\n";
+                + "Format : Ingredient Name | Quantity | Price | Expiry\n";
         String[] categoryArray = {Dairy.INGREDIENT_WORD, Drink.INGREDIENT_WORD, Fruit.INGREDIENT_WORD,
             Meat.INGREDIENT_WORD, Miscellaneous.INGREDIENT_WORD, Staple.INGREDIENT_WORD, Vegetable.INGREDIENT_WORD};
         if (ingredientList.size() == 0) {
@@ -64,7 +64,7 @@ public class ListCommand extends Command {
         int itemNum = Integer.parseInt(itemNumber) - 1;
         String result = "Recipe Name : " + recipeArrayList.get(itemNum).getRecipeName()
                 + "\nHere is the list of Ingredients in Recipe:"
-                + "\nFormat : Ingredient Name | Ingredient Category | Portion | Price | Expiry\n";
+                + "\nFormat : Ingredient Name | Ingredient Category | Quantity | Price | Expiry\n";
         Recipe recipeItem = recipeArrayList.get(itemNum);
         if (recipeItem.getRecipeItem().size() == 0) {
             result += "The Recipe List is currently empty.";
