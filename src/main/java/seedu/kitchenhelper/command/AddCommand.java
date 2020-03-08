@@ -69,15 +69,20 @@ public class AddCommand extends Command {
     
     @Override
     public String addChore(String objectVariables, ArrayList<Chore> choreList) {
-        String[] objectTypeAndOthers = objectVariables.split("chore ", 2);
-        String[] descriptionAndDate = objectTypeAndOthers[1].trim().split("/by ");
-        String description = descriptionAndDate[0];
-        String date = descriptionAndDate[1];
-        Chore newChore = new Chore(description, date);
-        choreList.add(newChore);
-        newChore.setEditType(COMMAND_WORD);
-        String feedbackToUser = String.format(Chore.MESSAGE_SUCCESS,
-                newChore.editType, newChore, choreList.size(), newChore.checkSingular(choreList));
+        String feedbackToUser;
+        try {
+            String[] objectTypeAndOthers = objectVariables.split("chore ", 2);
+            String[] descriptionAndDate = objectTypeAndOthers[1].trim().split("/by");
+            String description = descriptionAndDate[0].trim();
+            String date = descriptionAndDate[1].trim();
+            Chore newChore = new Chore(description, date);
+            choreList.add(newChore);
+            newChore.setEditType(COMMAND_WORD);
+            feedbackToUser = String.format(Chore.MESSAGE_SUCCESS,
+                    newChore.editType, newChore, choreList.size(), newChore.checkSingular(choreList));
+        } catch (IndexOutOfBoundsException e) {
+            feedbackToUser = "You need to add a date with \"/by\" in the description.";
+        }
         return feedbackToUser;
     }
     

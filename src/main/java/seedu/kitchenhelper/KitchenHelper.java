@@ -53,6 +53,7 @@ public class KitchenHelper {
                 ui.printDivider();
             } catch (KitchenHelperException e) {
                 ui.printInvalidCmd();
+                ui.print(e.getMessage());
                 ui.printDivider();
             }
         } while (!userCommandInput.equalsIgnoreCase(ExitCommand.COMMAND_WORD));

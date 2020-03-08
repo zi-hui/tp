@@ -23,7 +23,7 @@ public abstract class Command {
         return "";
     }
 
-    public String addChore(String objectVariables, ArrayList<Chore> choreList) throws KitchenHelperException {
+    public String addChore(String objectVariables, ArrayList<Chore> choreList) {
         return "";
     }
 

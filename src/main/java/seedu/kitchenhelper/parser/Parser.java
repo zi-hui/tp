@@ -148,6 +148,8 @@ public class Parser {
                 throw new KitchenHelperException("delete ingredient /n INGREDIENT [/q QUANTITY]");
             } else if (deleteParam.get("type").equalsIgnoreCase("recipe")) {
                 throw new KitchenHelperException("delete recipe /n RECIPENAME");
+            } else if (deleteParam.get("type").equalsIgnoreCase("chore")) {
+                throw new KitchenHelperException("delete chore <integer>");
             }
             throw new KitchenHelperException("");
         }
