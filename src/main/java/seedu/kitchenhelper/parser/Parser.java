@@ -114,7 +114,7 @@ public class Parser {
         }
     }
   
-  /**
+    /**
      * Prepares the parameters needed for the list function.
      *
      * @param attributes full user input string.
