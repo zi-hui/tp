@@ -19,6 +19,16 @@ Invalid Command Format!
 Adds a ingredient to the inventory list. /n INGREDIENT /c CATEGORY /q QUANTITY /p PRICE /e EXPIRY
 Example: addinventory /n Beef /c Meat /q 1 /p 13.5 /e 2020-02-13
 ===================================================
+add chore buy groceries /by Tuesday 12pm
+You have added this chore:
+[x] buy groceries(by: Tuesday 12pm)
+Now you have 1 chore in the list.
+===================================================
+list chore
+Here are the chores in your list:
+1. [x] buy groceries(by: Tuesday 12pm)
+
+===================================================
 delete recipe /n Chicken Salad
 Chicken Salad has been deleted.
 ===================================================
@@ -27,6 +37,11 @@ The quantity of Beef has been changed!
 ===================================================
 delete ingredient /n Kailan
 Kailan has been deleted.
+===================================================
+delete chore 1
+You have deleted this chore:
+[x] buy groceries(by: Tuesday 12pm)
+Now you have 0 chores in the list.
 ===================================================
 exit
 Exiting KitchenHelper as requested ...

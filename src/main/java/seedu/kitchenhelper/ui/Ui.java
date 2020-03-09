@@ -37,6 +37,10 @@ public class Ui {
         this.out = out;
     }
 
+    public void print(String message) {
+        out.println(message);
+    }
+
     public void printInvalidCmd() {
         System.out.println("Invalid Command, please check your format!");
     }
