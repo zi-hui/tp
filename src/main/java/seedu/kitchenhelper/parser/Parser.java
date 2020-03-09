@@ -14,6 +14,7 @@ import seedu.kitchenhelper.exception.KitchenHelperException;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 /**
  * Parse user input.
  */
@@ -94,11 +95,11 @@ public class Parser {
      * @param attributes full user input string.
      * @return the prepared command.
      */
-    private Command prepareAddInventory(String attributes) {
+    public Command prepareAddInventory(String attributes) {
         try {
             // Regex for checking the format of add inventory
             String addInventoryRegex =
-                    "/n [a-zA-Z]+ /c [a-zA-Z]+ /q [0-9]+ /p \\d+(\\.\\d{1,2})? /e \\d{4}-\\d{2}-\\d{2}";
+                    "/n [a-zA-Z]+( [a-zA-Z]+)* /c [a-zA-Z]+ /q [0-9]+ /p \\d+(\\.\\d{1,2})? /e \\d{4}-\\d{2}-\\d{2}";
             if (!isValidUserInputFormat(attributes, addInventoryRegex)) {
                 throw new KitchenHelperException("Invalid Add Inventory Format");
             }
@@ -118,15 +119,13 @@ public class Parser {
                     String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, AddInventoryCommand.COMMAND_FORMAT));
         }
     }
-
+  
     /**
-     * Prepares the deletion of recipe and ingredients from the lists.
+     * Prepares the parameters needed for the list function.
      *
      * @param attributes full user input string.
-     * @return hashmap of a formatted list of parameters to be deleted.
-     * @throws KitchenHelperException if the command is invalid
+     * @return the prepared command.
      */
-
     private HashMap<String, String> prepareListParams(String attributes) throws KitchenHelperException {
         HashMap<String, String> listParam = new HashMap<>();
         try {
@@ -146,7 +145,17 @@ public class Parser {
         }
         return listParam;
     }
-
+  
+  
+  
+    /**
+     * Prepares the deletion of recipe and ingredients from the lists.
+     *
+     * @param attributes full user input string.
+     * @return hashmap of a formatted list of parameters to be deleted.
+     * @throws KitchenHelperException if the command is invalid
+     */
+    
     private HashMap<String, String> prepareDeleteParams(String attributes) throws KitchenHelperException {
         HashMap<String, String> deleteParam = new HashMap<>();
         try {
@@ -203,7 +212,7 @@ public class Parser {
      * @param regex      quantifier to check if valid.
      * @return true if it match, otherwise false.
      */
-    private boolean isValidUserInputFormat(String attributes, String regex) {
+    public boolean isValidUserInputFormat(String attributes, String regex) {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(attributes);
         boolean isMatch = matcher.matches();
