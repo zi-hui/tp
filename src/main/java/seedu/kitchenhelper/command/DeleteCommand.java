@@ -120,8 +120,22 @@ public class DeleteCommand extends Command {
         return feedbackToUser;
     }
     
-    public void deleteChores(String attributes) {
-    
+    @Override
+    public String deleteChore(String numberToDelete, ArrayList<Chore> choreList) {
+        String feedbackToUser;
+        try {
+            int number = Integer.parseInt(numberToDelete.trim());
+            Chore choreToDelete = choreList.get(number - 1);
+            choreList.remove(choreToDelete);
+            choreToDelete.setEditType(COMMAND_WORD);
+            feedbackToUser = String.format(Chore.MESSAGE_SUCCESS,
+                    choreToDelete.editType, choreToDelete, choreList.size(), choreToDelete.checkSingular(choreList));
+        } catch (NumberFormatException e) {
+            feedbackToUser = "The description of \"delete\" has to be an integer in the list.";
+        } catch (IndexOutOfBoundsException e) {
+            feedbackToUser = "The description of \"delete\" has to be an integer in the list.";
+        }
+        return feedbackToUser;
     }
 
     /**
