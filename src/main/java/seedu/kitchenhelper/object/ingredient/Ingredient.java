@@ -60,7 +60,6 @@ public abstract class Ingredient {
      *
      * @param quantity quantity of ingredient
      */
-
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }

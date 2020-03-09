@@ -4,6 +4,7 @@ import seedu.kitchenhelper.exception.KitchenHelperException;
 import seedu.kitchenhelper.object.Chore;
 import seedu.kitchenhelper.object.Recipe;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
+import seedu.kitchenhelper.storage.Storage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -60,6 +61,14 @@ public class DeleteCommand extends Command {
     public void setOtherAttributes(HashMap<String, String> attributes) {
         objectVariables = attributes.get("nameToDelete");
         quantity = Integer.parseInt(attributes.get("quantity"));
+    }
+
+    public void executeIngredientStorage(ArrayList<Ingredient> ingredientList, Storage storage){
+
+    }
+
+    public void executeChoreStorage(ArrayList<Chore> choreList, Storage storage){
+
     }
 
     /**

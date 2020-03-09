@@ -23,14 +23,20 @@ import java.io.IOException;
  */
 public class Storage {
 
-    private String filePath;
+    private String filePathIngredient;
+    private String filePathRecipe;
+    private String filePathChore;
 
     /**
      * Constructor for Storage.
-     * @param filePath String of filepath for stored data.
+     * @param filePathIngredient String of filepath for stored Ingredient data.
+     * @param filePathRecipe String of filepath for stored Recipe data.
+     * @param filePathChore String of filepath for stored Chore data.
      */
-    public Storage(String filePath) {
-        this.filePath = filePath;
+    public Storage(String filePathIngredient, String filePathRecipe, String filePathChore) {
+        this.filePathIngredient = filePathIngredient;
+        this.filePathRecipe = filePathRecipe;
+        this.filePathChore = filePathChore;
     }
 
     /**
@@ -40,7 +46,7 @@ public class Storage {
      */
     public ArrayList<Ingredient> getIngredientData() throws FileNotFoundException {
         ArrayList<Ingredient> ingredientList = new ArrayList<>();
-        File file = new File(filePath);
+        File file = new File(filePathIngredient);
         Scanner scanner = new Scanner(file);
 
         while (scanner.hasNext()) {
@@ -121,9 +127,9 @@ public class Storage {
      * Saves and stores the ingredients in ArrayList Ingredient into a text file.
      * @param ingredientList ArrayList.
      */
-    public void saveIngredientData(ArrayList<Ingredient> ingredientList) {
+    public static void saveIngredientData(ArrayList<Ingredient> ingredientList) {
         try {
-            FileWriter fw = new FileWriter("output.txt");
+            FileWriter fw = new FileWriter("outputIngredient.txt");
             for (Ingredient ingredient : ingredientList) {
                 fw.write(ingredient.toString() + System.lineSeparator());
             }
@@ -134,13 +140,44 @@ public class Storage {
     }
 
     /**
+     * Gets the saved Recipe data from text file.
+     * @return ArrayList Contains data from saved text file
+     * @throws FileNotFoundException If file from file path does not exists.
+     */
+    /*public ArrayList<Recipe> getRecipeData() throws FileNotFoundException {
+        ArrayList<Recipe> recipeList = new ArrayList<>();
+        File file = new File(filePathRecipe);
+        Scanner scanner = new Scanner(file);
+
+        while (scanner.hasNext()) {
+            String userData = scanner.nextLine();
+        }
+        return recipeList;
+    }*/
+
+    /**
+     * Gets the saved Chore data from text file.
+     * @return ArrayList Contains data from saved text file
+     * @throws FileNotFoundException If file from file path does not exists.
+     */
+    public ArrayList<Chore> getChoreData() throws FileNotFoundException {
+        ArrayList<Chore> choreList = new ArrayList<>();
+        File file = new File(filePathChore);
+        Scanner scanner = new Scanner(file);
+
+        while (scanner.hasNext()) {
+            String userData = scanner.nextLine();
+        }
+        return choreList;
+    }
+
+    /**
      * Saves the recipe in recipeList ArrayList and recipe ingredients in recipeItems ArrayList into a text file.
      * @param recipeList ArrayList.
-     * @param recipeItems ArrayList.
      */
-    public void saveRecipeData(ArrayList<Recipe> recipeList, ArrayList<Ingredient> recipeItems) {
+    public static void saveRecipeData(ArrayList<Recipe> recipeList) {
         try {
-            FileWriter fw = new FileWriter("output.txt");
+            FileWriter fw = new FileWriter("outputRecipe.txt");
             for (Recipe recipe : recipeList) {
                 fw.write(recipe.toString() + System.lineSeparator());
             }
@@ -150,13 +187,31 @@ public class Storage {
         }
     }
 
+
     /**
-     * Saves the chores in recipeList choreList into a text file.
+     * Saves the recipe ingredients in recipeItems ArrayList into a text file.
+     * @param recipeItems ArrayList.
+     */
+    /*public static void saveRecipeIngredientData(ArrayList<Ingredient> recipeItems) {
+        try {
+            FileWriter fw = new FileWriter("outputRecipe.txt");
+            for (Ingredient items : recipeItems) {
+                fw.write(items.toString() + System.lineSeparator());
+            }
+            fw.close();
+        } catch (IOException err) {
+            err.printStackTrace();
+        }
+    }
+*/
+
+    /**
+     * Saves the chores in choreList into a text file.
      * @param choreList ArrayList.
      */
-    public void saveChoreData(ArrayList<Chore> choreList) {
+    public static void saveChoreData(ArrayList<Chore> choreList) {
         try {
-            FileWriter fw = new FileWriter("output.txt");
+            FileWriter fw = new FileWriter("outputChore.txt");
             for (Chore chore : choreList) {
                 fw.write(chore.toString() + System.lineSeparator());
             }

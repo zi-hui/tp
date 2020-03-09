@@ -4,6 +4,7 @@ import seedu.kitchenhelper.exception.KitchenHelperException;
 import seedu.kitchenhelper.object.Chore;
 import seedu.kitchenhelper.object.Recipe;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
+import seedu.kitchenhelper.storage.Storage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -54,8 +55,8 @@ public class AddCommand extends Command {
         actionType = COMMAND_WORD;
     }
     
-    public void addIngredients(String attributes) {
-    
+    public void addIngredients(String attributes, ArrayList<Ingredient> ingredientList) {
+        Storage.saveIngredientData(ingredientList);
     }
 
     @Override
@@ -64,14 +65,25 @@ public class AddCommand extends Command {
         freshRecipe.setRecipeName(attributes);
         freshRecipe.addIngredientsToRecipe(parsedIngr);
         recipeList.add(freshRecipe);
+        Storage.saveRecipeData(recipeList);
+
         return freshRecipe.recipeName + " Recipe has been created with "
                 + freshRecipe.recipeIngrQty + " ingredients inside.";
     }
     
-    public void addChores(String attributes) {
+    public void addChores(String attributes, ArrayList<Chore> choreList) {
+        Storage.saveChoreData(choreList);
     
     }
-    
+
+    public void executeIngredientStorage(ArrayList<Ingredient> ingredientList, Storage storage){
+
+    }
+
+    public void executeChoreStorage(ArrayList<Chore> choreList, Storage storage){
+
+    }
+
     @Override
     public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
                                  ArrayList<Chore> choreList) throws KitchenHelperException {

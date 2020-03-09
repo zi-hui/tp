@@ -85,7 +85,15 @@ public class AddInventoryCommand extends Command {
         }
         
     }
-    
+
+    public void executeIngredientStorage(ArrayList<Ingredient> ingredientList, Storage storage){
+
+    }
+
+    public void executeChoreStorage(ArrayList<Chore> choreList, Storage storage){
+
+    }
+
     /**
      * {@inheritDoc}
      *
