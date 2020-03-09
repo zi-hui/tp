@@ -120,7 +120,7 @@ public class Parser {
      * @param attributes full user input string.
      * @return the prepared command.
      */
-  private HashMap<String, String> prepareListParams(String attributes) throws KitchenHelperException {
+    private HashMap<String, String> prepareListParams(String attributes) throws KitchenHelperException {
         HashMap<String, String> listParam = new HashMap<>();
         try {
             String[] typeName = attributes.split("\\s", 2);
