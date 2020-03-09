@@ -3,6 +3,7 @@ package seedu.kitchenhelper;
 import seedu.kitchenhelper.command.Command;
 import seedu.kitchenhelper.command.CommandResult;
 import seedu.kitchenhelper.command.ExitCommand;
+import seedu.kitchenhelper.storage.Storage;
 import seedu.kitchenhelper.exception.KitchenHelperException;
 import seedu.kitchenhelper.object.Chore;
 import seedu.kitchenhelper.object.Recipe;
@@ -21,10 +22,12 @@ public class KitchenHelper {
      * https://github.com/nus-cs2113-AY1920S2/personbook/blob/master/src/main/java/seedu/personbook/Main.java */
     
     private Ui ui;
-    
+    private Storage storage;
+  
     private void start() {
         ui = new Ui();
         ui.showWelcomeMessage();
+        storage = new Storage("output.txt");
     }
     
     private void run() {
