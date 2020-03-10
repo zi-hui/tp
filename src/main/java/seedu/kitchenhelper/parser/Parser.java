@@ -14,6 +14,7 @@ import seedu.kitchenhelper.exception.KitchenHelperException;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 /**
  * Parse user input.
  */
@@ -38,7 +39,10 @@ public class Parser {
         case AddInventoryCommand.COMMAND_WORD:
             return prepareAddInventory(parameters);
         case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            ListCommand listCmd = new ListCommand();
+            HashMap<String, String> listParams = prepareListParams(parameters);
+            listCmd.setListParams(listParams);
+            return listCmd;
         case DeleteCommand.COMMAND_WORD:
             DeleteCommand deleteCmd = new DeleteCommand();
             HashMap<String, String> deleteParams = prepareDeleteParams(parameters);
@@ -64,6 +68,12 @@ public class Parser {
         HashMap<String[], Integer> ingrAndQty = new HashMap<>();
         String ingredientList;
         try {
+            if (attributes.indexOf("/i") == -1) {
+                String[] splitAttributes = attributes.split(" ", 2);
+                if (splitAttributes[0].equalsIgnoreCase("chore")) {
+                    return ingrAndQty;
+                }
+            }
             ingredientList = attributes.substring(attributes.indexOf("/i") + 3);
             String[] splitedIngr = ingredientList.split("[,][\\s]");
             for (String item : splitedIngr) {
@@ -85,11 +95,11 @@ public class Parser {
      * @param attributes full user input string.
      * @return the prepared command.
      */
-    private Command prepareAddInventory(String attributes) {
+    public Command prepareAddInventory(String attributes) {
         try {
             // Regex for checking the format of add inventory
             String addInventoryRegex =
-                    "/n [a-zA-Z]+ /c [a-zA-Z]+ /q [0-9]+ /p \\d+(\\.\\d{1,2})? /e \\d{4}-\\d{2}-\\d{2}";
+                    "/n [a-zA-Z]+( [a-zA-Z]+)* /c [a-zA-Z]+ /q [0-9]+ /p \\d+(\\.\\d{1,2})? /e \\d{4}-\\d{2}-\\d{2}";
             if (!isValidUserInputFormat(attributes, addInventoryRegex)) {
                 throw new KitchenHelperException("Invalid Add Inventory Format");
             }
@@ -109,7 +119,35 @@ public class Parser {
                     String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, AddInventoryCommand.COMMAND_FORMAT));
         }
     }
-
+  
+    /**
+     * Prepares the parameters needed for the list function.
+     *
+     * @param attributes full user input string.
+     * @return the prepared command.
+     */
+    private HashMap<String, String> prepareListParams(String attributes) throws KitchenHelperException {
+        HashMap<String, String> listParam = new HashMap<>();
+        try {
+            String[] typeName = attributes.split("\\s", 2);
+            listParam.put("type", typeName[0].trim());
+            if (typeName.length == 2) {
+                listParam.put("item", typeName[1].trim());
+            }
+            if (listParam.get("type").equalsIgnoreCase("recipe") && typeName.length != 2) {
+                throw new KitchenHelperException("list recipe <integer>");
+            }
+            if (listParam.get("type").isEmpty()) {
+                throw new KitchenHelperException("list <type>");
+            }
+        } catch (IndexOutOfBoundsException e) {
+            throw new KitchenHelperException(ListCommand.COMMAND_FORMAT);
+        }
+        return listParam;
+    }
+  
+  
+  
     /**
      * Prepares the deletion of recipe and ingredients from the lists.
      *
@@ -117,24 +155,33 @@ public class Parser {
      * @return hashmap of a formatted list of parameters to be deleted.
      * @throws KitchenHelperException if the command is invalid
      */
-
+    
     private HashMap<String, String> prepareDeleteParams(String attributes) throws KitchenHelperException {
         HashMap<String, String> deleteParam = new HashMap<>();
         try {
-            String [] typeAndName = attributes.split("/n\\s", 2);
-            deleteParam.put("type", typeAndName[0].trim());
-            String [] nameAndQuantity = typeAndName[1].split("/q\\s", 2);
-            deleteParam.put("nameToDelete", nameAndQuantity[0].trim());
-            if (nameAndQuantity.length > 1) {
-                deleteParam.put("quantity", nameAndQuantity[1].trim());
-            } else {
+            if (attributes.indexOf("/n") == -1) {
+                String [] typeAndNumber = attributes.split(" ", 2);
+                deleteParam.put("type", typeAndNumber[0].trim());
+                deleteParam.put("nameToDelete", typeAndNumber[1].trim());
                 deleteParam.put("quantity", "-1");
+            } else {
+                String [] typeAndName = attributes.split("/n\\s", 2);
+                deleteParam.put("type", typeAndName[0].trim());
+                String [] nameAndQuantity = typeAndName[1].split("/q\\s", 2);
+                deleteParam.put("nameToDelete", nameAndQuantity[0].trim());
+                if (nameAndQuantity.length > 1) {
+                    deleteParam.put("quantity", nameAndQuantity[1].trim());
+                } else {
+                    deleteParam.put("quantity", "-1");
+                }
             }
         } catch (IndexOutOfBoundsException e) {
             if (deleteParam.get("type").equalsIgnoreCase("ingredient")) {
                 throw new KitchenHelperException("delete ingredient /n INGREDIENT [/q QUANTITY]");
             } else if (deleteParam.get("type").equalsIgnoreCase("recipe")) {
                 throw new KitchenHelperException("delete recipe /n RECIPENAME");
+            } else if (deleteParam.get("type").equalsIgnoreCase("chore")) {
+                throw new KitchenHelperException("delete chore <integer>");
             }
             throw new KitchenHelperException("");
         }
@@ -165,7 +212,7 @@ public class Parser {
      * @param regex      quantifier to check if valid.
      * @return true if it match, otherwise false.
      */
-    private boolean isValidUserInputFormat(String attributes, String regex) {
+    public boolean isValidUserInputFormat(String attributes, String regex) {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(attributes);
         boolean isMatch = matcher.matches();

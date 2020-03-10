@@ -22,10 +22,10 @@ public class KitchenHelper {
     public ArrayList<Chore> choreList = new ArrayList<>();
     /* Hi pls, look at this main program.
      * https://github.com/nus-cs2113-AY1920S2/personbook/blob/master/src/main/java/seedu/personbook/Main.java */
-
+    
     private Ui ui;
     private Storage storage;
-
+  
     private void start() {
         ui = new Ui();
         ui.showWelcomeMessage();
@@ -54,7 +54,7 @@ public class KitchenHelper {
     private void runCommandLoopUntilExitCommand() {
         Command command;
         String userCommandInput = "";
-
+        
         do {
             try {
                 // takes in the user's input
@@ -71,6 +71,7 @@ public class KitchenHelper {
                 ui.printDivider();
             } catch (KitchenHelperException e) {
                 ui.printInvalidCmd();
+                ui.print(e.getMessage());
                 ui.printDivider();
             }
         } while (!userCommandInput.equalsIgnoreCase(ExitCommand.COMMAND_WORD));
@@ -81,7 +82,13 @@ public class KitchenHelper {
         new KitchenHelper().run();
     }
     
-    private CommandResult executeCommand(Command command) {
+    /**
+     * Executes the command and return result.
+     *
+     * @param command the command being executed.
+     * @return the return message of the command.
+     */
+    public CommandResult executeCommand(Command command) {
         try {
             // to check if you get the right object
             // System.out.println(command.getClass().getName());

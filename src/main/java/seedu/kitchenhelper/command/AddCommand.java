@@ -4,7 +4,6 @@ import seedu.kitchenhelper.exception.KitchenHelperException;
 import seedu.kitchenhelper.object.Chore;
 import seedu.kitchenhelper.object.Recipe;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
-import seedu.kitchenhelper.storage.Storage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,8 +54,8 @@ public class AddCommand extends Command {
         actionType = COMMAND_WORD;
     }
     
-    public void addIngredients(String attributes, ArrayList<Ingredient> ingredientList) {
-        Storage.saveIngredientData(ingredientList);
+    public void addIngredients(String attributes) {
+    
     }
 
     @Override
@@ -65,25 +64,29 @@ public class AddCommand extends Command {
         freshRecipe.setRecipeName(attributes);
         freshRecipe.addIngredientsToRecipe(parsedIngr);
         recipeList.add(freshRecipe);
-        Storage.saveRecipeData(recipeList);
-
         return freshRecipe.recipeName + " Recipe has been created with "
                 + freshRecipe.recipeIngrQty + " ingredients inside.";
     }
     
-    public void addChores(String attributes, ArrayList<Chore> choreList) {
-        Storage.saveChoreData(choreList);
+    @Override
+    public String addChore(String objectVariables, ArrayList<Chore> choreList) {
+        String feedbackToUser;
+        try {
+            String[] objectTypeAndOthers = objectVariables.split("chore ", 2);
+            String[] descriptionAndDate = objectTypeAndOthers[1].trim().split("/by");
+            String description = descriptionAndDate[0].trim();
+            String date = descriptionAndDate[1].trim();
+            Chore newChore = new Chore(description, date);
+            choreList.add(newChore);
+            newChore.setEditType(COMMAND_WORD);
+            feedbackToUser = String.format(Chore.MESSAGE_SUCCESS,
+                    newChore.editType, newChore, choreList.size(), newChore.checkSingular(choreList));
+        } catch (IndexOutOfBoundsException e) {
+            feedbackToUser = "You need to add a date with \"/by\" in the description.";
+        }
+        return feedbackToUser;
+    }
     
-    }
-
-    public void executeIngredientStorage(ArrayList<Ingredient> ingredientList, Storage storage){
-
-    }
-
-    public void executeChoreStorage(ArrayList<Chore> choreList, Storage storage){
-
-    }
-
     @Override
     public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
                                  ArrayList<Chore> choreList) throws KitchenHelperException {
