@@ -33,8 +33,7 @@ public class KitchenHelper {
                 "outputChore.txt");
         try {
             ingredientList = new ArrayList<>(storage.getIngredientData());
-            //recipeList = new ArrayList<Recipe>(storage.getRecipeData());
-            choreList = new ArrayList<Chore>(storage.getChoreData());
+            choreList = new ArrayList<>(storage.getChoreData());
         } catch (FileNotFoundException err) {
             //ui.errorMessage(err.toString());
             //ingredientList = new

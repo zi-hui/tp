@@ -1,5 +1,6 @@
 package seedu.kitchenhelper.storage;
 
+import seedu.kitchenhelper.command.AddInventoryCommand;
 import seedu.kitchenhelper.object.Recipe;
 import seedu.kitchenhelper.object.Chore;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
@@ -39,6 +40,7 @@ public class Storage {
         this.filePathChore = filePathChore;
     }
 
+
     /**
      * Gets the saved Ingredient data from text file.
      * @return ArrayList Contains data from saved text file
@@ -66,6 +68,7 @@ public class Storage {
 
             loadingIngredients(name, category, quantity, price, expiry, ingredientList);
         }
+        scanner.close();
         return ingredientList;
     }
 
@@ -82,38 +85,37 @@ public class Storage {
     private void loadingIngredients(String name, String category, Integer quantity, Double price, String expiry,
                                     ArrayList<Ingredient> ingredientList) {
 
-        switch (category) {
-        case "Dairy":
+        switch (category.toLowerCase()) {
+        case "dairy":
             Ingredient diary = new Dairy(name, category, quantity, price, expiry);
             ingredientList.add(diary);
             break;
-        case "Drink": {
+        case "drink": {
             Ingredient drink = new Drink(name, category, quantity, price, expiry);
             ingredientList.add(drink);
             break;
         }
-        case "Fruit": {
+        case "fruit": {
             Ingredient fruit = new Fruit(name, category, quantity, price, expiry);
             ingredientList.add(fruit);
-            ;
             break;
         }
-        case "Meat": {
+        case "meat": {
             Ingredient meat = new Meat(name, category, quantity, price, expiry);
             ingredientList.add(meat);
             break;
         }
-        case "Miscellaneous": {
+        case "miscellaneous": {
             Ingredient miscellaneous = new Miscellaneous(name, category, quantity, price, expiry);
             ingredientList.add(miscellaneous);
             break;
         }
-        case "Staple": {
+        case "staple": {
             Ingredient staple = new Staple(name, category, quantity, price, expiry);
             ingredientList.add(staple);
             break;
         }
-        case "Vegetable": {
+        case "vegetable": {
             Ingredient vegetable = new Vegetable(name, category, quantity, price, expiry);
             ingredientList.add(vegetable);
             break;
@@ -121,6 +123,50 @@ public class Storage {
         default:
             throw new IllegalStateException("Unexpected value: " + category);
         }
+    }
+
+
+    /**
+     * Gets the saved Recipe data from text file.
+     * @return ArrayList Contains data from saved text file
+     * @throws FileNotFoundException If file from file path does not exists.
+     */
+    /*public ArrayList<Recipe> getRecipeData() throws FileNotFoundException {
+        ArrayList<Recipe> recipeList = new ArrayList<>();
+        File file = new File(filePathRecipe);
+        Scanner scanner = new Scanner(file);
+
+        while (scanner.hasNext()) {
+            String userData = scanner.nextLine();
+        }
+        scanner.close();
+        return recipeList;
+    }*/
+
+    /**
+     * Gets the saved Chore data from text file.
+     * @return ArrayList Contains data from saved text file
+     * @throws FileNotFoundException If file from file path does not exists.
+     */
+    public ArrayList<Chore> getChoreData() throws FileNotFoundException {
+
+        ArrayList<Chore> choreList = new ArrayList<>();
+        File file = new File(filePathChore);
+        Scanner scanner = new Scanner(file);
+
+        while (scanner.hasNext()) {
+            String userData = scanner.nextLine();
+            char isDone = userData.charAt(1);
+            String[] description = userData.substring(4).split(" \\(by: ");
+            Chore todo = new Chore(description[0], description[1].substring(0, description[1].length() - 1));
+
+            if (isDone == '/') {
+                todo.markAsDone();
+            }
+            choreList.add(todo);
+        }
+        scanner.close();
+        return choreList;
     }
 
     /**
@@ -137,38 +183,6 @@ public class Storage {
         } catch (IOException err) {
             err.printStackTrace();
         }
-    }
-
-    /**
-     * Gets the saved Recipe data from text file.
-     * @return ArrayList Contains data from saved text file
-     * @throws FileNotFoundException If file from file path does not exists.
-     */
-    /*public ArrayList<Recipe> getRecipeData() throws FileNotFoundException {
-        ArrayList<Recipe> recipeList = new ArrayList<>();
-        File file = new File(filePathRecipe);
-        Scanner scanner = new Scanner(file);
-
-        while (scanner.hasNext()) {
-            String userData = scanner.nextLine();
-        }
-        return recipeList;
-    }*/
-
-    /**
-     * Gets the saved Chore data from text file.
-     * @return ArrayList Contains data from saved text file
-     * @throws FileNotFoundException If file from file path does not exists.
-     */
-    public ArrayList<Chore> getChoreData() throws FileNotFoundException {
-        ArrayList<Chore> choreList = new ArrayList<>();
-        File file = new File(filePathChore);
-        Scanner scanner = new Scanner(file);
-
-        while (scanner.hasNext()) {
-            String userData = scanner.nextLine();
-        }
-        return choreList;
     }
 
     /**

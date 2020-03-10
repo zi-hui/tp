@@ -4,6 +4,7 @@ import seedu.kitchenhelper.exception.KitchenHelperException;
 import seedu.kitchenhelper.object.Chore;
 import seedu.kitchenhelper.object.Recipe;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
+import seedu.kitchenhelper.storage.Storage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -53,9 +54,18 @@ public class AddCommand extends Command {
     public void setAction() {
         actionType = COMMAND_WORD;
     }
+
+    public void executeIngredientStorage(ArrayList<Ingredient> ingredientList, Storage storage){
+
+    }
+
+    public void executeChoreStorage(ArrayList<Chore> choreList, Storage storage){
+
+    }
     
-    public void addIngredients(String attributes) {
-    
+    public void addIngredients(String attributes, ArrayList<Ingredient> ingredientList) {
+
+        //Storage.saveIngredientData(ingredientList);
     }
 
     @Override
@@ -64,6 +74,7 @@ public class AddCommand extends Command {
         freshRecipe.setRecipeName(attributes);
         freshRecipe.addIngredientsToRecipe(parsedIngr);
         recipeList.add(freshRecipe);
+        Storage.saveRecipeData(recipeList);
         return freshRecipe.recipeName + " Recipe has been created with "
                 + freshRecipe.recipeIngrQty + " ingredients inside.";
     }
@@ -84,6 +95,7 @@ public class AddCommand extends Command {
         } catch (IndexOutOfBoundsException e) {
             feedbackToUser = "You need to add a date with \"/by\" in the description.";
         }
+        Storage.saveChoreData(choreList);
         return feedbackToUser;
     }
     

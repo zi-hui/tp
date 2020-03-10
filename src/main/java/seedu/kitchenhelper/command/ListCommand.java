@@ -11,6 +11,8 @@ import seedu.kitchenhelper.object.ingredient.Drink;
 import seedu.kitchenhelper.object.ingredient.Fruit;
 import seedu.kitchenhelper.object.ingredient.Meat;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
+import seedu.kitchenhelper.storage.Storage;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -80,7 +82,14 @@ public class ListCommand extends Command {
         return result;
     }
 
-    
+    public void executeIngredientStorage(ArrayList<Ingredient> ingredientList, Storage storage){
+
+    }
+
+    public void executeChoreStorage(ArrayList<Chore> choreList, Storage storage){
+
+    }
+
     @Override
     public String listChore(ArrayList<Chore> choreList) {
         String feedbackToUser = "";
