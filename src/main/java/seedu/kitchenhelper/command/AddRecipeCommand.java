@@ -59,7 +59,8 @@ public class AddRecipeCommand extends Command {
     }
 
     @Override
-    public String addRecipe(String attributes, ArrayList<Recipe> recipeList) throws KitchenHelperException {
+    public String addRecipe(String attributes, ArrayList<Recipe> recipeList) {
+        System.out.println(attributes);
         Recipe freshRecipe = new Recipe();
         freshRecipe.setRecipeName(attributes);
         freshRecipe.addIngredientsToRecipe(parsedIngr);
