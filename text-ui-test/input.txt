@@ -8,5 +8,4 @@ list chore
 delete recipe /n Chicken Salad
 delete ingredient /n Beef /q 2
 delete ingredient /n Kailan
-delete chore 1
 exit
