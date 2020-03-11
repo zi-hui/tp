@@ -1,6 +1,6 @@
 package seedu.kitchenhelper.parser;
 
-import seedu.kitchenhelper.command.AddCommand;
+import seedu.kitchenhelper.command.AddRecipeCommand;
 import seedu.kitchenhelper.command.AddInventoryCommand;
 import seedu.kitchenhelper.command.DeleteCommand;
 import seedu.kitchenhelper.command.ExitCommand;
@@ -30,11 +30,8 @@ public class Parser {
         final String commandWord = userInputs[0];
         final String parameters = userInputs[1];
         switch (commandWord.toLowerCase()) {
-        case AddCommand.COMMAND_WORD:
-            AddCommand addCmd = new AddCommand();
-            HashMap<String[], Integer> ingrAndQty = prepareAddRecipe(parameters);
-            addCmd.setAttributesOfCmd(parameters, ingrAndQty);
-            return addCmd;
+        case AddRecipeCommand.COMMAND_WORD:
+            return prepareAddRecipe(parameters);
         case AddInventoryCommand.COMMAND_WORD:
             return prepareAddInventory(parameters);
         case ListCommand.COMMAND_WORD:
@@ -60,7 +57,7 @@ public class Parser {
      * @return hashmap of a formatted list of ingredients.
      * @throws KitchenHelperException if the command is invalid
      */
-    public HashMap<String[], Integer> prepareAddRecipe(String attributes) throws KitchenHelperException {
+    public Command prepareAddRecipe(String attributes) throws KitchenHelperException {
         HashMap<String[], Integer> ingrAndQty = new HashMap<>();
         String ingredientList;
         try {
@@ -76,7 +73,9 @@ public class Parser {
         } catch (IndexOutOfBoundsException e) {
             throw new KitchenHelperException("Invalid Command");
         }
-        return ingrAndQty;
+        AddRecipeCommand addCmd = new AddRecipeCommand();
+        addCmd.setAttributesOfCmd(attributes, ingrAndQty);
+        return addCmd;
     }
     
     /**

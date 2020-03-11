@@ -11,7 +11,7 @@ import java.util.HashMap;
 /**
  * Perform addition-related commands.
  */
-public class AddCommand extends Command {
+public class AddRecipeCommand extends Command {
     
     public static final String COMMAND_WORD = "add";
     public HashMap<String[], Integer> parsedIngr;
@@ -53,9 +53,9 @@ public class AddCommand extends Command {
     public void setAction() {
         actionType = COMMAND_WORD;
     }
-    
+
     public void addIngredients(String attributes) {
-    
+
     }
 
     @Override
