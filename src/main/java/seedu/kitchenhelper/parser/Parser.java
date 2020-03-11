@@ -65,12 +65,6 @@ public class Parser {
         HashMap<String[], Integer> ingrAndQty = new HashMap<>();
         String ingredientList;
         try {
-            if (attributes.indexOf("/i") == -1) {
-                String[] splitAttributes = attributes.split(" ", 2);
-                if (splitAttributes[0].equalsIgnoreCase("chore")) {
-                    return ingrAndQty;
-                }
-            }
             ingredientList = attributes.substring(attributes.indexOf("/i") + 3);
             String[] splitedIngr = ingredientList.split("[,][\\s]");
             for (String item : splitedIngr) {
