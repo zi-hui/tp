@@ -106,13 +106,13 @@ public class DeleteCommand extends Command {
         int count = 0;
 
         for (Recipe recipe : recipeList) {
-            System.out.println(recipe.getRecipeName());
             if (recipe.getRecipeName().equalsIgnoreCase(recipeName.trim())) {
-                recipeList.remove(recipe);
-                count += 1;
+                break;
             }
+            count += 1;
         }
-        if (count == 1) {
+        if (count <= (recipeList.size() - 1) && (count >= 0)) {
+            recipeList.remove(recipeList.get(count));
             feedbackToUser = recipeName + " has been deleted.";
         } else {
             feedbackToUser = "This recipe does not exist! Please type in a correct recipe name.";
@@ -120,8 +120,22 @@ public class DeleteCommand extends Command {
         return feedbackToUser;
     }
     
-    public void deleteChores(String attributes) {
-    
+    @Override
+    public String deleteChore(String numberToDelete, ArrayList<Chore> choreList) {
+        String feedbackToUser;
+        try {
+            int number = Integer.parseInt(numberToDelete.trim());
+            Chore choreToDelete = choreList.get(number - 1);
+            choreList.remove(choreToDelete);
+            choreToDelete.setEditType(COMMAND_WORD);
+            feedbackToUser = String.format(Chore.MESSAGE_SUCCESS,
+                    choreToDelete.editType, choreToDelete, choreList.size(), choreToDelete.checkSingular(choreList));
+        } catch (NumberFormatException e) {
+            feedbackToUser = "The description of \"delete\" has to be an integer in the list.";
+        } catch (IndexOutOfBoundsException e) {
+            feedbackToUser = "The description of \"delete\" has to be an integer in the list.";
+        }
+        return feedbackToUser;
     }
 
     /**
@@ -134,7 +148,7 @@ public class DeleteCommand extends Command {
      */
 
     @Override
-    public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
+    public CommandResult    execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
                                  ArrayList<Chore> choreList) throws KitchenHelperException {
         return super.execute(ingredientList, recipeList, choreList);
     }

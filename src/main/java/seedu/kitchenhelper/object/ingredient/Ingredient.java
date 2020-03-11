@@ -82,4 +82,14 @@ public abstract class Ingredient {
     public String getExpiryDate() {
         return expiryDate;
     }
+
+    /**
+     * To format all variables of add ingredient as a string.
+     * @return String consisting of ingredient name, category, quantity, price and expiry.
+     */
+    @Override
+    public String toString() {
+        return "/n " + getIngredientName() + " /c " + getCategoryName() + " /q " + getQuantity()
+                + " /p " + getPrice() + " /e " + getExpiryDate();
+    }
 }

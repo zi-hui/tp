@@ -23,6 +23,10 @@ public abstract class Command {
         return "";
     }
 
+    public String addChore(String objectVariables, ArrayList<Chore> choreList) {
+        return "";
+    }
+
     public String deleteRecipe(String objectVariables, ArrayList<Recipe> recipeList) {
         return "";
     }
@@ -31,6 +35,21 @@ public abstract class Command {
         return "";
     }
 
+    public String deleteChore(String objectVariables, ArrayList<Chore> choreList) {
+        return "";
+    }
+
+    public String listIngredients(ArrayList<Ingredient> ingredientsList) {
+        return "";
+    }
+
+    public String listRecipe(String objectVariables, ArrayList<Recipe> recipeList) {
+        return "";
+    }
+
+    public String listChore(ArrayList<Chore> choreList) {
+        return "";
+    }
 
     /**
      * Runs the command given by user.
@@ -43,6 +62,7 @@ public abstract class Command {
      */
     public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
                                  ArrayList<Chore> choreList) throws KitchenHelperException {
+        //throw new UnsupportedOperationException();
         String feedbackToUser = "";
         if (actionType.equals(AddRecipeCommand.COMMAND_WORD) && objectType.equals("recipe")) {
             feedbackToUser = addRecipe(objectVariables, recipeList);
@@ -55,6 +75,14 @@ public abstract class Command {
             feedbackToUser = deleteRecipe(objectVariables, recipeList);
         } else if (actionType.equals(DeleteCommand.COMMAND_WORD) && objectType.equals("ingredient")) {
             feedbackToUser = deleteIngredient(objectVariables, ingredientList);
+        } else if (actionType.equals(DeleteCommand.COMMAND_WORD) && objectType.equals("chore")) {
+            feedbackToUser = deleteChore(objectVariables, choreList);
+        } else if (actionType.equals(ListCommand.COMMAND_WORD) && objectType.equals("ingredient")) {
+            feedbackToUser = listIngredients(ingredientList);
+        } else if (actionType.equals(ListCommand.COMMAND_WORD) && objectType.equals("recipe")) {
+            feedbackToUser = listRecipe(objectVariables, recipeList);
+        } else if (actionType.equals(ListCommand.COMMAND_WORD) && objectType.equals("chore")) {
+            feedbackToUser = listChore(choreList);
         }
         CommandResult cmdResult = new CommandResult(feedbackToUser);
         return cmdResult;
