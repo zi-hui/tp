@@ -12,13 +12,13 @@ public class AddRecipeCommandTest {
 
     @Test
     public void addRecipe_testPass() {
-        ArrayList<Recipe> recipeList = new ArrayList<>();
         HashMap<String[], Integer> parsedIngr = new HashMap<>();
         String[] ingr = new String[2];
         ingr[0] = "milo";
         ingr[1] = "drink";
         parsedIngr.put(ingr, 10);
         String attributes = "recipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable";
+        ArrayList<Recipe> recipeList = new ArrayList<>();
         AddRecipeCommand newRecipe = new AddRecipeCommand();
         newRecipe.setAttributesOfCmd(attributes, parsedIngr);
         newRecipe.addRecipe(attributes, recipeList);
@@ -27,16 +27,15 @@ public class AddRecipeCommandTest {
 
     @Test
     public void addRecipe_testFail() {
-        ArrayList<Recipe> recipeList = new ArrayList<>();
         HashMap<String[], Integer> parsedIngr = new HashMap<>();
         String[] ingr = new String[2];
         ingr[0] = "milo";
         ingr[1] = " ";
         parsedIngr.put(ingr, 10);
         String attributes = "recipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable";
+        ArrayList<Recipe> recipeList = new ArrayList<>();
         AddRecipeCommand newRecipe = new AddRecipeCommand();
         newRecipe.setAttributesOfCmd(attributes, parsedIngr);
-        System.out.println();
         newRecipe.addRecipe(attributes, recipeList);
         assertNotEquals("drink", recipeList.get(0).getRecipeItem().getClass());
     }
