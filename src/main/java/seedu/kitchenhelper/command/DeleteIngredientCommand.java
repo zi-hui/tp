@@ -14,14 +14,14 @@ public class DeleteIngredientCommand extends Command {
     /**
      * Constructor for Delete Ingredient Command.
      *
-     * @param recipeName name of the recipe to be deleted
+     * @param ingredientName name of the ingredient to be deleted
      * @param quantity number of serving of ingredient to be deleted
      */
 
-    public DeleteIngredientCommand(String recipeName, int quantity) {
+    public DeleteIngredientCommand(String ingredientName, int quantity) {
         setAction();
         setObjectType(OBJECT_TYPE);
-        setAttributes(recipeName, quantity);
+        setAttributes(ingredientName, quantity);
     }
 
     /**
