@@ -16,8 +16,6 @@ public abstract class Command {
     public static String objectType; //ingredient, recipe, chore
     public static String objectVariables;
 
-
-
     public Command() {
     }
 
@@ -87,9 +85,9 @@ public abstract class Command {
         } else if (actionType.equals(AddCommand.COMMAND_WORD) && objectType.equals("chore")) {
             feedbackToUser = addChore(objectVariables, choreList);
         } else if (actionType.equals(DeleteCommand.COMMAND_WORD) && objectType.equals("recipe")) {
-            feedbackToUser = deleteRecipe(objectVariables, recipeList);
+            //feedbackToUser = deleteRecipe(objectVariables, recipeList);
         } else if (actionType.equals(DeleteCommand.COMMAND_WORD) && objectType.equals("ingredient")) {
-            feedbackToUser = deleteIngredient(objectVariables, ingredientList);
+            //feedbackToUser = deleteIngredient(objectVariables, ingredientList);
         } else if (actionType.equals(DeleteCommand.COMMAND_WORD) && objectType.equals("chore")) {
             feedbackToUser = deleteChore(objectVariables, choreList);
         } else if (actionType.equals(ListCommand.COMMAND_WORD) && objectType.equals("ingredient")) {

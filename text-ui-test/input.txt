@@ -5,14 +5,8 @@ addinventory /n HLMilk /c Dairy /q 3 /p 12.2 /e 2020-03-14
 addinventory /n Milo /c Drink /q 30 /p 10 /e 2020-012-20
 add chore buy groceries /by Tuesday 12pm
 list chore
-delete recipe /n Chicken Salad
+deleterecipe /n Chicken Salad
 deleteingredient /n Beef /q 2
 deleteingredient /n Kailan
 delete chore 1
 exit
-
-addinventory /n Beef /c Meat /q 3 /p 20 /e 2020-03-18
-deleteingredient /n Beef /q 2
-
-add recipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable
-delete recipe /n Chicken Salad

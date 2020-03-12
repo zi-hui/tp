@@ -89,7 +89,7 @@ public class DeleteRecipeCommand extends Command {
     public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
                                   ArrayList<Chore> choreList) throws KitchenHelperException {
         String feedbackToUser = deleteRecipe(recipeList);
-        System.out.println(feedbackToUser);
-        return super.execute(ingredientList, recipeList, choreList);
+        CommandResult cmdResult = new CommandResult(feedbackToUser);
+        return cmdResult;
     }
 }

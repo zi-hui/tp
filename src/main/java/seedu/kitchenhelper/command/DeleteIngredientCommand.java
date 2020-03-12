@@ -1,13 +1,12 @@
 package seedu.kitchenhelper.command;
 
-import seedu.kitchenhelper.exception.KitchenHelperException;
 import seedu.kitchenhelper.object.Chore;
 import seedu.kitchenhelper.object.Recipe;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
 
 import java.util.ArrayList;
 
-public class DeleteIngredientCommand extends Command{
+public class DeleteIngredientCommand extends Command {
     public static final String COMMAND_WORD = "deleteingredient";
     private static final String OBJECT_TYPE = "ingredient";
     private static int quantity = 0;
@@ -59,7 +58,7 @@ public class DeleteIngredientCommand extends Command{
      *
      * @param ingredientName the name of the ingredient to be deleted
      * @param ingredientsList the list of ingredients
-     * @return
+     * @return index if the ingredient is found in the ingredient list, else -1
      */
 
     public int getIngredientIndex(String ingredientName, ArrayList<Ingredient> ingredientsList) {
@@ -77,22 +76,26 @@ public class DeleteIngredientCommand extends Command{
      *
      * @param newQuantity  the new quantity for the ingredient
      * @param ingredientToDelete the ingredient to be deleted
+     * @return feedback to user
      */
 
-    public void updateNewQuantity(int newQuantity, Ingredient ingredientToDelete) {
+    public String updateNewQuantity(int newQuantity, Ingredient ingredientToDelete) {
+        String feedbackToUser;
         if (newQuantity < 0) {
-            System.out.println("Please enter a valid quantity to delete! Currently: \n" +
-                    ingredientToDelete.getIngredientName() + ":" + ingredientToDelete.getQuantity());;
+            feedbackToUser = "Please enter a valid quantity to delete! Currently: \n"
+                    + ingredientToDelete.getIngredientName() + ":" + ingredientToDelete.getQuantity();
         } else {
             ingredientToDelete.setQuantity(newQuantity);
-            System.out.println("The quantity of " + ingredientToDelete.getIngredientName() + " has been changed!");
+            feedbackToUser = "The quantity of " + ingredientToDelete.getIngredientName() + " has been changed!";
         }
+        return feedbackToUser;
     }
 
     /**
      * Delete the ingredient from the ingredient list.
      *
      * @param ingredientsList the list of ingredients
+     * @return feedback to user
      */
 
     public String deleteIngredient(ArrayList<Ingredient> ingredientsList) {
@@ -106,7 +109,7 @@ public class DeleteIngredientCommand extends Command{
                 feedbackToUser = ingredientName + " has been deleted.";
             } else {
                 int newQuantity = ingredientToDelete.getQuantity() - quantity;
-                updateNewQuantity(newQuantity, ingredientToDelete);
+                feedbackToUser = updateNewQuantity(newQuantity, ingredientToDelete);
             }
         } else {
             feedbackToUser = "This ingredient does not exist! Please type in a correct ingredient name.";
@@ -125,9 +128,9 @@ public class DeleteIngredientCommand extends Command{
 
     @Override
     public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
-                                  ArrayList<Chore> choreList) throws KitchenHelperException {
+                                  ArrayList<Chore> choreList) {
         String feedbackToUser = deleteIngredient(ingredientList);
-        System.out.println(feedbackToUser);
-        return super.execute(ingredientList, recipeList, choreList);
+        CommandResult cmdResult = new CommandResult(feedbackToUser);
+        return cmdResult;
     }
 }
