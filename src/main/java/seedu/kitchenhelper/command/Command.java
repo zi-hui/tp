@@ -62,16 +62,8 @@ public abstract class Command {
      */
     public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
                                  ArrayList<Chore> choreList) throws KitchenHelperException {
-        //throw new UnsupportedOperationException();
         String feedbackToUser = "";
-        if (actionType.equals(AddRecipeCommand.COMMAND_WORD) && objectType.equals("recipe")) {
-            feedbackToUser = addRecipe(objectVariables, recipeList);
-        } else if (actionType.equals(AddRecipeCommand.COMMAND_WORD) && objectType.equals("ingredient")) {
-            // change here for your part!
-            System.out.println("hello add ingr");
-        } else if (actionType.equals(AddRecipeCommand.COMMAND_WORD) && objectType.equals("chore")) {
-            System.out.println("hello add chore");
-        } else if (actionType.equals(DeleteCommand.COMMAND_WORD) && objectType.equals("recipe")) {
+        if (actionType.equals(DeleteCommand.COMMAND_WORD) && objectType.equals("recipe")) {
             feedbackToUser = deleteRecipe(objectVariables, recipeList);
         } else if (actionType.equals(DeleteCommand.COMMAND_WORD) && objectType.equals("ingredient")) {
             feedbackToUser = deleteIngredient(objectVariables, ingredientList);
