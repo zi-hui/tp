@@ -11,8 +11,10 @@ public class DeleteIngredientCommandTest {
     @Test
     public void deleteIngredient() {
         ArrayList<Ingredient> ingredientList = new ArrayList<>();
-        new AddInventoryCommand("Beef", "Meat", 30, 20.2, "2020-02-20").addToCategory("Meat", ingredientList);
-        new AddInventoryCommand("kailan", "Vegetable", 30, 30.45, "2020-03-12").addToCategory("Vegetable", ingredientList);
+        new AddInventoryCommand("Beef", "Meat", 30, 20.2, "2020-02-20")
+                                .addToCategory("Meat", ingredientList);
+        new AddInventoryCommand("kailan", "Vegetable", 30, 30.45, "2020-03-12")
+                                .addToCategory("Vegetable", ingredientList);
 
         int index = 0;
         DeleteIngredientCommand deleteIngredientQuantity = new DeleteIngredientCommand("Beef", 2);
@@ -36,8 +38,10 @@ public class DeleteIngredientCommandTest {
     @Test
     public void getIngredientIndex() {
         ArrayList<Ingredient> ingredientList = new ArrayList<>();
-        new AddInventoryCommand("Beef", "Meat", 30, 20.2, "2020-02-20").addToCategory("Meat", ingredientList);
-        new AddInventoryCommand("kailan", "Vegetable", 30, 30.45, "2020-03-12").addToCategory("Vegetable", ingredientList);
+        new AddInventoryCommand("Beef", "Meat", 30, 20.2, "2020-02-20")
+                                .addToCategory("Meat", ingredientList);
+        new AddInventoryCommand("kailan", "Vegetable", 30, 30.45, "2020-03-12")
+                                .addToCategory("Vegetable", ingredientList);
 
         int index = 0;
         DeleteIngredientCommand deleteKnownIngredient = new DeleteIngredientCommand("kailan", -1);
@@ -52,8 +56,10 @@ public class DeleteIngredientCommandTest {
     @Test
     public void updateNewQuantity() {
         ArrayList<Ingredient> ingredientList = new ArrayList<>();
-        new AddInventoryCommand("Beef", "Meat", 30, 20.2, "2020-02-20").addToCategory("Meat", ingredientList);
-        new AddInventoryCommand("kailan", "Vegetable", 30, 30.45, "2020-03-12").addToCategory("Vegetable", ingredientList);
+        new AddInventoryCommand("Beef", "Meat", 30, 20.2, "2020-02-20")
+                                .addToCategory("Meat", ingredientList);
+        new AddInventoryCommand("kailan", "Vegetable", 30, 30.45, "2020-03-12")
+                                .addToCategory("Vegetable", ingredientList);
 
         int index = 0;
         Ingredient ingredientToUpdate;

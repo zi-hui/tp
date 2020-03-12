@@ -19,7 +19,7 @@ public class DeleteRecipeCommandTest {
         parsedIngr.put(ingr, 10);
         String attributes = "recipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable";
         ArrayList<Recipe> recipeList = new ArrayList<>();
-        AddCommand newRecipe = new AddCommand();
+        AddRecipeCommand newRecipe = new AddRecipeCommand();
         newRecipe.setAttributesOfCmd(attributes, parsedIngr);
         newRecipe.addRecipe(attributes, recipeList);
 
@@ -41,7 +41,7 @@ public class DeleteRecipeCommandTest {
         parsedIngr.put(ingr, 10);
         String attributes = "recipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable";
         ArrayList<Recipe> recipeList = new ArrayList<>();
-        AddCommand newRecipe = new AddCommand();
+        AddRecipeCommand newRecipe = new AddRecipeCommand();
         newRecipe.setAttributesOfCmd(attributes, parsedIngr);
         newRecipe.addRecipe(attributes, recipeList);
 
