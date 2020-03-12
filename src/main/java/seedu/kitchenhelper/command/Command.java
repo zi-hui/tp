@@ -15,7 +15,9 @@ public abstract class Command {
     public static String actionType; //add, delete, list
     public static String objectType; //ingredient, recipe, chore
     public static String objectVariables;
-    
+
+
+
     public Command() {
     }
 

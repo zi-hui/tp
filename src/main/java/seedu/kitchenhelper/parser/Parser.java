@@ -1,14 +1,6 @@
 package seedu.kitchenhelper.parser;
 
-import seedu.kitchenhelper.command.AddCommand;
-import seedu.kitchenhelper.command.AddInventoryCommand;
-import seedu.kitchenhelper.command.DeleteCommand;
-import seedu.kitchenhelper.command.ExitCommand;
-import seedu.kitchenhelper.command.HelpCommand;
-import seedu.kitchenhelper.command.InvalidCommand;
-import seedu.kitchenhelper.command.ListCommand;
-import seedu.kitchenhelper.command.Command;
-
+import seedu.kitchenhelper.command.*;
 import seedu.kitchenhelper.exception.KitchenHelperException;
 
 import java.util.HashMap;
@@ -48,6 +40,10 @@ public class Parser {
             HashMap<String, String> deleteParams = prepareDeleteParams(parameters);
             deleteCmd.setDeleteParams(deleteParams);
             return deleteCmd;
+        case DeleteRecipeCommand.COMMAND_WORD:
+            return prepareDeleteRecipe(parameters);
+        case DeleteIngredientCommand.COMMAND_WORD:
+            return prepareDeleteIngredient(parameters);
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
         case ExitCommand.COMMAND_WORD:
@@ -56,7 +52,7 @@ public class Parser {
             return new InvalidCommand();
         }
     }
-    
+
     /**
      * Prepares the addition of ingredients into recipe.
      *
@@ -145,17 +141,46 @@ public class Parser {
         }
         return listParam;
     }
-  
-  
-  
+
     /**
-     * Prepares the deletion of recipe and ingredients from the lists.
+     * Prepares the deletion of recipe from the lists.
      *
-     * @param attributes full user input string.
+     * @param parameters full user input string.
      * @return hashmap of a formatted list of parameters to be deleted.
      * @throws KitchenHelperException if the command is invalid
      */
-    
+
+    private Command prepareDeleteRecipe(String parameters) throws KitchenHelperException {
+        try {
+            String [] typeAndName = parameters.split("/n\\s",2);
+            return new DeleteRecipeCommand(typeAndName[1].trim());
+        } catch (IndexOutOfBoundsException e) {
+            throw new KitchenHelperException("delete recipe /n RECIPENAME");
+        }
+    }
+
+    /**
+     * Prepares the deletion of ingredients from the lists.
+     *
+     * @param parameters full user input string.
+     * @return hashmap of a formatted list of parameters to be deleted.
+     * @throws KitchenHelperException if the command is invalid
+     */
+
+    private Command prepareDeleteIngredient(String parameters) throws KitchenHelperException {
+        try {
+            String [] typeAndName = parameters.split("/n\\s", 2);
+            String [] nameAndQuantity = typeAndName[1].split("/q\\s", 2);
+            if (nameAndQuantity.length > 1) {
+                return new DeleteIngredientCommand(nameAndQuantity[0].trim(), Integer.parseInt(nameAndQuantity[1]));
+            } else {
+                return new DeleteIngredientCommand(nameAndQuantity[0].trim(), -1);
+            }
+        } catch (IndexOutOfBoundsException e) {
+            throw new KitchenHelperException("delete ingredient /n INGREDIENT [/q QUANTITY]");
+        }
+    }
+
     private HashMap<String, String> prepareDeleteParams(String attributes) throws KitchenHelperException {
         HashMap<String, String> deleteParam = new HashMap<>();
         try {
