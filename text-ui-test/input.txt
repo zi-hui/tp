@@ -1,4 +1,4 @@
-add recipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable
+addRecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable
 addinventory /n Beef /c Meat /q 3 /p 20 /e 2020-03-18
 addinventory /n kailan /c Vegetable /q 30 /p 30.45 /e 2020-03-12
 addinventory /n HLMilk /c Dairy /q 3 /p 12.2 /e 2020-03-14
