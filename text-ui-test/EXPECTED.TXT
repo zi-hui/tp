@@ -2,7 +2,7 @@
 Hello! I'm KitchenHelper here
 What can I do for you?
 ===================================================
-addRecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable
+addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable
 Chicken Salad Recipe has been created with 2 ingredients inside.
 ===================================================
 addinventory /n Beef /c Meat /q 3 /p 20 /e 2020-03-18
@@ -31,8 +31,11 @@ Chicken Salad has been deleted.
 deleteingredient /n Beef /q 2
 The quantity of Beef has been changed!
 ===================================================
-deleteingredient /n Kailan
-Kailan has been deleted.
+deleteingredient /n kailan
+kailan has been deleted.
+===================================================
+delete chore 1
+The description of "delete" has to be an integer in the list.
 ===================================================
 exit
 Exiting KitchenHelper as requested ...

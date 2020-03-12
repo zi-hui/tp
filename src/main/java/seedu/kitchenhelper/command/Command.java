@@ -31,6 +31,34 @@ public abstract class Command {
         return objectVariables;
     }
 
+    /**
+     * Set the Action Type for the Command.
+     */
+
+    public void setActionType(String command) {
+        actionType = command;
+    }
+
+    /**
+     * Set the Object Type for the Command.
+     *
+     * @param type the name of the object type
+     */
+
+    public void setObjectType(String type) {
+        objectType = type;
+    }
+
+    /**
+     * Set the Object Variables for Command.
+     *
+     * @param attribute the values for the variables, can be recipe or ingredient names
+     */
+    public void setObjectVariables(String attribute) {
+        objectVariables = attribute;
+    }
+
+
     public String addChore(String objectVariables, ArrayList<Chore> choreList) {
         return "";
     }

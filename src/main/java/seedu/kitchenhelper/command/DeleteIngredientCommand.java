@@ -8,49 +8,22 @@ import java.util.ArrayList;
 
 public class DeleteIngredientCommand extends Command {
     public static final String COMMAND_WORD = "deleteingredient";
+    public static final String COMMAND_FORMAT = "deleteingredient /n INGREDIENT [/q QUANTITY]";
     private static final String OBJECT_TYPE = "ingredient";
     private static int quantity = 0;
 
     /**
      * Constructor for Delete Ingredient Command.
      *
-     * @param recipeName name of the recipe to be deleted
+     * @param ingredientName name of the recipe to be deleted
      * @param quantity number of serving of ingredient to be deleted
      */
 
-    public DeleteIngredientCommand(String recipeName, int quantity) {
-        setAction();
+    public DeleteIngredientCommand(String ingredientName, int quantity) {
+        setActionType(COMMAND_WORD);
         setObjectType(OBJECT_TYPE);
-        setAttributes(recipeName, quantity);
-    }
-
-    /**
-     * To set the other attributes for DeleteIngredientCommand.
-     * @param ingredientName The name of ingredient to be deleted
-     * @param quantity number of serving of ingredient to be deleted
-     */
-
-    public void setAttributes(String ingredientName, int quantity) {
-        objectVariables = ingredientName;
+        setObjectVariables(ingredientName);
         this.quantity = quantity;
-    }
-
-    /**
-     * Set the Action Type for the Command (delete).
-     */
-
-    public void setAction() {
-        actionType = COMMAND_WORD;
-    }
-
-    /**
-     * Set the Object Type for the Command.
-     *
-     * @param type the name of the object type
-     */
-
-    public static void setObjectType(String type) {
-        objectType = type;
     }
 
     /**
@@ -82,7 +55,7 @@ public class DeleteIngredientCommand extends Command {
     public String updateNewQuantity(int newQuantity, Ingredient ingredientToDelete) {
         String feedbackToUser;
         if (newQuantity < 0) {
-            feedbackToUser = "Please enter a valid quantity to delete! Currently: \n"
+            feedbackToUser = "Please enter a valid quantity to delete! \nCurrently: \n"
                     + ingredientToDelete.getIngredientName() + ":" + ingredientToDelete.getQuantity();
         } else {
             ingredientToDelete.setQuantity(newQuantity);

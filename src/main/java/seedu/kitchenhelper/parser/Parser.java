@@ -37,6 +37,10 @@ public class Parser {
             return prepareAddRecipe(parameters);
         case AddInventoryCommand.COMMAND_WORD:
             return prepareAddInventory(parameters);
+        case DeleteRecipeCommand.COMMAND_WORD:
+            return prepareDeleteRecipe(parameters);
+        case DeleteIngredientCommand.COMMAND_WORD:
+            return prepareDeleteIngredient(parameters);
         case ListCommand.COMMAND_WORD:
             ListCommand listCmd = new ListCommand();
             HashMap<String, String> listParams = prepareListParams(parameters);
@@ -47,10 +51,6 @@ public class Parser {
             HashMap<String, String> deleteParams = prepareDeleteParams(parameters);
             deleteCmd.setDeleteParams(deleteParams);
             return deleteCmd;
-        case DeleteRecipeCommand.COMMAND_WORD:
-            return prepareDeleteRecipe(parameters);
-        case DeleteIngredientCommand.COMMAND_WORD:
-            return prepareDeleteIngredient(parameters);
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
         case ExitCommand.COMMAND_WORD:
@@ -159,7 +159,7 @@ public class Parser {
             String [] typeAndName = parameters.split("/n\\s",2);
             return new DeleteRecipeCommand(typeAndName[1].trim());
         } catch (IndexOutOfBoundsException e) {
-            throw new KitchenHelperException("delete recipe /n RECIPENAME");
+            throw new KitchenHelperException(DeleteRecipeCommand.COMMAND_FORMAT);
         }
     }
 
@@ -181,7 +181,7 @@ public class Parser {
                 return new DeleteIngredientCommand(nameAndQuantity[0].trim(), -1);
             }
         } catch (IndexOutOfBoundsException e) {
-            throw new KitchenHelperException("delete ingredient /n INGREDIENT [/q QUANTITY]");
+            throw new KitchenHelperException(DeleteIngredientCommand.COMMAND_FORMAT);
         }
     }
 
@@ -193,23 +193,9 @@ public class Parser {
                 deleteParam.put("type", typeAndNumber[0].trim());
                 deleteParam.put("nameToDelete", typeAndNumber[1].trim());
                 deleteParam.put("quantity", "-1");
-            } else {
-                String [] typeAndName = attributes.split("/n\\s", 2);
-                deleteParam.put("type", typeAndName[0].trim());
-                String [] nameAndQuantity = typeAndName[1].split("/q\\s", 2);
-                deleteParam.put("nameToDelete", nameAndQuantity[0].trim());
-                if (nameAndQuantity.length > 1) {
-                    deleteParam.put("quantity", nameAndQuantity[1].trim());
-                } else {
-                    deleteParam.put("quantity", "-1");
-                }
             }
         } catch (IndexOutOfBoundsException e) {
-            if (deleteParam.get("type").equalsIgnoreCase("ingredient")) {
-                throw new KitchenHelperException("delete ingredient /n INGREDIENT [/q QUANTITY]");
-            } else if (deleteParam.get("type").equalsIgnoreCase("recipe")) {
-                throw new KitchenHelperException("delete recipe /n RECIPENAME");
-            } else if (deleteParam.get("type").equalsIgnoreCase("chore")) {
+            if (deleteParam.get("type").equalsIgnoreCase("chore")) {
                 throw new KitchenHelperException("delete chore <integer>");
             }
             throw new KitchenHelperException("");
