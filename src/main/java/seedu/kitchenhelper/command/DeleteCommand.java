@@ -61,37 +61,6 @@ public class DeleteCommand extends Command {
         objectVariables = attributes.get("nameToDelete");
         quantity = Integer.parseInt(attributes.get("quantity"));
     }
-
-    /**
-     * Delete the ingredient from the ingredient list.
-     *
-     * @param ingredientName the ingredient name to be deleted
-     * @param ingredientsList the list of ingredients
-     */
-
-    @Override
-    public String deleteIngredient(String ingredientName, ArrayList<Ingredient> ingredientsList) {
-        String feedbackToUser = "";
-        int count = 0;
-        for (Ingredient ingredient : ingredientsList) {
-            if (ingredient.getIngredientName().equalsIgnoreCase(ingredientName)) {
-                if (quantity <= -1) {
-                    ingredientsList.remove(ingredient);
-                    feedbackToUser = ingredientName + " has been deleted.";
-                } else {
-                    ingredient.setQuantity(ingredient.getQuantity() - quantity);
-                    feedbackToUser = "The quantity of " + ingredientName + " has been changed!";
-                }
-                count += 1;
-            }
-        }
-
-        if (count < 1) {
-            feedbackToUser = "This ingredient does not exist! Please type in a correct ingredient name.";
-        }
-
-        return feedbackToUser;
-    }
     
     @Override
     public String deleteChore(String numberToDelete, ArrayList<Chore> choreList) {

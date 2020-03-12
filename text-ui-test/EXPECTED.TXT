@@ -2,7 +2,7 @@
 Hello! I'm KitchenHelper here
 What can I do for you?
 ===================================================
-add recipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable
+addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable
 Chicken Salad Recipe has been created with 2 ingredients inside.
 ===================================================
 addinventory /n Beef /c Meat /q 3 /p 20 /e 2020-03-18
@@ -20,14 +20,10 @@ Adds a ingredient to the inventory list. /n INGREDIENT /c CATEGORY /q QUANTITY /
 Example: addinventory /n Beef /c Meat /q 1 /p 13.5 /e 2020-02-13
 ===================================================
 add chore buy groceries /by Tuesday 12pm
-You have added this chore:
-[x] buy groceries(by: Tuesday 12pm)
-Now you have 1 chore in the list.
+Invalid Command Format!
 ===================================================
 list chore
-Here are the chores in your list:
-1. [x] buy groceries(by: Tuesday 12pm)
-
+Your list of chores is currently empty.
 ===================================================
 deleterecipe /n Chicken Salad
 Chicken Salad has been deleted.
@@ -35,13 +31,11 @@ Chicken Salad has been deleted.
 deleteingredient /n Beef /q 2
 The quantity of Beef has been changed!
 ===================================================
-deleteingredient /n Kailan
-Kailan has been deleted.
+deleteingredient /n kailan
+kailan has been deleted.
 ===================================================
 delete chore 1
-You have deleted this chore:
-[x] buy groceries(by: Tuesday 12pm)
-Now you have 0 chores in the list.
+The description of "delete" has to be an integer in the list.
 ===================================================
 exit
 Exiting KitchenHelper as requested ...

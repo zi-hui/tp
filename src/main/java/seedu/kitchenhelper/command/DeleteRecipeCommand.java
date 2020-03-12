@@ -9,36 +9,14 @@ import java.util.ArrayList;
 
 public class DeleteRecipeCommand extends Command {
     public static final String COMMAND_WORD = "deleterecipe";
+    public static final String COMMAND_FORMAT = "deleterecipe /n RECIPENAME";
     private static final String OBJECT_TYPE = "recipe";
 
     public DeleteRecipeCommand(String recipeName) {
-        setAction();
+        setActionType(COMMAND_WORD);
         setObjectType(OBJECT_TYPE);
-        setAttributes(recipeName);
+        setObjectVariables(recipeName);
     }
-
-    public void setAttributes(String recipeName) {
-        objectVariables = recipeName;
-    }
-
-    /**
-     * Set the Action Type for the Command (delete).
-     */
-
-    public void setAction() {
-        actionType = COMMAND_WORD;
-    }
-
-    /**
-     * Set the Object Type for the Command.
-     *
-     * @param type the name of the object type
-     */
-
-    public static void setObjectType(String type) {
-        objectType = type;
-    }
-
     /**
      * Getting the index of the recipe to be deleted.
      *
