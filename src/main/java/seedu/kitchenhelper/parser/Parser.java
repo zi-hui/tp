@@ -79,6 +79,7 @@ public class Parser {
         }
         AddRecipeCommand addCmd = new AddRecipeCommand();
         addCmd.setAttributesOfCmd(attributes, ingrAndQty);
+
         return addCmd;
     }
     
