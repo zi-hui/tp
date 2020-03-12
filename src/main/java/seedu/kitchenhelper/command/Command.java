@@ -72,19 +72,10 @@ public abstract class Command {
      * @return cmdResult response given to user after successful execution.
      * @throws KitchenHelperException if the command is invalid.
      */
-
     public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
                                  ArrayList<Chore> choreList) throws KitchenHelperException {
-        //throw new UnsupportedOperationException();
         String feedbackToUser = "";
-        if (actionType.equals(AddCommand.COMMAND_WORD) && objectType.equals("recipe")) {
-            feedbackToUser = addRecipe(objectVariables, recipeList);
-        } else if (actionType.equals(AddCommand.COMMAND_WORD) && objectType.equals("ingredient")) {
-            // change here for your part!
-            System.out.println("hello add ingr");
-        } else if (actionType.equals(AddCommand.COMMAND_WORD) && objectType.equals("chore")) {
-            feedbackToUser = addChore(objectVariables, choreList);
-        } else if (actionType.equals(DeleteCommand.COMMAND_WORD) && objectType.equals("recipe")) {
+        if (actionType.equals(DeleteCommand.COMMAND_WORD) && objectType.equals("recipe")) {
             feedbackToUser = deleteRecipe(objectVariables, recipeList);
         } else if (actionType.equals(DeleteCommand.COMMAND_WORD) && objectType.equals("ingredient")) {
             feedbackToUser = deleteIngredient(objectVariables, ingredientList);
