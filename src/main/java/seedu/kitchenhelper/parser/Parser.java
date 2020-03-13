@@ -26,8 +26,9 @@ import java.util.regex.Pattern;
 
 public class Parser {
 
-    public static final Logger LOGS = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
-    public final String WARNING_PREPARERECIPE = "An IO exception has been caught";
+    public static final Logger kitchenlogs = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    public final String warningPrepareRecipe = "An IO exception has been caught";
+
     /**
      * Parses user input into command for execution.
      *
@@ -88,7 +89,7 @@ public class Parser {
                 ingrAndQty.put(nameAndType, Integer.parseInt(ingrContent[1]));
             }
         } catch (IndexOutOfBoundsException e) {
-            LOGS.log(Level.WARNING, WARNING_PREPARERECIPE, e.toString());
+            kitchenlogs.log(Level.WARNING, warningPrepareRecipe, e.toString());
             return new InvalidCommand(
                     String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, AddRecipeCommand.COMMAND_FORMAT));
         }

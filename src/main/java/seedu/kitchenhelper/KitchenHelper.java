@@ -13,10 +13,15 @@ import seedu.kitchenhelper.ui.Ui;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.*;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+import java.util.logging.FileHandler;
+import java.util.logging.SimpleFormatter;
 
 public class KitchenHelper {
-    public final static Logger LOGS = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    public final Logger kitchenLogs = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     public ArrayList<Ingredient> ingredientList = new ArrayList<>();
     public ArrayList<Recipe> recipeList = new ArrayList<>();
     public ArrayList<Chore> choreList = new ArrayList<>();
@@ -51,7 +56,7 @@ public class KitchenHelper {
         LogManager.getLogManager().reset();
         ConsoleHandler consoleOutput = new ConsoleHandler();
         consoleOutput.setLevel(Level.SEVERE);
-        LOGS.addHandler(consoleOutput);
+        kitchenLogs.addHandler(consoleOutput);
 
         /*
         Logs all information above the Level.Fine to a log file
@@ -60,7 +65,7 @@ public class KitchenHelper {
             FileHandler logFile = new FileHandler("KitchenLogs.log");
             logFile.setFormatter(new SimpleFormatter());
             logFile.setLevel(Level.FINE);
-            LOGS.addHandler(logFile);
+            kitchenLogs.addHandler(logFile);
         } catch (IOException e) {
             throw new KitchenHelperException("Error in Logging");
         }

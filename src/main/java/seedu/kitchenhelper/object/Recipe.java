@@ -19,8 +19,8 @@ import java.util.logging.Logger;
  */
 public class Recipe {
 
-    public static final Logger LOGS = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
-    public final String WARNING_ADDINGRTORECIPE =
+    public static final Logger kitchenLogs = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    public final String warningAddRecipe =
             "An unidentifiable ingredient has been added to ingredient of Miscellaneous category";
     ArrayList<Ingredient> recipeItems = new ArrayList<>();
     public String recipeName;
@@ -72,7 +72,7 @@ public class Recipe {
         case "vegetable":
             return new Vegetable(ingrName, ingrCategory, ingrQuantity, 0, null);
         default:
-            LOGS.warning(WARNING_ADDINGRTORECIPE);
+            kitchenLogs.warning(warningAddRecipe);
             return new Miscellaneous(ingrName, ingrCategory, ingrQuantity, 0, null);
         }
     }
