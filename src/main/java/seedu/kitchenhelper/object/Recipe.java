@@ -32,12 +32,17 @@ public class Recipe {
      * @param ingrAndQty the hashmap of ingredients.
      */
     public void addIngredientsToRecipe(HashMap<String[], Integer> ingrAndQty) {
+        assert ingrAndQty.size() > 0;
         for (Map.Entry<String[], Integer> entry : ingrAndQty.entrySet()) {
             String ingrName = (entry.getKey())[0];
             String ingrCategory = (entry.getKey())[1];
             Integer ingrQuantity = entry.getValue();
+            assert ingrName.length() > 0;
+            assert ingrCategory.length() > 0;
+            assert ingrQuantity >= 0;
             Ingredient newIngredient = createIngr(ingrName, ingrCategory, ingrQuantity);
             recipeItems.add(newIngredient);
+            assert recipeItems.size() > 0;
         }
         recipeIngrQty = recipeItems.size();
     }

@@ -76,6 +76,7 @@ public class Parser {
     public Command prepareAddRecipe(String attributes) throws KitchenHelperException {
         HashMap<String[], Integer> ingrAndQty = new HashMap<>();
         String ingredientList;
+        AddRecipeCommand addCmd = new AddRecipeCommand();
         try {
             ingredientList = attributes.substring(attributes.indexOf("/i") + 3);
             String[] splitedIngr = ingredientList.split("[,][\\s]");
@@ -88,9 +89,9 @@ public class Parser {
             }
         } catch (IndexOutOfBoundsException e) {
             LOGS.log(Level.WARNING, WARNING_PREPARERECIPE, e.toString());
-            throw new KitchenHelperException("Invalid Command");
+            return new InvalidCommand(
+                    String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, AddRecipeCommand.COMMAND_FORMAT));
         }
-        AddRecipeCommand addCmd = new AddRecipeCommand();
         addCmd.setAttributesOfCmd(attributes, ingrAndQty);
         return addCmd;
     }
