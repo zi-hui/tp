@@ -1,0 +1,4 @@
+Mar 13, 2020 1:53:13 PM seedu.kitchenhelper.parser.Parser prepareAddRecipe
+WARNING: An IO exception has been caught
+Mar 13, 2020 1:53:28 PM seedu.kitchenhelper.command.AddRecipeCommand addRecipe
+INFO: A new recipe has been added

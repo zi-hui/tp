@@ -12,11 +12,16 @@ import seedu.kitchenhelper.object.ingredient.Vegetable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 
 /**
  * A Recipe represents a collection of ingredients of different types.
  */
 public class Recipe {
+
+    public static final Logger LOGS = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    public final String WARNING_ADDINGRTORECIPE =
+            "An unidentifiable ingredient has been added to ingredient of Miscellaneous category";
     ArrayList<Ingredient> recipeItems = new ArrayList<>();
     public String recipeName;
     public Integer recipeIngrQty;
@@ -62,7 +67,8 @@ public class Recipe {
         case "vegetable":
             return new Vegetable(ingrName, ingrCategory, ingrQuantity, 0, null);
         default:
-            return null;
+            LOGS.warning(WARNING_ADDINGRTORECIPE);
+            return new Miscellaneous(ingrName, ingrCategory, ingrQuantity, 0, null);
         }
     }
 

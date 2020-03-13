@@ -12,8 +12,11 @@ import seedu.kitchenhelper.command.ExitCommand;
 import seedu.kitchenhelper.command.InvalidCommand;
 
 import seedu.kitchenhelper.exception.KitchenHelperException;
+import seedu.kitchenhelper.object.Recipe;
 
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,6 +25,9 @@ import java.util.regex.Pattern;
  */
 
 public class Parser {
+
+    public static final Logger LOGS = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    public final String WARNING_PREPARERECIPE = "An IO exception has been caught";
     /**
      * Parses user input into command for execution.
      *
@@ -81,11 +87,11 @@ public class Parser {
                 ingrAndQty.put(nameAndType, Integer.parseInt(ingrContent[1]));
             }
         } catch (IndexOutOfBoundsException e) {
+            LOGS.log(Level.WARNING, WARNING_PREPARERECIPE, e.toString());
             throw new KitchenHelperException("Invalid Command");
         }
         AddRecipeCommand addCmd = new AddRecipeCommand();
         addCmd.setAttributesOfCmd(attributes, ingrAndQty);
-
         return addCmd;
     }
     

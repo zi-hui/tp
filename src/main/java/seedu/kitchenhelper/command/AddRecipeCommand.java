@@ -7,13 +7,16 @@ import seedu.kitchenhelper.object.ingredient.Ingredient;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.logging.*;
 
 /**
  * Perform addition-related commands.
  */
 public class AddRecipeCommand extends Command {
-    
+
+    public static final Logger LOGS = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     public static final String COMMAND_WORD = "addrecipe";
+    public final String INFO_ADDEDRECIPE = "A new recipe has been added";
     public HashMap<String[], Integer> parsedIngr;
 
     /**
@@ -50,6 +53,7 @@ public class AddRecipeCommand extends Command {
         freshRecipe.setRecipeName(attributes);
         freshRecipe.addIngredientsToRecipe(parsedIngr);
         recipeList.add(freshRecipe);
+        LOGS.info(INFO_ADDEDRECIPE);
         return freshRecipe.recipeName + " Recipe has been created with "
                 + freshRecipe.recipeIngrQty + " ingredients inside.";
     }
