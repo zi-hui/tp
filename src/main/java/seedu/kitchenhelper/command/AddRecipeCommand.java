@@ -7,29 +7,30 @@ import seedu.kitchenhelper.object.ingredient.Ingredient;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.logging.Logger;
 
 /**
  * Perform addition-related commands.
  */
-public class AddCommand extends Command {
-    
-    public static final String COMMAND_WORD = "add";
+public class AddRecipeCommand extends Command {
+
+    public static final Logger kitchenLogs = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    public static final String COMMAND_WORD = "addrecipe";
+    public static final String COMMAND_DESC = "Adds a recipe to the recipe list.";
+    public static final String COMMAND_PARAMETER
+            = "/n RECIPENAME /i INGRNAME:QUANTITY:CATEGORY <optional: , INGRNAME:QUANTITY:CATEGORY>";
+    public static final String COMMAND_EXAMPLE
+            = "Example: addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable";
+    public static final String COMMAND_FORMAT =
+            String.format("%s %s\n%s", COMMAND_DESC, COMMAND_PARAMETER, COMMAND_EXAMPLE);
+    public final String logAddRecipe = "A new recipe has been added";
     public HashMap<String[], Integer> parsedIngr;
 
     /**
      * Set the object's type.
-     *
-     * @param object full user input string excluding the action word.
      */
-    public void setTypeOfObject(String object) {
-        String[] attributes = object.split("\\s+");
-        if (attributes[0].equalsIgnoreCase("recipe")) {
-            objectType = "recipe";
-        } else if (attributes[0].equalsIgnoreCase("ingredient")) {
-            objectType = "ingredient";
-        } else if (attributes[0].equalsIgnoreCase("chore")) {
-            objectType = "chore";
-        }
+    public void setTypeOfObject() {
+        objectType = "recipe";
     }
 
     /**
@@ -40,7 +41,7 @@ public class AddCommand extends Command {
      *                   and ingredientQuantity as value
      */
     public void setAttributesOfCmd(String rawString, HashMap<String[], Integer> ingrAndQty) {
-        setTypeOfObject(rawString);
+        setTypeOfObject();
         setObjectVariables(rawString);
         setAction();
         this.parsedIngr = ingrAndQty;
@@ -53,17 +54,16 @@ public class AddCommand extends Command {
     public void setAction() {
         actionType = COMMAND_WORD;
     }
-    
-    public void addIngredients(String attributes) {
-    
-    }
 
-    @Override
-    public String addRecipe(String attributes, ArrayList<Recipe> recipeList) throws KitchenHelperException {
+    public String addRecipe(String attributes, ArrayList<Recipe> recipeList) {
+
         Recipe freshRecipe = new Recipe();
         freshRecipe.setRecipeName(attributes);
         freshRecipe.addIngredientsToRecipe(parsedIngr);
         recipeList.add(freshRecipe);
+        assert freshRecipe.recipeName.length() > 0;
+        assert recipeList.size() > 0;
+        kitchenLogs.info(logAddRecipe);
         return freshRecipe.recipeName + " Recipe has been created with "
                 + freshRecipe.recipeIngrQty + " ingredients inside.";
     }
@@ -90,6 +90,7 @@ public class AddCommand extends Command {
     @Override
     public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
                                  ArrayList<Chore> choreList) throws KitchenHelperException {
-        return super.execute(ingredientList, recipeList, choreList);
+        String message = addRecipe(this.objectVariables,recipeList);
+        return new CommandResult(message);
     }
 }

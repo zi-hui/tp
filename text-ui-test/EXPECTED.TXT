@@ -2,46 +2,45 @@
 Hello! I'm KitchenHelper here
 What can I do for you?
 ===================================================
-add recipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable
+addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable
 Chicken Salad Recipe has been created with 2 ingredients inside.
 ===================================================
-addinventory /n Beef /c Meat /q 3 /p 20 /e 2020-03-18
+addingredient /n Beef /c Meat /q 3 /p 20 /e 2020-03-18
 You have added Ingredient:Beef Category:Meat Quantity:3 Price:$20.00 Expiry:2020-03-18 to the inventory list
 ===================================================
-addinventory /n Kailan /c Vegetable /q 30 /p 30.45 /e 2020-03-12
-You have added Ingredient:Kailan Category:Vegetable Quantity:30 Price:$30.45 Expiry:2020-03-12 to the inventory list
+addingredient /n kailan /c Vegetable /q 30 /p 30.45 /e 2020-03-12
+You have added Ingredient:kailan Category:Vegetable Quantity:30 Price:$30.45 Expiry:2020-03-12 to the inventory list
 ===================================================
-addinventory /n HLMilk /c Dairy /q 3 /p 12.2 /e 2020-03-14
-You have added Ingredient:HLMilk Category:Dairy Quantity:3 Price:$12.20 Expiry:2020-03-14 to the inventory list
+addingredient /n HL Milk /c Dairy /q 3 /p 12.2 /e 2020-03-14
+You have added Ingredient:HL Milk Category:Dairy Quantity:3 Price:$12.20 Expiry:2020-03-14 to the inventory list
 ===================================================
-addinventory /n Milo /c Drink /q 30 /p 10 /e 2020-012-20
+addingredient /n Milo /c Drink /q 30 /p 10 /e 2020-012-20
 Invalid Command Format!
 Adds a ingredient to the inventory list. /n INGREDIENT /c CATEGORY /q QUANTITY /p PRICE /e EXPIRY
-Example: addinventory /n Beef /c Meat /q 1 /p 13.5 /e 2020-02-13
+Example: addingredient /n Beef /c Meat /q 1 /p 13.5 /e 2020-02-13
 ===================================================
 add chore buy groceries /by Tuesday 12pm
-You have added this chore:
-[x] buy groceries(by: Tuesday 12pm)
-Now you have 1 chore in the list.
+Invalid Command Format!
 ===================================================
 list chore
-Here are the chores in your list:
-1. [x] buy groceries(by: Tuesday 12pm)
-
+Your list of chores is currently empty.
 ===================================================
-delete recipe /n Chicken Salad
-Chicken Salad has been deleted.
+deleterecipe /n Chicken Salad
+Chicken Salad has been deleted
 ===================================================
-delete ingredient /n Beef /q 2
+deleteingredient /n Beef /q 2
 The quantity of Beef has been changed!
 ===================================================
-delete ingredient /n Kailan
-Kailan has been deleted.
+deleteingredient /n kailan /q 35
+Please enter a valid quantity to delete!
+Currently:
+kailan : 30
+===================================================
+deleteingredient /n kailan
+kailan has been deleted.
 ===================================================
 delete chore 1
-You have deleted this chore:
-[x] buy groceries(by: Tuesday 12pm)
-Now you have 0 chores in the list.
+The description of "delete" has to be an integer in the list.
 ===================================================
 exit
 Exiting KitchenHelper as requested ...
