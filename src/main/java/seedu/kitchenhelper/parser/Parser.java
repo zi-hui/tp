@@ -5,7 +5,6 @@ import seedu.kitchenhelper.command.AddRecipeCommand;
 import seedu.kitchenhelper.command.AddIngredientCommand;
 import seedu.kitchenhelper.command.DeleteRecipeCommand;
 import seedu.kitchenhelper.command.DeleteIngredientCommand;
-import seedu.kitchenhelper.command.DeleteRecipeCommand;
 import seedu.kitchenhelper.command.DeleteCommand;
 import seedu.kitchenhelper.command.ListCommand;
 import seedu.kitchenhelper.command.HelpCommand;
@@ -26,7 +25,7 @@ import java.util.regex.Pattern;
 
 public class Parser {
 
-    public static final Logger kitchenlogs = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    public static final Logger kitchenLogs = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     public static final String LOG_WARNING_INDEX = "An IndexOutOfBounds exception has been caught";
     public final String warningPrepareRecipe = "An IO exception has been caught";
 
@@ -90,7 +89,7 @@ public class Parser {
                 ingrAndQty.put(nameAndType, Integer.parseInt(ingrContent[1]));
             }
         } catch (IndexOutOfBoundsException e) {
-            kitchenlogs.log(Level.WARNING, warningPrepareRecipe, e.toString());
+            kitchenLogs.log(Level.WARNING, warningPrepareRecipe, e.toString());
             return new InvalidCommand(
                     String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, AddRecipeCommand.COMMAND_FORMAT));
         }
@@ -133,7 +132,7 @@ public class Parser {
             
             return new AddIngredientCommand(itemName, category, quantity, price, expiry);
         } catch (KitchenHelperException khe) {
-            kitchenlogs.log(Level.WARNING,InvalidCommand.MESSAGE_INVALID + " " + attributes);
+            kitchenLogs.log(Level.WARNING, InvalidCommand.MESSAGE_INVALID + " " + attributes);
             return new InvalidCommand(
                     String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, AddIngredientCommand.COMMAND_FORMAT));
         }
@@ -179,7 +178,7 @@ public class Parser {
             assert typeAndName.length == 2;
             return new DeleteRecipeCommand(typeAndName[1].trim());
         } catch (IndexOutOfBoundsException e) {
-            kitchenlogs.log(Level.WARNING, LOG_WARNING_INDEX, e.toString());
+            kitchenLogs.log(Level.WARNING, LOG_WARNING_INDEX, e.toString());
             throw new KitchenHelperException(DeleteRecipeCommand.COMMAND_FORMAT);
         }
     }
@@ -204,7 +203,7 @@ public class Parser {
                 return new DeleteIngredientCommand(nameAndQuantity[0].trim(), -1);
             }
         } catch (IndexOutOfBoundsException e) {
-            kitchenlogs.log(Level.WARNING, LOG_WARNING_INDEX, e.toString());
+            kitchenLogs.log(Level.WARNING, LOG_WARNING_INDEX, e.toString());
             throw new KitchenHelperException(DeleteIngredientCommand.COMMAND_FORMAT);
         }
     }
