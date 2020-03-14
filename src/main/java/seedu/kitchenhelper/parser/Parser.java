@@ -3,6 +3,7 @@ package seedu.kitchenhelper.parser;
 import seedu.kitchenhelper.command.Command;
 import seedu.kitchenhelper.command.AddRecipeCommand;
 import seedu.kitchenhelper.command.AddInventoryCommand;
+import seedu.kitchenhelper.command.AddChoreCommand;
 import seedu.kitchenhelper.command.DeleteRecipeCommand;
 import seedu.kitchenhelper.command.DeleteIngredientCommand;
 import seedu.kitchenhelper.command.ListCommand;
@@ -10,6 +11,7 @@ import seedu.kitchenhelper.command.DeleteCommand;
 import seedu.kitchenhelper.command.HelpCommand;
 import seedu.kitchenhelper.command.ExitCommand;
 import seedu.kitchenhelper.command.InvalidCommand;
+
 
 import seedu.kitchenhelper.exception.KitchenHelperException;
 import seedu.kitchenhelper.object.Recipe;
@@ -44,6 +46,8 @@ public class Parser {
             return prepareAddRecipe(parameters);
         case AddInventoryCommand.COMMAND_WORD:
             return prepareAddInventory(parameters);
+        case AddChoreCommand.COMMAND_WORD:
+            return prepareAddChore(parameters);
         case DeleteRecipeCommand.COMMAND_WORD:
             return prepareDeleteRecipe(parameters);
         case DeleteIngredientCommand.COMMAND_WORD:
@@ -125,6 +129,18 @@ public class Parser {
         } catch (KitchenHelperException khe) {
             return new InvalidCommand(
                     String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, AddInventoryCommand.COMMAND_FORMAT));
+        }
+    }
+
+    public Command prepareAddChore(String attributes) {
+        try {
+            String[] descriptionAndDate = attributes.split("/by");
+            String description = descriptionAndDate[0].trim();
+            String date = descriptionAndDate[1].trim();
+            return new AddChoreCommand(description, date);
+        } catch (IndexOutOfBoundsException e) {
+            return new InvalidCommand(
+                    String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, AddChoreCommand.COMMAND_FORMAT));
         }
     }
   

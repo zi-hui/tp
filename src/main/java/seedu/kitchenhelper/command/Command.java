@@ -59,10 +59,6 @@ public abstract class Command {
     }
 
 
-    public String addChore(String objectVariables, ArrayList<Chore> choreList) {
-        return "";
-    }
-
     public String deleteChore(String objectVariables, ArrayList<Chore> choreList) {
         return "";
     }

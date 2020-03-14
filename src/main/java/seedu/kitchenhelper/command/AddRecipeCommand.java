@@ -69,25 +69,6 @@ public class AddRecipeCommand extends Command {
     }
     
     @Override
-    public String addChore(String objectVariables, ArrayList<Chore> choreList) {
-        String feedbackToUser;
-        try {
-            String[] objectTypeAndOthers = objectVariables.split("chore ", 2);
-            String[] descriptionAndDate = objectTypeAndOthers[1].trim().split("/by");
-            String description = descriptionAndDate[0].trim();
-            String date = descriptionAndDate[1].trim();
-            Chore newChore = new Chore(description, date);
-            choreList.add(newChore);
-            newChore.setEditType(COMMAND_WORD);
-            feedbackToUser = String.format(Chore.MESSAGE_SUCCESS,
-                    newChore.editType, newChore, choreList.size(), newChore.checkSingular(choreList));
-        } catch (IndexOutOfBoundsException e) {
-            feedbackToUser = "You need to add a date with \"/by\" in the description.";
-        }
-        return feedbackToUser;
-    }
-    
-    @Override
     public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
                                  ArrayList<Chore> choreList) throws KitchenHelperException {
         String message = addRecipe(this.objectVariables,recipeList);

@@ -19,8 +19,15 @@ Invalid Command Format!
 Adds a ingredient to the inventory list. /n INGREDIENT /c CATEGORY /q QUANTITY /p PRICE /e EXPIRY
 Example: addinventory /n Beef /c Meat /q 1 /p 13.5 /e 2020-02-13
 ===================================================
-add chore buy groceries /by Tuesday 12pm
+addchore buy groceries /by Tuesday 12pm
+You have added this chore:
+[x] buy groceries(by: Tuesday 12pm)
+Now you have 1 chore in the list.
+===================================================
+addchore buy groceries
 Invalid Command Format!
+Adds a chore to the chore list. TASK /by DATE
+Example: addchore buy groceries /by Tuesday 12pm
 ===================================================
 list chore
 Your list of chores is currently empty.
