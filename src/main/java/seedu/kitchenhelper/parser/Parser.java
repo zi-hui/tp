@@ -42,7 +42,7 @@ public class Parser {
         case AddRecipeCommand.COMMAND_WORD:
             return prepareAddRecipe(parameters);
         case AddIngredientCommand.COMMAND_WORD:
-            return prepareAddInventory(parameters);
+            return prepareAddIngredient(parameters);
         case DeleteRecipeCommand.COMMAND_WORD:
             return prepareDeleteRecipe(parameters);
         case DeleteIngredientCommand.COMMAND_WORD:
@@ -102,22 +102,27 @@ public class Parser {
      * @param attributes full user input string.
      * @return the prepared command.
      */
-    public Command prepareAddInventory(String attributes) {
+    public Command prepareAddIngredient(String attributes) {
         try {
-            // Regex for checking the format of add inventory
+            // Regex for checking the format of add ingredient
             String addInventoryRegex =
                     "/n [a-zA-Z]+( [a-zA-Z]+)* /c [a-zA-Z]+ /q [0-9]+ /p \\d+(\\.\\d{1,2})? /e \\d{4}-\\d{2}-\\d{2}";
             if (!isValidUserInputFormat(attributes, addInventoryRegex)) {
                 throw new KitchenHelperException("Invalid Add Inventory Format");
             }
             String[] nameAndOthers = attributes.split("/c\\s", 2);
-            String itemName = nameAndOthers[0].split("/n\\s+")[1].trim();
             String[] categoryAndOthers = nameAndOthers[1].split("\\s+/q\\s+");
-            String category = categoryAndOthers[0].trim();
             String[] quantityAndOthers = categoryAndOthers[1].split("\\s+/p\\s+");
-            int quantity = Integer.parseInt(quantityAndOthers[0]);
             String[] priceAndExpiry = quantityAndOthers[1].split("\\s+/e\\s+");
+            
+            String itemName = nameAndOthers[0].split("/n\\s+")[1].trim();
+            assert itemName.length() > 0 : itemName;
+            String category = categoryAndOthers[0].trim();
+            assert category.length() > 0 : category;
+            int quantity = Integer.parseInt(quantityAndOthers[0]);
+            assert quantity >= 0 : quantity;
             double price = Double.parseDouble(priceAndExpiry[0]);
+            assert price >= 0.00 : price;
             String expiry = priceAndExpiry[1];
             
             return new AddIngredientCommand(itemName, category, quantity, price, expiry);
