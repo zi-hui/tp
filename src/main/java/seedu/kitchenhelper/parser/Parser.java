@@ -5,8 +5,9 @@ import seedu.kitchenhelper.command.AddRecipeCommand;
 import seedu.kitchenhelper.command.AddIngredientCommand;
 import seedu.kitchenhelper.command.DeleteRecipeCommand;
 import seedu.kitchenhelper.command.DeleteIngredientCommand;
-import seedu.kitchenhelper.command.ListCommand;
+import seedu.kitchenhelper.command.DeleteRecipeCommand;
 import seedu.kitchenhelper.command.DeleteCommand;
+import seedu.kitchenhelper.command.ListCommand;
 import seedu.kitchenhelper.command.HelpCommand;
 import seedu.kitchenhelper.command.ExitCommand;
 import seedu.kitchenhelper.command.InvalidCommand;
@@ -26,6 +27,7 @@ import java.util.regex.Pattern;
 public class Parser {
 
     public static final Logger kitchenlogs = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    public static final String LOG_WARNING_INDEX = "An IndexOutOfBounds exception has been caught";
     public final String warningPrepareRecipe = "An IO exception has been caught";
 
     /**
@@ -174,8 +176,10 @@ public class Parser {
     private Command prepareDeleteRecipe(String parameters) throws KitchenHelperException {
         try {
             String [] typeAndName = parameters.split("/n\\s",2);
+            assert typeAndName.length == 2;
             return new DeleteRecipeCommand(typeAndName[1].trim());
         } catch (IndexOutOfBoundsException e) {
+            kitchenlogs.log(Level.WARNING, LOG_WARNING_INDEX, e.toString());
             throw new KitchenHelperException(DeleteRecipeCommand.COMMAND_FORMAT);
         }
     }
@@ -191,13 +195,16 @@ public class Parser {
     private Command prepareDeleteIngredient(String parameters) throws KitchenHelperException {
         try {
             String [] typeAndName = parameters.split("/n\\s", 2);
+            assert typeAndName.length == 2;
             String [] nameAndQuantity = typeAndName[1].split("/q\\s", 2);
+            assert nameAndQuantity.length >= 1;
             if (nameAndQuantity.length > 1) {
                 return new DeleteIngredientCommand(nameAndQuantity[0].trim(), Integer.parseInt(nameAndQuantity[1]));
             } else {
                 return new DeleteIngredientCommand(nameAndQuantity[0].trim(), -1);
             }
         } catch (IndexOutOfBoundsException e) {
+            kitchenlogs.log(Level.WARNING, LOG_WARNING_INDEX, e.toString());
             throw new KitchenHelperException(DeleteIngredientCommand.COMMAND_FORMAT);
         }
     }

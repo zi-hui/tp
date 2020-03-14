@@ -26,10 +26,15 @@ list chore
 Your list of chores is currently empty.
 ===================================================
 deleterecipe /n Chicken Salad
-Chicken Salad has been deleted.
+Chicken Salad has been deleted
 ===================================================
 deleteingredient /n Beef /q 2
 The quantity of Beef has been changed!
+===================================================
+deleteingredient /n kailan /q 35
+Please enter a valid quantity to delete!
+Currently:
+kailan : 30
 ===================================================
 deleteingredient /n kailan
 kailan has been deleted.
