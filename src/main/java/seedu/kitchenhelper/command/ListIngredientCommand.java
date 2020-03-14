@@ -14,51 +14,78 @@ import seedu.kitchenhelper.object.ingredient.Ingredient;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ListCommand extends Command {
+public class ListIngredientCommand extends Command {
     
-    public static final String COMMAND_WORD = "list";
+    public static final String COMMAND_WORD = "listingredient";
+    private String category;
+    public static final String COMMAND_FORMAT = "listingredient <all|dairy|drink|fruit|meat|"
+        + "miscellaneous|staple|vegetable";
+    public static final String[] categoryArray = {"all",Dairy.INGREDIENT_WORD,
+        Drink.INGREDIENT_WORD,Fruit.INGREDIENT_WORD,
+        Meat.INGREDIENT_WORD,Miscellaneous.INGREDIENT_WORD,
+        Staple.INGREDIENT_WORD,Vegetable.INGREDIENT_WORD};
 
-    public static final String COMMAND_FORMAT = "list ingredient";
-
-    public void setListParams(HashMap<String, String> attributes) {
-        actionType = COMMAND_WORD;
-        setTypeOfObject(attributes.get("type"));
-        if (attributes.size() == 2) {
-            objectVariables = attributes.get("item");
-        }
+    /**
+     * Constructor for ListIngredient Command.
+     *
+     * @param category   category of the ingredient.
+     */
+    public ListIngredientCommand(String category) {
+        this.category = category;
     }
 
-    public void setTypeOfObject(String object) {
-        String[] attributes = object.split("\\s");
-        if (attributes[0].equalsIgnoreCase("recipe")) {
-            objectType = "recipe";
-        } else if (attributes[0].equalsIgnoreCase("ingredient")) {
-            objectType = "ingredient";
-        } else if (attributes[0].equalsIgnoreCase("chore")) {
-            objectType = "chore";
-        }
-    }
-
-    public String listIngredients(ArrayList<Ingredient> ingredientList) {
+    public String listIngredients(String category, ArrayList<Ingredient> ingredientList) {
         String result = "Here is the list of Ingredients in Inventory:\n"
                 + "Format : Ingredient Name | Quantity | Price | Expiry\n";
-        String[] categoryArray = {Dairy.INGREDIENT_WORD, Drink.INGREDIENT_WORD, Fruit.INGREDIENT_WORD,
-            Meat.INGREDIENT_WORD, Miscellaneous.INGREDIENT_WORD, Staple.INGREDIENT_WORD, Vegetable.INGREDIENT_WORD};
         if (ingredientList.size() == 0) {
             result += "The Ingredient List is currently empty.";
         } else {
-            for (String categoryName : categoryArray) {
-                result += categoryName + " : \n";
+            if (category.equalsIgnoreCase("all")) {
+                for (String categoryName : categoryArray) {
+                    result += categoryName + " : \n";
+                    for (int i = 0; i < ingredientList.size(); i++) {
+                        Ingredient ingredientObj = ingredientList.get(i);
+                        if (ingredientObj.getCategoryName().equalsIgnoreCase(categoryName)) {
+                            result += ingredientObj.getIngredientName() + " | " + ingredientObj.getQuantity() + " | "
+                                    + ingredientObj.getPrice() + " | " + ingredientObj.getExpiryDate() + " \n";
+                        }
+                    }
+                }
+            } else {
+                result += category + " : \n";
                 for (int i = 0; i < ingredientList.size(); i++) {
                     Ingredient ingredientObj = ingredientList.get(i);
-                    if (ingredientObj.getCategoryName().equals(categoryName)) {
+                    if (ingredientObj.getCategoryName().equalsIgnoreCase(category)) {
                         result += ingredientObj.getIngredientName() + " | " + ingredientObj.getQuantity() + " | "
                                 + ingredientObj.getPrice() + " | " + ingredientObj.getExpiryDate() + " \n";
                     }
+
+                    if (i == ingredientList.size()) {
+                        result += "The Ingredient List for your category (" + category + ") is currently empty.";
+                    }
                 }
             }
+
         }
         return result;
+    }
+
+    public String getCategory() {
+        return this.category;
+    }
+
+    public boolean checkCategoryValid() {
+        boolean validCategory = false;
+        for (String catName : categoryArray) {
+            if (catName.equalsIgnoreCase(this.category)) {
+                validCategory = true;
+            }
+        }
+        return validCategory;
+    }
+
+    public String[] getCategoryArray() {
+        return this.categoryArray;
     }
 
     public String listRecipe(String itemNumber, ArrayList<Recipe> recipeArrayList) {
@@ -98,6 +125,7 @@ public class ListCommand extends Command {
     @Override
     public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
                                  ArrayList<Chore> choreList) throws KitchenHelperException {
-        return super.execute(ingredientList, recipeList, choreList);
+        String message = listIngredients(this.category, ingredientList);
+        return new CommandResult(message);
     }
 }

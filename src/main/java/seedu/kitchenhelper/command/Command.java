@@ -94,11 +94,11 @@ public abstract class Command {
 
         if (actionType.equals(DeleteCommand.COMMAND_WORD) && objectType.equals("chore")) {
             feedbackToUser = deleteChore(objectVariables, choreList);
-        } else if (actionType.equals(ListCommand.COMMAND_WORD) && objectType.equals("ingredient")) {
+        } else if (actionType.equals(ListIngredientCommand.COMMAND_WORD) && objectType.equals("ingredient")) {
             feedbackToUser = listIngredients(ingredientList);
-        } else if (actionType.equals(ListCommand.COMMAND_WORD) && objectType.equals("recipe")) {
+        } else if (actionType.equals(ListIngredientCommand.COMMAND_WORD) && objectType.equals("recipe")) {
             feedbackToUser = listRecipe(objectVariables, recipeList);
-        } else if (actionType.equals(ListCommand.COMMAND_WORD) && objectType.equals("chore")) {
+        } else if (actionType.equals(ListIngredientCommand.COMMAND_WORD) && objectType.equals("chore")) {
             feedbackToUser = listChore(choreList);
         }
         CommandResult cmdResult = new CommandResult(feedbackToUser);

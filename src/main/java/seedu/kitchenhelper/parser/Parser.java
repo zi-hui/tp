@@ -5,9 +5,8 @@ import seedu.kitchenhelper.command.AddRecipeCommand;
 import seedu.kitchenhelper.command.AddIngredientCommand;
 import seedu.kitchenhelper.command.DeleteRecipeCommand;
 import seedu.kitchenhelper.command.DeleteIngredientCommand;
-import seedu.kitchenhelper.command.DeleteRecipeCommand;
 import seedu.kitchenhelper.command.DeleteCommand;
-import seedu.kitchenhelper.command.ListCommand;
+import seedu.kitchenhelper.command.ListIngredientCommand;
 import seedu.kitchenhelper.command.HelpCommand;
 import seedu.kitchenhelper.command.ExitCommand;
 import seedu.kitchenhelper.command.InvalidCommand;
@@ -49,11 +48,8 @@ public class Parser {
             return prepareDeleteRecipe(parameters);
         case DeleteIngredientCommand.COMMAND_WORD:
             return prepareDeleteIngredient(parameters);
-        case ListCommand.COMMAND_WORD:
-            ListCommand listCmd = new ListCommand();
-            HashMap<String, String> listParams = prepareListParams(parameters);
-            listCmd.setListParams(listParams);
-            return listCmd;
+        case ListIngredientCommand.COMMAND_WORD:
+            return prepareListIngredient(parameters);
         case DeleteCommand.COMMAND_WORD:
             DeleteCommand deleteCmd = new DeleteCommand();
             HashMap<String, String> deleteParams = prepareDeleteParams(parameters);
@@ -142,27 +138,27 @@ public class Parser {
     /**
      * Prepares the parameters needed for the list function.
      *
-     * @param attributes full user input string.
+     * @param parameters full user input string.
      * @return the prepared command.
      */
-    private HashMap<String, String> prepareListParams(String attributes) throws KitchenHelperException {
-        HashMap<String, String> listParam = new HashMap<>();
+    private Command prepareListIngredient(String parameters) throws KitchenHelperException {
         try {
-            String[] typeName = attributes.split("\\s", 2);
-            listParam.put("type", typeName[0].trim());
-            if (typeName.length == 2) {
-                listParam.put("item", typeName[1].trim());
+            if (parameters.isEmpty()) {
+                throw new KitchenHelperException("Invalid ListIngredient command.");
+            } else {
+                for (int i = 0; i < ListIngredientCommand.categoryArray.length; i++) {
+                    if (ListIngredientCommand.categoryArray[i].equalsIgnoreCase(parameters)) {
+                        break;
+                    } else if (i == ListIngredientCommand.categoryArray.length - 1) {
+                        throw new KitchenHelperException("Invalid ListIngredient Category.");
+                    }
+                }
             }
-            if (listParam.get("type").equalsIgnoreCase("recipe") && typeName.length != 2) {
-                throw new KitchenHelperException("list recipe <integer>");
-            }
-            if (listParam.get("type").isEmpty()) {
-                throw new KitchenHelperException("list <type>");
-            }
-        } catch (IndexOutOfBoundsException e) {
-            throw new KitchenHelperException(ListCommand.COMMAND_FORMAT);
+            return new ListIngredientCommand(parameters);
+        } catch (KitchenHelperException e) {
+            kitchenlogs.log(Level.WARNING, LOG_WARNING_INDEX, e.toString());
+            throw new KitchenHelperException(ListIngredientCommand.COMMAND_FORMAT);
         }
-        return listParam;
     }
 
     /**
