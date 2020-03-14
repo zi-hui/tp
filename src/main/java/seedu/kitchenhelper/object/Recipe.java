@@ -97,7 +97,7 @@ public class Recipe {
     }
 
     public ArrayList<Ingredient> getRecipeItem() {
-        System.out.println(recipeItems.size());
+        //System.out.println(recipeItems.size());
         return this.recipeItems;
     }
 
