@@ -2,7 +2,8 @@ package seedu.kitchenhelper.parser;
 
 import seedu.kitchenhelper.command.Command;
 import seedu.kitchenhelper.command.AddRecipeCommand;
-import seedu.kitchenhelper.command.AddInventoryCommand;
+import seedu.kitchenhelper.command.AddIngredientCommand;
+import seedu.kitchenhelper.command.DeleteRecipeCommand;
 import seedu.kitchenhelper.command.DeleteIngredientCommand;
 import seedu.kitchenhelper.command.DeleteRecipeCommand;
 import seedu.kitchenhelper.command.DeleteCommand;
@@ -42,8 +43,8 @@ public class Parser {
         switch (commandWord.toLowerCase()) {
         case AddRecipeCommand.COMMAND_WORD:
             return prepareAddRecipe(parameters);
-        case AddInventoryCommand.COMMAND_WORD:
-            return prepareAddInventory(parameters);
+        case AddIngredientCommand.COMMAND_WORD:
+            return prepareAddIngredient(parameters);
         case DeleteRecipeCommand.COMMAND_WORD:
             return prepareDeleteRecipe(parameters);
         case DeleteIngredientCommand.COMMAND_WORD:
@@ -103,28 +104,38 @@ public class Parser {
      * @param attributes full user input string.
      * @return the prepared command.
      */
-    public Command prepareAddInventory(String attributes) {
+    public Command prepareAddIngredient(String attributes) {
         try {
-            // Regex for checking the format of add inventory
+            // Regex for checking the format of add ingredient
             String addInventoryRegex =
                     "/n [a-zA-Z]+( [a-zA-Z]+)* /c [a-zA-Z]+ /q [0-9]+ /p \\d+(\\.\\d{1,2})? /e \\d{4}-\\d{2}-\\d{2}";
             if (!isValidUserInputFormat(attributes, addInventoryRegex)) {
                 throw new KitchenHelperException("Invalid Add Inventory Format");
             }
+    
             String[] nameAndOthers = attributes.split("/c\\s", 2);
             String itemName = nameAndOthers[0].split("/n\\s+")[1].trim();
+            assert itemName.length() > 0 : itemName;
+            
             String[] categoryAndOthers = nameAndOthers[1].split("\\s+/q\\s+");
             String category = categoryAndOthers[0].trim();
+            assert category.length() > 0 : category;
+            
             String[] quantityAndOthers = categoryAndOthers[1].split("\\s+/p\\s+");
             int quantity = Integer.parseInt(quantityAndOthers[0]);
+            assert quantity >= 0 : quantity;
+            
             String[] priceAndExpiry = quantityAndOthers[1].split("\\s+/e\\s+");
             double price = Double.parseDouble(priceAndExpiry[0]);
+            assert price >= 0.00 : price;
+            
             String expiry = priceAndExpiry[1];
             
-            return new AddInventoryCommand(itemName, category, quantity, price, expiry);
+            return new AddIngredientCommand(itemName, category, quantity, price, expiry);
         } catch (KitchenHelperException khe) {
+            kitchenlogs.log(Level.WARNING,InvalidCommand.MESSAGE_INVALID + " " + attributes);
             return new InvalidCommand(
-                    String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, AddInventoryCommand.COMMAND_FORMAT));
+                    String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, AddIngredientCommand.COMMAND_FORMAT));
         }
     }
   

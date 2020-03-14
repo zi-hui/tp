@@ -10,12 +10,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class AddInventoryCommandTest {
+class AddIngredientCommandTest {
     
     @Test
     void addToCategory_testPass() {
         ArrayList<Ingredient> ingredientList = new ArrayList<>();
-        new AddInventoryCommand("Beef", "Meat", 30, 20.2, "2020-02-20").addToCategory("Meat", ingredientList);
+        new AddIngredientCommand("Beef", "Meat", 30, 20.2, "2020-02-20").addToCategory("Meat", ingredientList);
         assertTrue(ingredientList.get(0) instanceof Meat);
         assertEquals("Beef", ingredientList.get(0).getIngredientName());
         assertEquals("Meat", ingredientList.get(0).getCategoryName());
@@ -27,7 +27,7 @@ class AddInventoryCommandTest {
     @Test
     void addToCategory_testFail() {
         ArrayList<Ingredient> ingredientList = new ArrayList<>();
-        new AddInventoryCommand("Beef", "Meat", 30, 20.2, "2020-02-20").addToCategory("Meat", ingredientList);
+        new AddIngredientCommand("Beef", "Meat", 30, 20.2, "2020-02-20").addToCategory("Meat", ingredientList);
         assertTrue(ingredientList.get(0) instanceof Meat);
         assertNotEquals("Pork", ingredientList.get(0).getIngredientName());
         assertNotEquals("Vegetable", ingredientList.get(0).getCategoryName());
