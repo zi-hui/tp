@@ -6,8 +6,11 @@ import seedu.kitchenhelper.object.Recipe;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DeleteRecipeCommand extends Command {
+    public static final Logger kitchenLogs = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     public static final String COMMAND_WORD = "deleterecipe";
     public static final String COMMAND_USAGE = "deleterecipe /n RECIPENAME";
     public static final String COMMAND_DESC = "Delete the recipe. ";
@@ -15,6 +18,7 @@ public class DeleteRecipeCommand extends Command {
     public static final String COMMAND_FORMAT = String.format("%s%s\n%s", COMMAND_DESC, COMMAND_USAGE, COMMAND_EXAMPLE);
     public static final String COMMAND_SUCCESS = "%s has been deleted";
     public static final String COMMAND_FAILURE = "This recipe does not exist! Please type in a correct recipe name.";
+    public static final String LOG_INFO = "A recipe has been deleted";
     private static final String OBJECT_TYPE = "recipe";
 
     public DeleteRecipeCommand(String recipeName) {
@@ -51,6 +55,7 @@ public class DeleteRecipeCommand extends Command {
         String recipeName = this.objectVariables;
         int index = getRecipeIndex(recipeName, recipeList);
         if (index != -1) {
+            kitchenLogs.log(Level.INFO, LOG_INFO);
             recipeList.remove(recipeList.get(index));
             feedbackToUser = String.format(COMMAND_SUCCESS, recipeName);
         } else {

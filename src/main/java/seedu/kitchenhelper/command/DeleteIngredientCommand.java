@@ -5,8 +5,11 @@ import seedu.kitchenhelper.object.Recipe;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DeleteIngredientCommand extends Command {
+    public static final Logger kitchenLogs = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     public static final String COMMAND_WORD = "deleteingredient";
     public static final String COMMAND_USAGE = "deleteingredient /n INGREDIENT [/q QUANTITY]";
     public static final String COMMAND_DESC = "Deletes an ingredient. ";
@@ -16,6 +19,7 @@ public class DeleteIngredientCommand extends Command {
     public static final String COMMAND_FAILURE = "This ingredient does not exist! Please type in a correct ingredient name.";
     public static final String COMMAND_SUCCESS_QUANTITY = "The quantity of %s has been changed!";
     public static final String COMMAND_FAILURE_QUANTITY = "Please enter a valid quantity to delete!\nCurrently: \n%s : %d";
+    public static final String LOG_INFO = "An ingredient has been deleted";
     private static final String OBJECT_TYPE = "ingredient";
     private static int quantity = 0;
 
@@ -88,6 +92,7 @@ public class DeleteIngredientCommand extends Command {
         if (indexOfIngredient != -1) {
             Ingredient ingredientToDelete = ingredientsList.get(indexOfIngredient);
             if (quantity <= -1) {
+                kitchenLogs.log(Level.INFO, LOG_INFO);
                 ingredientsList.remove(ingredientToDelete);
                 feedbackToUser = String.format(COMMAND_SUCCESS, ingredientName);
             } else {
