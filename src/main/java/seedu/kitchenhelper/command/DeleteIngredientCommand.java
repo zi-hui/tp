@@ -8,7 +8,14 @@ import java.util.ArrayList;
 
 public class DeleteIngredientCommand extends Command {
     public static final String COMMAND_WORD = "deleteingredient";
-    public static final String COMMAND_FORMAT = "deleteingredient /n INGREDIENT [/q QUANTITY]";
+    public static final String COMMAND_USAGE = "deleteingredient /n INGREDIENT [/q QUANTITY]";
+    public static final String COMMAND_DESC = "Deletes an ingredient. ";
+    public static final String COMMAND_EXAMPLE = "Example: deleteingredient /n Beef /q 2";
+    public static final String COMMAND_FORMAT = String.format("%s%s\n%s", COMMAND_DESC, COMMAND_USAGE, COMMAND_EXAMPLE);
+    public static final String COMMAND_SUCCESS = "%s has been deleted.";
+    public static final String COMMAND_FAILURE = "This ingredient does not exist! Please type in a correct ingredient name.";
+    public static final String COMMAND_SUCCESS_QUANTITY = "The quantity of %s has been changed!";
+    public static final String COMMAND_FAILURE_QUANTITY = "Please enter a valid quantity to delete!\nCurrently: \n%s : %d";
     private static final String OBJECT_TYPE = "ingredient";
     private static int quantity = 0;
 
@@ -54,12 +61,14 @@ public class DeleteIngredientCommand extends Command {
 
     public String updateNewQuantity(int newQuantity, Ingredient ingredientToDelete) {
         String feedbackToUser;
+        String ingredientName = ingredientToDelete.getIngredientName();
+        int ingredientQuantity = ingredientToDelete.getQuantity();
+
         if (newQuantity < 0) {
-            feedbackToUser = "Please enter a valid quantity to delete! \nCurrently: \n"
-                    + ingredientToDelete.getIngredientName() + ":" + ingredientToDelete.getQuantity();
+            feedbackToUser = String.format(COMMAND_FAILURE_QUANTITY, ingredientName, ingredientQuantity);
         } else {
             ingredientToDelete.setQuantity(newQuantity);
-            feedbackToUser = "The quantity of " + ingredientToDelete.getIngredientName() + " has been changed!";
+            feedbackToUser = String.format(COMMAND_SUCCESS_QUANTITY, ingredientName);
         }
         return feedbackToUser;
     }
@@ -75,17 +84,18 @@ public class DeleteIngredientCommand extends Command {
         String feedbackToUser = "";
         String ingredientName = this.objectVariables;
         int indexOfIngredient = getIngredientIndex(ingredientName, ingredientsList);
+
         if (indexOfIngredient != -1) {
             Ingredient ingredientToDelete = ingredientsList.get(indexOfIngredient);
             if (quantity <= -1) {
                 ingredientsList.remove(ingredientToDelete);
-                feedbackToUser = ingredientName + " has been deleted.";
+                feedbackToUser = String.format(COMMAND_SUCCESS, ingredientName);
             } else {
                 int newQuantity = ingredientToDelete.getQuantity() - quantity;
                 feedbackToUser = updateNewQuantity(newQuantity, ingredientToDelete);
             }
         } else {
-            feedbackToUser = "This ingredient does not exist! Please type in a correct ingredient name.";
+            feedbackToUser = COMMAND_FAILURE;
         }
         return feedbackToUser;
     }
