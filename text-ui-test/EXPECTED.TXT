@@ -17,7 +17,7 @@ You have added Ingredient:HL Milk Category:Dairy Quantity:3 Price:$12.20 Expiry:
 addingredient /n Milo /c Drink /q 30 /p 10 /e 2020-012-20
 Invalid Command Format!
 Adds a ingredient to the inventory list. /n INGREDIENT /c CATEGORY /q QUANTITY /p PRICE /e EXPIRY
-Example: addinventory /n Beef /c Meat /q 1 /p 13.5 /e 2020-02-13
+Example: addingredient /n Beef /c Meat /q 1 /p 13.5 /e 2020-02-13
 ===================================================
 add chore buy groceries /by Tuesday 12pm
 Invalid Command Format!

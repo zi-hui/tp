@@ -24,7 +24,7 @@ public class AddIngredientCommand extends Command {
             "You have added Ingredient:%s Category:%s Quantity:%d Price:$%.2f Expiry:%s to the inventory list";
     public static final String COMMAND_DESC = "Adds a ingredient to the inventory list.";
     public static final String COMMAND_PARAMETER = "/n INGREDIENT /c CATEGORY /q QUANTITY /p PRICE /e EXPIRY";
-    public static final String COMMAND_EXAMPLE = "Example: addinventory /n Beef /c Meat /q 1 /p 13.5 /e 2020-02-13";
+    public static final String COMMAND_EXAMPLE = "Example: addingredient /n Beef /c Meat /q 1 /p 13.5 /e 2020-02-13";
     public static final String COMMAND_FORMAT =
             String.format("%s %s\n%s", COMMAND_DESC, COMMAND_PARAMETER, COMMAND_EXAMPLE);
     

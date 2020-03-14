@@ -29,21 +29,21 @@ class ParserTest {
     @Test
     void prepareAddInventory_testPass() {
         String correctAttributes = "/n Beef /c Meat /q 30 /p 20.2 /e 2020-02-20";
-        assertTrue(new Parser().prepareAddInventory(correctAttributes) instanceof AddIngredientCommand);
+        assertTrue(new Parser().prepareAddIngredient(correctAttributes) instanceof AddIngredientCommand);
         String output = String.format(AddIngredientCommand.MESSAGE_SUCCESS, "Beef", "Meat", 30, 20.2, "2020-02-20");
         assertEquals(output, showToConsole(new KitchenHelper()
-                .executeCommand(new Parser().prepareAddInventory(correctAttributes)).feedbackToUser));
+                .executeCommand(new Parser().prepareAddIngredient(correctAttributes)).feedbackToUser));
     }
     
     @Test
     void prepareAddInventory_testFail() {
         String incorrectAttributes = "/ Beef /c Meat /q 30 /p 20.2 /e 2020-02-20";
-        assertTrue(new Parser().prepareAddInventory(incorrectAttributes) instanceof InvalidCommand);
+        assertTrue(new Parser().prepareAddIngredient(incorrectAttributes) instanceof InvalidCommand);
         String output = "Invalid Command Format!\n"
                         + "Adds a ingredient to the inventory list. /n INGREDIENT /c CATEGORY /q QUANTITY /p PRICE /e"
-                        + " EXPIRY\n" + "Example: addinventory /n Beef /c Meat /q 1 /p 13.5 /e 2020-02-13";
+                        + " EXPIRY\n" + "Example: addingredient /n Beef /c Meat /q 1 /p 13.5 /e 2020-02-13";
         assertEquals(output, showToConsole(new KitchenHelper()
-                .executeCommand(new Parser().prepareAddInventory(incorrectAttributes)).feedbackToUser));
+                .executeCommand(new Parser().prepareAddIngredient(incorrectAttributes)).feedbackToUser));
     }
     
     @Test
