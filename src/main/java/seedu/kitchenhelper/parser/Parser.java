@@ -121,6 +121,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Prepares the addition of a chore into chore list.
+     *
+     * @param attributes full user input string.
+     * @return the prepared command.
+     */
     public Command prepareAddChore(String attributes) {
         try {
             String[] descriptionAndDate = attributes.split("/by");
@@ -204,6 +210,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Prepares the deletion of a chore from the list.
+     *
+     * @param parameters full user input string.
+     * @return the prepared command.
+     */
     private Command prepareDeleteChore(String parameters) {
         try {
             int indexToDelete = Integer.parseInt(parameters.trim());

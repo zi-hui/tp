@@ -6,7 +6,11 @@ import seedu.kitchenhelper.object.ingredient.Ingredient;
 
 import java.util.ArrayList;
 
+/**
+ * Adds a chore to the chore list.
+ */
 public class AddChoreCommand extends Command {
+
     public static final String COMMAND_WORD = "addchore";
     public static final String MESSAGE_SUCCESS = "You have added this chore:\n%s\nNow you have %s chore%s in the list.";
     public static final String COMMAND_DESC = "Adds a chore to the chore list.";
@@ -18,11 +22,25 @@ public class AddChoreCommand extends Command {
     private String description;
     private String date;
 
+    /**
+     * Constructor for AddChoreCommand.
+     *
+     * @param description the description of the chore.
+     * @param date the date or time to complete the chore by.
+     */
     public AddChoreCommand(String description, String date) {
         this.description = description;
         this.date = date;
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @param ingredientList list of ingredients.
+     * @param recipeList list of recipes.
+     * @param choreList list of chores.
+     * @return the success message of adding chore to the chore list.
+     */
     @Override
     public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
                                  ArrayList<Chore> choreList) {
