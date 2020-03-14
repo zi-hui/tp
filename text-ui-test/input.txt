@@ -8,5 +8,5 @@ list chore
 deleterecipe /n Chicken Salad
 deleteingredient /n Beef /q 2
 deleteingredient /n kailan
-delete chore 1
+deletechore 1
 exit

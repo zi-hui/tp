@@ -41,8 +41,10 @@ The quantity of Beef has been changed!
 deleteingredient /n kailan
 kailan has been deleted.
 ===================================================
-delete chore 1
-The description of "delete" has to be an integer in the list.
+deletechore 1
+You have deleted this chore:
+[x] buy groceries(by: Tuesday 12pm)
+Now you have 0 chores in the list.
 ===================================================
 exit
 Exiting KitchenHelper as requested ...
