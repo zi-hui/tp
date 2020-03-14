@@ -4,6 +4,7 @@ import seedu.kitchenhelper.object.Chore;
 import seedu.kitchenhelper.object.Recipe;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
 import seedu.kitchenhelper.storage.Storage;
+import seedu.kitchenhelper.ui.Ui;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -22,6 +23,8 @@ public class DeleteIngredientCommand extends Command {
     public static final String COMMAND_SUCCESS_QUANTITY = "The quantity of %s has been changed!";
     public static final String COMMAND_FAILURE_QUANTITY = "Please enter a valid quantity to delete!\nCurrently:"
                                                             + "\n%s : %d";
+    public static final String MESSAGE_USAGE = String.format("%s: %s", COMMAND_WORD, COMMAND_DESC) + Ui.LS + String
+            .format("Parameter: %s\n%s", COMMAND_USAGE, COMMAND_EXAMPLE);
     public static final String LOG_INFO = "An ingredient has been deleted";
     private static final String OBJECT_TYPE = "ingredient";
     private static int quantity = 0;

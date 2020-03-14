@@ -5,6 +5,7 @@ import seedu.kitchenhelper.object.Chore;
 import seedu.kitchenhelper.object.Recipe;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
 import seedu.kitchenhelper.storage.Storage;
+import seedu.kitchenhelper.ui.Ui;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -21,7 +22,9 @@ public class DeleteRecipeCommand extends Command {
     public static final String COMMAND_FAILURE = "This recipe does not exist! Please type in a correct recipe name.";
     public static final String LOG_INFO = "A recipe has been deleted";
     private static final String OBJECT_TYPE = "recipe";
-
+    public static final String MESSAGE_USAGE = String.format("%s: %s", COMMAND_WORD, COMMAND_DESC) + Ui.LS + String
+            .format("Parameter: %s\n%s", COMMAND_USAGE, COMMAND_EXAMPLE);
+    
     public DeleteRecipeCommand(String recipeName) {
         setActionType(COMMAND_WORD);
         setObjectType(OBJECT_TYPE);
