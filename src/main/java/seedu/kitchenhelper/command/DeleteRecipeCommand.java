@@ -62,6 +62,7 @@ public class DeleteRecipeCommand extends Command {
             assert recipeList.size() > 0;
             kitchenLogs.log(Level.INFO, LOG_INFO);
             recipeList.remove(recipeList.get(index));
+            Storage.saveRecipeData(recipeList);
             feedbackToUser = String.format(COMMAND_SUCCESS, recipeName);
         } else {
             feedbackToUser = COMMAND_FAILURE;
