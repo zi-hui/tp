@@ -110,19 +110,23 @@ public class Parser {
             if (!isValidUserInputFormat(attributes, addInventoryRegex)) {
                 throw new KitchenHelperException("Invalid Add Inventory Format");
             }
+    
             String[] nameAndOthers = attributes.split("/c\\s", 2);
-            String[] categoryAndOthers = nameAndOthers[1].split("\\s+/q\\s+");
-            String[] quantityAndOthers = categoryAndOthers[1].split("\\s+/p\\s+");
-            String[] priceAndExpiry = quantityAndOthers[1].split("\\s+/e\\s+");
-            
             String itemName = nameAndOthers[0].split("/n\\s+")[1].trim();
             assert itemName.length() > 0 : itemName;
+            
+            String[] categoryAndOthers = nameAndOthers[1].split("\\s+/q\\s+");
             String category = categoryAndOthers[0].trim();
             assert category.length() > 0 : category;
+            
+            String[] quantityAndOthers = categoryAndOthers[1].split("\\s+/p\\s+");
             int quantity = Integer.parseInt(quantityAndOthers[0]);
             assert quantity >= 0 : quantity;
+            
+            String[] priceAndExpiry = quantityAndOthers[1].split("\\s+/e\\s+");
             double price = Double.parseDouble(priceAndExpiry[0]);
             assert price >= 0.00 : price;
+            
             String expiry = priceAndExpiry[1];
             
             return new AddIngredientCommand(itemName, category, quantity, price, expiry);
