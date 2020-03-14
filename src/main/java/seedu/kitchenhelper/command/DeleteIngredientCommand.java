@@ -70,9 +70,11 @@ public class DeleteIngredientCommand extends Command {
 
         if (newQuantity < 0) {
             feedbackToUser = String.format(COMMAND_FAILURE_QUANTITY, ingredientName, ingredientQuantity);
+            assert ingredientQuantity != newQuantity;
         } else {
             ingredientToDelete.setQuantity(newQuantity);
             feedbackToUser = String.format(COMMAND_SUCCESS_QUANTITY, ingredientName);
+            assert ingredientQuantity == newQuantity;
         }
         return feedbackToUser;
     }
@@ -90,6 +92,7 @@ public class DeleteIngredientCommand extends Command {
         int indexOfIngredient = getIngredientIndex(ingredientName, ingredientsList);
 
         if (indexOfIngredient != -1) {
+            assert ingredientsList.size() > 0;
             Ingredient ingredientToDelete = ingredientsList.get(indexOfIngredient);
             if (quantity <= -1) {
                 kitchenLogs.log(Level.INFO, LOG_INFO);

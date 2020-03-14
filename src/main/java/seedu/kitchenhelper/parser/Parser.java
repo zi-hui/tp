@@ -155,6 +155,7 @@ public class Parser {
     private Command prepareDeleteRecipe(String parameters) throws KitchenHelperException {
         try {
             String [] typeAndName = parameters.split("/n\\s",2);
+            assert typeAndName.length == 2;
             return new DeleteRecipeCommand(typeAndName[1].trim());
         } catch (IndexOutOfBoundsException e) {
             kitchenlogs.log(Level.WARNING, LOG_WARNING_INDEX, e.toString());
@@ -173,7 +174,9 @@ public class Parser {
     private Command prepareDeleteIngredient(String parameters) throws KitchenHelperException {
         try {
             String [] typeAndName = parameters.split("/n\\s", 2);
+            assert typeAndName.length == 2;
             String [] nameAndQuantity = typeAndName[1].split("/q\\s", 2);
+            assert nameAndQuantity.length >= 1;
             if (nameAndQuantity.length > 1) {
                 return new DeleteIngredientCommand(nameAndQuantity[0].trim(), Integer.parseInt(nameAndQuantity[1]));
             } else {
