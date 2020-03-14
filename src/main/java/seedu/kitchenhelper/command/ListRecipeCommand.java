@@ -3,7 +3,14 @@ package seedu.kitchenhelper.command;
 import seedu.kitchenhelper.exception.KitchenHelperException;
 import seedu.kitchenhelper.object.Chore;
 import seedu.kitchenhelper.object.Recipe;
-import seedu.kitchenhelper.object.ingredient.*;
+import seedu.kitchenhelper.object.ingredient.Vegetable;
+import seedu.kitchenhelper.object.ingredient.Staple;
+import seedu.kitchenhelper.object.ingredient.Miscellaneous;
+import seedu.kitchenhelper.object.ingredient.Dairy;
+import seedu.kitchenhelper.object.ingredient.Drink;
+import seedu.kitchenhelper.object.ingredient.Fruit;
+import seedu.kitchenhelper.object.ingredient.Meat;
+import seedu.kitchenhelper.object.ingredient.Ingredient;
 
 import java.util.ArrayList;
 
@@ -39,7 +46,7 @@ public class ListRecipeCommand extends Command {
     public String listRecipe(int itemNum, ArrayList<Recipe> recipeArrayList) {
         String result = "\nHere is the list of Ingredients in Recipe:"
                 + "\nFormat : Ingredient Name | Ingredient Category | Quantity | Price | Expiry\n";
-        if (recipeArrayList.size() == 0 ||itemNum > recipeArrayList.size() || itemNum < 0) {
+        if (recipeArrayList.size() == 0 || itemNum > recipeArrayList.size() || itemNum < 0) {
             result += "The Recipe List is currently empty.";
         } else {
             Recipe recipeItem = recipeArrayList.get(itemNum - 1);
