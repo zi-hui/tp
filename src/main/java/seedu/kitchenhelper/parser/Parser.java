@@ -1,6 +1,16 @@
 package seedu.kitchenhelper.parser;
 
-import seedu.kitchenhelper.command.*;
+import seedu.kitchenhelper.command.Command;
+import seedu.kitchenhelper.command.AddRecipeCommand;
+import seedu.kitchenhelper.command.AddInventoryCommand;
+import seedu.kitchenhelper.command.DeleteIngredientCommand;
+import seedu.kitchenhelper.command.DeleteRecipeCommand;
+import seedu.kitchenhelper.command.DeleteCommand;
+import seedu.kitchenhelper.command.ListCommand;
+import seedu.kitchenhelper.command.HelpCommand;
+import seedu.kitchenhelper.command.ExitCommand;
+import seedu.kitchenhelper.command.InvalidCommand;
+
 import seedu.kitchenhelper.exception.KitchenHelperException;
 
 import java.util.HashMap;

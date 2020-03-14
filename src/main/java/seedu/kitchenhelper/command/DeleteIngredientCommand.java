@@ -16,9 +16,11 @@ public class DeleteIngredientCommand extends Command {
     public static final String COMMAND_EXAMPLE = "Example: deleteingredient /n Beef /q 2";
     public static final String COMMAND_FORMAT = String.format("%s%s\n%s", COMMAND_DESC, COMMAND_USAGE, COMMAND_EXAMPLE);
     public static final String COMMAND_SUCCESS = "%s has been deleted.";
-    public static final String COMMAND_FAILURE = "This ingredient does not exist! Please type in a correct ingredient name.";
+    public static final String COMMAND_FAILURE = "This ingredient does not exist! Please type in a correct "
+                                                    + "ingredient name.";
     public static final String COMMAND_SUCCESS_QUANTITY = "The quantity of %s has been changed!";
-    public static final String COMMAND_FAILURE_QUANTITY = "Please enter a valid quantity to delete!\nCurrently: \n%s : %d";
+    public static final String COMMAND_FAILURE_QUANTITY = "Please enter a valid quantity to delete!\nCurrently:"
+                                                            + "\n%s : %d";
     public static final String LOG_INFO = "An ingredient has been deleted";
     private static final String OBJECT_TYPE = "ingredient";
     private static int quantity = 0;
