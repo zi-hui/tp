@@ -2,7 +2,7 @@ package seedu.kitchenhelper.parser;
 
 import org.junit.jupiter.api.Test;
 import seedu.kitchenhelper.KitchenHelper;
-import seedu.kitchenhelper.command.AddInventoryCommand;
+import seedu.kitchenhelper.command.AddIngredientCommand;
 import seedu.kitchenhelper.command.InvalidCommand;
 import seedu.kitchenhelper.exception.KitchenHelperException;
 
@@ -17,20 +17,20 @@ class ParserTest {
     @Test
     void parseUserCommand_testPass() throws KitchenHelperException {
         assertTrue(new Parser().parseUserCommand(
-                "addinventory /n Beef /c Meat /q 30 /p 20.2 /e 2020-02-20") instanceof AddInventoryCommand);
+                "addingredient /n Beef /c Meat /q 30 /p 20.2 /e 2020-02-20") instanceof AddIngredientCommand);
     }
     
     @Test
     void parseUserCommand_testFail() throws KitchenHelperException {
         assertFalse(new Parser()
-                .parseUserCommand("dada /n Beef /c Meat /q 30 /p 20.2 /e 2020-02-20") instanceof AddInventoryCommand);
+                .parseUserCommand("dada /n Beef /c Meat /q 30 /p 20.2 /e 2020-02-20") instanceof AddIngredientCommand);
     }
     
     @Test
     void prepareAddInventory_testPass() {
         String correctAttributes = "/n Beef /c Meat /q 30 /p 20.2 /e 2020-02-20";
-        assertTrue(new Parser().prepareAddInventory(correctAttributes) instanceof AddInventoryCommand);
-        String output = String.format(AddInventoryCommand.MESSAGE_SUCCESS, "Beef", "Meat", 30, 20.2, "2020-02-20");
+        assertTrue(new Parser().prepareAddInventory(correctAttributes) instanceof AddIngredientCommand);
+        String output = String.format(AddIngredientCommand.MESSAGE_SUCCESS, "Beef", "Meat", 30, 20.2, "2020-02-20");
         assertEquals(output, showToConsole(new KitchenHelper()
                 .executeCommand(new Parser().prepareAddInventory(correctAttributes)).feedbackToUser));
     }
@@ -48,15 +48,15 @@ class ParserTest {
     
     @Test
     void splitInputLine_testPass() {
-        String userInput = "addinventory /n Beef /c Meat /q 30 /p 20.2 /e 2020-02-20";
-        assertEquals("addinventory", splitInputLine(userInput, " ")[0]);
+        String userInput = "addingredient /n Beef /c Meat /q 30 /p 20.2 /e 2020-02-20";
+        assertEquals("addingredient", splitInputLine(userInput, " ")[0]);
         assertEquals("/n Beef /c Meat /q 30 /p 20.2 /e 2020-02-20", splitInputLine(userInput, " ")[1]);
     }
     
     @Test
     void splitInputLine_testFail() {
-        String userInput = "addinventory /n Beef /c Meat /q 30 /p 20.2 /e 2020-02-20";
-        assertNotEquals("addinventory", splitInputLine(userInput, "")[0]);
+        String userInput = "addingredient /n Beef /c Meat /q 30 /p 20.2 /e 2020-02-20";
+        assertNotEquals("addingredient", splitInputLine(userInput, "")[0]);
         assertNotEquals("/n Beef /c Meat /q 30 /p 20.2 /e 2020-02-20", splitInputLine(userInput, "/p")[1]);
     }
     

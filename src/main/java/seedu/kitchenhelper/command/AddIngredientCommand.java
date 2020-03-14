@@ -17,9 +17,9 @@ import java.util.ArrayList;
 /**
  * Adds the ingredient to the inventory list.
  */
-public class AddInventoryCommand extends Command {
+public class AddIngredientCommand extends Command {
     
-    public static final String COMMAND_WORD = "addinventory";
+    public static final String COMMAND_WORD = "addingredient";
     public static final String MESSAGE_SUCCESS =
             "You have added Ingredient:%s Category:%s Quantity:%d Price:$%.2f Expiry:%s to the inventory list";
     public static final String COMMAND_DESC = "Adds a ingredient to the inventory list.";
@@ -43,7 +43,7 @@ public class AddInventoryCommand extends Command {
      * @param price          cost of the ingredient.
      * @param expiry         ingredient expiry date.
      */
-    public AddInventoryCommand(String ingredientName, String categoryName, int quantity, double price, String expiry) {
+    public AddIngredientCommand(String ingredientName, String categoryName, int quantity, double price, String expiry) {
         this.ingredientName = ingredientName;
         this.categoryName = categoryName;
         this.quantity = quantity;

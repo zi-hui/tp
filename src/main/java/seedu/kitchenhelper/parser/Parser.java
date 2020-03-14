@@ -2,7 +2,7 @@ package seedu.kitchenhelper.parser;
 
 import seedu.kitchenhelper.command.Command;
 import seedu.kitchenhelper.command.AddRecipeCommand;
-import seedu.kitchenhelper.command.AddInventoryCommand;
+import seedu.kitchenhelper.command.AddIngredientCommand;
 import seedu.kitchenhelper.command.DeleteRecipeCommand;
 import seedu.kitchenhelper.command.DeleteIngredientCommand;
 import seedu.kitchenhelper.command.ListCommand;
@@ -12,7 +12,6 @@ import seedu.kitchenhelper.command.ExitCommand;
 import seedu.kitchenhelper.command.InvalidCommand;
 
 import seedu.kitchenhelper.exception.KitchenHelperException;
-import seedu.kitchenhelper.object.Recipe;
 
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -42,7 +41,7 @@ public class Parser {
         switch (commandWord.toLowerCase()) {
         case AddRecipeCommand.COMMAND_WORD:
             return prepareAddRecipe(parameters);
-        case AddInventoryCommand.COMMAND_WORD:
+        case AddIngredientCommand.COMMAND_WORD:
             return prepareAddInventory(parameters);
         case DeleteRecipeCommand.COMMAND_WORD:
             return prepareDeleteRecipe(parameters);
@@ -121,10 +120,10 @@ public class Parser {
             double price = Double.parseDouble(priceAndExpiry[0]);
             String expiry = priceAndExpiry[1];
             
-            return new AddInventoryCommand(itemName, category, quantity, price, expiry);
+            return new AddIngredientCommand(itemName, category, quantity, price, expiry);
         } catch (KitchenHelperException khe) {
             return new InvalidCommand(
-                    String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, AddInventoryCommand.COMMAND_FORMAT));
+                    String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, AddIngredientCommand.COMMAND_FORMAT));
         }
     }
   
