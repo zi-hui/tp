@@ -12,11 +12,16 @@ import seedu.kitchenhelper.object.ingredient.Vegetable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 
 /**
  * A Recipe represents a collection of ingredients of different types.
  */
 public class Recipe {
+
+    public static final Logger kitchenLogs = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    public final String warningAddRecipe =
+            "An unidentifiable ingredient has been added to ingredient of Miscellaneous category";
     ArrayList<Ingredient> recipeItems = new ArrayList<>();
     public String recipeName;
     public Integer recipeIngrQty;
@@ -27,12 +32,17 @@ public class Recipe {
      * @param ingrAndQty the hashmap of ingredients.
      */
     public void addIngredientsToRecipe(HashMap<String[], Integer> ingrAndQty) {
+        assert ingrAndQty.size() > 0;
         for (Map.Entry<String[], Integer> entry : ingrAndQty.entrySet()) {
             String ingrName = (entry.getKey())[0];
             String ingrCategory = (entry.getKey())[1];
             Integer ingrQuantity = entry.getValue();
+            assert ingrName.length() > 0;
+            assert ingrCategory.length() > 0;
+            assert ingrQuantity >= 0;
             Ingredient newIngredient = createIngr(ingrName, ingrCategory, ingrQuantity);
             recipeItems.add(newIngredient);
+            assert recipeItems.size() > 0;
         }
         recipeIngrQty = recipeItems.size();
     }
@@ -62,7 +72,8 @@ public class Recipe {
         case "vegetable":
             return new Vegetable(ingrName, ingrCategory, ingrQuantity, 0, null);
         default:
-            return null;
+            kitchenLogs.warning(warningAddRecipe);
+            return new Miscellaneous(ingrName, ingrCategory, ingrQuantity, 0, null);
         }
     }
 
