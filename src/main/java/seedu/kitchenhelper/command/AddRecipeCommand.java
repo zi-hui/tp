@@ -7,13 +7,23 @@ import seedu.kitchenhelper.object.ingredient.Ingredient;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.logging.Logger;
 
 /**
  * Perform addition-related commands.
  */
 public class AddRecipeCommand extends Command {
-    
+
+    public static final Logger kitchenLogs = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     public static final String COMMAND_WORD = "addrecipe";
+    public static final String COMMAND_DESC = "Adds a recipe to the recipe list.";
+    public static final String COMMAND_PARAMETER
+            = "/n RECIPENAME /i INGRNAME:QUANTITY:CATEGORY <optional: , INGRNAME:QUANTITY:CATEGORY>";
+    public static final String COMMAND_EXAMPLE
+            = "Example: addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable";
+    public static final String COMMAND_FORMAT =
+            String.format("%s %s\n%s", COMMAND_DESC, COMMAND_PARAMETER, COMMAND_EXAMPLE);
+    public final String logAddRecipe = "A new recipe has been added";
     public HashMap<String[], Integer> parsedIngr;
 
     /**
@@ -46,10 +56,14 @@ public class AddRecipeCommand extends Command {
     }
 
     public String addRecipe(String attributes, ArrayList<Recipe> recipeList) {
+
         Recipe freshRecipe = new Recipe();
         freshRecipe.setRecipeName(attributes);
         freshRecipe.addIngredientsToRecipe(parsedIngr);
         recipeList.add(freshRecipe);
+        assert freshRecipe.recipeName.length() > 0;
+        assert recipeList.size() > 0;
+        kitchenLogs.info(logAddRecipe);
         return freshRecipe.recipeName + " Recipe has been created with "
                 + freshRecipe.recipeIngrQty + " ingredients inside.";
     }
