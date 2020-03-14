@@ -1,5 +1,7 @@
 package seedu.kitchenhelper.command;
 
+import seedu.kitchenhelper.KitchenHelper;
+import seedu.kitchenhelper.exception.KitchenHelperException;
 import seedu.kitchenhelper.object.Chore;
 import seedu.kitchenhelper.object.Recipe;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
@@ -21,12 +23,24 @@ public class DeleteChoreCommand extends Command {
         this.indexToDelete = indexToDelete;
     }
 
+    public String deleteChore(ArrayList<Chore> choreList) {
+        try {
+            if (indexToDelete > choreList.size()) {
+                throw new KitchenHelperException("Please choose an index in the chore list!");
+            }
+            Chore choreToDelete = choreList.get(indexToDelete - 1);
+            choreList.remove(choreToDelete);
+            return String.format(MESSAGE_SUCCESS, choreToDelete, choreList.size(), choreToDelete.checkSingular(choreList));
+        } catch (KitchenHelperException khe) {
+            return khe.getMessage();
+        }
+    }
+
     @Override
     public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
                                  ArrayList<Chore> choreList) {
-        Chore choreToDelete = choreList.get(indexToDelete - 1);
-        choreList.remove(choreToDelete);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, choreToDelete, choreList.size(), choreToDelete.checkSingular(choreList)));
+        String feedbackToUser = deleteChore(choreList);
+        return new CommandResult(feedbackToUser);
     }
 }
 

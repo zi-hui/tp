@@ -123,11 +123,17 @@ public class Parser {
         try {
             String[] descriptionAndDate = attributes.split("/by");
             String description = descriptionAndDate[0].trim();
+            if (description.isEmpty()) {
+                throw new KitchenHelperException(
+                        String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, AddChoreCommand.COMMAND_FORMAT));
+            }
             String date = descriptionAndDate[1].trim();
             return new AddChoreCommand(description, date);
         } catch (IndexOutOfBoundsException e) {
             return new InvalidCommand(
                     String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, AddChoreCommand.COMMAND_FORMAT));
+        } catch (KitchenHelperException khe) {
+            return new InvalidCommand(khe.getMessage());
         }
     }
   
