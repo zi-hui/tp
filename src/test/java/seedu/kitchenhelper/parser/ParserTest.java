@@ -40,7 +40,7 @@ class ParserTest {
         String incorrectAttributes = "/ Beef /c Meat /q 30 /p 20.2 /e 2020-02-20";
         assertTrue(new Parser().prepareAddIngredient(incorrectAttributes) instanceof InvalidCommand);
         String output = "Invalid Command Format!\n"
-                        + "Adds a ingredient to the inventory list. /n INGREDIENT /c CATEGORY /q QUANTITY /p PRICE /e"
+                        + "Adds a ingredient to the ingredient list. /n INGREDIENT /c CATEGORY /q QUANTITY /p PRICE /e"
                         + " EXPIRY\n" + "Example: addingredient /n Beef /c Meat /q 1 /p 13.5 /e 2020-02-13";
         assertEquals(output, showToConsole(new KitchenHelper()
                 .executeCommand(new Parser().prepareAddIngredient(incorrectAttributes)).feedbackToUser));
