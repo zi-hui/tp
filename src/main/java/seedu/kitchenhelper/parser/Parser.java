@@ -1,17 +1,22 @@
 package seedu.kitchenhelper.parser;
 
-import seedu.kitchenhelper.command.AddCommand;
-import seedu.kitchenhelper.command.AddInventoryCommand;
-import seedu.kitchenhelper.command.DeleteCommand;
-import seedu.kitchenhelper.command.ExitCommand;
-import seedu.kitchenhelper.command.HelpCommand;
-import seedu.kitchenhelper.command.InvalidCommand;
-import seedu.kitchenhelper.command.ListCommand;
 import seedu.kitchenhelper.command.Command;
+import seedu.kitchenhelper.command.AddRecipeCommand;
+import seedu.kitchenhelper.command.AddIngredientCommand;
+import seedu.kitchenhelper.command.DeleteRecipeCommand;
+import seedu.kitchenhelper.command.DeleteIngredientCommand;
+import seedu.kitchenhelper.command.DeleteRecipeCommand;
+import seedu.kitchenhelper.command.DeleteCommand;
+import seedu.kitchenhelper.command.ListCommand;
+import seedu.kitchenhelper.command.HelpCommand;
+import seedu.kitchenhelper.command.ExitCommand;
+import seedu.kitchenhelper.command.InvalidCommand;
 
 import seedu.kitchenhelper.exception.KitchenHelperException;
 
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -20,6 +25,11 @@ import java.util.regex.Pattern;
  */
 
 public class Parser {
+
+    public static final Logger kitchenlogs = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    public static final String LOG_WARNING_INDEX = "An IndexOutOfBounds exception has been caught";
+    public final String warningPrepareRecipe = "An IO exception has been caught";
+
     /**
      * Parses user input into command for execution.
      *
@@ -31,13 +41,14 @@ public class Parser {
         final String commandWord = userInputs[0];
         final String parameters = userInputs[1];
         switch (commandWord.toLowerCase()) {
-        case AddCommand.COMMAND_WORD:
-            AddCommand addCmd = new AddCommand();
-            HashMap<String[], Integer> ingrAndQty = prepareAddRecipe(parameters);
-            addCmd.setAttributesOfCmd(parameters, ingrAndQty);
-            return addCmd;
-        case AddInventoryCommand.COMMAND_WORD:
-            return prepareAddInventory(parameters);
+        case AddRecipeCommand.COMMAND_WORD:
+            return prepareAddRecipe(parameters);
+        case AddIngredientCommand.COMMAND_WORD:
+            return prepareAddIngredient(parameters);
+        case DeleteRecipeCommand.COMMAND_WORD:
+            return prepareDeleteRecipe(parameters);
+        case DeleteIngredientCommand.COMMAND_WORD:
+            return prepareDeleteIngredient(parameters);
         case ListCommand.COMMAND_WORD:
             ListCommand listCmd = new ListCommand();
             HashMap<String, String> listParams = prepareListParams(parameters);
@@ -56,7 +67,7 @@ public class Parser {
             return new InvalidCommand();
         }
     }
-    
+
     /**
      * Prepares the addition of ingredients into recipe.
      *
@@ -64,16 +75,11 @@ public class Parser {
      * @return hashmap of a formatted list of ingredients.
      * @throws KitchenHelperException if the command is invalid
      */
-    public HashMap<String[], Integer> prepareAddRecipe(String attributes) throws KitchenHelperException {
+    public Command prepareAddRecipe(String attributes) throws KitchenHelperException {
         HashMap<String[], Integer> ingrAndQty = new HashMap<>();
         String ingredientList;
+        AddRecipeCommand addCmd = new AddRecipeCommand();
         try {
-            if (attributes.indexOf("/i") == -1) {
-                String[] splitAttributes = attributes.split(" ", 2);
-                if (splitAttributes[0].equalsIgnoreCase("chore")) {
-                    return ingrAndQty;
-                }
-            }
             ingredientList = attributes.substring(attributes.indexOf("/i") + 3);
             String[] splitedIngr = ingredientList.split("[,][\\s]");
             for (String item : splitedIngr) {
@@ -84,9 +90,12 @@ public class Parser {
                 ingrAndQty.put(nameAndType, Integer.parseInt(ingrContent[1]));
             }
         } catch (IndexOutOfBoundsException e) {
-            throw new KitchenHelperException("Invalid Command");
+            kitchenlogs.log(Level.WARNING, warningPrepareRecipe, e.toString());
+            return new InvalidCommand(
+                    String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, AddRecipeCommand.COMMAND_FORMAT));
         }
-        return ingrAndQty;
+        addCmd.setAttributesOfCmd(attributes, ingrAndQty);
+        return addCmd;
     }
     
     /**
@@ -95,28 +104,38 @@ public class Parser {
      * @param attributes full user input string.
      * @return the prepared command.
      */
-    public Command prepareAddInventory(String attributes) {
+    public Command prepareAddIngredient(String attributes) {
         try {
-            // Regex for checking the format of add inventory
+            // Regex for checking the format of add ingredient
             String addInventoryRegex =
                     "/n [a-zA-Z]+( [a-zA-Z]+)* /c [a-zA-Z]+ /q [0-9]+ /p \\d+(\\.\\d{1,2})? /e \\d{4}-\\d{2}-\\d{2}";
             if (!isValidUserInputFormat(attributes, addInventoryRegex)) {
                 throw new KitchenHelperException("Invalid Add Inventory Format");
             }
+    
             String[] nameAndOthers = attributes.split("/c\\s", 2);
             String itemName = nameAndOthers[0].split("/n\\s+")[1].trim();
+            assert itemName.length() > 0 : itemName;
+            
             String[] categoryAndOthers = nameAndOthers[1].split("\\s+/q\\s+");
             String category = categoryAndOthers[0].trim();
+            assert category.length() > 0 : category;
+            
             String[] quantityAndOthers = categoryAndOthers[1].split("\\s+/p\\s+");
             int quantity = Integer.parseInt(quantityAndOthers[0]);
+            assert quantity >= 0 : quantity;
+            
             String[] priceAndExpiry = quantityAndOthers[1].split("\\s+/e\\s+");
             double price = Double.parseDouble(priceAndExpiry[0]);
+            assert price >= 0.00 : price;
+            
             String expiry = priceAndExpiry[1];
             
-            return new AddInventoryCommand(itemName, category, quantity, price, expiry);
+            return new AddIngredientCommand(itemName, category, quantity, price, expiry);
         } catch (KitchenHelperException khe) {
+            kitchenlogs.log(Level.WARNING,InvalidCommand.MESSAGE_INVALID + " " + attributes);
             return new InvalidCommand(
-                    String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, AddInventoryCommand.COMMAND_FORMAT));
+                    String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, AddIngredientCommand.COMMAND_FORMAT));
         }
     }
   
@@ -145,17 +164,51 @@ public class Parser {
         }
         return listParam;
     }
-  
-  
-  
+
     /**
-     * Prepares the deletion of recipe and ingredients from the lists.
+     * Prepares the deletion of recipe from the lists.
      *
-     * @param attributes full user input string.
+     * @param parameters full user input string.
      * @return hashmap of a formatted list of parameters to be deleted.
      * @throws KitchenHelperException if the command is invalid
      */
-    
+
+    private Command prepareDeleteRecipe(String parameters) throws KitchenHelperException {
+        try {
+            String [] typeAndName = parameters.split("/n\\s",2);
+            assert typeAndName.length == 2;
+            return new DeleteRecipeCommand(typeAndName[1].trim());
+        } catch (IndexOutOfBoundsException e) {
+            kitchenlogs.log(Level.WARNING, LOG_WARNING_INDEX, e.toString());
+            throw new KitchenHelperException(DeleteRecipeCommand.COMMAND_FORMAT);
+        }
+    }
+
+    /**
+     * Prepares the deletion of ingredients from the lists.
+     *
+     * @param parameters full user input string.
+     * @return hashmap of a formatted list of parameters to be deleted.
+     * @throws KitchenHelperException if the command is invalid
+     */
+
+    private Command prepareDeleteIngredient(String parameters) throws KitchenHelperException {
+        try {
+            String [] typeAndName = parameters.split("/n\\s", 2);
+            assert typeAndName.length == 2;
+            String [] nameAndQuantity = typeAndName[1].split("/q\\s", 2);
+            assert nameAndQuantity.length >= 1;
+            if (nameAndQuantity.length > 1) {
+                return new DeleteIngredientCommand(nameAndQuantity[0].trim(), Integer.parseInt(nameAndQuantity[1]));
+            } else {
+                return new DeleteIngredientCommand(nameAndQuantity[0].trim(), -1);
+            }
+        } catch (IndexOutOfBoundsException e) {
+            kitchenlogs.log(Level.WARNING, LOG_WARNING_INDEX, e.toString());
+            throw new KitchenHelperException(DeleteIngredientCommand.COMMAND_FORMAT);
+        }
+    }
+
     private HashMap<String, String> prepareDeleteParams(String attributes) throws KitchenHelperException {
         HashMap<String, String> deleteParam = new HashMap<>();
         try {
@@ -164,23 +217,9 @@ public class Parser {
                 deleteParam.put("type", typeAndNumber[0].trim());
                 deleteParam.put("nameToDelete", typeAndNumber[1].trim());
                 deleteParam.put("quantity", "-1");
-            } else {
-                String [] typeAndName = attributes.split("/n\\s", 2);
-                deleteParam.put("type", typeAndName[0].trim());
-                String [] nameAndQuantity = typeAndName[1].split("/q\\s", 2);
-                deleteParam.put("nameToDelete", nameAndQuantity[0].trim());
-                if (nameAndQuantity.length > 1) {
-                    deleteParam.put("quantity", nameAndQuantity[1].trim());
-                } else {
-                    deleteParam.put("quantity", "-1");
-                }
             }
         } catch (IndexOutOfBoundsException e) {
-            if (deleteParam.get("type").equalsIgnoreCase("ingredient")) {
-                throw new KitchenHelperException("delete ingredient /n INGREDIENT [/q QUANTITY]");
-            } else if (deleteParam.get("type").equalsIgnoreCase("recipe")) {
-                throw new KitchenHelperException("delete recipe /n RECIPENAME");
-            } else if (deleteParam.get("type").equalsIgnoreCase("chore")) {
+            if (deleteParam.get("type").equalsIgnoreCase("chore")) {
                 throw new KitchenHelperException("delete chore <integer>");
             }
             throw new KitchenHelperException("");

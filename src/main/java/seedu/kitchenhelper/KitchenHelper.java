@@ -11,11 +11,17 @@ import seedu.kitchenhelper.object.ingredient.Ingredient;
 import seedu.kitchenhelper.parser.Parser;
 import seedu.kitchenhelper.ui.Ui;
 
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+import java.util.logging.FileHandler;
+import java.util.logging.SimpleFormatter;
 
 public class KitchenHelper {
-    
+    public final Logger kitchenLogs = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     public ArrayList<Ingredient> ingredientList = new ArrayList<>();
     public ArrayList<Recipe> recipeList = new ArrayList<>();
     public ArrayList<Chore> choreList = new ArrayList<>();
@@ -28,19 +34,11 @@ public class KitchenHelper {
     private void start() {
         ui = new Ui();
         ui.showWelcomeMessage();
-        storage = new Storage("outputIngredient.txt", "outputRecipe.txt",
-                "outputChore.txt");
-        try {
-            ingredientList = new ArrayList<>(storage.getIngredientData());
-            recipeList = new ArrayList<>(storage.getRecipeData());
-            choreList = new ArrayList<>(storage.getChoreData());
-        } catch (FileNotFoundException err) {
-            //ui.errorMessage(err.toString());
-            //ingredientList = new
-        }
+        storage = new Storage("output.txt");
     }
     
-    private void run() {
+    private void run() throws KitchenHelperException {
+        setUpLogger();
         start();
         runCommandLoopUntilExitCommand();
         exit();
@@ -48,6 +46,29 @@ public class KitchenHelper {
     
     private void exit() {
         System.exit(0);
+    }
+
+    private void setUpLogger() throws KitchenHelperException {
+        /*
+        Output to console only when a serious failure has caused normal
+        execution of the program
+         */
+        LogManager.getLogManager().reset();
+        ConsoleHandler consoleOutput = new ConsoleHandler();
+        consoleOutput.setLevel(Level.SEVERE);
+        kitchenLogs.addHandler(consoleOutput);
+
+        /*
+        Logs all information above the Level.Fine to a log file
+         */
+        try {
+            FileHandler logFile = new FileHandler("KitchenLogs.log");
+            logFile.setFormatter(new SimpleFormatter());
+            logFile.setLevel(Level.FINE);
+            kitchenLogs.addHandler(logFile);
+        } catch (IOException e) {
+            throw new KitchenHelperException("Error in Logging");
+        }
     }
     
     private void runCommandLoopUntilExitCommand() {
@@ -62,11 +83,6 @@ public class KitchenHelper {
                 // type of command (i.e add/ delete/ list/ help / exit)
                 command = new Parser().parseUserCommand(userCommandInput);
                 CommandResult result = executeCommand(command);
-
-                command.executeIngredientStorage(ingredientList, storage);
-                command.executeRecipeStorage(recipeList,storage);
-                command.executeChoreStorage(choreList, storage);
-
                 ui.showResultToUser(result);
                 ui.printDivider();
             } catch (KitchenHelperException e) {

@@ -13,20 +13,24 @@ import seedu.kitchenhelper.object.ingredient.Staple;
 import seedu.kitchenhelper.object.ingredient.Vegetable;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 /**
  * Adds the ingredient to the inventory list.
  */
-public class AddInventoryCommand extends Command {
+public class AddIngredientCommand extends Command {
     
-    public static final String COMMAND_WORD = "addinventory";
+    public final Logger kitchenLogs = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    public static final String COMMAND_WORD = "addingredient";
     public static final String MESSAGE_SUCCESS =
             "You have added Ingredient:%s Category:%s Quantity:%d Price:$%.2f Expiry:%s to the inventory list";
     public static final String COMMAND_DESC = "Adds a ingredient to the inventory list.";
     public static final String COMMAND_PARAMETER = "/n INGREDIENT /c CATEGORY /q QUANTITY /p PRICE /e EXPIRY";
-    public static final String COMMAND_EXAMPLE = "Example: addinventory /n Beef /c Meat /q 1 /p 13.5 /e 2020-02-13";
+    public static final String COMMAND_EXAMPLE = "Example: addingredient /n Beef /c Meat /q 1 /p 13.5 /e 2020-02-13";
     public static final String COMMAND_FORMAT =
             String.format("%s %s\n%s", COMMAND_DESC, COMMAND_PARAMETER, COMMAND_EXAMPLE);
+    
+    public final String logAddIngredient = "A new ingredient has been added";
     
     private String ingredientName;
     private String categoryName;
@@ -43,7 +47,7 @@ public class AddInventoryCommand extends Command {
      * @param price          cost of the ingredient.
      * @param expiry         ingredient expiry date.
      */
-    public AddInventoryCommand(String ingredientName, String categoryName, int quantity, double price, String expiry) {
+    public AddIngredientCommand(String ingredientName, String categoryName, int quantity, double price, String expiry) {
         this.ingredientName = ingredientName;
         this.categoryName = categoryName;
         this.quantity = quantity;
@@ -117,6 +121,7 @@ public class AddInventoryCommand extends Command {
     public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
                                  ArrayList<Chore> choreList) {
         addToCategory(categoryName, ingredientList);
+        kitchenLogs.info(logAddIngredient);
         return new CommandResult(String.format(MESSAGE_SUCCESS, ingredientName, categoryName, quantity, price, expiry));
     }
 }

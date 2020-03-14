@@ -4,7 +4,6 @@ import seedu.kitchenhelper.exception.KitchenHelperException;
 import seedu.kitchenhelper.object.Chore;
 import seedu.kitchenhelper.object.Recipe;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
-import seedu.kitchenhelper.storage.Storage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -62,76 +61,6 @@ public class DeleteCommand extends Command {
         objectVariables = attributes.get("nameToDelete");
         quantity = Integer.parseInt(attributes.get("quantity"));
     }
-
-    public void executeIngredientStorage(ArrayList<Ingredient> ingredientList, Storage storage){
-
-    }
-
-    public void executeChoreStorage(ArrayList<Chore> choreList, Storage storage){
-
-    }
-
-    public void executeRecipeStorage(ArrayList<Recipe> recipeList, Storage storage){
-
-    }
-
-    /**
-     * Delete the ingredient from the ingredient list.
-     *
-     * @param ingredientName the ingredient name to be deleted
-     * @param ingredientsList the list of ingredients
-     */
-
-    @Override
-    public String deleteIngredient(String ingredientName, ArrayList<Ingredient> ingredientsList) {
-        String feedbackToUser = "";
-        int count = 0;
-        for (Ingredient ingredient : ingredientsList) {
-            if (ingredient.getIngredientName().equalsIgnoreCase(ingredientName)) {
-                if (quantity <= -1) {
-                    ingredientsList.remove(ingredient);
-                    feedbackToUser = ingredientName + " has been deleted.";
-                } else {
-                    ingredient.setQuantity(ingredient.getQuantity() - quantity);
-                    feedbackToUser = "The quantity of " + ingredientName + " has been changed!";
-                }
-                count += 1;
-            }
-        }
-
-        if (count < 1) {
-            feedbackToUser = "This ingredient does not exist! Please type in a correct ingredient name.";
-        }
-
-        return feedbackToUser;
-    }
-
-    /**
-     * Delete the recipe for the recipe list.
-     *
-     * @param recipeName the recipe name to be deleted
-     * @param recipeList the list of recipe
-     */
-
-    @Override
-    public String deleteRecipe(String recipeName, ArrayList<Recipe> recipeList) {
-        String feedbackToUser;
-        int count = 0;
-
-        for (Recipe recipe : recipeList) {
-            if (recipe.getRecipeName().equalsIgnoreCase(recipeName.trim())) {
-                break;
-            }
-            count += 1;
-        }
-        if (count <= (recipeList.size() - 1) && (count >= 0)) {
-            recipeList.remove(recipeList.get(count));
-            feedbackToUser = recipeName + " has been deleted.";
-        } else {
-            feedbackToUser = "This recipe does not exist! Please type in a correct recipe name.";
-        }
-        return feedbackToUser;
-    }
     
     @Override
     public String deleteChore(String numberToDelete, ArrayList<Chore> choreList) {
@@ -161,7 +90,7 @@ public class DeleteCommand extends Command {
      */
 
     @Override
-    public CommandResult    execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
+    public CommandResult  execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
                                  ArrayList<Chore> choreList) throws KitchenHelperException {
         return super.execute(ingredientList, recipeList, choreList);
     }
