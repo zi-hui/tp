@@ -6,19 +6,21 @@ import seedu.kitchenhelper.object.Recipe;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ListRecipeCommandTest {
 
     @Test
     public void listCommandRecipe_validItemNumber_correctlyConstructed() throws Exception {
-        ListRecipeCommand command = new ListRecipeCommand(1);
         HashMap<String[], Integer> parsedIngr = new HashMap<>();
         String[] ingr = new String[2];
         ingr[0] = "milo";
         ingr[1] = "drink";
         parsedIngr.put(ingr, 10);
         String attributes = "recipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable";
+        ListRecipeCommand command = new ListRecipeCommand(1);
         ArrayList<Recipe> recipeList = new ArrayList<>();
         AddRecipeCommand newRecipe = new AddRecipeCommand();
         newRecipe.setAttributesOfCmd(attributes, parsedIngr);
@@ -31,13 +33,13 @@ class ListRecipeCommandTest {
 
     @Test
     public void listCommandRecipe_invalidItemNumber_correctlyConstructed() throws Exception {
-        ListRecipeCommand command = new ListRecipeCommand(1);
         HashMap<String[], Integer> parsedIngr = new HashMap<>();
         String[] ingr = new String[2];
         ingr[0] = "milo";
         ingr[1] = "drink";
         parsedIngr.put(ingr, 10);
         String attributes = "recipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable";
+        ListRecipeCommand command = new ListRecipeCommand(1);
         ArrayList<Recipe> recipeList = new ArrayList<>();
         AddRecipeCommand newRecipe = new AddRecipeCommand();
         newRecipe.setAttributesOfCmd(attributes, parsedIngr);

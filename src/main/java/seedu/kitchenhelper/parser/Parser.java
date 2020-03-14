@@ -11,6 +11,7 @@ import seedu.kitchenhelper.command.HelpCommand;
 import seedu.kitchenhelper.command.ExitCommand;
 import seedu.kitchenhelper.command.InvalidCommand;
 import seedu.kitchenhelper.command.ListRecipeCommand;
+import seedu.kitchenhelper.command.ListChoreCommand;
 import seedu.kitchenhelper.exception.KitchenHelperException;
 
 import java.util.HashMap;
@@ -52,6 +53,8 @@ public class Parser {
             return prepareListIngredient(parameters);
         case ListRecipeCommand.COMMAND_WORD:
             return prepareListRecipe(parameters);
+        case ListChoreCommand.COMMAND_WORD:
+            return prepareListChore(parameters);
         case DeleteCommand.COMMAND_WORD:
             DeleteCommand deleteCmd = new DeleteCommand();
             HashMap<String, String> deleteParams = prepareDeleteParams(parameters);
@@ -160,6 +163,24 @@ public class Parser {
         } catch (KitchenHelperException e) {
             kitchenlogs.log(Level.WARNING, LOG_WARNING_INDEX, e.toString());
             throw new KitchenHelperException(ListIngredientCommand.COMMAND_FORMAT);
+        }
+    }
+
+    /**
+     * Prepares the parameters needed for the list function.
+     *
+     * @param parameters full user input string.
+     * @return the prepared command.
+     */
+    private Command prepareListChore(String parameters) throws KitchenHelperException {
+        try {
+            if (! parameters.isEmpty()) {
+                throw new KitchenHelperException("Invalid ListChore command.");
+            }
+            return new ListChoreCommand();
+        } catch (KitchenHelperException e) {
+            kitchenlogs.log(Level.WARNING, LOG_WARNING_INDEX, e.toString());
+            throw new KitchenHelperException(ListChoreCommand.COMMAND_FORMAT);
         }
     }
 
