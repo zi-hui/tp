@@ -50,7 +50,7 @@ Example: addingredient /n Beef /c Meat /q 1 /p 13.5 /e 2020-02-13
 add chore buy groceries /by Tuesday 12pm
 Invalid Command Format!
 ===================================================
-list chore
+listchore
 Your list of chores is currently empty.
 ===================================================
 deleterecipe /n Chicken Salad

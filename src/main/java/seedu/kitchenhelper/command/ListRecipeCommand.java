@@ -55,7 +55,7 @@ public class ListRecipeCommand extends Command {
                 Ingredient ingredientObj = recipeItem.getRecipeItem().get(i);
                 result += ingredientObj.getIngredientName() + " | " + ingredientObj.getCategoryName()
                         + " | " + ingredientObj.getQuantity() + " | "
-                        + ingredientObj.getPrice() + " | " + ingredientObj.getExpiryDate() + " \n";
+                        + ingredientObj.getPrice() + " | " + ingredientObj.getExpiryDate() + "\n";
             }
         }
         return result;

@@ -43,12 +43,12 @@ public class ListIngredientCommand extends Command {
         } else {
             if (category.equalsIgnoreCase("all")) {
                 for (String categoryName : categoryArray) {
-                    result += categoryName + " : \n";
+                    result += categoryName + " :\n";
                     for (int i = 0; i < ingredientList.size(); i++) {
                         Ingredient ingredientObj = ingredientList.get(i);
                         if (ingredientObj.getCategoryName().equalsIgnoreCase(categoryName)) {
                             result += ingredientObj.getIngredientName() + " | " + ingredientObj.getQuantity() + " | "
-                                    + ingredientObj.getPrice() + " | " + ingredientObj.getExpiryDate() + " \n";
+                                    + ingredientObj.getPrice() + " | " + ingredientObj.getExpiryDate() + "\n";
                         }
                     }
                 }
@@ -58,7 +58,7 @@ public class ListIngredientCommand extends Command {
                     Ingredient ingredientObj = ingredientList.get(i);
                     if (ingredientObj.getCategoryName().equalsIgnoreCase(category)) {
                         result += ingredientObj.getIngredientName() + " | " + ingredientObj.getQuantity() + " | "
-                                + ingredientObj.getPrice() + " | " + ingredientObj.getExpiryDate() + " \n";
+                                + ingredientObj.getPrice() + " | " + ingredientObj.getExpiryDate() + "\n";
                     }
 
                     if (i == ingredientList.size()) {
