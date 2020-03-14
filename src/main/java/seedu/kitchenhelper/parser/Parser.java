@@ -127,6 +127,7 @@ public class Parser {
             
             return new AddIngredientCommand(itemName, category, quantity, price, expiry);
         } catch (KitchenHelperException khe) {
+            kitchenlogs.log(Level.WARNING,InvalidCommand.MESSAGE_INVALID + " " + attributes);
             return new InvalidCommand(
                     String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, AddIngredientCommand.COMMAND_FORMAT));
         }
