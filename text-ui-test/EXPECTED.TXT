@@ -8,11 +8,11 @@ Chicken Salad Recipe has been created with 2 ingredients inside.
 addingredient /n Beef /c Meat /q 3 /p 20 /e 2020-03-18
 You have added Ingredient:Beef Category:Meat Quantity:3 Price:$20.00 Expiry:2020-03-18 to the ingredient list
 ===================================================
-addingredient /n kailan /c Vegetable /q 30 /p 30.45 /e 2020-03-12
-You have added Ingredient:kailan Category:Vegetable Quantity:30 Price:$30.45 Expiry:2020-03-12 to the ingredient list
+addingredient /n kailan /c vegetable /q 30 /p 30.45 /e 2020-03-12
+You have added Ingredient:kailan Category:vegetable Quantity:30 Price:$30.45 Expiry:2020-03-12 to the ingredient list
 ===================================================
-addingredient /n HL Milk /c Dairy /q 3 /p 12.2 /e 2020-03-14
-You have added Ingredient:HL Milk Category:Dairy Quantity:3 Price:$12.20 Expiry:2020-03-14 to the ingredient list
+addingredient /n HL Milk /c dairy /q 3 /p 12.2 /e 2020-03-14
+You have added Ingredient:HL Milk Category:dairy Quantity:3 Price:$12.20 Expiry:2020-03-14 to the ingredient list
 ===================================================
 addingredient /n Milo /c Drink /q 30 /p 10 /e 2020-012-20
 Invalid Command Format!
@@ -29,7 +29,9 @@ deleterecipe /n Chicken Salad
 Chicken Salad has been deleted
 ===================================================
 deleteingredient /n Beef /q 2
-The quantity of Beef has been changed!
+Please enter a valid quantity to delete!
+Currently:
+Beef : 1
 ===================================================
 deleteingredient /n kailan /q 35
 Please enter a valid quantity to delete!
