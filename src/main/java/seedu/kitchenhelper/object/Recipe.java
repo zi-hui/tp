@@ -39,17 +39,10 @@ public class Recipe {
         recipeIngrQty = recipeItems.size();
     }
 
-    public void loadIngredientsToRecipe(ArrayList<String> recipeData) {
-
-        for (String item : recipeData) {
-            String[] parse = item.split(" ");
-            String ingrName = parse[0];
-            String ingrCategory = parse[1];
-            Integer ingrQuantity = Integer.parseInt(parse[2]);
-            Ingredient newIngredient = createIngr(ingrName, ingrCategory, ingrQuantity);
-            recipeItems.add(newIngredient);
+    public void addIngredientsToRecipeFromArrayList(ArrayList<Ingredient> ingredients) {
+        for (Ingredient ingredient : ingredients) {
+            this.recipeItems.add(ingredient);
         }
-        recipeIngrQty = recipeItems.size();
     }
 
     /**
@@ -84,6 +77,10 @@ public class Recipe {
     public void setRecipeName(String attributes) {
         String recipeNameAndIngr = attributes.substring(attributes.indexOf("/n") + 3, attributes.indexOf("/i") - 1);
         recipeName = recipeNameAndIngr;
+    }
+
+    public void setRecipeNameForStorage(String attributes) {
+        recipeName = attributes;
     }
 
     public String getRecipeName() {

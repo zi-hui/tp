@@ -13,7 +13,6 @@ import seedu.kitchenhelper.ui.Ui;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import seedu.kitchenhelper.storage.Storage;
 
 public class KitchenHelper {
     
@@ -35,7 +34,6 @@ public class KitchenHelper {
             ingredientList = new ArrayList<>(storage.getIngredientData());
             recipeList = new ArrayList<>(storage.getRecipeData());
             choreList = new ArrayList<>(storage.getChoreData());
-
         } catch (FileNotFoundException err) {
             //ui.errorMessage(err.toString());
             //ingredientList = new

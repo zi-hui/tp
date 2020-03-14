@@ -1,6 +1,5 @@
 package seedu.kitchenhelper.storage;
 
-import seedu.kitchenhelper.command.AddInventoryCommand;
 import seedu.kitchenhelper.object.Recipe;
 import seedu.kitchenhelper.object.Chore;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
@@ -15,11 +14,10 @@ import seedu.kitchenhelper.object.ingredient.Miscellaneous;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
+
 
 /**
  * Storage class to get/load and store data.
@@ -29,6 +27,7 @@ public class Storage {
     private String filePathIngredient;
     private String filePathRecipe;
     private String filePathChore;
+
 
     /**
      * Constructor for Storage.
@@ -41,6 +40,7 @@ public class Storage {
         this.filePathRecipe = filePathRecipe;
         this.filePathChore = filePathChore;
     }
+
 
     /**
      * Gets the saved Ingredient data from text file.
@@ -73,6 +73,7 @@ public class Storage {
         return ingredientList;
     }
 
+
     /**
      * Loads the ingredient into the ArrayList according to the category type.
      *
@@ -83,8 +84,8 @@ public class Storage {
      * @param expiry ingredient expiry date.
      * @param ingredientList the ArrayList to store ingredients.
      */
-    private void loadingIngredients(String name, String category, Integer quantity, Double price, String expiry,
-                                    ArrayList<Ingredient> ingredientList) {
+    void loadingIngredients(String name, String category, Integer quantity, Double price, String expiry,
+                            ArrayList<Ingredient> ingredientList) {
 
         switch (category.toLowerCase()) {
         case "dairy":
@@ -140,7 +141,7 @@ public class Storage {
         while (scanner.hasNext()) {
 
             Recipe freshRecipe = new Recipe();
-            ArrayList<String> recipeData = new ArrayList<>();
+            ArrayList<Ingredient> recipeItems = new ArrayList<>();
 
             String userData = scanner.nextLine();
             String removeQuantity = userData.substring(userData.length() - 1);
@@ -151,35 +152,44 @@ public class Storage {
 
             Integer count = ingredientQuantity + 1;
 
+            freshRecipe.setRecipeNameForStorage(addRecipeName);
+
             while (count > 1) {
                 String command = recipeName[count];
                 String[] getName = command.split(" /c ");
                 String[] getCat = getName[1].split(" /q ");
                 String[] getQuantity = getCat[1].split(" /p ");
-                //String[] getPrice = getQuantity[1].split(" /e ");
+                String[] getPrice = getQuantity[1].split(" /e ");
 
                 String name = getName[0];
                 String category = getCat[0];
                 Integer quantity = Integer.parseInt(getQuantity[0]);
-                //Double price = Double.parseDouble(getPrice[0]);
-                //String expiry = getPrice[1].substring(0, getPrice[1].length() - 2);
+                Double price = Double.parseDouble(getPrice[0]);
+                String expiry = getPrice[1].substring(0, getPrice[1].length() - 2);
 
-                String finalString = name + " " + category + " " + getQuantity[0];
-                recipeData.add(finalString);
-
-                freshRecipe.setRecipeName(addRecipeName);
-                freshRecipe.createIngr(name, category, quantity);
-                freshRecipe.loadIngredientsToRecipe(recipeData);
-                recipeList.add(freshRecipe);
+                loadingRecipeItems(name, category, quantity, price, expiry, recipeItems);
 
                 count -= 1;
             }
+            freshRecipe.addIngredientsToRecipeFromArrayList(recipeItems);
+            recipeList.add(freshRecipe);
         }
         scanner.close();
         return recipeList;
     }
 
-    /*private void loadingRecipeItems(String name, String category, Integer quantity, Double price, String expiry,
+
+    /**
+     * Loads the ingredient into the ArrayList according to the category type.
+     *
+     * @param name name of the ingredient.
+     * @param category category of the ingredient.
+     * @param quantity number of serving of ingredient.
+     * @param price cost of the ingredient.
+     * @param expiry ingredient expiry date.
+     * @param recipeItems the ArrayList to store ingredients of the recipe.
+     */
+    private void loadingRecipeItems(String name, String category, Integer quantity, Double price, String expiry,
                                     ArrayList<Ingredient> recipeItems) {
 
         switch (category.toLowerCase()) {
@@ -220,7 +230,8 @@ public class Storage {
         default:
             throw new IllegalStateException("Unexpected value: " + category);
         }
-    }*/
+    }
+
 
     /**
      * Gets the saved Chore data from text file.
@@ -248,6 +259,7 @@ public class Storage {
         return choreList;
     }
 
+
     /**
      * Saves and stores the ingredients in ArrayList Ingredient into a text file.
      * @param ingredientList ArrayList.
@@ -264,6 +276,7 @@ public class Storage {
         }
     }
 
+
     /**
      * Saves the recipe in recipeList ArrayList and recipe ingredients in recipeItems ArrayList into a text file.
      * @param recipeList ArrayList.
@@ -279,6 +292,7 @@ public class Storage {
             err.printStackTrace();
         }
     }
+
 
     /**
      * Saves the chores in choreList into a text file.
