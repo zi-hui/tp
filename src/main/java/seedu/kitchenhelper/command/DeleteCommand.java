@@ -70,6 +70,7 @@ public class DeleteCommand extends Command {
             int number = Integer.parseInt(numberToDelete.trim());
             Chore choreToDelete = choreList.get(number - 1);
             choreList.remove(choreToDelete);
+            Storage.saveChoreData(choreList);
             choreToDelete.setEditType(COMMAND_WORD);
             feedbackToUser = String.format(Chore.MESSAGE_SUCCESS,
                     choreToDelete.editType, choreToDelete, choreList.size(), choreToDelete.checkSingular(choreList));

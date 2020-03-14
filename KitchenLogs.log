@@ -1,0 +1,12 @@
+Mar 15, 2020 12:09:39 AM seedu.kitchenhelper.command.AddIngredientCommand execute
+INFO: A new ingredient has been added
+Mar 15, 2020 12:10:29 AM seedu.kitchenhelper.command.AddIngredientCommand execute
+INFO: A new ingredient has been added
+Mar 15, 2020 12:10:51 AM seedu.kitchenhelper.command.AddIngredientCommand execute
+INFO: A new ingredient has been added
+Mar 15, 2020 12:11:27 AM seedu.kitchenhelper.command.DeleteIngredientCommand deleteIngredient
+INFO: An ingredient has been deleted
+Mar 15, 2020 12:15:43 AM seedu.kitchenhelper.command.AddIngredientCommand execute
+INFO: A new ingredient has been added
+Mar 15, 2020 12:15:57 AM seedu.kitchenhelper.command.DeleteIngredientCommand deleteIngredient
+INFO: An ingredient has been deleted
