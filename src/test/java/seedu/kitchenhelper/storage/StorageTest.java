@@ -1,15 +1,13 @@
 package seedu.kitchenhelper.storage;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class StorageTest {
     public static final String OUTPUT_INGREDIENT = "./src/test/data/StorageTest/outputIngredient.txt";
@@ -19,13 +17,12 @@ class StorageTest {
     public static final String NEW_OUTPUT_RECIPE = "./src/test/data/NewStorageTest/outputRecipe.txt";
     public static final String NEW_OUTPUT_CHORE = "./src/test/data/NewStorageTest/outputChore.txt";
 
-    public Storage storage = new Storage(OUTPUT_INGREDIENT, OUTPUT_RECIPE, OUTPUT_CHORE);;
+    public Storage storage = new Storage(OUTPUT_INGREDIENT, OUTPUT_RECIPE, OUTPUT_CHORE);
 
     @Test
     void getIngredientDataTest() {
         try {
             Storage newStorage = new StubStorage();
-
             List<Ingredient> ingredients = storage.getIngredientData();
             List<Ingredient> stubIngredients = newStorage.getIngredientData();
             assertEquals(ingredients, stubIngredients);
@@ -55,7 +52,7 @@ class StorageTest {
     }
 
     private class StubStorage extends Storage {
-        public StubStorage () {
+        public StubStorage() {
             super(NEW_OUTPUT_INGREDIENT, NEW_OUTPUT_RECIPE, NEW_OUTPUT_CHORE);
         }
 

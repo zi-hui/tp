@@ -148,10 +148,8 @@ public class Storage {
             Integer ingredientQuantity = Integer.parseInt(removeQuantity);
             String newUserData = userData.substring(0, userData.length() - 1);
             String[] recipeName = newUserData.split("/n ");
-            String addRecipeName = recipeName[1].substring(0, recipeName[1].length()-2);
-
+            String addRecipeName = recipeName[1].substring(0, recipeName[1].length() - 2);
             Integer count = ingredientQuantity + 1;
-
             freshRecipe.setRecipeNameForStorage(addRecipeName);
 
             while (count > 1) {
