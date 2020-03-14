@@ -11,9 +11,9 @@ import java.util.Scanner;
  */
 public class Ui {
     
-    private static final String LS = System.lineSeparator();
+    public static final String LS = System.lineSeparator();
     
-    private static final String DIVIDER = "===================================================";
+    public static final String DIVIDER = "===================================================";
 
     public void printDivider() {
         System.out.println(DIVIDER);
