@@ -15,6 +15,8 @@ import seedu.kitchenhelper.object.ingredient.Miscellaneous;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -39,7 +41,6 @@ public class Storage {
         this.filePathRecipe = filePathRecipe;
         this.filePathChore = filePathChore;
     }
-
 
     /**
      * Gets the saved Ingredient data from text file.
@@ -131,16 +132,94 @@ public class Storage {
      * @return ArrayList Contains data from saved text file
      * @throws FileNotFoundException If file from file path does not exists.
      */
-    /*public ArrayList<Recipe> getRecipeData() throws FileNotFoundException {
+    public ArrayList<Recipe> getRecipeData() throws FileNotFoundException {
         ArrayList<Recipe> recipeList = new ArrayList<>();
         File file = new File(filePathRecipe);
         Scanner scanner = new Scanner(file);
 
         while (scanner.hasNext()) {
+
+            Recipe freshRecipe = new Recipe();
+            ArrayList<String> recipeData = new ArrayList<>();
+
             String userData = scanner.nextLine();
+            String removeQuantity = userData.substring(userData.length() - 1);
+            Integer ingredientQuantity = Integer.parseInt(removeQuantity);
+            String newUserData = userData.substring(0, userData.length() - 1);
+            String[] recipeName = newUserData.split("/n ");
+            String addRecipeName = recipeName[1].substring(0, recipeName[1].length()-2);
+
+            Integer count = ingredientQuantity + 1;
+
+            while (count > 1) {
+                String command = recipeName[count];
+                String[] getName = command.split(" /c ");
+                String[] getCat = getName[1].split(" /q ");
+                String[] getQuantity = getCat[1].split(" /p ");
+                //String[] getPrice = getQuantity[1].split(" /e ");
+
+                String name = getName[0];
+                String category = getCat[0];
+                Integer quantity = Integer.parseInt(getQuantity[0]);
+                //Double price = Double.parseDouble(getPrice[0]);
+                //String expiry = getPrice[1].substring(0, getPrice[1].length() - 2);
+
+                String finalString = name + " " + category + " " + getQuantity[0];
+                recipeData.add(finalString);
+
+                freshRecipe.setRecipeName(addRecipeName);
+                freshRecipe.createIngr(name, category, quantity);
+                freshRecipe.loadIngredientsToRecipe(recipeData);
+                recipeList.add(freshRecipe);
+
+                count -= 1;
+            }
         }
         scanner.close();
         return recipeList;
+    }
+
+    /*private void loadingRecipeItems(String name, String category, Integer quantity, Double price, String expiry,
+                                    ArrayList<Ingredient> recipeItems) {
+
+        switch (category.toLowerCase()) {
+        case "dairy":
+            Ingredient diary = new Dairy(name, category, quantity, price, expiry);
+            recipeItems.add(diary);
+            break;
+        case "drink": {
+            Ingredient drink = new Drink(name, category, quantity, price, expiry);
+            recipeItems.add(drink);
+            break;
+        }
+        case "fruit": {
+            Ingredient fruit = new Fruit(name, category, quantity, price, expiry);
+            recipeItems.add(fruit);
+            break;
+        }
+        case "meat": {
+            Ingredient meat = new Meat(name, category, quantity, price, expiry);
+            recipeItems.add(meat);
+            break;
+        }
+        case "miscellaneous": {
+            Ingredient miscellaneous = new Miscellaneous(name, category, quantity, price, expiry);
+            recipeItems.add(miscellaneous);
+            break;
+        }
+        case "staple": {
+            Ingredient staple = new Staple(name, category, quantity, price, expiry);
+            recipeItems.add(staple);
+            break;
+        }
+        case "vegetable": {
+            Ingredient vegetable = new Vegetable(name, category, quantity, price, expiry);
+            recipeItems.add(vegetable);
+            break;
+        }
+        default:
+            throw new IllegalStateException("Unexpected value: " + category);
+        }
     }*/
 
     /**
@@ -200,24 +279,6 @@ public class Storage {
             err.printStackTrace();
         }
     }
-
-
-    /**
-     * Saves the recipe ingredients in recipeItems ArrayList into a text file.
-     * @param recipeItems ArrayList.
-     */
-    /*public static void saveRecipeIngredientData(ArrayList<Ingredient> recipeItems) {
-        try {
-            FileWriter fw = new FileWriter("outputRecipe.txt");
-            for (Ingredient items : recipeItems) {
-                fw.write(items.toString() + System.lineSeparator());
-            }
-            fw.close();
-        } catch (IOException err) {
-            err.printStackTrace();
-        }
-    }
-*/
 
     /**
      * Saves the chores in choreList into a text file.

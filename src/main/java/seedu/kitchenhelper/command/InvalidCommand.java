@@ -40,6 +40,10 @@ public class InvalidCommand extends Command {
 
     }
 
+    public void executeRecipeStorage(ArrayList<Recipe> recipeList, Storage storage){
+
+    }
+
     /**
      * {@inheritDoc}
      *

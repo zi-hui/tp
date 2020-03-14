@@ -94,4 +94,6 @@ public abstract class Command {
     public abstract void executeIngredientStorage(ArrayList<Ingredient> ingredientList, Storage storage);
 
     public abstract void executeChoreStorage(ArrayList<Chore> choreList, Storage storage);
+
+    public abstract void executeRecipeStorage(ArrayList<Recipe> recipeList, Storage storage);
 }

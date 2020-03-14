@@ -8,6 +8,7 @@ import seedu.kitchenhelper.object.ingredient.Meat;
 import seedu.kitchenhelper.object.ingredient.Miscellaneous;
 import seedu.kitchenhelper.object.ingredient.Staple;
 import seedu.kitchenhelper.object.ingredient.Vegetable;
+import seedu.kitchenhelper.storage.Storage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,10 +28,24 @@ public class Recipe {
      * @param ingrAndQty the hashmap of ingredients.
      */
     public void addIngredientsToRecipe(HashMap<String[], Integer> ingrAndQty) {
+
         for (Map.Entry<String[], Integer> entry : ingrAndQty.entrySet()) {
             String ingrName = (entry.getKey())[0];
             String ingrCategory = (entry.getKey())[1];
             Integer ingrQuantity = entry.getValue();
+            Ingredient newIngredient = createIngr(ingrName, ingrCategory, ingrQuantity);
+            recipeItems.add(newIngredient);
+        }
+        recipeIngrQty = recipeItems.size();
+    }
+
+    public void loadIngredientsToRecipe(ArrayList<String> recipeData) {
+
+        for (String item : recipeData) {
+            String[] parse = item.split(" ");
+            String ingrName = parse[0];
+            String ingrCategory = parse[1];
+            Integer ingrQuantity = Integer.parseInt(parse[2]);
             Ingredient newIngredient = createIngr(ingrName, ingrCategory, ingrQuantity);
             recipeItems.add(newIngredient);
         }
@@ -77,5 +92,14 @@ public class Recipe {
 
     public ArrayList<Ingredient> getRecipeItem() {
         return this.recipeItems;
+    }
+
+    /**
+     * To format all variables of add ingredient as a string.
+     * @return String consisting of ingredient name, category, quantity, price and expiry.
+     */
+    @Override
+    public String toString() {
+        return "/n " + getRecipeName() + " " + getRecipeItem() + " " + recipeItems.size();
     }
 }

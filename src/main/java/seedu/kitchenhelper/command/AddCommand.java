@@ -62,6 +62,10 @@ public class AddCommand extends Command {
     public void executeChoreStorage(ArrayList<Chore> choreList, Storage storage){
 
     }
+
+    public void executeRecipeStorage(ArrayList<Recipe> recipeList, Storage storage){
+
+    }
     
     public void addIngredients(String attributes, ArrayList<Ingredient> ingredientList) {
 

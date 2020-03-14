@@ -1,6 +1,7 @@
 package seedu.kitchenhelper.command;
 
 import seedu.kitchenhelper.object.Chore;
+import seedu.kitchenhelper.object.Recipe;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
 import seedu.kitchenhelper.storage.Storage;
 
@@ -15,6 +16,10 @@ public class HelpCommand extends Command {
     }
 
     public void executeChoreStorage(ArrayList<Chore> choreList, Storage storage){
+
+    }
+
+    public void executeRecipeStorage(ArrayList<Recipe> recipeList, Storage storage){
 
     }
     

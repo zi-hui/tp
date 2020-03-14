@@ -97,6 +97,10 @@ public class AddInventoryCommand extends Command {
 
     }
 
+    public void executeRecipeStorage(ArrayList<Recipe> recipeList, Storage storage){
+
+    }
+
     public void executeChoreStorage(ArrayList<Chore> choreList, Storage storage){
 
     }

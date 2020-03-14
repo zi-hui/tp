@@ -71,6 +71,10 @@ public class DeleteCommand extends Command {
 
     }
 
+    public void executeRecipeStorage(ArrayList<Recipe> recipeList, Storage storage){
+
+    }
+
     /**
      * Delete the ingredient from the ingredient list.
      *
