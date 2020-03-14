@@ -88,8 +88,6 @@ public abstract class Command {
             feedbackToUser = listIngredients(ingredientList);
         } else if (actionType.equals(ListCommand.COMMAND_WORD) && objectType.equals("recipe")) {
             feedbackToUser = listRecipe(objectVariables, recipeList);
-        } else if (actionType.equals(ListCommand.COMMAND_WORD) && objectType.equals("chore")) {
-            feedbackToUser = listChore(choreList);
         }
         CommandResult cmdResult = new CommandResult(feedbackToUser);
         return cmdResult;

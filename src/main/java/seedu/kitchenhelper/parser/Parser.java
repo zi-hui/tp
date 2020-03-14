@@ -44,6 +44,8 @@ public class Parser {
             return prepareDeleteIngredient(parameters);
         case DeleteChoreCommand.COMMAND_WORD:
             return prepareDeleteChore(parameters);
+        case ListChoreCommand.COMMAND_WORD:
+            return new ListChoreCommand();
         case ListCommand.COMMAND_WORD:
             ListCommand listCmd = new ListCommand();
             HashMap<String, String> listParams = prepareListParams(parameters);
