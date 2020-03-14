@@ -32,6 +32,7 @@ public class ListIngredientCommand extends Command {
      */
     public ListIngredientCommand(String category) {
         this.category = category;
+        assert category.length() > 0;
     }
 
     public String listIngredients(String category, ArrayList<Ingredient> ingredientList) {
@@ -86,40 +87,6 @@ public class ListIngredientCommand extends Command {
 
     public String[] getCategoryArray() {
         return this.categoryArray;
-    }
-
-    public String listRecipe(String itemNumber, ArrayList<Recipe> recipeArrayList) {
-        int itemNum = Integer.parseInt(itemNumber) - 1;
-        String result = "\nHere is the list of Ingredients in Recipe:"
-                + "\nFormat : Ingredient Name | Ingredient Category | Quantity | Price | Expiry\n";
-        if (recipeArrayList.size() == 0 || (itemNum + 1) > recipeArrayList.size()) {
-            result += "The Recipe List is currently empty.";
-        } else {
-            Recipe recipeItem = recipeArrayList.get(itemNum);
-            result += "Recipe Name : " + recipeArrayList.get(itemNum).getRecipeName() + "\n";
-            for (int i = 0; i < recipeItem.getRecipeItem().size(); i++) {
-                Ingredient ingredientObj = recipeItem.getRecipeItem().get(i);
-                result += ingredientObj.getIngredientName() + " | " + ingredientObj.getCategoryName()
-                        + " | " + ingredientObj.getQuantity() + " | "
-                        + ingredientObj.getPrice() + " | " + ingredientObj.getExpiryDate() + " \n";
-            }
-        }
-        return result;
-    }
-
-    
-    @Override
-    public String listChore(ArrayList<Chore> choreList) {
-        String feedbackToUser = "";
-        if (choreList.size() == 0) {
-            feedbackToUser = "Your list of chores is currently empty.";
-        } else {
-            feedbackToUser = "Here are the chores in your list:\n";
-            for (int i = 0; i < choreList.size(); ++i) {
-                feedbackToUser += (Integer.toString(i + 1) + ". " + choreList.get(i) + "\n");
-            }
-        }
-        return feedbackToUser;
     }
 
     @Override

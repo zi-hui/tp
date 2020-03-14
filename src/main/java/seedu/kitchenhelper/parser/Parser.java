@@ -10,7 +10,7 @@ import seedu.kitchenhelper.command.ListIngredientCommand;
 import seedu.kitchenhelper.command.HelpCommand;
 import seedu.kitchenhelper.command.ExitCommand;
 import seedu.kitchenhelper.command.InvalidCommand;
-
+import seedu.kitchenhelper.command.ListRecipeCommand;
 import seedu.kitchenhelper.exception.KitchenHelperException;
 
 import java.util.HashMap;
@@ -50,6 +50,8 @@ public class Parser {
             return prepareDeleteIngredient(parameters);
         case ListIngredientCommand.COMMAND_WORD:
             return prepareListIngredient(parameters);
+        case ListRecipeCommand.COMMAND_WORD:
+            return prepareListRecipe(parameters);
         case DeleteCommand.COMMAND_WORD:
             DeleteCommand deleteCmd = new DeleteCommand();
             HashMap<String, String> deleteParams = prepareDeleteParams(parameters);
@@ -161,6 +163,28 @@ public class Parser {
         }
     }
 
+    /**
+     * Prepares the parameters needed for the list function.
+     *
+     * @param parameters full user input string.
+     * @return the prepared command.
+     */
+    private Command prepareListRecipe(String parameters) throws KitchenHelperException {
+        try {
+            int itemNumber = Integer.parseInt(parameters);
+            if (parameters.isEmpty()) {
+                throw new KitchenHelperException("Invalid ListRecipe command.");
+            }
+
+            return new ListRecipeCommand(itemNumber);
+        } catch (KitchenHelperException e) {
+            kitchenlogs.log(Level.WARNING, LOG_WARNING_INDEX, e.toString());
+            throw new KitchenHelperException(ListRecipeCommand.COMMAND_FORMAT);
+        } catch (NumberFormatException e) {
+            kitchenlogs.log(Level.WARNING, LOG_WARNING_INDEX, e.toString());
+            throw new KitchenHelperException(ListRecipeCommand.COMMAND_FORMAT);
+        }
+    }
     /**
      * Prepares the deletion of recipe from the lists.
      *
