@@ -2,7 +2,7 @@
 Hello! I'm KitchenHelper here
 What can I do for you?
 ===================================================
-addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable
+addrecipe /n Chicken Salad /i Chicken:2:meat, Lettuce:4:vegetable
 Chicken Salad Recipe has been created with 2 ingredients inside.
 ===================================================
 listrecipe 1
@@ -10,7 +10,7 @@ listrecipe 1
 Here is the list of Ingredients in Recipe:
 Format:Ingredient Name|Ingredient Category|Quantity|Price|Expiry
 Recipe Name:Chicken Salad
-Chicken Breast|meat|2|0.0|null
+Chicken|meat|2|0.0|null
 Lettuce|vegetable|4|0.0|null
 
 ===================================================
