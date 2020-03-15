@@ -20,8 +20,8 @@ import java.util.logging.Logger;
  * Adds the ingredient to the inventory list.
  */
 public class AddIngredientCommand extends Command {
-    
-    public final Logger kitchenLogs = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+
+    public static final Logger kitchenLogs = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     public static final String COMMAND_WORD = "addingredient";
     public static final String MESSAGE_SUCCESS =
             "You have added Ingredient:%s Category:%s Quantity:%d Price:$%.2f Expiry:%s to the ingredient list";
