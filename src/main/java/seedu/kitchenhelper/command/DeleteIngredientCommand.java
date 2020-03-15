@@ -3,12 +3,28 @@ package seedu.kitchenhelper.command;
 import seedu.kitchenhelper.object.Chore;
 import seedu.kitchenhelper.object.Recipe;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
+import seedu.kitchenhelper.ui.Ui;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DeleteIngredientCommand extends Command {
+    public static final Logger kitchenLogs = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     public static final String COMMAND_WORD = "deleteingredient";
-    public static final String COMMAND_FORMAT = "deleteingredient /n INGREDIENT [/q QUANTITY]";
+    public static final String COMMAND_USAGE = "deleteingredient /n INGREDIENT [/q QUANTITY]";
+    public static final String COMMAND_DESC = "Deletes an ingredient. ";
+    public static final String COMMAND_EXAMPLE = "Example: deleteingredient /n Beef /q 2";
+    public static final String COMMAND_FORMAT = String.format("%s%s\n%s", COMMAND_DESC, COMMAND_USAGE, COMMAND_EXAMPLE);
+    public static final String COMMAND_SUCCESS = "%s has been deleted.";
+    public static final String COMMAND_FAILURE = "This ingredient does not exist! Please type in a correct "
+                                                    + "ingredient name.";
+    public static final String COMMAND_SUCCESS_QUANTITY = "The quantity of %s has been changed!";
+    public static final String COMMAND_FAILURE_QUANTITY = "Please enter a valid quantity to delete!\nCurrently:"
+                                                            + "\n%s : %d";
+    public static final String MESSAGE_USAGE = String.format("%s: %s", COMMAND_WORD, COMMAND_DESC) + Ui.LS + String
+            .format("Parameter: %s\n%s", COMMAND_USAGE, COMMAND_EXAMPLE);
+    public static final String LOG_INFO = "An ingredient has been deleted";
     private static final String OBJECT_TYPE = "ingredient";
     private static int quantity = 0;
 
@@ -54,12 +70,16 @@ public class DeleteIngredientCommand extends Command {
 
     public String updateNewQuantity(int newQuantity, Ingredient ingredientToDelete) {
         String feedbackToUser;
+        String ingredientName = ingredientToDelete.getIngredientName();
+        int ingredientQuantity = ingredientToDelete.getQuantity();
+
         if (newQuantity < 0) {
-            feedbackToUser = "Please enter a valid quantity to delete! \nCurrently: \n"
-                    + ingredientToDelete.getIngredientName() + ":" + ingredientToDelete.getQuantity();
+            feedbackToUser = String.format(COMMAND_FAILURE_QUANTITY, ingredientName, ingredientQuantity);
+            assert ingredientQuantity != newQuantity;
         } else {
             ingredientToDelete.setQuantity(newQuantity);
-            feedbackToUser = "The quantity of " + ingredientToDelete.getIngredientName() + " has been changed!";
+            feedbackToUser = String.format(COMMAND_SUCCESS_QUANTITY, ingredientName);
+            assert ingredientToDelete.getQuantity() == newQuantity;
         }
         return feedbackToUser;
     }
@@ -75,17 +95,20 @@ public class DeleteIngredientCommand extends Command {
         String feedbackToUser = "";
         String ingredientName = this.objectVariables;
         int indexOfIngredient = getIngredientIndex(ingredientName, ingredientsList);
+
         if (indexOfIngredient != -1) {
+            assert ingredientsList.size() > 0;
             Ingredient ingredientToDelete = ingredientsList.get(indexOfIngredient);
             if (quantity <= -1) {
+                kitchenLogs.log(Level.INFO, LOG_INFO);
                 ingredientsList.remove(ingredientToDelete);
-                feedbackToUser = ingredientName + " has been deleted.";
+                feedbackToUser = String.format(COMMAND_SUCCESS, ingredientName);
             } else {
                 int newQuantity = ingredientToDelete.getQuantity() - quantity;
                 feedbackToUser = updateNewQuantity(newQuantity, ingredientToDelete);
             }
         } else {
-            feedbackToUser = "This ingredient does not exist! Please type in a correct ingredient name.";
+            feedbackToUser = COMMAND_FAILURE;
         }
         return feedbackToUser;
     }
