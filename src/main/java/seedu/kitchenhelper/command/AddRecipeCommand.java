@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.logging.Logger;
 
 /**
- * Perform addition-related commands.
+ * Adds recipe to the list of recipes.
  */
 public class AddRecipeCommand extends Command {
 
@@ -30,18 +30,6 @@ public class AddRecipeCommand extends Command {
     public final String logAddRecipe = "A new recipe has been added";
     public HashMap<String[], Integer> parsedIngr;
 
-    public void executeIngredientStorage(ArrayList<Ingredient> ingredientList, Storage storage){
-
-    }
-
-    public void executeChoreStorage(ArrayList<Chore> choreList, Storage storage){
-
-    }
-
-    public void executeRecipeStorage(ArrayList<Recipe> recipeList, Storage storage){
-
-    }
-
     /**
      * Set the object's type.
      */
@@ -52,9 +40,9 @@ public class AddRecipeCommand extends Command {
     /**
      * Set the attributes of the Command class.
      *
-     * @param rawString full user input string.
-     * @param ingrAndQty a hashmap of ingredient with [ingredientName, ingredientCategory] as key
-     *                   and ingredientQuantity as value
+     * @param rawString     full user input string.
+     * @param ingrAndQty    a hashmap of ingredient with [ingredientName, ingredientCategory] as key
+     *                      and ingredientQuantity as value.
      */
     public void setAttributesOfCmd(String rawString, HashMap<String[], Integer> ingrAndQty) {
         setTypeOfObject();
@@ -63,16 +51,29 @@ public class AddRecipeCommand extends Command {
         this.parsedIngr = ingrAndQty;
     }
 
+    /**
+     * Sets the string without the keyword to be the values of the reicpe object.
+     *
+     * @param rawString string that has removed the keyword.
+     * */
     public void setObjectVariables(String rawString) {
         objectVariables = rawString;
     }
 
+    /**
+     * Sets the object's action to add recipe.
+     */
     public void setAction() {
         actionType = COMMAND_WORD;
     }
 
+    /**
+     * The main utility function to add recipe.
+     * @param attributes     list of ingredients that have not been parsed.
+     * @param recipeList     list of recipes.
+     * @return the success message of adding inventory.
+     */
     public String addRecipe(String attributes, ArrayList<Recipe> recipeList) {
-
         Recipe freshRecipe = new Recipe();
         freshRecipe.setRecipeName(attributes);
         freshRecipe.addIngredientsToRecipe(parsedIngr);
@@ -83,7 +84,24 @@ public class AddRecipeCommand extends Command {
         return freshRecipe.recipeName + " Recipe has been created with "
                 + freshRecipe.recipeIngrQty + " ingredients inside.";
     }
-    
+
+    public void executeIngredientStorage(ArrayList<Ingredient> ingredientList, Storage storage){
+    }
+
+    public void executeChoreStorage(ArrayList<Chore> choreList, Storage storage){
+    }
+
+    public void executeRecipeStorage(ArrayList<Recipe> recipeList, Storage storage){
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param ingredientList list of ingredients.
+     * @param recipeList     list of recipes.
+     * @param choreList      list of chores.
+     * @return the success message of adding recipe.
+     */
     @Override
     public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
                                  ArrayList<Chore> choreList) throws KitchenHelperException {

@@ -77,25 +77,50 @@ public class Recipe {
         }
     }
 
+    /**
+     * Loading of ingredients into a recipe.
+     *
+     * @param ingredients the list of ingredients.
+     */
     public void addIngredientsToRecipeFromArrayList(ArrayList<Ingredient> ingredients) {
         for (Ingredient ingredient : ingredients) {
             this.recipeItems.add(ingredient);
         }
     }
 
+    /**
+     * For ease of saving into storage.
+     *
+     * @param attributes the string of ingredients and recipe.
+     */
     public void setRecipeNameForStorage(String attributes) {
         recipeName = attributes;
     }
 
+    /**
+     * Sets the recipe name.
+     *
+     * @param attributes the list of ingredients and recipe name.
+     */
     public void setRecipeName(String attributes) {
         String recipeNameAndIngr = attributes.substring(attributes.indexOf("/n") + 3, attributes.indexOf("/i") - 1);
         recipeName = recipeNameAndIngr;
     }
 
+    /**
+     * Retrieve the name of a recipe.
+     *
+     * @return the recipe name.
+     */
     public String getRecipeName() {
         return recipeName;
     }
 
+    /**
+     * Get the list of ingredients in a recipe.
+     *
+     * @return the arraylist of ingredients.
+     */
     public ArrayList<Ingredient> getRecipeItem() {
         return this.recipeItems;
     }
