@@ -28,18 +28,6 @@ public class DeleteChoreCommand extends Command {
 
     private int indexToDelete;
 
-    public void executeIngredientStorage(ArrayList<Ingredient> ingredientList, Storage storage){
-
-    }
-
-    public void executeChoreStorage(ArrayList<Chore> choreList, Storage storage){
-
-    }
-
-    public void executeRecipeStorage(ArrayList<Recipe> recipeList, Storage storage){
-
-    }
-
     /**
      * Constructor for DeleteChoreCommand.
      *
@@ -68,6 +56,15 @@ public class DeleteChoreCommand extends Command {
         } catch (KitchenHelperException khe) {
             return khe.getMessage();
         }
+    }
+
+    public void executeIngredientStorage(ArrayList<Ingredient> ingredientList, Storage storage){
+    }
+
+    public void executeChoreStorage(ArrayList<Chore> choreList, Storage storage){
+    }
+
+    public void executeRecipeStorage(ArrayList<Recipe> recipeList, Storage storage){
     }
 
     /**

@@ -37,7 +37,6 @@ public class ListRecipeCommand extends Command {
         assert itemNumber > 0;
     }
 
-
     public int getItemNumber() {
         return this.itemNumber;
     }
@@ -84,17 +83,22 @@ public class ListRecipeCommand extends Command {
     }
 
     public void executeIngredientStorage(ArrayList<Ingredient> ingredientList, Storage storage){
-
     }
 
     public void executeChoreStorage(ArrayList<Chore> choreList, Storage storage){
-
     }
 
     public void executeRecipeStorage(ArrayList<Recipe> recipeList, Storage storage){
-
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @param ingredientList list of ingredients.
+     * @param recipeList list of recipes.
+     * @param choreList list of chores.
+     * @return the list of recipes.
+     */
     @Override
     public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
                                  ArrayList<Chore> choreList) throws KitchenHelperException {

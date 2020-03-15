@@ -118,15 +118,12 @@ public class DeleteIngredientCommand extends Command {
     }
 
     public void executeIngredientStorage(ArrayList<Ingredient> ingredientList, Storage storage){
-
     }
 
     public void executeChoreStorage(ArrayList<Chore> choreList, Storage storage){
-
     }
 
     public void executeRecipeStorage(ArrayList<Recipe> recipeList, Storage storage){
-
     }
 
     /**
@@ -137,7 +134,6 @@ public class DeleteIngredientCommand extends Command {
      * @param choreList      list of chores.
      * @return the execution of the deletion of ingredients or tasks.
      */
-
     @Override
     public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
                                   ArrayList<Chore> choreList) {
