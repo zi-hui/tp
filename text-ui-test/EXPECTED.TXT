@@ -10,8 +10,8 @@ listrecipe 1
 Here is the list of Ingredients in Recipe:
 Format:Ingredient Name|Ingredient Category|Quantity|Price|Expiry
 Recipe Name :Chicken Salad
-Chicken Breast|meat|2|0.0|null
-Lettuce|vegetable|4|0.0|null
+Chicken Breast|meat|2|0.0
+Lettuce|vegetable|4|0.0
 
 ===================================================
 addingredient /n Beef /c meat /q 3 /p 20 /e 2020-03-18
