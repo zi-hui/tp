@@ -84,7 +84,7 @@ public class Parser {
         try {
             ingredientList = attributes.substring(attributes.indexOf("/i") + 3);
             String[] splitedIngr = ingredientList.split("[,][\\s]");
-            for (int i=0; i < splitedIngr.length;i++) {
+            for (int i = 0; i < splitedIngr.length;i++) {
                 String item = splitedIngr[i];
                 String[] ingrContent = item.split(":");
                 String[] nameAndType = new String[2];
