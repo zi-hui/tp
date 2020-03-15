@@ -1,0 +1,14 @@
+Mar 15, 2020 5:25:26 PM seedu.kitchenhelper.parser.Parser prepareAddRecipe
+WARNING: An IO exception has been caught
+Mar 15, 2020 5:25:45 PM seedu.kitchenhelper.parser.Parser prepareAddRecipe
+WARNING: An IO exception has been caught
+Mar 15, 2020 5:26:08 PM seedu.kitchenhelper.object.Recipe createIngr
+WARNING: An unidentifiable ingredient has been added to ingredient of Miscellaneous category
+Mar 15, 2020 5:26:08 PM seedu.kitchenhelper.command.AddRecipeCommand addRecipe
+INFO: A new recipe has been added
+Mar 15, 2020 5:27:03 PM seedu.kitchenhelper.command.AddIngredientCommand execute
+INFO: A new ingredient has been added
+Mar 15, 2020 5:27:17 PM seedu.kitchenhelper.command.AddIngredientCommand execute
+INFO: A new ingredient has been added
+Mar 15, 2020 5:28:06 PM seedu.kitchenhelper.parser.Parser prepareAddIngredient
+WARNING: Invalid Command Format! /n kailan /c Vegetable /q
