@@ -45,28 +45,28 @@ public class ListIngredientCommand extends Command {
 
     public String listIngredients(String category, ArrayList<Ingredient> ingredientList) {
         String result = "Here is the list of Ingredients in Inventory:\n"
-                + "Format : Ingredient Name | Quantity | Price | Expiry\n";
+                + "Format : Ingredient Nam|Quantity|Price|Expiry\n";
         if (ingredientList.size() == 0) {
             result += "The Ingredient List is currently empty.";
         } else {
             if (category.equalsIgnoreCase("all")) {
                 for (String categoryName : categoryArray) {
-                    result += categoryName + " :\n";
+                    result += categoryName + ":\n";
                     for (int i = 0; i < ingredientList.size(); i++) {
                         Ingredient ingredientObj = ingredientList.get(i);
                         if (ingredientObj.getCategoryName().equalsIgnoreCase(categoryName)) {
-                            result += ingredientObj.getIngredientName() + " | " + ingredientObj.getQuantity() + " | "
-                                    + ingredientObj.getPrice() + " | " + ingredientObj.getExpiryDate() + "\n";
+                            result += ingredientObj.getIngredientName() + "|" + ingredientObj.getQuantity() + "|"
+                                    + ingredientObj.getPrice() + "|" + ingredientObj.getExpiryDate() + "\n";
                         }
                     }
                 }
             } else {
-                result += category + " :\n";
+                result += category + ":\n";
                 for (int i = 0; i < ingredientList.size(); i++) {
                     Ingredient ingredientObj = ingredientList.get(i);
                     if (ingredientObj.getCategoryName().equalsIgnoreCase(category)) {
-                        result += ingredientObj.getIngredientName() + " | " + ingredientObj.getQuantity() + " | "
-                                + ingredientObj.getPrice() + " | " + ingredientObj.getExpiryDate() + "\n";
+                        result += ingredientObj.getIngredientName() + "|" + ingredientObj.getQuantity() + "|"
+                                + ingredientObj.getPrice() + "|" + ingredientObj.getExpiryDate() + "\n";
                     }
 
                     if (i == ingredientList.size()) {

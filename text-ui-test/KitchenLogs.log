@@ -1,0 +1,18 @@
+Mar 15, 2020 10:53:45 PM seedu.kitchenhelper.command.AddRecipeCommand addRecipe
+INFO: A new recipe has been added
+Mar 15, 2020 10:53:45 PM seedu.kitchenhelper.command.AddIngredientCommand execute
+INFO: A new ingredient has been added
+Mar 15, 2020 10:53:45 PM seedu.kitchenhelper.command.AddIngredientCommand execute
+INFO: A new ingredient has been added
+Mar 15, 2020 10:53:45 PM seedu.kitchenhelper.command.AddIngredientCommand execute
+INFO: A new ingredient has been added
+Mar 15, 2020 10:53:45 PM seedu.kitchenhelper.parser.Parser prepareAddIngredient
+WARNING: Invalid Command Format! /n Milo /c Drink /q 30 /p 10 /e 2020-012-20
+Mar 15, 2020 10:53:45 PM seedu.kitchenhelper.command.DeleteIngredientCommand deleteIngredient
+INFO: An ingredient has been deleted
+Mar 15, 2020 10:53:45 PM seedu.kitchenhelper.command.DeleteIngredientCommand deleteIngredient
+INFO: An ingredient has been deleted
+Mar 15, 2020 10:53:45 PM seedu.kitchenhelper.command.DeleteIngredientCommand deleteIngredient
+INFO: An ingredient has been deleted
+Mar 15, 2020 10:53:45 PM seedu.kitchenhelper.command.DeleteRecipeCommand deleteRecipe
+INFO: A recipe has been deleted

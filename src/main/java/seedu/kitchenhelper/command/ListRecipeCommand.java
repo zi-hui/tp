@@ -51,7 +51,7 @@ public class ListRecipeCommand extends Command {
 
     public String listRecipe(int itemNum, ArrayList<Recipe> recipeArrayList) {
         String result = "\nHere is the list of Ingredients in Recipe:"
-                + "\nFormat : Ingredient Name | Ingredient Category | Quantity | Price | Expiry\n";
+                + "\nFormat:Ingredient Name|Ingredient Category|Quantity|Price|Expiry\n";
         if (recipeArrayList.size() == 0 || itemNum > recipeArrayList.size() || itemNum < 0) {
             result += "The Recipe List is currently empty.";
         } else {
