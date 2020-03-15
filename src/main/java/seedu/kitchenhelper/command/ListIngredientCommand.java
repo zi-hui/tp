@@ -61,7 +61,7 @@ public class ListIngredientCommand extends Command {
                     }
                 }
             } else {
-                result += category + " : \n";
+                result += category + " :\n";
                 for (int i = 0; i < ingredientList.size(); i++) {
                     Ingredient ingredientObj = ingredientList.get(i);
                     if (ingredientObj.getCategoryName().equalsIgnoreCase(category)) {

@@ -5,8 +5,38 @@ What can I do for you?
 addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable
 Chicken Salad Recipe has been created with 2 ingredients inside.
 ===================================================
+listrecipe 1
+
+Here is the list of Ingredients in Recipe:
+Format : Ingredient Name | Ingredient Category | Quantity | Price | Expiry
+Recipe Name : Chicken Salad
+Chicken Breast | meat | 2 | 0.0 | null
+Lettuce | vegetable | 4 | 0.0 | null
+
+===================================================
 addingredient /n Beef /c meat /q 3 /p 20 /e 2020-03-18
 You have added Ingredient:Beef Category:meat Quantity:3 Price:$20.00 Expiry:2020-03-18 to the ingredient list
+===================================================
+listingredient all
+Here is the list of Ingredients in Inventory:
+Format : Ingredient Name | Quantity | Price | Expiry
+all :
+dairy :
+drink :
+fruit :
+meat :
+Beef | 3 | 20.0 | 2020-03-18
+miscellaneous :
+staple :
+vegetable :
+
+===================================================
+listingredient meat
+Here is the list of Ingredients in Inventory:
+Format : Ingredient Name | Quantity | Price | Expiry
+meat :
+Beef | 3 | 20.0 | 2020-03-18
+
 ===================================================
 addingredient /n kailan /c Vegetable /q 30 /p 30.45 /e 2020-03-12
 You have added Ingredient:kailan Category:Vegetable Quantity:30 Price:$30.45 Expiry:2020-03-12 to the ingredient list
@@ -24,6 +54,15 @@ You have added this chore:
 [x] buy groceries (by: Tuesday 12pm)
 Now you have 1 chore in the list.
 ===================================================
+listchore
+Here are the chores in your list:
+1. [x] buy groceries (by: Tuesday 12pm)
+===================================================
+deletechore 1
+You have deleted this chore:
+[x] buy groceries (by: Tuesday 12pm)
+Now you have 0 chores in the list.
+===================================================
 addchore buy groceries
 Invalid Command Format!
 Adds a chore to the chore list. TASK /by DATE
@@ -40,12 +79,28 @@ kailan : 30
 deleteingredient /n kailan
 kailan has been deleted.
 ===================================================
+deleteingredient /n HL Milk
+HL Milk has been deleted.
+===================================================
+deleteingredient /n Milo
+This ingredient does not exist! Please type in a correct ingredient name.
+===================================================
 deleterecipe /n Chicken Salad
 Chicken Salad has been deleted
 ===================================================
 listchore
-Here are the chores in your list:
-1. [x] buy groceries (by: Tuesday 12pm)
+Your list of chores is currently empty.
+===================================================
+listingredient all
+Here is the list of Ingredients in Inventory:
+Format : Ingredient Name | Quantity | Price | Expiry
+The Ingredient List is currently empty.
+===================================================
+listrecipe 1
+
+Here is the list of Ingredients in Recipe:
+Format : Ingredient Name | Ingredient Category | Quantity | Price | Expiry
+The Recipe List is currently empty.
 ===================================================
 exit
 Exiting KitchenHelper as requested ...
