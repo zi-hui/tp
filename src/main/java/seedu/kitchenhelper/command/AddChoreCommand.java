@@ -58,6 +58,7 @@ public class AddChoreCommand extends Command {
     public String addChore(ArrayList<Chore> choreList) {
         Chore newChore = new Chore(description, date);
         choreList.add(newChore);
+        Storage.saveChoreData(choreList);
         return String.format(MESSAGE_SUCCESS, newChore, choreList.size(), newChore.checkSingular(choreList));
     }
 
