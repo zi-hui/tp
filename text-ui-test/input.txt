@@ -1,13 +1,13 @@
 addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable
-addingredient /n Beef /c Meat /q 3 /p 20 /e 2020-03-18
+addingredient /n Beef /c meat /q 3 /p 20 /e 2020-03-18
 addingredient /n kailan /c Vegetable /q 30 /p 30.45 /e 2020-03-12
 addingredient /n HL Milk /c Dairy /q 3 /p 12.2 /e 2020-03-14
 addingredient /n Milo /c Drink /q 30 /p 10 /e 2020-012-20
-add chore buy groceries /by Tuesday 12pm
-list chore
-deleterecipe /n Chicken Salad
-deleteingredient /n Beef /q 2
+addchore buy groceries /by Tuesday 12pm
+addchore buy groceries
+deleteingredient /n Beef
 deleteingredient /n kailan /q 35
 deleteingredient /n kailan
-delete chore 1
+deleterecipe /n Chicken Salad
+listchore
 exit

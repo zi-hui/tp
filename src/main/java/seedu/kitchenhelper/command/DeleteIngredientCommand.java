@@ -3,6 +3,7 @@ package seedu.kitchenhelper.command;
 import seedu.kitchenhelper.object.Chore;
 import seedu.kitchenhelper.object.Recipe;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
+import seedu.kitchenhelper.storage.Storage;
 import seedu.kitchenhelper.ui.Ui;
 
 import java.util.ArrayList;
@@ -102,15 +103,30 @@ public class DeleteIngredientCommand extends Command {
             if (quantity <= -1) {
                 kitchenLogs.log(Level.INFO, LOG_INFO);
                 ingredientsList.remove(ingredientToDelete);
+                //Storage.saveIngredientData(ingredientsList);
                 feedbackToUser = String.format(COMMAND_SUCCESS, ingredientName);
             } else {
                 int newQuantity = ingredientToDelete.getQuantity() - quantity;
                 feedbackToUser = updateNewQuantity(newQuantity, ingredientToDelete);
+                //Storage.saveIngredientData(ingredientsList);
             }
+            Storage.saveIngredientData(ingredientsList);
         } else {
             feedbackToUser = COMMAND_FAILURE;
         }
         return feedbackToUser;
+    }
+
+    public void executeIngredientStorage(ArrayList<Ingredient> ingredientList, Storage storage){
+
+    }
+
+    public void executeChoreStorage(ArrayList<Chore> choreList, Storage storage){
+
+    }
+
+    public void executeRecipeStorage(ArrayList<Recipe> recipeList, Storage storage){
+
     }
 
     /**
