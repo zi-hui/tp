@@ -9,7 +9,7 @@ listrecipe 1
 
 Here is the list of Ingredients in Recipe:
 Format:Ingredient Name|Ingredient Category|Quantity|Price|Expiry
-Recipe Name :Chicken Salad
+Recipe Name:Chicken Salad
 Chicken Breast|meat|2|0.0|null
 Lettuce|vegetable|4|0.0|null
 
@@ -19,7 +19,7 @@ You have added Ingredient:Beef Category:meat Quantity:3 Price:$20.00 Expiry:2020
 ===================================================
 listingredient all
 Here is the list of Ingredients in Inventory:
-Format : Ingredient Nam|Quantity|Price|Expiry
+Format : Ingredient Name|Quantity|Price|Expiry
 all:
 dairy:
 drink:
@@ -33,7 +33,7 @@ vegetable:
 ===================================================
 listingredient meat
 Here is the list of Ingredients in Inventory:
-Format : Ingredient Nam|Quantity|Price|Expiry
+Format : Ingredient Name|Quantity|Price|Expiry
 meat:
 Beef|3|20.0|2020-03-18
 
@@ -93,7 +93,7 @@ Your list of chores is currently empty.
 ===================================================
 listingredient all
 Here is the list of Ingredients in Inventory:
-Format : Ingredient Nam|Quantity|Price|Expiry
+Format : Ingredient Name|Quantity|Price|Expiry
 The Ingredient List is currently empty.
 ===================================================
 listrecipe 1
