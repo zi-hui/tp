@@ -14,6 +14,7 @@ public class ListChoreCommand extends Command {
 
 
     public static final String COMMAND_WORD = "listchore";
+    public static final String COMMAND_FORMAT = "listchore *No parameter";
 
     /**
      * Loops through and displays each chore in the list.
