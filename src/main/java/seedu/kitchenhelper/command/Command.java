@@ -83,12 +83,6 @@ public abstract class Command {
     public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
                                  ArrayList<Chore> choreList) throws KitchenHelperException {
         String feedbackToUser = "";
-
-        if (actionType.equals(ListCommand.COMMAND_WORD) && objectType.equals("ingredient")) {
-            feedbackToUser = listIngredients(ingredientList);
-        } else if (actionType.equals(ListCommand.COMMAND_WORD) && objectType.equals("recipe")) {
-            feedbackToUser = listRecipe(objectVariables, recipeList);
-        }
         CommandResult cmdResult = new CommandResult(feedbackToUser);
         return cmdResult;
     }

@@ -7,7 +7,8 @@ import seedu.kitchenhelper.command.AddChoreCommand;
 import seedu.kitchenhelper.command.DeleteRecipeCommand;
 import seedu.kitchenhelper.command.DeleteIngredientCommand;
 import seedu.kitchenhelper.command.DeleteChoreCommand;
-import seedu.kitchenhelper.command.ListCommand;
+import seedu.kitchenhelper.command.ListRecipeCommand;
+import seedu.kitchenhelper.command.ListIngredientCommand;
 import seedu.kitchenhelper.command.ListChoreCommand;
 import seedu.kitchenhelper.command.HelpCommand;
 import seedu.kitchenhelper.command.ExitCommand;
@@ -54,13 +55,12 @@ public class Parser {
             return prepareDeleteIngredient(parameters);
         case DeleteChoreCommand.COMMAND_WORD:
             return prepareDeleteChore(parameters);
+        case ListIngredientCommand.COMMAND_WORD:
+            return prepareListIngredient(parameters);
+        case ListRecipeCommand.COMMAND_WORD:
+            return prepareListRecipe(parameters);
         case ListChoreCommand.COMMAND_WORD:
-            return new ListChoreCommand();
-        case ListCommand.COMMAND_WORD:
-            ListCommand listCmd = new ListCommand();
-            HashMap<String, String> listParams = prepareListParams(parameters);
-            listCmd.setListParams(listParams);
-            return listCmd;
+            return prepareListChore(parameters);
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
         case ExitCommand.COMMAND_WORD:
@@ -99,7 +99,7 @@ public class Parser {
         addCmd.setAttributesOfCmd(attributes, ingrAndQty);
         return addCmd;
     }
-    
+
     /**
      * Prepares the addition of ingredient into inventory.
      *
@@ -114,25 +114,25 @@ public class Parser {
             if (!isValidUserInputFormat(attributes, addInventoryRegex)) {
                 throw new KitchenHelperException("Invalid Add Inventory Format");
             }
-    
+
             String[] nameAndOthers = attributes.split("/c\\s", 2);
             String itemName = nameAndOthers[0].split("/n\\s+")[1].trim();
             assert itemName.length() > 0 : itemName;
-            
+
             String[] categoryAndOthers = nameAndOthers[1].split("\\s+/q\\s+");
             String category = categoryAndOthers[0].trim();
             assert category.length() > 0 : category;
-            
+
             String[] quantityAndOthers = categoryAndOthers[1].split("\\s+/p\\s+");
             int quantity = Integer.parseInt(quantityAndOthers[0]);
             assert quantity >= 0 : quantity;
-            
+
             String[] priceAndExpiry = quantityAndOthers[1].split("\\s+/e\\s+");
             double price = Double.parseDouble(priceAndExpiry[0]);
             assert price >= 0.00 : price;
-            
+
             String expiry = priceAndExpiry[1];
-            
+
             return new AddIngredientCommand(itemName, category, quantity, price, expiry);
         } catch (KitchenHelperException khe) {
             kitchenlogs.log(Level.WARNING,InvalidCommand.MESSAGE_INVALID + " " + attributes);
@@ -164,31 +164,72 @@ public class Parser {
             return new InvalidCommand(khe.getMessage());
         }
     }
-  
+
     /**
      * Prepares the parameters needed for the list function.
      *
-     * @param attributes full user input string.
+     * @param parameters full user input string.
      * @return the prepared command.
      */
-    private HashMap<String, String> prepareListParams(String attributes) throws KitchenHelperException {
-        HashMap<String, String> listParam = new HashMap<>();
+    private Command prepareListIngredient(String parameters) throws KitchenHelperException {
         try {
-            String[] typeName = attributes.split("\\s", 2);
-            listParam.put("type", typeName[0].trim());
-            if (typeName.length == 2) {
-                listParam.put("item", typeName[1].trim());
+            if (parameters.isEmpty()) {
+                throw new KitchenHelperException("Invalid ListIngredient command.");
+            } else {
+                for (int i = 0; i < ListIngredientCommand.categoryArray.length; i++) {
+                    if (ListIngredientCommand.categoryArray[i].equalsIgnoreCase(parameters)) {
+                        break;
+                    } else if (i == ListIngredientCommand.categoryArray.length - 1) {
+                        throw new KitchenHelperException("Invalid ListIngredient Category.");
+                    }
+                }
             }
-            if (listParam.get("type").equalsIgnoreCase("recipe") && typeName.length != 2) {
-                throw new KitchenHelperException("list recipe <integer>");
-            }
-            if (listParam.get("type").isEmpty()) {
-                throw new KitchenHelperException("list <type>");
-            }
-        } catch (IndexOutOfBoundsException e) {
-            throw new KitchenHelperException(ListCommand.COMMAND_FORMAT);
+            return new ListIngredientCommand(parameters);
+        } catch (KitchenHelperException e) {
+            kitchenlogs.log(Level.WARNING, LOG_WARNING_INDEX, e.toString());
+            throw new KitchenHelperException(ListIngredientCommand.COMMAND_FORMAT);
         }
-        return listParam;
+    }
+
+    /**
+     * Prepares the parameters needed for the list function.
+     *
+     * @param parameters full user input string.
+     * @return the prepared command.
+     */
+    private Command prepareListChore(String parameters) throws KitchenHelperException {
+        try {
+            if (! parameters.isEmpty()) {
+                throw new KitchenHelperException("Invalid ListChore command.");
+            }
+            return new ListChoreCommand();
+        } catch (KitchenHelperException e) {
+            kitchenlogs.log(Level.WARNING, LOG_WARNING_INDEX, e.toString());
+            throw new KitchenHelperException(ListChoreCommand.COMMAND_FORMAT);
+        }
+    }
+
+    /**
+     * Prepares the parameters needed for the list function.
+     *
+     * @param parameters full user input string.
+     * @return the prepared command.
+     */
+    private Command prepareListRecipe(String parameters) throws KitchenHelperException {
+        try {
+            int itemNumber = Integer.parseInt(parameters);
+            if (parameters.isEmpty()) {
+                throw new KitchenHelperException("Invalid ListRecipe command.");
+            }
+
+            return new ListRecipeCommand(itemNumber);
+        } catch (KitchenHelperException e) {
+            kitchenlogs.log(Level.WARNING, LOG_WARNING_INDEX, e.toString());
+            throw new KitchenHelperException(ListRecipeCommand.COMMAND_FORMAT);
+        } catch (NumberFormatException e) {
+            kitchenlogs.log(Level.WARNING, LOG_WARNING_INDEX, e.toString());
+            throw new KitchenHelperException(ListRecipeCommand.COMMAND_FORMAT);
+        }
     }
 
     /**
@@ -255,7 +296,7 @@ public class Parser {
     //@@author AY1920S2-CS2113T-M16-2-reused
     //Reused from
     //https://github.com/nus-cs2113-AY1920S2/contacts/blob/master/src/main/java/Contacts1.java
-    
+
     /**
      * Split the user input into two parts with a specific regex.
      *
@@ -268,7 +309,7 @@ public class Parser {
         return split.length == 2 ? split : new String[]{split[0], ""}; // else no parameters
     }
     //@@author
-    
+
     /**
      * Checks if the input string matches the regex.
      *
