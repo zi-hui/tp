@@ -78,6 +78,7 @@ public class AddRecipeCommand extends Command {
         freshRecipe.setRecipeName(attributes);
         freshRecipe.addIngredientsToRecipe(parsedIngr);
         recipeList.add(freshRecipe);
+        Storage.saveRecipeData(recipeList);
         assert freshRecipe.recipeName.length() > 0;
         assert recipeList.size() > 0;
         kitchenLogs.info(logAddRecipe);

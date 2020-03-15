@@ -4,6 +4,7 @@ import seedu.kitchenhelper.object.Chore;
 import seedu.kitchenhelper.object.Recipe;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
 import seedu.kitchenhelper.storage.Storage;
+import seedu.kitchenhelper.ui.Ui;
 
 import java.util.ArrayList;
 
@@ -19,6 +20,8 @@ public class AddChoreCommand extends Command {
     public static final String COMMAND_EXAMPLE = "Example: addchore buy groceries /by Tuesday 12pm";
     public static final String COMMAND_FORMAT =
             String.format("%s %s\n%s", COMMAND_DESC, COMMAND_PARAMETER, COMMAND_EXAMPLE);
+    public static final String MESSAGE_USAGE = String.format("%s: %s", COMMAND_WORD, COMMAND_DESC) + Ui.LS + String
+            .format("Parameter: %s\n%s", COMMAND_PARAMETER, COMMAND_EXAMPLE);
 
     private String description;
     private String date;
@@ -55,6 +58,7 @@ public class AddChoreCommand extends Command {
     public String addChore(ArrayList<Chore> choreList) {
         Chore newChore = new Chore(description, date);
         choreList.add(newChore);
+        Storage.saveChoreData(choreList);
         return String.format(MESSAGE_SUCCESS, newChore, choreList.size(), newChore.checkSingular(choreList));
     }
 

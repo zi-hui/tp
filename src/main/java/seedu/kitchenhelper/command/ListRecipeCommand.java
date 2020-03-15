@@ -12,6 +12,7 @@ import seedu.kitchenhelper.object.ingredient.Fruit;
 import seedu.kitchenhelper.object.ingredient.Meat;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
 import seedu.kitchenhelper.storage.Storage;
+import seedu.kitchenhelper.ui.Ui;
 
 import java.util.ArrayList;
 
@@ -20,6 +21,11 @@ public class ListRecipeCommand extends Command {
     public static final String COMMAND_WORD = "listrecipe";
     private int itemNumber;
     public static final String COMMAND_FORMAT = "listrecipe <item number>";
+    public static final String COMMAND_DESC = "Display the recipe";
+    public static final String COMMAND_PARAMETER = "INTEGER";
+    public static final String COMMAND_EXAMPLE = "Example: listrecipe 1";
+    public static final String MESSAGE_USAGE = String.format("%s: %s", COMMAND_WORD, COMMAND_DESC) + Ui.LS + String
+            .format("Parameter: %s\n%s", COMMAND_PARAMETER, COMMAND_EXAMPLE);
 
     /**
      * Constructor for ListIngredient Command.
