@@ -56,12 +56,12 @@ public class ListRecipeCommand extends Command {
             result += "The Recipe List is currently empty.";
         } else {
             Recipe recipeItem = recipeArrayList.get(itemNum - 1);
-            result += "Recipe Name : " + recipeItem.getRecipeName() + "\n";
+            result += "Recipe Name :" + recipeItem.getRecipeName() + "\n";
             for (int i = 0; i < recipeItem.getRecipeItem().size(); i++) {
                 Ingredient ingredientObj = recipeItem.getRecipeItem().get(i);
-                result += ingredientObj.getIngredientName() + " | " + ingredientObj.getCategoryName()
-                        + " | " + ingredientObj.getQuantity() + " | "
-                        + ingredientObj.getPrice() + " | " + ingredientObj.getExpiryDate() + "\n";
+                result += ingredientObj.getIngredientName() + "|" + ingredientObj.getCategoryName()
+                        + "|" + ingredientObj.getQuantity() + "|"
+                        + ingredientObj.getPrice() + "|" + ingredientObj.getExpiryDate() + "\n";
             }
         }
         return result;
