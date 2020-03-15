@@ -103,12 +103,14 @@ public class DeleteIngredientCommand extends Command {
             if (quantity <= -1) {
                 kitchenLogs.log(Level.INFO, LOG_INFO);
                 ingredientsList.remove(ingredientToDelete);
-                Storage.saveIngredientData(ingredientsList);
+                //Storage.saveIngredientData(ingredientsList);
                 feedbackToUser = String.format(COMMAND_SUCCESS, ingredientName);
             } else {
                 int newQuantity = ingredientToDelete.getQuantity() - quantity;
                 feedbackToUser = updateNewQuantity(newQuantity, ingredientToDelete);
+                //Storage.saveIngredientData(ingredientsList);
             }
+            Storage.saveIngredientData(ingredientsList);
         } else {
             feedbackToUser = COMMAND_FAILURE;
         }

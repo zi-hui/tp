@@ -5,6 +5,7 @@ import seedu.kitchenhelper.exception.KitchenHelperException;
 import seedu.kitchenhelper.object.Chore;
 import seedu.kitchenhelper.object.Recipe;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
+import seedu.kitchenhelper.storage.Storage;
 
 import java.util.ArrayList;
 
@@ -23,6 +24,18 @@ public class DeleteChoreCommand extends Command {
             String.format("%s %s\n%s", COMMAND_DESC, COMMAND_PARAMETER, COMMAND_EXAMPLE);
 
     private int indexToDelete;
+
+    public void executeIngredientStorage(ArrayList<Ingredient> ingredientList, Storage storage){
+
+    }
+
+    public void executeChoreStorage(ArrayList<Chore> choreList, Storage storage){
+
+    }
+
+    public void executeRecipeStorage(ArrayList<Recipe> recipeList, Storage storage){
+
+    }
 
     /**
      * Constructor for DeleteChoreCommand.
@@ -46,6 +59,7 @@ public class DeleteChoreCommand extends Command {
             }
             Chore choreToDelete = choreList.get(indexToDelete - 1);
             choreList.remove(choreToDelete);
+            Storage.saveChoreData(choreList);
             return String.format(MESSAGE_SUCCESS, choreToDelete, choreList.size(),
                     choreToDelete.checkSingular(choreList));
         } catch (KitchenHelperException khe) {
