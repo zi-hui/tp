@@ -5,5 +5,9 @@ addingredient /n HL Milk /c Dairy /q 3 /p 12.2 /e 2020-03-14
 addingredient /n Milo /c Drink /q 30 /p 10 /e 2020-012-20
 addchore buy groceries /by Tuesday 12pm
 addchore buy groceries
+deleteingredient /n Beef
+deleteingredient /n kailan /q 35
+deleteingredient /n kailan
+deleterecipe /n Chicken Salad
 listchore
 exit

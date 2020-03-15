@@ -29,6 +29,20 @@ Invalid Command Format!
 Adds a chore to the chore list. TASK /by DATE
 Example: addchore buy groceries /by Tuesday 12pm
 ===================================================
+deleteingredient /n Beef
+Beef has been deleted.
+===================================================
+deleteingredient /n kailan /q 35
+Please enter a valid quantity to delete!
+Currently:
+kailan : 30
+===================================================
+deleteingredient /n kailan
+kailan has been deleted.
+===================================================
+deleterecipe /n Chicken Salad
+Chicken Salad has been deleted
+===================================================
 listchore
 Here are the chores in your list:
 1. [x] buy groceries (by: Tuesday 12pm)
