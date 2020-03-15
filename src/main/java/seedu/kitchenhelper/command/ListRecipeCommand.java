@@ -11,6 +11,7 @@ import seedu.kitchenhelper.object.ingredient.Drink;
 import seedu.kitchenhelper.object.ingredient.Fruit;
 import seedu.kitchenhelper.object.ingredient.Meat;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
+import seedu.kitchenhelper.storage.Storage;
 
 import java.util.ArrayList;
 
@@ -76,6 +77,17 @@ public class ListRecipeCommand extends Command {
         return feedbackToUser;
     }
 
+    public void executeIngredientStorage(ArrayList<Ingredient> ingredientList, Storage storage){
+
+    }
+
+    public void executeChoreStorage(ArrayList<Chore> choreList, Storage storage){
+
+    }
+
+    public void executeRecipeStorage(ArrayList<Recipe> recipeList, Storage storage){
+
+    }
     @Override
     public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
                                  ArrayList<Chore> choreList) throws KitchenHelperException {
