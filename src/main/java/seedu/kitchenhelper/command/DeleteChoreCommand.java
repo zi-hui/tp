@@ -14,7 +14,8 @@ import java.util.ArrayList;
 public class DeleteChoreCommand extends Command {
 
     public static final String COMMAND_WORD = "deletechore";
-    public static final String MESSAGE_SUCCESS = "You have deleted this chore:\n%s\nNow you have %s chore%s in the list.";
+    public static final String MESSAGE_SUCCESS = "You have deleted this chore:\n%s\n"
+            + "Now you have %s chore%s in the list.";
     public static final String COMMAND_DESC = "Deletes a chore from the chore list.";
     public static final String COMMAND_PARAMETER = "<index>";
     public static final String COMMAND_EXAMPLE = "Example: deletechore 1";
@@ -45,7 +46,8 @@ public class DeleteChoreCommand extends Command {
             }
             Chore choreToDelete = choreList.get(indexToDelete - 1);
             choreList.remove(choreToDelete);
-            return String.format(MESSAGE_SUCCESS, choreToDelete, choreList.size(), choreToDelete.checkSingular(choreList));
+            return String.format(MESSAGE_SUCCESS, choreToDelete, choreList.size(),
+                    choreToDelete.checkSingular(choreList));
         } catch (KitchenHelperException khe) {
             return khe.getMessage();
         }
