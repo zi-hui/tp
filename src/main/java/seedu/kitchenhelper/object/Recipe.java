@@ -77,6 +77,16 @@ public class Recipe {
         }
     }
 
+    public void addIngredientsToRecipeFromArrayList(ArrayList<Ingredient> ingredients) {
+        for (Ingredient ingredient : ingredients) {
+            this.recipeItems.add(ingredient);
+        }
+    }
+
+    public void setRecipeNameForStorage(String attributes) {
+        recipeName = attributes;
+    }
+
     public void setRecipeName(String attributes) {
         String recipeNameAndIngr = attributes.substring(attributes.indexOf("/n") + 3, attributes.indexOf("/i") - 1);
         recipeName = recipeNameAndIngr;
@@ -87,7 +97,18 @@ public class Recipe {
     }
 
     public ArrayList<Ingredient> getRecipeItem() {
-        System.out.println(recipeItems.size());
+        //System.out.println(recipeItems.size());
         return this.recipeItems;
     }
+
+    /**
+     * To format all variables of add ingredient as a string.
+     * @return String consisting of ingredient name, category, quantity, price and expiry.
+     */
+    @Override
+    public String toString() {
+        return "/n " + getRecipeName() + " " + getRecipeItem() + " " + recipeItems.size();
+    }
 }
+
+

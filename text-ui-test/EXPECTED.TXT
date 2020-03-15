@@ -5,8 +5,8 @@ What can I do for you?
 addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable
 Chicken Salad Recipe has been created with 2 ingredients inside.
 ===================================================
-addingredient /n Beef /c Meat /q 3 /p 20 /e 2020-03-18
-You have added Ingredient:Beef Category:Meat Quantity:3 Price:$20.00 Expiry:2020-03-18 to the ingredient list
+addingredient /n Beef /c meat /q 3 /p 20 /e 2020-03-18
+You have added Ingredient:Beef Category:meat Quantity:3 Price:$20.00 Expiry:2020-03-18 to the ingredient list
 ===================================================
 addingredient /n kailan /c Vegetable /q 30 /p 30.45 /e 2020-03-12
 You have added Ingredient:kailan Category:Vegetable Quantity:30 Price:$30.45 Expiry:2020-03-12 to the ingredient list
@@ -19,28 +19,19 @@ Invalid Command Format!
 Adds a ingredient to the ingredient list. /n INGREDIENT /c CATEGORY /q QUANTITY /p PRICE /e EXPIRY
 Example: addingredient /n Beef /c Meat /q 1 /p 13.5 /e 2020-02-13
 ===================================================
-add chore buy groceries /by Tuesday 12pm
+addchore buy groceries /by Tuesday 12pm
+You have added this chore:
+[x] buy groceries (by: Tuesday 12pm)
+Now you have 1 chore in the list.
+===================================================
+addchore buy groceries
 Invalid Command Format!
+Adds a chore to the chore list. TASK /by DATE
+Example: addchore buy groceries /by Tuesday 12pm
 ===================================================
-list chore
-Your list of chores is currently empty.
-===================================================
-deleterecipe /n Chicken Salad
-Chicken Salad has been deleted
-===================================================
-deleteingredient /n Beef /q 2
-The quantity of Beef has been changed!
-===================================================
-deleteingredient /n kailan /q 35
-Please enter a valid quantity to delete!
-Currently:
-kailan : 30
-===================================================
-deleteingredient /n kailan
-kailan has been deleted.
-===================================================
-delete chore 1
-The description of "delete" has to be an integer in the list.
+listchore
+Here are the chores in your list:
+1. [x] buy groceries (by: Tuesday 12pm)
 ===================================================
 exit
 Exiting KitchenHelper as requested ...

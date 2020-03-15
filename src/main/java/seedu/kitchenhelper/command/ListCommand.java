@@ -11,6 +11,8 @@ import seedu.kitchenhelper.object.ingredient.Drink;
 import seedu.kitchenhelper.object.ingredient.Fruit;
 import seedu.kitchenhelper.object.ingredient.Meat;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
+import seedu.kitchenhelper.storage.Storage;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -19,6 +21,18 @@ public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
 
     public static final String COMMAND_FORMAT = "list ingredient";
+
+    public void executeIngredientStorage(ArrayList<Ingredient> ingredientList, Storage storage){
+
+    }
+
+    public void executeChoreStorage(ArrayList<Chore> choreList, Storage storage){
+
+    }
+
+    public void executeRecipeStorage(ArrayList<Recipe> recipeList, Storage storage){
+
+    }
 
     public void setListParams(HashMap<String, String> attributes) {
         actionType = COMMAND_WORD;
@@ -80,20 +94,6 @@ public class ListCommand extends Command {
         return result;
     }
 
-    
-    @Override
-    public String listChore(ArrayList<Chore> choreList) {
-        String feedbackToUser = "";
-        if (choreList.size() == 0) {
-            feedbackToUser = "Your list of chores is currently empty.";
-        } else {
-            feedbackToUser = "Here are the chores in your list:\n";
-            for (int i = 0; i < choreList.size(); ++i) {
-                feedbackToUser += (Integer.toString(i + 1) + ". " + choreList.get(i) + "\n");
-            }
-        }
-        return feedbackToUser;
-    }
 
     @Override
     public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
