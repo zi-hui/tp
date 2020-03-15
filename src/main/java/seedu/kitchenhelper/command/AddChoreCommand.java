@@ -34,6 +34,18 @@ public class AddChoreCommand extends Command {
     }
 
     /**
+     * Adds a chore to the chore list.
+     *
+     * @param choreList the ArrayList of chores.
+     * @return success message of addition.
+     */
+    public String addChore(ArrayList<Chore> choreList) {
+        Chore newChore = new Chore(description, date);
+        choreList.add(newChore);
+        return String.format(MESSAGE_SUCCESS, newChore, choreList.size(), newChore.checkSingular(choreList));
+    }
+
+    /**
      * {@inheritDoc}
      *
      * @param ingredientList list of ingredients.
@@ -44,8 +56,7 @@ public class AddChoreCommand extends Command {
     @Override
     public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
                                  ArrayList<Chore> choreList) {
-        Chore newChore = new Chore(description, date);
-        choreList.add(newChore);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, newChore, choreList.size(), newChore.checkSingular(choreList)));
+        String feedbackToUser = addChore(choreList);
+        return new CommandResult(feedbackToUser);
     }
 }

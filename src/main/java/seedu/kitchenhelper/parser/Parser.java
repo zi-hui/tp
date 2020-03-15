@@ -216,7 +216,7 @@ public class Parser {
      * @param parameters full user input string.
      * @return the prepared command.
      */
-    private Command prepareDeleteChore(String parameters) {
+    public Command prepareDeleteChore(String parameters) {
         try {
             int indexToDelete = Integer.parseInt(parameters.trim());
             return new DeleteChoreCommand(indexToDelete);
