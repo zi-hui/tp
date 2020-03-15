@@ -19,11 +19,19 @@ Invalid Command Format!
 Adds a ingredient to the ingredient list. /n INGREDIENT /c CATEGORY /q QUANTITY /p PRICE /e EXPIRY
 Example: addingredient /n Beef /c Meat /q 1 /p 13.5 /e 2020-02-13
 ===================================================
-add chore buy groceries /by Tuesday 12pm
-Invalid Command Format!
+addchore buy groceries /by Tuesday 12pm
+You have added this chore:
+[x] buy groceries(by: Tuesday 12pm)
+Now you have 1 chore in the list.
 ===================================================
-list chore
-Your list of chores is currently empty.
+addchore buy groceries
+Invalid Command Format!
+Adds a chore to the chore list. TASK /by DATE
+Example: addchore buy groceries /by Tuesday 12pm
+===================================================
+listchore
+Here are the chores in your list:
+1. [x] buy groceries(by: Tuesday 12pm)
 ===================================================
 deleterecipe /n Chicken Salad
 Chicken Salad has been deleted
@@ -41,8 +49,10 @@ kailan : 30
 deleteingredient /n kailan
 kailan has been deleted.
 ===================================================
-delete chore 1
-The description of "delete" has to be an integer in the list.
+deletechore 1
+You have deleted this chore:
+[x] buy groceries(by: Tuesday 12pm)
+Now you have 0 chores in the list.
 ===================================================
 exit
 Exiting KitchenHelper as requested ...
