@@ -60,7 +60,6 @@ public abstract class Ingredient {
      *
      * @param quantity quantity of ingredient
      */
-
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
@@ -91,5 +90,23 @@ public abstract class Ingredient {
     public String toString() {
         return "/n " + getIngredientName() + " /c " + getCategoryName() + " /q " + getQuantity()
                 + " /p " + getPrice() + " /e " + getExpiryDate();
+    }
+
+    /**
+     * To compare two Ingredient objects based on their attributes.
+     * @return boolean return false if any of the attributes are not equal to each other.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Ingredient) {
+            Ingredient i = (Ingredient) o;
+            return this.ingredientName.equals(i.ingredientName)
+                && this.categoryName.equals(i.categoryName)
+                && this.quantity == i.quantity
+                && this.price == price
+                && this.expiryDate.equals(i.expiryDate);
+        } else {
+            return false;
+        }
     }
 }

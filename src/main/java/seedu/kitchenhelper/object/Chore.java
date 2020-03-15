@@ -44,7 +44,7 @@ public class Chore {
     }
 
     public String toString() {
-        return "[" + getStatusIcon() + "] " + description + "(by: " + date + ")";
+        return "[" + getStatusIcon() + "] " + description + " (by: " + date + ")";
     }
 
 }
