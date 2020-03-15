@@ -14,7 +14,8 @@ class StorageTest {
     public static final String OUTPUT_INGREDIENT = currentDirectory + "/src/test/data/StorageTest/outputIngredient.txt";
     public static final String OUTPUT_RECIPE = currentDirectory + "/src/test/data/StorageTest/outputRecipe.txt";
     public static final String OUTPUT_CHORE = currentDirectory + "/src/test/data/StorageTest/outputChore.txt";
-    public static final String NEW_OUTPUT_INGREDIENT = currentDirectory + "/src/test/data/NewStorageTest/outputIngredient.txt";
+    public static final String NEW_OUTPUT_INGREDIENT = currentDirectory
+            + "/src/test/data/NewStorageTest/outputIngredient.txt";
     public static final String NEW_OUTPUT_RECIPE = currentDirectory + "/src/test/data/NewStorageTest/outputRecipe.txt";
     public static final String NEW_OUTPUT_CHORE = currentDirectory + "/src/test/data/NewStorageTest/outputChore.txt";
 
