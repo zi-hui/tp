@@ -21,7 +21,7 @@ Example: addingredient /n Beef /c Meat /q 1 /p 13.5 /e 2020-02-13
 ===================================================
 addchore buy groceries /by Tuesday 12pm
 You have added this chore:
-[x] buy groceries(by: Tuesday 12pm)
+[x] buy groceries (by: Tuesday 12pm)
 Now you have 1 chore in the list.
 ===================================================
 addchore buy groceries
@@ -31,7 +31,7 @@ Example: addchore buy groceries /by Tuesday 12pm
 ===================================================
 listchore
 Here are the chores in your list:
-1. [x] buy groceries(by: Tuesday 12pm)
+1. [x] buy groceries (by: Tuesday 12pm)
 ===================================================
 deleterecipe /n Chicken Salad
 Chicken Salad has been deleted
@@ -51,7 +51,7 @@ kailan has been deleted.
 ===================================================
 deletechore 1
 You have deleted this chore:
-[x] buy groceries(by: Tuesday 12pm)
+[x] buy groceries (by: Tuesday 12pm)
 Now you have 0 chores in the list.
 ===================================================
 exit
