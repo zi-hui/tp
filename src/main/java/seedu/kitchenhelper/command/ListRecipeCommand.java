@@ -15,6 +15,8 @@ import seedu.kitchenhelper.storage.Storage;
 import seedu.kitchenhelper.ui.Ui;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class ListRecipeCommand extends Command {
 
@@ -51,35 +53,22 @@ public class ListRecipeCommand extends Command {
 
     public String listRecipe(int itemNum, ArrayList<Recipe> recipeArrayList) {
         String result = "\nHere is the list of Ingredients in Recipe:"
-                + "\nFormat : Ingredient Name | Ingredient Category | Quantity | Price | Expiry\n";
+                + "\nFormat:Ingredient Name|Ingredient Category|Quantity|Price|Expiry\n";
         if (recipeArrayList.size() == 0 || itemNum > recipeArrayList.size() || itemNum < 0) {
             result += "The Recipe List is currently empty.";
         } else {
             Recipe recipeItem = recipeArrayList.get(itemNum - 1);
-            result += "Recipe Name : " + recipeItem.getRecipeName() + "\n";
-            for (int i = 0; i < recipeItem.getRecipeItem().size(); i++) {
-                Ingredient ingredientObj = recipeItem.getRecipeItem().get(i);
-                result += ingredientObj.getIngredientName() + " | " + ingredientObj.getCategoryName()
-                        + " | " + ingredientObj.getQuantity() + " | "
-                        + ingredientObj.getPrice() + " | " + ingredientObj.getExpiryDate() + "\n";
+            result += "Recipe Name:" + recipeItem.getRecipeName() + "\n";
+            ArrayList<Ingredient> ingredientByCategory = recipeItem.getRecipeItem();
+            Collections.sort(ingredientByCategory, Comparator.comparing(Ingredient::getCategoryName));
+            for (int i = 0; i < ingredientByCategory.size(); i++) {
+                Ingredient ingredientObj = ingredientByCategory.get(i);
+                result += ingredientObj.getIngredientName() + "|" + ingredientObj.getCategoryName()
+                        + "|" + Integer.toString(ingredientObj.getQuantity()) + "|"
+                        + Double.toString(ingredientObj.getPrice()) + "|" + ingredientObj.getExpiryDate() + "\n";
             }
         }
         return result;
-    }
-
-    
-    @Override
-    public String listChore(ArrayList<Chore> choreList) {
-        String feedbackToUser = "";
-        if (choreList.size() == 0) {
-            feedbackToUser = "Your list of chores is currently empty.";
-        } else {
-            feedbackToUser = "Here are the chores in your list:\n";
-            for (int i = 0; i < choreList.size(); ++i) {
-                feedbackToUser += (Integer.toString(i + 1) + ". " + choreList.get(i) + "\n");
-            }
-        }
-        return feedbackToUser;
     }
 
     public void executeIngredientStorage(ArrayList<Ingredient> ingredientList, Storage storage){

@@ -5,6 +5,15 @@ What can I do for you?
 addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable
 Chicken Salad Recipe has been created with 2 ingredients inside.
 ===================================================
+listrecipe 1
+
+Here is the list of Ingredients in Recipe:
+Format:Ingredient Name|Ingredient Category|Quantity|Price|Expiry
+Recipe Name:Chicken Salad
+Chicken Breast|meat|2|0.0|null
+Lettuce|vegetable|4|0.0|null
+
+===================================================
 addingredient /n Beef /c meat /q 3 /p 20 /e 2020-03-18
 You have added Ingredient:Beef Category:meat Quantity:3 Price:$20.00 Expiry:2020-03-18 to the ingredient list
 ===================================================
@@ -31,18 +40,18 @@ Example: addchore buy groceries /by Tuesday 12pm
 ===================================================
 listingredient all
 Here is the list of Ingredients in Inventory:
-Format : Ingredient Name | Quantity | Price | Expiry
-all :
-dairy :
-HL Milk | 3 | 12.2 | 2020-03-14
-drink :
-fruit :
-meat :
-Beef | 3 | 20.0 | 2020-03-18
-miscellaneous :
-staple :
-vegetable :
-kailan | 30 | 30.45 | 2020-03-12
+Format : Ingredient Name|Quantity|Price|Expiry
+all:
+dairy:
+HL Milk|3|12.2|2020-03-14
+drink:
+fruit:
+meat:
+Beef|3|20.0|2020-03-18
+miscellaneous:
+staple:
+vegetable:
+kailan|30|30.45|2020-03-12
 
 ===================================================
 deleteingredient /n Beef
@@ -65,7 +74,7 @@ Chicken Salad has been deleted
 listrecipe 1
 
 Here is the list of Ingredients in Recipe:
-Format : Ingredient Name | Ingredient Category | Quantity | Price | Expiry
+Format:Ingredient Name|Ingredient Category|Quantity|Price|Expiry
 The Recipe List is currently empty.
 ===================================================
 deletechore 1
