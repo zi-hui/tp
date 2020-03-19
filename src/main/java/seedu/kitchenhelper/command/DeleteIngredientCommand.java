@@ -98,32 +98,21 @@ public class DeleteIngredientCommand extends Command {
         int indexOfIngredient = getIngredientIndex(ingredientName, ingredientsList);
 
         if (indexOfIngredient != -1) {
-            assert ingredientsList.size() > 0;
+            assert indexOfIngredient >= 0;
             Ingredient ingredientToDelete = ingredientsList.get(indexOfIngredient);
             if (quantity <= -1) {
                 kitchenLogs.log(Level.INFO, LOG_INFO);
                 ingredientsList.remove(ingredientToDelete);
-                //Storage.saveIngredientData(ingredientsList);
                 feedbackToUser = String.format(COMMAND_SUCCESS, ingredientName);
             } else {
                 int newQuantity = ingredientToDelete.getQuantity() - quantity;
                 feedbackToUser = updateNewQuantity(newQuantity, ingredientToDelete);
-                //Storage.saveIngredientData(ingredientsList);
             }
             Storage.saveIngredientData(ingredientsList);
         } else {
             feedbackToUser = COMMAND_FAILURE;
         }
         return feedbackToUser;
-    }
-
-    public void executeIngredientStorage(ArrayList<Ingredient> ingredientList, Storage storage){
-    }
-
-    public void executeChoreStorage(ArrayList<Chore> choreList, Storage storage){
-    }
-
-    public void executeRecipeStorage(ArrayList<Recipe> recipeList, Storage storage){
     }
 
     /**

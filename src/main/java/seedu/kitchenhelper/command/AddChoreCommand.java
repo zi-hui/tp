@@ -26,17 +26,6 @@ public class AddChoreCommand extends Command {
     private String description;
     private String date;
 
-    public void executeIngredientStorage(ArrayList<Ingredient> ingredientList, Storage storage){
-
-    }
-
-    public void executeChoreStorage(ArrayList<Chore> choreList, Storage storage){
-
-    }
-
-    public void executeRecipeStorage(ArrayList<Recipe> recipeList, Storage storage){
-
-    }
 
     /**
      * Constructor for AddChoreCommand.
