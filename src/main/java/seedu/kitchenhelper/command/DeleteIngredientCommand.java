@@ -3,6 +3,8 @@ package seedu.kitchenhelper.command;
 import seedu.kitchenhelper.object.Chore;
 import seedu.kitchenhelper.object.Recipe;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
+import seedu.kitchenhelper.storage.Storage;
+import seedu.kitchenhelper.ui.Ui;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -21,6 +23,8 @@ public class DeleteIngredientCommand extends Command {
     public static final String COMMAND_SUCCESS_QUANTITY = "The quantity of %s has been changed!";
     public static final String COMMAND_FAILURE_QUANTITY = "Please enter a valid quantity to delete!\nCurrently:"
                                                             + "\n%s : %d";
+    public static final String MESSAGE_USAGE = String.format("%s: %s", COMMAND_WORD, COMMAND_DESC) + Ui.LS + String
+            .format("Parameter: %s\n%s", COMMAND_USAGE, COMMAND_EXAMPLE);
     public static final String LOG_INFO = "An ingredient has been deleted";
     private static final String OBJECT_TYPE = "ingredient";
     private static int quantity = 0;
@@ -94,7 +98,7 @@ public class DeleteIngredientCommand extends Command {
         int indexOfIngredient = getIngredientIndex(ingredientName, ingredientsList);
 
         if (indexOfIngredient != -1) {
-            assert ingredientsList.size() > 0;
+            assert indexOfIngredient >= 0;
             Ingredient ingredientToDelete = ingredientsList.get(indexOfIngredient);
             if (quantity <= -1) {
                 kitchenLogs.log(Level.INFO, LOG_INFO);
@@ -104,10 +108,20 @@ public class DeleteIngredientCommand extends Command {
                 int newQuantity = ingredientToDelete.getQuantity() - quantity;
                 feedbackToUser = updateNewQuantity(newQuantity, ingredientToDelete);
             }
+            Storage.saveIngredientData(ingredientsList);
         } else {
             feedbackToUser = COMMAND_FAILURE;
         }
         return feedbackToUser;
+    }
+
+    public void executeIngredientStorage(ArrayList<Ingredient> ingredientList, Storage storage){
+    }
+
+    public void executeChoreStorage(ArrayList<Chore> choreList, Storage storage){
+    }
+
+    public void executeRecipeStorage(ArrayList<Recipe> recipeList, Storage storage){
     }
 
     /**
@@ -118,7 +132,6 @@ public class DeleteIngredientCommand extends Command {
      * @param choreList      list of chores.
      * @return the execution of the deletion of ingredients or tasks.
      */
-
     @Override
     public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
                                   ArrayList<Chore> choreList) {

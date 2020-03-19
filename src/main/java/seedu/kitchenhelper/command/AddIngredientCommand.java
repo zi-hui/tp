@@ -11,6 +11,7 @@ import seedu.kitchenhelper.object.ingredient.Meat;
 import seedu.kitchenhelper.object.ingredient.Miscellaneous;
 import seedu.kitchenhelper.object.ingredient.Staple;
 import seedu.kitchenhelper.object.ingredient.Vegetable;
+import seedu.kitchenhelper.ui.Ui;
 
 import java.util.ArrayList;
 import java.util.logging.Logger;
@@ -19,17 +20,18 @@ import java.util.logging.Logger;
  * Adds the ingredient to the inventory list.
  */
 public class AddIngredientCommand extends Command {
-    
-    public final Logger kitchenLogs = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+
+    public static final Logger kitchenLogs = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     public static final String COMMAND_WORD = "addingredient";
     public static final String MESSAGE_SUCCESS =
-            "You have added Ingredient:%s Category:%s Quantity:%d Price:$%.2f Expiry:%s to the inventory list";
-    public static final String COMMAND_DESC = "Adds a ingredient to the inventory list.";
+            "You have added Ingredient:%s Category:%s Quantity:%d Price:$%.2f Expiry:%s to the ingredient list";
+    public static final String COMMAND_DESC = "Adds a ingredient to the ingredient list.";
     public static final String COMMAND_PARAMETER = "/n INGREDIENT /c CATEGORY /q QUANTITY /p PRICE /e EXPIRY";
     public static final String COMMAND_EXAMPLE = "Example: addingredient /n Beef /c Meat /q 1 /p 13.5 /e 2020-02-13";
     public static final String COMMAND_FORMAT =
             String.format("%s %s\n%s", COMMAND_DESC, COMMAND_PARAMETER, COMMAND_EXAMPLE);
-    
+    public static final String MESSAGE_USAGE = String.format("%s: %s", COMMAND_WORD, COMMAND_DESC) + Ui.LS + String
+            .format("Parameter: %s\n%s", COMMAND_PARAMETER, COMMAND_EXAMPLE);
     public final String logAddIngredient = "A new ingredient has been added";
     
     private String ingredientName;
@@ -65,32 +67,47 @@ public class AddIngredientCommand extends Command {
         switch (category.toLowerCase()) {
         case Meat.INGREDIENT_WORD:
             ingredientList.add(new Meat(ingredientName, categoryName, quantity, price, expiry));
+            Storage.saveIngredientData(ingredientList);
             break;
         case Vegetable.INGREDIENT_WORD:
             ingredientList.add(new Vegetable(ingredientName, categoryName, quantity, price, expiry));
+            Storage.saveIngredientData(ingredientList);
             break;
         case Drink.INGREDIENT_WORD:
             ingredientList.add(new Drink(ingredientName, categoryName, quantity, price, expiry));
+            Storage.saveIngredientData(ingredientList);
             break;
         case Fruit.INGREDIENT_WORD:
             ingredientList.add(new Fruit(ingredientName, categoryName, quantity, price, expiry));
+            Storage.saveIngredientData(ingredientList);
             break;
         case Staple.INGREDIENT_WORD:
             ingredientList.add(new Staple(ingredientName, categoryName, quantity, price, expiry));
+            Storage.saveIngredientData(ingredientList);
             break;
         case Dairy.INGREDIENT_WORD:
             ingredientList.add(new Dairy(ingredientName, categoryName, quantity, price, expiry));
+            Storage.saveIngredientData(ingredientList);
             break;
         case Miscellaneous.INGREDIENT_WORD:
             // Fallthrough
         default:
             this.categoryName = Miscellaneous.INGREDIENT_WORD;
             ingredientList.add(new Miscellaneous(ingredientName, categoryName, quantity, price, expiry));
+            Storage.saveIngredientData(ingredientList);
             break;
         }
-        
     }
-    
+
+    public void executeIngredientStorage(ArrayList<Ingredient> ingredientList, Storage storage){
+    }
+
+    public void executeRecipeStorage(ArrayList<Recipe> recipeList, Storage storage){
+    }
+
+    public void executeChoreStorage(ArrayList<Chore> choreList, Storage storage){
+    }
+
     /**
      * {@inheritDoc}
      *
