@@ -90,6 +90,13 @@ public class AddRecipeCommand extends Command {
                 + freshRecipe.recipeIngrQty + " ingredients inside.";
     }
 
+    /**
+     * Checks for existing recipe with the same name.
+     * @param newRecipeName The name of the new recipe.
+     * @param recipeList    The list of recipes.
+     * @return true when a recipe with the same name is found,
+     *          false otherwise.
+     */
     public Boolean checkIfRecipeExist(String newRecipeName, ArrayList<Recipe> recipeList) {
         boolean existence = false;
         for (Recipe recipe : recipeList) {
