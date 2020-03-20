@@ -92,9 +92,6 @@ public class KitchenHelper {
                 // parse input to return obj of the corresponding
                 // type of command (i.e add/ delete/ list/ help / exit)
                 command = new Parser().parseUserCommand(userCommandInput);
-                command.executeIngredientStorage(ingredientList, storage);
-                command.executeRecipeStorage(recipeList,storage);
-                command.executeChoreStorage(choreList, storage);
                 CommandResult result = executeCommand(command);
                 ui.showResultToUser(result);
                 ui.printDivider();

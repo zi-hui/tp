@@ -118,15 +118,6 @@ public class DeleteIngredientCommand extends Command {
         return feedbackToUser;
     }
 
-    public void executeIngredientStorage(ArrayList<Ingredient> ingredientList, Storage storage){
-    }
-
-    public void executeChoreStorage(ArrayList<Chore> choreList, Storage storage){
-    }
-
-    public void executeRecipeStorage(ArrayList<Recipe> recipeList, Storage storage){
-    }
-
     /**
      * {@inheritDoc}
      *
