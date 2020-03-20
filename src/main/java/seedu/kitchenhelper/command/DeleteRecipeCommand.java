@@ -17,7 +17,8 @@ public class DeleteRecipeCommand extends Command {
     public static final String COMMAND_USAGE = "Usage: deleterecipe /n RECIPENAME OR deleterecipe /i <index>";
     public static final String COMMAND_DESC = "Delete the recipe. ";
     public static final String COMMAND_EXAMPLE = "Example: deleterecipe /n Chicken Salad OR deleterecipe /i 1";
-    public static final String COMMAND_FORMAT = String.format("%s\n%s\n%s", COMMAND_DESC, COMMAND_USAGE, COMMAND_EXAMPLE);
+    public static final String COMMAND_FORMAT = String.format("%s\n%s\n%s", COMMAND_DESC, COMMAND_USAGE,
+                                                    COMMAND_EXAMPLE);
     public static final String COMMAND_SUCCESS = "%s has been deleted";
     public static final String COMMAND_FAILURE = "This recipe does not exist! Please type in a correct "
                                                     + "recipe name/index.";
