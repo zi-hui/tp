@@ -105,7 +105,7 @@ public class DeleteIngredientCommand extends Command {
                 kitchenLogs.log(Level.INFO, LOG_INFO);
                 ingredientsList.remove(ingredientToDelete);
                 feedbackToUser = String.format(COMMAND_SUCCESS, ingredientName);
-            } else if (quantity > 0){
+            } else if (quantity > 0) {
                 int newQuantity = ingredientQuantity - quantity;
                 feedbackToUser = updateNewQuantity(newQuantity, ingredientToDelete);
             } else {
