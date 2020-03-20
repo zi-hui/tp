@@ -84,13 +84,16 @@ public class Parser {
         try {
             ingredientList = attributes.substring(attributes.indexOf("/i") + 3);
             String[] splitedIngr = ingredientList.split("[,][\\s]");
-            for (String item : splitedIngr) {
+            for (int i = 0; i < splitedIngr.length;i++) {
+
+                String item = splitedIngr[i];
                 String[] ingrContent = item.split(":");
                 String[] nameAndType = new String[2];
                 nameAndType[0] = ingrContent[0];
                 nameAndType[1] = ingrContent[2];
                 ingrAndQty.put(nameAndType, Integer.parseInt(ingrContent[1]));
             }
+
         } catch (IndexOutOfBoundsException e) {
             kitchenLogs.log(Level.WARNING, warningPrepareRecipe, e.toString());
             return new InvalidCommand(

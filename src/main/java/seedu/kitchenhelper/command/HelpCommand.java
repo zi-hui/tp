@@ -19,18 +19,7 @@ public class HelpCommand extends Command {
     public static final String COMMAND_DESC = "Shows the program command line interface instructions";
     public static final String MESSAGE_USAGE =
             String.format("%s: %s", COMMAND_WORD, COMMAND_DESC) + Ui.LS + String.format("Example: %s", COMMAND_WORD);
-    
-    public void executeIngredientStorage(ArrayList<Ingredient> ingredientList, Storage storage) {
-    
-    }
-    
-    public void executeChoreStorage(ArrayList<Chore> choreList, Storage storage) {
-    
-    }
-    
-    public void executeRecipeStorage(ArrayList<Recipe> recipeList, Storage storage) {
-    
-    }
+
 
     /**
      * {@inheritDoc}

@@ -10,7 +10,7 @@ public abstract class Ingredient {
     private int quantity;
     private double price;
     private String expiryDate;
-    
+
     /**
      * Constructor for Ingredient.
      *
