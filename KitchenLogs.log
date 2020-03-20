@@ -1,0 +1,4 @@
+Mar 20, 2020 2:38:05 PM seedu.kitchenhelper.command.AddRecipeCommand addRecipe
+INFO: A new recipe has been added
+Mar 20, 2020 2:38:18 PM seedu.kitchenhelper.command.DeleteRecipeCommand deleteRecipe
+INFO: A recipe has been deleted
