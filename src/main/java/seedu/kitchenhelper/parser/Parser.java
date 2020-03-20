@@ -268,7 +268,7 @@ public class Parser {
             if (nameAndQuantity.length > 1) {
                 return new DeleteIngredientCommand(nameAndQuantity[0].trim(), Integer.parseInt(nameAndQuantity[1]));
             } else {
-                return new DeleteIngredientCommand(nameAndQuantity[0].trim(), -1);
+                return new DeleteIngredientCommand(nameAndQuantity[0].trim(), null);
             }
         } catch (IndexOutOfBoundsException e) {
             kitchenLogs.log(Level.WARNING, LOG_WARNING_INDEX, e.toString());
