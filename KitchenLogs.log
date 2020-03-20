@@ -1,4 +1,8 @@
-Mar 20, 2020 2:38:05 PM seedu.kitchenhelper.command.AddRecipeCommand addRecipe
-INFO: A new recipe has been added
-Mar 20, 2020 2:38:18 PM seedu.kitchenhelper.command.DeleteRecipeCommand deleteRecipe
-INFO: A recipe has been deleted
+Mar 20, 2020 2:57:35 PM seedu.kitchenhelper.parser.Parser prepareListRecipe
+WARNING: An IndexOutOfBounds exception has been caught
+Mar 20, 2020 2:57:48 PM seedu.kitchenhelper.command.AddIngredientCommand execute
+INFO: A new ingredient has been added
+Mar 20, 2020 2:57:48 PM seedu.kitchenhelper.command.AddIngredientCommand execute
+INFO: A new ingredient has been added
+Mar 20, 2020 2:57:48 PM seedu.kitchenhelper.command.AddIngredientCommand execute
+INFO: A new ingredient has been added

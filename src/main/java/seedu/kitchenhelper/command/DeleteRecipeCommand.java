@@ -26,13 +26,27 @@ public class DeleteRecipeCommand extends Command {
     public static final String MESSAGE_USAGE = String.format("%s: %s", COMMAND_WORD, COMMAND_DESC) + Ui.LS + String
             .format("Parameter: %s\n%s", COMMAND_USAGE, COMMAND_EXAMPLE);
     private Integer recipeIndex;
-    
+
+    /**
+     * Constructor for Delete Recipe Command.
+     *
+     * @param recipeName name of the recipe to be deleted
+     *
+     */
+
     public DeleteRecipeCommand(String recipeName) {
         setActionType(COMMAND_WORD);
         setObjectType(OBJECT_TYPE);
         setObjectVariables(recipeName);
         this.recipeIndex = null;
     }
+
+    /**
+     * Constructor for Delete Recipe Command.
+     *
+     * @param recipeIndex index of the recipe to be deleted
+     *
+     */
 
     public DeleteRecipeCommand(Integer recipeIndex) {
         setActionType(COMMAND_WORD);
@@ -79,11 +93,23 @@ public class DeleteRecipeCommand extends Command {
         return feedbackToUser;
     }
 
+    /**
+     * Delete the recipe by index.
+     *
+     * @param recipeList the list of recipe
+     */
+
     public String deleteRecipeByIndex(ArrayList<Recipe> recipeList) {
         int index = this.recipeIndex;
         String feedbackToUser = deleteRecipe(recipeList, index);
         return feedbackToUser;
     }
+
+    /**
+     * Delete the recipe by name.
+     *
+     * @param recipeList the list of recipe
+     */
 
     public String deleteRecipeByName(ArrayList<Recipe> recipeList) {
         String recipeName = this.objectVariables;
