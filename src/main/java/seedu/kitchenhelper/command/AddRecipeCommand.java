@@ -1,5 +1,6 @@
 package seedu.kitchenhelper.command;
 
+import seedu.kitchenhelper.KitchenHelper;
 import seedu.kitchenhelper.exception.KitchenHelperException;
 import seedu.kitchenhelper.object.Chore;
 import seedu.kitchenhelper.object.Recipe;
@@ -73,9 +74,12 @@ public class AddRecipeCommand extends Command {
      * @param recipeList     list of recipes.
      * @return the success message of adding inventory.
      */
-    public String addRecipe(String attributes, ArrayList<Recipe> recipeList) {
+    public String addRecipe(String attributes, ArrayList<Recipe> recipeList) throws KitchenHelperException {
         Recipe freshRecipe = new Recipe();
         freshRecipe.setRecipeName(attributes);
+        if (checkIfRecipeExist(freshRecipe.getRecipeName(), recipeList)) {
+            throw new KitchenHelperException("There is an existing recipe!");
+        }
         freshRecipe.addIngredientsToRecipe(parsedIngr);
         recipeList.add(freshRecipe);
         Storage.saveRecipeData(recipeList);
@@ -85,6 +89,25 @@ public class AddRecipeCommand extends Command {
         return freshRecipe.recipeName + " Recipe has been created with "
                 + freshRecipe.recipeIngrQty + " ingredients inside.";
     }
+
+    /**
+     * Checks for existing recipe with the same name.
+     * @param newRecipeName The name of the new recipe.
+     * @param recipeList    The list of recipes.
+     * @return true when a recipe with the same name is found,
+     *          false otherwise.
+     */
+    public Boolean checkIfRecipeExist(String newRecipeName, ArrayList<Recipe> recipeList) {
+        boolean existence = false;
+        for (Recipe recipe : recipeList) {
+            if (recipe.getRecipeName().equalsIgnoreCase(newRecipeName)) {
+                existence = true;
+                break;
+            }
+        }
+        return existence;
+    }
+
 
     /**
      * {@inheritDoc}
@@ -97,7 +120,11 @@ public class AddRecipeCommand extends Command {
     @Override
     public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
                                  ArrayList<Chore> choreList) throws KitchenHelperException {
-        String message = addRecipe(this.objectVariables,recipeList);
-        return new CommandResult(message);
+        try {
+            String message = addRecipe(this.objectVariables, recipeList);
+            return new CommandResult(message);
+        } catch (KitchenHelperException e) {
+            return new CommandResult("There is an existing recipe with the same name!");
+        }
     }
 }
