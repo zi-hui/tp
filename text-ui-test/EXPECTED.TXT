@@ -55,6 +55,9 @@ Here are your matching recipes in your list
 deleteingredient /n Beef
 Beef has been deleted.
 ===================================================
+deleteingredient /n Beef cubes
+Beef cubes has been deleted.
+===================================================
 deleteingredient /n kailan /q 35
 Please enter a valid quantity to delete!
 Currently:
@@ -66,24 +69,27 @@ kailan has been deleted.
 deleterecipe /n Chicken Salad
 Chicken Salad has been deleted
 ===================================================
+deleterecipe /n Chicken Salad
+This recipe does not exist! Please type in a correct recipe name.
+===================================================
+deleterecipe /n Chicken Stew
+Chicken Stew has been deleted
+===================================================
+deleteingredient /n HL milk
+HL milk has been deleted.
+===================================================
+deletechore 1
+You have deleted this chore:
+[x] buy groceries (by: Tuesday 12pm)
+Now you have 0 chores in the list.
+===================================================
 listingredient all
 Here is the list of Ingredients in Inventory:
 Format : Ingredient Name|Quantity|Price|Expiry
-all:
-dairy:
-HL Milk|3|12.2|2020-03-14
-drink:
-fruit:
-meat:
-Beef cubes|3|20.0|2020-03-18
-miscellaneous:
-staple:
-vegetable:
-
+The Ingredient List is currently empty.
 ===================================================
 listchore
-Here are the chores in your list:
-1. [x] buy groceries (by: Tuesday 12pm)
+Your list of chores is currently empty.
 ===================================================
 exit
 Exiting KitchenHelper as requested ...
