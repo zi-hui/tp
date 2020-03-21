@@ -12,9 +12,14 @@ searchchore groceries
 searchingredient beef
 searchrecipe chicken
 deleteingredient /n Beef
+deleteingredient /n Beef cubes
 deleteingredient /n kailan /q 35
 deleteingredient /n kailan
 deleterecipe /n Chicken Salad
+deleterecipe /n Chicken Salad
+deleterecipe /n Chicken Stew
+deleteingredient /n HL milk
+deletechore 1
 listingredient all
 listchore
 exit
