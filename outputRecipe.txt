@@ -1,1 +1,3 @@
 /n Chicken Salad [/n milo /c drink /q 10 /p 0.0 /e null] 1
+/n Chicken+Duck Salad [/n Chicken Breast /c meat /q 2 /p 0.0 /e null, /n Duck Meat /c meat /q 2 /p 0.0 /e null, /n Lettuce /c vegetable /q 4 /p 0.0 /e null] 3
+/n Chicken Salad v2.0 [/n Chicken Breast /c meat /q 2 /p 0.0 /e null, /n Zebra Meat /c meat /q 2 /p 0.0 /e null, /n Cabbage /c vegetable /q 2 /p 0.0 /e null, /n Lettuce /c vegetable /q 4 /p 0.0 /e null] 4
