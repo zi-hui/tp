@@ -27,7 +27,7 @@ public class DeleteIngredientCommand extends Command {
             .format("Parameter: %s\n%s", COMMAND_USAGE, COMMAND_EXAMPLE);
     public static final String LOG_INFO = "An ingredient has been deleted";
     private static final String OBJECT_TYPE = "ingredient";
-    private static int quantity = 0;
+    private static Integer quantity;
 
     /**
      * Constructor for Delete Ingredient Command.
@@ -36,7 +36,7 @@ public class DeleteIngredientCommand extends Command {
      * @param quantity number of serving of ingredient to be deleted
      */
 
-    public DeleteIngredientCommand(String ingredientName, int quantity) {
+    public DeleteIngredientCommand(String ingredientName, Integer quantity) {
         setActionType(COMMAND_WORD);
         setObjectType(OBJECT_TYPE);
         setObjectVariables(ingredientName);
@@ -97,16 +97,19 @@ public class DeleteIngredientCommand extends Command {
         String ingredientName = this.objectVariables;
         int indexOfIngredient = getIngredientIndex(ingredientName, ingredientsList);
 
-        if (indexOfIngredient != -1) {
+        if (indexOfIngredient > -1 && indexOfIngredient < ingredientsList.size()) {
             assert indexOfIngredient >= 0;
             Ingredient ingredientToDelete = ingredientsList.get(indexOfIngredient);
-            if (quantity <= -1) {
+            int ingredientQuantity = ingredientToDelete.getQuantity();
+            if (quantity == null) {
                 kitchenLogs.log(Level.INFO, LOG_INFO);
                 ingredientsList.remove(ingredientToDelete);
                 feedbackToUser = String.format(COMMAND_SUCCESS, ingredientName);
-            } else {
-                int newQuantity = ingredientToDelete.getQuantity() - quantity;
+            } else if (quantity > 0) {
+                int newQuantity = ingredientQuantity - quantity;
                 feedbackToUser = updateNewQuantity(newQuantity, ingredientToDelete);
+            } else {
+                feedbackToUser = String.format(COMMAND_FAILURE_QUANTITY, ingredientName, ingredientQuantity);
             }
             Storage.saveIngredientData(ingredientsList);
         } else {
