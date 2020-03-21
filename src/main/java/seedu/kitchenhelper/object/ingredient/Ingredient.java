@@ -91,6 +91,10 @@ public abstract class Ingredient {
         return "/n " + getIngredientName() + " /c " + getCategoryName() + " /q " + getQuantity()
                 + " /p " + getPrice() + " /e " + getExpiryDate();
     }
+    
+    public String toFind() {
+        return getIngredientName() + " Qty:" + getQuantity() + " $" + getPrice() + " Exp:" + getExpiryDate();
+    }
 
     /**
      * To compare two Ingredient objects based on their attributes.
