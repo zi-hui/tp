@@ -53,7 +53,7 @@ public class SearchRecipeCommand extends Command {
         sb.append(NON_EMPTY_LIST)
                 .append(Ui.LS);
         for (int i = 0; i < findRecipeList.size(); ++i) {
-            if(i == findRecipeList.size() - 1) {
+            if (i == findRecipeList.size() - 1) {
                 sb.append(String.format(NUMBER_FORMAT, i + 1))
                         .append(findRecipeList.get(i).getRecipeName())
                         .append(String.format(RECIPE_INDEX, recipeIndex.get(i)));
