@@ -28,6 +28,125 @@ Invalid Command Format!
 Adds a ingredient to the ingredient list. /n INGREDIENT /c CATEGORY /q QUANTITY /p PRICE /e EXPIRY
 Example: addingredient /n Beef /c Meat /q 1 /p 13.5 /e 2020-02-13
 ===================================================
+addingredient /n Pear /c fruit /q 1 /p 1 /e 2020-02-02
+You have added Ingredient:Pear Category:fruit Quantity:1 Price:$1.00 Expiry:2020-02-02 to the ingredient list
+===================================================
+listingredient all
+Here is the list of Ingredients in Inventory:
+Format : Ingredient Name|Quantity|Price|Expiry
+all:
+dairy:
+HL Milk|3|12.2|2020-03-14
+drink:
+fruit:
+Pear|1|1.0|2020-02-02
+meat:
+Beef|3|20.0|2020-03-18
+Beef cubes|3|20.0|2020-03-18
+miscellaneous:
+staple:
+vegetable:
+kailan|30|30.45|2020-03-12
+
+===================================================
+addingredient /n Apple /c fruit /q 1 /p 1 /e 2020-02-02
+You have added Ingredient:Apple Category:fruit Quantity:1 Price:$1.00 Expiry:2020-02-02 to the ingredient list
+===================================================
+listingredient all
+Here is the list of Ingredients in Inventory:
+Format : Ingredient Name|Quantity|Price|Expiry
+all:
+dairy:
+HL Milk|3|12.2|2020-03-14
+drink:
+fruit:
+Apple|1|1.0|2020-02-02
+Pear|1|1.0|2020-02-02
+meat:
+Beef|3|20.0|2020-03-18
+Beef cubes|3|20.0|2020-03-18
+miscellaneous:
+staple:
+vegetable:
+kailan|30|30.45|2020-03-12
+
+===================================================
+addingredient /n Apple /c fruit /q 1 /p 1 /e 2020-02-01
+You have added Ingredient:Apple Category:fruit Quantity:1 Price:$1.00 Expiry:2020-02-01 to the ingredient list
+===================================================
+listingredient all
+Here is the list of Ingredients in Inventory:
+Format : Ingredient Name|Quantity|Price|Expiry
+all:
+dairy:
+HL Milk|3|12.2|2020-03-14
+drink:
+fruit:
+Apple|1|1.0|2020-02-01
+Apple|1|1.0|2020-02-02
+Pear|1|1.0|2020-02-02
+meat:
+Beef|3|20.0|2020-03-18
+Beef cubes|3|20.0|2020-03-18
+miscellaneous:
+staple:
+vegetable:
+kailan|30|30.45|2020-03-12
+
+===================================================
+addingredient /n Apple /c fruit /q 1 /p 1 /e 2020-02-03
+You have added Ingredient:Apple Category:fruit Quantity:1 Price:$1.00 Expiry:2020-02-03 to the ingredient list
+===================================================
+listingredient all
+Here is the list of Ingredients in Inventory:
+Format : Ingredient Name|Quantity|Price|Expiry
+all:
+dairy:
+HL Milk|3|12.2|2020-03-14
+drink:
+fruit:
+Apple|1|1.0|2020-02-01
+Apple|1|1.0|2020-02-02
+Apple|1|1.0|2020-02-03
+Pear|1|1.0|2020-02-02
+meat:
+Beef|3|20.0|2020-03-18
+Beef cubes|3|20.0|2020-03-18
+miscellaneous:
+staple:
+vegetable:
+kailan|30|30.45|2020-03-12
+
+===================================================
+deleteingredient /n Apple
+Apple has been deleted.
+===================================================
+deleteingredient /n Apple
+Apple has been deleted.
+===================================================
+deleteingredient /n Apple
+Apple has been deleted.
+===================================================
+deleteingredient /n Pear
+Pear has been deleted.
+===================================================
+listingredient all
+Here is the list of Ingredients in Inventory:
+Format : Ingredient Name|Quantity|Price|Expiry
+all:
+dairy:
+HL Milk|3|12.2|2020-03-14
+drink:
+fruit:
+meat:
+Beef|3|20.0|2020-03-18
+Beef cubes|3|20.0|2020-03-18
+miscellaneous:
+staple:
+vegetable:
+kailan|30|30.45|2020-03-12
+
+===================================================
 addchore buy groceries /by Tuesday 12pm
 You have added this chore:
 [x] buy groceries (by: Tuesday 12pm)
