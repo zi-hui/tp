@@ -5,6 +5,9 @@ What can I do for you?
 addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable
 Chicken Salad Recipe has been created with 2 ingredients inside.
 ===================================================
+addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable
+There is an existing recipe with the same name!
+===================================================
 addingredient /n Beef /c meat /q 3 /p 20 /e 2020-03-18
 You have added Ingredient:Beef Category:meat Quantity:3 Price:$20.00 Expiry:2020-03-18 to the ingredient list
 ===================================================
@@ -29,22 +32,6 @@ Invalid Command Format!
 Adds a chore to the chore list. TASK /by DATE
 Example: addchore buy groceries /by Tuesday 12pm
 ===================================================
-listingredient all
-Here is the list of Ingredients in Inventory:
-Format : Ingredient Name | Quantity | Price | Expiry
-all :
-dairy :
-HL Milk | 3 | 12.2 | 2020-03-14
-drink :
-fruit :
-meat :
-Beef | 3 | 20.0 | 2020-03-18
-miscellaneous :
-staple :
-vegetable :
-kailan | 30 | 30.45 | 2020-03-12
-
-===================================================
 deleteingredient /n Beef
 Beef has been deleted.
 ===================================================
@@ -56,25 +43,8 @@ kailan : 30
 deleteingredient /n kailan
 kailan has been deleted.
 ===================================================
-deleteingredient /n HL Milk
-HL Milk has been deleted.
-===================================================
 deleterecipe /n Chicken Salad
 Chicken Salad has been deleted
-===================================================
-listrecipe 1
-
-Here is the list of Ingredients in Recipe:
-Format : Ingredient Name | Ingredient Category | Quantity | Price | Expiry
-The Recipe List is currently empty.
-===================================================
-deletechore 1
-You have deleted this chore:
-[x] buy groceries (by: Tuesday 12pm)
-Now you have 0 chores in the list.
-===================================================
-listchore
-Your list of chores is currently empty.
 ===================================================
 exit
 Exiting KitchenHelper as requested ...
