@@ -58,7 +58,7 @@ public class DeleteRecipeCommand extends Command {
         String feedbackToUser;
         String recipeName = this.objectVariables;
         int index = getRecipeIndex(recipeName, recipeList);
-        if (index != -1) {
+        if (index > -1 && index < recipeList.size()) {
             assert recipeList.size() > 0;
             kitchenLogs.log(Level.INFO, LOG_INFO);
             recipeList.remove(recipeList.get(index));
