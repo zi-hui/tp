@@ -29,7 +29,6 @@ public class DeleteIngredientCommand extends Command {
             .format("Parameter: %s\n%s", COMMAND_USAGE, COMMAND_EXAMPLE);
     public static final String LOG_INFO = "An ingredient has been deleted";
     private static final String OBJECT_TYPE = "ingredient";
-<<<<<<< HEAD
     private Integer quantity;
     private Integer ingredientIndex;
 
@@ -46,9 +45,6 @@ public class DeleteIngredientCommand extends Command {
         this.quantity = quantity;
         this.ingredientIndex = ingredientIndex;
     }
-=======
-    private static Integer quantity;
->>>>>>> origin/master
 
     /**
      * Constructor for Delete Ingredient Command.
