@@ -10,6 +10,9 @@ import seedu.kitchenhelper.command.DeleteChoreCommand;
 import seedu.kitchenhelper.command.ListRecipeCommand;
 import seedu.kitchenhelper.command.ListIngredientCommand;
 import seedu.kitchenhelper.command.ListChoreCommand;
+import seedu.kitchenhelper.command.SearchIngredientCommand;
+import seedu.kitchenhelper.command.SearchRecipeCommand;
+import seedu.kitchenhelper.command.SearchChoreCommand;
 import seedu.kitchenhelper.command.HelpCommand;
 import seedu.kitchenhelper.command.ExitCommand;
 import seedu.kitchenhelper.command.InvalidCommand;
@@ -61,6 +64,12 @@ public class Parser {
             return prepareListRecipe(parameters);
         case ListChoreCommand.COMMAND_WORD:
             return prepareListChore(parameters);
+        case SearchIngredientCommand.COMMAND_WORD:
+            return new SearchIngredientCommand(parameters);
+        case SearchRecipeCommand.COMMAND_WORD:
+            return new SearchRecipeCommand(parameters);
+        case SearchChoreCommand.COMMAND_WORD:
+            return new SearchChoreCommand(parameters);
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
         case ExitCommand.COMMAND_WORD:
