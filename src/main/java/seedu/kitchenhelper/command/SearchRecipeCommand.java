@@ -28,10 +28,21 @@ public class SearchRecipeCommand extends Command {
     
     private String keyword;
     
+    /**
+     * Constructor for Search Recipe Command.
+     * @param keyword the word to search.
+     */
     public SearchRecipeCommand(String keyword) {
         this.keyword = keyword;
     }
     
+    /**
+     * {@inheritDoc}
+     * @param ingredientList list of ingredients.
+     * @param recipeList     list of recipes.
+     * @param choreList      list of chores.
+     * @return the list of matching recipe.
+     */
     @Override
     public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
                                  ArrayList<Chore> choreList) {
