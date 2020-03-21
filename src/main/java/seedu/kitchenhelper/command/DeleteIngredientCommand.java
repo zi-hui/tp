@@ -3,6 +3,8 @@ package seedu.kitchenhelper.command;
 import seedu.kitchenhelper.object.Chore;
 import seedu.kitchenhelper.object.Recipe;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
+import seedu.kitchenhelper.storage.Storage;
+import seedu.kitchenhelper.ui.Ui;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -21,9 +23,11 @@ public class DeleteIngredientCommand extends Command {
     public static final String COMMAND_SUCCESS_QUANTITY = "The quantity of %s has been changed!";
     public static final String COMMAND_FAILURE_QUANTITY = "Please enter a valid quantity to delete!\nCurrently:"
                                                             + "\n%s : %d";
+    public static final String MESSAGE_USAGE = String.format("%s: %s", COMMAND_WORD, COMMAND_DESC) + Ui.LS + String
+            .format("Parameter: %s\n%s", COMMAND_USAGE, COMMAND_EXAMPLE);
     public static final String LOG_INFO = "An ingredient has been deleted";
     private static final String OBJECT_TYPE = "ingredient";
-    private static int quantity = 0;
+    private static Integer quantity;
 
     /**
      * Constructor for Delete Ingredient Command.
@@ -32,7 +36,7 @@ public class DeleteIngredientCommand extends Command {
      * @param quantity number of serving of ingredient to be deleted
      */
 
-    public DeleteIngredientCommand(String ingredientName, int quantity) {
+    public DeleteIngredientCommand(String ingredientName, Integer quantity) {
         setActionType(COMMAND_WORD);
         setObjectType(OBJECT_TYPE);
         setObjectVariables(ingredientName);
@@ -93,17 +97,21 @@ public class DeleteIngredientCommand extends Command {
         String ingredientName = this.objectVariables;
         int indexOfIngredient = getIngredientIndex(ingredientName, ingredientsList);
 
-        if (indexOfIngredient != -1) {
-            assert ingredientsList.size() > 0;
+        if (indexOfIngredient > -1 && indexOfIngredient < ingredientsList.size()) {
+            assert indexOfIngredient >= 0;
             Ingredient ingredientToDelete = ingredientsList.get(indexOfIngredient);
-            if (quantity <= -1) {
+            int ingredientQuantity = ingredientToDelete.getQuantity();
+            if (quantity == null) {
                 kitchenLogs.log(Level.INFO, LOG_INFO);
                 ingredientsList.remove(ingredientToDelete);
                 feedbackToUser = String.format(COMMAND_SUCCESS, ingredientName);
-            } else {
-                int newQuantity = ingredientToDelete.getQuantity() - quantity;
+            } else if (quantity > 0) {
+                int newQuantity = ingredientQuantity - quantity;
                 feedbackToUser = updateNewQuantity(newQuantity, ingredientToDelete);
+            } else {
+                feedbackToUser = String.format(COMMAND_FAILURE_QUANTITY, ingredientName, ingredientQuantity);
             }
+            Storage.saveIngredientData(ingredientsList);
         } else {
             feedbackToUser = COMMAND_FAILURE;
         }
@@ -118,7 +126,6 @@ public class DeleteIngredientCommand extends Command {
      * @param choreList      list of chores.
      * @return the execution of the deletion of ingredients or tasks.
      */
-
     @Override
     public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
                                   ArrayList<Chore> choreList) {

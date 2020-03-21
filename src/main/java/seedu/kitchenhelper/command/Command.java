@@ -6,12 +6,13 @@ import seedu.kitchenhelper.object.Recipe;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
 
 import java.util.ArrayList;
+import seedu.kitchenhelper.storage.Storage;
 
 /**
  * Abstract class to represent user's command.
  */
 public abstract class Command {
-    
+
     public static String actionType; //add, delete, list
     public static String objectType; //ingredient, recipe, chore
     public static String objectVariables;
@@ -59,14 +60,6 @@ public abstract class Command {
     }
 
 
-    public String addChore(String objectVariables, ArrayList<Chore> choreList) {
-        return "";
-    }
-
-    public String deleteChore(String objectVariables, ArrayList<Chore> choreList) {
-        return "";
-    }
-
     public String listIngredients(ArrayList<Ingredient> ingredientsList) {
         return "";
     }
@@ -83,26 +76,15 @@ public abstract class Command {
      * Runs the command given by user.
      *
      * @param ingredientList list of ingredients.
-     * @param recipeList list of recipes.
-     * @param choreList list of chores.
+     * @param recipeList     list of recipes.
+     * @param choreList      list of chores.
      * @return cmdResult response given to user after successful execution.
      * @throws KitchenHelperException if the command is invalid.
      */
     public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
                                  ArrayList<Chore> choreList) throws KitchenHelperException {
         String feedbackToUser = "";
-
-        if (actionType.equals(DeleteCommand.COMMAND_WORD) && objectType.equals("chore")) {
-            feedbackToUser = deleteChore(objectVariables, choreList);
-        } else if (actionType.equals(ListCommand.COMMAND_WORD) && objectType.equals("ingredient")) {
-            feedbackToUser = listIngredients(ingredientList);
-        } else if (actionType.equals(ListCommand.COMMAND_WORD) && objectType.equals("recipe")) {
-            feedbackToUser = listRecipe(objectVariables, recipeList);
-        } else if (actionType.equals(ListCommand.COMMAND_WORD) && objectType.equals("chore")) {
-            feedbackToUser = listChore(choreList);
-        }
         CommandResult cmdResult = new CommandResult(feedbackToUser);
         return cmdResult;
     }
-
 }
