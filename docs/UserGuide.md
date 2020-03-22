@@ -27,7 +27,7 @@ By: `Team CS2113T-M16-2` Since: `March 2020` License: `MIT`
    * [Search for chore: `searchchore`](#search-for-chore-searchchore)  
 
 4. [FAQ](#4-faq)  
-5. [Commands Summary](#5-command-summary)
+5. [Command Summary](#5-command-summary)
 
 ## 1. Introduction
 
