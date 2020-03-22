@@ -7,12 +7,14 @@ import seedu.kitchenhelper.object.ingredient.Ingredient;
 import seedu.kitchenhelper.ui.Ui;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 /**
  * Search for recipe name in the recipe list.
  */
 public class SearchRecipeCommand extends Command {
     
+    public static final Logger kitchenLogs = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     public static final String COMMAND_WORD = "searchrecipe";
     public static final String COMMAND_DESC = "Find common recipe name in the recipe list using a keyword.";
     public static final String COMMAND_PARAMETER = "KEYWORD";
@@ -25,6 +27,9 @@ public class SearchRecipeCommand extends Command {
     private static final String NON_EMPTY_LIST = "Here are your matching recipes in your list";
     private static final String RECIPE_INDEX = " located at listrecipe %d";
     private static final String NUMBER_FORMAT = "%d.";
+    public static final String LOG_INFO = "Entering execution of finding matching recipe";
+    public static final String LOG_INFO_EMPTY = "Has non-matching recipe";
+    public static final String LOG_INFO_Found = "Found matching recipe";
     
     private String keyword;
     
@@ -46,6 +51,7 @@ public class SearchRecipeCommand extends Command {
     @Override
     public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
                                  ArrayList<Chore> choreList) {
+        kitchenLogs.info(LOG_INFO);
         ArrayList<Recipe> findRecipeList = new ArrayList<>();
         ArrayList<Integer> recipeIndex = new ArrayList<>();
         int currIndex = 1;
@@ -58,11 +64,13 @@ public class SearchRecipeCommand extends Command {
         }
         
         if (findRecipeList.isEmpty()) {
+            kitchenLogs.info(LOG_INFO_EMPTY);
             return new CommandResult(EMPTY_LIST);
         }
         StringBuilder sb = new StringBuilder();
         sb.append(NON_EMPTY_LIST)
                 .append(Ui.LS);
+        kitchenLogs.info(LOG_INFO_Found);
         for (int i = 0; i < findRecipeList.size(); ++i) {
             if (i == findRecipeList.size() - 1) {
                 sb.append(String.format(NUMBER_FORMAT, i + 1))
