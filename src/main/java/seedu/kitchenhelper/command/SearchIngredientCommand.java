@@ -64,6 +64,7 @@ public class SearchIngredientCommand extends Command {
         StringBuilder sb = new StringBuilder();
         sb.append(NON_EMPTY_LIST)
                 .append(Ui.LS);
+        assert findIngredientList.size() > 0;
         kitchenLogs.info(LOG_INFO_Found);
         for (int i = 0; i < findIngredientList.size(); ++i) {
             if (i == findIngredientList.size() - 1) {

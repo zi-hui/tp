@@ -1,6 +1,5 @@
 package seedu.kitchenhelper.command;
 
-import seedu.kitchenhelper.exception.KitchenHelperException;
 import seedu.kitchenhelper.object.Chore;
 import seedu.kitchenhelper.object.Recipe;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
@@ -65,6 +64,7 @@ public class SearchChoreCommand extends Command {
         StringBuilder sb = new StringBuilder();
         sb.append(NON_EMPTY_LIST)
                 .append(Ui.LS);
+        assert findChoreList.size() > 0;
         kitchenLogs.info(LOG_INFO_Found);
         for (int i = 0; i < findChoreList.size(); ++i) {
             if (i == findChoreList.size() - 1) {
