@@ -69,7 +69,9 @@ By: `CS2113T-M16-2` Since: `2020`
 ### 4.4. Storage
 
 ### 4.5. Logging
-The `java.util.logging` package is used for logging. The logging mechanism can be managed from the `KitchenHelper` class through the `kitchenLogs` logger object.
+Logging in the application refers to storing exceptions, warnings and messages that occur during the execution of Kitchen Helper. It was included to help developers to identify bugs and to simplify their debugging process. 
+
+The `java.util.logging` package in Java is used for logging. The logging mechanism can be managed from the `KitchenHelper` class through the `kitchenLogs` logger object.
 
 All control of the logger for the application can be viewed/ altered in the `setUpLogger()` method. The current settings for the logger are as follow:
 
