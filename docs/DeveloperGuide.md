@@ -1,4 +1,5 @@
 # Developer Guide
+![Supported Java versions](https://img.shields.io/badge/Java-11-blue.svg) ![Supported OS](https://img.shields.io/badge/Supported%20OS-Windows|MacOS|Linux-yellow.svg) 
 
 ## 1. Introduction
 ### 1.1. Purpose
@@ -31,6 +32,28 @@
 ### 4.4. Storage
 
 ### 4.5. Logging
+The `java.util.logging` package is used for logging. The logging mechanism can be managed from the `KitchenHelper` class through the `kitchenLogs` logger object.
+
+All control of the logger for the application can be viewed/ altered in the `setUpLogger()` method. The current settings for the logger are as follow:
+
+- All logs of `Level.SEVERE` level will be shown on the console when an input/ program flow has caused a possible disruption to the execution of the program. (See the levels of logging below)
+- All information above ‘Level.FINE’ level is logged into a log file, `KitchenLogs.log`.
+- Logging is made to be displayed in the `SimpleFormatter` style where the date, class and error description are logged.
+
+Logging Levels:
+- `Level.SEVERE`: a serious failure, which prevents normal execution of the program, for end users and system administrators.
+- `Level.WARNING`: a potential problem, for end users and system administrators.
+- `Level.INFO`: reasonably significant informational message for end users and system administrators.
+- `Level.CONFIG`: hardware configuration, such as CPU type.
+- `Level.FINE`, `Level.FINER`, `Level.FINEST`: three levels used for providing tracing information for the software developers.
+
+Additional logging can be done by adding the calling of the global logger and invoking the function `log()`. This will ensure that all loggings will be made to the same file across the various classes. 
+
+An example is shown below:
+```java
+public static final Logger kitchenLogs = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+kitchenLogs.log(Level.WARNING, description_of_warning_here, e.toString());
+```
 
 ### 4.6. Configuration
 
