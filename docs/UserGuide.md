@@ -4,6 +4,7 @@ By: `Team CS2113T-M16-2` Since: `March 2020` License: `MIT`
 1. [Introduction](#1-introduction)  
 2. [Quick Start](#2-quick-start)  
 3. [Features](#3-features)  
+
    3.1 [General Commands](#31-general-commands)  
    * [Viewing help: `help`](#viewing-help-help)  
    * [Exiting the Program: `exit`](#exiting-the-program-exit)  
@@ -31,7 +32,10 @@ By: `Team CS2113T-M16-2` Since: `March 2020` License: `MIT`
 
 ## 1. Introduction
 
-{Give a product intro}
+Our project, Kitchen Helper is a household application which tracks household inventory, creates recipes which would indicate how much ingredients will be used, and assigns tasks to household members. The application will be easy to use, with intuitive ways of editing, finding and tracking tasks that have been added. It is optimised for those who prefer working with Command Line Interface (CLI). Kitchen Helper provides convenience in our often busy lives, so give this application a chance to help you!
+This user guide aims to help you learn your way around our application, making the learning process smooth and effortless. 
+
+So what are you waiting for? Let’s go!
 
 ## 2. Quick Start
 
@@ -52,17 +56,21 @@ By: `Team CS2113T-M16-2` Since: `March 2020` License: `MIT`
 ### 3.1 General Commands
 #### Viewing help: `help`
 Shows a list of available commands and their usages.  
+
 __Format:__ `help`  
 
 #### Exiting the Program: `exit`
 Exits the program.  
+
 __Format:__ `exit`  
 
 
 ### 3.2 Ingredient
 #### Adding an ingredient: `addingredient`
 Adds an ingredient to the list when the user buys an item to keep track.   
+
 __Format:__ `addingredient /n INGREDIENT /c CATEGORY /q QUANTITY /p PRICE /e EXPIRY`  
+
 __Example of usage:__  
 * `addingredient /n Beef cubes /c meat /q 3 /p 20 /e 2020-03-18`
 * `addingredient /n kailan /c Vegetable /q 30 /p 30.45 /e 2020-03-12`
@@ -70,7 +78,9 @@ __Example of usage:__
 
 #### Search for ingredient: `searchingredient`
 Search for ingredients based on given keyword.  
+
 __Format:__ `searchingredient KEYWORD`  
+
 __Example of usage:__  
 * `searchingredient beef`  
 Search by ingredient's name.
@@ -82,9 +92,23 @@ Search by ingredient's expiry date.
 
 ### 3.3 Recipe
 
+#### Adding a recipe: `addrecipe`
+Adds a new unique recipe into the List in Kitchen Helper.
+
+__Format:__ `addrecipe /n <recipe name> /i <ingredient_name>:<quantity>:<category>[,..]`
+
+__Example of usage:__ 
+* `addrecipe /n Rice Ball /i Rice:3:staple`
+   Creates a new recipe called `Rice Ball` which contains one ingredient mainly `3` portions of `Rice`.
+* `addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable`
+   Creates a new recipe called `Chicken Salad` which contains two ingredients mainly `2` portions of `Chicken Breast` and `4` portions of `Lettuce`.
+#### Listing all recipes: `listrecipe all`
+
 #### Search for recipe: `searchrecipe`
 Search for recipes based on given keyword.  
+
 __Format:__ `searchrecipe KEYWORD`  
+
 __Example of usage:__  
 * `searchrecipe Chicken Stew`  
 Search by recipe's name.
@@ -94,7 +118,9 @@ Search by recipe's name.
 
 #### Search for chore: `searchchore`
 Search for chores based on given keyword.  
+
 __Format:__ `searchchore KEYWORD`  
+
 __Example of usage:__  
 * `searchchore groceries`  
 Search by chore's description.
@@ -144,6 +170,7 @@ searchingredient | `searchingredient KEYWORD` <br> e.g. `searchingredient beef`
 __Recipe Commands__  
 Feature | Command  
 ------- | -------  
+addrecipe | `addrecipe /n <recipe name> /i <ingredient_name>:<quantity>:<category>[,..]`
 searchrecipe | `searchrecipe KEYWORD` <br> e.g. `searchrecipe Chicken Stew`  
 
  
