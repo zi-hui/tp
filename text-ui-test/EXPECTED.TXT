@@ -9,17 +9,17 @@ What can I do for you?
 addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable
 Chicken Salad Recipe has been created with 2 ingredients inside.
 ===================================================
-listrecipe 1
-
-Here is the list of Ingredients in Recipe:
-Format:Ingredient Name|Ingredient Category|Quantity|Price|Expiry
-Recipe Name:Chicken Salad
-Chicken Breast|meat|2|0.0|null
-Lettuce|vegetable|4|0.0|null
-
+addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable
+There is an existing recipe with the same name!
+===================================================
+addrecipe /n Chicken Stew /i Chicken Breast:2:meat, Lettuce:4:vegetable
+Chicken Stew Recipe has been created with 2 ingredients inside.
 ===================================================
 addingredient /n Beef /c meat /q 3 /p 20 /e 2020-03-18
 You have added Ingredient:Beef Category:meat Quantity:3 Price:$20.00 Expiry:2020-03-18 to the ingredient list
+===================================================
+addingredient /n Beef cubes /c meat /q 3 /p 20 /e 2020-03-18
+You have added Ingredient:Beef cubes Category:meat Quantity:3 Price:$20.00 Expiry:2020-03-18 to the ingredient list
 ===================================================
 addingredient /n kailan /c Vegetable /q 30 /p 30.45 /e 2020-03-12
 You have added Ingredient:kailan Category:Vegetable Quantity:30 Price:$30.45 Expiry:2020-03-12 to the ingredient list
@@ -32,15 +32,107 @@ Invalid Command Format!
 Adds a ingredient to the ingredient list. /n INGREDIENT /c CATEGORY /q QUANTITY /p PRICE /e EXPIRY
 Example: addingredient /n Beef /c Meat /q 1 /p 13.5 /e 2020-02-13
 ===================================================
-addchore buy groceries /by Tuesday 12pm
-You have added this chore:
-[x] buy groceries (by: Tuesday 12pm)
-Now you have 1 chore in the list.
+addingredient /n Pear /c fruit /q 1 /p 1 /e 2020-02-02
+You have added Ingredient:Pear Category:fruit Quantity:1 Price:$1.00 Expiry:2020-02-02 to the ingredient list
 ===================================================
-addchore buy groceries
-Invalid Command Format!
-Adds a chore to the chore list. TASK /by DATE
-Example: addchore buy groceries /by Tuesday 12pm
+listingredient all
+Here is the list of Ingredients in Inventory:
+Format : Ingredient Name|Quantity|Price|Expiry
+all:
+dairy:
+HL Milk|3|12.2|2020-03-14
+drink:
+fruit:
+Pear|1|1.0|2020-02-02
+meat:
+Beef|3|20.0|2020-03-18
+Beef cubes|3|20.0|2020-03-18
+miscellaneous:
+staple:
+vegetable:
+kailan|30|30.45|2020-03-12
+
+===================================================
+addingredient /n Apple /c fruit /q 1 /p 1 /e 2020-02-02
+You have added Ingredient:Apple Category:fruit Quantity:1 Price:$1.00 Expiry:2020-02-02 to the ingredient list
+===================================================
+listingredient all
+Here is the list of Ingredients in Inventory:
+Format : Ingredient Name|Quantity|Price|Expiry
+all:
+dairy:
+HL Milk|3|12.2|2020-03-14
+drink:
+fruit:
+Apple|1|1.0|2020-02-02
+Pear|1|1.0|2020-02-02
+meat:
+Beef|3|20.0|2020-03-18
+Beef cubes|3|20.0|2020-03-18
+miscellaneous:
+staple:
+vegetable:
+kailan|30|30.45|2020-03-12
+
+===================================================
+addingredient /n Apple /c fruit /q 1 /p 1 /e 2020-02-01
+You have added Ingredient:Apple Category:fruit Quantity:1 Price:$1.00 Expiry:2020-02-01 to the ingredient list
+===================================================
+listingredient all
+Here is the list of Ingredients in Inventory:
+Format : Ingredient Name|Quantity|Price|Expiry
+all:
+dairy:
+HL Milk|3|12.2|2020-03-14
+drink:
+fruit:
+Apple|1|1.0|2020-02-01
+Apple|1|1.0|2020-02-02
+Pear|1|1.0|2020-02-02
+meat:
+Beef|3|20.0|2020-03-18
+Beef cubes|3|20.0|2020-03-18
+miscellaneous:
+staple:
+vegetable:
+kailan|30|30.45|2020-03-12
+
+===================================================
+addingredient /n Apple /c fruit /q 1 /p 1 /e 2020-02-03
+You have added Ingredient:Apple Category:fruit Quantity:1 Price:$1.00 Expiry:2020-02-03 to the ingredient list
+===================================================
+listingredient all
+Here is the list of Ingredients in Inventory:
+Format : Ingredient Name|Quantity|Price|Expiry
+all:
+dairy:
+HL Milk|3|12.2|2020-03-14
+drink:
+fruit:
+Apple|1|1.0|2020-02-01
+Apple|1|1.0|2020-02-02
+Apple|1|1.0|2020-02-03
+Pear|1|1.0|2020-02-02
+meat:
+Beef|3|20.0|2020-03-18
+Beef cubes|3|20.0|2020-03-18
+miscellaneous:
+staple:
+vegetable:
+kailan|30|30.45|2020-03-12
+
+===================================================
+deleteingredient /n Apple
+Apple has been deleted.
+===================================================
+deleteingredient /n Apple
+Apple has been deleted.
+===================================================
+deleteingredient /n Apple
+Apple has been deleted.
+===================================================
+deleteingredient /n Pear
+Pear has been deleted.
 ===================================================
 listingredient all
 Here is the list of Ingredients in Inventory:
@@ -52,14 +144,42 @@ drink:
 fruit:
 meat:
 Beef|3|20.0|2020-03-18
+Beef cubes|3|20.0|2020-03-18
 miscellaneous:
 staple:
 vegetable:
 kailan|30|30.45|2020-03-12
 
 ===================================================
+addchore buy groceries /by Tuesday 12pm
+You have added this chore:
+[x] buy groceries (by: Tuesday 12pm)
+Now you have 1 chore in the list.
+===================================================
+addchore buy groceries
+Invalid Command Format!
+Adds a chore to the chore list. TASK /by DATE
+Example: addchore buy groceries /by Tuesday 12pm
+===================================================
+searchchore groceries
+Here are your matching chores in your list
+1.[x] buy groceries (by: Tuesday 12pm)
+===================================================
+searchingredient beef
+Here are your matching ingredients in your list
+1.[Meat] Beef Qty:3 $20.0 Exp:2020-03-18
+2.[Meat] Beef cubes Qty:3 $20.0 Exp:2020-03-18
+===================================================
+searchrecipe chicken
+Here are your matching recipes in your list
+1.Chicken Salad located at listrecipe 1
+2.Chicken Stew located at listrecipe 2
+===================================================
 deleteingredient /n Beef
 Beef has been deleted.
+===================================================
+deleteingredient /n Beef cubes
+Beef cubes has been deleted.
 ===================================================
 deleteingredient /n kailan /q 35
 Please enter a valid quantity to delete!
@@ -69,22 +189,27 @@ kailan : 30
 deleteingredient /n kailan
 kailan has been deleted.
 ===================================================
-deleteingredient /n HL Milk
-HL Milk has been deleted.
-===================================================
 deleterecipe /n Chicken Salad
 Chicken Salad has been deleted
 ===================================================
-listrecipe 1
-
-Here is the list of Ingredients in Recipe:
-Format:Ingredient Name|Ingredient Category|Quantity|Price|Expiry
-The Recipe List is currently empty.
+deleterecipe /n Chicken Salad
+This recipe does not exist! Please type in a correct recipe name/index.
+===================================================
+deleterecipe /n Chicken Stew
+Chicken Stew has been deleted
+===================================================
+deleteingredient /n HL milk
+HL Milk has been deleted.
 ===================================================
 deletechore 1
 You have deleted this chore:
 [x] buy groceries (by: Tuesday 12pm)
 Now you have 0 chores in the list.
+===================================================
+listingredient all
+Here is the list of Ingredients in Inventory:
+Format : Ingredient Name|Quantity|Price|Expiry
+The Ingredient List is currently empty.
 ===================================================
 listchore
 Your list of chores is currently empty.
