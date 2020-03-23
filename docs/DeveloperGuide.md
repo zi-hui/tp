@@ -73,11 +73,12 @@ kitchenLogs.log(Level.WARNING, description_of_warning_here, e.toString());
 
 ### Appendix D: Non-Functional Requirements
 
-{Give non-functional requirements}
+1. Should work on any mainstream OS as long as it has Java `11` or above installed.
+2. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 ### Appendix E: Glossary
 
-* *glossary item* - Definition
+* *Mainstream OS* - Windows, Linux, Unix, OS-X
 
 ### Appendix G: Instructions for Manual Testing
 #### G.1. Launch and Shutdown
