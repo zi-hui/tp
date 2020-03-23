@@ -189,13 +189,13 @@ deleterecipe /n Chicken Salad
 Chicken Salad has been deleted
 ===================================================
 deleterecipe /n Chicken Salad
-This recipe does not exist! Please type in a correct recipe name.
+This recipe does not exist! Please type in a correct recipe name/index.
 ===================================================
 deleterecipe /n Chicken Stew
 Chicken Stew has been deleted
 ===================================================
 deleteingredient /n HL milk
-HL milk has been deleted.
+HL Milk has been deleted.
 ===================================================
 deletechore 1
 You have deleted this chore:

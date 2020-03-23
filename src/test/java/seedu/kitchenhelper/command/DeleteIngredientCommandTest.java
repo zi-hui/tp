@@ -19,19 +19,19 @@ public class DeleteIngredientCommandTest {
         int index = 0;
         DeleteIngredientCommand deleteIngredientQuantity = new DeleteIngredientCommand("Beef", 2);
         index = deleteIngredientQuantity.getIngredientIndex("Beef", ingredientList);
-        deleteIngredientQuantity.deleteIngredient(ingredientList);
+        deleteIngredientQuantity.deleteIngredientByName(ingredientList);
         assertEquals(ingredientList.get(index).getQuantity(), 28);
 
         DeleteIngredientCommand deleteIngredientQuantityExceed = new DeleteIngredientCommand("Beef", 30);
-        deleteIngredientQuantityExceed.deleteIngredient(ingredientList);
+        deleteIngredientQuantityExceed.deleteIngredientByName(ingredientList);
         assertEquals(ingredientList.get(index).getQuantity(), 28);
 
         DeleteIngredientCommand deleteKnownIngredient = new DeleteIngredientCommand("kailan", null);
-        deleteKnownIngredient.deleteIngredient(ingredientList);
+        deleteKnownIngredient.deleteIngredientByName(ingredientList);
         assertEquals(ingredientList.size(), 1);
 
         DeleteIngredientCommand deleteUnknownIngredient = new DeleteIngredientCommand("chocolate", null);
-        deleteUnknownIngredient.deleteIngredient(ingredientList);
+        deleteUnknownIngredient.deleteIngredientByName(ingredientList);
         assertEquals(ingredientList.size(), 1);
     }
 
