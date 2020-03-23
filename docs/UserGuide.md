@@ -172,6 +172,7 @@ Here is a short summary of the command used in KitchenHelper application.
 Refer back to [Section 3, "Features"](#3-features) for more information on the usage of commands.  
   
 __General Commands__  
+
 Feature | Command  
 ------- | -------  
 help | `help`  
@@ -179,6 +180,7 @@ exit | `exit`
 
 
 __Ingredient Commands__  
+
 Feature | Command  
 ------- | -------  
 addingredient | `addingredient /n INGREDIENT /c CATEGORY /q QUANTITY /p PRICE /e EXPIRY`<br> e.g. `addingredient /n Beef cubes /c meat /q 3 /p 20 /e 2020-03-18`  
@@ -187,6 +189,7 @@ searchingredient | `searchingredient KEYWORD` <br> e.g. `searchingredient beef`
 
 
 __Recipe Commands__  
+
 Feature | Command  
 ------- | -------  
 addrecipe | `addrecipe /n <recipe name> /i <ingredient_name>:<quantity>:<category>[,..]`
@@ -195,6 +198,7 @@ searchrecipe | `searchrecipe KEYWORD` <br> e.g. `searchrecipe Chicken Stew`
 
  
 __Chore Commands__  
+
 Feature | Command  
 ------- | -------  
 searchchore | `searchchore KEYWORD` <br> e.g. `searchchore groceries`  
