@@ -1,4 +1,6 @@
 # Developer Guide
+By: `CS2113T-M16-2` Since: `2020`
+
 ![Supported Java versions](https://img.shields.io/badge/Java-11-blue.svg) ![Supported OS](https://img.shields.io/badge/Supported%20OS-Windows|MacOS|Linux-yellow.svg) 
 - [Developer Guide](#developer-guide)
   * [1. Introduction](#1-introduction)
