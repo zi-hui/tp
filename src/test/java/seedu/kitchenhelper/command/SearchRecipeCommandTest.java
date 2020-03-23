@@ -6,6 +6,7 @@ import seedu.kitchenhelper.object.Chore;
 import seedu.kitchenhelper.object.Recipe;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
 import seedu.kitchenhelper.parser.Parser;
+import seedu.kitchenhelper.ui.Ui;
 
 import java.util.ArrayList;
 
@@ -21,7 +22,10 @@ class SearchRecipeCommandTest {
         addFirstRecipe(recipeArrayList);
         addSecondRecipe(recipeArrayList);
         String expectedOutput =
-                "Here are your matching recipes in your list\r\n" + "1.Chicken Salad located at listrecipe 1\r\n"
+                "Here are your matching recipes in your list"
+                + Ui.LS
+                + "1.Chicken Salad located at listrecipe 1"
+                + Ui.LS
                 + "2.Chicken Stew located at listrecipe 2";
         String output = new Parser().parseUserCommand("searchrecipe chicken")
                 .execute(ingredientArrayList, recipeArrayList, choreArrayList).feedbackToUser;

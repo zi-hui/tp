@@ -6,6 +6,7 @@ import seedu.kitchenhelper.object.Chore;
 import seedu.kitchenhelper.object.Recipe;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
 import seedu.kitchenhelper.parser.Parser;
+import seedu.kitchenhelper.ui.Ui;
 
 import java.util.ArrayList;
 
@@ -20,8 +21,10 @@ class SearchChoreCommandTest {
         ArrayList<Chore> choreArrayList = new ArrayList<>();
         choreArrayList.add(new Chore("buy groceries", "Tuesday 12pm"));
         choreArrayList.add(new Chore("buy groceries", "Wednesday 12pm"));
-        String expectedOutput = "Here are your matching chores in your list\r\n"
-                                + "1.[x] buy groceries (by: Tuesday 12pm)\r\n"
+        String expectedOutput = "Here are your matching chores in your list"
+                                + Ui.LS
+                                + "1.[x] buy groceries (by: Tuesday 12pm)"
+                                + Ui.LS
                                 + "2.[x] buy groceries (by: Wednesday 12pm)";
         String output = new Parser().parseUserCommand("searchchore groceries")
                 .execute(ingredientArrayList, recipeArrayList, choreArrayList).feedbackToUser;

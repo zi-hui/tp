@@ -7,6 +7,7 @@ import seedu.kitchenhelper.object.Recipe;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
 import seedu.kitchenhelper.object.ingredient.Meat;
 import seedu.kitchenhelper.parser.Parser;
+import seedu.kitchenhelper.ui.Ui;
 
 import java.util.ArrayList;
 
@@ -21,8 +22,10 @@ class SearchIngredientCommandTest {
         ArrayList<Chore> choreArrayList = new ArrayList<>();
         ingredientArrayList.add(new Meat("Beef", "meat", 3, 20, "2020-03-18"));
         ingredientArrayList.add(new Meat("Beef cubes", "meat", 3, 20, "2020-03-18"));
-        String expectedOutput = "Here are your matching ingredients in your list\r\n"
-                                + "1.[Meat] Beef Qty:3 $20.0 Exp:2020-03-18\r\n"
+        String expectedOutput = "Here are your matching ingredients in your list"
+                                + Ui.LS
+                                + "1.[Meat] Beef Qty:3 $20.0 Exp:2020-03-18"
+                                + Ui.LS
                                 + "2.[Meat] Beef cubes Qty:3 $20.0 Exp:2020-03-18";
         String output = new Parser().parseUserCommand("searchingredient beef")
                 .execute(ingredientArrayList, recipeArrayList, choreArrayList).feedbackToUser;
