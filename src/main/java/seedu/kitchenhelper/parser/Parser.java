@@ -1,9 +1,24 @@
 package seedu.kitchenhelper.parser;
 
-import seedu.kitchenhelper.command.*;
-
+import seedu.kitchenhelper.command.AddChoreCommand;
+import seedu.kitchenhelper.command.AddRecipeCommand;
+import seedu.kitchenhelper.command.AddIngredientCommand;
+import seedu.kitchenhelper.command.DeleteRecipeCommand;
+import seedu.kitchenhelper.command.DeleteIngredientCommand;
+import seedu.kitchenhelper.command.DeleteChoreCommand;
+import seedu.kitchenhelper.command.ListRecipeCommand;
+import seedu.kitchenhelper.command.ListIngredientCommand;
+import seedu.kitchenhelper.command.ListChoreCommand;
+import seedu.kitchenhelper.command.SearchRecipeCommand;
+import seedu.kitchenhelper.command.SearchIngredientCommand;
+import seedu.kitchenhelper.command.SearchChoreCommand;
+import seedu.kitchenhelper.command.HelpCommand;
+import seedu.kitchenhelper.command.DoneCommand;
+import seedu.kitchenhelper.command.ExitCommand;
+import seedu.kitchenhelper.command.CookRecipeCommand;
+import seedu.kitchenhelper.command.InvalidCommand;
 import seedu.kitchenhelper.exception.KitchenHelperException;
-
+import seedu.kitchenhelper.command.Command;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -166,7 +181,7 @@ public class Parser {
     }
 
     /**
-     * Prepares the parameters needed for the list function.
+     * Prepares the parameters needed for the cookrecipe function.
      *
      * @param attributes full user input string.
      * @return the prepared command.
