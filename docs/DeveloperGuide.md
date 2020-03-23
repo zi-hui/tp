@@ -1,6 +1,8 @@
 # Developer Guide
 
 ## 1. Introduction
+### 1.1. Purpose
+### 1.2. Scope
 
 ## 2. Setting up
 
@@ -20,11 +22,17 @@
 #### 4.2.3. Delete all/ specific recipe(s)
 #### 4.2.4. Search for recipe based on keyword(s)
 
-### 4.3. Storage
+### 4.3. Chore-related Features
+#### 4.3.1. Addition of chore
+#### 4.3.2. List all/ specific chore(s)
+#### 4.3.3. Delete all/ specific chore(s)
+#### 4.3.4. Search for chore based on keyword(s)
 
-### 4.4 Logging
+### 4.4. Storage
 
-### 4.5 Configuration
+### 4.5. Logging
+
+### 4.6. Configuration
 
 ## Appendices 
 ### Appendix A: Product Scope
