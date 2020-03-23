@@ -1,9 +1,2 @@
-/n Apple meat /c meat /q 1 /p 1.0 /e 2020-02-01
-/n Apple meat /c meat /q 1 /p 1.0 /e 2020-02-02
-/n Apple meat /c meat /q 1 /p 1.0 /e 2020-02-03
 /n Beef /c Meat /q 30 /p 20.2 /e 2020-02-20
-/n aailan /c vegetable /q 1 /p 1.0 /e 2020-02-02
-/n bailan /c vegetable /q 1 /p 1.0 /e 2020-02-02
-/n cailan /c vegetable /q 1 /p 1.0 /e 2020-02-02
-/n duck meat /c meat /q 1 /p 1.0 /e 2020-02-02
 /n kailan /c Vegetable /q 30 /p 30.45 /e 2020-03-12
