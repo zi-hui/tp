@@ -5,8 +5,9 @@ import seedu.kitchenhelper.object.Chore;
 import seedu.kitchenhelper.object.Recipe;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
 
+import java.io.IOException;
 import java.util.ArrayList;
-import seedu.kitchenhelper.storage.Storage;
+
 
 /**
  * Abstract class to represent user's command.
@@ -82,7 +83,7 @@ public abstract class Command {
      * @throws KitchenHelperException if the command is invalid.
      */
     public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
-                                 ArrayList<Chore> choreList) throws KitchenHelperException {
+                                 ArrayList<Chore> choreList) throws KitchenHelperException, IOException {
         String feedbackToUser = "";
         CommandResult cmdResult = new CommandResult(feedbackToUser);
         return cmdResult;

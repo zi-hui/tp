@@ -11,6 +11,7 @@ import seedu.kitchenhelper.object.ingredient.Ingredient;
 import seedu.kitchenhelper.parser.Parser;
 import seedu.kitchenhelper.ui.Ui;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,22 +33,67 @@ public class KitchenHelper {
     private Ui ui;
     private Storage storage;
   
-    private void start() {
+    private void start() throws IOException {
         ui = new Ui();
+        String userChoice = ui.getUserChoice();
+        ui.validUserChoice(userChoice);
         ui.showWelcomeMessage();
-        storage = new Storage("outputIngredient.txt", "outputRecipe.txt",
-                "outputChore.txt");
-        try {
-            ingredientList = new ArrayList<>(storage.getIngredientData());
-            recipeList = new ArrayList<>(storage.getRecipeData());
-            choreList = new ArrayList<>(storage.getChoreData());
-        } catch (FileNotFoundException err) {
-            //ui.errorMessage(err.toString());
-            //ingredientList = new
+        if (userChoice == "1"){
+            storage = new Storage("outputIngredient.txt", "outputRecipe.txt",
+                    "outputChore.txt");
+            try {
+                ingredientList = new ArrayList<>(storage.getIngredientData());
+                recipeList = new ArrayList<>(storage.getRecipeData());
+                choreList = new ArrayList<>(storage.getChoreData());
+            } catch (FileNotFoundException err) {
+                Ui.errorMessage(err.toString());
+                ingredientList = new ArrayList<>(storage.getIngredientData());
+                recipeList = new ArrayList<>(storage.getRecipeData());
+                choreList = new ArrayList<>(storage.getChoreData());
+            }
+        } else if (userChoice == "2"){
+            createNewFiles();
+            storage = new Storage("outputIngredientCopy.txt", "outputRecipeCopy.txt",
+                    "outputChoreCopy.txt");
+            try {
+                ingredientList = new ArrayList<>(storage.getIngredientData());
+                recipeList = new ArrayList<>(storage.getRecipeData());
+                choreList = new ArrayList<>(storage.getChoreData());
+            } catch (FileNotFoundException err) {
+                Ui.errorMessage(err.toString());
+                ingredientList = new ArrayList<>(storage.getIngredientData());
+                recipeList = new ArrayList<>(storage.getRecipeData());
+                choreList = new ArrayList<>(storage.getChoreData());
+            }
         }
     }
+
+    /**
+     * Populate empty saved state files with current output files if save command have never been called by user.
+     */
+    private void createNewFiles() throws IOException {
+        var sourceIngredient = new File("outputIngredient.txt");
+        var sourceRecipe = new File("outputRecipe.txt");
+        var sourceChore = new File("outputChore.txt");
+        var destIngredient = new File("outputIngredientCopy.txt");
+        var destRecipe = new File("outputRecipeCopy.txt");
+        var destChore = new File("outputChoreCopy.txt");
+
+        if (destIngredient.length() == 0) {
+            Storage.copyFile(sourceIngredient, destIngredient);
+        }
+
+        if (destRecipe.length() == 0) {
+            Storage.copyFile(sourceRecipe, destRecipe);
+        }
+        if (destChore.length() == 0) {
+            Storage.copyFile(sourceChore, destChore);
+        }
+            //Ui.askForReInput();
+           // chooseSaveOption();
+    }
     
-    private void run() throws KitchenHelperException {
+    private void run() throws KitchenHelperException, IOException {
         setUpLogger();
         start();
         runCommandLoopUntilExitCommand();
@@ -104,7 +150,7 @@ public class KitchenHelper {
         
     }
     
-    public static void main(String[] args) throws KitchenHelperException {
+    public static void main(String[] args) throws KitchenHelperException, IOException {
         new KitchenHelper().run();
     }
     

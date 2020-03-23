@@ -4,6 +4,7 @@ import seedu.kitchenhelper.command.CommandResult;
 
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -24,6 +25,11 @@ public class Ui {
      */
     private static final String COMMENT_LINE_FORMAT_REGEX = "#.*";
     private static final String WELCOME_MESSAGE = "Hello! I'm KitchenHelper here" + LS + "What can I do for you?";
+
+    public static final String MESSAGE_TO_CHOOSE_STATE = "Please enter '1' for auto-save and '2' for saved state:";
+    public static final String MESSAGE_FOR_AUTO_SAVE = "Okay auto-save chosen.";
+    public static final String MESSAGE_FOR_SAVED_STATE = "Okay saved state chosen.";
+    public static final String MESSAGE_INVALID_USER_CHOICE = "Invalid Choice!";
     
     private final Scanner in;
     private final PrintStream out;
@@ -43,6 +49,40 @@ public class Ui {
 
     public void printInvalidCmd() {
         System.out.println("Invalid Command, please check your format!");
+    }
+
+    public String getUserChoice() {
+        System.out.println(DIVIDER);
+        System.out.println(MESSAGE_TO_CHOOSE_STATE);
+        String userChoice;
+        try {
+            //Scanner sc = new Scanner(System.in);
+            userChoice = in.nextLine();
+            return userChoice;
+        } catch (InputMismatchException ex) {
+            askForReInput();
+            getUserChoice();
+            return "-1";
+        }
+    }
+
+    public static void askForReInput() {
+        System.out.println(DIVIDER);
+        System.out.println(MESSAGE_INVALID_USER_CHOICE);
+        System.out.println(DIVIDER);
+    }
+
+
+    public static void validUserChoice(String userChoice){
+        System.out.println(DIVIDER);
+        switch (userChoice){
+        case "1":
+            System.out.println(MESSAGE_FOR_AUTO_SAVE);
+            break;
+        case "2":
+            System.out.println(MESSAGE_FOR_SAVED_STATE);
+            break;
+        }
     }
     
     //@@author AY1920S2-CS2113T-M16-2-reused
@@ -123,5 +163,9 @@ public class Ui {
      */
     public void showResultToUser(CommandResult result) {
         showToConsole(result.feedbackToUser);
+    }
+
+    public static void errorMessage(String err) {
+        System.out.println(err);
     }
 }
