@@ -40,7 +40,7 @@ public class KitchenHelper {
         String userChoice = ui.getUserChoice();
         ui.validUserChoice(userChoice);
         ui.showWelcomeMessage();
-        if (userChoice == "1"){
+        if (userChoice == "1") {
             storage = new Storage("outputIngredient.txt", "outputRecipe.txt",
                     "outputChore.txt");
             try {
@@ -53,7 +53,7 @@ public class KitchenHelper {
                 recipeList = new ArrayList<>(storage.getRecipeData());
                 choreList = new ArrayList<>(storage.getChoreData());
             }
-        } else if (userChoice == "2"){
+        } else if (userChoice == "2") {
             createNewFiles();
             storage = new Storage("outputIngredientCopy.txt", "outputRecipeCopy.txt",
                     "outputChoreCopy.txt");
@@ -91,8 +91,6 @@ public class KitchenHelper {
         if (destChore.length() == 0) {
             Storage.copyFile(sourceChore, destChore);
         }
-            //Ui.askForReInput();
-           // chooseSaveOption();
     }
     
     private void run() throws KitchenHelperException, IOException {

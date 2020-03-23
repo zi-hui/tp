@@ -9,7 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class SaveStateCommand extends Command{
+public class SaveStateCommand extends Command {
 
     public static final String COMMAND_WORD = "save";
     public static final String MESSAGE_SUCCESS = "You have saved the current state in the following files: ";

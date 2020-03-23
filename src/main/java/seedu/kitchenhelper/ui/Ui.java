@@ -73,15 +73,16 @@ public class Ui {
     }
 
 
-    public static void validUserChoice(String userChoice){
+    public static void validUserChoice(String userChoice) {
         System.out.println(DIVIDER);
-        switch (userChoice){
+        switch (userChoice) {
         case "1":
             System.out.println(MESSAGE_FOR_AUTO_SAVE);
             break;
         case "2":
             System.out.println(MESSAGE_FOR_SAVED_STATE);
             break;
+        default:
         }
     }
     
