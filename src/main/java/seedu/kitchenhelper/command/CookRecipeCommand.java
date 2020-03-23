@@ -129,7 +129,7 @@ public class CookRecipeCommand extends Command {
     /**
      * Sets the number of pax for the recipe.
      *
-     * @param numberofpax
+     * @param numberofpax   the num of pax to cook.
      */
     public void setRecipePax(int numberofpax) {
         this.pax = numberofpax;
