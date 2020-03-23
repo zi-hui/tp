@@ -7,8 +7,9 @@ import seedu.kitchenhelper.command.AddChoreCommand;
 import seedu.kitchenhelper.command.DeleteRecipeCommand;
 import seedu.kitchenhelper.command.DeleteIngredientCommand;
 import seedu.kitchenhelper.command.DeleteChoreCommand;
-import seedu.kitchenhelper.command.ListRecipeCommand;
+import seedu.kitchenhelper.command.DoneCommand;
 import seedu.kitchenhelper.command.ListIngredientCommand;
+import seedu.kitchenhelper.command.ListRecipeCommand;
 import seedu.kitchenhelper.command.ListChoreCommand;
 import seedu.kitchenhelper.command.SearchIngredientCommand;
 import seedu.kitchenhelper.command.SearchRecipeCommand;
@@ -58,6 +59,8 @@ public class Parser {
             return prepareDeleteIngredient(parameters);
         case DeleteChoreCommand.COMMAND_WORD:
             return prepareDeleteChore(parameters);
+        case DoneCommand.COMMAND_WORD:
+            return prepareDoneChore(parameters);
         case ListIngredientCommand.COMMAND_WORD:
             return prepareListIngredient(parameters);
         case ListRecipeCommand.COMMAND_WORD:
@@ -312,6 +315,16 @@ public class Parser {
         } catch (NumberFormatException e) {
             return new InvalidCommand(
                     String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, DeleteChoreCommand.COMMAND_FORMAT));
+        }
+    }
+
+    public Command prepareDoneChore(String parameters) {
+        try {
+            int indexToCheck = Integer.parseInt(parameters.trim());
+            return new DoneCommand(indexToCheck);
+        } catch (NumberFormatException e) {
+            return new InvalidCommand(
+                    String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, DoneCommand.COMMAND_FORMAT));
         }
     }
 
