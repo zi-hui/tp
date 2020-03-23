@@ -52,9 +52,61 @@ This section describes some details on how the features are being implemented. A
 
 ### 4.1.Ingredient-related Features
 #### 4.1.1. Addition of ingredient
+
+The addition of the ingredient feature allows the user to keep track of the ingredients in the ingredient’s list.   
+For example, `addingredient /n beef /c meat /q 2 /p 20 /e 2020-02-18` will add the ingredient `beef` 
+which have the following attributes:  category `meat`, quantity `2`, price `$20` and expiry `2020-02-18`  
+
+##### 4.1.1.1. Implementation
+
+{insert sequence diagram of addingredient command}  
+
+The following steps explained “Sequence diagram for an example `addingredient` command”:  
+1. The user enters  `addingredient /n beef /c meat /q 2 /p 20 /e 2020-02-18`.  
+2. `KitchenHelper` calls `Parser#parseUserCommand()` which splits the user’s input into 2 parts 
+and enters a switch case for execution.  
+3. `parseUserCommand` in the Parser object will call its own method `Parser#prepareAddIngredient`.  
+4. `prepareAddIngredient` will first validates the user’s remaining attributes and if successful, 
+it will execute `AddIngredientCommand` with the attributes, 
+otherwise it will throw an `InvalidCommand` along with the syntax of `addingredient command`  
+5. On execute(), the ingredient is added based on the category into the ingredient’s list.
+
 #### 4.1.2. List all/ specific ingredient(s)
 #### 4.1.3. Delete all/ specific ingredients(s)
 #### 4.1.4. Search for ingredients based on keyword(s)
+
+The search for ingredients feature allows the user to find ingredients using a keyword in the ingredient’s list.  
+For example, `searchingredient beef` will find all the ingredients that contain `beef`.  
+
+##### 4.1.4.1. Implementation  
+
+{insert sequence diagram of searchingredient command}
+
+The following steps explained “Sequence diagram for an example `searchingredient` command”:
+1. The user enters `searchingredient beef`
+2. `KitchenHelper` calls `Parser#parseUserCommand()` which splits the user’s input into 2 parts 
+and enters a switch case for execution.
+3. `parseUserCommand` in the Parser object will call a method `SearchIngredientCommand`.
+4. On execute(), the list of ingredients that contains the keyword will be displayed.
+
+##### 4.1.4.2. Design considerations:
+
+Aspects: How `searchingredient` executes:  
+
+- Alternative 1 (current choice): Find if the keyword is part of the substring of the ingredient, 
+`[Meat] Beef Qty:3 $20.00 Exp:2020-03-18.`  
+
+|     |     |
+|-----|-----|
+|**Pros** | 1. Easily to find by any attributes such as category, ingredient’s name,  quantity, price and expiry date.|  
+|**Cons** | 1. Searching `beef [meat]` will fail to show any matching result.|
+
+- Alternative 2: Take in all the predicates given by the user and find using the predicates as a keyword
+
+|     |     |
+|-----|-----|
+|**Pros** | 1. More accurate searching of the ingredient is available for the user.|  
+|**Cons** | 1. Requires users to enter more precise predicate keywords which could be more inconvenient.|
 
 ### 4.2. Recipe-related Features
 #### 4.2.1. Addition of recipe
@@ -76,11 +128,76 @@ All description and warnings to the user utilises the `UI` class, which controls
 #### 4.2.3. Delete all/ specific recipe(s)
 #### 4.2.4. Search for recipe based on keyword(s)
 
+The search for recipe feature allows the user to find recipes using a keyword in the recipe’s list.  
+For example, `searchrecipe Chicken` will find all recipes that contain `Chicken`.  
+
+
+##### 4.2.4.1. Implementation
+
+{insert sequence diagram of searchrecipe command}
+
+The following steps explained “Sequence diagram for an example `searchrecipe` command”:
+1. The user enters `searchrecipe Chicken`
+2. `KitchenHelper` calls `Parser#parseUserCommand()` which splits the user’s input into 2 parts 
+and enters a switch case for execution.  
+3. `parseUserCommand` in the Parser object will call a method `SearchRecipeCommand`.  
+4. On execute(), the list of recipes' name that contains the keyword will be displayed.  
+
+##### 4.2.4.2. Design considerations:
+
+Aspects: How `searchrecipe` executes:  
+
+- Alternative 1 (current choice): Find if the keyword is part of the substring of the recipe’s name 
+and returns the recipe’s name and the index of recipe in the recipe’s list.  
+
+|     |     |
+|-----|-----|
+|**Pros** | 1. Easy to find similar recipe by their name.|  
+|**Cons** | 1. Only shows the different recipe that contains the keyword.|
+
+- Alternative 2: Find the keyword within the recipe’s ingredient.  
+
+|     |     |
+|-----|-----|
+|**Pros** | 1. More accurate searching of the recipe that uses the ingredients.|  
+|**Cons** | 1. Could be more memory intensive to find if the list is huge.|
+
 ### 4.3. Chore-related Features
 #### 4.3.1. Addition of chore
 #### 4.3.2. List all/ specific chore(s)
 #### 4.3.3. Delete all/ specific chore(s)
 #### 4.3.4. Search for chore based on keyword(s)
+
+The search for chore feature allows the user to find chores using a keyword in the chore’s list.  
+For example, `searchchore groceries` will find all chores that contain `groceries`.  
+
+##### 4.3.4.1. Implementation  
+
+{insert sequence diagram of searchchore command}
+
+The following steps explained “Sequence diagram for an example `searchchore` command”:  
+1. The user enters `searchchore groceries`  
+2. `KitchenHelper` calls `Parser#parseUserCommand()` which splits the user’s input into 2 parts 
+and enters a switch case for execution.  
+3. `parseUserCommand` in the Parser object will call a method `SearchChoreCommand`.  
+4. On execute(), the list of chore that contains the keyword will be displayed.  
+
+##### 4.3.4.2. Design considerations:
+
+- Alternative 1 (current choice): Find if the keyword is part of the substring of the chore, 
+`[x] buy groceries (by: Tuesday 12pm)`.   
+ 
+|     |     |
+|-----|-----|
+|**Pros** | 1. Easily to find by any attributes such as description and date.|  
+|**Cons** | 1. Searching `buy groceries [x]` will fail to show any matching result.|
+
+- Alternative 2: Take in all the predicates given by the user and find using the predicates as a keyword  
+
+|     |     |
+|-----|-----|
+|**Pros** | 1. More accurate searching of the chore is available for the user..|  
+|**Cons** | 1. Requires users to enter more precise predicate keywords which could be more inconvenient.|
 
 ### 4.4. Storage
 
