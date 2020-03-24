@@ -72,6 +72,22 @@ otherwise it will throw an `InvalidCommand` along with the syntax of `addingredi
 5. On execute(), the ingredient is added based on the category into the ingredient’s list.
 
 #### 4.1.2. List all/ specific ingredient(s)
+
+The listing of Ingredients feature shows the user the existing data that is added by the user. The user is also able to specify which category would they want to display.
+Command usage: `listingredient all` will show the details of all ingredients
+which have the following attributes:  category `all`
+
+#### 4.1.2.1. Implementation
+{insert sequence diagram}
+Steps for `listingredient all` command:
+1. The user enters  `listingredient all`.  
+2. `KitchenHelper` calls `Parser#parseUserCommand()` which splits the user’s input into 2 parts 
+and enters a switch case for execution.  
+3. `parseUserCommand` in the Parser object will call its own method `Parser#prepareListIngredient`.  
+4. `prepareListIngredient` will first validate if the user's input is belongs to `all/dairy/drink/fruit/meat/miscellaneous/staple/vegetable`, 
+following, it will return the items belonging into the category, 
+otherwise it will throw an `InvalidCommand` along with the syntax of `listingredient command`  
+5. On execute(), the ingredient in the list will be printed out.
 #### 4.1.3. Delete all/ specific ingredients(s)
 #### 4.1.4. Search for ingredients based on keyword(s)
 
@@ -125,6 +141,21 @@ When the user attempts to create a new recipe, the `AddRecipeCommand`, ‘Parser
 All description and warnings to the user utilises the `UI` class, which controls the printing of the text on the console. 
 
 #### 4.2.2. List all/ specific recipe(s)
+The listing of Recipe feature shows the user the existing recipe and it's details that is added by the user.
+Command usage: `listrecipe 1` will show the details of recipe number `1`
+which have the following attributes:  recipe number `1`
+
+#### 4.1.2.1. Implementation
+{insert sequence diagram}
+Steps for `listrecipe 1` command:
+1. The user enters  `listrecipe 1`.  
+2. `KitchenHelper` calls `Parser#parseUserCommand()` which splits the user’s input into 2 parts 
+and enters a switch case for execution.  
+3. `parseUserCommand` in the Parser object will call its own method `Parser#prepareListRecipe`.  
+4. `prepareListIngredient` will first validate if the user's input is a valid integer and if it's more than 0, 
+following, it will return the details belonging to the recipe, 
+otherwise it will throw an `InvalidCommand` along with the syntax of `listrecipe command`  
+5. On execute(), the details in the recipe will be printed out.
 #### 4.2.3. Delete all/ specific recipe(s)
 #### 4.2.4. Search for recipe based on keyword(s)
 
