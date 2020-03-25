@@ -1,25 +1,24 @@
 package seedu.kitchenhelper.parser;
 
-import seedu.kitchenhelper.command.Command;
+import seedu.kitchenhelper.command.AddChoreCommand;
 import seedu.kitchenhelper.command.AddRecipeCommand;
 import seedu.kitchenhelper.command.AddIngredientCommand;
-import seedu.kitchenhelper.command.AddChoreCommand;
 import seedu.kitchenhelper.command.DeleteRecipeCommand;
 import seedu.kitchenhelper.command.DeleteIngredientCommand;
 import seedu.kitchenhelper.command.DeleteChoreCommand;
-import seedu.kitchenhelper.command.DoneCommand;
-import seedu.kitchenhelper.command.ListIngredientCommand;
 import seedu.kitchenhelper.command.ListRecipeCommand;
+import seedu.kitchenhelper.command.ListIngredientCommand;
 import seedu.kitchenhelper.command.ListChoreCommand;
-import seedu.kitchenhelper.command.SearchIngredientCommand;
 import seedu.kitchenhelper.command.SearchRecipeCommand;
+import seedu.kitchenhelper.command.SearchIngredientCommand;
 import seedu.kitchenhelper.command.SearchChoreCommand;
 import seedu.kitchenhelper.command.HelpCommand;
+import seedu.kitchenhelper.command.DoneCommand;
 import seedu.kitchenhelper.command.ExitCommand;
+import seedu.kitchenhelper.command.CookRecipeCommand;
 import seedu.kitchenhelper.command.InvalidCommand;
-
 import seedu.kitchenhelper.exception.KitchenHelperException;
-
+import seedu.kitchenhelper.command.Command;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -53,6 +52,8 @@ public class Parser {
             return prepareAddIngredient(parameters);
         case AddChoreCommand.COMMAND_WORD:
             return prepareAddChore(parameters);
+        case CookRecipeCommand.COMMAND_WORD:
+            return prepareCookRecipe(parameters);
         case DeleteRecipeCommand.COMMAND_WORD:
             return prepareDeleteRecipe(parameters);
         case DeleteIngredientCommand.COMMAND_WORD:
@@ -177,6 +178,26 @@ public class Parser {
         } catch (KitchenHelperException khe) {
             return new InvalidCommand(khe.getMessage());
         }
+    }
+
+    /**
+     * Prepares the parameters needed for the cookrecipe function.
+     *
+     * @param attributes full user input string.
+     * @return the prepared command.
+     */
+    private Command prepareCookRecipe(String attributes) {
+        CookRecipeCommand cookRecipe = new CookRecipeCommand();
+        try {
+            String recipeName = attributes.substring(attributes.indexOf("/n") + 3, attributes.indexOf("/p") - 1);
+            int numOfPax = Integer.parseInt(attributes.substring(attributes.indexOf("/p") + 3));
+            cookRecipe.setRecipeName(recipeName);
+            cookRecipe.setRecipePax(numOfPax);
+        } catch (IndexOutOfBoundsException e) {
+            return new InvalidCommand(
+                    String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, cookRecipe.COMMAND_FORMAT));
+        }
+        return cookRecipe;
     }
 
     /**
