@@ -95,7 +95,7 @@ Search by ingredient's expiry date.
 #### Adding a recipe: `addrecipe`
 Adds a new unique recipe into the List in Kitchen Helper.
 
-__Format:__ `addrecipe /n <recipe name> /i <ingredient_name>:<quantity>:<category>[,..]`
+__Format:__ `addrecipe /n <recipe_name> /i <ingredient_name>:<quantity>:<category>[,..]`
 
 __Example of usage:__ 
 * `addrecipe /n Rice Ball /i Rice:3:staple`
