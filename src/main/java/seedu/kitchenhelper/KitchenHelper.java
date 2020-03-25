@@ -39,7 +39,6 @@ public class KitchenHelper {
         ui = new Ui();
         String userChoice = ui.getUserChoice();
         ui.validUserChoice(userChoice);
-        ui.showWelcomeMessage();
         if (userChoice == "1") {
             storage = new Storage("outputIngredient.txt", "outputRecipe.txt",
                     "outputChore.txt");
@@ -68,6 +67,7 @@ public class KitchenHelper {
                 choreList = new ArrayList<>(storage.getChoreData());
             }
         }
+        ui.showWelcomeMessage();
     }
 
     /**

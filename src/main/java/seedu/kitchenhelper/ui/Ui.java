@@ -26,10 +26,10 @@ public class Ui {
     private static final String COMMENT_LINE_FORMAT_REGEX = "#.*";
     private static final String WELCOME_MESSAGE = "Hello! I'm KitchenHelper here" + LS + "What can I do for you?";
 
-    public static final String MESSAGE_TO_CHOOSE_STATE = "Please enter '1' for auto-save and '2' for saved state:";
+    public static final String MESSAGE_TO_CHOOSE_STATE = "Please enter '1' for auto-save and '2' for manual-save:";
     public static final String MESSAGE_FOR_AUTO_SAVE = "Okay auto-save chosen.";
-    public static final String MESSAGE_FOR_SAVED_STATE = "Okay saved state chosen.";
-    public static final String MESSAGE_INVALID_USER_CHOICE = "Invalid Choice!";
+    public static final String MESSAGE_FOR_SAVED_STATE = "Okay manual-save chosen.";
+    public static final String MESSAGE_INVALID_USER_CHOICE = "Invalid Choice! PLease choose either option 1 or 2";
     
     private final Scanner in;
     private final PrintStream out;
@@ -56,24 +56,19 @@ public class Ui {
         System.out.println(MESSAGE_TO_CHOOSE_STATE);
         String userChoice;
         try {
-            //Scanner sc = new Scanner(System.in);
             userChoice = in.nextLine();
             return userChoice;
         } catch (InputMismatchException ex) {
-            askForReInput();
-            getUserChoice();
             return "-1";
         }
     }
 
-    public static void askForReInput() {
-        System.out.println(DIVIDER);
+    public void askForReInput() {
         System.out.println(MESSAGE_INVALID_USER_CHOICE);
-        System.out.println(DIVIDER);
+        validUserChoice(getUserChoice());
     }
 
-
-    public static void validUserChoice(String userChoice) {
+    public void validUserChoice(String userChoice) {
         System.out.println(DIVIDER);
         switch (userChoice) {
         case "1":
@@ -83,6 +78,7 @@ public class Ui {
             System.out.println(MESSAGE_FOR_SAVED_STATE);
             break;
         default:
+            askForReInput();
         }
     }
     
