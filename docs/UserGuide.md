@@ -77,7 +77,14 @@ __Example of usage:__
 * `addingredient /n Milo /c Drink /q 30 /p 10 /e 2020-12-20`
 
 #### 3.2.2. List ingredient: `listingredient`
+Prints out a list of ingredients added by the user. Allow users to choose which category to print out from.
 
+__Format:__ `listingredient <all/dairy/drink/fruit/meat/miscellaneous/staple/vegetable>`
+
+__Example of usage:__
+* `listingredient all`
+* `listingredient meat`
+* `listingredient vegetable`
 #### 3.2.3. Delete an ingredient: `deleteingredient`
 Delete the specified ingredient or reduce an ingredient’s quantity from the ingredients inventory in Kitchen Helper using ingredient's name or index. 
 The name or index of the ingredient can be found by displaying the list of ingredients. 
@@ -119,7 +126,14 @@ __Example of usage:__
 * `addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable`
    Creates a new recipe called `Chicken Salad` which contains two ingredients mainly `2` portions of `Chicken Breast` and `4` portions of `Lettuce`.
 
-#### 3.3.2. List all recipes: `listrecipe all`
+#### 3.3.2. List recipes: `listrecipe 1`
+Prints out details of recipe added by the user. Allow users to choose which recipe to print out from.
+
+__Format:__ `listrecipe <recipe number>`
+
+__Example of usage:__
+* `listingredient 1`
+* `listingredient 2`
 
 #### 3.3.3. Delete a recipe: `deleterecipe`
 Deletes the specific recipe name or index from the list in Kitchen Helper. The name or index of the recipe can be found by displaying the list of recipes. 
