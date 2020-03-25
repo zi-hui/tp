@@ -16,10 +16,11 @@ By: `Team CS2113T-M16-2` Since: `March 2020` License: `MIT`
    * [Search for ingredient: `searchingredient`](#search-for-ingredient-searchingredient)  
 
    3.3 [Recipe](#33-recipe)  
-   * Adding a recipe: `addrecipe`  
+   * [Adding a recipe: `addrecipe`](#adding-a-recipe-addrecipe) 
    * List recipe: `listrecipe`  
    * Delete a recipe: `deleterecipe`  
    * [Search for recipe: `searchrecipe`](#search-for-recipe-searchrecipe)  
+   * [Cooking a recipe: `cookrecipe`](#cooking-a-recipe-cookrecipe) 
 
    3.4 [Chore](#34-chore)  
    * Adding a chore: `addchore`  
@@ -97,11 +98,10 @@ Adds a new unique recipe into the List in Kitchen Helper.
 
 __Format:__ `addrecipe /n <recipe_name> /i <ingredient_name>:<quantity>:<category>[,..]`
 
-__Example of usage:__ 
-* `addrecipe /n Rice Ball /i Rice:3:staple`
-   Creates a new recipe called `Rice Ball` which contains one ingredient mainly `3` portions of `Rice`.
-* `addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable`
-   Creates a new recipe called `Chicken Salad` which contains two ingredients mainly `2` portions of `Chicken Breast` and `4` portions of `Lettuce`.
+Example |  Outcome
+--------|------------------
+Command: <br> `addrecipe /n Rice Ball /i Rice:3:staple` <br> Description: <br> Creates a new recipe called `Rice Ball` which contains one ingredient, `3` portions of `Rice`. | addrecipe /n Rice Ball /i Rice:3:staple <br>Rice Ball Recipe has been created with 1 ingredients inside.<br>===================================================`
+
 #### Listing all recipes: `listrecipe all`
 
 #### Search for recipe: `searchrecipe`
@@ -113,6 +113,14 @@ __Example of usage:__
 * `searchrecipe Chicken Stew`  
 Search by recipe's name.
 
+#### Cooking a recipe: `cookrecipe`
+Cooks a recipe specified by the user by the recipe’s name.
+
+__Format:__ `cookrecipe /n <recipe_name> /p <number_of_pax>`
+
+Example |  Outcome
+--------|------------------
+`cookrecipe /n chicken salad /p 2` | Cooks the ‘chicken salad’ recipe with a pax 2.
 
 ### 3.4 Chore
 
