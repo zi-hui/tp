@@ -1,5 +1,5 @@
 ===================================================
-Please enter '1' for auto-save and '2' for saved state:
+Please enter '1' for auto-save and '2' for manual-save:
 ===================================================
 Okay auto-save chosen.
 ===================================================
