@@ -1,34 +1,35 @@
 # Kitchen Helper - User Guide
 By: `Team CS2113T-M16-2` Since: `March 2020` License: `MIT`
 
-1. [Introduction](#1-introduction)  
-2. [Quick Start](#2-quick-start)  
-3. [Features](#3-features)  
+- [User Guide]()
+  * [1. Introduction](#1-introduction)  
+  * [2. Quick Start](#2-quick-start)  
+  * [3. Features](#3-features)  
+    + [3.1. General Commands](#31-general-commands)  
+       - [3.1.1. Viewing help: `help`](#311-viewing-help-help)  
+       - [3.1.2. Exiting the Program: `exit`](#312-exiting-the-program-exit)  
+    + [3.2. Ingredient](#32-ingredient)  
+       - [3.2.1. Adding an ingredient: `addingredient`](#321-adding-an-ingredient-addingredient)  
+       - [3.2.2. List ingredient: `listingredient`](#322-list-ingredient-listingredient)  
+       - [3.2.3. Delete an ingredient: `deleteingredient`](#323-delete-an-ingredient-deleteingredient)  
+       - [3.2.4. Search for ingredient: `searchingredient`](#324-search-for-ingredient-searchingredient)  
 
-   3.1 [General Commands](#31-general-commands)  
-   * [Viewing help: `help`](#viewing-help-help)  
-   * [Exiting the Program: `exit`](#exiting-the-program-exit)  
-   
-   3.2 [Ingredient](#32-ingredient)  
-   * [Adding an ingredient: `addingredient`](#adding-an-ingredient-addingredient)  
-   * List ingredient: `listingredient`  
-   * [Delete an ingredient: `deleteingredient`](#delete-an-ingredient-deleteingredient)  
-   * [Search for ingredient: `searchingredient`](#search-for-ingredient-searchingredient)  
+    + [3.3. Recipe](#33-recipe)  
+      - [3.3.1. Adding a recipe: `addrecipe`](#331-adding-a-recipe-addrecipe)  
+      - [3.3.2. List recipe: `listrecipe`](#332-list-all-recipes-listrecipe-all)  
+      - [3.3.3. Delete a recipe: `deleterecipe`](#333-delete-a-recipe-deleterecipe)
+      - [3.3.4. Search for recipe: `searchrecipe`](#334-search-for-recipe-searchrecipe)  
+      - [3.3.5. Cooking a recipe: `cookrecipe`](#335-cooking-a-recipe-cookrecipe)
 
-   3.3 [Recipe](#33-recipe)  
-   * Adding a recipe: `addrecipe`  
-   * List recipe: `listrecipe`  
-   * [Delete a recipe: `deleterecipe`](#delete-a-recipe-deleterecipe)
-   * [Search for recipe: `searchrecipe`](#search-for-recipe-searchrecipe)  
+    + [3.4. Chore](#34-chore)  
+      - [3.4.1. Adding a chore: `addchore`](#341-adding-a-chore-addchore)  
+      - [3.4.2. List chore: `listchore`](#342-list-chore-listchore)  
+      - [3.4.3. Delete a chore: `deletechore`](#343-delete-a-chore-deletechore)  
+      - [3.4.4. Search for chore: `searchchore`](#343-search-for-chore-searchchore)  
+  
+  * [4. FAQ](#4-faq)  
+  * [5. Command Summary](#5-command-summary)
 
-   3.4 [Chore](#34-chore)  
-   * Adding a chore: `addchore`  
-   * List chore: `listchore`  
-   * Delete a chore: `deletechore`  
-   * [Search for chore: `searchchore`](#search-for-chore-searchchore)  
-
-4. [FAQ](#4-faq)  
-5. [Command Summary](#5-command-summary)
 
 ## 1. Introduction
 
@@ -53,20 +54,20 @@ So what are you waiting for? Let’s go!
 
 ## 3. Features 
 
-### 3.1 General Commands
-#### Viewing help: `help`
+### 3.1. General Commands
+#### 3.1.1. Viewing help: `help`
 Shows a list of available commands and their usages.  
 
 __Format:__ `help`  
 
-#### Exiting the Program: `exit`
+#### 3.1.2. Exiting the Program: `exit`
 Exits the program.  
 
 __Format:__ `exit`  
 
 
-### 3.2 Ingredient
-#### Adding an ingredient: `addingredient`
+### 3.2. Ingredient
+#### 3.2.1. Adding an ingredient: `addingredient`
 Adds an ingredient to the list when the user buys an item to keep track.   
 
 __Format:__ `addingredient /n INGREDIENT /c CATEGORY /q QUANTITY /p PRICE /e EXPIRY`  
@@ -76,7 +77,16 @@ __Example of usage:__
 * `addingredient /n kailan /c Vegetable /q 30 /p 30.45 /e 2020-03-12`
 * `addingredient /n Milo /c Drink /q 30 /p 10 /e 2020-12-20`
 
-#### Delete an ingredient: `deleteingredient`
+#### 3.2.2. List ingredient: `listingredient`
+Prints out a list of ingredients added by the user. Allow users to choose which category to print out from.
+
+__Format:__ `listingredient <all/dairy/drink/fruit/meat/miscellaneous/staple/vegetable>`
+
+__Example of usage:__
+* `listingredient all`
+* `listingredient meat`
+* `listingredient vegetable`
+#### 3.2.3. Delete an ingredient: `deleteingredient`
 Delete the specified ingredient or reduce an ingredient’s quantity from the ingredients inventory in Kitchen Helper using ingredient's name or index. 
 The name or index of the ingredient can be found by displaying the list of ingredients. 
 
@@ -90,7 +100,7 @@ Deletes the ingredient named `wagyu beef` from the ingredients inventory.
 * `deleteingredient /i 1` <br>
 Delete ingredient by index. In this case, delete the ingredient with index of 1.
 
-#### Search for ingredient: `searchingredient`
+#### 3.2.4. Search for ingredient: `searchingredient`
 Search for ingredients based on given keyword.  
 
 __Format:__ `searchingredient KEYWORD`  
@@ -104,21 +114,30 @@ Search by ingredient's category.
 Search by ingredient's expiry date.
 
 
-### 3.3 Recipe
+### 3.3. Recipe
 
-#### Adding a recipe: `addrecipe`
+#### 3.3.1. Adding a recipe: `addrecipe`
 Adds a new unique recipe into the List in Kitchen Helper.
 
-__Format:__ `addrecipe /n <recipe name> /i <ingredient_name>:<quantity>:<category>[,..]`
+__Format:__ `addrecipe /n <recipe_name> /i <ingredient_name>:<quantity>:<category>[,..]`
 
-__Example of usage:__ 
-* `addrecipe /n Rice Ball /i Rice:3:staple`
-   Creates a new recipe called `Rice Ball` which contains one ingredient mainly `3` portions of `Rice`.
-* `addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable`
-   Creates a new recipe called `Chicken Salad` which contains two ingredients mainly `2` portions of `Chicken Breast` and `4` portions of `Lettuce`.
+Example |  Outcome
+--------|------------------
+Command: <br> `addrecipe /n Rice Ball /i Rice:3:staple` <br> Description: <br> Creates a new recipe called `Rice Ball` which contains one ingredient, `3` portions of `Rice`. | addrecipe /n Rice Ball /i Rice:3:staple <br>Rice Ball Recipe has been created with 1 ingredients inside.<br>===================================================`
 
-#### Delete a recipe: `deleterecipe`
+#### 3.3.2. List recipes: `listrecipe 1`
+Prints out details of recipe added by the user. Allow users to choose which recipe to print out from.
+
+__Format:__ `listrecipe <recipe number>`
+
+__Example of usage:__
+* `listingredient 1`
+* `listingredient 2`
+
+#### 3.3.3. Delete a recipe: `deleterecipe`
 Deletes the specific recipe name or index from the list in Kitchen Helper. The name or index of the recipe can be found by displaying the list of recipes. 
+
+#### Listing all recipes: `listrecipe all`
 
 __Format__: `deleterecipe /n <RECIPE>` OR `deleterecipe /i <RECIPE_INDEX>`
 
@@ -128,9 +147,7 @@ __Example of usage:__
 * `deleterecipe /i 2`
   Deletes recipe by index. In this case, delete recipe with the index of 2 from the recipe list.
 
-#### List all recipes: `listrecipe all`
-
-#### Search for recipe: `searchrecipe`
+#### 3.3.4. Search for recipe: `searchrecipe`
 Search for recipes based on given keyword.  
 
 __Format:__ `searchrecipe KEYWORD`  
@@ -139,10 +156,24 @@ __Example of usage:__
 * `searchrecipe Chicken Stew`  
 Search by recipe's name.
 
+#### 3.3.5. Cooking a recipe: `cookrecipe`
+Cooks a recipe specified by the user by the recipe’s name.
 
-### 3.4 Chore
+__Format:__ `cookrecipe /n <recipe_name> /p <number_of_pax>`
 
-#### Search for chore: `searchchore`
+Example |  Outcome
+--------|------------------
+`cookrecipe /n chicken salad /p 2` | Cooks the ‘chicken salad’ recipe with a pax 2.
+
+### 3.4. Chore
+
+#### 3.4.1. Adding a chore: `addchore`
+
+#### 3.4.2. List chore: `listchore`
+
+#### 3.4.3. Delete a chore: `deletechore`
+
+#### 3.4.3. Search for chore: `searchchore`
 Search for chores based on given keyword.  
 
 __Format:__ `searchchore KEYWORD`  
@@ -152,22 +183,6 @@ __Example of usage:__
 Search by chore's description.
 * `searchchore 2020-03-18`  
 Search by chore's date.
-
-{Give detailed description of each feature}
-
-### Adding a to-do: `todo`
-Adds a to-do item to the list of to-dos.
-
-Format: `todo n/TODO_NAME d/DEADLINE`
-
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.  
-
-Example of usage: 
-
-`todo n/Write the rest of the User Guide d/next week`
-
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
 
 ## 4. FAQ
 
@@ -180,6 +195,7 @@ Here is a short summary of the command used in KitchenHelper application.
 Refer back to [Section 3, "Features"](#3-features) for more information on the usage of commands.  
   
 __General Commands__  
+
 Feature | Command  
 ------- | -------  
 help | `help`  
@@ -187,6 +203,7 @@ exit | `exit`
 
 
 __Ingredient Commands__  
+
 Feature | Command  
 ------- | -------  
 addingredient | `addingredient /n INGREDIENT /c CATEGORY /q QUANTITY /p PRICE /e EXPIRY`<br> e.g. `addingredient /n Beef cubes /c meat /q 3 /p 20 /e 2020-03-18`  
@@ -195,6 +212,7 @@ searchingredient | `searchingredient KEYWORD` <br> e.g. `searchingredient beef`
 
 
 __Recipe Commands__  
+
 Feature | Command  
 ------- | -------  
 addrecipe | `addrecipe /n <recipe name> /i <ingredient_name>:<quantity>:<category>[,..]`
@@ -203,10 +221,7 @@ searchrecipe | `searchrecipe KEYWORD` <br> e.g. `searchrecipe Chicken Stew`
 
  
 __Chore Commands__  
+
 Feature | Command  
 ------- | -------  
 searchchore | `searchchore KEYWORD` <br> e.g. `searchchore groceries`  
-
-{Give a 'cheat sheet' of commands here}
-
-* Add to-do `todo n/TODO_NAME d/DEADLINE`

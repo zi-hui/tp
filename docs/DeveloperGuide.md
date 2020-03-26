@@ -11,29 +11,31 @@ By: `CS2113T-M16-2` Since: `2020`
   * [4. Implementation](#4-implementation)
     + [4.1.Ingredient-related Features](#41ingredient-related-features)
       - [4.1.1. Addition of ingredient](#411-addition-of-ingredient)
-      - [4.1.2. List all/ specific ingredient(s)](#412-list-all--specific-ingredient-s-)
-      - [4.1.3. Delete all/ specific ingredients(s)](#413-delete-all--specific-ingredients-s-)
-      - [4.1.4. Search for ingredients based on keyword(s)](#414-search-for-ingredients-based-on-keyword-s-)
+      - [4.1.2. List all/ specific ingredient(s)](#412-list-all-specific-ingredients)
+      - [4.1.3. Delete all/ specific ingredients(s)](#413-delete-all-specific-ingredientss)
+      - [4.1.4. Search for ingredients based on keyword(s)](#414-search-for-ingredients-based-on-keywords)
     + [4.2. Recipe-related Features](#42-recipe-related-features)
       - [4.2.1. Addition of recipe](#421-addition-of-recipe)
-      - [4.2.2. List all/ specific recipe(s)](#422-list-all--specific-recipe-s-)
-      - [4.2.3. Delete all/ specific recipe(s)](#423-delete-all--specific-recipe-s-)
-      - [4.2.4. Search for recipe based on keyword(s)](#424-search-for-recipe-based-on-keyword-s-)
+      - [4.2.2. List all/ specific recipe(s)](#422-list-all-specific-recipes)
+      - [4.2.3. Delete all/ specific recipe(s)](#423-delete-all-specific-recipes)
+      - [4.2.4. Search for recipe based on keyword(s)](#424-search-for-recipe-based-on-keywords)
     + [4.3. Chore-related Features](#43-chore-related-features)
       - [4.3.1. Addition of chore](#431-addition-of-chore)
-      - [4.3.2. List all/ specific chore(s)](#432-list-all--specific-chore-s-)
-      - [4.3.3. Delete all/ specific chore(s)](#433-delete-all--specific-chore-s-)
-      - [4.3.4. Search for chore based on keyword(s)](#434-search-for-chore-based-on-keyword-s-)
+      - [4.3.2. List all/ specific chore(s)](#432-list-all-specific-chores)
+      - [4.3.3. Delete all/ specific chore(s)](#433-delete-all-specific-chores)
+      - [4.3.4. Search for chore based on keyword(s)](#434-search-for-chore-based-on-keywords)
     + [4.4. Storage](#44-storage)
+      - [4.4.1. Select files to load from and save to](#441-selection-of-load-files)
+      - [4.4.2. Save current state](#442-save-current-state)
     + [4.5. Logging](#45-logging)
     + [4.6. Configuration](#46-configuration)
   * [Appendices](#appendices)
-    + [Appendix A: Product Scope](#appendix-a--product-scope)
-    + [Appendix B: User Stories](#appendix-b--user-stories)
-    + [Appendix C: Value proposition - Use cases](#appendix-c--value-proposition---use-cases)
-    + [Appendix D: Non-Functional Requirements](#appendix-d--non-functional-requirements)
-    + [Appendix E: Glossary](#appendix-e--glossary)
-    + [Appendix G: Instructions for Manual Testing](#appendix-g--instructions-for-manual-testing)
+    + [Appendix A: Product Scope](#appendix-a-product-scope)
+    + [Appendix B: User Stories](#appendix-b-user-stories)
+    + [Appendix C: Value proposition - Use cases](#appendix-c-value-proposition---use-cases)
+    + [Appendix D: Non-Functional Requirements](#appendix-d-non-functional-requirements)
+    + [Appendix E: Glossary](#appendix-e-glossary)
+    + [Appendix G: Instructions for Manual Testing](#appendix-g-instructions-for-manual-testing)
       - [G.1. Launch and Shutdown](#g1-launch-and-shutdown)
       - [G.2. Deleting a](#g2-deleting-a)
       - [G.3. Saving data](#g3-saving-data)
@@ -52,9 +54,77 @@ This section describes some details on how the features are being implemented. A
 
 ### 4.1.Ingredient-related Features
 #### 4.1.1. Addition of ingredient
+
+The addition of the ingredient feature allows the user to keep track of the ingredients in the ingredient’s list.   
+For example, `addingredient /n beef /c meat /q 2 /p 20 /e 2020-02-18` will add the ingredient `beef` 
+which have the following attributes:  category `meat`, quantity `2`, price `$20` and expiry `2020-02-18`  
+
+##### 4.1.1.1. Implementation
+
+{insert sequence diagram of addingredient command}  
+
+The following steps explained “Sequence diagram for an example `addingredient` command”:  
+1. The user enters  `addingredient /n beef /c meat /q 2 /p 20 /e 2020-02-18`.  
+2. `KitchenHelper` calls `Parser#parseUserCommand()` which splits the user’s input into 2 parts 
+and enters a switch case for execution.  
+3. `parseUserCommand` in the Parser object will call its own method `Parser#prepareAddIngredient`.  
+4. `prepareAddIngredient` will first validates the user’s remaining attributes and if successful, 
+it will execute `AddIngredientCommand` with the attributes, 
+otherwise it will throw an `InvalidCommand` along with the syntax of `addingredient command`  
+5. On execute(), the ingredient is added based on the category into the ingredient’s list.
+
 #### 4.1.2. List all/ specific ingredient(s)
+
+The listing of Ingredients feature shows the user the existing data that is added by the user. The user is also able to specify which category would they want to display.
+Command usage: `listingredient all` will show the details of all ingredients
+which have the following attributes:  category `all`
+
+#### 4.1.2.1. Implementation
+{insert sequence diagram}
+Steps for `listingredient all` command:
+1. The user enters  `listingredient all`.  
+2. `KitchenHelper` calls `Parser#parseUserCommand()` which splits the user’s input into 2 parts 
+and enters a switch case for execution.  
+3. `parseUserCommand` in the Parser object will call its own method `Parser#prepareListIngredient`.  
+4. `prepareListIngredient` will first validate if the user's input is belongs to `all/dairy/drink/fruit/meat/miscellaneous/staple/vegetable`, 
+following, it will return the items belonging into the category, 
+otherwise it will throw an `InvalidCommand` along with the syntax of `listingredient command`  
+5. On execute(), the ingredient in the list will be printed out.
 #### 4.1.3. Delete all/ specific ingredients(s)
 #### 4.1.4. Search for ingredients based on keyword(s)
+
+The search for ingredients feature allows the user to find ingredients using a keyword in the ingredient’s list.  
+For example, `searchingredient beef` will find all the ingredients that contain `beef`.  
+
+##### 4.1.4.1. Implementation  
+
+{insert sequence diagram of searchingredient command}
+
+The following steps explained “Sequence diagram for an example `searchingredient` command”:
+1. The user enters `searchingredient beef`
+2. `KitchenHelper` calls `Parser#parseUserCommand()` which splits the user’s input into 2 parts 
+and enters a switch case for execution.
+3. `parseUserCommand` in the Parser object will call a method `SearchIngredientCommand`.
+4. On execute(), the list of ingredients that contains the keyword will be displayed.
+
+##### 4.1.4.2. Design considerations:
+
+Aspects: How `searchingredient` executes:  
+
+- Alternative 1 (current choice): Find if the keyword is part of the substring of the ingredient, 
+`[Meat] Beef Qty:3 $20.00 Exp:2020-03-18.`  
+
+|     |     |
+|-----|-----|
+|**Pros** | 1. Easily to find by any attributes such as category, ingredient’s name,  quantity, price and expiry date.|  
+|**Cons** | 1. Searching `beef [meat]` will fail to show any matching result.|
+
+- Alternative 2: Take in all the predicates given by the user and find using the predicates as a keyword
+
+|     |     |
+|-----|-----|
+|**Pros** | 1. More accurate searching of the ingredient is available for the user.|  
+|**Cons** | 1. Requires users to enter more precise predicate keywords which could be more inconvenient.|
 
 ### 4.2. Recipe-related Features
 #### 4.2.1. Addition of recipe
@@ -73,8 +143,57 @@ When the user attempts to create a new recipe, the `AddRecipeCommand`, ‘Parser
 All description and warnings to the user utilises the `UI` class, which controls the printing of the text on the console. 
 
 #### 4.2.2. List all/ specific recipe(s)
+The listing of Recipe feature shows the user the existing recipe and it's details that is added by the user.
+Command usage: `listrecipe 1` will show the details of recipe number `1`
+which have the following attributes:  recipe number `1`
+
+#### 4.1.2.1. Implementation
+{insert sequence diagram}
+Steps for `listrecipe 1` command:
+1. The user enters  `listrecipe 1`.  
+2. `KitchenHelper` calls `Parser#parseUserCommand()` which splits the user’s input into 2 parts 
+and enters a switch case for execution.  
+3. `parseUserCommand` in the Parser object will call its own method `Parser#prepareListRecipe`.  
+4. `prepareListIngredient` will first validate if the user's input is a valid integer and if it's more than 0, 
+following, it will return the details belonging to the recipe, 
+otherwise it will throw an `InvalidCommand` along with the syntax of `listrecipe command`  
+5. On execute(), the details in the recipe will be printed out.
 #### 4.2.3. Delete all/ specific recipe(s)
 #### 4.2.4. Search for recipe based on keyword(s)
+
+The search for recipe feature allows the user to find recipes using a keyword in the recipe’s list.  
+For example, `searchrecipe Chicken` will find all recipes that contain `Chicken`.  
+
+
+##### 4.2.4.1. Implementation
+
+{insert sequence diagram of searchrecipe command}
+
+The following steps explained “Sequence diagram for an example `searchrecipe` command”:
+1. The user enters `searchrecipe Chicken`
+2. `KitchenHelper` calls `Parser#parseUserCommand()` which splits the user’s input into 2 parts 
+and enters a switch case for execution.  
+3. `parseUserCommand` in the Parser object will call a method `SearchRecipeCommand`.  
+4. On execute(), the list of recipes' name that contains the keyword will be displayed.  
+
+##### 4.2.4.2. Design considerations:
+
+Aspects: How `searchrecipe` executes:  
+
+- Alternative 1 (current choice): Find if the keyword is part of the substring of the recipe’s name 
+and returns the recipe’s name and the index of recipe in the recipe’s list.  
+
+|     |     |
+|-----|-----|
+|**Pros** | 1. Easy to find similar recipe by their name.|  
+|**Cons** | 1. Only shows the different recipe that contains the keyword.|
+
+- Alternative 2: Find the keyword within the recipe’s ingredient.  
+
+|     |     |
+|-----|-----|
+|**Pros** | 1. More accurate searching of the recipe that uses the ingredients.|  
+|**Cons** | 1. Could be more memory intensive to find if the list is huge.|
 
 ### 4.3. Chore-related Features
 #### 4.3.1. Addition of chore
@@ -82,7 +201,94 @@ All description and warnings to the user utilises the `UI` class, which controls
 #### 4.3.3. Delete all/ specific chore(s)
 #### 4.3.4. Search for chore based on keyword(s)
 
+The search for chore feature allows the user to find chores using a keyword in the chore’s list.  
+For example, `searchchore groceries` will find all chores that contain `groceries`.  
+
+##### 4.3.4.1. Implementation  
+
+{insert sequence diagram of searchchore command}
+
+The following steps explained “Sequence diagram for an example `searchchore` command”:  
+1. The user enters `searchchore groceries`  
+2. `KitchenHelper` calls `Parser#parseUserCommand()` which splits the user’s input into 2 parts 
+and enters a switch case for execution.  
+3. `parseUserCommand` in the Parser object will call a method `SearchChoreCommand`.  
+4. On execute(), the list of chore that contains the keyword will be displayed.  
+
+##### 4.3.4.2. Design considerations:
+
+- Alternative 1 (current choice): Find if the keyword is part of the substring of the chore, 
+`[x] buy groceries (by: Tuesday 12pm)`.   
+ 
+|     |     |
+|-----|-----|
+|**Pros** | 1. Easily to find by any attributes such as description and date.|  
+|**Cons** | 1. Searching `buy groceries [x]` will fail to show any matching result.|
+
+- Alternative 2: Take in all the predicates given by the user and find using the predicates as a keyword  
+
+|     |     |
+|-----|-----|
+|**Pros** | 1. More accurate searching of the chore is available for the user..|  
+|**Cons** | 1. Requires users to enter more precise predicate keywords which could be more inconvenient.|
+
 ### 4.4. Storage
+#### 4.4.1. Select files to load from and save to
+
+The select files to load from and save to feature allows the user to choose an option to either load their data from the auto-save mode or the manual-save mode. The auto-save mode keeps track of and stores all changes made in the program and provides the user with the most recent representation of their inventory. While the manual-save mode stores the state of the program data from the most recent usage of the save command by the user. 
+
+If the user chooses the manual-save mode, it will overwrite all the data stored in auto-save mode. However, any subsequent changes made to the program data will be saved by auto-save mode regardless of initial load options. To save by manual-save mode, the user will have to use the save current state function with the save command (see section 4.4.2).
+
+##### 4.4.1.1. Implementation  
+
+{insert sequence diagram of searchingredient command}
+
+
+
+##### 4.4.1.2. Design considerations:
+
+Aspects: How saving of files executes:  
+
+- Alternative 1 (current choice): Overwriting files with entire current ArrayLists every time changes are made.
+
+|     |     |
+|-----|-----|
+|**Pros** | Easier to implement when it comes to delete commands as there is no need to loop through the whole ArrayList to find and compare the object to delete and update files.|  
+|**Cons** | Takes more time to load and save.|
+
+- Alternative 2: Appending the new changes to the files every time changes are made.
+
+|     |     |
+|-----|-----|
+|**Pros** | Faster as there is no need to go through the whole ArrayList whenever we save since changes are appended individually.|  
+|**Cons** | Difficult and slower to implement for commands that require deletion of objects.|
+
+#### 4.4.2. Save current state
+The save current state feature allows the user to store the current state of the program data by manual-save mode. Manual-save mode data will be updated and replaced with the current state when save command is implemented.
+
+##### 4.4.2.1. Implementation  
+
+{insert sequence diagram of searchingredient command}
+
+
+##### 4.4.2.2. Design considerations:
+
+Aspects: How saving of current state data executes:
+
+- Alternative 1 (current choice): Using Files.copy to copy content of auto-save files to manual-save files.
+
+|     |     |
+|-----|-----|
+|**Pros** | Easy to implement as less code is needed with Java 7 Files helper class.|  
+|**Cons** | Relatively slow copy performance when file size increases.|
+
+- Alternative 2: Using FileChannels to copy content of auto-save files to manual-save files.
+
+|     |     |
+|-----|-----|
+|**Pros** | The FileChannels technique is usually faster than its alternatives such as basic streams.|  
+|**Cons** | It may fail for very large files and more lines of codes are needed for implementation.|
+
 
 ### 4.5. Logging
 Logging in the application refers to storing exceptions, warnings and messages that occur during the execution of Kitchen Helper. It was included to help developers to identify bugs and to simplify their debugging process. 
