@@ -57,7 +57,7 @@ The addition of the ingredient feature allows the user to keep track of the ingr
 For example, `addingredient /n beef /c meat /q 2 /p 20 /e 2020-02-18` will add the ingredient `beef` 
 which have the following attributes:  category `meat`, quantity `2`, price `$20` and expiry `2020-02-18`  
 
-##### 4.1.1.1. Implementation
+##### Implementation
 
 {insert sequence diagram of addingredient command}  
 
@@ -78,7 +78,7 @@ otherwise it will throw an `InvalidCommand` along with the syntax of `addingredi
 The search for ingredients feature allows the user to find ingredients using a keyword in the ingredient’s list.  
 For example, `searchingredient beef` will find all the ingredients that contain `beef`.  
 
-##### 4.1.4.1. Implementation  
+##### Implementation  
 
 {insert sequence diagram of searchingredient command}
 
@@ -89,7 +89,7 @@ and enters a switch case for execution.
 3. `parseUserCommand` in the Parser object will call a method `SearchIngredientCommand`.
 4. On execute(), the list of ingredients that contains the keyword will be displayed.
 
-##### 4.1.4.2. Design considerations:
+##### Design considerations:
 
 Aspects: How `searchingredient` executes:  
 
@@ -132,7 +132,7 @@ The search for recipe feature allows the user to find recipes using a keyword in
 For example, `searchrecipe Chicken` will find all recipes that contain `Chicken`.  
 
 
-##### 4.2.4.1. Implementation
+##### Implementation
 
 {insert sequence diagram of searchrecipe command}
 
@@ -143,7 +143,7 @@ and enters a switch case for execution.
 3. `parseUserCommand` in the Parser object will call a method `SearchRecipeCommand`.  
 4. On execute(), the list of recipes' name that contains the keyword will be displayed.  
 
-##### 4.2.4.2. Design considerations:
+##### Design considerations:
 
 Aspects: How `searchrecipe` executes:  
 
@@ -171,7 +171,7 @@ and returns the recipe’s name and the index of recipe in the recipe’s list.
 The search for chore feature allows the user to find chores using a keyword in the chore’s list.  
 For example, `searchchore groceries` will find all chores that contain `groceries`.  
 
-##### 4.3.4.1. Implementation  
+##### Implementation  
 
 {insert sequence diagram of searchchore command}
 
@@ -182,7 +182,7 @@ and enters a switch case for execution.
 3. `parseUserCommand` in the Parser object will call a method `SearchChoreCommand`.  
 4. On execute(), the list of chore that contains the keyword will be displayed.  
 
-##### 4.3.4.2. Design considerations:
+##### Design considerations:
 
 - Alternative 1 (current choice): Find if the keyword is part of the substring of the chore, 
 `[x] buy groceries (by: Tuesday 12pm)`.   
