@@ -19,6 +19,7 @@ By: `Team CS2113T-M16-2` Since: `March 2020` License: `MIT`
       - [3.3.2. List recipe: `listrecipe`](#332-list-all-recipes-listrecipe-all)  
       - [3.3.3. Delete a recipe: `deleterecipe`](#333-delete-a-recipe-deleterecipe)
       - [3.3.4. Search for recipe: `searchrecipe`](#334-search-for-recipe-searchrecipe)  
+      - [3.3.5. Cooking a recipe: `cookrecipe`](#335-cooking-a-recipe-cookrecipe)
 
     + [3.4. Chore](#34-chore)  
       - [3.4.1. Adding a chore: `addchore`](#341-adding-a-chore-addchore)  
@@ -118,13 +119,11 @@ Search by ingredient's expiry date.
 #### 3.3.1. Adding a recipe: `addrecipe`
 Adds a new unique recipe into the List in Kitchen Helper.
 
-__Format:__ `addrecipe /n <recipe name> /i <ingredient_name>:<quantity>:<category>[,..]`
+__Format:__ `addrecipe /n <recipe_name> /i <ingredient_name>:<quantity>:<category>[,..]`
 
-__Example of usage:__ 
-* `addrecipe /n Rice Ball /i Rice:3:staple`
-   Creates a new recipe called `Rice Ball` which contains one ingredient mainly `3` portions of `Rice`.
-* `addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable`
-   Creates a new recipe called `Chicken Salad` which contains two ingredients mainly `2` portions of `Chicken Breast` and `4` portions of `Lettuce`.
+Example |  Outcome
+--------|------------------
+Command: <br> `addrecipe /n Rice Ball /i Rice:3:staple` <br> Description: <br> Creates a new recipe called `Rice Ball` which contains one ingredient, `3` portions of `Rice`. | addrecipe /n Rice Ball /i Rice:3:staple <br>Rice Ball Recipe has been created with 1 ingredients inside.<br>===================================================`
 
 #### 3.3.2. List recipes: `listrecipe 1`
 Prints out details of recipe added by the user. Allow users to choose which recipe to print out from.
@@ -137,6 +136,8 @@ __Example of usage:__
 
 #### 3.3.3. Delete a recipe: `deleterecipe`
 Deletes the specific recipe name or index from the list in Kitchen Helper. The name or index of the recipe can be found by displaying the list of recipes. 
+
+#### Listing all recipes: `listrecipe all`
 
 __Format__: `deleterecipe /n <RECIPE>` OR `deleterecipe /i <RECIPE_INDEX>`
 
@@ -155,6 +156,14 @@ __Example of usage:__
 * `searchrecipe Chicken Stew`  
 Search by recipe's name.
 
+#### 3.3.5. Cooking a recipe: `cookrecipe`
+Cooks a recipe specified by the user by the recipe’s name.
+
+__Format:__ `cookrecipe /n <recipe_name> /p <number_of_pax>`
+
+Example |  Outcome
+--------|------------------
+`cookrecipe /n chicken salad /p 2` | Cooks the ‘chicken salad’ recipe with a pax 2.
 
 ### 3.4. Chore
 
