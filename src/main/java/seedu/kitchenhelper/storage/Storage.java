@@ -1,5 +1,6 @@
 package seedu.kitchenhelper.storage;
 
+import seedu.kitchenhelper.command.AddChoreCommand;
 import seedu.kitchenhelper.object.Recipe;
 import seedu.kitchenhelper.object.Chore;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
@@ -11,9 +12,13 @@ import seedu.kitchenhelper.object.ingredient.Staple;
 import seedu.kitchenhelper.object.ingredient.Vegetable;
 import seedu.kitchenhelper.object.ingredient.Miscellaneous;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Date;
 import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -246,7 +251,9 @@ public class Storage {
             String userData = scanner.nextLine();
             char isDone = userData.charAt(1);
             String[] description = userData.substring(4).split(" \\(by: ");
-            Chore todo = new Chore(description[0], description[1].substring(0, description[1].length() - 1));
+            //Chore todo = new Chore(description[0], description[1].substring(0, description[1].length() - 1));
+            Chore todo =
+                    createChore(description[0], description[1].substring(0, description[1].length() - 1));
 
             if (isDone == '/') {
                 todo.markAsDone();
@@ -255,6 +262,16 @@ public class Storage {
         }
         scanner.close();
         return choreList;
+    }
+
+    public Chore createChore(String description, String dateStr) {
+        try {
+            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+            Date date = dateFormat.parse(dateStr);
+            return new Chore(description, date);
+        } catch (ParseException e) {
+            return new Chore(description, dateStr);
+        }
     }
 
 
