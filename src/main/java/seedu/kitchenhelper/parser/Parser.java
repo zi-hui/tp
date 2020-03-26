@@ -23,7 +23,6 @@ import seedu.kitchenhelper.command.Command;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.DayOfWeek;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -348,6 +347,9 @@ public class Parser {
             int indexToDelete = Integer.parseInt(parameters.trim());
             return new DeleteChoreCommand(indexToDelete);
         } catch (NumberFormatException e) {
+            if (parameters.trim().equalsIgnoreCase("all")) {
+                return new DeleteChoreCommand();
+            }
             return new InvalidCommand(
                     String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, DeleteChoreCommand.COMMAND_FORMAT));
         }

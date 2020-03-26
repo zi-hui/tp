@@ -44,7 +44,6 @@ public class AddChoreCommand extends Command {
     public AddChoreCommand(String description, Date date) {
         this.description = description;
         this.date = date;
-        System.out.println(new SimpleDateFormat().format(date));
     }
 
     /**
