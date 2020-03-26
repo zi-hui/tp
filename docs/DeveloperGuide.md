@@ -25,6 +25,8 @@ By: `CS2113T-M16-2` Since: `2020`
       - [4.3.3. Delete all/ specific chore(s)](#433-delete-all-specific-chores)
       - [4.3.4. Search for chore based on keyword(s)](#434-search-for-chore-based-on-keywords)
     + [4.4. Storage](#44-storage)
+      - [4.4.1. Select files to load from and save to](#441-selection-of-load-files)
+      - [4.4.2. Save current state](#442-save-current-state)
     + [4.5. Logging](#45-logging)
     + [4.6. Configuration](#46-configuration)
   * [Appendices](#appendices)
@@ -231,6 +233,62 @@ and enters a switch case for execution.
 |**Cons** | 1. Requires users to enter more precise predicate keywords which could be more inconvenient.|
 
 ### 4.4. Storage
+#### 4.4.1. Select files to load from and save to
+
+The select files to load from and save to feature allows the user to choose an option to either load their data from the auto-save mode or the manual-save mode. The auto-save mode keeps track of and stores all changes made in the program and provides the user with the most recent representation of their inventory. While the manual-save mode stores the state of the program data from the most recent usage of the save command by the user. 
+
+If the user chooses the manual-save mode, it will overwrite all the data stored in auto-save mode. However, any subsequent changes made to the program data will be saved by auto-save mode regardless of initial load options. To save by manual-save mode, the user will have to use the save current state function with the save command (see section 4.4.2).
+
+##### 4.4.1.1. Implementation  
+
+{insert sequence diagram of searchingredient command}
+
+
+
+##### 4.4.1.2. Design considerations:
+
+Aspects: How saving of files executes:  
+
+- Alternative 1 (current choice): Overwriting files with entire current ArrayLists every time changes are made.
+
+|     |     |
+|-----|-----|
+|**Pros** | Easier to implement when it comes to delete commands as there is no need to loop through the whole ArrayList to find and compare the object to delete and update files.|  
+|**Cons** | Takes more time to load and save.|
+
+- Alternative 2: Appending the new changes to the files every time changes are made.
+
+|     |     |
+|-----|-----|
+|**Pros** | Faster as there is no need to go through the whole ArrayList whenever we save since changes are appended individually.|  
+|**Cons** | Difficult and slower to implement for commands that require deletion of objects.|
+
+#### 4.4.2. Save current state
+The save current state feature allows the user to store the current state of the program data by manual-save mode. Manual-save mode data will be updated and replaced with the current state when save command is implemented.
+
+##### 4.4.2.1. Implementation  
+
+{insert sequence diagram of searchingredient command}
+
+
+##### 4.4.2.2. Design considerations:
+
+Aspects: How saving of current state data executes:
+
+- Alternative 1 (current choice): Using Files.copy to copy content of auto-save files to manual-save files.
+
+|     |     |
+|-----|-----|
+|**Pros** | Easy to implement as less code is needed with Java 7 Files helper class.|  
+|**Cons** | Relatively slow copy performance when file size increases.|
+
+- Alternative 2: Using FileChannels to copy content of auto-save files to manual-save files.
+
+|     |     |
+|-----|-----|
+|**Pros** | The FileChannels technique is usually faster than its alternatives such as basic streams.|  
+|**Cons** | It may fail for very large files and more lines of codes are needed for implementation.|
+
 
 ### 4.5. Logging
 Logging in the application refers to storing exceptions, warnings and messages that occur during the execution of Kitchen Helper. It was included to help developers to identify bugs and to simplify their debugging process. 
