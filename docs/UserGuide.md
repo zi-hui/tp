@@ -16,7 +16,7 @@ By: `Team CS2113T-M16-2` Since: `March 2020` License: `MIT`
 
     + [3.3. Recipe](#33-recipe)  
       - [3.3.1. Adding a recipe: `addrecipe`](#331-adding-a-recipe-addrecipe)  
-      - [3.3.2. List recipe: `listrecipe`](#332-list-all-recipes-listrecipe-all)  
+      - [3.3.2. List recipe: `listrecipe`](#332-list-recipes-listrecipe-1)  
       - [3.3.3. Delete a recipe: `deleterecipe`](#333-delete-a-recipe-deleterecipe)
       - [3.3.4. Search for recipe: `searchrecipe`](#334-search-for-recipe-searchrecipe)  
       - [3.3.5. Cooking a recipe: `cookrecipe`](#335-cooking-a-recipe-cookrecipe)
@@ -41,7 +41,7 @@ So what are you waiting for? Let’s go!
 ## 2. Quick Start
 
 1. Ensure that you have Java `11` or above installed on your computer.
-2. Down the latest version of `KitchenHelper` from [here](https://github.com/AY1920S2-CS2113T-M16-2/tp/releases).
+2. Download the latest version of `KitchenHelper` from [here](https://github.com/AY1920S2-CS2113T-M16-2/tp/releases).
 3. Copy the file to the folder you want to use as the home folder for KitchenHelper.
 4. Type the command `java -jar kitchenhelper.jar` in the command prompt to start the application.
 5. Type the command in the command box and press `Enter` to execute it.  
@@ -87,6 +87,7 @@ __Example of usage:__
 * `listingredient all`
 * `listingredient meat`
 * `listingredient vegetable`
+
 #### 3.2.3. Delete an ingredient: `deleteingredient`
 Delete the specified ingredient or reduce an ingredient’s quantity from the ingredients inventory in Kitchen Helper using ingredient's name or index. 
 The name or index of the ingredient can be found by displaying the list of ingredients. 
