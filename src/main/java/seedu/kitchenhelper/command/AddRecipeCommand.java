@@ -1,6 +1,5 @@
 package seedu.kitchenhelper.command;
 
-import seedu.kitchenhelper.KitchenHelper;
 import seedu.kitchenhelper.exception.KitchenHelperException;
 import seedu.kitchenhelper.object.Chore;
 import seedu.kitchenhelper.object.Recipe;
