@@ -25,6 +25,8 @@ By: `CS2113T-M16-2` Since: `2020`
       - [4.3.3. Delete all/ specific chore(s)](#433-delete-all-specific-chores)
       - [4.3.4. Search for chore based on keyword(s)](#434-search-for-chore-based-on-keywords)
     + [4.4. Storage](#44-storage)
+      - [4.4.1. Select files to load from and save to](#441-selection-of-load-files)
+      - [4.4.2. Save current state](#442-save-current-state)
     + [4.5. Logging](#45-logging)
     + [4.6. Configuration](#46-configuration)
   * [Appendices](#appendices)
@@ -89,6 +91,42 @@ following, it will return the items belonging into the category,
 otherwise it will throw an `InvalidCommand` along with the syntax of `listingredient command`  
 5. On execute(), the ingredient in the list will be printed out.
 #### 4.1.3. Delete all/ specific ingredients(s)
+The deletion feature for ingredients allows the user to delete ingredients either by the name or index of the ingredients. In addition to that, it allows users to reduce the quantity of a specific ingredient. 
+
+<b>Implementation</b><br>
+When the user attempts to reduce the quantity of ingredient at index 1 of the ingredients inventory by 4,  the `Kitchen Helper`, ‘Parser’ and ‘DeleteRecipeCommand` class will be called upon. The following sequence of steps will then occur: 
+1. The user keyed in “deleteingredient /i 1 /q 4”`. 
+    2. A `UI` object will be created and it will call `UI#getUserCommand()` method to take in the input that the user has keyed in.
+    3. A `String` object will be returned and saved into the `userCommandInput` variable in `Kitchen Helper`.
+    4. The variable `userCommandInput` is being parsed into the `Parser` class as an argument for this method `Parser#parseUserCommand`.
+2. The command inserted by the user is being parsed into the `Parser` and a new `Command` object is being created. 
+    2. The variable `userCommandInput` will be identified as `deleteingredient` in the `Parser#parseUserCommand()`.The `Parser#prepareDeleteIngredient()` is being called to prepare the `userCommandInput` string to create a `DeleteIngredientCommand` object.
+    3. The `DeleteIngredientCommand` object is created with the ingredientIndex and quantity set to 4. 
+3. The Command is now being executed. 
+    2. The `DeleteIngredientCommand#execute()` will be called.
+    3. As this is a deletion by ingredient index, the `ingredientIndex` variable is not null. As the `ingredientIndex` is not null, `DeleteIngredientCommand#deleteIngredientByIndex()`.
+    4. Next, `DeleteIngredientCommand#deleteIngredient()` is called to reduce the quantity of this ingredient since the `quantity` variable is not null. 
+    6. Next, `DeleteIngredientCommand#updateNewQuantity()` will be called to update the quantity of this ingredient in our ingredients’ inventory.
+    7. Lastly, a String called `feedbackToUser`will be returned to the user to inform the user of the outcome of the command. 
+4. The details will then be printed onto the console using `Ui#showResultToUser(result)`.
+
+<b>Design Considerations</b> <br>
+Aspect: How is the `DeleteIngredientCommand` initialise. <br>
+<br>
+Alternative 1 (Current Choice) <br>
+
+|     |     |
+|-----|-----|
+|**Pros** | This gives us more flexibility on what object can be created with different variables since there are two methods of delete of ingredients. |  
+|**Cons** | There is an overload of constructors.|
+
+Alternative 2 <br>
+
+|     |     |
+|-----|-----|
+|**Pros** |The Parser can call for one main default constructor. |
+|**Cons** | The single constructor will need to deal with 2 different methods of deletion, causing the constructor to have more than one purpose.|
+
 #### 4.1.4. Search for ingredients based on keyword(s)
 
 The search for ingredients feature allows the user to find ingredients using a keyword in the ingredient’s list.  
@@ -157,6 +195,42 @@ following, it will return the details belonging to the recipe,
 otherwise it will throw an `InvalidCommand` along with the syntax of `listrecipe command`  
 5. On execute(), the details in the recipe will be printed out.
 #### 4.2.3. Delete all/ specific recipe(s)
+The deletion feature for specific recipes allows the user to delete recipes either by the name or index of the recipe. 
+
+<b>Implementation</b> <br>
+When the user attempts to delete the `Chicken Rice` recipe from Kitchen Helper, the `Kitchen Helper`, `Parser` and `DeleteRecipeCommand` class will be called upon. The following sequence of steps will then occur: 
+1. The user keyed in “deleterecipe /n `Chicken Rice”`.
+    2. A `UI` object will be created and it will call `UI#getUserCommand()` method to take in the input that the user has keyed in. 
+    3. A `String` object will be returned and saved into the `userCommandInput` variable in `Kitchen Helper`. 
+    4. The variable `userCommandInput` is being parsed into the `Parser` class as an argument for this method `Parser#parseUserCommand()`.
+2. The command inserted by the user is being parsed into the `Parser` and a new `Command` object is being created. 
+    2. The variable `userCommandInput` will be identified as `deleterecipe` in the `Parser#parseUserCommand()`.The `Parser#prepareDeleteRecipe()` is being called to prepare the `userCommandInput` string to create a `DeleteRecipeCommand` object.
+3. The command is now being executed.
+    2. The `DeleteRecipeCommand#execute()` will be called.
+    3. As this is a deletion by recipe name, the `recipeIndex` variable is set as null. As the variable is null, `DeleteRecipeCommand#deleteRecipeByName()` will be called.
+    4. Next, the `DeleteRecipeCommand#getRecipeIndex()` to get the index based on the recipe name that the user has inputted. With the given index, `DeleteRecipeCommand#deleteRecipe()` will be called to delete the recipe. 
+    5. Lastly, a String called `feedbackToUser`will be returned to the user to inform the user of the outcome of the command. 
+4. The details will then be printed onto the console using `Ui#showResultToUser(result)`.
+
+
+<b>Design Considerations</b> <br>
+Aspect: How is the `DeleteRecipeCommand` initialise. <br>
+<br>
+Alternative 1 (Current Choice): Usage of 2 constructors <br>
+
+|     |     |
+|-----|-----|
+|**Pros** | This gives us more flexibility on what object can be created with different variables since there are two methods of recipe deletion. |  
+|**Cons** | There is an overload of constructors.|
+
+Alternative 2: Usage of 1 constructor <br>
+
+|     |     |
+|-----|-----|
+|**Pros** |The Parser can call for one main default constructor. |
+|**Cons** | The single constructor will need to deal with 2 different methods of deletion, causing the constructor to have more than one purpose.|
+
+
 #### 4.2.4. Search for recipe based on keyword(s)
 
 The search for recipe feature allows the user to find recipes using a keyword in the recipe’s list.  
@@ -231,6 +305,62 @@ and enters a switch case for execution.
 |**Cons** | 1. Requires users to enter more precise predicate keywords which could be more inconvenient.|
 
 ### 4.4. Storage
+#### 4.4.1. Select files to load from and save to
+
+The select files to load from and save to feature allows the user to choose an option to either load their data from the auto-save mode or the manual-save mode. The auto-save mode keeps track of and stores all changes made in the program and provides the user with the most recent representation of their inventory. While the manual-save mode stores the state of the program data from the most recent usage of the save command by the user. 
+
+If the user chooses the manual-save mode, it will overwrite all the data stored in auto-save mode. However, any subsequent changes made to the program data will be saved by auto-save mode regardless of initial load options. To save by manual-save mode, the user will have to use the save current state function with the save command (see section 4.4.2).
+
+##### 4.4.1.1. Implementation  
+
+{insert sequence diagram of searchingredient command}
+
+
+
+##### 4.4.1.2. Design considerations:
+
+Aspects: How saving of files executes:  
+
+- Alternative 1 (current choice): Overwriting files with entire current ArrayLists every time changes are made.
+
+|     |     |
+|-----|-----|
+|**Pros** | Easier to implement when it comes to delete commands as there is no need to loop through the whole ArrayList to find and compare the object to delete and update files.|  
+|**Cons** | Takes more time to load and save.|
+
+- Alternative 2: Appending the new changes to the files every time changes are made.
+
+|     |     |
+|-----|-----|
+|**Pros** | Faster as there is no need to go through the whole ArrayList whenever we save since changes are appended individually.|  
+|**Cons** | Difficult and slower to implement for commands that require deletion of objects.|
+
+#### 4.4.2. Save current state
+The save current state feature allows the user to store the current state of the program data by manual-save mode. Manual-save mode data will be updated and replaced with the current state when save command is implemented.
+
+##### 4.4.2.1. Implementation  
+
+{insert sequence diagram of searchingredient command}
+
+
+##### 4.4.2.2. Design considerations:
+
+Aspects: How saving of current state data executes:
+
+- Alternative 1 (current choice): Using Files.copy to copy content of auto-save files to manual-save files.
+
+|     |     |
+|-----|-----|
+|**Pros** | Easy to implement as less code is needed with Java 7 Files helper class.|  
+|**Cons** | Relatively slow copy performance when file size increases.|
+
+- Alternative 2: Using FileChannels to copy content of auto-save files to manual-save files.
+
+|     |     |
+|-----|-----|
+|**Pros** | The FileChannels technique is usually faster than its alternatives such as basic streams.|  
+|**Cons** | It may fail for very large files and more lines of codes are needed for implementation.|
+
 
 ### 4.5. Logging
 Logging in the application refers to storing exceptions, warnings and messages that occur during the execution of Kitchen Helper. It was included to help developers to identify bugs and to simplify their debugging process. 
