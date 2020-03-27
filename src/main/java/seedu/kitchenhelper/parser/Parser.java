@@ -411,9 +411,10 @@ public class Parser {
     }
     
     /**
-     * Check if the user input a valid date
-     * @param expiry the user input date
-     * @return the date in the form of dd/MM/yyyy
+     * Check if the user input a valid date.
+     *
+     * @param expiry the user input date.
+     * @return the date in the form of dd/MM/yyyy.
      */
     public String parseDateFormat(String expiry) {
         String[] splitExpiry = expiry.split("/");
