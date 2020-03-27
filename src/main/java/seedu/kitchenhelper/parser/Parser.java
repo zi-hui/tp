@@ -213,7 +213,6 @@ public class Parser {
             cookCmd.setRecipeName(recipeName);
             cookCmd.setRecipePax(numOfPax);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("hi");
             return new InvalidCommand(
                     String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, cookCmd.COMMAND_FORMAT));
         }

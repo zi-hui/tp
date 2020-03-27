@@ -20,6 +20,11 @@ public class CookRecipeCommand extends Command {
             = "Example: cookrecipe /n Chicken Salad /p 2";
     public static final String COMMAND_FORMAT =
             String.format("%s %s\n%s", COMMAND_DESC, COMMAND_PARAMETER, COMMAND_EXAMPLE);
+    public static final String COMMAND_FAILURE_RECIPE_NOT_EXISTS = "The given recipe name does not exist!";
+    public static final String COMMAND_FAILURE_INSUFFICIENT_INGREDIENTS = "There are insufficient/"
+                                                                            + "missing ingredients!";
+    public static final String KITCHEN_HELPER_COOK = "Kitchen Helper is trying to cook!";
+    public static final String COMMAND_SUCCESS = "%s was cooked with a pax of %d";
     public String recipeName;
     public int pax;
 
@@ -36,18 +41,18 @@ public class CookRecipeCommand extends Command {
         // checks if the specified recipe given by user exists
         int indexOfRecipe = checkIfRecipeExist(recipeList);
         if (indexOfRecipe > recipeList.size()) {
-            return "The given recipe name does not exist!";
+            return COMMAND_FAILURE_RECIPE_NOT_EXISTS;
         }
-        System.out.println("Kitchen Helper is trying to cook!");
+        System.out.println(KITCHEN_HELPER_COOK);
         Recipe recipeToBeCooked = recipeList.get(indexOfRecipe - 1);
 
         if (checkForSufficientIngredient(ingredientList, recipeToBeCooked)) {
             deductIngredients(ingredientList, recipeToBeCooked);
         } else {
-            return "There are insufficient/ missing ingredients!";
+            return COMMAND_FAILURE_INSUFFICIENT_INGREDIENTS;
         }
 
-        return recipeName + " was cooked with a pax of " + pax;
+        return String.format(COMMAND_SUCCESS, recipeName, pax);
     }
 
     /**

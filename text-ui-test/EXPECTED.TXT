@@ -215,7 +215,7 @@ Chicken Salad was cooked with a pax of 2
 ===================================================
 cookrecipe /n Chicken Salad /p 3
 Kitchen Helper is trying to cook!
-There are insufficient/ missing ingredients!
+There are insufficient/missing ingredients!
 ===================================================
 deleteingredient /n Beef
 Beef has been deleted.
