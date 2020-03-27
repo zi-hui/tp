@@ -5,6 +5,7 @@ import seedu.kitchenhelper.object.Chore;
 import seedu.kitchenhelper.object.Recipe;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -34,7 +35,7 @@ public class CookRecipeCommand extends Command {
             throws KitchenHelperException {
         // checks if the specified recipe given by user exists
         int indexOfRecipe = checkIfRecipeExist(recipeList);
-        if (indexOfRecipe >= recipeList.size()) {
+        if (indexOfRecipe > recipeList.size()) {
             throw new KitchenHelperException("The given recipe name does not exist");
         }
         System.out.println("Kitchen Helper is trying to cook!");
@@ -57,12 +58,35 @@ public class CookRecipeCommand extends Command {
      */
     public void deductIngredients(ArrayList<Ingredient> ingredientList, Recipe recipeToBeCooked) {
         for (Ingredient ingredient : recipeToBeCooked.getRecipeItem()) {
-            // write a function to get all the ingredients with the same name
-            // sort that output according to expiry im not sure if its already sorted
-            // when u loop through the ingredient list
-            // deduct accordingly - the ones that will expire first
+            String ingredientName = ingredient.getIngredientName();
+            ArrayList<Ingredient> listOfSameName = getIngredientsWithSameName(ingredientList, ingredientName);
+            int totalCookedQty = pax * ingredient.getQuantity();
+            for (Ingredient ingredientToDeduct : listOfSameName) {
+                int quantity = ingredientToDeduct.getQuantity();
+                if (totalCookedQty == 0) {
+                    break;
+                }
+                else if (quantity <= totalCookedQty) {
+                    totalCookedQty -= quantity;
+                    ingredientToDeduct.setQuantity(0);
+                } else if (quantity > totalCookedQty) {
+                    ingredientToDeduct.setQuantity(quantity - totalCookedQty);
+                    totalCookedQty = 0;
+                }
+            }
         }
     }
+
+    public ArrayList<Ingredient> getIngredientsWithSameName(ArrayList<Ingredient> ingredientList, String ingredientName) {
+        ArrayList<Ingredient> listOfSameName = new ArrayList<>();
+        for (Ingredient ingredient : ingredientList) {
+            if (ingredient.getIngredientName().equalsIgnoreCase(ingredientName)) {
+                listOfSameName.add(ingredient);
+            }
+        }
+        return listOfSameName;
+    }
+
 
     /**
      * Checks if the recipe user wants exist.
@@ -91,11 +115,8 @@ public class CookRecipeCommand extends Command {
      */
     public Boolean checkForSufficientIngredient(ArrayList<Ingredient> ingredientList, Recipe recipeToBeCooked) {
         boolean isSufficient = true;
-        System.out.println("it came here");
         for (Ingredient ingr : recipeToBeCooked.getRecipeItem()) {
             int totalCookedQty = pax * ingr.getQuantity();
-            System.out.println(totalCookedQty);
-            System.out.println(getIngredientQty(ingr.getIngredientName().toLowerCase(), ingredientList));
             if (getIngredientQty(ingr.getIngredientName().toLowerCase(), ingredientList) < totalCookedQty) {
                 isSufficient = false;
             }

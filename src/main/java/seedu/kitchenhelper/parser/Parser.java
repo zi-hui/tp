@@ -194,6 +194,7 @@ public class Parser {
             cookRecipe.setRecipeName(recipeName);
             cookRecipe.setRecipePax(numOfPax);
         } catch (IndexOutOfBoundsException e) {
+            System.out.println("hi");
             return new InvalidCommand(
                     String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, cookRecipe.COMMAND_FORMAT));
         }

@@ -3,10 +3,14 @@ addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable
 addrecipe /n Chicken Stew /i Chicken Breast:2:meat, Lettuce:4:vegetable
 addingredient /n Beef /c meat /q 3 /p 20 /e 2020-03-18
 addingredient /n Beef cubes /c meat /q 3 /p 20 /e 2020-03-18
+addingredient /n Chicken Breast /c meat /q 4 /p 20 /e 2020-03-20
+addingredient /n Chicken Breast /c meat /q 3 /p 20 /e 2020-03-18
 addingredient /n kailan /c Vegetable /q 30 /p 30.45 /e 2020-03-12
 addingredient /n HL Milk /c Dairy /q 3 /p 12.2 /e 2020-03-14
 addingredient /n Milo /c Drink /q 30 /p 10 /e 2020-012-20
 addingredient /n Pear /c fruit /q 1 /p 1 /e 2020-02-02
+addingredient /n Lettuce /c Vegetable /q 4 /p 20 /e 2020-03-20
+addingredient /n Lettuce /c Vegetable /q 8 /p 20 /e 2020-03-09
 listingredient all
 addingredient /n Apple /c fruit /q 1 /p 1 /e 2020-02-02
 listingredient all
@@ -24,6 +28,8 @@ addchore buy groceries
 searchchore groceries
 searchingredient beef
 searchrecipe chicken
+cookrecipe /n Chicken Salad /p 2
+cookrecipe /n Chicken Salad /p 3
 deleteingredient /n Beef
 deleteingredient /n Beef cubes
 deleteingredient /n kailan /q 35
@@ -32,6 +38,10 @@ deleterecipe /n Chicken Salad
 deleterecipe /n Chicken Salad
 deleterecipe /n Chicken Stew
 deleteingredient /n HL milk
+deleteingredient /i 4
+deleteingredient /i 3
+deleteingredient /i 2
+deleteingredient /i 1
 deletechore 1
 listingredient all
 listchore
