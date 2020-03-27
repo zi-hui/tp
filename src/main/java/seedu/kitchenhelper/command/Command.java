@@ -13,44 +13,18 @@ import java.util.ArrayList;
  * Abstract class to represent user's command.
  */
 public abstract class Command {
-
+    
     public static String actionType; //add, delete, list
     public static String objectType; //ingredient, recipe, chore
     public static String objectVariables;
-
+    
     public Command() {
     }
-
-    public String getActionType() {
-        return actionType;
-    }
-
-    public String getObjectType() {
-        return objectType;
-    }
-
+    
     public String getObjectVariables() {
         return objectVariables;
     }
-
-    /**
-     * Set the Action Type for the Command.
-     */
-
-    public void setActionType(String command) {
-        actionType = command;
-    }
-
-    /**
-     * Set the Object Type for the Command.
-     *
-     * @param type the name of the object type
-     */
-
-    public void setObjectType(String type) {
-        objectType = type;
-    }
-
+    
     /**
      * Set the Object Variables for Command.
      *
@@ -59,16 +33,25 @@ public abstract class Command {
     public void setObjectVariables(String attribute) {
         objectVariables = attribute;
     }
-
-
-    public String listIngredients(ArrayList<Ingredient> ingredientsList) {
-        return "";
+    
+    /**
+     * Set the Action Type for the Command.
+     */
+    
+    public void setActionType(String command) {
+        actionType = command;
     }
-
-    public String listRecipe(String objectVariables, ArrayList<Recipe> recipeList) {
-        return "";
+    
+    /**
+     * Set the Object Type for the Command.
+     *
+     * @param type the name of the object type
+     */
+    
+    public void setObjectType(String type) {
+        objectType = type;
     }
-
+    
     /**
      * Runs the command given by user.
      *
