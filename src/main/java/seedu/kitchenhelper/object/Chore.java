@@ -6,21 +6,12 @@ public class Chore {
     public String description;
     public String date;
     public boolean isDone;
-    public String editType;
     public static final String MESSAGE_SUCCESS = "You have %s this chore:\n%s\nNow you have %s chore%s in the list.";
 
     public Chore(String description, String date) {
         this.description = description;
         this.date = date;
         this.isDone = false;
-    }
-
-    public void setEditType(String command) {
-        if (command.equals("add")) {
-            this.editType = "added";
-        } else {
-            this.editType = "deleted";
-        }
     }
 
     public boolean markAsDone() {

@@ -34,7 +34,6 @@ public class DeleteRecipeCommand extends Command {
      * @param recipeName name of the recipe to be deleted
      *
      */
-
     public DeleteRecipeCommand(String recipeName) {
         setActionType(COMMAND_WORD);
         setObjectType(OBJECT_TYPE);
@@ -48,7 +47,6 @@ public class DeleteRecipeCommand extends Command {
      * @param recipeIndex index of the recipe to be deleted
      *
      */
-
     public DeleteRecipeCommand(Integer recipeIndex) {
         setActionType(COMMAND_WORD);
         setObjectType(OBJECT_TYPE);
@@ -62,7 +60,6 @@ public class DeleteRecipeCommand extends Command {
      * @param recipeList the list of recipe
      * @return
      */
-
     public int getRecipeIndex(String recipeName, ArrayList<Recipe> recipeList) {
         for (Recipe recipe : recipeList) {
             if (recipe.getRecipeName().equalsIgnoreCase(recipeName)) {
@@ -78,7 +75,6 @@ public class DeleteRecipeCommand extends Command {
      *
      * @param recipeList the list of recipe
      */
-
     public String deleteRecipe(ArrayList<Recipe> recipeList, Integer recipeIndex) {
         String feedbackToUser;
         if (recipeIndex > -1 && recipeIndex < recipeList.size()) {
@@ -99,7 +95,6 @@ public class DeleteRecipeCommand extends Command {
      *
      * @param recipeList the list of recipe
      */
-
     public String deleteRecipeByIndex(ArrayList<Recipe> recipeList) {
         int index = this.recipeIndex;
         String feedbackToUser = deleteRecipe(recipeList, index);
@@ -111,7 +106,6 @@ public class DeleteRecipeCommand extends Command {
      *
      * @param recipeList the list of recipe
      */
-
     public String deleteRecipeByName(ArrayList<Recipe> recipeList) {
         String recipeName = this.objectVariables;
         int recipeIndex = getRecipeIndex(recipeName, recipeList);
@@ -127,7 +121,6 @@ public class DeleteRecipeCommand extends Command {
      * @param choreList      list of chores.
      * @return the execution of the deletion of ingredients or tasks.
      */
-
     @Override
     public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
                                   ArrayList<Chore> choreList) throws KitchenHelperException {

@@ -274,7 +274,6 @@ public class Parser {
      * @return hashmap of a formatted list of parameters to be deleted.
      * @throws KitchenHelperException if the command is invalid
      */
-
     private Command prepareDeleteRecipe(String parameters) throws KitchenHelperException {
         try {
             if (parameters.contains("/i")) {
@@ -297,7 +296,6 @@ public class Parser {
      * @return hashmap of a formatted list of parameters to be deleted.
      * @throws KitchenHelperException if the command is invalid
      */
-
     private Command prepareDeleteIngredient(String parameters) throws KitchenHelperException {
         try {
             String [] typeAndName = parameters.split("/n|/i\\s", 2);

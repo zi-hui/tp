@@ -16,6 +16,14 @@ public class ExitCommand extends Command {
     public static final String MESSAGE_USAGE = String.format("%s: %s", COMMAND_WORD, COMMAND_DESC) + Ui.LS + String
             .format("Example: %s", COMMAND_WORD);
 
+    /**
+     * {@inheritDoc}
+     *
+     * @param ingredientList list of ingredients.
+     * @param recipeList     list of recipes.
+     * @param choreList      list of chores.
+     * @return the success message exiting.
+     */
     public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
                                  ArrayList<Chore> choreList) {
         return new CommandResult(MESSAGE_EXIT);
