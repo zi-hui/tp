@@ -12,9 +12,13 @@ import seedu.kitchenhelper.object.ingredient.Staple;
 import seedu.kitchenhelper.object.ingredient.Vegetable;
 import seedu.kitchenhelper.object.ingredient.Miscellaneous;
 
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -46,6 +50,14 @@ public class Storage {
         this.filePathChore = filePathChore;
     }
 
+    public static void copyFile(File source, File dest) {
+        try {
+            Files.copy(source.toPath(), dest.toPath(),
+                    StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * Gets the saved Ingredient data from text file.
@@ -89,7 +101,7 @@ public class Storage {
      * @param expiry ingredient expiry date.
      * @param ingredientList the ArrayList to store ingredients.
      */
-    void loadingIngredients(String name, String category, Integer quantity, Double price, String expiry,
+    public void loadingIngredients(String name, String category, Integer quantity, Double price, String expiry,
                             ArrayList<Ingredient> ingredientList) {
 
         switch (category.toLowerCase()) {

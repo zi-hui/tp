@@ -24,6 +24,11 @@ public class Ui {
      */
     private static final String COMMENT_LINE_FORMAT_REGEX = "#.*";
     private static final String WELCOME_MESSAGE = "Hello! I'm KitchenHelper here" + LS + "What can I do for you?";
+
+    public static final String MESSAGE_TO_CHOOSE_STATE = "Please enter '1' for auto-save and '2' for manual-save:";
+    public static final String MESSAGE_FOR_AUTO_SAVE = "Okay auto-save chosen.";
+    public static final String MESSAGE_FOR_SAVED_STATE = "Okay manual-save chosen.";
+    public static final String MESSAGE_INVALID_USER_CHOICE = "Invalid Choice! PLease choose either option 1 or 2";
     
     private final Scanner in;
     private final PrintStream out;
@@ -43,6 +48,30 @@ public class Ui {
 
     public void printInvalidCmd() {
         System.out.println("Invalid Command, please check your format!");
+    }
+
+    public String getUserChoice() {
+        System.out.println(DIVIDER);
+        System.out.println(MESSAGE_TO_CHOOSE_STATE);
+        String userChoice;
+        userChoice = in.nextLine();
+        return userChoice;
+    }
+
+    public void askForReInput() {
+        System.out.println(MESSAGE_INVALID_USER_CHOICE);
+        validUserChoice(getUserChoice());
+    }
+
+    public void validUserChoice(String userChoice) {
+        System.out.println(DIVIDER);
+        if (userChoice.equals("1")) {
+            System.out.println(MESSAGE_FOR_AUTO_SAVE);
+        } else if (userChoice.equals("2")) {
+            System.out.println(MESSAGE_FOR_SAVED_STATE);
+        } else {
+            askForReInput();
+        }
     }
     
     //@@author AY1920S2-CS2113T-M16-2-reused
@@ -123,5 +152,9 @@ public class Ui {
      */
     public void showResultToUser(CommandResult result) {
         showToConsole(result.feedbackToUser);
+    }
+
+    public static void errorMessage(String err) {
+        System.out.println(err);
     }
 }
