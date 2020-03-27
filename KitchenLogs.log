@@ -1,4 +1,0 @@
-Mar 16, 2020 5:17:34 PM seedu.kitchenhelper.command.AddIngredientCommand execute
-INFO: A new ingredient has been added
-Mar 16, 2020 5:17:46 PM seedu.kitchenhelper.command.AddRecipeCommand addRecipe
-INFO: A new recipe has been added
