@@ -37,6 +37,9 @@ Example: addingredient /n Beef /c Meat /q 1 /p 13.5 /e 2020-02-13
 addingredient /n Pear /c fruit /q 1 /p 1 /e 2020-02-02
 You have added Ingredient:Pear Category:fruit Quantity:1 Price:$1.00 Expiry:2020-02-02 to the ingredient list
 ===================================================
+cookrecipe /n Chicken Salad /p 1
+There are insufficient/ missing ingredients!
+===================================================
 listingredient all
 Here is the list of Ingredients in Inventory:
 Format : Ingredient Name|Quantity|Price|Expiry

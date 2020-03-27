@@ -9,6 +9,9 @@ import seedu.kitchenhelper.ui.Ui;
 
 import java.util.ArrayList;
 
+/**
+ * Represent the keyword used to identify the action.
+ */
 public class DoneCommand extends Command {
 
     public static final String COMMAND_WORD = "done";
@@ -24,10 +27,21 @@ public class DoneCommand extends Command {
 
     private int indexToCheck;
 
+    /**
+     * Mark item at index as done.
+     *
+     * @param indexToCheck  the index to mark.
+     */
     public DoneCommand(int indexToCheck) {
         this.indexToCheck = indexToCheck;
     }
 
+    /**
+     * Marks specified chore as completed.
+     *
+     * @param choreList the list of chores
+     * @return  the message when task has been marked as done.
+     */
     public String markChoreDone(ArrayList<Chore> choreList) {
         try {
             if (indexToCheck > choreList.size()) {
@@ -42,7 +56,14 @@ public class DoneCommand extends Command {
         }
     }
 
-
+    /**
+     * {@inheritDoc}
+     *
+     * @param ingredientList list of ingredients.
+     * @param recipeList     list of recipes.
+     * @param choreList      list of chores.
+     * @return the success message of marking item as done.
+     */
     @Override
     public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
                                  ArrayList<Chore> choreList) {

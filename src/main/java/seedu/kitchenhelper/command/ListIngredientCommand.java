@@ -79,10 +79,20 @@ public class ListIngredientCommand extends Command {
         return result;
     }
 
+    /**
+     * Retrieves the category of ingredient.
+     *
+     * @return  catgeory of ingredient.
+     */
     public String getCategory() {
         return this.category;
     }
 
+    /**
+     * Checks if the user is listing an exisitng catgeory.
+     *
+     * @return true if the category is defined, false otherwise.
+     */
     public boolean checkCategoryValid() {
         boolean validCategory = false;
         for (String catName : categoryArray) {
@@ -91,10 +101,6 @@ public class ListIngredientCommand extends Command {
             }
         }
         return validCategory;
-    }
-
-    public String[] getCategoryArray() {
-        return this.categoryArray;
     }
 
     /**

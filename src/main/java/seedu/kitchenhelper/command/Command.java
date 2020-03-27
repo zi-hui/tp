@@ -20,7 +20,7 @@ public abstract class Command {
     
     public Command() {
     }
-    
+
     public String getObjectVariables() {
         return objectVariables;
     }
