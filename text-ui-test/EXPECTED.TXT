@@ -2,6 +2,8 @@
 Hello! I'm KitchenHelper here
 What can I do for you?
 ===================================================
+You have no deadlines upcoming in the next 3 days.
+===================================================
 addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable
 Chicken Salad Recipe has been created with 2 ingredients inside.
 ===================================================

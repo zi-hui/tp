@@ -20,6 +20,11 @@ import seedu.kitchenhelper.command.CookRecipeCommand;
 import seedu.kitchenhelper.command.InvalidCommand;
 import seedu.kitchenhelper.exception.KitchenHelperException;
 import seedu.kitchenhelper.command.Command;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -166,20 +171,28 @@ public class Parser {
      * @return the prepared command.
      */
     public Command prepareAddChore(String attributes) {
+        String description;
+        String dateStr;
         try {
             String[] descriptionAndDate = attributes.split("/by");
-            String description = descriptionAndDate[0].trim();
+            description = descriptionAndDate[0].trim();
             if (description.isEmpty()) {
                 throw new KitchenHelperException(
                         String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, AddChoreCommand.COMMAND_FORMAT));
             }
-            String date = descriptionAndDate[1].trim();
-            return new AddChoreCommand(description, date);
+            dateStr = descriptionAndDate[1].trim();
         } catch (IndexOutOfBoundsException e) {
             return new InvalidCommand(
                     String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, AddChoreCommand.COMMAND_FORMAT));
         } catch (KitchenHelperException khe) {
             return new InvalidCommand(khe.getMessage());
+        }
+        try {
+            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+            Date date = dateFormat.parse(dateStr);
+            return new AddChoreCommand(description, date);
+        } catch (ParseException e) {
+            return new AddChoreCommand(description, dateStr);
         }
     }
 
@@ -337,6 +350,9 @@ public class Parser {
             int indexToDelete = Integer.parseInt(parameters.trim());
             return new DeleteChoreCommand(indexToDelete);
         } catch (NumberFormatException e) {
+            if (parameters.trim().equalsIgnoreCase("all")) {
+                return new DeleteChoreCommand();
+            }
             return new InvalidCommand(
                     String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, DeleteChoreCommand.COMMAND_FORMAT));
         }

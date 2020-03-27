@@ -168,20 +168,52 @@ Example |  Outcome
 ### 3.4. Chore
 
 #### 3.4.1. Adding a chore: `addchore`
+Adds a chore to the chore list in Kitchen Helper.
+
+__Format:__ `addchore <task_description> /by <deadline>`  
+
+Example |  Outcome
+--------|------------------
+Command: <br> `addchore buy groceries /by Monday 12pm` <br> Description: <br> Creates a new chore called `buy groceries` which contains the deadline `Monday 12pm.` | addchore buy groceries /by Monday 12pm <br> You have added this chore: <br> [x] buy groceries (by: Monday 12pm) <br> Now you have 2 chores in the list. <br> ===================================================
+
 
 #### 3.4.2. List chore: `listchore`
+Displays all the items currently in the chore list in Kitchen Helper.
+__Format:__ `listchore`  
+
+Example |  Outcome
+--------|------------------
+Command: <br> `listchore` | listchore <br> Here are the chores in your list: <br> 1. [x] buy groceries (by: Monday 12pm) <br> 2. [/] scrub the floor (by: this Saturday) <br> ===================================================
+
 
 #### 3.4.3. Delete a chore: `deletechore`
+Deletes the chore specified by the index in the chore list in Kitchen Helper. The index of the chore can be found by displaying the list of chores.
+__Format:__ `deletechore <index_to_delete>`  
 
-#### 3.4.3. Search for chore: `searchchore`
-Search for chores based on a given keyword.  
+<<<<<<< HEAD
+Example |  Outcome
+--------|------------------
+Command: <br> `deletechore 1` <br> Description: <br> Deletes the item specified by `index 1` in the chore list. | deletechore 1 <br> You have deleted this chore: <br> [x] buy groceries (by: Monday 12pm) <br> Now you have 0 chores in the list. <br> ===================================================
 
+
+#### 3.4.4. Search for chore: `searchchore`
+Search for chores based on given keyword.  
 __Format:__ `searchchore KEYWORD`  
 
 Example |  Outcome
 --------|------------------
 Command: <br> `searchchore groceries` <br> Description: <br> Search by chore's description. | searchchore groceries <br> Here are your matching chores in your list <br> 1.\[x\] buy groceries (by: Tuesday 12pm) <br> ===================================================
 Command: <br> `searchchore Tuesday` <br> Description: <br> Search by chore's date. | searchchore Tuesday <br> Here are your matching chores in your list <br> 1.\[x\] buy groceries (by: Tuesday 12pm) <br> ===================================================
+
+
+#### 3.4.5. Mark chore as done: `done`
+Marks the chore specified by the index in the chore list in Kitchen Helper as done. The index of the chore can be found by displaying the list of chores.
+__Format:__ `done <index_to_check>`  
+
+Example |  Outcome
+--------|------------------
+Command: <br> `done 1` <br> Description: <br> Marks the item specified by `index 1` in the chore list as done. | done 1 <br> You have completed this chore: <br> [/] buy groceries (by: Monday 12pm) <br> <br> ===================================================
+
 
 ## 4. FAQ
 
