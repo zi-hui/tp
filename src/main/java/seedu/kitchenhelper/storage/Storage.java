@@ -1,6 +1,5 @@
 package seedu.kitchenhelper.storage;
 
-import seedu.kitchenhelper.command.AddChoreCommand;
 import seedu.kitchenhelper.object.Recipe;
 import seedu.kitchenhelper.object.Chore;
 import seedu.kitchenhelper.object.ingredient.Ingredient;

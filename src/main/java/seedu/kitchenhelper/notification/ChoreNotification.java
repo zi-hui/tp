@@ -3,7 +3,6 @@ package seedu.kitchenhelper.notification;
 import seedu.kitchenhelper.object.Chore;
 import seedu.kitchenhelper.ui.Ui;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
