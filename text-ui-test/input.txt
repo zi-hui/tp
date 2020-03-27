@@ -1,3 +1,4 @@
+1
 addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable
 addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable
 addrecipe /n Chicken Stew /i Chicken Breast:2:meat, Lettuce:4:vegetable
