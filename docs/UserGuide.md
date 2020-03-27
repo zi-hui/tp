@@ -54,6 +54,10 @@ So what are you waiting for? Let’s go!
 
 ## 3. Features 
 
+Command Format: 
+- Words that are enclosed by angle brackets are the parameters to be supplied by the user. E.g. `deleterecipe /n <recipe_name>`
+- Items in angle brackets with the word “optional:'' are optional. E.g. `deleteingredient /n <ingredient_name>:<optional:quantity>` can be used as `deleteingredient /n apple or deleteingredient /n name /q 2`
+
 ### 3.1. General Commands
 #### 3.1.1. Viewing help: `help`
 Shows a list of available commands and their usages.  
