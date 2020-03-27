@@ -9,6 +9,7 @@ public class Chore {
     public String dateStr = null;
     public Date date = null;
     public boolean isDone;
+    public static final String MESSAGE_SUCCESS = "You have %s this chore:\n%s\nNow you have %s chore%s in the list.";
 
     public Chore(String description, String dateStr) {
         this.description = description;

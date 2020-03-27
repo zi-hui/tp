@@ -21,14 +21,6 @@ public abstract class Command {
     public Command() {
     }
 
-    public String getActionType() {
-        return actionType;
-    }
-
-    public String getObjectType() {
-        return objectType;
-    }
-
     public String getObjectVariables() {
         return objectVariables;
     }

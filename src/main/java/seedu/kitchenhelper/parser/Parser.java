@@ -109,8 +109,7 @@ public class Parser {
         try {
             ingredientList = attributes.substring(attributes.indexOf("/i") + 3);
             String[] splitedIngr = ingredientList.split("[,][\\s]");
-            for (int i = 0; i < splitedIngr.length;i++) {
-
+            for (int i = 0; i < splitedIngr.length; i++) {
                 String item = splitedIngr[i];
                 String[] ingrContent = item.split(":");
                 String[] nameAndType = new String[2];
@@ -207,17 +206,17 @@ public class Parser {
      * @return the prepared command.
      */
     private Command prepareCookRecipe(String attributes) {
-        CookRecipeCommand cookRecipe = new CookRecipeCommand();
+        CookRecipeCommand cookCmd = new CookRecipeCommand();
         try {
             String recipeName = attributes.substring(attributes.indexOf("/n") + 3, attributes.indexOf("/p") - 1);
             int numOfPax = Integer.parseInt(attributes.substring(attributes.indexOf("/p") + 3));
-            cookRecipe.setRecipeName(recipeName);
-            cookRecipe.setRecipePax(numOfPax);
+            cookCmd.setRecipeName(recipeName);
+            cookCmd.setRecipePax(numOfPax);
         } catch (IndexOutOfBoundsException e) {
             return new InvalidCommand(
-                    String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, cookRecipe.COMMAND_FORMAT));
+                    String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, cookCmd.COMMAND_FORMAT));
         }
-        return cookRecipe;
+        return cookCmd;
     }
 
     /**
@@ -294,7 +293,6 @@ public class Parser {
      * @return hashmap of a formatted list of parameters to be deleted.
      * @throws KitchenHelperException if the command is invalid
      */
-
     private Command prepareDeleteRecipe(String parameters) throws KitchenHelperException {
         try {
             if (parameters.contains("/i")) {
@@ -317,7 +315,6 @@ public class Parser {
      * @return hashmap of a formatted list of parameters to be deleted.
      * @throws KitchenHelperException if the command is invalid
      */
-
     private Command prepareDeleteIngredient(String parameters) throws KitchenHelperException {
         try {
             String [] typeAndName = parameters.split("/n|/i\\s", 2);
