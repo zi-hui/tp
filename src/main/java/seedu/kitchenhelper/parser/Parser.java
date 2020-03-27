@@ -200,17 +200,17 @@ public class Parser {
      * @return the prepared command.
      */
     private Command prepareCookRecipe(String attributes) {
-        CookRecipeCommand cookRecipe = new CookRecipeCommand();
+        CookRecipeCommand cookCmd = new CookRecipeCommand();
         try {
             String recipeName = attributes.substring(attributes.indexOf("/n") + 3, attributes.indexOf("/p") - 1);
             int numOfPax = Integer.parseInt(attributes.substring(attributes.indexOf("/p") + 3));
-            cookRecipe.setRecipeName(recipeName);
-            cookRecipe.setRecipePax(numOfPax);
+            cookCmd.setRecipeName(recipeName);
+            cookCmd.setRecipePax(numOfPax);
         } catch (IndexOutOfBoundsException e) {
             return new InvalidCommand(
-                    String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, cookRecipe.COMMAND_FORMAT));
+                    String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, cookCmd.COMMAND_FORMAT));
         }
-        return cookRecipe;
+        return cookCmd;
     }
 
     /**

@@ -98,14 +98,14 @@ public class AddRecipeCommand extends Command {
      *          false otherwise.
      */
     public Boolean checkIfRecipeExist(String newRecipeName, ArrayList<Recipe> recipeList) {
-        boolean existence = false;
+        boolean isExist = false;
         for (Recipe recipe : recipeList) {
             if (recipe.getRecipeName().equalsIgnoreCase(newRecipeName)) {
-                existence = true;
+                isExist = true;
                 break;
             }
         }
-        return existence;
+        return isExist;
     }
 
 
