@@ -60,7 +60,6 @@ public class ListRecipeCommand extends Command {
             Recipe recipeItem = recipeArrayList.get(itemNum - 1);
             result += "Recipe Name:" + recipeItem.getRecipeName() + "\n";
             ArrayList<Ingredient> ingredientByCategory = recipeItem.getRecipeItem();
-            Collections.sort(ingredientByCategory, Comparator.comparing(Ingredient::getCategoryName));
             for (int i = 0; i < ingredientByCategory.size(); i++) {
                 Ingredient ingredientObj = ingredientByCategory.get(i);
                 result += ingredientObj.getIngredientName() + "|" + ingredientObj.getCategoryName()
@@ -69,15 +68,6 @@ public class ListRecipeCommand extends Command {
             }
         }
         return result;
-    }
-
-    public void executeIngredientStorage(ArrayList<Ingredient> ingredientList, Storage storage){
-    }
-
-    public void executeChoreStorage(ArrayList<Chore> choreList, Storage storage){
-    }
-
-    public void executeRecipeStorage(ArrayList<Recipe> recipeList, Storage storage){
     }
 
     /**

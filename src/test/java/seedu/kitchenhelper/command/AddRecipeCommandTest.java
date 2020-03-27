@@ -1,6 +1,7 @@
 package seedu.kitchenhelper.command;
 
 import org.junit.jupiter.api.Test;
+import seedu.kitchenhelper.exception.KitchenHelperException;
 import seedu.kitchenhelper.object.Recipe;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 public class AddRecipeCommandTest {
 
     @Test
-    public void addRecipe_testPass() {
+    public void addRecipe_testPass() throws KitchenHelperException {
         HashMap<String[], Integer> parsedIngr = new HashMap<>();
         String[] ingr = new String[2];
         ingr[0] = "milo";
@@ -26,7 +27,7 @@ public class AddRecipeCommandTest {
     }
 
     @Test
-    public void addRecipe_testFail() {
+    public void addRecipe_testFail() throws KitchenHelperException {
         HashMap<String[], Integer> parsedIngr = new HashMap<>();
         String[] ingr = new String[2];
         ingr[0] = "milo";

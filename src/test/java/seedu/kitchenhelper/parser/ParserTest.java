@@ -6,6 +6,9 @@ import seedu.kitchenhelper.command.AddIngredientCommand;
 import seedu.kitchenhelper.command.AddChoreCommand;
 import seedu.kitchenhelper.command.DeleteChoreCommand;
 import seedu.kitchenhelper.command.InvalidCommand;
+import seedu.kitchenhelper.command.SearchIngredientCommand;
+import seedu.kitchenhelper.command.SearchRecipeCommand;
+import seedu.kitchenhelper.command.SearchChoreCommand;
 import seedu.kitchenhelper.exception.KitchenHelperException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -20,6 +23,9 @@ class ParserTest {
     void parseUserCommand_testPass() throws KitchenHelperException {
         assertTrue(new Parser().parseUserCommand(
                 "addingredient /n Beef /c Meat /q 30 /p 20.2 /e 2020-02-20") instanceof AddIngredientCommand);
+        assertTrue(new Parser().parseUserCommand("searchingredient Beef") instanceof SearchIngredientCommand);
+        assertTrue(new Parser().parseUserCommand("searchrecipe chicken") instanceof SearchRecipeCommand);
+        assertTrue(new Parser().parseUserCommand("searchchore groceries") instanceof SearchChoreCommand);
     }
     
     @Test
