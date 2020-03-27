@@ -94,13 +94,11 @@ The name or index of the ingredient can be found by displaying the list of ingre
 
 __Format__: `deleteingredient /n <INGREDIENT> [/q QUANTITY]` OR `deleteingredient /i <INGREDIENT_INDEX> [/q QUANTITY]`
 
-__Example of usage:__
-* `deleteingredient /n apple /q 2` <br>
-Deletes 2 apples from the total quantity of apples. 
-* `deleteingredient /n wagyu beef` <br>
-Deletes the ingredient named `wagyu beef` from the ingredients inventory.
-* `deleteingredient /i 1` <br>
-Delete ingredient by index. In this case, delete the ingredient with index of 1.
+Example |  Outcome
+--------|------------------
+Command: <br> `deleteingredient /n apple /q 2` <br> Description: <br> Deletes `2 apples` from the total quantity of `apples.` | `deleteingredient /n apple /q 2` <br> `The quantity of apple has been changed!`
+Command: <br> `deleteingredient /n wagyu beef` <br> Deletes the ingredient named `wagyu beef` from the ingredients list. | `deleteingredient /n wagyu beef` <br> `wagyu beef has been deleted.`
+Command: <br> `deleteingredient /i 1` <br> Deletes the item specified by `index 1` in the ingredient list. | `deleteingredient /i 1` <br> `apple has been deleted.`
 
 #### 3.2.4. Search for ingredient: `searchingredient`
 Search for ingredients based on a given keyword.  
@@ -127,6 +125,8 @@ Command: <br> `addrecipe /n Rice Ball /i Rice:3:staple` <br> Description: <br> C
 #### 3.3.2. List recipes: `listrecipe 1`
 Prints out details of recipe added by the user. Allow users to choose which recipe to print out from.
 
+#### Listing all recipes: `listrecipe all`
+
 __Format:__ `listrecipe <recipe number>`
 
 __Example of usage:__
@@ -136,15 +136,12 @@ __Example of usage:__
 #### 3.3.3. Delete a recipe: `deleterecipe`
 Deletes the specific recipe name or index from the list in Kitchen Helper. The name or index of the recipe can be found by displaying the list of recipes. 
 
-#### Listing all recipes: `listrecipe all`
-
 __Format__: `deleterecipe /n <RECIPE>` OR `deleterecipe /i <RECIPE_INDEX>`
 
-__Example of usage:__
-* `deleterecipe /n pasta`
-  Deletes the recipe with the name of `pasta` from the recipe list.
-* `deleterecipe /i 2`
-  Deletes recipe by index. In this case, delete recipe with the index of 2 from the recipe list.
+Example |  Outcome
+--------|------------------
+Command: <br> `deleterecipe /n pasta` <br> Description: <br> Deletes the recipe with the name of `pasta` from the recipe list.| `deleterecipe /n pasta` <br> `pasta has been deleted.`
+Command: <br> `deleterecipe /i 2` <br> Description: <br> Deletes recipe by index. In this case, delete recipe with the `index 2` from the recipe list. | `deleterecipe /i 2` <br> `Beef Salad has been deleted`
 
 #### 3.3.4. Search for recipe: `searchrecipe`
 Search for recipes based on a given keyword.  
@@ -205,7 +202,7 @@ __Ingredient Commands__
 Feature | Command  
 ------- | -------  
 addingredient | `addingredient /n INGREDIENT /c CATEGORY /q QUANTITY /p PRICE /e EXPIRY`<br> e.g. `addingredient /n Beef cubes /c meat /q 3 /p 20 /e 2020-03-18`  
-deleteingredient | `deleteingredient /n INGREDIENT [/q QUANTITY]` OR `deleteingredient /i INGREDIENT_INDEX [/q QUANTITY]` <br> e.g.`deleteingredient /n apple /q 2` OR `deleteingredient /i 1`<br>
+deleteingredient | `deleteingredient /n <ingredient_name>> [/q quantity]` OR `deleteingredient /i <ingredient_index> [/q quantity]` <br> e.g.`deleteingredient /n apple /q 2` OR `deleteingredient /i 1`<br>
 searchingredient | `searchingredient KEYWORD` <br> e.g. `searchingredient beef`  
 
 
@@ -214,7 +211,7 @@ __Recipe Commands__
 Feature | Command  
 ------- | -------  
 addrecipe | `addrecipe /n <recipe name> /i <ingredient_name>:<quantity>:<category>[,..]`
-deleterecipe | `deleterecipe /n <RECIPE>` OR `deleterecipe /i <RECIPE_INDEX>` <br> e.g. `deleterecipe /n pasta` OR `deleterecipe /i 2`<br>
+deleterecipe | `deleterecipe /n <recipe_name>` OR `deleterecipe /i <recipe_index>` <br> e.g. `deleterecipe /n pasta` OR `deleterecipe /i 2`<br>
 searchrecipe | `searchrecipe KEYWORD` <br> e.g. `searchrecipe Chicken Stew`  
 
  
