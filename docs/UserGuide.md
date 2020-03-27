@@ -26,7 +26,11 @@ By: `Team CS2113T-M16-2` Since: `March 2020` License: `MIT`
       - [3.4.2. List chore: `listchore`](#342-list-chore-listchore)  
       - [3.4.3. Delete a chore: `deletechore`](#343-delete-a-chore-deletechore)  
       - [3.4.4. Search for chore: `searchchore`](#343-search-for-chore-searchchore)  
-  
+ 
+    + [3.5 Storage](#35-storage)  
+      - [3.5.1. Select Load Files](#351-select-load-files)  
+      - [3.5.2. Save Current State: `save`](#352-save-current-state-save)
+ 
   * [4. FAQ](#4-faq)  
   * [5. Command Summary](#5-command-summary)
 
@@ -214,6 +218,28 @@ Example |  Outcome
 --------|------------------
 Command: <br> `done 1` <br> Description: <br> Marks the item specified by `index 1` in the chore list as done. | done 1 <br> You have completed this chore: <br> [/] buy groceries (by: Monday 12pm) <br> <br> ===================================================
 
+### 3.5. Storage
+
+#### 3.5.1. Select Load Files
+Prompts the user with the option to either load their data from auto-save mode or the manual-save mode. If the user chooses the manual-save mode,  it will overwrite all the data stored in auto-save mode. However, any subsequent changes made to the program data will be saved through auto-save mode regardless of initial load options, to save through manual-save mode, user will have to use the save command [Section 3.5.3, "Save Current State"](#352-save-current-state-save).
+
+
+
+__Format:__ `addchore <task_description> /by <deadline>`  
+
+Example |  Outcome
+--------|------------------
+Command: <br> `1` <br> Description: <br> Data loaded from most recent auto-save mode files.  | Please enter '1' for auto-save and '2' for manual-save: <br> 1 <br> =================================================== <br> Okay auto-save chosen. <br> ===================================================
+Command: <br> `2` <br> Description: <br> Data loaded from most recent manual-save mode files.  | Please enter '1' for auto-save and '2' for manual-save: <br> 2 <br> =================================================== <br> Okay manual-save chosen. <br> ===================================================
+
+
+#### 3.5.2. Save Current State: `save`
+Saves the current state of the program into manual-save mode files. 
+__Format:__ `save`  
+
+Example |  Outcome
+--------|------------------
+Command: <br> `save` <br>  Description: <br> Data saved into manual-save mode files.  | save <br> You have saved the current state in the following files: outputIngredientCopy.txt, outputRecipeCopy.txt, outputChoreCopy.txt  <br> =================================================== 
 
 ## 4. FAQ
 
@@ -256,3 +282,10 @@ __Chore Commands__
 Feature | Command  
 ------- | -------  
 searchchore | `searchchore KEYWORD` <br> e.g. `searchchore groceries`  
+
+
+__Storage Commands__
+
+Feature | Command  
+------- | -------  
+save current state | `save`  
