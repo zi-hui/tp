@@ -159,12 +159,34 @@ Search by recipe's name.
 ### 3.4. Chore
 
 #### 3.4.1. Adding a chore: `addchore`
+Adds a chore to the chore list in Kitchen Helper.
+
+__Format:__ `addchore <task_description> /by <deadline>`  
+
+__Example of usage:__  
+* `addchore buy groceries /by Monday 12pm`  
+Creates a new chore called `buy groceries` which contains the deadline `Monday 12pm`.
+
+
 
 #### 3.4.2. List chore: `listchore`
+Displays all the items currently in the chore list in Kitchen Helper.
+__Format:__ `listchore`  
+
+__Example of usage:__  
+* `listchore`  
+
 
 #### 3.4.3. Delete a chore: `deletechore`
+Deletes the chore specified by the index in the chore list in Kitchen Helper. The index of the chore can be found by displaying the list of chores.
+__Format:__ `deletechore <index_to_delete>`  
 
-#### 3.4.3. Search for chore: `searchchore`
+__Example of usage:__  
+* `deletechore 1`  
+Deletes the item specified by `index 1` in the chore list.
+
+
+#### 3.4.4. Search for chore: `searchchore`
 Search for chores based on given keyword.  
 
 __Format:__ `searchchore KEYWORD`  
@@ -174,6 +196,16 @@ __Example of usage:__
 Search by chore's description.
 * `searchchore 2020-03-18`  
 Search by chore's date.
+
+
+#### 3.4.5. Mark chore as done: `done`
+Marks the chore specified by the index in the chore list in Kitchen Helper as done. The index of the chore can be found by displaying the list of chores.
+__Format:__ `done <index_to_check>`  
+
+__Example of usage:__  
+* `done 1`  
+Marks the item specified by `index 1` in the chore list as done.
+
 
 ## 4. FAQ
 
