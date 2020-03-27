@@ -28,8 +28,6 @@ public class KitchenHelper {
     public ArrayList<Ingredient> ingredientList = new ArrayList<>();
     public ArrayList<Recipe> recipeList = new ArrayList<>();
     public ArrayList<Chore> choreList = new ArrayList<>();
-    /* Hi pls, look at this main program.
-     * https://github.com/nus-cs2113-AY1920S2/personbook/blob/master/src/main/java/seedu/personbook/Main.java */
     
     private Ui ui;
     private Storage storage;
@@ -47,7 +45,6 @@ public class KitchenHelper {
                 recipeList = new ArrayList<>(storage.getRecipeData());
                 choreList = new ArrayList<>(storage.getChoreData());
             } catch (FileNotFoundException err) {
-                //Ui.errorMessage(err.toString());
                 ingredientList = new ArrayList<>();
                 recipeList = new ArrayList<>();
                 choreList = new ArrayList<>();
@@ -61,7 +58,6 @@ public class KitchenHelper {
                 recipeList = new ArrayList<>(storage.getRecipeData());
                 choreList = new ArrayList<>(storage.getChoreData());
             } catch (FileNotFoundException err) {
-                //Ui.errorMessage(err.toString());
                 ingredientList = new ArrayList<>();
                 recipeList = new ArrayList<>();
                 choreList = new ArrayList<>();
@@ -133,10 +129,7 @@ public class KitchenHelper {
         
         do {
             try {
-                // takes in the user's input
                 userCommandInput = ui.getUserCommand();
-                // parse input to return obj of the corresponding
-                // type of command (i.e add/ delete/ list/ help / exit)
                 command = new Parser().parseUserCommand(userCommandInput);
                 CommandResult result = executeCommand(command);
                 ui.showResultToUser(result);
@@ -156,7 +149,7 @@ public class KitchenHelper {
         System.out.println(choreNotification);
     }
     
-    public static void main(String[] args) throws KitchenHelperException, IOException {
+    public static void main(String[] args) throws KitchenHelperException {
         new KitchenHelper().run();
     }
     
@@ -168,8 +161,6 @@ public class KitchenHelper {
      */
     public CommandResult executeCommand(Command command) {
         try {
-            // to check if you get the right object
-            // System.out.println(command.getClass().getName());
             CommandResult result = command.execute(ingredientList, recipeList, choreList);
             return result;
         } catch (Exception e) {
