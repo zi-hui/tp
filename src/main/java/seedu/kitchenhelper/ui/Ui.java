@@ -4,7 +4,6 @@ import seedu.kitchenhelper.command.CommandResult;
 
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -55,12 +54,8 @@ public class Ui {
         System.out.println(DIVIDER);
         System.out.println(MESSAGE_TO_CHOOSE_STATE);
         String userChoice;
-        try {
-            userChoice = in.nextLine();
-            return userChoice;
-        } catch (InputMismatchException ex) {
-            return "-1";
-        }
+        userChoice = in.nextLine();
+        return userChoice;
     }
 
     public void askForReInput() {
@@ -70,14 +65,11 @@ public class Ui {
 
     public void validUserChoice(String userChoice) {
         System.out.println(DIVIDER);
-        switch (userChoice) {
-        case "1":
+        if (userChoice.equals("1")) {
             System.out.println(MESSAGE_FOR_AUTO_SAVE);
-            break;
-        case "2":
+        } else if (userChoice.equals("2")) {
             System.out.println(MESSAGE_FOR_SAVED_STATE);
-            break;
-        default:
+        } else {
             askForReInput();
         }
     }

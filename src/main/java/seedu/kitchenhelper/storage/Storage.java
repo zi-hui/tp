@@ -43,9 +43,13 @@ public class Storage {
         this.filePathChore = filePathChore;
     }
 
-    public static void copyFile(File source, File dest) throws IOException {
-        Files.copy(source.toPath(), dest.toPath(),
-                StandardCopyOption.REPLACE_EXISTING);
+    public static void copyFile(File source, File dest) {
+        try {
+            Files.copy(source.toPath(), dest.toPath(),
+                    StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

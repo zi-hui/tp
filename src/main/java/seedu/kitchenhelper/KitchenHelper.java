@@ -34,12 +34,13 @@ public class KitchenHelper {
     
     private Ui ui;
     private Storage storage;
-  
-    private void start() throws IOException {
+
+    private void start() {
         ui = new Ui();
         String userChoice = ui.getUserChoice();
         ui.validUserChoice(userChoice);
-        if (userChoice == "1") {
+        ui.showWelcomeMessage();
+        if (userChoice.equals("1")) {
             storage = new Storage("outputIngredient.txt", "outputRecipe.txt",
                     "outputChore.txt");
             try {
@@ -48,11 +49,11 @@ public class KitchenHelper {
                 choreList = new ArrayList<>(storage.getChoreData());
             } catch (FileNotFoundException err) {
                 Ui.errorMessage(err.toString());
-                ingredientList = new ArrayList<>(storage.getIngredientData());
-                recipeList = new ArrayList<>(storage.getRecipeData());
-                choreList = new ArrayList<>(storage.getChoreData());
+                ingredientList = new ArrayList<>();
+                recipeList = new ArrayList<>();
+                choreList = new ArrayList<>();
             }
-        } else if (userChoice == "2") {
+        } else if (userChoice.equals("2")) {
             createNewFiles();
             storage = new Storage("outputIngredientCopy.txt", "outputRecipeCopy.txt",
                     "outputChoreCopy.txt");
@@ -62,18 +63,17 @@ public class KitchenHelper {
                 choreList = new ArrayList<>(storage.getChoreData());
             } catch (FileNotFoundException err) {
                 Ui.errorMessage(err.toString());
-                ingredientList = new ArrayList<>(storage.getIngredientData());
-                recipeList = new ArrayList<>(storage.getRecipeData());
-                choreList = new ArrayList<>(storage.getChoreData());
+                ingredientList = new ArrayList<>();
+                recipeList = new ArrayList<>();
+                choreList = new ArrayList<>();
             }
         }
-        ui.showWelcomeMessage();
     }
 
     /**
      * Populate empty saved state files with current output files if save command have never been called by user.
      */
-    private void createNewFiles() throws IOException {
+    private void createNewFiles() {
         var sourceIngredient = new File("outputIngredient.txt");
         var sourceRecipe = new File("outputRecipe.txt");
         var sourceChore = new File("outputChore.txt");
@@ -93,7 +93,7 @@ public class KitchenHelper {
         }
     }
     
-    private void run() throws KitchenHelperException, IOException {
+    private void run() throws KitchenHelperException {
         setUpLogger();
         start();
         runCommandLoopUntilExitCommand();
