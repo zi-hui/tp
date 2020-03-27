@@ -32,13 +32,6 @@ public class AddRecipeCommand extends Command {
     public HashMap<String[], Integer> parsedIngr;
 
     /**
-     * Set the object's type.
-     */
-    public void setTypeOfObject() {
-        objectType = "recipe";
-    }
-
-    /**
      * Set the attributes of the Command class.
      *
      * @param rawString     full user input string.
@@ -46,7 +39,6 @@ public class AddRecipeCommand extends Command {
      *                      and ingredientQuantity as value.
      */
     public void setAttributesOfCmd(String rawString, HashMap<String[], Integer> ingrAndQty) {
-        setTypeOfObject();
         setObjectVariables(rawString);
         setAction();
         this.parsedIngr = ingrAndQty;
