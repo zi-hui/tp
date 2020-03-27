@@ -47,7 +47,25 @@ By: `CS2113T-M16-2` Since: `2020`
 ## 2. Setting up
 
 ## 3. Design
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+
+### 3.1. Architecture
+### 3.2. Ui Component
+![Ui Component](/docs/images/UI_Component.png | width=150)
+
+API: `Ui.java`
+ 
+The `Ui` component is a singleton class where all interaction will be made through this component
+ 
+The `Ui` component,
+
+* Executes user commands using the command component
+* Listens for changes and outputs messages from the Command component
+
+### 3.3. Logic Component
+### 3.4. Model Component
+### 3.5. Storage Component
+### 3.6. Common Classes 
+Classes used by multiple components are in the `seedu.kitchenhelper.object` package.
 
 ## 4. Implementation
 This section describes some details on how the features are being implemented. All recipe/ ingredient/ chore-related features can be broken down into 4 distinct functionality, addition, listing, deletion and searching.
@@ -170,13 +188,58 @@ Users can add a new recipe to the application where there must be at least one o
 
 When the user attempts to create a new recipe, the `AddRecipeCommand`, ‘Parser’ and `Recipe` class will be accessed and the following sequence of actions are called to create a `recipe` object:
 
-1. User’s input will be parsed and identified with the keyword `addrecipe`.
-2. This will automatically trigger the parsing of the user’s input string into a suitable format for the addition of `recipe` object.
-3. A `AddRecipeCommand` object will be created and checked for an existing recipe with the same name. An exception will be triggered when there is an existing recipe.
-4. `Ingredient`s parsed in step 2 will be added to the newly created recipe according to their category.
-5. Finally, the recipe that is filled with `ingredients` will be added to the list of recipes.
+##### 4.2.1.1. Implementation 
+When the user attempts to create a new recipe, the `AddRecipeCommand`, ‘Parser’ and `Recipe` class will be accessed and the following sequence of actions are called to create a `recipe` object:
+
+1. User executes `addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable` 
+    1. A `Ui` object will be created and calls `Ui#getUserCommand()`
+    1. Input will be parsed in `Command#parseUserCommand()` and identified with the keyword `addrecipe`.
+    
+    ![Add Recipe Step 1](/docs/images/AddRecipe1.png | width=150)
+2. Parsing of user input and creation of command object
+    1. This will automatically trigger the parsing of the user’s input string into a suitable format for the addition of `recipe` object in `Command#prepareAddRecipe()`.
+    1. A `AddRecipeCommand` object will be created and calls `AddRecipeCommand#setAttributesOfCmd()` to set the contents of the command into reader friendly formats.
+    
+    ![Add Recipe Step 2](/docs/images/AddRecipe2.png | width=150)
+3. Executing Command
+    1. The newly created object will call `#AddRecipeCommand#execute` which starts the process of adding a recipe, thus calling `Recipe#AddRecipe()`.
+    1. A `Recipe` object will be created with its name that was parsed in step 2.
+    1. An additional step is included where a check for an existing recipe with the same name is conducted with `#AddRecipeCommand#checkIfRecipeExist()`. A `KitchenHelperException` exception will be triggered when there is an existing recipe.
+    
+    ![Add Recipe Step 3](/docs/images/AddRecipe3.png | width=150)
+4. `Ingredient`s parsed in step 2 will be added to the newly created recipe according to their category through the calling of `Recipe#addIngredientsToRecipe()`.
+	
+	![Add Recipe Step 4](/docs/images/AddRecipe4.png | width=150)
 
 All description and warnings to the user utilises the `UI` class, which controls the printing of the text on the console. 
+
+The following sequence diagram shows how the `addrecipe` command works
+
+{insert diagram}
+
+##### 4.2.1.2. Design Considerations
+Aspect: Parsing of the user’s input command
+
+Alternative 1 (current choice): The key parameters that are required are divided by the delimiter of ‘/’ followed by a specific letter. `(i.e. /i)`
+
+|     |     |
+|-----|-----|
+|**Pros** | User would be able to have strings that may contain spaces (i.e. /n Chicken Salad /i Breast meat:2:meat) |
+|**Cons** | The order of delimiters needs to be standardized, users will not be able to re-order the delimiters. |
+
+Alternative 2: Multiple prompts for user’s input of a recipe name and ingredient(s)
+
+|     |     |
+|-----|-----|
+|**Pros** | Users would not have to make sure that their command is syntactically right |
+|**Cons** | The constant prompting could subject the application to a negative experience in the difficulty to use the commands. |
+
+Alternative 3: User’s command are divided by space
+
+|     |     |
+|-----|-----|
+|**Pros** | The parsing can be easily done by calling Java built-in function `.split()` |
+|**Cons** | Values for each variable cannot contain spaces which makes the application restrictive. |
 
 #### 4.2.2. List all/ specific recipe(s)
 The listing of Recipe feature shows the user the existing recipe and it's details that is added by the user.
