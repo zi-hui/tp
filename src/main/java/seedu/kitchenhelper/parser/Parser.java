@@ -398,10 +398,6 @@ public class Parser {
     public boolean isValidUserInputFormat(String attributes, String regex) {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(attributes);
-        boolean isMatch = matcher.matches();
-        if (isMatch) {
-            return true;
-        }
-        return false;
+        return matcher.matches();
     }
 }

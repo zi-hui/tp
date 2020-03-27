@@ -153,8 +153,5 @@ public class Ui {
     public void showResultToUser(CommandResult result) {
         showToConsole(result.feedbackToUser);
     }
-
-    public static void errorMessage(String err) {
-        System.out.println(err);
-    }
+    
 }
