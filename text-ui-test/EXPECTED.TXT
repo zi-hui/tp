@@ -172,8 +172,8 @@ Here are your matching chores in your list
 ===================================================
 searchingredient beef
 Here are your matching ingredients in your list
-1.[Meat] Beef Qty:3 $20.0 Exp:18/03/2020
-2.[Meat] Beef cubes Qty:3 $20.0 Exp:18/03/2020
+1.[Meat] Beef Qty:3 $20.00 Exp:18/03/2020
+2.[Meat] Beef cubes Qty:3 $20.00 Exp:18/03/2020
 ===================================================
 searchrecipe chicken
 Here are your matching recipes in your list

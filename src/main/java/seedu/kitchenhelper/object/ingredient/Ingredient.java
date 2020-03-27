@@ -10,6 +10,7 @@ public abstract class Ingredient {
     private int quantity;
     private double price;
     private String expiryDate;
+    private static final String FIND_PARAMETERS = "%s Qty:%d $%.2f Exp:%s";
 
     /**
      * Constructor for Ingredient.
@@ -93,7 +94,7 @@ public abstract class Ingredient {
     }
     
     public String toFind() {
-        return getIngredientName() + " Qty:" + getQuantity() + " $" + getPrice() + " Exp:" + getExpiryDate();
+        return String.format(FIND_PARAMETERS, getIngredientName(), getQuantity(), getPrice(), getExpiryDate());
     }
 
     /**
