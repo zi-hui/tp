@@ -36,7 +36,7 @@ public class CookRecipeCommand extends Command {
         // checks if the specified recipe given by user exists
         int indexOfRecipe = checkIfRecipeExist(recipeList);
         if (indexOfRecipe > recipeList.size()) {
-            throw new KitchenHelperException("The given recipe name does not exist");
+            return "The given recipe name does not exist!";
         }
         System.out.println("Kitchen Helper is trying to cook!");
         Recipe recipeToBeCooked = recipeList.get(indexOfRecipe - 1);
@@ -44,7 +44,7 @@ public class CookRecipeCommand extends Command {
         if (checkForSufficientIngredient(ingredientList, recipeToBeCooked)) {
             deductIngredients(ingredientList, recipeToBeCooked);
         } else {
-            throw new KitchenHelperException("There are insufficient/ missing ingredients!");
+            return "There are insufficient/ missing ingredients!";
         }
 
         return recipeName + " was cooked with a pax of " + pax;
@@ -65,8 +65,7 @@ public class CookRecipeCommand extends Command {
                 int quantity = ingredientToDeduct.getQuantity();
                 if (totalCookedQty == 0) {
                     break;
-                }
-                else if (quantity <= totalCookedQty) {
+                } else if (quantity <= totalCookedQty) {
                     totalCookedQty -= quantity;
                     ingredientToDeduct.setQuantity(0);
                 } else if (quantity > totalCookedQty) {
@@ -77,7 +76,16 @@ public class CookRecipeCommand extends Command {
         }
     }
 
-    public ArrayList<Ingredient> getIngredientsWithSameName(ArrayList<Ingredient> ingredientList, String ingredientName) {
+    /**
+     * Get a list of ingredients that has the same name as the specified ingredient.
+     *
+     * @param ingredientList    the list of ingredients available.
+     * @param ingredientName  the ingredient to check for its occurrence in the ingredientlist
+     * @return a list of ingredients with the same name as ingredientName
+     */
+
+    public ArrayList<Ingredient> getIngredientsWithSameName(ArrayList<Ingredient> ingredientList,
+                                                            String ingredientName) {
         ArrayList<Ingredient> listOfSameName = new ArrayList<>();
         for (Ingredient ingredient : ingredientList) {
             if (ingredient.getIngredientName().equalsIgnoreCase(ingredientName)) {
@@ -170,11 +178,8 @@ public class CookRecipeCommand extends Command {
     @Override
     public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
                                  ArrayList<Chore> choreList) throws KitchenHelperException {
-        try {
-            String message = cookRecipe(ingredientList, recipeList);
-            return new CommandResult(message);
-        } catch (KitchenHelperException e) {
-            return new CommandResult("There are insufficient/ missing ingredients!");
-        }
+        String message = cookRecipe(ingredientList, recipeList);
+        return new CommandResult(message);
     }
+
 }

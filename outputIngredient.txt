@@ -1,7 +1,0 @@
-/n Chicken Breast /c meat /q 0 /p 20.0 /e 2020-03-18
-/n Chicken Breast /c meat /q 1 /p 20.0 /e 2020-03-20
-/n Chicken Breast /c meat /q 4 /p 20.0 /e 2020-03-20
-/n Lettuce /c Vegetable /q 0 /p 20.0 /e 2020-03-09
-/n Lettuce /c Vegetable /q 8 /p 20.0 /e 2020-03-09
-/n Lettuce /c Vegetable /q 0 /p 20.0 /e 2020-03-20
-/n Lettuce /c Vegetable /q 4 /p 20.0 /e 2020-03-20
