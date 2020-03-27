@@ -1,24 +1,32 @@
 package seedu.kitchenhelper.parser;
 
 import seedu.kitchenhelper.command.AddChoreCommand;
-import seedu.kitchenhelper.command.AddRecipeCommand;
 import seedu.kitchenhelper.command.AddIngredientCommand;
-import seedu.kitchenhelper.command.DeleteRecipeCommand;
-import seedu.kitchenhelper.command.DeleteIngredientCommand;
+import seedu.kitchenhelper.command.AddRecipeCommand;
+import seedu.kitchenhelper.command.Command;
 import seedu.kitchenhelper.command.DeleteChoreCommand;
-import seedu.kitchenhelper.command.ListRecipeCommand;
-import seedu.kitchenhelper.command.ListIngredientCommand;
-import seedu.kitchenhelper.command.ListChoreCommand;
-import seedu.kitchenhelper.command.SearchRecipeCommand;
-import seedu.kitchenhelper.command.SearchIngredientCommand;
-import seedu.kitchenhelper.command.SearchChoreCommand;
-import seedu.kitchenhelper.command.HelpCommand;
+import seedu.kitchenhelper.command.ResetCommand;
+import seedu.kitchenhelper.command.DeleteIngredientCommand;
+import seedu.kitchenhelper.command.DeleteRecipeCommand;
 import seedu.kitchenhelper.command.DoneCommand;
 import seedu.kitchenhelper.command.ExitCommand;
-import seedu.kitchenhelper.command.CookRecipeCommand;
+import seedu.kitchenhelper.command.HelpCommand;
+import seedu.kitchenhelper.command.SaveStateCommand;
+import seedu.kitchenhelper.command.SearchChoreCommand;
+import seedu.kitchenhelper.command.SearchIngredientCommand;
+import seedu.kitchenhelper.command.SearchRecipeCommand;
+import seedu.kitchenhelper.command.ListChoreCommand;
+import seedu.kitchenhelper.command.ListIngredientCommand;
+import seedu.kitchenhelper.command.ListRecipeCommand;
 import seedu.kitchenhelper.command.InvalidCommand;
+import seedu.kitchenhelper.command.CookRecipeCommand;
 import seedu.kitchenhelper.exception.KitchenHelperException;
-import seedu.kitchenhelper.command.Command;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -74,6 +82,10 @@ public class Parser {
             return new SearchRecipeCommand(parameters);
         case SearchChoreCommand.COMMAND_WORD:
             return new SearchChoreCommand(parameters);
+        case ResetCommand.COMMAND_WORD:
+            return new ResetCommand();
+        case SaveStateCommand.COMMAND_WORD:
+            return new SaveStateCommand();
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
         case ExitCommand.COMMAND_WORD:
@@ -97,8 +109,7 @@ public class Parser {
         try {
             ingredientList = attributes.substring(attributes.indexOf("/i") + 3);
             String[] splitedIngr = ingredientList.split("[,][\\s]");
-            for (int i = 0; i < splitedIngr.length;i++) {
-
+            for (int i = 0; i < splitedIngr.length; i++) {
                 String item = splitedIngr[i];
                 String[] ingrContent = item.split(":");
                 String[] nameAndType = new String[2];
@@ -163,20 +174,28 @@ public class Parser {
      * @return the prepared command.
      */
     public Command prepareAddChore(String attributes) {
+        String description;
+        String dateStr;
         try {
             String[] descriptionAndDate = attributes.split("/by");
-            String description = descriptionAndDate[0].trim();
+            description = descriptionAndDate[0].trim();
             if (description.isEmpty()) {
                 throw new KitchenHelperException(
                         String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, AddChoreCommand.COMMAND_FORMAT));
             }
-            String date = descriptionAndDate[1].trim();
-            return new AddChoreCommand(description, date);
+            dateStr = descriptionAndDate[1].trim();
         } catch (IndexOutOfBoundsException e) {
             return new InvalidCommand(
                     String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, AddChoreCommand.COMMAND_FORMAT));
         } catch (KitchenHelperException khe) {
             return new InvalidCommand(khe.getMessage());
+        }
+        try {
+            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+            Date date = dateFormat.parse(dateStr);
+            return new AddChoreCommand(description, date);
+        } catch (ParseException e) {
+            return new AddChoreCommand(description, dateStr);
         }
     }
 
@@ -187,18 +206,18 @@ public class Parser {
      * @return the prepared command.
      */
     private Command prepareCookRecipe(String attributes) {
-        CookRecipeCommand cookRecipe = new CookRecipeCommand();
+        CookRecipeCommand cookCmd = new CookRecipeCommand();
         try {
             String recipeName = attributes.substring(attributes.indexOf("/n") + 3, attributes.indexOf("/p") - 1);
             int numOfPax = Integer.parseInt(attributes.substring(attributes.indexOf("/p") + 3));
-            cookRecipe.setRecipeName(recipeName);
-            cookRecipe.setRecipePax(numOfPax);
+            cookCmd.setRecipeName(recipeName);
+            cookCmd.setRecipePax(numOfPax);
         } catch (IndexOutOfBoundsException e) {
             System.out.println("hi");
             return new InvalidCommand(
-                    String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, cookRecipe.COMMAND_FORMAT));
+                    String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, cookCmd.COMMAND_FORMAT));
         }
-        return cookRecipe;
+        return cookCmd;
     }
 
     /**
@@ -275,7 +294,6 @@ public class Parser {
      * @return hashmap of a formatted list of parameters to be deleted.
      * @throws KitchenHelperException if the command is invalid
      */
-
     private Command prepareDeleteRecipe(String parameters) throws KitchenHelperException {
         try {
             if (parameters.contains("/i")) {
@@ -298,7 +316,6 @@ public class Parser {
      * @return hashmap of a formatted list of parameters to be deleted.
      * @throws KitchenHelperException if the command is invalid
      */
-
     private Command prepareDeleteIngredient(String parameters) throws KitchenHelperException {
         try {
             String [] typeAndName = parameters.split("/n|/i\\s", 2);
@@ -335,6 +352,9 @@ public class Parser {
             int indexToDelete = Integer.parseInt(parameters.trim());
             return new DeleteChoreCommand(indexToDelete);
         } catch (NumberFormatException e) {
+            if (parameters.trim().equalsIgnoreCase("all")) {
+                return new DeleteChoreCommand();
+            }
             return new InvalidCommand(
                     String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, DeleteChoreCommand.COMMAND_FORMAT));
         }

@@ -3,6 +3,7 @@ package seedu.kitchenhelper;
 import seedu.kitchenhelper.command.Command;
 import seedu.kitchenhelper.command.CommandResult;
 import seedu.kitchenhelper.command.ExitCommand;
+import seedu.kitchenhelper.notification.ChoreNotification;
 import seedu.kitchenhelper.storage.Storage;
 import seedu.kitchenhelper.exception.KitchenHelperException;
 import seedu.kitchenhelper.object.Chore;
@@ -11,11 +12,10 @@ import seedu.kitchenhelper.object.ingredient.Ingredient;
 import seedu.kitchenhelper.parser.Parser;
 import seedu.kitchenhelper.ui.Ui;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
@@ -33,25 +33,69 @@ public class KitchenHelper {
     
     private Ui ui;
     private Storage storage;
-  
+
     private void start() {
         ui = new Ui();
+        String userChoice = ui.getUserChoice();
+        ui.validUserChoice(userChoice);
         ui.showWelcomeMessage();
-        storage = new Storage("outputIngredient.txt", "outputRecipe.txt",
-                "outputChore.txt");
-        try {
-            ingredientList = new ArrayList<>(storage.getIngredientData());
-            recipeList = new ArrayList<>(storage.getRecipeData());
-            choreList = new ArrayList<>(storage.getChoreData());
-        } catch (FileNotFoundException err) {
-            //ui.errorMessage(err.toString());
-            //ingredientList = new
+        if (userChoice.equals("1")) {
+            storage = new Storage("outputIngredient.txt", "outputRecipe.txt",
+                    "outputChore.txt");
+            try {
+                ingredientList = new ArrayList<>(storage.getIngredientData());
+                recipeList = new ArrayList<>(storage.getRecipeData());
+                choreList = new ArrayList<>(storage.getChoreData());
+            } catch (FileNotFoundException err) {
+                //Ui.errorMessage(err.toString());
+                ingredientList = new ArrayList<>();
+                recipeList = new ArrayList<>();
+                choreList = new ArrayList<>();
+            }
+        } else if (userChoice.equals("2")) {
+            createNewFiles();
+            storage = new Storage("outputIngredientCopy.txt", "outputRecipeCopy.txt",
+                    "outputChoreCopy.txt");
+            try {
+                ingredientList = new ArrayList<>(storage.getIngredientData());
+                recipeList = new ArrayList<>(storage.getRecipeData());
+                choreList = new ArrayList<>(storage.getChoreData());
+            } catch (FileNotFoundException err) {
+                //Ui.errorMessage(err.toString());
+                ingredientList = new ArrayList<>();
+                recipeList = new ArrayList<>();
+                choreList = new ArrayList<>();
+            }
+        }
+    }
+
+    /**
+     * Populate empty saved state files with current output files if save command have never been called by user.
+     */
+    private void createNewFiles() {
+        var sourceIngredient = new File("outputIngredient.txt");
+        var sourceRecipe = new File("outputRecipe.txt");
+        var sourceChore = new File("outputChore.txt");
+        var destIngredient = new File("outputIngredientCopy.txt");
+        var destRecipe = new File("outputRecipeCopy.txt");
+        var destChore = new File("outputChoreCopy.txt");
+
+        if (destIngredient.length() == 0) {
+            Storage.copyFile(sourceIngredient, destIngredient);
+        }
+
+        if (destRecipe.length() == 0) {
+            Storage.copyFile(sourceRecipe, destRecipe);
+        }
+        if (destChore.length() == 0) {
+            Storage.copyFile(sourceChore, destChore);
         }
     }
     
     private void run() throws KitchenHelperException {
         setUpLogger();
         start();
+        showNotifications();
         runCommandLoopUntilExitCommand();
         exit();
     }
@@ -105,8 +149,14 @@ public class KitchenHelper {
         } while (!userCommandInput.equalsIgnoreCase(ExitCommand.COMMAND_WORD));
         
     }
+
+    private void showNotifications() {
+        String choreNotification;
+        choreNotification = new ChoreNotification().getNotifications(choreList);
+        System.out.println(choreNotification);
+    }
     
-    public static void main(String[] args) throws KitchenHelperException {
+    public static void main(String[] args) throws KitchenHelperException, IOException {
         new KitchenHelper().run();
     }
     
