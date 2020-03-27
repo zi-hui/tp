@@ -16,9 +16,10 @@ By: `Team CS2113T-M16-2` Since: `March 2020` License: `MIT`
 
     + [3.3. Recipe](#33-recipe)  
       - [3.3.1. Adding a recipe: `addrecipe`](#331-adding-a-recipe-addrecipe)  
-      - [3.3.2. List recipe: `listrecipe`](#332-list-all-recipes-listrecipe-all)  
+      - [3.3.2. List recipe: `listrecipe`](#332-list-recipes-listrecipe-1)  
       - [3.3.3. Delete a recipe: `deleterecipe`](#333-delete-a-recipe-deleterecipe)
       - [3.3.4. Search for recipe: `searchrecipe`](#334-search-for-recipe-searchrecipe)  
+      - [3.3.5. Cooking a recipe: `cookrecipe`](#335-cooking-a-recipe-cookrecipe)
 
     + [3.4. Chore](#34-chore)  
       - [3.4.1. Adding a chore: `addchore`](#341-adding-a-chore-addchore)  
@@ -40,7 +41,7 @@ So what are you waiting for? Let’s go!
 ## 2. Quick Start
 
 1. Ensure that you have Java `11` or above installed on your computer.
-2. Down the latest version of `KitchenHelper` from [here](https://github.com/AY1920S2-CS2113T-M16-2/tp/releases).
+2. Download the latest version of `KitchenHelper` from [here](https://github.com/AY1920S2-CS2113T-M16-2/tp/releases).
 3. Copy the file to the folder you want to use as the home folder for KitchenHelper.
 4. Type the command `java -jar kitchenhelper.jar` in the command prompt to start the application.
 5. Type the command in the command box and press `Enter` to execute it.  
@@ -71,10 +72,11 @@ Adds an ingredient to the list when the user buys an item to keep track.
 
 __Format:__ `addingredient /n INGREDIENT /c CATEGORY /q QUANTITY /p PRICE /e EXPIRY`  
 
-__Example of usage:__  
-* `addingredient /n Beef cubes /c meat /q 3 /p 20 /e 2020-03-18`
-* `addingredient /n kailan /c Vegetable /q 30 /p 30.45 /e 2020-03-12`
-* `addingredient /n Milo /c Drink /q 30 /p 10 /e 2020-12-20`
+Example |  Outcome
+--------|------------------
+Command: <br> `addingredient /n Beef cubes /c meat /q 3 /p 20 /e 2020-03-18` <br> Description: <br> Creates a new ingredient called `Beef cubes`, which have the following attributes: category `meat`, quantity `3`, price `20` , expiry date `2020-03-18`. | addingredient /n Beef cubes /c meat /q 3 /p 20 /e 2020-03-18 <br> You have added Ingredient:Beef cubes Category:meat Quantity:3 Price:$20.00 Expiry:2020-03-18 to the ingredient list<br>===================================================
+Command: <br> `addingredient /n kailan /c Vegetable /q 30 /p 30.45 /e 2020-03-12` <br> Description: <br> Creates a new ingredient called `kailan`, which have the following attributes: category `Vegetable`, quantity `30`, price `30.45` , expiry date `2020-03-12`. | addingredient /n kailan /c Vegetable /q 30 /p 30.45 /e 2020-03-12 <br> You have added Ingredient:kailan Category:Vegetable Quantity:30 Price:$30.45 Expiry:2020-03-12 to the ingredient list<br>===================================================
+Command: <br> `addingredient /n Milo /c Drink /q 30 /p 10 /e 2020-12-20` <br> Description: <br> Creates a new ingredient called `Milo`, which have the following attributes: category `Drink`, quantity `30`, price `10` , expiry date `2020-12-20`. | addingredient /n Milo /c Drink /q 30 /p 10 /e 2020-12-20 <br> You have added Ingredient:Milo Category:Drink Quantity:30 Price:$10.00 Expiry:2020-12-20 to the ingredient list<br>===================================================
 
 #### 3.2.2. List ingredient: `listingredient`
 Prints out a list of ingredients added by the user. Allow users to choose which category to print out from.
@@ -85,6 +87,7 @@ __Example of usage:__
 * `listingredient all`
 * `listingredient meat`
 * `listingredient vegetable`
+
 #### 3.2.3. Delete an ingredient: `deleteingredient`
 Delete the specified ingredient or reduce an ingredient’s quantity from the ingredients inventory in Kitchen Helper using ingredient's name or index. 
 The name or index of the ingredient can be found by displaying the list of ingredients. 
@@ -100,31 +103,26 @@ Deletes the ingredient named `wagyu beef` from the ingredients inventory.
 Delete ingredient by index. In this case, delete the ingredient with index of 1.
 
 #### 3.2.4. Search for ingredient: `searchingredient`
-Search for ingredients based on given keyword.  
+Search for ingredients based on a given keyword.  
 
 __Format:__ `searchingredient KEYWORD`  
 
-__Example of usage:__  
-* `searchingredient beef`  
-Search by ingredient's name.
-* `searchingredient meat`  
-Search by ingredient's category.
-* `searchingredient 2020-03-18`  
-Search by ingredient's expiry date.
-
+Example |  Outcome
+--------|------------------
+Command: <br> `searchingredient beef` <br> Description: <br> Search by ingredient's name. | searchingredient beef <br> Here are your matching ingredients in your list <br> 1. \[Meat\] Beef Qty: 3 $20.00 Exp: 2020-03-18 <br> ===================================================
+Command: <br> `searchingredient meat` <br> Description: <br> Search by ingredient's category. | searchingredient meat <br> Here are your matching ingredients in your list <br> 1. \[Meat\] Beef Qty: 3 $20.00 Exp: 2020-03-18 <br> ===================================================
+Command: <br> `searchingredient 2020-03-18` <br> Description: <br> Search by ingredient's expiry date. | searchingredient 2020-03-18 <br> Here are your matching ingredients in your list <br> 1. \[Meat\] Beef Qty: 3 $20.00 Exp: 2020-03-18 <br> ===================================================
 
 ### 3.3. Recipe
 
 #### 3.3.1. Adding a recipe: `addrecipe`
 Adds a new unique recipe into the List in Kitchen Helper.
 
-__Format:__ `addrecipe /n <recipe name> /i <ingredient_name>:<quantity>:<category>[,..]`
+__Format:__ `addrecipe /n <recipe_name> /i <ingredient_name>:<quantity>:<category>[,..]`
 
-__Example of usage:__ 
-* `addrecipe /n Rice Ball /i Rice:3:staple`
-   Creates a new recipe called `Rice Ball` which contains one ingredient mainly `3` portions of `Rice`.
-* `addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable`
-   Creates a new recipe called `Chicken Salad` which contains two ingredients mainly `2` portions of `Chicken Breast` and `4` portions of `Lettuce`.
+Example |  Outcome
+--------|------------------
+Command: <br> `addrecipe /n Rice Ball /i Rice:3:staple` <br> Description: <br> Creates a new recipe called `Rice Ball` which contains one ingredient, `3` portions of `Rice`. | addrecipe /n Rice Ball /i Rice:3:staple <br>Rice Ball Recipe has been created with 1 ingredients inside.<br>===================================================`
 
 #### 3.3.2. List recipes: `listrecipe 1`
 Prints out details of recipe added by the user. Allow users to choose which recipe to print out from.
@@ -138,6 +136,8 @@ __Example of usage:__
 #### 3.3.3. Delete a recipe: `deleterecipe`
 Deletes the specific recipe name or index from the list in Kitchen Helper. The name or index of the recipe can be found by displaying the list of recipes. 
 
+#### Listing all recipes: `listrecipe all`
+
 __Format__: `deleterecipe /n <RECIPE>` OR `deleterecipe /i <RECIPE_INDEX>`
 
 __Example of usage:__
@@ -147,14 +147,22 @@ __Example of usage:__
   Deletes recipe by index. In this case, delete recipe with the index of 2 from the recipe list.
 
 #### 3.3.4. Search for recipe: `searchrecipe`
-Search for recipes based on given keyword.  
+Search for recipes based on a given keyword.  
 
 __Format:__ `searchrecipe KEYWORD`  
 
-__Example of usage:__  
-* `searchrecipe Chicken Stew`  
-Search by recipe's name.
+Example |  Outcome
+--------|------------------
+Command: <br> `searchrecipe Chicken Stew` <br> Description: <br> Search by recipe's name. | searchrecipe Chicken Stew <br> Here are your matching recipes in your list <br> 1.Chicken Stew located at listrecipe 1 <br> ===================================================
 
+#### 3.3.5. Cooking a recipe: `cookrecipe`
+Cooks a recipe specified by the user by the recipe’s name.
+
+__Format:__ `cookrecipe /n <recipe_name> /p <number_of_pax>`
+
+Example |  Outcome
+--------|------------------
+`cookrecipe /n chicken salad /p 2` | Cooks the ‘chicken salad’ recipe with a pax 2.
 
 ### 3.4. Chore
 
@@ -191,11 +199,10 @@ Search for chores based on given keyword.
 
 __Format:__ `searchchore KEYWORD`  
 
-__Example of usage:__  
-* `searchchore groceries`  
-Search by chore's description.
-* `searchchore 2020-03-18`  
-Search by chore's date.
+Example |  Outcome
+--------|------------------
+Command: <br> `searchchore groceries` <br> Description: <br> Search by chore's description. | searchchore groceries <br> Here are your matching chores in your list <br> 1.\[x\] buy groceries (by: Tuesday 12pm) <br> ===================================================
+Command: <br> `searchchore Tuesday` <br> Description: <br> Search by chore's date. | searchchore Tuesday <br> Here are your matching chores in your list <br> 1.\[x\] buy groceries (by: Tuesday 12pm) <br> ===================================================
 
 
 #### 3.4.5. Mark chore as done: `done`
