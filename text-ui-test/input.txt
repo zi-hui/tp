@@ -7,6 +7,7 @@ addingredient /n kailan /c Vegetable /q 30 /p 30.45 /e 2020-03-12
 addingredient /n HL Milk /c Dairy /q 3 /p 12.2 /e 2020-03-14
 addingredient /n Milo /c Drink /q 30 /p 10 /e 2020-012-20
 addingredient /n Pear /c fruit /q 1 /p 1 /e 2020-02-02
+cookrecipe /n Chicken Salad /p 1
 listingredient all
 addingredient /n Apple /c fruit /q 1 /p 1 /e 2020-02-02
 listingredient all

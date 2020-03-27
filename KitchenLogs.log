@@ -1,0 +1,6 @@
+Mar 27, 2020 3:11:27 PM seedu.kitchenhelper.parser.Parser prepareListRecipe
+WARNING: An IndexOutOfBounds exception has been caught
+Mar 27, 2020 3:11:47 PM seedu.kitchenhelper.command.AddRecipeCommand addRecipe
+INFO: A new recipe has been added
+Mar 27, 2020 3:12:01 PM seedu.kitchenhelper.command.AddRecipeCommand addRecipe
+INFO: A new recipe has been added
