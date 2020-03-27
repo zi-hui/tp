@@ -3,6 +3,7 @@ package seedu.kitchenhelper;
 import seedu.kitchenhelper.command.Command;
 import seedu.kitchenhelper.command.CommandResult;
 import seedu.kitchenhelper.command.ExitCommand;
+import seedu.kitchenhelper.notification.ChoreNotification;
 import seedu.kitchenhelper.storage.Storage;
 import seedu.kitchenhelper.exception.KitchenHelperException;
 import seedu.kitchenhelper.object.Chore;
@@ -15,8 +16,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
@@ -96,6 +95,7 @@ public class KitchenHelper {
     private void run() throws KitchenHelperException {
         setUpLogger();
         start();
+        showNotifications();
         runCommandLoopUntilExitCommand();
         exit();
     }
@@ -148,6 +148,12 @@ public class KitchenHelper {
             }
         } while (!userCommandInput.equalsIgnoreCase(ExitCommand.COMMAND_WORD));
         
+    }
+
+    private void showNotifications() {
+        String choreNotification;
+        choreNotification = new ChoreNotification().getNotifications(choreList);
+        System.out.println(choreNotification);
     }
     
     public static void main(String[] args) throws KitchenHelperException, IOException {

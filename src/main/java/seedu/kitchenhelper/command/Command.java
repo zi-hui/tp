@@ -69,10 +69,6 @@ public abstract class Command {
         return "";
     }
 
-    public String listChore(ArrayList<Chore> choreList) {
-        return "";
-    }
-
     /**
      * Runs the command given by user.
      *
