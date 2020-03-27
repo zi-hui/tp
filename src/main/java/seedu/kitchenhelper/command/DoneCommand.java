@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class DoneCommand extends Command {
 
     public static final String COMMAND_WORD = "done";
+    public static final String INVALID_INDEX = "Please choose an index in the chore list!";
     public static final String MESSAGE_SUCCESS = "You have completed this chore:\n%s\n";
     public static final String COMMAND_DESC = "Marks a chore as done.";
     public static final String COMMAND_PARAMETER = "<index>";
@@ -30,7 +31,7 @@ public class DoneCommand extends Command {
     public String markChoreDone(ArrayList<Chore> choreList) {
         try {
             if (indexToCheck > choreList.size()) {
-                throw new KitchenHelperException("Please choose an index in the chore list!");
+                throw new KitchenHelperException(INVALID_INDEX);
             }
             Chore choreToCheck = choreList.get(indexToCheck - 1);
             choreToCheck.markAsDone();
