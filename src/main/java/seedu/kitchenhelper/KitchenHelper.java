@@ -48,7 +48,7 @@ public class KitchenHelper {
                 recipeList = new ArrayList<>(storage.getRecipeData());
                 choreList = new ArrayList<>(storage.getChoreData());
             } catch (FileNotFoundException err) {
-                Ui.errorMessage(err.toString());
+                //Ui.errorMessage(err.toString());
                 ingredientList = new ArrayList<>();
                 recipeList = new ArrayList<>();
                 choreList = new ArrayList<>();
@@ -62,7 +62,7 @@ public class KitchenHelper {
                 recipeList = new ArrayList<>(storage.getRecipeData());
                 choreList = new ArrayList<>(storage.getChoreData());
             } catch (FileNotFoundException err) {
-                Ui.errorMessage(err.toString());
+                //Ui.errorMessage(err.toString());
                 ingredientList = new ArrayList<>();
                 recipeList = new ArrayList<>();
                 choreList = new ArrayList<>();
