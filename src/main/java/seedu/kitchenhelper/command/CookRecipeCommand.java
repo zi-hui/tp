@@ -34,7 +34,7 @@ public class CookRecipeCommand extends Command {
             throws KitchenHelperException {
         // checks if the specified recipe given by user exists
         int indexOfRecipe = checkIfRecipeExist(recipeList);
-        if (indexOfRecipe != recipeList.size()) {
+        if (indexOfRecipe >= recipeList.size()) {
             throw new KitchenHelperException("The given recipe name does not exist");
         }
         System.out.println("Kitchen Helper is trying to cook!");
@@ -91,8 +91,11 @@ public class CookRecipeCommand extends Command {
      */
     public Boolean checkForSufficientIngredient(ArrayList<Ingredient> ingredientList, Recipe recipeToBeCooked) {
         boolean isSufficient = true;
+        System.out.println("it came here");
         for (Ingredient ingr : recipeToBeCooked.getRecipeItem()) {
             int totalCookedQty = pax * ingr.getQuantity();
+            System.out.println(totalCookedQty);
+            System.out.println(getIngredientQty(ingr.getIngredientName().toLowerCase(), ingredientList));
             if (getIngredientQty(ingr.getIngredientName().toLowerCase(), ingredientList) < totalCookedQty) {
                 isSufficient = false;
             }

@@ -1,0 +1,7 @@
+/n Beef /c meat /q 3 /p 20.0 /e 2020-03-18
+/n Beef cubes /c meat /q 3 /p 20.0 /e 2020-03-18
+/n Chicken Breast /c Meat /q 3 /p 5.0 /e 2020-02-19
+/n HL Milk /c Dairy /q 3 /p 12.2 /e 2020-03-14
+/n Lettuce /c vegetable /q 10 /p 1.0 /e 2020-02-20
+/n Pear /c fruit /q 1 /p 1.0 /e 2020-02-02
+/n kailan /c Vegetable /q 30 /p 30.45 /e 2020-03-12
