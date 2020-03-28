@@ -21,39 +21,29 @@ public class IngredientNotification {
             + "expiring for the next 3 days.\n";
     public static final String EMPTYLOWQUANTITY_NOTIFICATION = "You have no ingredients that is low in stock [< 5].\n";
     public static final String EMPTYEXPIRED_NOTIFICATION = "You have no ingredients that is expired.\n";
-
+    private String notification = "";
 
     public String getNotifications(ArrayList<Ingredient> ingredientArrayList) {
-        String notification = "";
-        ArrayList<Ingredient> ingredientExpiring = isExpiring(ingredientArrayList);
-        ArrayList<Ingredient> ingredientLowQuantity = isLowQuantity(ingredientArrayList);
-        ArrayList<Ingredient> ingredientExpired = isExpired(ingredientArrayList);
+        ArrayList<Ingredient> ingredientExpiring = checkForExpiringIngr(ingredientArrayList);
+        ArrayList<Ingredient> ingredientLowQuantity = checkForLowQuantityIngr(ingredientArrayList);
+        ArrayList<Ingredient> ingredientExpired = checkForExpiredIngr(ingredientArrayList);
 
 
         if (!ingredientExpiring.isEmpty()) {
             notification += EXPIRING_NOTIFICATION;
-            for (Ingredient i : ingredientExpiring) {
-                notification += i.getIngredientName() + "|" + i.getQuantity() + "|"
-                        + i.getPrice() + "|" + i.getExpiryDate() + "\n";;
-            }
+            addToNotification(ingredientExpiring);
         } else {
             notification += EMPTYEXPIRING_NOTIFICATION;
         }
         if (!ingredientLowQuantity.isEmpty()) {
             notification += LOWQUANTITY_NOTIFICATION;
-            for (Ingredient i : ingredientLowQuantity) {
-                notification += i.getIngredientName() + "|" + i.getQuantity() + "|"
-                        + i.getPrice() + "|" + i.getExpiryDate() + "\n";;
-            }
+            addToNotification(ingredientLowQuantity);
         } else {
             notification += EMPTYLOWQUANTITY_NOTIFICATION;
         }
         if (!ingredientExpired.isEmpty()) {
             notification += EXPIRED_NOTIFICATION;
-            for (Ingredient i : ingredientExpired) {
-                notification += i.getIngredientName() + "|" + i.getQuantity() + "|"
-                        + i.getPrice() + "|" + i.getExpiryDate() + "\n";;
-            }
+            addToNotification(ingredientExpired);
             notification += Ui.DIVIDER;
         } else {
             notification += EMPTYEXPIRED_NOTIFICATION + Ui.DIVIDER;
@@ -73,7 +63,14 @@ public class IngredientNotification {
         return date;
     }
 
-    public ArrayList<Ingredient> isExpiring(ArrayList<Ingredient> ingredientArrayList) {
+    public void addToNotification(ArrayList<Ingredient> ingredientArrayList) {
+        for (Ingredient i : ingredientArrayList) {
+            notification += i.getIngredientName() + "|" + i.getQuantity() + "|"
+                    + i.getPrice() + "|" + i.getExpiryDate() + "\n";;
+        }
+    }
+
+    public ArrayList<Ingredient> checkForExpiringIngr(ArrayList<Ingredient> ingredientArrayList) {
         ArrayList<Ingredient> ingredientExpiring = new ArrayList<Ingredient>();
         for (Ingredient i : ingredientArrayList) {
             Date deadline = stringToDate(i.getExpiryDate());
@@ -91,7 +88,7 @@ public class IngredientNotification {
     }
 
 
-    public ArrayList<Ingredient> isLowQuantity(ArrayList<Ingredient> ingredientArrayList) {
+    public ArrayList<Ingredient> checkForLowQuantityIngr(ArrayList<Ingredient> ingredientArrayList) {
         ArrayList<Ingredient> ingredientLowQuantity = new ArrayList<Ingredient>();
         for (Ingredient i : ingredientArrayList) {
             if (i.getQuantity() < 5) {
@@ -101,7 +98,7 @@ public class IngredientNotification {
         return ingredientLowQuantity;
     }
 
-    public ArrayList<Ingredient> isExpired(ArrayList<Ingredient> ingredientArrayList) {
+    public ArrayList<Ingredient> checkForExpiredIngr(ArrayList<Ingredient> ingredientArrayList) {
         ArrayList<Ingredient> ingredientExpired = new ArrayList<Ingredient>();
         for (Ingredient i : ingredientArrayList) {
             Date deadline = stringToDate(i.getExpiryDate());
