@@ -20,7 +20,7 @@ class ListRecipeCommandTest {
         ingr[1] = "drink";
         parsedIngr.put(ingr, 10);
         String attributes = "recipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable";
-        ListRecipeCommand command = new ListRecipeCommand(1);
+        ListRecipeCommand command = new ListRecipeCommand("1");
         ArrayList<Recipe> recipeList = new ArrayList<>();
         AddRecipeCommand newRecipe = new AddRecipeCommand();
         newRecipe.setAttributesOfCmd(attributes, parsedIngr);
@@ -39,7 +39,7 @@ class ListRecipeCommandTest {
         ingr[1] = "drink";
         parsedIngr.put(ingr, 10);
         String attributes = "recipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable";
-        ListRecipeCommand command = new ListRecipeCommand(1);
+        ListRecipeCommand command = new ListRecipeCommand("1");
         ArrayList<Recipe> recipeList = new ArrayList<>();
         AddRecipeCommand newRecipe = new AddRecipeCommand();
         newRecipe.setAttributesOfCmd(attributes, parsedIngr);

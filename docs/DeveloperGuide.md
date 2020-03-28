@@ -128,22 +128,43 @@ The following steps explained “Sequence diagram for an example `addingredient`
 6. On `AddIngredientCommand#execute()`, ingredient is added and return of the message.  
 
 #### 4.1.2. List all/ specific ingredient(s)
-
-The listing of Ingredients feature shows the user the existing data that is added by the user. The user is also able to specify which category would they want to display.
-Command usage: `listingredient all` will show the details of all ingredients
-which have the following attributes:  category `all`
+The list feature allows showing details of Ingredients added by the user.  All ingredients added will be shown in a sorted order, by expiry, and shown by categories. The function will require a valid string , which belongs to `all/dairy/drink/fruit/meat/miscellaneous/staple/vegetable`, 
+to be added as a parameter. Failure to do so will trigger an exception where the user will be notified of an invalid command and the syntax of the listing of the ingredients will be displayed. 
 
 #### 4.1.2.1. Implementation
-{insert sequence diagram}
-Steps for `listingredient all` command:
-1. The user enters  `listingredient all`.  
-2. `KitchenHelper` calls `Parser#parseUserCommand()` which splits the user’s input into 2 parts 
-and enters a switch case for execution.  
-3. `parseUserCommand` in the Parser object will call its own method `Parser#prepareListIngredient`.  
-4. `prepareListIngredient` will first validate if the user's input is belongs to `all/dairy/drink/fruit/meat/miscellaneous/staple/vegetable`, 
-following, it will return the items belonging into the category, 
-otherwise it will throw an `InvalidCommand` along with the syntax of `listingredient command`  
-5. On execute(), the ingredient in the list will be printed out.
+When the user attempts to list the details of a particular category of ingredients, the `listIngredientCommand`, ‘Parser’ and `Ingredient` class will be accessed and the following sequence of actions are called to list details of  a particular category Ingredient list: <br>
+1. User executes `listingredient all` 
+    2. A `Ui` object will be created and calls `Ui#getUserCommand()`
+    3. Input will be parsed in `Command#parseUserCommand()` and identified with the keyword `listingredient`.
+    ![List Ingredient Step 1](images/AddRecipe1.png)
+2. Parsing of user input and creation of command object
+    2.This will automatically trigger the parsing of the user’s input string into a suitable format for the listing of a particular category of  `ingredient` object in `Command#prepareListIngredient()`.
+    3. A `ListIngredientCommand` object will be created.
+    ![List Ingredient Step 2](images/ListIngredientCommand.png)   
+3. Executing Command
+    2. The newly created object will call `#ListIngredientCommand#execute` which starts the process of listing a particular category’s ingredient details, thus calling `ListIngredientCommand#listIngredients()`.
+    3. The existing ingredientList arraylist and the category of the chosen ingredient category  will be passed through to the `ListIngredientCommand#listIngredients()`.
+    4. The function will find if the category name is valid, thus, creates `CommandResult` result storing the details of the ingredient belonging to the particular category.
+    ![List Ingredient Step 3](images/ListIngredientCommand2.png)
+4. The details will then be printed onto the console using `Ui#showResultToUser(result)`.
+    
+
+#### 4.1.2.2. Design Considerations</b> <br>
+Aspect: Finding the category name and print out ingredient belonging to the category
+
+Alternative 1: Looping through the whole ingredientList arraylist to find out all possible category name, then, do sorting and return result
+
+|     |     |
+|-----|-----|
+|**Pros** | The program will be able to detect all category name inside the ingredientList arraylist. |
+|**Cons** | This method will be slow when facing a huge amount of data in the arraylist as the program may have to go through every single item in the arraylist. |
+
+Alternative 2 (current choice): Creating a fixed array which includes the order and all possible category names.
+|     |     |
+|-----|-----|
+|**Pros** | Users would be able to get the details of the particular recipe accurately and fast. |
+|**Cons** | Program will not be able to handle any ingredient which isn’t belonging to the category names in the fixed array.  |
+
 #### 4.1.3. Delete all/ specific ingredients(s)
 The deletion feature for ingredients allows the user to delete ingredients either by the name or index of the ingredients. In addition to that, it allows users to reduce the quantity of a specific ingredient. 
 
@@ -251,7 +272,7 @@ All description and warnings to the user utilises the `UI` class, which controls
 
 The following sequence diagram shows how the `addrecipe` command works
 
-{insert diagram}
+![AddRecipeCommand](images/addRecipeSequenceDiagram.png) 
 
 ##### 4.2.1.2. Design Considerations
 Aspect: Parsing of the user’s input command
@@ -278,21 +299,42 @@ Alternative 3: User’s command are divided by space
 |**Cons** | Values for each variable cannot contain spaces which makes the application restrictive. |
 
 #### 4.2.2. List all/ specific recipe(s)
-The listing of Recipe feature shows the user the existing recipe and it's details that is added by the user.
-Command usage: `listrecipe 1` will show the details of recipe number `1`
-which have the following attributes:  recipe number `1`
+The list feature allows showing details of a particular recipe created by the user.  All ingredients added into the recipe will be shown in a sorted order and shown by categories. The function will require valid string of a integer or `all` to be added as a parameter. Failure to do so will trigger an exception where the user will be notified of an invalid command and the syntax of the listing of the recipe will be displayed. 
 
-#### 4.1.2.1. Implementation
-{insert sequence diagram}
-Steps for `listrecipe 1` command:
-1. The user enters  `listrecipe 1`.  
-2. `KitchenHelper` calls `Parser#parseUserCommand()` which splits the user’s input into 2 parts 
-and enters a switch case for execution.  
-3. `parseUserCommand` in the Parser object will call its own method `Parser#prepareListRecipe`.  
-4. `prepareListIngredient` will first validate if the user's input is a valid integer and if it's more than 0, 
-following, it will return the details belonging to the recipe, 
-otherwise it will throw an `InvalidCommand` along with the syntax of `listrecipe command`  
-5. On execute(), the details in the recipe will be printed out.
+#### 4.2.2.1. Implementation
+When the user attempts to list the details of a particular recipe, the `listRecipeCommand`, ‘Parser’ and `Recipe` class will be accessed and the following sequence of actions are called to list details of  a particular `recipe` object:
+1. User executes `listrecipe 1`  
+    2. A `Ui` object will be created and calls `Ui#getUserCommand()`
+    3. Input will be parsed in `Command#parseUserCommand()` and identified with the keyword `listrecipe`.
+    ![List Ingredient Step 1](images/AddRecipe1.png)
+2. Parsing of user input and creation of command object
+    2.This will automatically trigger the parsing of the user’s input string into a suitable format for the listing of `recipe` object in `Command#prepareListRecipe()`.
+    3. A `ListRecipeCommand` object will be created.
+    ![List Ingredient Step 2](images/ListRecipeCommand.png)   
+3. Executing Command
+    2. The newly created object will call `ListRecipeCommand#execute` which starts the process of listing a particular recipe’s details, thus, calling `ListRecipeCommand#listRecipe()`.
+    3. The existing recipeList arraylist and the item number of the chosen recipe will be passed through to the `ListRecipeCommand#listRecipe()`.
+    4. The function will find if the item number is valid and contains details of the recipe, thus, creates a CommandResult storing the details of the particular recipe.
+    ![List Ingredient Step 3](images/ListRecipeCommand2.png)
+4. The details will then be printed onto the console using `Ui#showResultToUser(result)`.
+    
+
+#### 4.2.2.2. Design Considerations</b> <br>
+Aspect: Finding the recipe requested by the user.
+
+Alternative 1: Looping through the whole recipeList arraylist to find the recipe requested by the user.
+
+|     |     |
+|-----|-----|
+|**Pros** | The program will be able to locate the recipe accurately. |
+|**Cons** | This method will be slow when facing a huge amount of data in the arraylist as the program may have to go through every single item in the arraylist. |
+
+Alternative 2 (current choice): Using arrayList.get(item) to get the recipe requested by the user.
+|     |     |
+|-----|-----|
+|**Pros** | Users would be able to get the details of the particular recipe accurately and fast. |
+|**Cons** | Without proper checks done before running the command, it will result in error if the number indicated by the user exceeds the arraylist / does not exist in the arraylist.  |
+
 
 #### 4.2.3. Delete all/ specific recipe(s)
 The deletion feature for specific recipes allows the user to delete recipes either by the name or index of the recipe. 
@@ -366,6 +408,41 @@ and returns the recipe’s name and the index of recipe in the recipe’s list.
 |-----|-----|
 |**Pros** | 1. More accurate searching of the recipe that uses the ingredients.|  
 |**Cons** | 1. Could be more memory intensive to find if the list is huge.|
+
+#### 4.2.5. Cooking a recipe
+##### Implementation
+##### Design considerations
+Aspect: Preparing the deduction of ingredients when cooking a recipe
+Alternative  1 (current choice): Checks for existence of recipe, existence of ingredients for the specified recipe and sufficiency of ingredients
+
+|   |   |
+|---|---|
+|**Pros**| Minimizes erroneous deduction of insufficient and nonexistent ingredients |
+|**Cons**|Additional computation and overhead |
+
+Alternative 2: Deductions are to be made to existing and available ingredients and users are notified when there are insufficient ingredients
+
+|   |   |
+|---|---|
+|**Pros**| Lesser overhead as there is lesser checks to be done
+|**Cons**| Hidden bugs and exceptions have to be well-covered to ensure that the deduction would be of the right value
+
+Aspect: Searching for the corresponding ingredients of a recipe/ Searching through list of recipes to check for existence of recipe
+Alternative 1 (current choice): Linear search, iterate through the arraylist of ingredients/ recipes and checking
+
+|   |   |
+|---|---|
+|**Pros**| Lesser use of complex data structure will save memory |
+|**Cons**| Not optimal as search will be O(n), larger amount of data may take a longer time |
+
+Alternative 2: building an index on the first letter of the recipe name
+
+|   |   |
+|---|---|
+|**Pros**| More efficient search as pool of search space would be significantly smaller
+|**Cons**| Needs to be constantly maintained which incurs overhead.
+
+
 
 ### 4.3. Chore-related Features
 #### 4.3.1. Addition of chore
