@@ -388,11 +388,16 @@ Alternative 1 (current choice): Linear search, iterate through the arraylist of 
 |   |   |
 |---|---|
 |**Pros**| Lesser use of complex data structure will save memory |
-|**Cons**|Not optimal as search will be O(n), larger amount of data may take a longer time |
+|**Cons**| Not optimal as search will be O(n), larger amount of data may take a longer time |
 
 Alternative 2: building an index on the first letter of the recipe name
-More efficient search as pool of search space would be significantly smaller
-Needs to be constantly maintained which incurs overhead.
+
+|   |   |
+|---|---|
+|**Pros**| More efficient search as pool of search space would be significantly smaller
+|**Cons**| Needs to be constantly maintained which incurs overhead.
+
+
 
 ### 4.3. Chore-related Features
 #### 4.3.1. Addition of chore
