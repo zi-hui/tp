@@ -21,13 +21,13 @@ class SearchIngredientCommandTest {
         ArrayList<Ingredient> ingredientArrayList = new ArrayList<>();
         ArrayList<Recipe> recipeArrayList = new ArrayList<>();
         ArrayList<Chore> choreArrayList = new ArrayList<>();
-        ingredientArrayList.add(new Meat("Beef", "meat", 3, 20, "2020-03-18"));
-        ingredientArrayList.add(new Meat("Beef cubes", "meat", 3, 20, "2020-03-18"));
+        ingredientArrayList.add(new Meat("Beef", "meat", 3, 20, "18/03/2020"));
+        ingredientArrayList.add(new Meat("Beef cubes", "meat", 3, 20, "18/03/2020"));
         String expectedOutput = "Here are your matching ingredients in your list"
                                 + Ui.LS
-                                + "1.[Meat] Beef Qty:3 $20.0 Exp:2020-03-18"
+                                + "1.[Meat] Beef Qty:3 $20.00 Exp:18/03/2020"
                                 + Ui.LS
-                                + "2.[Meat] Beef cubes Qty:3 $20.0 Exp:2020-03-18";
+                                + "2.[Meat] Beef cubes Qty:3 $20.00 Exp:18/03/2020";
         String output = new Parser().parseUserCommand("searchingredient beef")
                 .execute(ingredientArrayList, recipeArrayList, choreArrayList).feedbackToUser;
         assertEquals(expectedOutput, output);
@@ -49,8 +49,8 @@ class SearchIngredientCommandTest {
         ArrayList<Ingredient> ingredientArrayList = new ArrayList<>();
         ArrayList<Recipe> recipeArrayList = new ArrayList<>();
         ArrayList<Chore> choreArrayList = new ArrayList<>();
-        ingredientArrayList.add(new Meat("Beef", "meat", 3, 20, "2020-03-18"));
-        ingredientArrayList.add(new Meat("Beef cubes", "meat", 3, 20, "2020-03-18"));
+        ingredientArrayList.add(new Meat("Beef", "meat", 3, 20, "18/03/2020"));
+        ingredientArrayList.add(new Meat("Beef cubes", "meat", 3, 20, "18/03/2020"));
         String expectedOutput = "There are no matching ingredient in your list.";
         String output = new Parser().parseUserCommand("searchingredient pork")
                 .execute(ingredientArrayList, recipeArrayList, choreArrayList).feedbackToUser;
