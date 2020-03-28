@@ -8,6 +8,10 @@ What can I do for you?
 ===================================================
 You have no deadlines upcoming in the next 3 days.
 ===================================================
+You have no ingredients that is expiring for the next 3 days.
+You have no ingredients that is low in stock [< 5].
+You have no ingredients that is expired.
+===================================================
 addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable
 Chicken Salad Recipe has been created with 2 ingredients inside.
 ===================================================
@@ -277,6 +281,35 @@ deletechore 1
 You have deleted this chore:
 [x] buy groceries (by: Tuesday 12pm)
 Now you have 0 chores in the list.
+===================================================
+addingredient /n Beef /c meat /q 3 /p 20 /e 18/03/2020
+You have added Ingredient:Beef Category:meat Quantity:3 Price:$20.00 Expiry:18/03/2020 to the ingredient list
+===================================================
+addchore buy groceries /by Tuesday 12pm
+You have added this chore:
+[x] buy groceries (by: Tuesday 12pm)
+Now you have 1 chore in the list.
+===================================================
+listingredient all
+Here is the list of Ingredients in Inventory:
+Format : Ingredient Name|Quantity|Price|Expiry
+all:
+dairy:
+drink:
+fruit:
+meat:
+Beef|3|20.0|18/03/2020
+miscellaneous:
+staple:
+vegetable:
+
+===================================================
+listchore
+Here are the chores in your list:
+1. [x] buy groceries (by: Tuesday 12pm)
+===================================================
+reset
+All data has been wiped
 ===================================================
 listingredient all
 Here is the list of Ingredients in Inventory:
