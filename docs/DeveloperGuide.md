@@ -492,6 +492,9 @@ kitchenLogs.log(Level.WARNING, description_of_warning_here, e.toString());
 
 1. Should work on any mainstream OS as long as it has Java `11` or above installed.
 2. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+3. Should not require user to install program file.
+4. Should work for single user.
+5. Should be able to run without internet connection.
 
 ### Appendix E: Glossary
 
