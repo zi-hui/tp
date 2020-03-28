@@ -43,10 +43,10 @@ By: `CS2113T-M16-2` Since: `2020`
     + [Appendix C: Value proposition - Use cases](#appendix-c-value-proposition---use-cases)
     + [Appendix D: Non-Functional Requirements](#appendix-d-non-functional-requirements)
     + [Appendix E: Glossary](#appendix-e-glossary)
-    + [Appendix G: Instructions for Manual Testing](#appendix-g-instructions-for-manual-testing)
-      - [G.1. Launch and Shutdown](#g1-launch-and-shutdown)
-      - [G.2. Deleting a](#g2-deleting-a)
-      - [G.3. Saving data](#g3-saving-data)
+    + [Appendix F: Instructions for Manual Testing](#appendix-f-instructions-for-manual-testing)
+      - [F.1. Launch and Shutdown](#f1-launch-and-shutdown)
+      - [F.2. Deleting a](#f2-deleting-a)
+      - [F.3. Saving data](#f3-saving-data)
 
 ## 1. Introduction
 ### 1.1. Purpose
@@ -620,8 +620,8 @@ Use case ends.
 
 * *Mainstream OS* - Windows, Linux, Unix, OS-X
 
-### Appendix G: Instructions for Manual Testing
-#### G.1. Launch and Shutdown
-#### G.2. Deleting a 
-#### G.3. Saving data
+### Appendix F: Instructions for Manual Testing
+#### F.1. Launch and Shutdown
+#### F.2. Deleting a 
+#### F.3. Saving data
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
