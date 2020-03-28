@@ -169,7 +169,7 @@ Alternative 2 (current choice): Creating a fixed array which includes the order 
 #### 4.1.3. Delete all/ specific ingredients(s)
 The deletion feature for ingredients allows the user to delete ingredients either by the name or index of the ingredients. In addition to that, it allows users to reduce the quantity of a specific ingredient. 
 
-<b>Implementation</b><br>
+##### Implementation
 When the user attempts to reduce the quantity of ingredient at index 1 of the ingredients inventory by 4,  the `Kitchen Helper`, ‘Parser’ and ‘DeleteRecipeCommand` class will be called upon. The following sequence of steps will then occur: 
 1. The user keyed in “deleteingredient /i 1 /q 4”`. 
     2. A `UI` object will be created and it will call `UI#getUserCommand()` method to take in the input that the user has keyed in.
@@ -246,7 +246,7 @@ Users can add a new recipe to the application where there must be at least one o
 
 When the user attempts to create a new recipe, the `AddRecipeCommand`, ‘Parser’ and `Recipe` class will be accessed and the following sequence of actions are called to create a `recipe` object:
 
-##### 4.2.1.1. Implementation 
+##### Implementation 
 When the user attempts to create a new recipe, the `AddRecipeCommand`, ‘Parser’ and `Recipe` class will be accessed and the following sequence of actions are called to create a `recipe` object:
 
 1. User executes `addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable` 
@@ -302,7 +302,7 @@ Alternative 3: User’s command are divided by space
 #### 4.2.2. List all/ specific recipe(s)
 The list feature allows showing details of a particular recipe created by the user.  All ingredients added into the recipe will be shown in a sorted order and shown by categories. The function will require valid string of a integer or `all` to be added as a parameter. Failure to do so will trigger an exception where the user will be notified of an invalid command and the syntax of the listing of the recipe will be displayed. 
 
-#### 4.2.2.1. Implementation
+##### Implementation
 When the user attempts to list the details of a particular recipe, the `listRecipeCommand`, ‘Parser’ and `Recipe` class will be accessed and the following sequence of actions are called to list details of  a particular `recipe` object:
 1. User executes `listrecipe 1`  
     2. A `Ui` object will be created and calls `Ui#getUserCommand()`
@@ -341,7 +341,7 @@ Alternative 2 (current choice): Using arrayList.get(item) to get the recipe requ
 #### 4.2.3. Delete all/ specific recipe(s)
 The deletion feature for specific recipes allows the user to delete recipes either by the name or index of the recipe. 
 
-<b>Implementation</b> <br>
+##### Implementation
 When the user attempts to delete the `Chicken Rice` recipe from Kitchen Helper, the `Kitchen Helper`, `Parser` and `DeleteRecipeCommand` class will be called upon. The following sequence of steps will then occur: 
 1. The user keyed in “deleterecipe /n `Chicken Rice”`.
     2. A `UI` object will be created and it will call `UI#getUserCommand()` method to take in the input that the user has keyed in. 
@@ -533,7 +533,7 @@ Aspects: How saving of files executes:
 #### 4.4.2. Save current state
 The save current state feature allows the user to store the current state of the program data by manual-save mode. Manual-save mode data will be updated and replaced with the current state when save command is implemented.
 
-<b>Implementation</b> <br>
+##### Implementation
 The following steps explain how `save` command works:
 1. The user enters `save`
 2. `KitchenHelper` calls `Parser#parseUserCommand()` which splits the user’s input into 2 parts 
