@@ -459,8 +459,30 @@ kitchenLogs.log(Level.WARNING, description_of_warning_here, e.toString());
 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+|v1.0|housewife|add my groceries to the inventory|track my ingredients.|
+|v1.0|user|track the list of ingredients|stock up before I cook a meal.|
+|v1.0|user|delete an ingredient|so that i can remove the wrongly keyed item.|
+|v1.0|user|decrease the quantity of an item in the inventory|see it reflects the current amount after consuming.|
+|v1.0|user|create new recipes|keep a list of recipes in the application.|
+|v1.0|user|view the list of recipe|view the ingredients that are needed for the recipe.|
+|v1.0|user|delete the recipe|remove unwanted recipe.|
+|v1.0|housewife|add chore to the list|remind myself of the tasks that needs to be completed.|
+|v1.0|housewife|be able to see the chore list|check what is not completed.|
+|v1.0|housewife|remove the task|delete  a task that was keyed wrongly..|
+|v1.0|user|save all my ingredients|keep track of them when the application reloads.|
+|v1.0|user|save all my recipes|choose which recipe that i would like to cook when the application reloads.|
+|v1.0|user|save all my chores|view the chores that need to be done.|
+|v1.0|frequent user|view all my past data|get the latest update on my inventory when the application reloads|
+|v1.0|new user|view more information about the commands|learn to use the various commands.|
+|v2.0|user|search for a specific ingredient|view the details regarding the ingredient.|
+|v2.0|user|search the relevant recipe using a keyword|view the different recipe that are similar.|
+|v2.0|user|search for a chore using a keyword|view the status of the chore.|
+|v2.0|user|create unique recipe names|differentiate between my recipes.|
+|v2.0|user|choose a recipe that contains sufficient ingredients|keep track of my ingredients and cook this meal.|
+|v2.0|user|deduct the ingredients that i have from the recipe that i want to cook|save time from deleting manually.|
+|v2.0|housewife|mark the task as done|track the uncompleted task.|
+|v2.0|user|retrieve all of my past history that i have entered in the application|view them again.|
+|v2.0|user|reset all my ingredients, chores, recipes|restart the application.|
 
 ### Appendix C: Value proposition - Use cases
 
