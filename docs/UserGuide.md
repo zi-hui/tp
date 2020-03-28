@@ -37,9 +37,10 @@ By: `Team CS2113T-M16-2` Since: `March 2020` License: `MIT`
 
 ## 1. Introduction
 
-Our project, Kitchen Helper is a household application which tracks household inventory, creates recipes which would indicate how much ingredients will be used, and assigns tasks to household members. The application will be easy to use, with intuitive ways of editing, finding and tracking tasks that have been added. It is optimised for those who prefer working with Command Line Interface (CLI). Kitchen Helper provides convenience in our often busy lives, so give this application a chance to help you!
+Our Project, Kitchen Helper is a kitchen application that is designed to facilitate users to track kitchen inventory effectively. KitchenHelper also enables users to create recipes with different ingredients and allows auto deduction when you cook using the recipe. Kitchen Helper also provides prompts when your ingredient is running low or even chores that should be completed by a deadline.    
+ It is optimised for those who prefer working with Command Line Interface (CLI). Kitchen Helper provides convenience in our often busy lives, so give this application a chance to help you!
+ 
 This user guide aims to help you learn your way around our application, making the learning process smooth and effortless. 
-
 So what are you waiting for? Let’s go!
 
 ## 2. Quick Start
