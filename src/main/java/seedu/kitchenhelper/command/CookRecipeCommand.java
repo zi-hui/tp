@@ -2,6 +2,7 @@ package seedu.kitchenhelper.command;
 
 import seedu.kitchenhelper.exception.KitchenHelperException;
 import seedu.kitchenhelper.object.Chore;
+import seedu.kitchenhelper.object.Expenditure;
 import seedu.kitchenhelper.object.Recipe;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
 
@@ -73,8 +74,10 @@ public class CookRecipeCommand extends Command {
                 } else if (quantity <= totalCookedQty) {
                     totalCookedQty -= quantity;
                     ingredientToDeduct.setQuantity(0);
+                    new Expenditure().addAmountForCooking(ingredientToDeduct, null);
                 } else if (quantity > totalCookedQty) {
                     ingredientToDeduct.setQuantity(quantity - totalCookedQty);
+                    new Expenditure().addAmountForCooking(ingredientToDeduct, totalCookedQty);
                     totalCookedQty = 0;
                 }
             }

@@ -8,7 +8,8 @@ import java.util.Scanner;
 
 public class Expenditure {
     public static final String PROMPT_REMOVE_FROM_EXPENDITURE
-            = "Would you like to remove the amount spent on this item from the total expenditure?\n";
+            = "The amount of money spent on this ingredient has already been recorded."
+            + "Would you like to remove the amount spent on this item from the total expenditure?\n";
     public static final String PROMPT_ADD_TO_AMOUNT_USED
             = "Would you like to add the amount spent on this item " +
             "to the amount used for cooking?\n";
@@ -31,8 +32,9 @@ public class Expenditure {
     public void removeFromExpenditure(Ingredient ingredientToDelete, Integer quantityToDelete) {
         String userResponse = promptUser(PROMPT_REMOVE_FROM_EXPENDITURE );
         if (userResponse.equalsIgnoreCase("yes")) {
-            totalExpenditure -= changePrice(ingredientToDelete, quantityToDelete);
-            System.out.println(REMOVAL_SUCCESS);
+            double price = changePrice(ingredientToDelete, quantityToDelete);
+            totalExpenditure -= price;
+            System.out.println(String.format((REMOVAL_SUCCESS), price));
         } else {
             System.out.println(NO_CHANGE);
         }
@@ -41,11 +43,16 @@ public class Expenditure {
     public void addToAmountUsed(Ingredient ingredientToDelete, Integer quantityToDelete) {
         String userResponse = promptUser(PROMPT_ADD_TO_AMOUNT_USED);
         if (userResponse.equalsIgnoreCase("yes")) {
-            amountUsedInCooking += changePrice(ingredientToDelete, quantityToDelete);
-            System.out.println(INCREASE_AMOUNT_USED);
+            addAmountForCooking(ingredientToDelete, quantityToDelete);
         } else {
             System.out.println(NO_CHANGE);
         }
+    }
+
+    public void addAmountForCooking(Ingredient ingredientToDelete, Integer quantityToDelete) {
+        double price = changePrice(ingredientToDelete, quantityToDelete);
+        amountUsedInCooking += price;
+        System.out.println(String.format(INCREASE_AMOUNT_USED, price));
     }
 
     public void editExpenditure(Ingredient ingredientToDelete, Integer quantityToDelete) {
