@@ -25,6 +25,9 @@ import seedu.kitchenhelper.exception.KitchenHelperException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import java.util.HashMap;
@@ -42,6 +45,7 @@ public class Parser {
     public static final Logger kitchenLogs = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     public static final String LOG_WARNING_INDEX = "An IndexOutOfBounds exception has been caught";
     public final String warningPrepareRecipe = "An IO exception has been caught";
+    public static final String INVALID_DATE = "An invalid date has been entered";
 
     /**
      * Parses user input into command for execution.
@@ -136,7 +140,7 @@ public class Parser {
         try {
             // Regex for checking the format of add ingredient
             String addInventoryRegex =
-                    "/n [a-zA-Z]+( [a-zA-Z]+)* /c [a-zA-Z]+ /q [0-9]+ /p \\d+(\\.\\d{1,2})? /e \\d{4}-\\d{2}-\\d{2}";
+                    "/n [a-zA-Z]+( [a-zA-Z]+)* /c [a-zA-Z]+ /q [0-9]+ /p \\d+(\\.\\d{1,2})? /e \\d{2}/\\d{2}/\\d{4}";
             if (!isValidUserInputFormat(attributes, addInventoryRegex)) {
                 throw new KitchenHelperException("Invalid Add Inventory Format");
             }
@@ -157,13 +161,15 @@ public class Parser {
             double price = Double.parseDouble(priceAndExpiry[0]);
             assert price >= 0.00 : price;
 
-            String expiry = priceAndExpiry[1];
-
+            String expiry = parseDateFormat(priceAndExpiry[1]);
+            
             return new AddIngredientCommand(itemName, category, quantity, price, expiry);
         } catch (KitchenHelperException khe) {
             kitchenLogs.log(Level.WARNING,InvalidCommand.MESSAGE_INVALID + " " + attributes);
             return new InvalidCommand(
                     String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, AddIngredientCommand.COMMAND_FORMAT));
+        } catch (DateTimeException dte) {
+            return new InvalidCommand(INVALID_DATE);
         }
     }
 
@@ -398,5 +404,23 @@ public class Parser {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(attributes);
         return matcher.matches();
+    }
+    
+    /**
+     * Check if the user input a valid date.
+     *
+     * @param expiry the user input date.
+     * @return the date in the form of dd/MM/yyyy.
+     */
+    public String parseDateFormat(String expiry) {
+        String[] splitExpiry = expiry.split("/");
+        LocalDate localDate;
+        String day = splitExpiry[0];
+        String month = splitExpiry[1];
+        String year = splitExpiry[2];
+        localDate = LocalDate.parse(year + "-" + month + "-" + day);
+        String formattedExpiry = localDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        formattedExpiry = formattedExpiry.replaceAll("-", "/");
+        return formattedExpiry;
     }
 }
