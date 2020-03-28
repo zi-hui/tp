@@ -8,6 +8,12 @@ By: `CS2113T-M16-2` Since: `2020`
     + [1.2. Scope](#12-scope)
   * [2. Setting up](#2-setting-up)
   * [3. Design](#3-design)
+    + [3.1. Architecture](#31-architecture)
+    + [3.2. Ui Component](#32-ui-component)
+    + [3.3. Logic Component](#33-logic-component)
+    + [3.4. Model Component](#34-model-component)
+    + [3.5. Storage Component](#35-storage-component)
+    + [3.6. Common Classes](#36-common-classes)
   * [4. Implementation](#4-implementation)
     + [4.1.Ingredient-related Features](#41ingredient-related-features)
       - [4.1.1. Addition of ingredient](#411-addition-of-ingredient)
@@ -25,7 +31,7 @@ By: `CS2113T-M16-2` Since: `2020`
       - [4.3.3. Delete all/ specific chore(s)](#433-delete-all-specific-chores)
       - [4.3.4. Search for chore based on keyword(s)](#434-search-for-chore-based-on-keywords)
     + [4.4. Storage](#44-storage)
-      - [4.4.1. Select files to load from and save to](#441-selection-of-load-files)
+      - [4.4.1. Select files to load from and save to](#441-select-files-to-load-from-and-save-to)
       - [4.4.2. Save current state](#442-save-current-state)
     + [4.5. Logging](#45-logging)
     + [4.6. Configuration](#46-configuration)
@@ -50,7 +56,7 @@ By: `CS2113T-M16-2` Since: `2020`
 
 ### 3.1. Architecture
 ### 3.2. Ui Component
-![Ui Component](/docs/images/UI_Component.png | width=150)
+![Ui Component](/docs/images/UI_Component.png)
 
 API: `Ui.java`
  
@@ -64,6 +70,16 @@ The `Ui` component,
 ### 3.3. Logic Component
 ### 3.4. Model Component
 ### 3.5. Storage Component
+image::Storage.png[Storage Class Diagram]
+
+A Storage object is created by the KitchenHelper class to handle the loading and saving of ingredients, recipes and chores data.
+
+The Storage() method acts as a constructor with filepaths to local save files for ingredients, recipes and chores data.
+
+The getIngredientData(), getRecipeData() and getChoreData() methods are used to read saved data from local files into the current session of KitchenHelper. loadingIngredients() and loadingRecipeItems() methods are called in getIngredientData() and getRecipeData() respectively to sort out which Ingredient object class each object belongs to.
+
+The saveIngredientData(), saveRecipeData() and saveChoreData() methods write the current state of KitchenHelper into the local save files by calling them in command classes such as AddChoreCommand and DeleteIngredientCommand.
+
 ### 3.6. Common Classes 
 Classes used by multiple components are in the `seedu.kitchenhelper.object` package.
 
@@ -193,12 +209,12 @@ When the user attempts to create a new recipe, the `AddRecipeCommand`, ‘Parser
     1. A `Ui` object will be created and calls `Ui#getUserCommand()`
     1. Input will be parsed in `Command#parseUserCommand()` and identified with the keyword `addrecipe`.
     
-    ![Add Recipe Step 1](/docs/images/AddRecipe1.png | width=150)
+    ![Add Recipe Step 1](/docs/images/AddRecipe1.png)
 2. Parsing of user input and creation of command object
     1. This will automatically trigger the parsing of the user’s input string into a suitable format for the addition of `recipe` object in `Command#prepareAddRecipe()`.
     1. A `AddRecipeCommand` object will be created and calls `AddRecipeCommand#setAttributesOfCmd()` to set the contents of the command into reader friendly formats.
     
-    ![Add Recipe Step 2](/docs/images/AddRecipe2.png | width=150)
+    ![Add Recipe Step 2](/docs/images/AddRecipe2.png)
 3. Executing Command
     1. The newly created object will call `#AddRecipeCommand#execute` which starts the process of adding a recipe, thus calling `Recipe#AddRecipe()`.
     1. A `Recipe` object will be created with its name that was parsed in step 2.
@@ -207,7 +223,7 @@ When the user attempts to create a new recipe, the `AddRecipeCommand`, ‘Parser
     ![Add Recipe Step 3](/docs/images/AddRecipe3.png | width=150)
 4. `Ingredient`s parsed in step 2 will be added to the newly created recipe according to their category through the calling of `Recipe#addIngredientsToRecipe()`.
 	
-	![Add Recipe Step 4](/docs/images/AddRecipe4.png | width=150)
+	![Add Recipe Step 4](/docs/images/AddRecipe4.png)
 
 All description and warnings to the user utilises the `UI` class, which controls the printing of the text on the console. 
 
@@ -371,16 +387,33 @@ The following steps explained sequence diagram for `searchchore` command:
 
 The select files to load from and save to feature allows the user to choose an option to either load their data from the auto-save mode or the manual-save mode. The auto-save mode keeps track of and stores all changes made in the program and provides the user with the most recent representation of their inventory. While the manual-save mode stores the state of the program data from the most recent usage of the save command by the user. 
 
-If the user chooses the manual-save mode, it will overwrite all the data stored in auto-save mode. However, any subsequent changes made to the program data will be saved by auto-save mode regardless of initial load options. To save by manual-save mode, the user will have to use the save current state function with the save command (see section 4.4.2).
+If the user chooses the manual-save mode, it will overwrite all the data stored in auto-save mode. However, any subsequent changes made to the program data will be saved by auto-save mode regardless of initial load options. To save by manual-save mode, the user will have to use the save current state function with the save command (see section 4.4.2)[4.4.2. Save current state](#442-save-current-state).
+    
+<b>Implementation</b> <br>
+1. For instance, if the User selects to load files from auto-save mode, User executes `1`
+	1. A `Ui` object will be created and calls `Ui#getUserChoice()` and returns String `UserChoice`. 
+	1. The `Ui` object then calls `Ui#validUserChoice()` with `UserChoice` as the parameter. If `UserChoice` is invalid, `Ui#validUserChoice()` will call `Ui#askForReInput()`.
+	1. The variable `userCommandInput` is being parsed into the `Parser` class as an argument for this method `Parser#parseUserCommand()`.
 
-##### 4.4.1.1. Implementation  
+2. Creation of storage object
+    
+    Ingredient data:
+    1. A `Storage` object will be created and calls `Storage#getIngredientData()` to load and parse the contents of ingredient save file into a newly created `ingredientList ArrayList<Ingredient>`.
+    1. ` Storage#getIngredientData()` will call `Storage#loadingIngredient()` to create `Ingredient` objects based on the category type of ingredients in the `ingredientList`.
+    
+    Recipe data:
+    1. A `Storage` object will be created and calls `Storage#getRecipeData()` to load and parse the contents of recipe save file into a newly created `recipeList ArrayList<Recipe>`.
+    1. `Storage#getRecipeData()` will create a `Recipe` object and `recipeItems ArrayList<Ingredient>`. It then calls `Storage#loadingRecipeItems()` to create `Ingredient` objects based on the category type of ingredients in each recipe into the `recipeItems`. Every ` recipeItems` of each recipe will then be added into `recipeList`.
 
-{insert sequence diagram of searchingredient command}
+    Chore data:
+    1. A `Storage` object will be created and calls `Storage#getChoreData()` to load and parse the contents of chore save file into a newly created `choreList ArrayList<Chore>`.
 
+All description and warnings to the user utilises the UI class, which controls the printing of the text on the console.
 
+The sequence diagram below summarizes how loading data works:
+image::Loading.jpeg[Load Data Sequence Diagram]
 
-##### 4.4.1.2. Design considerations:
-
+<b>Design considerations:</b> <br>
 Aspects: How saving of files executes:  
 
 - Alternative 1 (current choice): Overwriting files with entire current ArrayLists every time changes are made.
@@ -400,13 +433,15 @@ Aspects: How saving of files executes:
 #### 4.4.2. Save current state
 The save current state feature allows the user to store the current state of the program data by manual-save mode. Manual-save mode data will be updated and replaced with the current state when save command is implemented.
 
-##### 4.4.2.1. Implementation  
+<b>Implementation</b> <br>
+The following steps explain how `save` command works:
+1. The user enters `save`
+2. `KitchenHelper` calls `Parser#parseUserCommand()` which splits the user’s input into 2 parts 
+and enters a switch case for execution.  
+3. `parseUserCommand` in the Parser object will call a method `SaveStateCommand`.  
+4. On execute(), `Storage.copyFile()` will be called three times to copy contents of ingredients, recipes and chore save files into their respective manual-mode save files.
 
-{insert sequence diagram of searchingredient command}
-
-
-##### 4.4.2.2. Design considerations:
-
+<b>Design considerations:</b> <br>
 Aspects: How saving of current state data executes:
 
 - Alternative 1 (current choice): Using Files.copy to copy content of auto-save files to manual-save files.
