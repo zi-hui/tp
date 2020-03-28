@@ -31,8 +31,7 @@ By: `Team CS2113T-M16-2` Since: `March 2020` License: `MIT`
       - [3.5.1. Select Load Files](#351-select-load-files)  
       - [3.5.2. Save Current State: `save`](#352-save-current-state-save)
  
-  * [4. FAQ](#4-faq)  
-  * [5. Command Summary](#5-command-summary)
+  * [4. Command Summary](#4-command-summary)
 
 
 ## 1. Introduction
@@ -267,13 +266,7 @@ Example |  Outcome
 --------|------------------
 Command: <br> `save` <br>  Description: <br> Data saved into manual-save mode files.  | save <br> You have saved the current state in the following files: outputIngredientCopy.txt, outputRecipeCopy.txt, outputChoreCopy.txt  <br> =================================================== 
 
-## 4. FAQ
-
-**Q**: How do I transfer my data to another computer? 
-
-**A**: Well, write the User Guide in active voice anyway.
-
-## 5. Command Summary
+## 4. Command Summary
 Here is a short summary of the command used in KitchenHelper application.  
 Refer back to [Section 3, "Features"](#3-features) for more information on the usage of commands.  
   
