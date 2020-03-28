@@ -7,6 +7,8 @@ By: `CS2113T-M16-2` Since: `2020`
     + [1.1. Purpose](#11-purpose)
     + [1.2. Scope](#12-scope)
   * [2. Setting up](#2-setting-up)
+    + [2.1. Prerequisites](#21-prerequisites)
+    + [2.2. Setting up the project in your computer](#22-setting-up-the-project-in-your-computer)
   * [3. Design](#3-design)
     + [3.1. Architecture](#31-architecture)
     + [3.2. Ui Component](#32-ui-component)
@@ -51,6 +53,22 @@ By: `CS2113T-M16-2` Since: `2020`
 ### 1.2. Scope
 
 ## 2. Setting up
+
+### 2.1. Prerequisites
+1. JDK `11`.
+2. IntelliJ IDE.
+
+### 2.2. Setting up the project in your computer
+1. Fork this repository, and clone the fork repository to your computer.
+2. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first).
+3. Set up the correct JDK version for Gradle  
+   1. Click `Configure` > `Structure for New Projects` and then `Project Settings` > `Project` > `Project SDK`.
+   2. If `JDK 11` is listed in the drop down, select it. Otherwise, click `New…` and select the directory where you installed `JDK 11`.
+   3. Click `OK`.
+4. Click `Import Project`.
+5. Locate the `build.gradle` file and select it. Click `OK`.
+6. Click `Open as Project`.
+7. Click `OK` to accept the default settings if prompted. 
 
 ## 3. Design
 
