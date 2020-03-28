@@ -21,6 +21,7 @@ import seedu.kitchenhelper.command.ListRecipeCommand;
 import seedu.kitchenhelper.command.InvalidCommand;
 import seedu.kitchenhelper.command.CookRecipeCommand;
 import seedu.kitchenhelper.exception.KitchenHelperException;
+import seedu.kitchenhelper.object.Expenditure;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -160,6 +161,7 @@ public class Parser {
             String[] priceAndExpiry = quantityAndOthers[1].split("\\s+/e\\s+");
             double price = Double.parseDouble(priceAndExpiry[0]);
             assert price >= 0.00 : price;
+            new Expenditure().addToExpenditure(price);
 
             String expiry = parseDateFormat(priceAndExpiry[1]);
             

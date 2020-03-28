@@ -1,6 +1,7 @@
 package seedu.kitchenhelper.command;
 
 import seedu.kitchenhelper.object.Chore;
+import seedu.kitchenhelper.object.Expenditure;
 import seedu.kitchenhelper.object.Recipe;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
 import seedu.kitchenhelper.storage.Storage;
@@ -154,6 +155,7 @@ public class DeleteIngredientCommand extends Command {
                 feedbackToUser = String.format(COMMAND_FAILURE_QUANTITY, ingredientName, ingredientQuantity);
             }
             Storage.saveIngredientData(ingredientsList);
+            new Expenditure().editExpenditure(ingredientToDelete, quantity);
         } else {
             feedbackToUser = COMMAND_FAILURE;
         }

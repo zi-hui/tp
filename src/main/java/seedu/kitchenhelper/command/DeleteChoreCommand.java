@@ -95,9 +95,7 @@ public class DeleteChoreCommand extends Command {
 
     public boolean isValidResponse(String userResponse) {
         String response = userResponse;
-        if (response.equalsIgnoreCase("no")) {
-            return true;
-        } else if (response.equalsIgnoreCase("yes")) {
+        if (response.equalsIgnoreCase("no") || response.equalsIgnoreCase("yes")) {
             return true;
         }
         return false;
