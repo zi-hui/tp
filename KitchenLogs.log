@@ -1,0 +1,6 @@
+Mar 28, 2020 11:06:33 AM seedu.kitchenhelper.parser.Parser prepareAddIngredient
+WARNING: Invalid Command Format! 
+Mar 28, 2020 11:06:48 AM seedu.kitchenhelper.parser.Parser prepareAddIngredient
+WARNING: Invalid Command Format! /n Beef /c Meat /q 1 /p 12 14/01/2020
+Mar 28, 2020 11:07:07 AM seedu.kitchenhelper.command.AddIngredientCommand execute
+INFO: A new ingredient has been added

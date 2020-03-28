@@ -61,7 +61,8 @@ So what are you waiting for? Let’s go!
 ## 3. Features 
 
 Command Format: 
-- Words that are enclosed by angle brackets are the parameters to be supplied by the user. E.g. `deleterecipe /n <recipe_name>`
+- Words that are enclosed by angle brackets are the parameters to be supplied by the user. E.g. `deleterecipe /n <recipe_name>` 
+From this example, `recipe_name` will be inputted by the user.
 - Items in angle brackets with the word “optional:'' are optional. E.g. `deleteingredient /n <ingredient_name>:<optional:quantity>` can be used as `deleteingredient /n apple or deleteingredient /n name /q 2`
 
 ### 3.1. General Commands
@@ -117,16 +118,23 @@ __Example of usage:__
 * `listingredient vegetable`
 
 #### 3.2.3. Delete an ingredient: `deleteingredient`
-Delete the specified ingredient or reduce an ingredient’s quantity from the ingredients inventory in Kitchen Helper using ingredient's name or index. 
-The name or index of the ingredient can be found by displaying the list of ingredients. 
+You can delete a specified ingredient or reduce an ingredient’s quantity from the ingredients' inventory in Kitchen Helper by using ingredient's name or index. <br>
 
-__Format__: `deleteingredient /n <INGREDIENT> [/q QUANTITY]` OR `deleteingredient /i <INGREDIENT_INDEX> [/q QUANTITY]`
+You may get the list of ingredients that you have previously keyed in, by referring to the [listingredient](#322-list-ingredient-listingredient) command section. <br>
+
+__Format__: `deleteingredient /n <ingredient_name> [/q quantity]` OR `deleteingredient /i <ingredient_index> [/q quantity]`
+<br>
+<br>
+`ingredient_name` : This refers to the name of the ingredient. <br>
+`ingredient_index`: This refers to the index of the ingredient. <br>
+`quantity` : This refers to the quantity of ingredient to be deducted. <br>
+<br>
 
 Example |  Outcome
 --------|------------------
-Command: <br> `deleteingredient /n apple /q 2` <br> Description: <br> Deletes `2 apples` from the total quantity of `apples.` | `deleteingredient /n apple /q 2` <br> `The quantity of apple has been changed!`
-Command: <br> `deleteingredient /n wagyu beef` <br> Deletes the ingredient named `wagyu beef` from the ingredients list. | `deleteingredient /n wagyu beef` <br> `wagyu beef has been deleted.`
-Command: <br> `deleteingredient /i 1` <br> Deletes the item specified by `index 1` in the ingredient list. | `deleteingredient /i 1` <br> `apple has been deleted.`
+Command: <br> `deleteingredient /n apple /q 2` <br><br> Description: <br> Deletes `2 apples` from the total quantity of `apples.` | deleteingredient /n apple /q 2 <br> The quantity of apple has been changed!<br>===================================================
+Command: <br> `deleteingredient /n wagyu beef` <br><br> Deletes the ingredient named `wagyu beef` from the ingredients list. | deleteingredient /n wagyu beef <br> wagyu beef has been deleted.<br>===================================================
+Command: <br> `deleteingredient /i 1` <br><br> Deletes the item specified by `index 1` in the ingredient list. | deleteingredient /i 1 <br> apple has been deleted.<br>===================================================
 
 #### 3.2.4. Search for ingredient: `searchingredient`
 You can search for ingredients based on a given keyword.  
@@ -164,14 +172,19 @@ __Example of usage:__
 * `listingredient 2`
 
 #### 3.3.3. Delete a recipe: `deleterecipe`
-Deletes the specific recipe name or index from the list in Kitchen Helper. The name or index of the recipe can be found by displaying the list of recipes. 
+You can delete a recipe by using the recipe name or index from the list in Kitchen Helper. The name or index of the recipe can be found by displaying the list of recipes. 
 
-__Format__: `deleterecipe /n <RECIPE>` OR `deleterecipe /i <RECIPE_INDEX>`
+__Format__: `deleterecipe /n <recipe_name>` OR `deleterecipe /i <recipe_index>`
+<br>
+<br>
+`recipe_name` : This refers to the name of the recipe. <br>
+`recipe_index`: This refers to the index of the recipe. <br>
+<br>
 
 Example |  Outcome
 --------|------------------
-Command: <br> `deleterecipe /n pasta` <br> Description: <br> Deletes the recipe with the name of `pasta` from the recipe list.| `deleterecipe /n pasta` <br> `pasta has been deleted.`
-Command: <br> `deleterecipe /i 2` <br> Description: <br> Deletes recipe by index. In this case, delete recipe with the `index 2` from the recipe list. | `deleterecipe /i 2` <br> `Beef Salad has been deleted`
+Command: <br> `deleterecipe /n pasta` <br><br> Description: <br> Deletes the recipe with the name of `pasta` from the recipe list.| deleterecipe /n pasta <br> pasta has been deleted.<br>===================================================
+Command: <br> `deleterecipe /i 2` <br><br> Description: <br> Deletes recipe by index. In this case, delete recipe with the `index 2` from the recipe list. | deleterecipe /i 2 <br> Beef Salad has been deleted.<br>===================================================
 
 #### 3.3.4. Search for recipe: `searchrecipe`
 You can search for recipes based on a given keyword.  
