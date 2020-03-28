@@ -508,6 +508,19 @@ kitchenLogs.log(Level.WARNING, description_of_warning_here, e.toString());
 ## Appendices 
 ### Appendix A: Product Scope
 
+__Target user profile__:
+
+* Prefers desktop application over other types.  
+* Can type fast.  
+* Prefers typing over mouse input.  
+* Comfortable with using command line interface.  
+* Facilitate user to track kitchen inventory easily.  
+* Enables user to remove consumed items easily.  
+* Reminds user of soon perishable food items.  
+* Reminds user to stock up enough food.  
+
+__Value proposition__: manage food inventory quickly compared to a typical mouse or graphic user interface driven application which saves time and makes it more convenient.  
+
 ### Appendix B: User Stories
 
 |Version| As a ... | I want to ... | So that I can ...|
