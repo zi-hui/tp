@@ -216,7 +216,6 @@ Command: <br> `listchore` | listchore <br> Here are the chores in your list: <br
 Deletes the chore specified by the index in the chore list in Kitchen Helper. The index of the chore can be found by displaying the list of chores.
 __Format:__ `deletechore <index_to_delete>`  
 
-<<<<<<< HEAD
 Example |  Outcome
 --------|------------------
 Command: <br> `deletechore 1` <br> Description: <br> Deletes the item specified by `index 1` in the chore list. | deletechore 1 <br> You have deleted this chore: <br> [x] buy groceries (by: Monday 12pm) <br> Now you have 0 chores in the list. <br> ===================================================
