@@ -188,7 +188,7 @@ For example, `searchingredient beef` will find all the ingredients that contain 
 
 ##### Implementation  
 
-![SearchIngredientCommand](images/searchIngredientCommand.png) 
+![SearchIngredientCommand](images/searchIngredientCommand1.png) 
 
 The following steps explained sequence diagram for `searchingredient` command:  
 1. The user enters `searchingredient beef`.  
@@ -339,7 +339,7 @@ For example, `searchrecipe Chicken` will find all recipes that contain `Chicken`
 
 ##### Implementation
 
-![SearchRecipeCommand](images/searchRecipeCommand.png)
+![SearchRecipeCommand](images/searchRecipeCommand1.png)
 
 The following steps explained sequence diagram for `searchrecipe` command:  
 1. The user enters `searchrecipe Chicken`.  
@@ -378,7 +378,7 @@ For example, `searchchore groceries` will find all chores that contain `grocerie
 
 ##### Implementation  
 
-![SearchChoreCommand](images/searchChoreCommand.png)
+![SearchChoreCommand](images/searchChoreCommand1.png)
 
 The following steps explained sequence diagram for `searchchore` command:  
 1. The user enters `searchchore groceries`.  
