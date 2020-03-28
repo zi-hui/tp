@@ -46,10 +46,10 @@ By: `CS2113T-M16-2` Since: `2020`
     + [Appendix F: Instructions for Manual Testing](#appendix-f-instructions-for-manual-testing)
       - [F.1. Launch and Shutdown](#f1-launch-and-shutdown)
       - [F.2. Add an ingredient](#f2-add-an-ingredient)
-      - [F.2. Search for ingredient](#f3-search-for-ingredient)
-      - [F.2. Search for recipe](#f4-search-for-recipe)
-      - [F.2. Search for chore](#f5-search-for-chore)
-      - [F.3. Saving data](#f6-saving-data)
+      - [F.3. Search for ingredient](#f3-search-for-ingredient)
+      - [F.4. Search for recipe](#f4-search-for-recipe)
+      - [F.5. Search for chore](#f5-search-for-chore)
+      - [F.6. Saving data](#f6-saving-data)
 
 ## 1. Introduction
 ### 1.1. Purpose
@@ -131,7 +131,7 @@ The following steps explained “Sequence diagram for an example `addingredient`
 The list feature allows showing details of Ingredients added by the user.  All ingredients added will be shown in a sorted order, by expiry, and shown by categories. The function will require a valid string , which belongs to `all/dairy/drink/fruit/meat/miscellaneous/staple/vegetable`, 
 to be added as a parameter. Failure to do so will trigger an exception where the user will be notified of an invalid command and the syntax of the listing of the ingredients will be displayed. 
 
-#### 4.1.2.1. Implementation
+#### Implementation
 When the user attempts to list the details of a particular category of ingredients, the `listIngredientCommand`, ‘Parser’ and `Ingredient` class will be accessed and the following sequence of actions are called to list details of  a particular category Ingredient list: <br>
 1. User executes `listingredient all` 
     2. A `Ui` object will be created and calls `Ui#getUserCommand()`
@@ -149,7 +149,7 @@ When the user attempts to list the details of a particular category of ingredien
 4. The details will then be printed onto the console using `Ui#showResultToUser(result)`.
     
 
-#### 4.1.2.2. Design Considerations</b> <br>
+#### Design Considerations</b> <br>
 Aspect: Finding the category name and print out ingredient belonging to the category
 
 Alternative 1: Looping through the whole ingredientList arraylist to find out all possible category name, then, do sorting and return result
@@ -160,6 +160,7 @@ Alternative 1: Looping through the whole ingredientList arraylist to find out al
 |**Cons** | This method will be slow when facing a huge amount of data in the arraylist as the program may have to go through every single item in the arraylist. |
 
 Alternative 2 (current choice): Creating a fixed array which includes the order and all possible category names.
+
 |     |     |
 |-----|-----|
 |**Pros** | Users would be able to get the details of the particular recipe accurately and fast. |
@@ -330,6 +331,7 @@ Alternative 1: Looping through the whole recipeList arraylist to find the recipe
 |**Cons** | This method will be slow when facing a huge amount of data in the arraylist as the program may have to go through every single item in the arraylist. |
 
 Alternative 2 (current choice): Using arrayList.get(item) to get the recipe requested by the user.
+
 |     |     |
 |-----|-----|
 |**Pros** | Users would be able to get the details of the particular recipe accurately and fast. |
@@ -599,7 +601,7 @@ __Target user profile__:
 * Reminds user of soon perishable food items.  
 * Reminds user to stock up enough food.  
 
-__Value proposition__: manage food inventory quickly compared to a typical mouse or graphic user interface driven application which saves time and makes it more convenient.  
+__Value proposition__: Manage food inventory quickly compared to a typical mouse or graphic user interface driven application which saves time and makes it more convenient.  
 
 ### Appendix B: User Stories
 
