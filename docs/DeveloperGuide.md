@@ -514,7 +514,7 @@ __Target user profile__:
 * Can type fast.  
 * Prefers typing over mouse input.  
 * Comfortable with using command line interface.  
-* Facilitate user to track kitchen inventory easily.  
+* Facilitate user to track kitchen related information easily.  
 * Enables user to remove consumed items easily.  
 * Reminds user of soon perishable food items.  
 * Reminds user to stock up enough food.  
@@ -552,7 +552,61 @@ __Value proposition__: manage food inventory quickly compared to a typical mouse
 
 ### Appendix C: Value proposition - Use cases
 
-{Describe the value proposition: what problem does it solve?}
+(For all use cases below, the __System__ is `Kitchen Helper` and the __Actor__ is the `user`, unless otherwise stated)
+```
+Use case: UC01 - Add an ingredient
+MSS:
+1. User purchases an ingredient.
+2. User wants to add to System for tracking purposes.
+3. System adds the ingredient.
+Use case ends.
+
+Extensions:
+2a. System detects invalid format in the entered data.
+  2a1. System throws invalid input format and shows a valid format example.
+  Use case resumes at step 2.
+```
+
+```
+Use case: UC02 - Search for ingredient
+MSS:
+1. User wants to find ingredients.
+2. User enters a keyword in the System.
+3. System displays the ingredient related to the keyword.
+Extentions: 
+3a. No matching ingredients related to the keyword.
+  3a1. Systems show no matching ingredient message
+Use case resumes at step 2.
+Use case ends.
+```
+
+```
+Use case: UC03 - Search for recipe
+MSS:
+1. User wants to find similar recipes.
+2. User enters a keyword in the System.
+3. System displays the recipe's name related to the keyword.
+Use case ends.
+Extentions: 
+3a. No matching recipe related to the keyword.
+  3a1. Systems show no matching recipe message
+Use case resumes at step 2.
+Use case ends.
+```
+
+```
+Use case: UC03 - Search for chore
+MSS:
+1. User wants to find chores.
+2. User enters a keyword in the System.
+3. System displays the chore related to the keyword.
+Use case ends.
+Extentions: 
+3a. No matching chore related to the keyword.
+  3a1. Systems show no matching chore message
+Use case resumes at step 2.
+Use case ends.
+```
 
 ### Appendix D: Non-Functional Requirements
 
