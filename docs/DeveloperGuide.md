@@ -45,8 +45,11 @@ By: `CS2113T-M16-2` Since: `2020`
     + [Appendix E: Glossary](#appendix-e-glossary)
     + [Appendix F: Instructions for Manual Testing](#appendix-f-instructions-for-manual-testing)
       - [F.1. Launch and Shutdown](#f1-launch-and-shutdown)
-      - [F.2. Deleting a](#f2-deleting-a)
-      - [F.3. Saving data](#f3-saving-data)
+      - [F.2. Add an ingredient](#f2-add-an-ingredient)
+      - [F.2. Search for ingredient](#f3-search-for-ingredient)
+      - [F.2. Search for recipe](#f4-search-for-recipe)
+      - [F.2. Search for chore](#f5-search-for-chore)
+      - [F.3. Saving data](#f6-saving-data)
 
 ## 1. Introduction
 ### 1.1. Purpose
@@ -621,7 +624,48 @@ Use case ends.
 * *Mainstream OS* - Windows, Linux, Unix, OS-X
 
 ### Appendix F: Instructions for Manual Testing
+
 #### F.1. Launch and Shutdown
-#### F.2. Deleting a 
-#### F.3. Saving data
+
+1. Initial launch
+   1. Download the jar file and copy into an empty folder.
+   2. Open up command prompt or terminal.
+   3. Change directory to where the jar file is located.
+   4. Run the command java -jar \<FILE\>.jar (FILE represents the filename)  
+   Expected: Shows a welcome message from Kitchen Helper.
+   
+#### F.2. Add an ingredient
+
+1. Add an ingredient into Kitchen Helper.
+   1. Prerequisites: List all the ingredient using the `listingredient all` command. 
+   2. Test case: 'addingredient /n beef /c meat /q 3 /p 20.20 /e 03/03/2020'    
+   Expected: Entry can be seen using `listingredient all` command.
+    
+#### F.3. Search for ingredient
+1. Search for ingredients in Kitchen Helper.
+   1. Prerequisites: The ingredient list should not be empty.
+   2. Test case: `searchingredient beef`  
+   Expected: Ingredient entries that have the keyword matching `beef` names are listed.
+   3. Test case: 'searchingredient meat'  
+   Expected: Ingredient entries that have the keyword matching `meat` category are listed.
+   4. Test case: `searchingredient 02/02/2020`  
+   Expected: Ingredient entries that have the keyword matching `02/02/2020` date are listed.
+   5. Test case: `searchingredient $20`  
+   Expected: Ingredient entries that have the keyword matching `$20` price are listed.
+   
+#### F.4. Search for recipe
+1. Search for similar recipe in Kitchen Helper.
+   1. Prerequisites: The recipe list should not be empty.
+   2. Test case: 'searchrecipe chicken' 
+   Expected: Recipe's name entries that have the keyword matching `chicken' are listed. 
+   
+#### F.5. Search for chore
+1. Search for chores in Kitchen Helper.
+   1. Prerequisites: The chore list should not be empty.
+   2. Test case: `searchchore groceries`  
+   Expected: Chore entries that have the keyword matching `groceries` description are listed.
+   3. Test case: `searchchore Tuesday`  
+   Expected: Chore entries that have the keyword matching `Tuesday` as a string are listed.  
+   
+#### F.6. Saving data
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
