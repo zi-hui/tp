@@ -1,6 +1,12 @@
 ===================================================
+Please enter '1' for auto-save and '2' for manual-save:
+===================================================
+Okay auto-save chosen.
+===================================================
 Hello! I'm KitchenHelper here
 What can I do for you?
+===================================================
+You have no deadlines upcoming in the next 3 days.
 ===================================================
 addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable
 Chicken Salad Recipe has been created with 2 ingredients inside.
@@ -17,6 +23,12 @@ You have added Ingredient:Beef Category:meat Quantity:3 Price:$20.00 Expiry:2020
 addingredient /n Beef cubes /c meat /q 3 /p 20 /e 2020-03-18
 You have added Ingredient:Beef cubes Category:meat Quantity:3 Price:$20.00 Expiry:2020-03-18 to the ingredient list
 ===================================================
+addingredient /n Chicken Breast /c meat /q 4 /p 20 /e 2020-03-20
+You have added Ingredient:Chicken Breast Category:meat Quantity:4 Price:$20.00 Expiry:2020-03-20 to the ingredient list
+===================================================
+addingredient /n Chicken Breast /c meat /q 3 /p 20 /e 2020-03-18
+You have added Ingredient:Chicken Breast Category:meat Quantity:3 Price:$20.00 Expiry:2020-03-18 to the ingredient list
+===================================================
 addingredient /n kailan /c Vegetable /q 30 /p 30.45 /e 2020-03-12
 You have added Ingredient:kailan Category:Vegetable Quantity:30 Price:$30.45 Expiry:2020-03-12 to the ingredient list
 ===================================================
@@ -31,6 +43,12 @@ Example: addingredient /n Beef /c Meat /q 1 /p 13.5 /e 2020-02-13
 addingredient /n Pear /c fruit /q 1 /p 1 /e 2020-02-02
 You have added Ingredient:Pear Category:fruit Quantity:1 Price:$1.00 Expiry:2020-02-02 to the ingredient list
 ===================================================
+addingredient /n Lettuce /c Vegetable /q 4 /p 20 /e 2020-03-20
+You have added Ingredient:Lettuce Category:Vegetable Quantity:4 Price:$20.00 Expiry:2020-03-20 to the ingredient list
+===================================================
+addingredient /n Lettuce /c Vegetable /q 8 /p 20 /e 2020-03-09
+You have added Ingredient:Lettuce Category:Vegetable Quantity:8 Price:$20.00 Expiry:2020-03-09 to the ingredient list
+===================================================
 listingredient all
 Here is the list of Ingredients in Inventory:
 Format : Ingredient Name|Quantity|Price|Expiry
@@ -43,9 +61,13 @@ Pear|1|1.0|2020-02-02
 meat:
 Beef|3|20.0|2020-03-18
 Beef cubes|3|20.0|2020-03-18
+Chicken Breast|3|20.0|2020-03-18
+Chicken Breast|4|20.0|2020-03-20
 miscellaneous:
 staple:
 vegetable:
+Lettuce|8|20.0|2020-03-09
+Lettuce|4|20.0|2020-03-20
 kailan|30|30.45|2020-03-12
 
 ===================================================
@@ -65,9 +87,13 @@ Pear|1|1.0|2020-02-02
 meat:
 Beef|3|20.0|2020-03-18
 Beef cubes|3|20.0|2020-03-18
+Chicken Breast|3|20.0|2020-03-18
+Chicken Breast|4|20.0|2020-03-20
 miscellaneous:
 staple:
 vegetable:
+Lettuce|8|20.0|2020-03-09
+Lettuce|4|20.0|2020-03-20
 kailan|30|30.45|2020-03-12
 
 ===================================================
@@ -88,9 +114,13 @@ Pear|1|1.0|2020-02-02
 meat:
 Beef|3|20.0|2020-03-18
 Beef cubes|3|20.0|2020-03-18
+Chicken Breast|3|20.0|2020-03-18
+Chicken Breast|4|20.0|2020-03-20
 miscellaneous:
 staple:
 vegetable:
+Lettuce|8|20.0|2020-03-09
+Lettuce|4|20.0|2020-03-20
 kailan|30|30.45|2020-03-12
 
 ===================================================
@@ -112,9 +142,13 @@ Pear|1|1.0|2020-02-02
 meat:
 Beef|3|20.0|2020-03-18
 Beef cubes|3|20.0|2020-03-18
+Chicken Breast|3|20.0|2020-03-18
+Chicken Breast|4|20.0|2020-03-20
 miscellaneous:
 staple:
 vegetable:
+Lettuce|8|20.0|2020-03-09
+Lettuce|4|20.0|2020-03-20
 kailan|30|30.45|2020-03-12
 
 ===================================================
@@ -141,9 +175,13 @@ fruit:
 meat:
 Beef|3|20.0|2020-03-18
 Beef cubes|3|20.0|2020-03-18
+Chicken Breast|3|20.0|2020-03-18
+Chicken Breast|4|20.0|2020-03-20
 miscellaneous:
 staple:
 vegetable:
+Lettuce|8|20.0|2020-03-09
+Lettuce|4|20.0|2020-03-20
 kailan|30|30.45|2020-03-12
 
 ===================================================
@@ -171,6 +209,14 @@ Here are your matching recipes in your list
 1.Chicken Salad located at listrecipe 1
 2.Chicken Stew located at listrecipe 2
 ===================================================
+cookrecipe /n Chicken Salad /p 2
+Kitchen Helper is trying to cook!
+Chicken Salad was cooked with a pax of 2
+===================================================
+cookrecipe /n Chicken Salad /p 3
+Kitchen Helper is trying to cook!
+There are insufficient/missing ingredients!
+===================================================
 deleteingredient /n Beef
 Beef has been deleted.
 ===================================================
@@ -196,6 +242,18 @@ Chicken Stew has been deleted
 ===================================================
 deleteingredient /n HL milk
 HL Milk has been deleted.
+===================================================
+deleteingredient /i 4
+Lettuce has been deleted.
+===================================================
+deleteingredient /i 3
+Lettuce has been deleted.
+===================================================
+deleteingredient /i 2
+Chicken Breast has been deleted.
+===================================================
+deleteingredient /i 1
+Chicken Breast has been deleted.
 ===================================================
 deletechore 1
 You have deleted this chore:
