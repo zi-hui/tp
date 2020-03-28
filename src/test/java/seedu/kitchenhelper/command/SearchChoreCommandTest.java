@@ -8,6 +8,7 @@ import seedu.kitchenhelper.object.ingredient.Ingredient;
 import seedu.kitchenhelper.parser.Parser;
 import seedu.kitchenhelper.ui.Ui;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -15,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class SearchChoreCommandTest {
     
     @Test
-    void execute_notEmpty() throws KitchenHelperException {
+    void execute_notEmpty() throws KitchenHelperException, IOException {
         ArrayList<Ingredient> ingredientArrayList = new ArrayList<>();
         ArrayList<Recipe> recipeArrayList = new ArrayList<>();
         ArrayList<Chore> choreArrayList = new ArrayList<>();
@@ -32,7 +33,7 @@ class SearchChoreCommandTest {
     }
     
     @Test
-    void execute_empty() throws KitchenHelperException {
+    void execute_empty() throws KitchenHelperException, IOException {
         ArrayList<Ingredient> ingredientArrayList = new ArrayList<>();
         ArrayList<Recipe> recipeArrayList = new ArrayList<>();
         ArrayList<Chore> choreArrayList = new ArrayList<>();
@@ -43,7 +44,7 @@ class SearchChoreCommandTest {
     }
     
     @Test
-    void execute_notFound() throws KitchenHelperException {
+    void execute_notFound() throws KitchenHelperException, IOException {
         ArrayList<Ingredient> ingredientArrayList = new ArrayList<>();
         ArrayList<Recipe> recipeArrayList = new ArrayList<>();
         ArrayList<Chore> choreArrayList = new ArrayList<>();

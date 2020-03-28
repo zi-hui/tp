@@ -11,11 +11,9 @@ import seedu.kitchenhelper.object.ingredient.Drink;
 import seedu.kitchenhelper.object.ingredient.Fruit;
 import seedu.kitchenhelper.object.ingredient.Meat;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
-import seedu.kitchenhelper.storage.Storage;
 import seedu.kitchenhelper.ui.Ui;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class ListIngredientCommand extends Command {
     
@@ -81,10 +79,20 @@ public class ListIngredientCommand extends Command {
         return result;
     }
 
+    /**
+     * Retrieves the category of ingredient.
+     *
+     * @return  catgeory of ingredient.
+     */
     public String getCategory() {
         return this.category;
     }
 
+    /**
+     * Checks if the user is listing an exisitng catgeory.
+     *
+     * @return true if the category is defined, false otherwise.
+     */
     public boolean checkCategoryValid() {
         boolean validCategory = false;
         for (String catName : categoryArray) {
@@ -93,10 +101,6 @@ public class ListIngredientCommand extends Command {
             }
         }
         return validCategory;
-    }
-
-    public String[] getCategoryArray() {
-        return this.categoryArray;
     }
 
     /**

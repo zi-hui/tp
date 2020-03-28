@@ -9,9 +9,13 @@ import seedu.kitchenhelper.ui.Ui;
 
 import java.util.ArrayList;
 
+/**
+ * Represent the keyword used to identify the action.
+ */
 public class DoneCommand extends Command {
 
     public static final String COMMAND_WORD = "done";
+    public static final String INVALID_INDEX = "Please choose an index in the chore list!";
     public static final String MESSAGE_SUCCESS = "You have completed this chore:\n%s\n";
     public static final String COMMAND_DESC = "Marks a chore as done.";
     public static final String COMMAND_PARAMETER = "<index>";
@@ -23,14 +27,25 @@ public class DoneCommand extends Command {
 
     private int indexToCheck;
 
+    /**
+     * Mark item at index as done.
+     *
+     * @param indexToCheck  the index to mark.
+     */
     public DoneCommand(int indexToCheck) {
         this.indexToCheck = indexToCheck;
     }
 
+    /**
+     * Marks specified chore as completed.
+     *
+     * @param choreList the list of chores
+     * @return  the message when task has been marked as done.
+     */
     public String markChoreDone(ArrayList<Chore> choreList) {
         try {
             if (indexToCheck > choreList.size()) {
-                throw new KitchenHelperException("Please choose an index in the chore list!");
+                throw new KitchenHelperException(INVALID_INDEX);
             }
             Chore choreToCheck = choreList.get(indexToCheck - 1);
             choreToCheck.markAsDone();
@@ -41,7 +56,14 @@ public class DoneCommand extends Command {
         }
     }
 
-
+    /**
+     * {@inheritDoc}
+     *
+     * @param ingredientList list of ingredients.
+     * @param recipeList     list of recipes.
+     * @param choreList      list of chores.
+     * @return the success message of marking item as done.
+     */
     @Override
     public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
                                  ArrayList<Chore> choreList) {
