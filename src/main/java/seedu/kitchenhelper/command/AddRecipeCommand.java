@@ -1,6 +1,5 @@
 package seedu.kitchenhelper.command;
 
-import seedu.kitchenhelper.KitchenHelper;
 import seedu.kitchenhelper.exception.KitchenHelperException;
 import seedu.kitchenhelper.object.Chore;
 import seedu.kitchenhelper.object.Recipe;
@@ -32,13 +31,6 @@ public class AddRecipeCommand extends Command {
     public HashMap<String[], Integer> parsedIngr;
 
     /**
-     * Set the object's type.
-     */
-    public void setTypeOfObject() {
-        objectType = "recipe";
-    }
-
-    /**
      * Set the attributes of the Command class.
      *
      * @param rawString     full user input string.
@@ -46,7 +38,6 @@ public class AddRecipeCommand extends Command {
      *                      and ingredientQuantity as value.
      */
     public void setAttributesOfCmd(String rawString, HashMap<String[], Integer> ingrAndQty) {
-        setTypeOfObject();
         setObjectVariables(rawString);
         setAction();
         this.parsedIngr = ingrAndQty;
@@ -98,14 +89,14 @@ public class AddRecipeCommand extends Command {
      *          false otherwise.
      */
     public Boolean checkIfRecipeExist(String newRecipeName, ArrayList<Recipe> recipeList) {
-        boolean existence = false;
+        boolean isExist = false;
         for (Recipe recipe : recipeList) {
             if (recipe.getRecipeName().equalsIgnoreCase(newRecipeName)) {
-                existence = true;
+                isExist = true;
                 break;
             }
         }
-        return existence;
+        return isExist;
     }
 
 
