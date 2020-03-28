@@ -74,7 +74,7 @@ By: `CS2113T-M16-2` Since: `2020`
 
 ### 3.1. Architecture
 ### 3.2. Ui Component
-![Ui Component](/docs/images/UI_Component.png)
+![Ui Component](images/UI_Component.png)
 
 API: `Ui.java`
  
