@@ -364,6 +364,36 @@ and returns the recipe’s name and the index of recipe in the recipe’s list.
 |**Pros** | 1. More accurate searching of the recipe that uses the ingredients.|  
 |**Cons** | 1. Could be more memory intensive to find if the list is huge.|
 
+#### 4.2.5. Cooking a recipe
+##### Implementation
+##### Design considerations
+Aspect: Preparing the deduction of ingredients when cooking a recipe
+Alternative  1 (current choice): Checks for existence of recipe, existence of ingredients for the specified recipe and sufficiency of ingredients
+
+|   |   |
+|---|---|
+|**Pros**| Minimizes erroneous deduction of insufficient and nonexistent ingredients |
+|**Cons**|Additional computation and overhead |
+
+Alternative 2: Deductions are to be made to existing and available ingredients and users are notified when there are insufficient ingredients
+
+|   |   |
+|---|---|
+|**Pros**| Lesser overhead as there is lesser checks to be done
+|**Cons**| Hidden bugs and exceptions have to be well-covered to ensure that the deduction would be of the right value
+
+Aspect: Searching for the corresponding ingredients of a recipe/ Searching through list of recipes to check for existence of recipe
+Alternative 1 (current choice): Linear search, iterate through the arraylist of ingredients/ recipes and checking
+
+|   |   |
+|---|---|
+|**Pros**| Lesser use of complex data structure will save memory |
+|**Cons**|Not optimal as search will be O(n), larger amount of data may take a longer time |
+
+Alternative 2: building an index on the first letter of the recipe name
+More efficient search as pool of search space would be significantly smaller
+Needs to be constantly maintained which incurs overhead.
+
 ### 4.3. Chore-related Features
 #### 4.3.1. Addition of chore
 #### 4.3.2. List all/ specific chore(s)
