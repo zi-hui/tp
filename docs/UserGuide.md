@@ -80,7 +80,7 @@ __Format:__ `exit`
 #### 3.2.1. Adding an ingredient: `addingredient`
 You can add an ingredient to the Kitchen Helper for tracking, containing various details.
 
-__Format:__ `addingredient /n <INGREDIENT> /c <CATEGORY< /q <QUANTITY> /p <PRICE> /e <EXPIRY>`  
+__Format:__ `addingredient /n <INGREDIENT> /c <CATEGORY> /q <QUANTITY> /p <PRICE> /e <EXPIRY>`  
 
 * `INGREDIENT` is the name of your ingredient.
 * `CATEGORY` is the category of your ingredient.  
@@ -93,7 +93,7 @@ The different types of `CATEGORY` are listed below:
   + `Drink`
   + `Miscellaneous`  
   
-:speech_balloon: Any `CATEGORY` that does not falls in the list would be put under `Miscellaneous`.
+Any `CATEGORY` that does not falls in the list would be put under `Miscellaneous`.
 * `QUANTITY` is the number of servings of the ingredient.
   + `QUANTITY` in the format of whole number.
 * `PRICE` is the cost of the ingredient.
