@@ -53,7 +53,8 @@ So what are you waiting for? Let’s go!
    e.g. typing `help` and pressing `Enter` will display help information.
 6. Some example commands you can try:  
    * `help` : lists all commands 
-   * `` :
+   * `addingredient /n Beef cubes /c meat /q 3 /p 20 /e 18/03/2020` : adds an ingredient to the list.
+   * `listingredient meat` : list the ingredients that has the category meat.
    * `exit` : exits the application.
 7. Refer to [Section 3, "Features"](#3-features) for details of each command.
 
