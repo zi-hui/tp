@@ -277,16 +277,11 @@ public class Parser {
      */
     private Command prepareListRecipe(String parameters) throws KitchenHelperException {
         try {
-            int itemNumber = Integer.parseInt(parameters);
             if (parameters.isEmpty()) {
                 throw new KitchenHelperException("Invalid ListRecipe command.");
             }
-
-            return new ListRecipeCommand(itemNumber);
+            return new ListRecipeCommand(parameters);
         } catch (KitchenHelperException e) {
-            kitchenLogs.log(Level.WARNING, LOG_WARNING_INDEX, e.toString());
-            throw new KitchenHelperException(ListRecipeCommand.COMMAND_FORMAT);
-        } catch (NumberFormatException e) {
             kitchenLogs.log(Level.WARNING, LOG_WARNING_INDEX, e.toString());
             throw new KitchenHelperException(ListRecipeCommand.COMMAND_FORMAT);
         }
