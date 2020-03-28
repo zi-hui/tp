@@ -25,7 +25,7 @@ By: `Team CS2113T-M16-2` Since: `March 2020` License: `MIT`
       - [3.4.1. Adding a chore: `addchore`](#341-adding-a-chore-addchore)  
       - [3.4.2. List chore: `listchore`](#342-list-chore-listchore)  
       - [3.4.3. Delete a chore: `deletechore`](#343-delete-a-chore-deletechore)  
-      - [3.4.4. Search for chore: `searchchore`](#343-search-for-chore-searchchore)  
+      - [3.4.4. Search for chore: `searchchore`](#344-search-for-chore-searchchore)  
  
     + [3.5 Storage](#35-storage)  
       - [3.5.1. Select Load Files](#351-select-load-files)  
@@ -73,18 +73,36 @@ Exits the program.
 
 __Format:__ `exit`  
 
-
 ### 3.2. Ingredient
 #### 3.2.1. Adding an ingredient: `addingredient`
-Adds an ingredient to the list when the user buys an item to keep track.   
+You can add an ingredient to the Kitchen Helper for tracking, containing various details.
 
-__Format:__ `addingredient /n INGREDIENT /c CATEGORY /q QUANTITY /p PRICE /e EXPIRY`  
+__Format:__ `addingredient /n <INGREDIENT> /c <CATEGORY< /q <QUANTITY> /p <PRICE> /e <EXPIRY>`  
+
+* `INGREDIENT` is the name of your ingredient.
+* `CATEGORY` is the category of your ingredient.  
+The different types of `CATEGORY` are listed below: 
+  + `Meat`
+  + `Vegetable`
+  + `Staple`
+  + `Fruit`
+  + `Dairy`
+  + `Drink`
+  + `Miscellaneous`  
+  
+:speech_balloon: Any `CATEGORY` that does not falls in the list would be put under `Miscellaneous`.
+* `QUANTITY` is the number of servings of the ingredient.
+  + `QUANTITY` in the format of whole number.
+* `PRICE` is the cost of the ingredient.
+  + `PRICE` can be given up to 2 decimal points.
+* `EXPIRY` is the expiry date of the ingredient.
+  + `EXPIRY` in the format of dd/MM/yyyy e.g. 01/12/2020.
 
 Example |  Outcome
 --------|------------------
-Command: <br> `addingredient /n Beef cubes /c meat /q 3 /p 20 /e 2020-03-18` <br> Description: <br> Creates a new ingredient called `Beef cubes`, which have the following attributes: category `meat`, quantity `3`, price `20` , expiry date `2020-03-18`. | addingredient /n Beef cubes /c meat /q 3 /p 20 /e 2020-03-18 <br> You have added Ingredient:Beef cubes Category:meat Quantity:3 Price:$20.00 Expiry:2020-03-18 to the ingredient list<br>===================================================
-Command: <br> `addingredient /n kailan /c Vegetable /q 30 /p 30.45 /e 2020-03-12` <br> Description: <br> Creates a new ingredient called `kailan`, which have the following attributes: category `Vegetable`, quantity `30`, price `30.45` , expiry date `2020-03-12`. | addingredient /n kailan /c Vegetable /q 30 /p 30.45 /e 2020-03-12 <br> You have added Ingredient:kailan Category:Vegetable Quantity:30 Price:$30.45 Expiry:2020-03-12 to the ingredient list<br>===================================================
-Command: <br> `addingredient /n Milo /c Drink /q 30 /p 10 /e 2020-12-20` <br> Description: <br> Creates a new ingredient called `Milo`, which have the following attributes: category `Drink`, quantity `30`, price `10` , expiry date `2020-12-20`. | addingredient /n Milo /c Drink /q 30 /p 10 /e 2020-12-20 <br> You have added Ingredient:Milo Category:Drink Quantity:30 Price:$10.00 Expiry:2020-12-20 to the ingredient list<br>===================================================
+**Command:** <br> `addingredient /n Beef cubes /c meat /q 3 /p 20 /e 18/03/2020` <br> **Description:** <br> Creates a new ingredient called `Beef cubes`, which have the following attributes: category `meat`, quantity `3`, price `20` , expiry date `18/03/2020`. | addingredient /n Beef cubes /c meat /q 3 /p 20 /e 18/03/2020 <br> You have added Ingredient:Beef cubes Category:meat Quantity:3 Price:$20.00 Expiry:18/03/2020 to the ingredient list<br>===================================================
+**Command:** <br> `addingredient /n kailan /c Vegetable /q 30 /p 30.45 /e 12/03/2020` <br> **Description:** <br> Creates a new ingredient called `kailan`, which have the following attributes: category `Vegetable`, quantity `30`, price `30.45` , expiry date `12/03/2020`. | addingredient /n kailan /c Vegetable /q 30 /p 30.45 /e 12/03/2020 <br> You have added Ingredient:kailan Category:Vegetable Quantity:30 Price:$30.45 Expiry:12/03/2020 to the ingredient list<br>===================================================
+**Command:** <br> `addingredient /n Milo /c Drink /q 30 /p 10 /e 20/12/2020` <br> **Description:** <br> Creates a new ingredient called `Milo`, which have the following attributes: category `Drink`, quantity `30`, price `10` , expiry date `20/12/2020`. | addingredient /n Milo /c Drink /q 30 /p 10 /e 20/12/2020 <br> You have added Ingredient:Milo Category:Drink Quantity:30 Price:$10.00 Expiry:20/12/2020 to the ingredient list<br>===================================================
 
 #### 3.2.2. List ingredient: `listingredient`
 Prints out a list of ingredients added by the user. Allow users to choose which category to print out from.
@@ -109,15 +127,17 @@ Command: <br> `deleteingredient /n wagyu beef` <br> Deletes the ingredient named
 Command: <br> `deleteingredient /i 1` <br> Deletes the item specified by `index 1` in the ingredient list. | `deleteingredient /i 1` <br> `apple has been deleted.`
 
 #### 3.2.4. Search for ingredient: `searchingredient`
-Search for ingredients based on a given keyword.  
+You can search for ingredients based on a given keyword.  
 
-__Format:__ `searchingredient KEYWORD`  
+__Format:__ `searchingredient <KEYWORD>`  
+
+* `KEYWORD` is the word to search for ingredient in Kitchen Helper.
 
 Example |  Outcome
 --------|------------------
-Command: <br> `searchingredient beef` <br> Description: <br> Search by ingredient's name. | searchingredient beef <br> Here are your matching ingredients in your list <br> 1. \[Meat\] Beef Qty: 3 $20.00 Exp: 2020-03-18 <br> ===================================================
-Command: <br> `searchingredient meat` <br> Description: <br> Search by ingredient's category. | searchingredient meat <br> Here are your matching ingredients in your list <br> 1. \[Meat\] Beef Qty: 3 $20.00 Exp: 2020-03-18 <br> ===================================================
-Command: <br> `searchingredient 2020-03-18` <br> Description: <br> Search by ingredient's expiry date. | searchingredient 2020-03-18 <br> Here are your matching ingredients in your list <br> 1. \[Meat\] Beef Qty: 3 $20.00 Exp: 2020-03-18 <br> ===================================================
+**Command:** <br> `searchingredient beef` <br> **Description:** <br> Search by ingredient's name. | searchingredient beef <br> Here are your matching ingredients in your list <br> 1. \[Meat\] Beef Qty: 3 $20.00 Exp: 18/03/2020 <br> ===================================================
+**Command:** <br> `searchingredient meat` <br> **Description:** <br> Search by ingredient's category. | searchingredient meat <br> Here are your matching ingredients in your list <br> 1. \[Meat\] Beef Qty: 3 $20.00 Exp: 18/03/2020 <br> ===================================================
+**Command:** <br> `searchingredient 18/03/2020` <br> **Description:** <br> Search by ingredient's expiry date. | searchingredient 18/03/2020 <br> Here are your matching ingredients in your list <br> 1. \[Meat\] Beef Qty: 3 $20.00 Exp: 18/03/2020 <br> ===================================================
 
 ### 3.3. Recipe
 
@@ -152,13 +172,15 @@ Command: <br> `deleterecipe /n pasta` <br> Description: <br> Deletes the recipe 
 Command: <br> `deleterecipe /i 2` <br> Description: <br> Deletes recipe by index. In this case, delete recipe with the `index 2` from the recipe list. | `deleterecipe /i 2` <br> `Beef Salad has been deleted`
 
 #### 3.3.4. Search for recipe: `searchrecipe`
-Search for recipes based on a given keyword.  
+You can search for recipes based on a given keyword.  
 
-__Format:__ `searchrecipe KEYWORD`  
+__Format:__ `searchrecipe <KEYWORD>`  
+
+* `KEYWORD` is the word to search for recipe's name in Kitchen Helper.
 
 Example |  Outcome
 --------|------------------
-Command: <br> `searchrecipe Chicken Stew` <br> Description: <br> Search by recipe's name. | searchrecipe Chicken Stew <br> Here are your matching recipes in your list <br> 1.Chicken Stew located at listrecipe 1 <br> ===================================================
+**Command:** <br> `searchrecipe Chicken Stew` <br> **Description:** <br> Search by recipe's name. | searchrecipe Chicken Stew <br> Here are your matching recipes in your list <br> 1.Chicken Stew located at listrecipe 1 <br> ===================================================
 
 #### 3.3.5. Cooking a recipe: `cookrecipe`
 Cooks a recipe specified by the user by the recipe’s name.
@@ -201,13 +223,16 @@ Command: <br> `deletechore 1` <br> Description: <br> Deletes the item specified 
 
 
 #### 3.4.4. Search for chore: `searchchore`
-Search for chores based on given keyword.  
-__Format:__ `searchchore KEYWORD`  
+You can search for chores based on a given keyword.  
+  
+__Format:__ `searchchore <KEYWORD>`  
+
+* `KEYWORD` is the word to search for chores in Kitchen Helper.
 
 Example |  Outcome
 --------|------------------
-Command: <br> `searchchore groceries` <br> Description: <br> Search by chore's description. | searchchore groceries <br> Here are your matching chores in your list <br> 1.\[x\] buy groceries (by: Tuesday 12pm) <br> ===================================================
-Command: <br> `searchchore Tuesday` <br> Description: <br> Search by chore's date. | searchchore Tuesday <br> Here are your matching chores in your list <br> 1.\[x\] buy groceries (by: Tuesday 12pm) <br> ===================================================
+**Command:** <br> `searchchore groceries` <br> **Description:** <br> Search by chore's description. | searchchore groceries <br> Here are your matching chores in your list <br> 1.\[x\] buy groceries (by: Tuesday 12pm) <br> ===================================================
+**Command:** <br> `searchchore Tuesday` <br> **Description:** <br> Search by chore's date. | searchchore Tuesday <br> Here are your matching chores in your list <br> 1.\[x\] buy groceries (by: Tuesday 12pm) <br> ===================================================
 
 
 #### 3.4.5. Mark chore as done: `done`
