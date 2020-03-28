@@ -248,7 +248,7 @@ All description and warnings to the user utilises the `UI` class, which controls
 
 The following sequence diagram shows how the `addrecipe` command works
 
-{insert diagram}
+![AddRecipeCommand](images/addRecipeSequenceDiagram.png) 
 
 ##### 4.2.1.2. Design Considerations
 Aspect: Parsing of the user’s input command
