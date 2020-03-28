@@ -44,6 +44,11 @@ deleteingredient /i 3
 deleteingredient /i 2
 deleteingredient /i 1
 deletechore 1
+addingredient /n Beef /c meat /q 3 /p 20 /e 18/03/2020
+addchore buy groceries /by Tuesday 12pm
+listingredient all
+listchore
+reset
 listingredient all
 listchore
 exit
