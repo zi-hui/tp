@@ -148,9 +148,26 @@ Adds a new unique recipe into the List in Kitchen Helper.
 
 __Format:__ `addrecipe /n <recipe_name> /i <ingredient_name>:<quantity>:<category>[,..]`
 
+* `recipe_name` is the name of your recipe.
+* `ingredient_name` is the name of your ingredient.
+* `quantity` number of servings of the ingredient.
+* `category` is the category of your ingredient.  
+
+The different types of `CATEGORY` are listed below: 
+  + `Meat`
+  + `Vegetable`
+  + `Staple`
+  + `Fruit`
+  + `Dairy`
+  + `Drink`
+  + `Miscellaneous`  
+  
+:speech_balloon: Any `category` that does not falls in the list could be put under `Miscellaneous`.
+:bulb: All `recipe_name` has to be unique. You can check the list of existing recipes by using [`listrecipe all`](#332-list-recipes-listrecipe-1)  
+
 Example |  Outcome
 --------|------------------
-Command: <br> `addrecipe /n Rice Ball /i Rice:3:staple` <br> Description: <br> Creates a new recipe called `Rice Ball` which contains one ingredient, `3` portions of `Rice`. | addrecipe /n Rice Ball /i Rice:3:staple <br>Rice Ball Recipe has been created with 1 ingredients inside.<br>===================================================`
+**Command**: <br> `addrecipe /n Rice Ball /i Rice:3:staple` <br><br> **Description**: <br> Creates a new recipe called `Rice Ball` which contains one ingredient, `3` portions of `Rice`. | addrecipe /n Rice Ball /i Rice:3:staple <br>Rice Ball Recipe has been created with 1 ingredients inside.<br>===================================================`
 
 #### 3.3.2. List recipes: `listrecipe 1`
 Prints out details of recipe added by the user. Allow users to choose which recipe to print out from.
@@ -189,9 +206,13 @@ Cooks a recipe specified by the user by the recipe’s name.
 
 __Format:__ `cookrecipe /n <recipe_name> /p <number_of_pax>`
 
+* `recipe_name` is the name of your recipe.
+* `number_of_pax` is the pax count for the specified recipe.
+
 Example |  Outcome
 --------|------------------
-`cookrecipe /n chicken salad /p 2` | Cooks the ‘chicken salad’ recipe with a pax 2.
+**Command**: <br> `cookrecipe /n chicken salad /p 2` <br><br> **Description**: <br> Cooks the recipe `Chicken Salad` for 2 people| Cooks the ‘chicken salad’ recipe with a pax 2.<br>===================================================
+
 
 ### 3.4. Chore
 
