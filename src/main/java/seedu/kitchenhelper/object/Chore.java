@@ -1,5 +1,7 @@
 package seedu.kitchenhelper.object;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -48,6 +50,16 @@ public class Chore {
             return new SimpleDateFormat("dd/MM/yyyy HH:mm").format(date);
         } else {
             return dateStr;
+        }
+    }
+
+    public static Chore createChoreWhenLoadFile(String description, String dateStr) {
+        try {
+            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+            Date date = dateFormat.parse(dateStr);
+            return new Chore(description, date);
+        } catch (ParseException e) {
+            return new Chore(description, dateStr);
         }
     }
 

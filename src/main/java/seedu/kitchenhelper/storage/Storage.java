@@ -262,9 +262,9 @@ public class Storage {
             String userData = scanner.nextLine();
             char isDone = userData.charAt(1);
             String[] description = userData.substring(4).split(" \\(by: ");
-            //Chore todo = new Chore(description[0], description[1].substring(0, description[1].length() - 1));
             Chore todo =
-                    createChore(description[0], description[1].substring(0, description[1].length() - 1));
+                    Chore.createChoreWhenLoadFile(description[0],
+                            description[1].substring(0, description[1].length() - 1)) ;
 
             if (isDone == '/') {
                 todo.markAsDone();
@@ -273,16 +273,6 @@ public class Storage {
         }
         scanner.close();
         return choreList;
-    }
-
-    public Chore createChore(String description, String dateStr) {
-        try {
-            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-            Date date = dateFormat.parse(dateStr);
-            return new Chore(description, date);
-        } catch (ParseException e) {
-            return new Chore(description, dateStr);
-        }
     }
 
 
@@ -330,6 +320,18 @@ public class Storage {
             for (Chore chore : choreList) {
                 fw.write(chore.toString() + System.lineSeparator());
             }
+            fw.close();
+        } catch (IOException err) {
+            err.printStackTrace();
+        }
+    }
+
+    public static void saveExpenditureData() {
+        try {
+            FileWriter fw = new FileWriter("outputExpenditure.txt");
+            /*for (Chore chore : choreList) {
+                fw.write(chore.toString() + System.lineSeparator());
+            }*/
             fw.close();
         } catch (IOException err) {
             err.printStackTrace();
