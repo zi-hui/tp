@@ -31,7 +31,7 @@ By: `CS2113T-M16-2` Since: `2020`
       - [4.3.3. Delete all/ specific chore(s)](#433-delete-all-specific-chores)
       - [4.3.4. Search for chore based on keyword(s)](#434-search-for-chore-based-on-keywords)
     + [4.4. Storage](#44-storage)
-      - [4.4.1. Select files to load from and save to](#441-selection-of-load-files)
+      - [4.4.1. Select files to load from and save to](#441-select-files-to-load-from-and-save-to)
       - [4.4.2. Save current state](#442-save-current-state)
     + [4.5. Logging](#45-logging)
     + [4.6. Configuration](#46-configuration)
