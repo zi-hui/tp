@@ -70,7 +70,8 @@ The `Ui` component,
 ### 3.3. Logic Component
 ### 3.4. Model Component
 ### 3.5. Storage Component
-image::Storage.png[Storage Class Diagram]
+
+![Storage Class Diagram](images/Storage.png)
 
 A Storage object is created by the KitchenHelper class to handle the loading and saving of ingredients, recipes and chores data.
 
@@ -209,21 +210,21 @@ When the user attempts to create a new recipe, the `AddRecipeCommand`, ‘Parser
     1. A `Ui` object will be created and calls `Ui#getUserCommand()`
     1. Input will be parsed in `Command#parseUserCommand()` and identified with the keyword `addrecipe`.
     
-    ![Add Recipe Step 1](/docs/images/AddRecipe1.png)
+    ![Add Recipe Step 1](images/AddRecipe1.png)
 2. Parsing of user input and creation of command object
     1. This will automatically trigger the parsing of the user’s input string into a suitable format for the addition of `recipe` object in `Command#prepareAddRecipe()`.
     1. A `AddRecipeCommand` object will be created and calls `AddRecipeCommand#setAttributesOfCmd()` to set the contents of the command into reader friendly formats.
     
-    ![Add Recipe Step 2](/docs/images/AddRecipe2.png)
+    ![Add Recipe Step 2](images/AddRecipe2.png)
 3. Executing Command
     1. The newly created object will call `#AddRecipeCommand#execute` which starts the process of adding a recipe, thus calling `Recipe#AddRecipe()`.
     1. A `Recipe` object will be created with its name that was parsed in step 2.
     1. An additional step is included where a check for an existing recipe with the same name is conducted with `#AddRecipeCommand#checkIfRecipeExist()`. A `KitchenHelperException` exception will be triggered when there is an existing recipe.
     
-    ![Add Recipe Step 3](/docs/images/AddRecipe3.png | width=150)
+    ![Add Recipe Step 3](images/AddRecipe3.png)
 4. `Ingredient`s parsed in step 2 will be added to the newly created recipe according to their category through the calling of `Recipe#addIngredientsToRecipe()`.
 	
-	![Add Recipe Step 4](/docs/images/AddRecipe4.png)
+	![Add Recipe Step 4](images/AddRecipe4.png)
 
 All description and warnings to the user utilises the `UI` class, which controls the printing of the text on the console. 
 
@@ -411,8 +412,7 @@ If the user chooses the manual-save mode, it will overwrite all the data stored 
 All description and warnings to the user utilises the UI class, which controls the printing of the text on the console.
 
 The sequence diagram below summarizes how loading data works:
-image::Loading.jpeg[Load Data Sequence Diagram]
-
+![Load Data Sequence Diagram](images/Loading.png)
 <b>Design considerations:</b> <br>
 Aspects: How saving of files executes:  
 
