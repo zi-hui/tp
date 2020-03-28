@@ -74,22 +74,20 @@ This section describes some details on how the features are being implemented. A
 #### 4.1.1. Addition of ingredient
 
 The addition of the ingredient feature allows the user to keep track of the ingredients in the ingredient’s list.   
-For example, `addingredient /n beef /c meat /q 2 /p 20 /e 2020-02-18` will add the ingredient `beef` 
-which have the following attributes:  category `meat`, quantity `2`, price `$20` and expiry `2020-02-18`  
+For example, `addingredient /n beef /c meat /q 2 /p 20 /e 18/02/2020` will add the ingredient `beef` 
+which have the following attributes:  category `meat`, quantity `2`, price `$20` and expiry `18/02/2020`  
 
 ##### Implementation
 
-{insert sequence diagram of addingredient command}  
+![addIngredientCommand](images/addIngredientCommand.png) 
 
 The following steps explained “Sequence diagram for an example `addingredient` command”:  
-1. The user enters  `addingredient /n beef /c meat /q 2 /p 20 /e 2020-02-18`.  
-2. `KitchenHelper` calls `Parser#parseUserCommand()` which splits the user’s input into 2 parts 
-and enters a switch case for execution.  
-3. `parseUserCommand` in the Parser object will call its own method `Parser#prepareAddIngredient`.  
-4. `prepareAddIngredient` will first validates the user’s remaining attributes and if successful, 
-it will execute `AddIngredientCommand` with the attributes, 
-otherwise it will throw an `InvalidCommand` along with the syntax of `addingredient command`  
-5. On execute(), the ingredient is added based on the category into the ingredient’s list.
+1. The user enters `addingredient /n beef /c meat /q 2 /p 20 /e 18/02/2020`.  
+2. `KitchenHelper` calls `Parser#parseUserCommand()`.  
+3. `Parser#parseUserCommand()` will call its own method `Parser#prepareAddIngredient()`.  
+4. `Parser#prepareAddIngredient()` will first validate the attributes and create an object `AddIngredientCommand` with the attributes if successful.  
+5. `KitchenHelper` calls it own method `executeCommand()` to execute the method in `AddIngredientCommand#execute()`.  
+6. On `AddIngredientCommand#execute()`, ingredient is added and return of the message.  
 
 #### 4.1.2. List all/ specific ingredient(s)
 
@@ -152,21 +150,21 @@ For example, `searchingredient beef` will find all the ingredients that contain 
 
 ##### Implementation  
 
-{insert sequence diagram of searchingredient command}
+![SearchIngredientCommand](images/searchIngredientCommand.png) 
 
-The following steps explained “Sequence diagram for an example `searchingredient` command”:
-1. The user enters `searchingredient beef`
-2. `KitchenHelper` calls `Parser#parseUserCommand()` which splits the user’s input into 2 parts 
-and enters a switch case for execution.
-3. `parseUserCommand` in the Parser object will call a method `SearchIngredientCommand`.
-4. On execute(), the list of ingredients that contains the keyword will be displayed.
+The following steps explained sequence diagram for `searchingredient` command:  
+1. The user enters `searchingredient beef`.  
+2. `KitchenHelper` calls `Parser#parseUserCommand()`.  
+3. `SearchIngredientCommand` object is created with the keyword passed in.  
+4. `KitchenHelper` calls it own method `executeCommand()` to execute the method in `SearchIngredientCommand#execute()`.  
+5. On `SearchIngredientCommand#execute()`, display the list of ingredients that matches the keyword. 
 
 ##### Design considerations:
 
 Aspects: How `searchingredient` executes:  
 
 - Alternative 1 (current choice): Find if the keyword is part of the substring of the ingredient, 
-`[Meat] Beef Qty:3 $20.00 Exp:2020-03-18.`  
+`[Meat] Beef Qty:3 $20.00 Exp:18/03/2020.`  
 
 |     |     |
 |-----|-----|
@@ -257,6 +255,7 @@ and enters a switch case for execution.
 following, it will return the details belonging to the recipe, 
 otherwise it will throw an `InvalidCommand` along with the syntax of `listrecipe command`  
 5. On execute(), the details in the recipe will be printed out.
+
 #### 4.2.3. Delete all/ specific recipe(s)
 The deletion feature for specific recipes allows the user to delete recipes either by the name or index of the recipe. 
 
@@ -302,14 +301,14 @@ For example, `searchrecipe Chicken` will find all recipes that contain `Chicken`
 
 ##### Implementation
 
-{insert sequence diagram of searchrecipe command}
+![SearchRecipeCommand](images/searchRecipeCommand.png)
 
-The following steps explained “Sequence diagram for an example `searchrecipe` command”:
-1. The user enters `searchrecipe Chicken`
-2. `KitchenHelper` calls `Parser#parseUserCommand()` which splits the user’s input into 2 parts 
-and enters a switch case for execution.  
-3. `parseUserCommand` in the Parser object will call a method `SearchRecipeCommand`.  
-4. On execute(), the list of recipes' name that contains the keyword will be displayed.  
+The following steps explained sequence diagram for `searchrecipe` command:  
+1. The user enters `searchrecipe Chicken`.  
+2. `KitchenHelper` calls `Parser#parseUserCommand()`.  
+3. `SearchRecipeCommand` object is created with the keyword passed in.  
+4. `KitchenHelper` calls it own method `executeCommand()` to execute the method in `SearchRecipeCommand#execute()`.  
+5. On `SearchRecipeCommand#execute()`, display the list of recipe's name that matches the keyword.
 
 ##### Design considerations:
 
@@ -341,14 +340,14 @@ For example, `searchchore groceries` will find all chores that contain `grocerie
 
 ##### Implementation  
 
-{insert sequence diagram of searchchore command}
+![SearchChoreCommand](images/searchChoreCommand.png)
 
-The following steps explained “Sequence diagram for an example `searchchore` command”:  
-1. The user enters `searchchore groceries`  
-2. `KitchenHelper` calls `Parser#parseUserCommand()` which splits the user’s input into 2 parts 
-and enters a switch case for execution.  
-3. `parseUserCommand` in the Parser object will call a method `SearchChoreCommand`.  
-4. On execute(), the list of chore that contains the keyword will be displayed.  
+The following steps explained sequence diagram for `searchchore` command:  
+1. The user enters `searchchore groceries`.  
+2. `KitchenHelper` calls `Parser#parseUserCommand()`.  
+3. `SearchChoreCommand` object is created with the keyword passed in.  
+4. `KitchenHelper` calls it own method `executeCommand()` to execute the method in `SearchChoreCommand#execute()`.  
+5. On `SearchChoreCommand#execute()`, display the list of chore that matches the keyword.
 
 ##### Design considerations:
 
