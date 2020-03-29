@@ -239,6 +239,7 @@ Alternative 2: Create 2 more constructors just for deduction of quantity for ing
 |**Pros**|This gives us more flexibility on what object can be created with different variables since there are two methods of delete of ingredients.|
 |**Cons**|There is an overload of constructors.|
 <br>
+
 #### 4.1.4. Search for ingredients based on keyword(s)
 
 The search for ingredients feature allows the user to find ingredients using a keyword in the ingredient’s list.  
@@ -712,6 +713,7 @@ Extensions:
   2a1. System throws invalid input format and shows a valid format example.
   Use case resumes at step 2.
 ```
+<br>
 
 ```
 Use case: UC02 - Search for ingredient
@@ -725,6 +727,7 @@ Extentions:
 Use case resumes at step 2.
 Use case ends.
 ```
+<br>
 
 ```
 Use case: UC03 - Search for recipe
@@ -739,9 +742,10 @@ Extentions:
 Use case resumes at step 2.
 Use case ends.
 ```
+<br>
 
 ```
-Use case: UC03 - Search for chore
+Use case: UC04 - Search for chore
 MSS:
 1. User wants to find chores.
 2. User enters a keyword in the System.
