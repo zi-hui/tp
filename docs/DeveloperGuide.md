@@ -77,10 +77,24 @@ By: `CS2113T-M16-2` Since: `2020`
 ## 3. Design
 This section provides a high level overview of our application, Kitchen Helper.
 ### 3.1. Architecture
-Our architecture is broken down into six classes, mainly Command, Notification, Object, Parser, Storage and UI. All modules can be controlled and accessed by the main class, Kitchen Helper. 
-<br>
+
 ![Architecture](images/KitchenHelperMain.png)
-<br>
+The image above explains the design of the application, Kitchen Helper. 
+
+The main driver of the application is `Main: Kitchen Helper`. It is responsible for mainly two phases:
+- At application launch
+    - This class will initialise the components in the correct sequence and is in charge of connecting them with each other.
+- At shut down
+    - This class will invoke cleanup method for the components when necessary.
+    
+In addition to that, the architecture of Kitchen Helper is broken down into seven classes, mainly the following: 
+- `Ui`: This class mainly handles the UI of the application.
+- `Parser`: This class mainly handles the parsing and handling of user commands.
+- `Command`: This class handles the type of command.
+- `Ingredient`: This class manages the data of data type ingredient in memory.
+- `Chore`: This class manages the data of data type chore in memory.
+- `Recipe`: This class manages the data of data type recipe in memory.
+- `Storage`: This class reads data from and writes data back into a text file for future uses.
 
 ### 3.2. Ui Component
 ![Ui Component](images/UI_Component.png)
@@ -224,6 +238,7 @@ Alternative 2: Create 2 more constructors just for deduction of quantity for ing
 |-----|-----|
 |**Pros**|This gives us more flexibility on what object can be created with different variables since there are two methods of delete of ingredients.|
 |**Cons**|There is an overload of constructors.|
+<br>
 #### 4.1.4. Search for ingredients based on keyword(s)
 
 The search for ingredients feature allows the user to find ingredients using a keyword in the ingredient’s list.  
