@@ -25,7 +25,7 @@ public class ListIngredientCommand extends Command {
         Drink.INGREDIENT_WORD,Fruit.INGREDIENT_WORD,
         Meat.INGREDIENT_WORD,Miscellaneous.INGREDIENT_WORD,
         Staple.INGREDIENT_WORD,Vegetable.INGREDIENT_WORD};
-    public static final String COMMAND_DESC = "Display the ingredients in the list";
+    public static final String COMMAND_DESC = "Display the ingredients in the list.";
     public static final String COMMAND_PARAMETER = "<all|dairy|drink|fruit|meat|miscellaneous|staple|vegetable";
     public static final String COMMAND_EXAMPLE = "Example: listingredient all; listingredient meat";
     public static final String MESSAGE_USAGE = String.format("%s: %s", COMMAND_WORD, COMMAND_DESC) + Ui.LS + String
