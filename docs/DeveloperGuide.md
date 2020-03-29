@@ -89,6 +89,14 @@ The `Ui` component,
 * Listens for changes and outputs messages from the Command component
 
 ### 3.3. Logic Component
+
+![Logic Component](images/logic.png)
+
+1. `Kitchen Helper` uses `Parser` class to parse the user command.
+2. This results in a command object return back which is executed by `Kitchen Helper`.
+3. The command execution can affect the object (e.g. adding an ingredient).
+4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to `Ui` to display the message.
+
 ### 3.4. Model Component
 ### 3.5. Storage Component
 
