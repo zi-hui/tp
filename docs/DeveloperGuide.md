@@ -98,6 +98,12 @@ The `Ui` component,
 4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to `Ui` to display the message.
 
 ### 3.4. Model Component
+
+![Model Component](images/model.png)
+* Stores the ingredient data.
+* Stores the recipe data.
+* Stores the chore data.
+
 ### 3.5. Storage Component
 
 ![Storage Class Diagram](images/Storage.png)
