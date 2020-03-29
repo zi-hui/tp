@@ -115,7 +115,7 @@ Example |  Outcome
 #### 3.2.2. List ingredient: `listingredient`
 Displays all the items currently in the ingredient list in Kitchen Helper.
 
-__Format__: `listingredient <CATEGORY>`
+__Format__: `listingredient <CATEGORY / ALL>`
 
 Example |  Outcome
 --------|------------------
@@ -189,7 +189,7 @@ Example |  Outcome
 Displays all recipe and its name or the items currently in a particular recipe in Kitchen Helper.
 
 
-__Format__: `listrecipe <item number / all>`
+__Format__: `listrecipe <ITEM_NUMBER / ALL>`
 
 Example |  Outcome
 --------|------------------
@@ -261,7 +261,7 @@ Example |  Outcome
 #### 3.4.3. Delete a chore: `deletechore`
 Deletes the chore specified by the index in the chore list in Kitchen Helper. The index of the chore can be found by displaying the list of chores.
 
-__Format:__ `deletechore <index_to_delete>`  
+__Format:__ `deletechore <INDEX_TO_DELETE>`  
 
 Example |  Outcome
 --------|------------------
@@ -283,6 +283,7 @@ Example |  Outcome
 
 #### 3.4.5. Mark chore as done: `done`
 Marks the chore specified by the index in the chore list in Kitchen Helper as done. The index of the chore can be found by displaying the list of chores.
+
 __Format:__ `done <INDEX_TO_CHECK>`  
 
 Example |  Outcome
@@ -329,6 +330,7 @@ __Ingredient Commands__
 Feature | Command  
 ------- | -------  
 addingredient | `addingredient /n INGREDIENT /c CATEGORY /q QUANTITY /p PRICE /e EXPIRY`<br> e.g. `addingredient /n Beef cubes /c meat /q 3 /p 20 /e 2020-03-18`  
+listingredient | `listingredient <CATEGORY / ALL>` <br> e.g. `listingredient all` OR `listingredient meat`
 deleteingredient | `deleteingredient /n <INGREDIENT_NAME>> [/q QUANTITY]` OR `deleteingredient /i <ingredient_index> [/q QUANTITY]` <br> e.g.`deleteingredient /n apple /q 2` OR `deleteingredient /i 1`<br>
 searchingredient | `searchingredient KEYWORD` <br> e.g. `searchingredient beef`  
 
@@ -338,6 +340,7 @@ __Recipe Commands__
 Feature | Command  
 ------- | -------  
 addrecipe | `addrecipe /n <RECIPE_NAME> /i <INGREDIENT_NAME>:<QUANTITY>:<CATEGORY>[,..]` <br> e.g. `addrecipe /n Rice Ball /i Rice:3:staple`
+listrecipe | `listrecipe <ITEM_NUMBER / ALL>` <br> e.g. `listrecipe all` OR `listrecipe 1`
 deleterecipe | `deleterecipe /n <RECIPE_NAME>` OR `deleterecipe /i <RECIPE_INDEX>` <br> e.g. `deleterecipe /n pasta` OR `deleterecipe /i 2`<br>
 searchrecipe | `searchrecipe KEYWORD` <br> e.g. `searchrecipe Chicken Stew`  
 cookrecipe | `cookrecipe /n <RECIPE_NAME> /p <NUMBER_OF_PAX>` <br> e.g. `cookrecipe /n chicken salad /p 2`
@@ -347,8 +350,11 @@ __Chore Commands__
 
 Feature | Command  
 ------- | -------  
+addchore | `addchore <TASK_DESCRIPTION> /by <DEADLINE>` <br> e.g. `addchore buy groceries /by Monday 12pm`
+listchore | `listchore` <br> e.g. `listchore`
+deletechore | `deletechore <INDEX_TO_DELETE>`  <br> e.g. `deletechore 1`
 searchchore | `searchchore KEYWORD` <br> e.g. `searchchore groceries`  
-
+done | `done <INDEX_TO_CHECK>` <br> e.g. `done 1`
 
 __Storage Commands__
 
