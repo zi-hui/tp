@@ -11,7 +11,9 @@ import seedu.kitchenhelper.object.ingredient.Vegetable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Collections;
 import java.util.Map;
+import java.util.Comparator;
 import java.util.logging.Logger;
 
 /**
@@ -45,8 +47,17 @@ public class Recipe {
             assert recipeItems.size() > 0;
         }
         recipeIngrQty = recipeItems.size();
+        sortRecipeItem();
     }
 
+    /**
+     * Sorts recipeItems arraylist by Category name, then, Ingredient name.
+     *
+     */
+    public void sortRecipeItem() {
+        Collections.sort(this.recipeItems, Comparator.comparing(Ingredient::getCategoryName)
+                .thenComparing(Ingredient::getIngredientName));
+    }
     /**
      * Prepares the addition of ingredients into recipe.
      *
@@ -55,6 +66,7 @@ public class Recipe {
      * @param ingrQuantity the quantity of the ingredient.
      * @return Ingredient specific to its category.
      */
+
     public Ingredient createIngr(String ingrName, String ingrCategory, Integer ingrQuantity) {
         switch (ingrCategory.toLowerCase()) {
         case "dairy":

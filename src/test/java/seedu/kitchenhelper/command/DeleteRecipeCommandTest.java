@@ -24,11 +24,11 @@ public class DeleteRecipeCommandTest {
         newRecipe.addRecipe(attributes, recipeList);
 
         DeleteRecipeCommand deleteCmd = new DeleteRecipeCommand("Chicken");
-        deleteCmd.deleteRecipe(recipeList);
+        deleteCmd.deleteRecipeByName(recipeList);
         assertEquals(1, recipeList.size());
 
         DeleteRecipeCommand deleteCmd2 = new DeleteRecipeCommand("Chicken Salad");
-        deleteCmd2.deleteRecipe(recipeList);
+        deleteCmd2.deleteRecipeByName(recipeList);
         assertEquals(0, recipeList.size());
     }
 

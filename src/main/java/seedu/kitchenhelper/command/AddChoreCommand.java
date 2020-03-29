@@ -7,6 +7,7 @@ import seedu.kitchenhelper.storage.Storage;
 import seedu.kitchenhelper.ui.Ui;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Adds a chore to the chore list.
@@ -24,16 +25,22 @@ public class AddChoreCommand extends Command {
             .format("Parameter: %s\n%s", COMMAND_PARAMETER, COMMAND_EXAMPLE);
 
     private String description;
-    private String date;
+    private String dateStr = null;
+    private Date date = null;
 
 
     /**
      * Constructor for AddChoreCommand.
      *
      * @param description the description of the chore.
-     * @param date the date or time to complete the chore by.
+     * @param dateStr the date or time to complete the chore by.
      */
-    public AddChoreCommand(String description, String date) {
+    public AddChoreCommand(String description, String dateStr) {
+        this.description = description;
+        this.dateStr = dateStr;
+    }
+
+    public AddChoreCommand(String description, Date date) {
         this.description = description;
         this.date = date;
     }
@@ -45,7 +52,12 @@ public class AddChoreCommand extends Command {
      * @return success message of addition.
      */
     public String addChore(ArrayList<Chore> choreList) {
-        Chore newChore = new Chore(description, date);
+        Chore newChore;
+        if (dateStr == null) {
+            newChore = new Chore(description, date);
+        } else {
+            newChore = new Chore(description, dateStr);
+        }
         choreList.add(newChore);
         Storage.saveChoreData(choreList);
         return String.format(MESSAGE_SUCCESS, newChore, choreList.size(), newChore.checkSingular(choreList));
