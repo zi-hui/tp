@@ -75,7 +75,7 @@ public class DeleteChoreCommand extends Command {
      *
      * @param choreList the list of Chores.
      * @return message success of deleting all chores or
-     * message showing cancellation of action to delete all chores.
+     *      message showing cancellation of action to delete all chores.
      */
     public String deleteAll(ArrayList<Chore> choreList) {
         String userResponse = promptUser();

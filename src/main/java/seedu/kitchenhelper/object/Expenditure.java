@@ -15,8 +15,8 @@ public class Expenditure {
             = "The amount of money spent on this ingredient has already been recorded.\n"
             + "Would you like to remove the amount spent on this item from the total expenditure?";
     public static final String PROMPT_ADD_TO_AMOUNT_USED
-            = "Would you like to add the amount spent on this item " +
-            "to the amount used for cooking?";
+            = "Would you like to add the amount spent on this item "
+            + "to the amount used for cooking?";
     public static final String REMOVAL_SUCCESS = "Ok! $%.2f is deducted from total expenditure.";
     public static final String INCREASE_AMOUNT_USED = "Ok! $%.2f is added to amount used in cooking.";
     public static final String NO_CHANGE = "Ok! There are no changes to expenditure.";
@@ -27,7 +27,10 @@ public class Expenditure {
     public Date lastSavedDate;
 
     private static Expenditure onlyInstance = null;
-    private Expenditure() {}
+
+    private Expenditure() {
+    }
+
     public static Expenditure getInstance() {
         if (onlyInstance == null) {
             onlyInstance = new Expenditure();
@@ -73,7 +76,7 @@ public class Expenditure {
     }
 
     public void removeFromExpenditure(Ingredient ingredientToDelete, Integer quantityToDelete) {
-        String userResponse = promptUser(PROMPT_REMOVE_FROM_EXPENDITURE );
+        String userResponse = promptUser(PROMPT_REMOVE_FROM_EXPENDITURE);
         if (userResponse.equalsIgnoreCase("yes")) {
             double price = changePrice(ingredientToDelete, quantityToDelete);
             totalExpenditure -= price;

@@ -46,7 +46,7 @@ public class Storage {
      * @param filePathRecipe String of filepath for stored Recipe data.
      * @param filePathChore String of filepath for stored Chore data.
      */
-    public Storage(String filePathIngredient, String filePathRecipe, String filePathChore/*, String filePathExpenditure*/) {
+    public Storage(String filePathIngredient, String filePathRecipe, String filePathChore) {
         this.filePathIngredient = filePathIngredient;
         this.filePathRecipe = filePathRecipe;
         this.filePathChore = filePathChore;
@@ -268,7 +268,7 @@ public class Storage {
             String[] description = userData.substring(4).split(" \\(by: ");
             Chore todo =
                     Chore.createChoreWhenLoadFile(description[0],
-                            description[1].substring(0, description[1].length() - 1)) ;
+                            description[1].substring(0, description[1].length() - 1));
 
             if (isDone == '/') {
                 todo.markAsDone();
