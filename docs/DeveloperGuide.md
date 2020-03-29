@@ -43,10 +43,13 @@ By: `CS2113T-M16-2` Since: `2020`
     + [Appendix C: Value proposition - Use cases](#appendix-c-value-proposition---use-cases)
     + [Appendix D: Non-Functional Requirements](#appendix-d-non-functional-requirements)
     + [Appendix E: Glossary](#appendix-e-glossary)
-    + [Appendix G: Instructions for Manual Testing](#appendix-g-instructions-for-manual-testing)
-      - [G.1. Launch and Shutdown](#g1-launch-and-shutdown)
-      - [G.2. Deleting a](#g2-deleting-a)
-      - [G.3. Saving data](#g3-saving-data)
+    + [Appendix F: Instructions for Manual Testing](#appendix-f-instructions-for-manual-testing)
+      - [F.1. Launch and Shutdown](#f1-launch-and-shutdown)
+      - [F.2. Add an ingredient](#f2-add-an-ingredient)
+      - [F.3. Search for ingredient](#f3-search-for-ingredient)
+      - [F.4. Search for recipe](#f4-search-for-recipe)
+      - [F.5. Search for chore](#f5-search-for-chore)
+      - [F.6. Saving data](#f6-saving-data)
 
 ## 1. Introduction
 ### 1.1. Purpose
@@ -128,7 +131,7 @@ The following steps explained “Sequence diagram for an example `addingredient`
 The list feature allows showing details of Ingredients added by the user.  All ingredients added will be shown in a sorted order, by expiry, and shown by categories. The function will require a valid string , which belongs to `all/dairy/drink/fruit/meat/miscellaneous/staple/vegetable`, 
 to be added as a parameter. Failure to do so will trigger an exception where the user will be notified of an invalid command and the syntax of the listing of the ingredients will be displayed. 
 
-#### 4.1.2.1. Implementation
+#### Implementation
 When the user attempts to list the details of a particular category of ingredients, the `listIngredientCommand`, ‘Parser’ and `Ingredient` class will be accessed and the following sequence of actions are called to list details of  a particular category Ingredient list: <br>
 1. User executes `listingredient all` 
     2. A `Ui` object will be created and calls `Ui#getUserCommand()`
@@ -146,7 +149,7 @@ When the user attempts to list the details of a particular category of ingredien
 4. The details will then be printed onto the console using `Ui#showResultToUser(result)`.
     
 
-#### 4.1.2.2. Design Considerations</b> <br>
+#### Design Considerations</b> <br>
 Aspect: Finding the category name and print out ingredient belonging to the category
 
 Alternative 1: Looping through the whole ingredientList arraylist to find out all possible category name, then, do sorting and return result
@@ -157,6 +160,7 @@ Alternative 1: Looping through the whole ingredientList arraylist to find out al
 |**Cons** | This method will be slow when facing a huge amount of data in the arraylist as the program may have to go through every single item in the arraylist. |
 
 Alternative 2 (current choice): Creating a fixed array which includes the order and all possible category names.
+
 |     |     |
 |-----|-----|
 |**Pros** | Users would be able to get the details of the particular recipe accurately and fast. |
@@ -165,7 +169,7 @@ Alternative 2 (current choice): Creating a fixed array which includes the order 
 #### 4.1.3. Delete all/ specific ingredients(s)
 The deletion feature for ingredients allows the user to delete ingredients either by the name or index of the ingredients. In addition to that, it allows users to reduce the quantity of a specific ingredient. 
 
-<b>Implementation</b><br>
+##### Implementation
 When the user attempts to reduce the quantity of ingredient at index 1 of the ingredients inventory by 4,  the `Kitchen Helper`, ‘Parser’ and ‘DeleteRecipeCommand` class will be called upon. The following sequence of steps will then occur: 
 1. The user keyed in “deleteingredient /i 1 /q 4”`. 
     2. A `UI` object will be created and it will call `UI#getUserCommand()` method to take in the input that the user has keyed in.
@@ -206,7 +210,7 @@ For example, `searchingredient beef` will find all the ingredients that contain 
 
 ##### Implementation  
 
-![SearchIngredientCommand](images/searchIngredientCommand.png) 
+![SearchIngredientCommand](images/searchIngredientCommand1.png) 
 
 The following steps explained sequence diagram for `searchingredient` command:  
 1. The user enters `searchingredient beef`.  
@@ -242,7 +246,7 @@ Users can add a new recipe to the application where there must be at least one o
 
 When the user attempts to create a new recipe, the `AddRecipeCommand`, ‘Parser’ and `Recipe` class will be accessed and the following sequence of actions are called to create a `recipe` object:
 
-##### 4.2.1.1. Implementation 
+##### Implementation 
 When the user attempts to create a new recipe, the `AddRecipeCommand`, ‘Parser’ and `Recipe` class will be accessed and the following sequence of actions are called to create a `recipe` object:
 
 1. User executes `addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable` 
@@ -298,7 +302,7 @@ Alternative 3: User’s command are divided by space
 #### 4.2.2. List all/ specific recipe(s)
 The list feature allows showing details of a particular recipe created by the user.  All ingredients added into the recipe will be shown in a sorted order and shown by categories. The function will require valid string of a integer or `all` to be added as a parameter. Failure to do so will trigger an exception where the user will be notified of an invalid command and the syntax of the listing of the recipe will be displayed. 
 
-#### 4.2.2.1. Implementation
+##### Implementation
 When the user attempts to list the details of a particular recipe, the `listRecipeCommand`, ‘Parser’ and `Recipe` class will be accessed and the following sequence of actions are called to list details of  a particular `recipe` object:
 1. User executes `listrecipe 1`  
     2. A `Ui` object will be created and calls `Ui#getUserCommand()`
@@ -327,6 +331,7 @@ Alternative 1: Looping through the whole recipeList arraylist to find the recipe
 |**Cons** | This method will be slow when facing a huge amount of data in the arraylist as the program may have to go through every single item in the arraylist. |
 
 Alternative 2 (current choice): Using arrayList.get(item) to get the recipe requested by the user.
+
 |     |     |
 |-----|-----|
 |**Pros** | Users would be able to get the details of the particular recipe accurately and fast. |
@@ -336,7 +341,7 @@ Alternative 2 (current choice): Using arrayList.get(item) to get the recipe requ
 #### 4.2.3. Delete all/ specific recipe(s)
 The deletion feature for specific recipes allows the user to delete recipes either by the name or index of the recipe. 
 
-<b>Implementation</b> <br>
+##### Implementation
 When the user attempts to delete the `Chicken Rice` recipe from Kitchen Helper, the `Kitchen Helper`, `Parser` and `DeleteRecipeCommand` class will be called upon. The following sequence of steps will then occur: 
 1. The user keyed in “deleterecipe /n `Chicken Rice”`.
     2. A `UI` object will be created and it will call `UI#getUserCommand()` method to take in the input that the user has keyed in. 
@@ -378,7 +383,7 @@ For example, `searchrecipe Chicken` will find all recipes that contain `Chicken`
 
 ##### Implementation
 
-![SearchRecipeCommand](images/searchRecipeCommand.png)
+![SearchRecipeCommand](images/searchRecipeCommand1.png)
 
 The following steps explained sequence diagram for `searchrecipe` command:  
 1. The user enters `searchrecipe Chicken`.  
@@ -452,7 +457,7 @@ For example, `searchchore groceries` will find all chores that contain `grocerie
 
 ##### Implementation  
 
-![SearchChoreCommand](images/searchChoreCommand.png)
+![SearchChoreCommand](images/searchChoreCommand1.png)
 
 The following steps explained sequence diagram for `searchchore` command:  
 1. The user enters `searchchore groceries`.  
@@ -528,7 +533,7 @@ Aspects: How saving of files executes:
 #### 4.4.2. Save current state
 The save current state feature allows the user to store the current state of the program data by manual-save mode. Manual-save mode data will be updated and replaced with the current state when save command is implemented.
 
-<b>Implementation</b> <br>
+##### Implementation
 The following steps explain how `save` command works:
 1. The user enters `save`
 2. `KitchenHelper` calls `Parser#parseUserCommand()` which splits the user’s input into 2 parts 
@@ -585,6 +590,19 @@ kitchenLogs.log(Level.WARNING, description_of_warning_here, e.toString());
 ## Appendices 
 ### Appendix A: Product Scope
 
+__Target user profile__:
+
+* Prefers desktop application over other types.  
+* Can type fast.  
+* Prefers typing over mouse input.  
+* Comfortable with using command line interface.  
+* Facilitate user to track kitchen related information easily.  
+* Enables user to remove consumed items easily.  
+* Reminds user of soon perishable food items.  
+* Reminds user to stock up enough food.  
+
+__Value proposition__: Manage food inventory quickly compared to a typical mouse or graphic user interface driven application which saves time and makes it more convenient.  
+
 ### Appendix B: User Stories
 
 |Version| As a ... | I want to ... | So that I can ...|
@@ -616,7 +634,61 @@ kitchenLogs.log(Level.WARNING, description_of_warning_here, e.toString());
 
 ### Appendix C: Value proposition - Use cases
 
-{Describe the value proposition: what problem does it solve?}
+(For all use cases below, the __System__ is `Kitchen Helper` and the __Actor__ is the `user`, unless otherwise stated)
+```
+Use case: UC01 - Add an ingredient
+MSS:
+1. User purchases an ingredient.
+2. User wants to add to System for tracking purposes.
+3. System adds the ingredient.
+Use case ends.
+
+Extensions:
+2a. System detects invalid format in the entered data.
+  2a1. System throws invalid input format and shows a valid format example.
+  Use case resumes at step 2.
+```
+
+```
+Use case: UC02 - Search for ingredient
+MSS:
+1. User wants to find ingredients.
+2. User enters a keyword in the System.
+3. System displays the ingredient related to the keyword.
+Extentions: 
+3a. No matching ingredients related to the keyword.
+  3a1. Systems show no matching ingredient message
+Use case resumes at step 2.
+Use case ends.
+```
+
+```
+Use case: UC03 - Search for recipe
+MSS:
+1. User wants to find similar recipes.
+2. User enters a keyword in the System.
+3. System displays the recipe's name related to the keyword.
+Use case ends.
+Extentions: 
+3a. No matching recipe related to the keyword.
+  3a1. Systems show no matching recipe message
+Use case resumes at step 2.
+Use case ends.
+```
+
+```
+Use case: UC03 - Search for chore
+MSS:
+1. User wants to find chores.
+2. User enters a keyword in the System.
+3. System displays the chore related to the keyword.
+Use case ends.
+Extentions: 
+3a. No matching chore related to the keyword.
+  3a1. Systems show no matching chore message
+Use case resumes at step 2.
+Use case ends.
+```
 
 ### Appendix D: Non-Functional Requirements
 
@@ -630,8 +702,49 @@ kitchenLogs.log(Level.WARNING, description_of_warning_here, e.toString());
 
 * *Mainstream OS* - Windows, Linux, Unix, OS-X
 
-### Appendix G: Instructions for Manual Testing
-#### G.1. Launch and Shutdown
-#### G.2. Deleting a 
-#### G.3. Saving data
+### Appendix F: Instructions for Manual Testing
+
+#### F.1. Launch and Shutdown
+
+1. Initial launch
+   1. Download the jar file and copy into an empty folder.
+   2. Open up command prompt or terminal.
+   3. Change directory to where the jar file is located.
+   4. Run the command java -jar \<FILE\>.jar (FILE represents the filename)  
+   Expected: Shows a welcome message from Kitchen Helper.
+   
+#### F.2. Add an ingredient
+
+1. Add an ingredient into Kitchen Helper.
+   1. Prerequisites: List all the ingredient using the `listingredient all` command. 
+   2. Test case: 'addingredient /n beef /c meat /q 3 /p 20.20 /e 03/03/2020'    
+   Expected: Entry can be seen using `listingredient all` command.
+    
+#### F.3. Search for ingredient
+1. Search for ingredients in Kitchen Helper.
+   1. Prerequisites: The ingredient list should not be empty.
+   2. Test case: `searchingredient beef`  
+   Expected: Ingredient entries that have the keyword matching `beef` names are listed.
+   3. Test case: 'searchingredient meat'  
+   Expected: Ingredient entries that have the keyword matching `meat` category are listed.
+   4. Test case: `searchingredient 02/02/2020`  
+   Expected: Ingredient entries that have the keyword matching `02/02/2020` date are listed.
+   5. Test case: `searchingredient $20`  
+   Expected: Ingredient entries that have the keyword matching `$20` price are listed.
+   
+#### F.4. Search for recipe
+1. Search for similar recipe in Kitchen Helper.
+   1. Prerequisites: The recipe list should not be empty.
+   2. Test case: 'searchrecipe chicken' 
+   Expected: Recipe's name entries that have the keyword matching `chicken' are listed. 
+   
+#### F.5. Search for chore
+1. Search for chores in Kitchen Helper.
+   1. Prerequisites: The chore list should not be empty.
+   2. Test case: `searchchore groceries`  
+   Expected: Chore entries that have the keyword matching `groceries` description are listed.
+   3. Test case: `searchchore Tuesday`  
+   Expected: Chore entries that have the keyword matching `Tuesday` as a string are listed.  
+   
+#### F.6. Saving data
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
