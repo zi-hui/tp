@@ -4,7 +4,10 @@ import seedu.kitchenhelper.exception.KitchenHelperException;
 import seedu.kitchenhelper.object.Chore;
 import seedu.kitchenhelper.object.Recipe;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
+import seedu.kitchenhelper.storage.Storage;
+import seedu.kitchenhelper.ui.Ui;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -19,6 +22,13 @@ public class CookRecipeCommand extends Command {
             = "Example: cookrecipe /n Chicken Salad /p 2";
     public static final String COMMAND_FORMAT =
             String.format("%s %s\n%s", COMMAND_DESC, COMMAND_PARAMETER, COMMAND_EXAMPLE);
+    public static final String COMMAND_FAILURE_RECIPE_NOT_EXISTS = "The given recipe name does not exist!";
+    public static final String COMMAND_FAILURE_INSUFFICIENT_INGREDIENTS = "There are insufficient/"
+                                                                            + "missing ingredients!";
+    public static final String KITCHEN_HELPER_COOK = "Kitchen Helper is trying to cook!";
+    public static final String COMMAND_SUCCESS = "%s was cooked with a pax of %d";
+    public static final String MESSAGE_USAGE = String.format("%s: %s", COMMAND_WORD, COMMAND_DESC) + Ui.LS + String
+            .format("Parameter: %s\n%s", COMMAND_PARAMETER, COMMAND_EXAMPLE);
     public String recipeName;
     public int pax;
 
@@ -34,19 +44,20 @@ public class CookRecipeCommand extends Command {
             throws KitchenHelperException {
         // checks if the specified recipe given by user exists
         int indexOfRecipe = checkIfRecipeExist(recipeList);
-        if (indexOfRecipe != recipeList.size()) {
-            throw new KitchenHelperException("The given recipe name does not exist");
+        if (indexOfRecipe > recipeList.size()) {
+            return COMMAND_FAILURE_RECIPE_NOT_EXISTS;
         }
-        System.out.println("Kitchen Helper is trying to cook!");
+        System.out.println(KITCHEN_HELPER_COOK);
         Recipe recipeToBeCooked = recipeList.get(indexOfRecipe - 1);
 
         if (checkForSufficientIngredient(ingredientList, recipeToBeCooked)) {
             deductIngredients(ingredientList, recipeToBeCooked);
+            Storage.saveIngredientData(ingredientList);
         } else {
-            throw new KitchenHelperException("There are insufficient/ missing ingredients!");
+            return COMMAND_FAILURE_INSUFFICIENT_INGREDIENTS;
         }
 
-        return recipeName + " was cooked with a pax of " + pax;
+        return String.format(COMMAND_SUCCESS, recipeName, pax);
     }
 
     /**
@@ -57,12 +68,43 @@ public class CookRecipeCommand extends Command {
      */
     public void deductIngredients(ArrayList<Ingredient> ingredientList, Recipe recipeToBeCooked) {
         for (Ingredient ingredient : recipeToBeCooked.getRecipeItem()) {
-            // write a function to get all the ingredients with the same name
-            // sort that output according to expiry im not sure if its already sorted
-            // when u loop through the ingredient list
-            // deduct accordingly - the ones that will expire first
+            String ingredientName = ingredient.getIngredientName();
+            ArrayList<Ingredient> listOfSameName = getIngredientsWithSameName(ingredientList, ingredientName);
+            int totalCookedQty = pax * ingredient.getQuantity();
+            for (Ingredient ingredientToDeduct : listOfSameName) {
+                int quantity = ingredientToDeduct.getQuantity();
+                if (totalCookedQty == 0) {
+                    break;
+                } else if (quantity <= totalCookedQty) {
+                    totalCookedQty -= quantity;
+                    ingredientToDeduct.setQuantity(0);
+                } else if (quantity > totalCookedQty) {
+                    ingredientToDeduct.setQuantity(quantity - totalCookedQty);
+                    totalCookedQty = 0;
+                }
+            }
         }
     }
+
+    /**
+     * Get a list of ingredients that has the same name as the specified ingredient.
+     *
+     * @param ingredientList    the list of ingredients available.
+     * @param ingredientName  the ingredient to check for its occurrence in the ingredientlist
+     * @return a list of ingredients with the same name as ingredientName
+     */
+
+    public ArrayList<Ingredient> getIngredientsWithSameName(ArrayList<Ingredient> ingredientList,
+                                                            String ingredientName) {
+        ArrayList<Ingredient> listOfSameName = new ArrayList<>();
+        for (Ingredient ingredient : ingredientList) {
+            if (ingredient.getIngredientName().equalsIgnoreCase(ingredientName)) {
+                listOfSameName.add(ingredient);
+            }
+        }
+        return listOfSameName;
+    }
+
 
     /**
      * Checks if the recipe user wants exist.
@@ -146,11 +188,8 @@ public class CookRecipeCommand extends Command {
     @Override
     public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
                                  ArrayList<Chore> choreList) throws KitchenHelperException {
-        try {
-            String message = cookRecipe(ingredientList, recipeList);
-            return new CommandResult(message);
-        } catch (KitchenHelperException e) {
-            return new CommandResult("There are insufficient/ missing ingredients!");
-        }
+        String message = cookRecipe(ingredientList, recipeList);
+        return new CommandResult(message);
     }
+
 }

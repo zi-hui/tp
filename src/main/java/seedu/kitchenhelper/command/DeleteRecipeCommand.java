@@ -14,7 +14,8 @@ import java.util.logging.Logger;
 public class DeleteRecipeCommand extends Command {
     public static final Logger kitchenLogs = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     public static final String COMMAND_WORD = "deleterecipe";
-    public static final String COMMAND_USAGE = "Usage: deleterecipe /n RECIPENAME OR deleterecipe /i <index>";
+    public static final String COMMAND_PARAMETER = "/n RECIPENAME OR /i RECIPEINDEX";
+    public static final String COMMAND_USAGE = "Usage: deleterecipe /n RECIPENAME OR deleterecipe /i RECIPEINDEX";
     public static final String COMMAND_DESC = "Delete the recipe. ";
     public static final String COMMAND_EXAMPLE = "Example: deleterecipe /n Chicken Salad OR deleterecipe /i 1";
     public static final String COMMAND_FORMAT = String.format("%s\n%s\n%s", COMMAND_DESC, COMMAND_USAGE,
@@ -25,7 +26,7 @@ public class DeleteRecipeCommand extends Command {
     public static final String LOG_INFO = "A recipe has been deleted";
     private static final String OBJECT_TYPE = "recipe";
     public static final String MESSAGE_USAGE = String.format("%s: %s", COMMAND_WORD, COMMAND_DESC) + Ui.LS + String
-            .format("Parameter: %s\n%s", COMMAND_USAGE, COMMAND_EXAMPLE);
+            .format("Parameter: %s\n%s", COMMAND_PARAMETER, COMMAND_EXAMPLE);
     private Integer recipeIndex;
 
     /**
@@ -34,7 +35,6 @@ public class DeleteRecipeCommand extends Command {
      * @param recipeName name of the recipe to be deleted
      *
      */
-
     public DeleteRecipeCommand(String recipeName) {
         setActionType(COMMAND_WORD);
         setObjectType(OBJECT_TYPE);
@@ -48,7 +48,6 @@ public class DeleteRecipeCommand extends Command {
      * @param recipeIndex index of the recipe to be deleted
      *
      */
-
     public DeleteRecipeCommand(Integer recipeIndex) {
         setActionType(COMMAND_WORD);
         setObjectType(OBJECT_TYPE);
@@ -62,7 +61,6 @@ public class DeleteRecipeCommand extends Command {
      * @param recipeList the list of recipe
      * @return
      */
-
     public int getRecipeIndex(String recipeName, ArrayList<Recipe> recipeList) {
         for (Recipe recipe : recipeList) {
             if (recipe.getRecipeName().equalsIgnoreCase(recipeName)) {
@@ -78,7 +76,6 @@ public class DeleteRecipeCommand extends Command {
      *
      * @param recipeList the list of recipe
      */
-
     public String deleteRecipe(ArrayList<Recipe> recipeList, Integer recipeIndex) {
         String feedbackToUser;
         if (recipeIndex > -1 && recipeIndex < recipeList.size()) {
@@ -99,7 +96,6 @@ public class DeleteRecipeCommand extends Command {
      *
      * @param recipeList the list of recipe
      */
-
     public String deleteRecipeByIndex(ArrayList<Recipe> recipeList) {
         int index = this.recipeIndex;
         String feedbackToUser = deleteRecipe(recipeList, index);
@@ -111,7 +107,6 @@ public class DeleteRecipeCommand extends Command {
      *
      * @param recipeList the list of recipe
      */
-
     public String deleteRecipeByName(ArrayList<Recipe> recipeList) {
         String recipeName = this.objectVariables;
         int recipeIndex = getRecipeIndex(recipeName, recipeList);
@@ -127,7 +122,6 @@ public class DeleteRecipeCommand extends Command {
      * @param choreList      list of chores.
      * @return the execution of the deletion of ingredients or tasks.
      */
-
     @Override
     public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
                                   ArrayList<Chore> choreList) throws KitchenHelperException {
