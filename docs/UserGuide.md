@@ -64,7 +64,7 @@ So what are you waiting for? Let’s go!
 Command Format: 
 - Words that are enclosed by angle brackets are the parameters to be supplied by the user. E.g. `deleterecipe /n <RECIPE_NAME>` 
 From this example, `RECIPE_NAME` will be inputted by the user.
-- Items in angle brackets with the word “optional:'' are optional. E.g. `deleteingredient /n <INGREDIENT_NAME>:<optional:QUANTITY>` can be used as `deleteingredient /n apple or deleteingredient /n name /q 2`
+- Items in square brackets with the word [] are optional. E.g. `deleteingredient /n <INGREDIENT_NAME> [/q QUANTITY]` can be used as `deleteingredient /n apple or deleteingredient /n name /q 2`
 
 ### 3.1. General Commands
 #### 3.1.1. Viewing help: `help`
@@ -86,9 +86,9 @@ __Format:__ `reset`
 #### 3.2.1. Adding an ingredient: `addingredient`
 You can add an ingredient to the Kitchen Helper for tracking, containing various details.
 
-__Format:__ `addingredient /n <INGREDIENT> /c <CATEGORY> /q <QUANTITY> /p <PRICE> /e <EXPIRY>`  
+__Format:__ `addingredient /n <INGREDIENT_NAME> /c <CATEGORY> /q <QUANTITY> /p <PRICE> /e <EXPIRY>`  
 
-* `INGREDIENT` is the name of your ingredient.
+* `INGREDIENT_NAME` is the name of your ingredient.
 * `CATEGORY` is the CATEGORY of your ingredient.  
 The different types of `CATEGORY` are listed below: 
   + `Meat`
@@ -130,7 +130,7 @@ You can delete a specified ingredient or reduce an ingredient’s QUANTITY from 
 
 You may get the list of ingredients that you have previously keyed in, by referring to the [listingredient](#322-list-ingredient-listingredient) command section. <br>
 
-__Format__: `deleteingredient /n <INGREDIENT_NAME> [/q QUANTITY]` OR `deleteingredient /i <INGREDIENT_INDEX> [/q QUANTITY]`
+__Format__: `deleteingredient /n <INGREDIENT_NAME> [/q <QUANTITY>]` OR `deleteingredient /i <INGREDIENT_INDEX> [/q <QUANTITY>]`
 <br>
 <br>
 `INGREDIENT_NAME` : This refers to the name of the ingredient. <br>
@@ -140,7 +140,7 @@ __Format__: `deleteingredient /n <INGREDIENT_NAME> [/q QUANTITY]` OR `deleteingr
 
 Example |  Outcome
 --------|------------------
-**Command**: <br> `deleteingredient /n apple /q 2` <br><br> **Description**: <br> Deletes `2 apples` from the total QUANTITY of `apples.` | deleteingredient /n apple /q 2 <br> The QUANTITY of apple has been changed!<br>===================================================
+**Command**: <br> `deleteingredient /n apple /q 2` <br><br> **Description**: <br> Deletes `2 apples` from the total quantity of `apples.` | deleteingredient /n apple /q 2 <br> The quantity of apple has been changed!<br>===================================================
 **Command**: <br> `deleteingredient /n wagyu beef` <br><br> **Description**: Deletes the ingredient named `wagyu beef` from the ingredients list. | deleteingredient /n wagyu beef <br> wagyu beef has been deleted.<br>===================================================
 **Command**: <br> `deleteingredient /i 1` <br><br> **Description**: Deletes the item specified by `index 1` in the ingredient list. | deleteingredient /i 1 <br> apple has been deleted.<br>===================================================
 
@@ -178,9 +178,9 @@ The different types of `CATEGORY` are listed below:
   + `Drink`
   + `Miscellaneous`  
   
-:speech_balloon: Any `CATEGORY` that does not falls in the list could be put under `Miscellaneous`.
+Any `CATEGORY` that does not falls in the list could be put under `Miscellaneous`.
 
-:bulb: All `RECIPE_NAME` has to be unique. You can check the list of existing recipes by using [`listrecipe all`](#332-list-recipes-listrecipe-1)  
+All `RECIPE_NAME` has to be unique. You can check the list of existing recipes by using [`listrecipe all`](#332-list-recipes-listrecipe-1)  
 
 Example |  Outcome
 --------|------------------
@@ -298,8 +298,6 @@ Example |  Outcome
 #### 3.5.1. Select Load Files
 Prompts the user with the option to either load their data from auto-save mode or the manual-save mode. If the user chooses the manual-save mode,  it will overwrite all the data stored in auto-save mode. However, any subsequent changes made to the program data will be saved through auto-save mode regardless of initial load options, to save through manual-save mode, user will have to use the save command [Section 3.5.3, "Save Current State"](#352-save-current-state-save).
 
-
-
 __Format:__ `addchore <task_description> /by <deadline>`  
 
 Example |  Outcome
@@ -332,10 +330,10 @@ __Ingredient Commands__
 
 Feature | Command  
 ------- | -------  
-addingredient | `addingredient /n INGREDIENT /c CATEGORY /q QUANTITY /p PRICE /e EXPIRY`<br> e.g. `addingredient /n Beef cubes /c meat /q 3 /p 20 /e 2020-03-18`  
+addingredient | `addingredient /n <INGREDIENT_NAME> /c <CATEGORY> /q <QUANTITY> /p <PRICE> /e <EXPIRY>`<br> e.g. `addingredient /n Beef cubes /c meat /q 3 /p 20 /e 2020-03-18`  
 listingredient | `listingredient <CATEGORY / ALL>` <br> e.g. `listingredient all` OR `listingredient meat`
-deleteingredient | `deleteingredient /n <INGREDIENT_NAME>> [/q QUANTITY]` OR `deleteingredient /i <ingredient_index> [/q QUANTITY]` <br> e.g.`deleteingredient /n apple /q 2` OR `deleteingredient /i 1`<br>
-searchingredient | `searchingredient KEYWORD` <br> e.g. `searchingredient beef`  
+deleteingredient | `deleteingredient /n <INGREDIENT_NAME> [/q <QUANTITY>]` OR `deleteingredient /i <ingredient_index> [/q <QUANTITY>]` <br> e.g.`deleteingredient /n apple /q 2` OR `deleteingredient /i 1`<br>
+searchingredient | `searchingredient <KEYWORD>` <br> e.g. `searchingredient beef`  
 
 
 __Recipe Commands__  
@@ -345,7 +343,7 @@ Feature | Command
 addrecipe | `addrecipe /n <RECIPE_NAME> /i <INGREDIENT_NAME>:<QUANTITY>:<CATEGORY>[,..]` <br> e.g. `addrecipe /n Rice Ball /i Rice:3:staple`
 listrecipe | `listrecipe <ITEM_NUMBER / ALL>` <br> e.g. `listrecipe all` OR `listrecipe 1`
 deleterecipe | `deleterecipe /n <RECIPE_NAME>` OR `deleterecipe /i <RECIPE_INDEX>` <br> e.g. `deleterecipe /n pasta` OR `deleterecipe /i 2`<br>
-searchrecipe | `searchrecipe KEYWORD` <br> e.g. `searchrecipe Chicken Stew`  
+searchrecipe | `searchrecipe <KEYWORD>` <br> e.g. `searchrecipe Chicken Stew`  
 cookrecipe | `cookrecipe /n <RECIPE_NAME> /p <NUMBER_OF_PAX>` <br> e.g. `cookrecipe /n chicken salad /p 2`
 
  
@@ -356,7 +354,7 @@ Feature | Command
 addchore | `addchore <TASK_DESCRIPTION> /by <DEADLINE>` <br> e.g. `addchore buy groceries /by Monday 12pm`
 listchore | `listchore` <br> e.g. `listchore`
 deletechore | `deletechore <INDEX_TO_DELETE>`  <br> e.g. `deletechore 1`
-searchchore | `searchchore KEYWORD` <br> e.g. `searchchore groceries`  
+searchchore | `searchchore <KEYWORD>` <br> e.g. `searchchore groceries`  
 done | `done <INDEX_TO_CHECK>` <br> e.g. `done 1`
 
 __Storage Commands__
