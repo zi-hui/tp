@@ -1,6 +1,7 @@
 package seedu.kitchenhelper.object;
 
 import seedu.kitchenhelper.object.ingredient.Ingredient;
+import seedu.kitchenhelper.storage.Storage;
 import seedu.kitchenhelper.ui.Ui;
 
 
@@ -47,6 +48,7 @@ public class Expenditure {
         this.totalExpenditure = totalExpenditure;
         this.amountUsedInCooking = amountUsedInCooking;
         this.lastSavedDate = lastSavedDate;
+        renewExpenditureValue();
     }
 
     public void renewExpenditureValue() {
@@ -94,11 +96,13 @@ public class Expenditure {
         double price = changePrice(ingredientToDelete, quantityToDelete);
         amountUsedInCooking += price;
         System.out.println(String.format(INCREASE_AMOUNT_USED, price));
+        //Storage.saveExpenditureData();
     }
 
     public void editExpenditure(Ingredient ingredientToDelete, Integer quantityToDelete) {
         removeFromExpenditure(ingredientToDelete, quantityToDelete);
         addToAmountUsed(ingredientToDelete, quantityToDelete);
+        //Storage.saveExpenditureData();
     }
 
     public double changePrice(Ingredient ingredientToDelete, Integer quantityToDelete) {

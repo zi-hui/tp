@@ -294,16 +294,15 @@ public class Storage {
 
             DateFormat dateFormat = new SimpleDateFormat("EEE dd/MM/yyyy HH:mm:ss");
             Date lastSavedDate = dateFormat.parse(variables[2]);
-            Expenditure newExpenditure = Expenditure.getInstance();
-            newExpenditure.loadExpenditureVariables(expenditure, amountUsed, lastSavedDate);
-            newExpenditure.renewExpenditureValue();
+            Expenditure.getInstance().loadExpenditureVariables(expenditure, amountUsed, lastSavedDate);
         } catch (IndexOutOfBoundsException e) {
             Expenditure.getInstance().loadExpenditureVariables(0, 0, null);
         } catch (ParseException e) {
             System.out.println("lastSavedDate loading error");
+        } finally {
+            scanner.close();
         }
 
-        scanner.close();
     }
 
 
