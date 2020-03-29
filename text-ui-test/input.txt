@@ -22,17 +22,9 @@ listingredient all
 addingredient /n Apple /c fruit /q 1 /p 1 /e 03/02/2020
 listingredient all
 deleteingredient /n Apple
-no
-no
 deleteingredient /n Apple
-no
-no
 deleteingredient /n Apple
-no
-no
 deleteingredient /n Pear
-no
-no
 listingredient all
 addchore buy groceries /by Tuesday 12pm
 addchore buy groceries

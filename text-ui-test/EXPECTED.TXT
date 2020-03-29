@@ -294,11 +294,6 @@ Ok! There are no changes to expenditure.
 kailan has been deleted.
 ===================================================
 deleterecipe /n Chicken Salad
-The amount of money spent on this ingredient has already been recorded.
-Would you like to remove the amount spent on this item from the total expenditure?
-Ok! There are no changes to expenditure.
-Would you like to add the amount spent on this item to the amount used for cooking?
-Ok! There are no changes to expenditure.
 Chicken Salad has been deleted
 ===================================================
 deleterecipe /n Chicken Salad
