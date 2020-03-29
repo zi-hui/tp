@@ -54,8 +54,9 @@ By: `CS2113T-M16-2` Since: `2020`
 
 ## 1. Introduction
 ### 1.1. Purpose
+The document contains the specified architecture and software design specifications for the application, Kitchen Helper. 
 ### 1.2. Scope
-
+This describes the software architecture and software design requirements for Kitchen Helper. This guide is mainly for developers, designers and software engineers that are or going to work on Kitchen Helper. 
 ## 2. Setting up
 
 ### 2.1. Prerequisites
