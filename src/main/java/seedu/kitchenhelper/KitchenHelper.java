@@ -39,12 +39,12 @@ public class KitchenHelper {
         ui.showWelcomeMessage();
         if (userChoice.equals("1")) {
             storage = new Storage("outputIngredient.txt", "outputRecipe.txt",
-                    "outputChore.txt", "outputExpenditure.txt");
+                    "outputChore.txt");
             try {
                 ingredientList = new ArrayList<>(storage.getIngredientData());
                 recipeList = new ArrayList<>(storage.getRecipeData());
                 choreList = new ArrayList<>(storage.getChoreData());
-                storage.loadExpenditureData();
+                //storage.loadExpenditureData();
             } catch (FileNotFoundException err) {
                 ingredientList = new ArrayList<>();
                 recipeList = new ArrayList<>();
@@ -53,7 +53,7 @@ public class KitchenHelper {
         } else if (userChoice.equals("2")) {
             createNewFiles();
             storage = new Storage("outputIngredientCopy.txt", "outputRecipeCopy.txt",
-                    "outputChoreCopy.txt", "outputExpenditureCopy.txt");
+                    "outputChoreCopy.txt");
             try {
                 ingredientList = new ArrayList<>(storage.getIngredientData());
                 recipeList = new ArrayList<>(storage.getRecipeData());

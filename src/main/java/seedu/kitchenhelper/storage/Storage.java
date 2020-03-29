@@ -46,11 +46,11 @@ public class Storage {
      * @param filePathRecipe String of filepath for stored Recipe data.
      * @param filePathChore String of filepath for stored Chore data.
      */
-    public Storage(String filePathIngredient, String filePathRecipe, String filePathChore, String filePathExpenditure) {
+    public Storage(String filePathIngredient, String filePathRecipe, String filePathChore/*, String filePathExpenditure*/) {
         this.filePathIngredient = filePathIngredient;
         this.filePathRecipe = filePathRecipe;
         this.filePathChore = filePathChore;
-        this.filePathExpenditure = filePathExpenditure;
+        //this.filePathExpenditure = filePathExpenditure;
     }
 
     public static void copyFile(File source, File dest) {
