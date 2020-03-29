@@ -1,28 +1,10 @@
 package seedu.kitchenhelper.parser;
 
-import seedu.kitchenhelper.command.AddChoreCommand;
-import seedu.kitchenhelper.command.AddIngredientCommand;
-import seedu.kitchenhelper.command.AddRecipeCommand;
-import seedu.kitchenhelper.command.Command;
-import seedu.kitchenhelper.command.DeleteChoreCommand;
-import seedu.kitchenhelper.command.ResetCommand;
-import seedu.kitchenhelper.command.DeleteIngredientCommand;
-import seedu.kitchenhelper.command.DeleteRecipeCommand;
-import seedu.kitchenhelper.command.DoneCommand;
-import seedu.kitchenhelper.command.ExitCommand;
-import seedu.kitchenhelper.command.HelpCommand;
-import seedu.kitchenhelper.command.SaveStateCommand;
-import seedu.kitchenhelper.command.SearchChoreCommand;
-import seedu.kitchenhelper.command.SearchIngredientCommand;
-import seedu.kitchenhelper.command.SearchRecipeCommand;
-import seedu.kitchenhelper.command.ListChoreCommand;
-import seedu.kitchenhelper.command.ListIngredientCommand;
-import seedu.kitchenhelper.command.ListRecipeCommand;
-import seedu.kitchenhelper.command.InvalidCommand;
-import seedu.kitchenhelper.command.CookRecipeCommand;
+import seedu.kitchenhelper.command.*;
 import seedu.kitchenhelper.exception.KitchenHelperException;
 import seedu.kitchenhelper.object.Expenditure;
 
+import java.lang.invoke.StringConcatFactory;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -75,6 +57,8 @@ public class Parser {
             return prepareDeleteChore(parameters);
         case DoneCommand.COMMAND_WORD:
             return prepareDoneChore(parameters);
+        case DisplayExpenditureCommand.COMMAND_WORD:
+            return prepareDisplayExpenditure(parameters);
         case ListIngredientCommand.COMMAND_WORD:
             return prepareListIngredient(parameters);
         case ListRecipeCommand.COMMAND_WORD:
@@ -374,6 +358,19 @@ public class Parser {
         } catch (NumberFormatException e) {
             return new InvalidCommand(
                     String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, DoneCommand.COMMAND_FORMAT));
+        }
+    }
+
+
+    public Command prepareDisplayExpenditure(String parameters) throws KitchenHelperException {
+        try {
+            if (! parameters.isEmpty()) {
+                throw new KitchenHelperException("Invalid DisplayExpenditure command.");
+            }
+            return new DisplayExpenditureCommand();
+        } catch (KitchenHelperException e) {
+            kitchenLogs.log(Level.WARNING, LOG_WARNING_INDEX, e.toString());
+            throw new KitchenHelperException(DisplayExpenditureCommand.COMMAND_FORMAT);
         }
     }
 

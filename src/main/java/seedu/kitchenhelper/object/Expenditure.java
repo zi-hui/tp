@@ -18,8 +18,8 @@ public class Expenditure {
     public static final String NO_CHANGE = "Ok! There are no changes to expenditure.\n";
 
 
-    private double totalExpenditure;
-    private double amountUsedInCooking;
+    public double totalExpenditure;
+    public double amountUsedInCooking;
 
     public void renewExpenditureValue() {
         totalExpenditure = 0;
@@ -89,5 +89,7 @@ public class Expenditure {
         }
         return false;
     }
+
+
 
 }
