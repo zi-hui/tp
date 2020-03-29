@@ -25,8 +25,9 @@ By: `CS2113T-M16-2` Since: `2020`
     + [4.2. Recipe-related Features](#42-recipe-related-features)
       - [4.2.1. Addition of recipe](#421-addition-of-recipe)
       - [4.2.2. List all/ specific recipe(s)](#422-list-all-specific-recipes)
-      - [4.2.3. Delete all/ specific recipe(s)](#423-delete-all-specific-recipes)
-      - [4.2.4. Search for recipe based on keyword(s)](#424-search-for-recipe-based-on-keywords)
+      - [4.2.3. Cooking of recipe](#423-cooking-of-recipe)
+      - [4.2.4. Delete all/ specific recipe(s)](#424-delete-all-specific-recipes)
+      - [4.2.5. Search for recipe based on keyword(s)](#425-search-for-recipe-based-on-keywords)
     + [4.3. Chore-related Features](#43-chore-related-features)
       - [4.3.1. Addition of chore](#431-addition-of-chore)
       - [4.3.2. List all/ specific chore(s)](#432-list-all-specific-chores)
@@ -343,8 +344,9 @@ Alternative 2 (current choice): Using arrayList.get(item) to get the recipe requ
 |**Pros** | Users would be able to get the details of the particular recipe accurately and fast. |
 |**Cons** | Without proper checks done before running the command, it will result in error if the number indicated by the user exceeds the arraylist / does not exist in the arraylist.  |
 
+#### 4.2.3. Cooking of recipe
 
-#### 4.2.3. Delete all/ specific recipe(s)
+#### 4.2.4. Delete all/ specific recipe(s)
 The deletion feature for specific recipes allows the user to delete recipes either by the name or index of the recipe. 
 
 ![Delete Recipe Sequence Diagram](images/deleteRecipeSequenceDiagram.png)
@@ -384,7 +386,7 @@ Alternative 2: Usage of 1 constructor <br>
 |**Cons** | The single constructor will need to deal with 2 different methods of deletion, causing the constructor to have more than one purpose.|
 
 
-#### 4.2.4. Search for recipe based on keyword(s)
+#### 4.2.5. Search for recipe based on keyword(s)
 
 The search for recipe feature allows the user to find recipes using a keyword in the recipe’s list.  
 For example, `searchrecipe Chicken` will find all recipes that contain `Chicken`.  
@@ -640,6 +642,8 @@ __Value proposition__: Manage food inventory quickly compared to a typical mouse
 |v2.0|housewife|mark the task as done|track the uncompleted task.|
 |v2.0|user|retrieve all of my past history that i have entered in the application|view them again.|
 |v2.0|user|reset all my ingredients, chores, recipes|restart the application.|
+|v2.0|user|deduct ingredients that expire first|do not waste my ingredients.|
+|v2.0|user|be informed if I have sufficient ingredients to cook a specific recipe|find other recipes to cook.\
 
 ### Appendix C: Value proposition - Use cases
 
