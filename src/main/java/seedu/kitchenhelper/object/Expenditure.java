@@ -11,7 +11,11 @@ import java.util.Date;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+/**
+ * Calculate user expenditure.
+ */
 public class Expenditure {
+
     public static final String PROMPT_REMOVE_FROM_EXPENDITURE
             = "The amount of money spent on this ingredient has already been recorded.\n"
             + "Would you like to remove the amount spent on this item from the total expenditure?";
@@ -29,9 +33,17 @@ public class Expenditure {
 
     private static Expenditure onlyInstance = null;
 
+    /**
+     * Only one instance of Expenditure class can be instantiated.
+     */
     private Expenditure() {
     }
 
+    /**
+     * Singleton instantiated by
+     *
+     * @return
+     */
     public static Expenditure getInstance() {
         if (onlyInstance == null) {
             onlyInstance = new Expenditure();
@@ -97,9 +109,7 @@ public class Expenditure {
     }
 
     public void addAmountForCooking(Ingredient ingredientToDelete, Integer quantityToDelete) {
-        double price = changePrice(ingredientToDelete, quantityToDelete);
-        amountUsedInCooking += price;
-        System.out.println(String.format(INCREASE_AMOUNT_USED, price));
+        amountUsedInCooking += changePrice(ingredientToDelete, quantityToDelete);
         //Storage.saveExpenditureData();
     }
 
