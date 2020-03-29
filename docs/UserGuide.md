@@ -201,6 +201,8 @@ Example |  Outcome
 #### 3.3.3. Delete a recipe: `deleterecipe`
 You can delete a recipe by using the recipe name or index from the list in Kitchen Helper. The name or index of the recipe can be found by displaying the list of recipes. 
 
+You may get the list of recipes that you have previously keyed in, by referring to the [listrecipe](#332-list-recipes-listrecipe) command section. <br>
+
 __Format__: `deleterecipe /n <RECIPE_NAME>` OR `deleterecipe /i <RECIPE_INDEX>`
 <br>
 <br>
