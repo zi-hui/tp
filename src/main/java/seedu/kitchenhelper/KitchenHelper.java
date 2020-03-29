@@ -154,6 +154,9 @@ public class KitchenHelper {
         
     }
 
+    /**
+     *
+     */
     private void showNotifications() {
         String choreNotification;
         choreNotification = new ChoreNotification().getNotifications(choreList);

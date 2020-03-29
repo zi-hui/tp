@@ -52,7 +52,7 @@ public class DeleteChoreCommand extends Command {
     /**
      * Deletes a chore from the chore list.
      *
-     * @param choreList the ArrayList of chores.
+     * @param choreList the list of Chores.
      * @return success message for successful deletion and error message for invalid index specified.
      */
     public String deleteChore(ArrayList<Chore> choreList) {
@@ -70,6 +70,13 @@ public class DeleteChoreCommand extends Command {
         }
     }
 
+    /**
+     * Deletes all the chores in the list.
+     *
+     * @param choreList the list of Chores.
+     * @return message success of deleting all chores or
+     * message showing cancellation of action to delete all chores.
+     */
     public String deleteAll(ArrayList<Chore> choreList) {
         String userResponse = promptUser();
         if (userResponse.equalsIgnoreCase("no")) {
@@ -82,6 +89,11 @@ public class DeleteChoreCommand extends Command {
         }
     }
 
+    /**
+     * Prompts user to ensure user wants to delete all chores from list.
+     *
+     * @return user response to confirmation of deletion.
+     */
     public String promptUser() {
         String userResponse;
         System.out.println(DELETE_ALL_PROMPT);
@@ -93,6 +105,12 @@ public class DeleteChoreCommand extends Command {
         return userResponse;
     }
 
+    /**
+     * Checks if user responds with either "yes" or "no".
+     *
+     * @param userResponse user input in commandline.
+     * @return True if user responds with either "yes" or "no".
+     */
     public boolean isValidResponse(String userResponse) {
         String response = userResponse;
         if (response.equalsIgnoreCase("no") || response.equalsIgnoreCase("yes")) {
@@ -107,7 +125,7 @@ public class DeleteChoreCommand extends Command {
      * @param ingredientList list of ingredients.
      * @param recipeList list of recipes.
      * @param choreList list of chores.
-     * @return the success or error message of deleting a chore from the chore list.
+     * @return the success or error message of deleting one or all chores from the chore list.
      */
     @Override
     public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,

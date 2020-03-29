@@ -8,6 +8,9 @@ import seedu.kitchenhelper.ui.Ui;
 
 import java.util.ArrayList;
 
+/**
+ * Displays user expenditure and amount used for cooking.
+ */
 public class DisplayExpenditureCommand extends Command {
 
     public static final String COMMAND_WORD = "displayexpenditure";
@@ -22,6 +25,14 @@ public class DisplayExpenditureCommand extends Command {
             + "for Ingredients used in your cooking this week: $%.2f";
 
 
+    /**
+     * {@inheritDoc}
+     *
+     * @param ingredientList list of ingredients.
+     * @param recipeList     list of recipes.
+     * @param choreList      list of chores.
+     * @return user expenditure and amount used for cooking.
+     */
     @Override
     public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
                                  ArrayList<Chore> choreList) {

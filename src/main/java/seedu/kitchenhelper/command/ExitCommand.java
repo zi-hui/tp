@@ -7,6 +7,9 @@ import seedu.kitchenhelper.ui.Ui;
 
 import java.util.ArrayList;
 
+/**
+ * Command when user exits program.
+ */
 public class ExitCommand extends Command {
     
     public static final String COMMAND_WORD = "exit";

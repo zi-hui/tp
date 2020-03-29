@@ -350,6 +350,7 @@ public class Storage {
             for (Chore chore : choreList) {
                 fw.write(chore.toString() + System.lineSeparator());
             }
+            fw.write(Expenditure.getInstance().saveExpenditureFile());
             fw.close();
         } catch (IOException err) {
             err.printStackTrace();

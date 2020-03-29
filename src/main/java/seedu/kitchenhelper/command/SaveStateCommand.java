@@ -9,6 +9,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Saves the program at the current point in time when user calls it manually.
+ */
 public class SaveStateCommand extends Command {
 
     public static final String COMMAND_WORD = "save";
