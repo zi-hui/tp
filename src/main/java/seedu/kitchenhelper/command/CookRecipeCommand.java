@@ -43,6 +43,7 @@ public class CookRecipeCommand extends Command {
             throws KitchenHelperException {
         // checks if the specified recipe given by user exists
         int indexOfRecipe = checkIfRecipeExist(recipeList);
+        System.out.println(indexOfRecipe);
         if (indexOfRecipe > recipeList.size()) {
             return COMMAND_FAILURE_RECIPE_NOT_EXISTS;
         }

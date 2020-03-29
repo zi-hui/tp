@@ -220,6 +220,10 @@ public class Parser {
         try {
             String recipeName = attributes.substring(attributes.indexOf("/n") + 3, attributes.indexOf("/p") - 1);
             int numOfPax = Integer.parseInt(attributes.substring(attributes.indexOf("/p") + 3));
+            if (numOfPax < 1) {
+                return new InvalidCommand(
+                        String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, cookCmd.COMMAND_FORMAT));
+            }
             cookCmd.setRecipeName(recipeName);
             cookCmd.setRecipePax(numOfPax);
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
