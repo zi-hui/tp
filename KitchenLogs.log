@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 Mar 29, 2020 8:35:54 PM seedu.kitchenhelper.parser.Parser prepareDeleteRecipe
 WARNING: An IndexOutOfBounds exception has been caught
 Mar 29, 2020 8:36:08 PM seedu.kitchenhelper.parser.Parser prepareDeleteRecipe
@@ -10,4 +8,3 @@ Mar 29, 2020 8:38:16 PM seedu.kitchenhelper.parser.Parser prepareAddRecipe
 WARNING: An IO exception has been caught
 Mar 29, 2020 8:38:21 PM seedu.kitchenhelper.parser.Parser prepareAddRecipe
 WARNING: An IO exception has been caught
->>>>>>> 915511117c5e57c83f16a3802cc9fe57700c9475
