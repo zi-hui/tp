@@ -1,5 +1,6 @@
 package seedu.kitchenhelper.object;
 
+import seedu.kitchenhelper.exception.KitchenHelperException;
 import seedu.kitchenhelper.object.ingredient.Dairy;
 import seedu.kitchenhelper.object.ingredient.Drink;
 import seedu.kitchenhelper.object.ingredient.Fruit;
@@ -85,7 +86,7 @@ public class Recipe {
             return new Vegetable(ingrName, ingrCategory, ingrQuantity, 0, null);
         default:
             kitchenLogs.warning(warningAddRecipe);
-            return new Miscellaneous(ingrName, ingrCategory, ingrQuantity, 0, null);
+            return new Miscellaneous(ingrName, "Miscellaneous", ingrQuantity, 0, null);
         }
     }
 
@@ -114,9 +115,13 @@ public class Recipe {
      *
      * @param attributes the list of ingredients and recipe name.
      */
-    public void setRecipeName(String attributes) {
-        String recipeNameAndIngr = attributes.substring(attributes.indexOf("/n") + 3, attributes.indexOf("/i") - 1);
-        recipeName = recipeNameAndIngr;
+    public void setRecipeName(String attributes) throws KitchenHelperException {
+        try {
+            String recipeNameAndIngr = attributes.substring(attributes.indexOf("/n") + 3, attributes.indexOf("/i") - 1);
+            recipeName = recipeNameAndIngr;
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+            throw new KitchenHelperException("Invalid command");
+        }
     }
 
     /**
