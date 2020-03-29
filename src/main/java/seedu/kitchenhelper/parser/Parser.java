@@ -121,7 +121,7 @@ public class Parser {
                 nameAndType[1] = ingrContent[2];
                 ingrAndQty.put(nameAndType, Integer.parseInt(ingrContent[1]));
             }
-        } catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
             kitchenLogs.log(Level.WARNING, warningPrepareRecipe, e.toString());
             return new InvalidCommand(
                     String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, AddRecipeCommand.COMMAND_FORMAT));
@@ -218,7 +218,7 @@ public class Parser {
             int numOfPax = Integer.parseInt(attributes.substring(attributes.indexOf("/p") + 3));
             cookCmd.setRecipeName(recipeName);
             cookCmd.setRecipePax(numOfPax);
-        } catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
             return new InvalidCommand(
                     String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, cookCmd.COMMAND_FORMAT));
         }
