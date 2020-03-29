@@ -361,7 +361,7 @@ Alternative 2 (current choice): Using arrayList.get(item) to get the recipe requ
 #### 4.2.3. Cooking of recipe
 The feature allows the user to cook a recipe if there are sufficient ingredients. The user will also indicate how many pax this recipe would be cooked for.
 
-![Cook Recipe Sequence Diagram](images/cookRecipeSequenceDiagram.png)
+![Cook Recipe Sequence Diagram](images/cookRecipeCommandSequenceDiagram.png)
 
 ##### Implementation 
 When the user attempts to cook `Chicken Salad` recipe from `Kitchen Helper`, the `Kitchen Helper`, `Parser` and `cookRecipeCommand` class will be called upon. The following sequence of steps will then occur:
