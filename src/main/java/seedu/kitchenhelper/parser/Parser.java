@@ -145,7 +145,7 @@ public class Parser {
             String[] priceAndExpiry = quantityAndOthers[1].split("\\s+/e\\s+");
             double price = Double.parseDouble(priceAndExpiry[0]);
             assert price >= 0.00 : price;
-            new Expenditure().addToExpenditure(price);
+            Expenditure.getInstance().addToExpenditure(price, quantity);
 
             String expiry = parseDateFormat(priceAndExpiry[1]);
             

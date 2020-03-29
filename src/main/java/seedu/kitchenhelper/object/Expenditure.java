@@ -34,8 +34,36 @@ public class Expenditure {
         return onlyInstance;
     }
 
+    public String saveExpenditureFile() {
+        String text;
+        text = String.format("Expenditure: $%.2f,", totalExpenditure);
+        text += String.format("Amount used in cooking: $%.2f,", amountUsedInCooking);
+        Date currentDate = new Date();
+        text += new SimpleDateFormat("EEE dd/MM/yyyy HH:mm:ss").format(currentDate) + Ui.LS;
+        return text;
+    }
+
+    public void loadExpenditureVariables(double totalExpenditure, double amountUsedInCooking, Date lastSavedDate) {
+        this.totalExpenditure = totalExpenditure;
+        this.amountUsedInCooking = amountUsedInCooking;
+        this.lastSavedDate = lastSavedDate;
+    }
+
     public void renewExpenditureValue() {
-        totalExpenditure = 0;
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        //DateFormat dateFormat = new SimpleDateFormat("EEE dd/MM/yyyy HH:mm:ss");
+        //System.out.println(dateFormat.format(c.getTime()));      // This past Monday [ May include today ]
+        Date pastMonday = calendar.getTime(); //past Monday
+        //calendar.add(Calendar.DATE,7);
+        //Date nextMonday = calendar.getTime(); //next Monday
+        if (lastSavedDate == null || lastSavedDate.before(pastMonday)) {
+            totalExpenditure = 0;
+            amountUsedInCooking = 0;
+        }
     }
 
     public void addToExpenditure(double price, int quantity) {

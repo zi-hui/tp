@@ -39,11 +39,12 @@ public class KitchenHelper {
         ui.showWelcomeMessage();
         if (userChoice.equals("1")) {
             storage = new Storage("outputIngredient.txt", "outputRecipe.txt",
-                    "outputChore.txt");
+                    "outputChore.txt", "outputExpenditure.txt");
             try {
                 ingredientList = new ArrayList<>(storage.getIngredientData());
                 recipeList = new ArrayList<>(storage.getRecipeData());
                 choreList = new ArrayList<>(storage.getChoreData());
+                storage.loadExpenditureData();
             } catch (FileNotFoundException err) {
                 ingredientList = new ArrayList<>();
                 recipeList = new ArrayList<>();
@@ -52,11 +53,12 @@ public class KitchenHelper {
         } else if (userChoice.equals("2")) {
             createNewFiles();
             storage = new Storage("outputIngredientCopy.txt", "outputRecipeCopy.txt",
-                    "outputChoreCopy.txt");
+                    "outputChoreCopy.txt", "outputExpenditureCopy.txt");
             try {
                 ingredientList = new ArrayList<>(storage.getIngredientData());
                 recipeList = new ArrayList<>(storage.getRecipeData());
                 choreList = new ArrayList<>(storage.getChoreData());
+                storage.loadExpenditureData();
             } catch (FileNotFoundException err) {
                 ingredientList = new ArrayList<>();
                 recipeList = new ArrayList<>();
@@ -72,9 +74,11 @@ public class KitchenHelper {
         var sourceIngredient = new File("outputIngredient.txt");
         var sourceRecipe = new File("outputRecipe.txt");
         var sourceChore = new File("outputChore.txt");
+        var sourceExpenditure = new File("outputChore.txt");
         var destIngredient = new File("outputIngredientCopy.txt");
         var destRecipe = new File("outputRecipeCopy.txt");
         var destChore = new File("outputChoreCopy.txt");
+        var destExpenditure = new File("outputExpenditureCopy.txt");
 
         if (destIngredient.length() == 0) {
             Storage.copyFile(sourceIngredient, destIngredient);
@@ -85,6 +89,9 @@ public class KitchenHelper {
         }
         if (destChore.length() == 0) {
             Storage.copyFile(sourceChore, destChore);
+        }
+        if (destExpenditure.length() == 0) {
+            Storage.copyFile(sourceExpenditure, destExpenditure);
         }
     }
     

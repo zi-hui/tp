@@ -1,5 +1,6 @@
 package seedu.kitchenhelper.storage;
 
+import seedu.kitchenhelper.object.Expenditure;
 import seedu.kitchenhelper.object.Recipe;
 import seedu.kitchenhelper.object.Chore;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
@@ -35,6 +36,8 @@ public class Storage {
     private String filePathIngredient;
     private String filePathRecipe;
     private String filePathChore;
+    private String filePathExpenditure;
+
 
 
     /**
@@ -43,10 +46,11 @@ public class Storage {
      * @param filePathRecipe String of filepath for stored Recipe data.
      * @param filePathChore String of filepath for stored Chore data.
      */
-    public Storage(String filePathIngredient, String filePathRecipe, String filePathChore) {
+    public Storage(String filePathIngredient, String filePathRecipe, String filePathChore, String filePathExpenditure) {
         this.filePathIngredient = filePathIngredient;
         this.filePathRecipe = filePathRecipe;
         this.filePathChore = filePathChore;
+        this.filePathExpenditure = filePathExpenditure;
     }
 
     public static void copyFile(File source, File dest) {
@@ -275,6 +279,33 @@ public class Storage {
         return choreList;
     }
 
+    public void loadExpenditureData() throws FileNotFoundException {
+
+        File file = new File(filePathExpenditure);
+        Scanner scanner = new Scanner(file);
+        String userData = scanner.nextLine();
+
+        try {
+            String[] variables = userData.split(",");
+            int expenditureIndex = variables[0].indexOf('$');
+            Double expenditure = Double.valueOf(variables[0].substring(expenditureIndex));
+            int amountUsedIndex = variables[1].indexOf("$");
+            Double amountUsed = Double.valueOf(variables[1].substring(amountUsedIndex));
+
+            DateFormat dateFormat = new SimpleDateFormat("EEE dd/MM/yyyy HH:mm:ss");
+            Date lastSavedDate = dateFormat.parse(variables[2]);
+            Expenditure newExpenditure = Expenditure.getInstance();
+            newExpenditure.loadExpenditureVariables(expenditure, amountUsed, lastSavedDate);
+            newExpenditure.renewExpenditureValue();
+        } catch (IndexOutOfBoundsException e) {
+            Expenditure.getInstance().loadExpenditureVariables(0, 0, null);
+        } catch (ParseException e) {
+            System.out.println("lastSavedDate loading error");
+        }
+
+        scanner.close();
+    }
+
 
     /**
      * Saves and stores the ingredients in ArrayList Ingredient into a text file.
@@ -332,6 +363,7 @@ public class Storage {
             /*for (Chore chore : choreList) {
                 fw.write(chore.toString() + System.lineSeparator());
             }*/
+            fw.write(Expenditure.getInstance().saveExpenditureFile());
             fw.close();
         } catch (IOException err) {
             err.printStackTrace();
