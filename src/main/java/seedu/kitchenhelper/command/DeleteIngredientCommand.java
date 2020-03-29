@@ -155,7 +155,7 @@ public class DeleteIngredientCommand extends Command {
                 feedbackToUser = String.format(COMMAND_FAILURE_QUANTITY, ingredientName, ingredientQuantity);
             }
             Storage.saveIngredientData(ingredientsList);
-            new Expenditure().editExpenditure(ingredientToDelete, quantity);
+            Expenditure.getInstance().editExpenditure(ingredientToDelete, quantity);
         } else {
             feedbackToUser = COMMAND_FAILURE;
         }

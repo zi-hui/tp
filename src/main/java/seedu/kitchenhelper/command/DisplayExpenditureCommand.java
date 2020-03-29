@@ -10,9 +10,9 @@ import java.util.ArrayList;
 
 public class DisplayExpenditureCommand extends Command {
 
-    public static final String COMMAND_WORD = "expenditure";
+    public static final String COMMAND_WORD = "displayexpenditure";
     public static final String COMMAND_DESC = "Displays the expenditure in that week.";
-    public static final String COMMAND_FORMAT = "expenditure *No parameter";
+    public static final String COMMAND_FORMAT = "displayexpenditure *No parameter";
     public static final String MESSAGE_USAGE = String.format("%s: %s", COMMAND_WORD, COMMAND_DESC) + Ui.LS + String
             .format("Example: %s", COMMAND_WORD);
 
@@ -25,9 +25,9 @@ public class DisplayExpenditureCommand extends Command {
     @Override
     public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
                                  ArrayList<Chore> choreList) {
-        Expenditure expenditureObject = new Expenditure();
+        Expenditure expenditureObject = Expenditure.getInstance();
         String feedbackToUser = String.format(EXPENDITURE, expenditureObject.totalExpenditure) + Ui.LS
-                + String.format(AMOUNT_USED_IN_COOKING, expenditureObject.amountUsedInCooking) + Ui.LS;
+                + String.format(AMOUNT_USED_IN_COOKING, expenditureObject.amountUsedInCooking);
         return new CommandResult(feedbackToUser);
     }
 }

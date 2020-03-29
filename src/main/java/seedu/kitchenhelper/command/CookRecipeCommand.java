@@ -74,10 +74,10 @@ public class CookRecipeCommand extends Command {
                 } else if (quantity <= totalCookedQty) {
                     totalCookedQty -= quantity;
                     ingredientToDeduct.setQuantity(0);
-                    new Expenditure().addAmountForCooking(ingredientToDeduct, null);
+                    Expenditure.getInstance().addAmountForCooking(ingredientToDeduct, null);
                 } else if (quantity > totalCookedQty) {
                     ingredientToDeduct.setQuantity(quantity - totalCookedQty);
-                    new Expenditure().addAmountForCooking(ingredientToDeduct, totalCookedQty);
+                    Expenditure.getInstance().addAmountForCooking(ingredientToDeduct, totalCookedQty);
                     totalCookedQty = 0;
                 }
             }
