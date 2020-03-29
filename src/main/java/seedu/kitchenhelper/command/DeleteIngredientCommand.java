@@ -13,8 +13,10 @@ import java.util.logging.Logger;
 public class DeleteIngredientCommand extends Command {
     public static final Logger kitchenLogs = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     public static final String COMMAND_WORD = "deleteingredient";
-    public static final String COMMAND_USAGE = "Usage: deleteingredient /n INGREDIENT [/q QUANTITY] OR "
-                                                + "deleteingredient /i <index> [/q QUANTITY]";
+    public static final String COMMAND_USAGE = "Usage: deleteingredient /n INGREDIENTNAME [/q QUANTITY] OR "
+                                                + "deleteingredient /i INGREDIENTINDEX [/q QUANTITY]";
+    public static final String COMMAND_PARAMETER = "/n INGREDIENTNAME [/q QUANTITY] OR"
+                                                    + "/i INGREDIENTINDEX [/q QUANTITY]";
     public static final String COMMAND_DESC = "Deletes an ingredient. ";
     public static final String COMMAND_EXAMPLE = "Example: deleteingredient /n Beef /q 2 OR deleteingredient /i 1 /q 2";
     public static final String COMMAND_FORMAT = String.format("%s\n%s\n%s", COMMAND_DESC, COMMAND_USAGE,
@@ -26,7 +28,7 @@ public class DeleteIngredientCommand extends Command {
     public static final String COMMAND_FAILURE_QUANTITY = "Please enter a valid quantity to delete!\nCurrently:"
                                                             + "\n%s : %d";
     public static final String MESSAGE_USAGE = String.format("%s: %s", COMMAND_WORD, COMMAND_DESC) + Ui.LS + String
-            .format("Parameter: %s\n%s", COMMAND_USAGE, COMMAND_EXAMPLE);
+            .format("Parameter: %s\n%s", COMMAND_PARAMETER, COMMAND_EXAMPLE);
     public static final String LOG_INFO = "An ingredient has been deleted";
     private static final String OBJECT_TYPE = "ingredient";
     private Integer quantity;
