@@ -57,7 +57,7 @@ public class DeleteChoreCommand extends Command {
      */
     public String deleteChore(ArrayList<Chore> choreList) {
         try {
-            if (indexToDelete > choreList.size()) {
+            if (indexToDelete > choreList.size() || indexToDelete < 0) {
                 throw new KitchenHelperException(INVALID_INDEX);
             }
             Chore choreToDelete = choreList.get(indexToDelete - 1);
