@@ -108,9 +108,9 @@ Any `CATEGORY` that does not falls in the list would be put under `Miscellaneous
 
 Example |  Outcome
 --------|------------------
-**Command:** <br> `addingredient /n Beef cubes /c meat /q 3 /p 20 /e 18/03/2020` <br><br> **Description:** <br> Creates a new ingredient called `Beef cubes`, which have the following attributes: CATEGORY `meat`, QUANTITY `3`, PRICE `20` , expiry date `18/03/2020`. | addingredient /n Beef cubes /c meat /q 3 /p 20 /e 18/03/2020 <br> You have added Ingredient:Beef cubes Category:meat Quantity:3 Price:$20.00 Expiry:18/03/2020 to the ingredient list<br>===================================================
-**Command:** <br> `addingredient /n kailan /c Vegetable /q 30 /p 30.45 /e 12/03/2020` <br><br> **Description:** <br> Creates a new ingredient called `kailan`, which have the following attributes: CATEGORY `Vegetable`, QUANTITY `30`, PRICE `30.45` , expiry date `12/03/2020`. | addingredient /n kailan /c Vegetable /q 30 /p 30.45 /e 12/03/2020 <br> You have added Ingredient:kailan Category:Vegetable Quantity:30 Price:$30.45 Expiry:12/03/2020 to the ingredient list<br>===================================================
-**Command:** <br> `addingredient /n Milo /c Drink /q 30 /p 10 /e 20/12/2020` <br><br> **Description:** <br> Creates a new ingredient called `Milo`, which have the following attributes: CATEGORY `Drink`, QUANTITY `30`, PRICE `10` , expiry date `20/12/2020`. | addingredient /n Milo /c Drink /q 30 /p 10 /e 20/12/2020 <br> You have added Ingredient:Milo Category:Drink Quantity:30 Price:$10.00 Expiry:20/12/2020 to the ingredient list<br>===================================================
+**Command**: <br> `addingredient /n Beef cubes /c meat /q 3 /p 20 /e 18/03/2020` <br><br> **Description:** <br> Creates a new ingredient called `Beef cubes`, which have the following attributes: CATEGORY `meat`, QUANTITY `3`, PRICE `20` , expiry date `18/03/2020`. | addingredient /n Beef cubes /c meat /q 3 /p 20 /e 18/03/2020 <br> You have added Ingredient:Beef cubes Category:meat Quantity:3 Price:$20.00 Expiry:18/03/2020 to the ingredient list<br>===================================================
+**Command**: <br> `addingredient /n kailan /c Vegetable /q 30 /p 30.45 /e 12/03/2020` <br><br> **Description:** <br> Creates a new ingredient called `kailan`, which have the following attributes: CATEGORY `Vegetable`, QUANTITY `30`, PRICE `30.45` , expiry date `12/03/2020`. | addingredient /n kailan /c Vegetable /q 30 /p 30.45 /e 12/03/2020 <br> You have added Ingredient:kailan Category:Vegetable Quantity:30 Price:$30.45 Expiry:12/03/2020 to the ingredient list<br>===================================================
+**Command**: <br> `addingredient /n Milo /c Drink /q 30 /p 10 /e 20/12/2020` <br><br> **Description:** <br> Creates a new ingredient called `Milo`, which have the following attributes: CATEGORY `Drink`, QUANTITY `30`, PRICE `10` , expiry date `20/12/2020`. | addingredient /n Milo /c Drink /q 30 /p 10 /e 20/12/2020 <br> You have added Ingredient:Milo Category:Drink Quantity:30 Price:$10.00 Expiry:20/12/2020 to the ingredient list<br>===================================================
 
 #### 3.2.2. List ingredient: `listingredient`
 Displays all the items currently in the ingredient list in Kitchen Helper.
@@ -152,9 +152,9 @@ __Format:__ `searchingredient <KEYWORD>`
 
 Example |  Outcome
 --------|------------------
-**Command:** <br> `searchingredient beef` <br> **Description:** <br> Search by ingredient's name. | searchingredient beef <br> Here are your matching ingredients in your list <br> 1. \[Meat\] Beef Qty: 3 $20.00 Exp: 18/03/2020 <br> ===================================================
-**Command:** <br> `searchingredient meat` <br> **Description:** <br> Search by ingredient's CATEGORY. | searchingredient meat <br> Here are your matching ingredients in your list <br> 1. \[Meat\] Beef Qty: 3 $20.00 Exp: 18/03/2020 <br> ===================================================
-**Command:** <br> `searchingredient 18/03/2020` <br> **Description:** <br> Search by ingredient's expiry date. | searchingredient 18/03/2020 <br> Here are your matching ingredients in your list <br> 1. \[Meat\] Beef Qty: 3 $20.00 Exp: 18/03/2020 <br> ===================================================
+**Command**: <br> `searchingredient beef` <br> **Description:** <br> Search by ingredient's name. | searchingredient beef <br> Here are your matching ingredients in your list <br> 1. \[Meat\] Beef Qty: 3 $20.00 Exp: 18/03/2020 <br> ===================================================
+**Command**: <br> `searchingredient meat` <br> **Description:** <br> Search by ingredient's CATEGORY. | searchingredient meat <br> Here are your matching ingredients in your list <br> 1. \[Meat\] Beef Qty: 3 $20.00 Exp: 18/03/2020 <br> ===================================================
+**Command** :<br> `searchingredient 18/03/2020` <br> **Description:** <br> Search by ingredient's expiry date. | searchingredient 18/03/2020 <br> Here are your matching ingredients in your list <br> 1. \[Meat\] Beef Qty: 3 $20.00 Exp: 18/03/2020 <br> ===================================================
 
 ### 3.3. Recipe
 
@@ -221,7 +221,7 @@ __Format:__ `searchrecipe <KEYWORD>`
 
 Example |  Outcome
 --------|------------------
-**Command:** <br> `searchrecipe Chicken Stew` <br><br> **Description:** <br> Search by recipe's name. | searchrecipe Chicken Stew <br> Here are your matching recipes in your list <br> 1.Chicken Stew located at listrecipe 1 <br> ===================================================
+**Command**: <br> `searchrecipe Chicken Stew` <br><br> **Description**: <br> Search by recipe's name. | searchrecipe Chicken Stew <br> Here are your matching recipes in your list <br> 1.Chicken Stew located at listrecipe 1 <br> ===================================================
 
 #### 3.3.5. Cooking a recipe: `cookrecipe`
 Cooks a recipe specified by the user by the recipe’s name.
@@ -245,7 +245,7 @@ __Format:__ `addchore <TASK_DESCRIPTION> /by <DEADLINE>`
 
 Example |  Outcome
 --------|------------------
-**Command**: <br> `addchore buy groceries /by Monday 12pm` <br> Description: <br> Creates a new chore called `buy groceries` which contains the deadline `Monday 12pm.` | addchore buy groceries /by Monday 12pm <br> You have added this chore: <br> [x] buy groceries (by: Monday 12pm) <br> Now you have 2 chores in the list. <br> ===================================================
+**Command**: <br> `addchore buy groceries /by Monday 12pm` <br><br> **Description**: <br> Creates a new chore called `buy groceries` which contains the deadline `Monday 12pm.` | addchore buy groceries /by Monday 12pm <br> You have added this chore: <br> [x] buy groceries (by: Monday 12pm) <br> Now you have 2 chores in the list. <br> ===================================================
 
 
 #### 3.4.2. List chore: `listchore`
@@ -277,8 +277,8 @@ __Format:__ `searchchore <KEYWORD>`
 
 Example |  Outcome
 --------|------------------
-**Command:** <br> `searchchore groceries` <br><br> **Description:** <br> Search by chore's description. | searchchore groceries <br> Here are your matching chores in your list <br> 1.\[x\] buy groceries (by: Tuesday 12pm) <br> ===================================================
-**Command:** <br> `searchchore Tuesday` <br><br> **Description:** <br> Search by chore's date. | searchchore Tuesday <br> Here are your matching chores in your list <br> 1.\[x\] buy groceries (by: Tuesday 12pm) <br> ===================================================
+**Command:** <br> `searchchore groceries` <br><br> **Description**: <br> Search by chore's description. | searchchore groceries <br> Here are your matching chores in your list <br> 1.\[x\] buy groceries (by: Tuesday 12pm) <br> ===================================================
+**Command:** <br> `searchchore Tuesday` <br><br> **Description**: <br> Search by chore's date. | searchchore Tuesday <br> Here are your matching chores in your list <br> 1.\[x\] buy groceries (by: Tuesday 12pm) <br> ===================================================
 
 
 #### 3.4.5. Mark chore as done: `done`
@@ -310,7 +310,7 @@ __Format:__ `save`
 
 Example |  Outcome
 --------|------------------
-**Command**: <br> `save` <br>  <br>**Description**: <br> Data saved into manual-save mode files.  | save <br> You have saved the current state in the following files: outputIngredientCopy.txt, outputRecipeCopy.txt, outputChoreCopy.txt  <br> =================================================== 
+**Command**: <br> `save` <br><br> **Description**: <br> Data saved into manual-save mode files.  | save <br> You have saved the current state in the following files: outputIngredientCopy.txt, outputRecipeCopy.txt, outputChoreCopy.txt  <br> =================================================== 
 
 ## 4. Command Summary
 Here is a short summary of the command used in KitchenHelper application.  
