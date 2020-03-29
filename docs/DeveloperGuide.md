@@ -95,7 +95,21 @@ The `Ui` component,
 * Listens for changes and outputs messages from the Command component
 
 ### 3.3. Logic Component
+
+![Logic Component](images/logic.png)
+
+1. `Kitchen Helper` uses `Parser` class to parse the user command.
+2. This results in a command object return back which is executed by `Kitchen Helper`.
+3. The command execution can affect the object (e.g. adding an ingredient).
+4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to `Ui` to display the message.
+
 ### 3.4. Model Component
+
+![Model Component](images/model.png)
+* Stores the ingredient data.
+* Stores the recipe data.
+* Stores the chore data.
+
 ### 3.5. Storage Component
 
 ![Storage Class Diagram](images/Storage.png)
@@ -137,7 +151,7 @@ The following steps explained “Sequence diagram for an example `addingredient`
 The list feature allows showing details of Ingredients added by the user.  All ingredients added will be shown in a sorted order, by expiry, and shown by categories. The function will require a valid string , which belongs to `all/dairy/drink/fruit/meat/miscellaneous/staple/vegetable`, 
 to be added as a parameter. Failure to do so will trigger an exception where the user will be notified of an invalid command and the syntax of the listing of the ingredients will be displayed. 
 
-#### Implementation
+##### Implementation
 When the user attempts to list the details of a particular category of ingredients, the `listIngredientCommand`, ‘Parser’ and `Ingredient` class will be accessed and the following sequence of actions are called to list details of  a particular category Ingredient list: <br>
 1. User executes `listingredient all` 
     2. A `Ui` object will be created and calls `Ui#getUserCommand()`
@@ -155,7 +169,7 @@ When the user attempts to list the details of a particular category of ingredien
 4. The details will then be printed onto the console using `Ui#showResultToUser(result)`.
     
 
-#### Design Considerations</b> <br>
+##### Design Considerations
 Aspect: Finding the category name and print out ingredient belonging to the category
 
 Alternative 1: Looping through the whole ingredientList arraylist to find out all possible category name, then, do sorting and return result
@@ -194,7 +208,7 @@ When the user attempts to reduce the quantity of ingredient at index 1 of the in
     7. Lastly, a String called `feedbackToUser`will be returned to the user to inform the user of the outcome of the command. 
 4. The details will then be printed onto the console using `Ui#showResultToUser(result)`.
 
-<b>Design Considerations</b> <br>
+##### Design Considerations
 Aspect 1: How to differentiate `deleteingredientByQuantity` and `deleteIngredient` <br>
 <br>
 Alternative 1: The `quantity` of ingredient in `DeleteIngredientCommand` constructor is set to the `quantity` that was inputted by the user. In the case where the user would like to delete an ingredient, the `quantity` variable will be set to `null`. (Current Choice)
@@ -282,7 +296,7 @@ The following sequence diagram shows how the `addrecipe` command works
 
 ![AddRecipeCommand](images/addRecipeSequenceDiagram.png) 
 
-##### 4.2.1.2. Design Considerations
+##### Design Considerations
 Aspect: Parsing of the user’s input command
 
 Alternative 1 (current choice): The key parameters that are required are divided by the delimiter of ‘/’ followed by a specific letter. `(i.e. /i)`
@@ -327,7 +341,7 @@ When the user attempts to list the details of a particular recipe, the `listReci
 4. The details will then be printed onto the console using `Ui#showResultToUser(result)`.
     
 
-#### 4.2.2.2. Design Considerations</b> <br>
+##### Design Considerations
 Aspect: Finding the recipe requested by the user.
 
 Alternative 1: Looping through the whole recipeList arraylist to find the recipe requested by the user.
@@ -388,7 +402,7 @@ When the user attempts to delete the `Chicken Rice` recipe from Kitchen Helper, 
 4. The details will then be printed onto the console using `Ui#showResultToUser(result)`.
 
 
-<b>Design Considerations</b> <br>
+##### Design Considerations
 Aspect: How is the `DeleteRecipeCommand` initialise. <br>
 <br>
 Alternative 1 (Current Choice): Usage of 2 constructors <br>
@@ -523,7 +537,7 @@ The select files to load from and save to feature allows the user to choose an o
 
 If the user chooses the manual-save mode, it will overwrite all the data stored in auto-save mode. However, any subsequent changes made to the program data will be saved by auto-save mode regardless of initial load options. To save by manual-save mode, the user will have to use the save current state function with the save command (see section 4.4.2)[4.4.2. Save current state](#442-save-current-state).
     
-<b>Implementation</b> <br>
+##### Implementation
 1. For instance, if the User selects to load files from auto-save mode, User executes `1`
 	1. A `Ui` object will be created and calls `Ui#getUserChoice()` and returns String `UserChoice`. 
 	1. The `Ui` object then calls `Ui#validUserChoice()` with `UserChoice` as the parameter. If `UserChoice` is invalid, `Ui#validUserChoice()` will call `Ui#askForReInput()`.
@@ -546,7 +560,7 @@ All description and warnings to the user utilises the UI class, which controls t
 
 The sequence diagram below summarizes how loading data works:
 ![Load Data Sequence Diagram](images/Loading.png)
-<b>Design considerations:</b> <br>
+##### Design considerations:
 Aspects: How saving of files executes:  
 
 - Alternative 1 (current choice): Overwriting files with entire current ArrayLists every time changes are made.
@@ -574,7 +588,7 @@ and enters a switch case for execution.
 3. `parseUserCommand` in the Parser object will call a method `SaveStateCommand`.  
 4. On execute(), `Storage.copyFile()` will be called three times to copy contents of ingredients, recipes and chore save files into their respective manual-mode save files.
 
-<b>Design considerations:</b> <br>
+##### Design considerations:
 Aspects: How saving of current state data executes:
 
 - Alternative 1 (current choice): Using Files.copy to copy content of auto-save files to manual-save files.
