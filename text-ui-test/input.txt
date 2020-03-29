@@ -42,8 +42,6 @@ deleterecipe /n Chicken Salad
 deleterecipe /n Chicken Stew
 deleteingredient /n HL milk
 deleteingredient /i 4
-no
-no
 deleteingredient /i 3
 deleteingredient /i 2
 deleteingredient /i 1
