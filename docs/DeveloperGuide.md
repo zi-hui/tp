@@ -345,6 +345,28 @@ Alternative 2 (current choice): Using arrayList.get(item) to get the recipe requ
 |**Cons** | Without proper checks done before running the command, it will result in error if the number indicated by the user exceeds the arraylist / does not exist in the arraylist.  |
 
 #### 4.2.3. Cooking of recipe
+The feature allows the user to cook a recipe if there are sufficient ingredients. The user will also indicate how many pax this recipe would be cooked for.
+
+![Cook Recipe Sequence Diagram](images/cookRecipeSequenceDiagram.png)
+
+##### Implementation 
+When the user attempts to cook `Chicken Salad` recipe from `Kitchen Helper`, the `Kitchen Helper`, `Parser` and `cookRecipeCommand` class will be called upon. The following sequence of steps will then occur:
+1. The user keyed in "cookrecipe /n `Chicken Salad`".
+    2. A `UI` object will be created and it will call `UI#getUserCommand()` method to take in the input that the user has keyed in. 
+    3. A `String` object will be returned and saved into the `userCommandInput` variable in `Kitchen Helper`. 
+    4. The variable `userCommandInput` is being parsed into the `Parser` class as an argument for this method `Parser#parseUserCommand()`.
+2. The command inserted by the user is being parsed into the `Parser` and a new `Command` object is being created. 
+    2. The variable `userCommandInput` will be identified as `cookrecipe` in the `Parser#parseUserCommand()`.The `Parser#prepareCookRecipe()` is being called to prepare the `userCommandInput` string to create a `CookRecipeCommand` object.
+3. The command is now being executed.
+    2. The `CookRecipeCommand#execute()` will be called.
+    3. The `CookRecipeCommand#cookRecipe()` is called and it checks whether the recipe inputted by the user exists by calling the `CookRecipeCommand#checkIfRecipeExists()` method.
+    4. If recipe exists, the `CookRecipeCommand#checkIfRecipeExists()` method will return the index of the recipe, else it will return a number that is bigger than the size of `recipelist`.
+    5. Next, it is to check if there are sufficient ingredients to be deducted from the ingredients' inventory to cater for the number of pax for the specific recipe by calling `CookRecipeCommand#checkForSufficientIngredients()` method.
+    6. If `CookRecipeCommand#checkForSufficientIngredients()` returns true, then `CookRecipeCommand#deductIngredients()` will be called to deduct the ingredients in the ingredients' inventory.
+    6. Lastly, a String called `feedbackToUser` will be returned to the user to inform the user of the outcome of the command.
+4. The details will then be printed onto the console using `Ui#showResultToUser(result)`.
+
+##### Design Considerations 
 
 #### 4.2.4. Delete all/ specific recipe(s)
 The deletion feature for specific recipes allows the user to delete recipes either by the name or index of the recipe. 
@@ -352,7 +374,7 @@ The deletion feature for specific recipes allows the user to delete recipes eith
 ![Delete Recipe Sequence Diagram](images/deleteRecipeSequenceDiagram.png)
 ##### Implementation
 When the user attempts to delete the `Chicken Rice` recipe from Kitchen Helper, the `Kitchen Helper`, `Parser` and `DeleteRecipeCommand` class will be called upon. The following sequence of steps will then occur: 
-1. The user keyed in “deleterecipe /n `Chicken Rice”`.
+1. The user keyed in “deleterecipe /n `Chicken Rice`".
     2. A `UI` object will be created and it will call `UI#getUserCommand()` method to take in the input that the user has keyed in. 
     3. A `String` object will be returned and saved into the `userCommandInput` variable in `Kitchen Helper`. 
     4. The variable `userCommandInput` is being parsed into the `Parser` class as an argument for this method `Parser#parseUserCommand()`.
@@ -362,7 +384,7 @@ When the user attempts to delete the `Chicken Rice` recipe from Kitchen Helper, 
     2. The `DeleteRecipeCommand#execute()` will be called.
     3. As this is a deletion by recipe name, the `recipeIndex` variable is set as null. As the variable is null, `DeleteRecipeCommand#deleteRecipeByName()` will be called.
     4. Next, the `DeleteRecipeCommand#getRecipeIndex()` to get the index based on the recipe name that the user has inputted. With the given index, `DeleteRecipeCommand#deleteRecipe()` will be called to delete the recipe. 
-    5. Lastly, a String called `feedbackToUser`will be returned to the user to inform the user of the outcome of the command. 
+    5. Lastly, a String called `feedbackToUser` will be returned to the user to inform the user of the outcome of the command. 
 4. The details will then be printed onto the console using `Ui#showResultToUser(result)`.
 
 
