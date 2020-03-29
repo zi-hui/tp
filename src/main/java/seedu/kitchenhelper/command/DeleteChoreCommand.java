@@ -1,6 +1,5 @@
 package seedu.kitchenhelper.command;
 
-import seedu.kitchenhelper.KitchenHelper;
 import seedu.kitchenhelper.exception.KitchenHelperException;
 import seedu.kitchenhelper.object.Chore;
 import seedu.kitchenhelper.object.Recipe;
@@ -9,6 +8,7 @@ import seedu.kitchenhelper.storage.Storage;
 import seedu.kitchenhelper.ui.Ui;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Deletes a chore from the chore list.
@@ -16,8 +16,15 @@ import java.util.ArrayList;
 public class DeleteChoreCommand extends Command {
 
     public static final String COMMAND_WORD = "deletechore";
-    public static final String MESSAGE_SUCCESS = "You have deleted this chore:\n%s\n"
+    public static final String DELETE_CHORE_MESSAGE_SUCCESS = "You have deleted this chore:\n%s\n"
             + "Now you have %s chore%s in the list.";
+    public static final String INVALID_INDEX = "Please choose an index in the chore list!";
+    public static final String DELETE_ALL_MESSAGE_SUCCESS = "You have deleted all the chores. "
+            + "Now you have 0 chores in the list.";
+    public static final String DELETE_ALL_PROMPT = "Are you sure you want to delete all the chores in your list?"
+            + "\nEnter \"Yes\"/\"No\"";
+    public static final String DELETE_ALL_CANCELLATION = "Ok then. Nothing has been deleted. "
+            + "You still have %s chore%s in the list.";
     public static final String COMMAND_DESC = "Deletes a chore from the chore list.";
     public static final String COMMAND_PARAMETER = "<index>";
     public static final String COMMAND_EXAMPLE = "Example: deletechore 1";
@@ -27,6 +34,7 @@ public class DeleteChoreCommand extends Command {
             .format("Parameter: %s\n%s", COMMAND_PARAMETER, COMMAND_EXAMPLE);
 
     private int indexToDelete;
+    private boolean isDeleteAll = false;
 
     /**
      * Constructor for DeleteChoreCommand.
@@ -35,6 +43,10 @@ public class DeleteChoreCommand extends Command {
      */
     public DeleteChoreCommand(int indexToDelete) {
         this.indexToDelete = indexToDelete;
+    }
+
+    public DeleteChoreCommand() {
+        this.isDeleteAll = true;
     }
 
     /**
@@ -46,25 +58,49 @@ public class DeleteChoreCommand extends Command {
     public String deleteChore(ArrayList<Chore> choreList) {
         try {
             if (indexToDelete > choreList.size()) {
-                throw new KitchenHelperException("Please choose an index in the chore list!");
+                throw new KitchenHelperException(INVALID_INDEX);
             }
             Chore choreToDelete = choreList.get(indexToDelete - 1);
             choreList.remove(choreToDelete);
             Storage.saveChoreData(choreList);
-            return String.format(MESSAGE_SUCCESS, choreToDelete, choreList.size(),
+            return String.format(DELETE_CHORE_MESSAGE_SUCCESS, choreToDelete, choreList.size(),
                     choreToDelete.checkSingular(choreList));
         } catch (KitchenHelperException khe) {
             return khe.getMessage();
         }
     }
 
-    public void executeIngredientStorage(ArrayList<Ingredient> ingredientList, Storage storage){
+    public String deleteAll(ArrayList<Chore> choreList) {
+        String userResponse = promptUser();
+        if (userResponse.equalsIgnoreCase("no")) {
+            return String.format(DELETE_ALL_CANCELLATION, choreList.size(),
+                    choreList.get(0).checkSingular(choreList));
+        } else {
+            choreList.clear();
+            Storage.saveChoreData(choreList);
+            return DELETE_ALL_MESSAGE_SUCCESS;
+        }
     }
 
-    public void executeChoreStorage(ArrayList<Chore> choreList, Storage storage){
+    public String promptUser() {
+        String userResponse;
+        System.out.println(DELETE_ALL_PROMPT);
+        userResponse = new Scanner(System.in).nextLine().trim();
+        while (!isValidResponse(userResponse)) {
+            System.out.println("Please enter either \"Yes\"/\"No\"");
+            userResponse = new Scanner(System.in).nextLine().trim();
+        }
+        return userResponse;
     }
 
-    public void executeRecipeStorage(ArrayList<Recipe> recipeList, Storage storage){
+    public boolean isValidResponse(String userResponse) {
+        String response = userResponse;
+        if (response.equalsIgnoreCase("no")) {
+            return true;
+        } else if (response.equalsIgnoreCase("yes")) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -78,7 +114,12 @@ public class DeleteChoreCommand extends Command {
     @Override
     public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
                                  ArrayList<Chore> choreList) {
-        String feedbackToUser = deleteChore(choreList);
+        String feedbackToUser;
+        if (isDeleteAll) {
+            feedbackToUser = deleteAll(choreList);
+        } else {
+            feedbackToUser = deleteChore(choreList);
+        }
         return new CommandResult(feedbackToUser);
     }
 }

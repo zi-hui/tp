@@ -31,13 +31,6 @@ public class AddRecipeCommand extends Command {
     public HashMap<String[], Integer> parsedIngr;
 
     /**
-     * Set the object's type.
-     */
-    public void setTypeOfObject() {
-        objectType = "recipe";
-    }
-
-    /**
      * Set the attributes of the Command class.
      *
      * @param rawString     full user input string.
@@ -45,7 +38,6 @@ public class AddRecipeCommand extends Command {
      *                      and ingredientQuantity as value.
      */
     public void setAttributesOfCmd(String rawString, HashMap<String[], Integer> ingrAndQty) {
-        setTypeOfObject();
         setObjectVariables(rawString);
         setAction();
         this.parsedIngr = ingrAndQty;
@@ -73,9 +65,12 @@ public class AddRecipeCommand extends Command {
      * @param recipeList     list of recipes.
      * @return the success message of adding inventory.
      */
-    public String addRecipe(String attributes, ArrayList<Recipe> recipeList) {
+    public String addRecipe(String attributes, ArrayList<Recipe> recipeList) throws KitchenHelperException {
         Recipe freshRecipe = new Recipe();
         freshRecipe.setRecipeName(attributes);
+        if (checkIfRecipeExist(freshRecipe.getRecipeName(), recipeList)) {
+            throw new KitchenHelperException("There is an existing recipe!");
+        }
         freshRecipe.addIngredientsToRecipe(parsedIngr);
         recipeList.add(freshRecipe);
         Storage.saveRecipeData(recipeList);
@@ -86,14 +81,24 @@ public class AddRecipeCommand extends Command {
                 + freshRecipe.recipeIngrQty + " ingredients inside.";
     }
 
-    public void executeIngredientStorage(ArrayList<Ingredient> ingredientList, Storage storage){
+    /**
+     * Checks for existing recipe with the same name.
+     * @param newRecipeName The name of the new recipe.
+     * @param recipeList    The list of recipes.
+     * @return true when a recipe with the same name is found,
+     *          false otherwise.
+     */
+    public Boolean checkIfRecipeExist(String newRecipeName, ArrayList<Recipe> recipeList) {
+        boolean isExist = false;
+        for (Recipe recipe : recipeList) {
+            if (recipe.getRecipeName().equalsIgnoreCase(newRecipeName)) {
+                isExist = true;
+                break;
+            }
+        }
+        return isExist;
     }
 
-    public void executeChoreStorage(ArrayList<Chore> choreList, Storage storage){
-    }
-
-    public void executeRecipeStorage(ArrayList<Recipe> recipeList, Storage storage){
-    }
 
     /**
      * {@inheritDoc}
@@ -106,7 +111,11 @@ public class AddRecipeCommand extends Command {
     @Override
     public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
                                  ArrayList<Chore> choreList) throws KitchenHelperException {
-        String message = addRecipe(this.objectVariables,recipeList);
-        return new CommandResult(message);
+        try {
+            String message = addRecipe(this.objectVariables, recipeList);
+            return new CommandResult(message);
+        } catch (KitchenHelperException e) {
+            return new CommandResult("There is an existing recipe with the same name!");
+        }
     }
 }

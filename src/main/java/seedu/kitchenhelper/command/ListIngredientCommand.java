@@ -11,11 +11,9 @@ import seedu.kitchenhelper.object.ingredient.Drink;
 import seedu.kitchenhelper.object.ingredient.Fruit;
 import seedu.kitchenhelper.object.ingredient.Meat;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
-import seedu.kitchenhelper.storage.Storage;
 import seedu.kitchenhelper.ui.Ui;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class ListIngredientCommand extends Command {
     
@@ -45,28 +43,30 @@ public class ListIngredientCommand extends Command {
 
     public String listIngredients(String category, ArrayList<Ingredient> ingredientList) {
         String result = "Here is the list of Ingredients in Inventory:\n"
-                + "Format : Ingredient Name | Quantity | Price | Expiry\n";
+                + "Format : Ingredient Name|Quantity|Price|Expiry\n";
         if (ingredientList.size() == 0) {
             result += "The Ingredient List is currently empty.";
         } else {
             if (category.equalsIgnoreCase("all")) {
                 for (String categoryName : categoryArray) {
-                    result += categoryName + " :\n";
+                    result += categoryName + ":\n";
                     for (int i = 0; i < ingredientList.size(); i++) {
                         Ingredient ingredientObj = ingredientList.get(i);
                         if (ingredientObj.getCategoryName().equalsIgnoreCase(categoryName)) {
-                            result += ingredientObj.getIngredientName() + " | " + ingredientObj.getQuantity() + " | "
-                                    + ingredientObj.getPrice() + " | " + ingredientObj.getExpiryDate() + "\n";
+                            result += ingredientObj.getIngredientName() + "|" + ingredientObj.getQuantity() + "|"
+                                    + ingredientObj.getPrice() + "|" + ingredientObj.getExpiryDate() + "\n";
                         }
                     }
                 }
             } else {
-                result += category + " : \n";
+                result += category + ":\n";
                 for (int i = 0; i < ingredientList.size(); i++) {
                     Ingredient ingredientObj = ingredientList.get(i);
                     if (ingredientObj.getCategoryName().equalsIgnoreCase(category)) {
-                        result += ingredientObj.getIngredientName() + " | " + ingredientObj.getQuantity() + " | "
-                                + ingredientObj.getPrice() + " | " + ingredientObj.getExpiryDate() + "\n";
+                        result += ingredientObj.getIngredientName() + "|"
+                                + Integer.toString(ingredientObj.getQuantity()) + "|"
+                                + Double.toString(ingredientObj.getPrice()) + "|"
+                                + ingredientObj.getExpiryDate() + "\n";
                     }
 
                     if (i == ingredientList.size()) {
@@ -79,10 +79,20 @@ public class ListIngredientCommand extends Command {
         return result;
     }
 
+    /**
+     * Retrieves the category of ingredient.
+     *
+     * @return  catgeory of ingredient.
+     */
     public String getCategory() {
         return this.category;
     }
 
+    /**
+     * Checks if the user is listing an exisitng catgeory.
+     *
+     * @return true if the category is defined, false otherwise.
+     */
     public boolean checkCategoryValid() {
         boolean validCategory = false;
         for (String catName : categoryArray) {
@@ -91,19 +101,6 @@ public class ListIngredientCommand extends Command {
             }
         }
         return validCategory;
-    }
-
-    public void executeIngredientStorage(ArrayList<Ingredient> ingredientList, Storage storage){
-    }
-
-    public void executeChoreStorage(ArrayList<Chore> choreList, Storage storage){
-    }
-
-    public void executeRecipeStorage(ArrayList<Recipe> recipeList, Storage storage){
-    }
-
-    public String[] getCategoryArray() {
-        return this.categoryArray;
     }
 
     /**

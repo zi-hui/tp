@@ -3,7 +3,6 @@ package seedu.kitchenhelper.command;
 import seedu.kitchenhelper.object.Chore;
 import seedu.kitchenhelper.object.Recipe;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
-import seedu.kitchenhelper.storage.Storage;
 import seedu.kitchenhelper.ui.Ui;
 
 import java.util.ArrayList;
@@ -16,17 +15,16 @@ public class ExitCommand extends Command {
     public static final String MESSAGE_USAGE = String.format("%s: %s", COMMAND_WORD, COMMAND_DESC) + Ui.LS + String
             .format("Example: %s", COMMAND_WORD);
 
+    /**
+     * {@inheritDoc}
+     *
+     * @param ingredientList list of ingredients.
+     * @param recipeList     list of recipes.
+     * @param choreList      list of chores.
+     * @return the success message exiting.
+     */
     public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
                                  ArrayList<Chore> choreList) {
         return new CommandResult(MESSAGE_EXIT);
-    }
-
-    public void executeIngredientStorage(ArrayList<Ingredient> ingredientList, Storage storage){
-    }
-
-    public void executeChoreStorage(ArrayList<Chore> choreList, Storage storage){
-    }
-
-    public void executeRecipeStorage(ArrayList<Recipe> recipeList, Storage storage){
     }
 }
