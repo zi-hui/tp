@@ -239,6 +239,7 @@ Alternative 2: Create 2 more constructors just for deduction of quantity for ing
 |**Pros**|This gives us more flexibility on what object can be created with different variables since there are two methods of delete of ingredients.|
 |**Cons**|There is an overload of constructors.|
 <br>
+
 #### 4.1.4. Search for ingredients based on keyword(s)
 
 The search for ingredients feature allows the user to find ingredients using a keyword in the ingredient’s list.  
