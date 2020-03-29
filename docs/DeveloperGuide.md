@@ -74,8 +74,13 @@ By: `CS2113T-M16-2` Since: `2020`
 7. Click `OK` to accept the default settings if prompted. 
 
 ## 3. Design
-
+This section provides a high level overview of our application, Kitchen Helper.
 ### 3.1. Architecture
+Our architecture is broken down into six classes, mainly Command, Notification, Object, Parser, Storage and UI. All modules can be controlled and accessed by the main class, Kitchen Helper. 
+<br>
+![Architecture](images/KitchenHelperMain.png)
+<br>
+
 ### 3.2. Ui Component
 ![Ui Component](images/UI_Component.png)
 
@@ -169,6 +174,8 @@ Alternative 2 (current choice): Creating a fixed array which includes the order 
 #### 4.1.3. Delete all/ specific ingredients(s)
 The deletion feature for ingredients allows the user to delete ingredients either by the name or index of the ingredients. In addition to that, it allows users to reduce the quantity of a specific ingredient. 
 
+![DeleteIngredient Sequence Diagram](images/deleteIngredientSequenceDiagram.png)
+
 ##### Implementation
 When the user attempts to reduce the quantity of ingredient at index 1 of the ingredients inventory by 4,  the `Kitchen Helper`, ‘Parser’ and ‘DeleteRecipeCommand` class will be called upon. The following sequence of steps will then occur: 
 1. The user keyed in “deleteingredient /i 1 /q 4”`. 
@@ -187,22 +194,21 @@ When the user attempts to reduce the quantity of ingredient at index 1 of the in
 4. The details will then be printed onto the console using `Ui#showResultToUser(result)`.
 
 <b>Design Considerations</b> <br>
-Aspect: How is the `DeleteIngredientCommand` initialise. <br>
+Aspect 1: How to differentiate `deleteingredientByQuantity` and `deleteIngredient` <br>
 <br>
-Alternative 1 (Current Choice) <br>
+Alternative 1: The `quantity` of ingredient in `DeleteIngredientCommand` constructor is set to the `quantity` that was inputted by the user. In the case where the user would like to delete an ingredient, the `quantity` variable will be set to `null`. (Current Choice)
 
 |     |     |
 |-----|-----|
-|**Pros** | This gives us more flexibility on what object can be created with different variables since there are two methods of delete of ingredients. |  
-|**Cons** | There is an overload of constructors.|
+|**Pros**|Only a `quantity` variable needs to be set. This increases more convenience and no overload of constructors.|
+|**Cons**|Dependent on the variable to check if the ingredient is to be deleted. | 
 
-Alternative 2 <br>
+Alternative 2: Create 2 more constructors just for deduction of quantity for ingredients. <br>
 
 |     |     |
 |-----|-----|
-|**Pros** |The Parser can call for one main default constructor. |
-|**Cons** | The single constructor will need to deal with 2 different methods of deletion, causing the constructor to have more than one purpose.|
-
+|**Pros**|This gives us more flexibility on what object can be created with different variables since there are two methods of delete of ingredients.|
+|**Cons**|There is an overload of constructors.|
 #### 4.1.4. Search for ingredients based on keyword(s)
 
 The search for ingredients feature allows the user to find ingredients using a keyword in the ingredient’s list.  
@@ -341,6 +347,7 @@ Alternative 2 (current choice): Using arrayList.get(item) to get the recipe requ
 #### 4.2.3. Delete all/ specific recipe(s)
 The deletion feature for specific recipes allows the user to delete recipes either by the name or index of the recipe. 
 
+![Delete Recipe Sequence Diagram](images/deleteRecipeSequenceDiagram.png)
 ##### Implementation
 When the user attempts to delete the `Chicken Rice` recipe from Kitchen Helper, the `Kitchen Helper`, `Parser` and `DeleteRecipeCommand` class will be called upon. The following sequence of steps will then occur: 
 1. The user keyed in “deleterecipe /n `Chicken Rice”`.
@@ -366,6 +373,8 @@ Alternative 1 (Current Choice): Usage of 2 constructors <br>
 |-----|-----|
 |**Pros** | This gives us more flexibility on what object can be created with different variables since there are two methods of recipe deletion. |  
 |**Cons** | There is an overload of constructors.|
+
+Rationale for using this: As there are two different types of deletion, it would be simpler and increase cohesion as it is more easier to express these constructors' functionality at a higher level.
 
 Alternative 2: Usage of 1 constructor <br>
 
