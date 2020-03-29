@@ -175,15 +175,35 @@ kailan|30|30.45|12/03/2020
 
 ===================================================
 deleteingredient /n Apple
+The amount of money spent on this ingredient has already been recorded.
+Would you like to remove the amount spent on this item from the total expenditure?
+Ok! There are no changes to expenditure.
+Would you like to add the amount spent on this item to the amount used for cooking?
+Ok! There are no changes to expenditure.
 Apple has been deleted.
 ===================================================
 deleteingredient /n Apple
+The amount of money spent on this ingredient has already been recorded.
+Would you like to remove the amount spent on this item from the total expenditure?
+Ok! There are no changes to expenditure.
+Would you like to add the amount spent on this item to the amount used for cooking?
+Ok! There are no changes to expenditure.
 Apple has been deleted.
 ===================================================
 deleteingredient /n Apple
+The amount of money spent on this ingredient has already been recorded.
+Would you like to remove the amount spent on this item from the total expenditure?
+Ok! There are no changes to expenditure.
+Would you like to add the amount spent on this item to the amount used for cooking?
+Ok! There are no changes to expenditure.
 Apple has been deleted.
 ===================================================
 deleteingredient /n Pear
+The amount of money spent on this ingredient has already been recorded.
+Would you like to remove the amount spent on this item from the total expenditure?
+Ok! There are no changes to expenditure.
+Would you like to add the amount spent on this item to the amount used for cooking?
+Ok! There are no changes to expenditure.
 Pear has been deleted.
 ===================================================
 listingredient all
@@ -240,20 +260,45 @@ Kitchen Helper is trying to cook!
 There are insufficient/missing ingredients!
 ===================================================
 deleteingredient /n Beef
+The amount of money spent on this ingredient has already been recorded.
+Would you like to remove the amount spent on this item from the total expenditure?
+Ok! There are no changes to expenditure.
+Would you like to add the amount spent on this item to the amount used for cooking?
+Ok! There are no changes to expenditure.
 Beef has been deleted.
 ===================================================
 deleteingredient /n Beef cubes
+The amount of money spent on this ingredient has already been recorded.
+Would you like to remove the amount spent on this item from the total expenditure?
+Ok! There are no changes to expenditure.
+Would you like to add the amount spent on this item to the amount used for cooking?
+Ok! There are no changes to expenditure.
 Beef cubes has been deleted.
 ===================================================
 deleteingredient /n kailan /q 35
+The amount of money spent on this ingredient has already been recorded.
+Would you like to remove the amount spent on this item from the total expenditure?
+Ok! There are no changes to expenditure.
+Would you like to add the amount spent on this item to the amount used for cooking?
+Ok! There are no changes to expenditure.
 Please enter a valid quantity to delete!
 Currently:
 kailan : 30
 ===================================================
 deleteingredient /n kailan
+The amount of money spent on this ingredient has already been recorded.
+Would you like to remove the amount spent on this item from the total expenditure?
+Ok! There are no changes to expenditure.
+Would you like to add the amount spent on this item to the amount used for cooking?
+Ok! There are no changes to expenditure.
 kailan has been deleted.
 ===================================================
 deleterecipe /n Chicken Salad
+The amount of money spent on this ingredient has already been recorded.
+Would you like to remove the amount spent on this item from the total expenditure?
+Ok! There are no changes to expenditure.
+Would you like to add the amount spent on this item to the amount used for cooking?
+Ok! There are no changes to expenditure.
 Chicken Salad has been deleted
 ===================================================
 deleterecipe /n Chicken Salad
@@ -266,15 +311,35 @@ deleteingredient /n HL milk
 HL Milk has been deleted.
 ===================================================
 deleteingredient /i 4
+The amount of money spent on this ingredient has already been recorded.
+Would you like to remove the amount spent on this item from the total expenditure?
+Ok! There are no changes to expenditure.
+Would you like to add the amount spent on this item to the amount used for cooking?
+Ok! There are no changes to expenditure.
 Lettuce has been deleted.
 ===================================================
 deleteingredient /i 3
+The amount of money spent on this ingredient has already been recorded.
+Would you like to remove the amount spent on this item from the total expenditure?
+Ok! There are no changes to expenditure.
+Would you like to add the amount spent on this item to the amount used for cooking?
+Ok! There are no changes to expenditure.
 Lettuce has been deleted.
 ===================================================
 deleteingredient /i 2
+The amount of money spent on this ingredient has already been recorded.
+Would you like to remove the amount spent on this item from the total expenditure?
+Ok! There are no changes to expenditure.
+Would you like to add the amount spent on this item to the amount used for cooking?
+Ok! There are no changes to expenditure.
 Chicken Breast has been deleted.
 ===================================================
 deleteingredient /i 1
+The amount of money spent on this ingredient has already been recorded.
+Would you like to remove the amount spent on this item from the total expenditure?
+Ok! There are no changes to expenditure.
+Would you like to add the amount spent on this item to the amount used for cooking?
+Ok! There are no changes to expenditure.
 Chicken Breast has been deleted.
 ===================================================
 deletechore 1
