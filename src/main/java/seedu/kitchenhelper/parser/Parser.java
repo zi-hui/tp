@@ -288,10 +288,21 @@ public class Parser {
             if (parameters.isEmpty()) {
                 throw new KitchenHelperException("Invalid ListRecipe command.");
             }
+            parameters = parameters.replaceAll("\\s+","");
+            if (! parameters.equalsIgnoreCase("all")) {
+                if (! parameters.matches("-?\\d+")) {
+                    throw new KitchenHelperException("Invalid ListRecipe command.");
+                } else if (Integer.parseInt(parameters) <= 0) {
+                    throw new NumberFormatException("Invalid Ingredient Index. Must be > 0.");
+                }
+            }
             return new ListRecipeCommand(parameters);
         } catch (KitchenHelperException e) {
             kitchenLogs.log(Level.WARNING, LOG_WARNING_INDEX, e.toString());
             throw new KitchenHelperException(ListRecipeCommand.COMMAND_FORMAT);
+        } catch (NumberFormatException e) {
+            kitchenLogs.log(Level.WARNING, LOG_WARNING_INDEX, e.toString());
+            throw new KitchenHelperException(ListRecipeCommand.COMMAND_PARAMETER_LIMIT);
         }
     }
 
