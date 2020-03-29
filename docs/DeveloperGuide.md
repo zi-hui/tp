@@ -25,8 +25,9 @@ By: `CS2113T-M16-2` Since: `2020`
     + [4.2. Recipe-related Features](#42-recipe-related-features)
       - [4.2.1. Addition of recipe](#421-addition-of-recipe)
       - [4.2.2. List all/ specific recipe(s)](#422-list-all-specific-recipes)
-      - [4.2.3. Delete all/ specific recipe(s)](#423-delete-all-specific-recipes)
-      - [4.2.4. Search for recipe based on keyword(s)](#424-search-for-recipe-based-on-keywords)
+      - [4.2.3. Cooking of recipe](#423-cooking-of-recipe)
+      - [4.2.4. Delete all/ specific recipe(s)](#424-delete-all-specific-recipes)
+      - [4.2.5. Search for recipe based on keyword(s)](#425-search-for-recipe-based-on-keywords)
     + [4.3. Chore-related Features](#43-chore-related-features)
       - [4.3.1. Addition of chore](#431-addition-of-chore)
       - [4.3.2. List all/ specific chore(s)](#432-list-all-specific-chores)
@@ -74,8 +75,13 @@ By: `CS2113T-M16-2` Since: `2020`
 7. Click `OK` to accept the default settings if prompted. 
 
 ## 3. Design
-
+This section provides a high level overview of our application, Kitchen Helper.
 ### 3.1. Architecture
+Our architecture is broken down into six classes, mainly Command, Notification, Object, Parser, Storage and UI. All modules can be controlled and accessed by the main class, Kitchen Helper. 
+<br>
+![Architecture](images/KitchenHelperMain.png)
+<br>
+
 ### 3.2. Ui Component
 ![Ui Component](images/UI_Component.png)
 
@@ -183,6 +189,8 @@ Alternative 2 (current choice): Creating a fixed array which includes the order 
 #### 4.1.3. Delete all/ specific ingredients(s)
 The deletion feature for ingredients allows the user to delete ingredients either by the name or index of the ingredients. In addition to that, it allows users to reduce the quantity of a specific ingredient. 
 
+![DeleteIngredient Sequence Diagram](images/deleteIngredientSequenceDiagram.png)
+
 ##### Implementation
 When the user attempts to reduce the quantity of ingredient at index 1 of the ingredients inventory by 4,  the `Kitchen Helper`, ‘Parser’ and ‘DeleteRecipeCommand` class will be called upon. The following sequence of steps will then occur: 
 1. The user keyed in “deleteingredient /i 1 /q 4”`. 
@@ -201,22 +209,21 @@ When the user attempts to reduce the quantity of ingredient at index 1 of the in
 4. The details will then be printed onto the console using `Ui#showResultToUser(result)`.
 
 ##### Design Considerations
-Aspect: How is the `DeleteIngredientCommand` initialise. <br>
+Aspect 1: How to differentiate `deleteingredientByQuantity` and `deleteIngredient` <br>
 <br>
-Alternative 1 (Current Choice) <br>
+Alternative 1: The `quantity` of ingredient in `DeleteIngredientCommand` constructor is set to the `quantity` that was inputted by the user. In the case where the user would like to delete an ingredient, the `quantity` variable will be set to `null`. (Current Choice)
 
 |     |     |
 |-----|-----|
-|**Pros** | This gives us more flexibility on what object can be created with different variables since there are two methods of delete of ingredients. |  
-|**Cons** | There is an overload of constructors.|
+|**Pros**|Only a `quantity` variable needs to be set. This increases more convenience and no overload of constructors.|
+|**Cons**|Dependent on the variable to check if the ingredient is to be deleted. | 
 
-Alternative 2 <br>
+Alternative 2: Create 2 more constructors just for deduction of quantity for ingredients. <br>
 
 |     |     |
 |-----|-----|
-|**Pros** |The Parser can call for one main default constructor. |
-|**Cons** | The single constructor will need to deal with 2 different methods of deletion, causing the constructor to have more than one purpose.|
-
+|**Pros**|This gives us more flexibility on what object can be created with different variables since there are two methods of delete of ingredients.|
+|**Cons**|There is an overload of constructors.|
 #### 4.1.4. Search for ingredients based on keyword(s)
 
 The search for ingredients feature allows the user to find ingredients using a keyword in the ingredient’s list.  
@@ -351,13 +358,37 @@ Alternative 2 (current choice): Using arrayList.get(item) to get the recipe requ
 |**Pros** | Users would be able to get the details of the particular recipe accurately and fast. |
 |**Cons** | Without proper checks done before running the command, it will result in error if the number indicated by the user exceeds the arraylist / does not exist in the arraylist.  |
 
+#### 4.2.3. Cooking of recipe
+The feature allows the user to cook a recipe if there are sufficient ingredients. The user will also indicate how many pax this recipe would be cooked for.
 
-#### 4.2.3. Delete all/ specific recipe(s)
+![Cook Recipe Sequence Diagram](images/cookRecipeCommandSequenceDiagram.png)
+
+##### Implementation 
+When the user attempts to cook `Chicken Salad` recipe from `Kitchen Helper`, the `Kitchen Helper`, `Parser` and `cookRecipeCommand` class will be called upon. The following sequence of steps will then occur:
+1. The user keyed in "cookrecipe /n `Chicken Salad`".
+    2. A `UI` object will be created and it will call `UI#getUserCommand()` method to take in the input that the user has keyed in. 
+    3. A `String` object will be returned and saved into the `userCommandInput` variable in `Kitchen Helper`. 
+    4. The variable `userCommandInput` is being parsed into the `Parser` class as an argument for this method `Parser#parseUserCommand()`.
+2. The command inserted by the user is being parsed into the `Parser` and a new `Command` object is being created. 
+    2. The variable `userCommandInput` will be identified as `cookrecipe` in the `Parser#parseUserCommand()`.The `Parser#prepareCookRecipe()` is being called to prepare the `userCommandInput` string to create a `CookRecipeCommand` object.
+3. The command is now being executed.
+    2. The `CookRecipeCommand#execute()` will be called.
+    3. The `CookRecipeCommand#cookRecipe()` is called and it checks whether the recipe inputted by the user exists by calling the `CookRecipeCommand#checkIfRecipeExists()` method.
+    4. If recipe exists, the `CookRecipeCommand#checkIfRecipeExists()` method will return the index of the recipe, else it will return a number that is bigger than the size of `recipelist`.
+    5. Next, it is to check if there are sufficient ingredients to be deducted from the ingredients' inventory to cater for the number of pax for the specific recipe by calling `CookRecipeCommand#checkForSufficientIngredients()` method.
+    6. If `CookRecipeCommand#checkForSufficientIngredients()` returns true, then `CookRecipeCommand#deductIngredients()` will be called to deduct the ingredients in the ingredients' inventory.
+    6. Lastly, a String called `feedbackToUser` will be returned to the user to inform the user of the outcome of the command.
+4. The details will then be printed onto the console using `Ui#showResultToUser(result)`.
+
+##### Design Considerations 
+
+#### 4.2.4. Delete all/ specific recipe(s)
 The deletion feature for specific recipes allows the user to delete recipes either by the name or index of the recipe. 
 
+![Delete Recipe Sequence Diagram](images/deleteRecipeSequenceDiagram.png)
 ##### Implementation
 When the user attempts to delete the `Chicken Rice` recipe from Kitchen Helper, the `Kitchen Helper`, `Parser` and `DeleteRecipeCommand` class will be called upon. The following sequence of steps will then occur: 
-1. The user keyed in “deleterecipe /n `Chicken Rice”`.
+1. The user keyed in “deleterecipe /n `Chicken Rice`".
     2. A `UI` object will be created and it will call `UI#getUserCommand()` method to take in the input that the user has keyed in. 
     3. A `String` object will be returned and saved into the `userCommandInput` variable in `Kitchen Helper`. 
     4. The variable `userCommandInput` is being parsed into the `Parser` class as an argument for this method `Parser#parseUserCommand()`.
@@ -367,7 +398,7 @@ When the user attempts to delete the `Chicken Rice` recipe from Kitchen Helper, 
     2. The `DeleteRecipeCommand#execute()` will be called.
     3. As this is a deletion by recipe name, the `recipeIndex` variable is set as null. As the variable is null, `DeleteRecipeCommand#deleteRecipeByName()` will be called.
     4. Next, the `DeleteRecipeCommand#getRecipeIndex()` to get the index based on the recipe name that the user has inputted. With the given index, `DeleteRecipeCommand#deleteRecipe()` will be called to delete the recipe. 
-    5. Lastly, a String called `feedbackToUser`will be returned to the user to inform the user of the outcome of the command. 
+    5. Lastly, a String called `feedbackToUser` will be returned to the user to inform the user of the outcome of the command. 
 4. The details will then be printed onto the console using `Ui#showResultToUser(result)`.
 
 
@@ -381,6 +412,8 @@ Alternative 1 (Current Choice): Usage of 2 constructors <br>
 |**Pros** | This gives us more flexibility on what object can be created with different variables since there are two methods of recipe deletion. |  
 |**Cons** | There is an overload of constructors.|
 
+Rationale for using this: As there are two different types of deletion, it would be simpler and increase cohesion as it is more easier to express these constructors' functionality at a higher level.
+
 Alternative 2: Usage of 1 constructor <br>
 
 |     |     |
@@ -389,7 +422,7 @@ Alternative 2: Usage of 1 constructor <br>
 |**Cons** | The single constructor will need to deal with 2 different methods of deletion, causing the constructor to have more than one purpose.|
 
 
-#### 4.2.4. Search for recipe based on keyword(s)
+#### 4.2.5. Search for recipe based on keyword(s)
 
 The search for recipe feature allows the user to find recipes using a keyword in the recipe’s list.  
 For example, `searchrecipe Chicken` will find all recipes that contain `Chicken`.  
@@ -645,6 +678,8 @@ __Value proposition__: Manage food inventory quickly compared to a typical mouse
 |v2.0|housewife|mark the task as done|track the uncompleted task.|
 |v2.0|user|retrieve all of my past history that i have entered in the application|view them again.|
 |v2.0|user|reset all my ingredients, chores, recipes|restart the application.|
+|v2.0|user|deduct ingredients that expire first|do not waste my ingredients.|
+|v2.0|user|be informed if I have sufficient ingredients to cook a specific recipe|find other recipes to cook.\
 
 ### Appendix C: Value proposition - Use cases
 
