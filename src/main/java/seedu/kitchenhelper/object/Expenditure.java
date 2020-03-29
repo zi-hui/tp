@@ -8,6 +8,7 @@ import seedu.kitchenhelper.ui.Ui;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Expenditure {
@@ -121,7 +122,11 @@ public class Expenditure {
     public String promptUser(String prompt) {
         String userResponse;
         System.out.println(prompt);
-        userResponse = new Scanner(System.in).nextLine().trim();
+        try {
+            userResponse = new Scanner(System.in).nextLine().trim();
+        } catch (NoSuchElementException e) {
+            return "no";
+        }
         while (!isValidResponse(userResponse)) {
             System.out.println("Please enter either \"Yes\"/\"No\"");
             userResponse = new Scanner(System.in).nextLine().trim();
