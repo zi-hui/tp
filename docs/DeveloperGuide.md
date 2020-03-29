@@ -757,7 +757,7 @@ Use case ends.
 ### Appendix D: Non-Functional Requirements
 
 1. Should work on any mainstream OS as long as it has Java `11` or above installed.
-2. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+2. An user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 3. Should not require user to install program file.
 4. Should work for single user.
 5. Should be able to run without internet connection.
@@ -811,4 +811,23 @@ Use case ends.
    Expected: Chore entries that have the keyword matching `Tuesday` as a string are listed.  
    
 #### F.6. Saving data
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+
+1. Load ingredient data into Kitchen Helper.
+   1. Prerequisites: The ingredient list save file should not be empty. 
+   1. Expected: Previously stored ingredient data can be seen using `listingredient all` command.
+
+1. Load recipe data into Kitchen Helper.
+   1. Prerequisites: The recipe list save file should not be empty. 
+   1. Expected: Previously stored recipe data can be seen using `listrecipe all` command.
+ 
+1. Load chore data into Kitchen Helper.
+   1. Prerequisites: The chore list save file should not be empty. 
+   1. Expected: Previously stored chore data can be seen using `listchore all` command.
+ 
+If any of the save files are empty, the user can choose to populate the files with their own user commands or alternatively, use any of the test cases below:
+
+1. `addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable`
+2. `addingredient /n Chicken Breast /c meat /q 3 /p 20 /e 18/03/2020`
+3. `addingredient /n kailan /c Vegetable /q 30 /p 30.45 /e 12/03/2020`
+4. `addingredient /n HL Milk /c Dairy /q 3 /p 12.2 /e 14/03/2020`
+5. `addchore buy groceries /by Tuesday 12pm`
