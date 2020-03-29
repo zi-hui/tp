@@ -38,8 +38,8 @@ public class Expenditure {
         totalExpenditure = 0;
     }
 
-    public void addToExpenditure(double price) {
-        totalExpenditure += price;
+    public void addToExpenditure(double price, int quantity) {
+        totalExpenditure += (price * quantity);
     }
 
     public void removeFromExpenditure(Ingredient ingredientToDelete, Integer quantityToDelete) {
@@ -74,13 +74,12 @@ public class Expenditure {
     }
 
     public double changePrice(Ingredient ingredientToDelete, Integer quantityToDelete) {
-        double itemPrice = ingredientToDelete.getPrice();
+        double pricePerPiece = ingredientToDelete.getPrice();
         int totalQuantityOfItem = ingredientToDelete.getQuantity();
-        double priceOfEachIngredient = itemPrice/totalQuantityOfItem;
         if (quantityToDelete == null) {
-            return itemPrice;
+            return pricePerPiece * totalQuantityOfItem;
         } else {
-            return priceOfEachIngredient * quantityToDelete;
+            return pricePerPiece * quantityToDelete;
         }
     }
 
