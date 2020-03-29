@@ -175,6 +175,7 @@ The different types of `CATEGORY` are listed below:
   + `Miscellaneous`  
   
 :speech_balloon: Any `category` that does not falls in the list could be put under `Miscellaneous`.
+
 :bulb: All `recipe_name` has to be unique. You can check the list of existing recipes by using [`listrecipe all`](#332-list-recipes-listrecipe-1)  
 
 Example |  Outcome
@@ -333,9 +334,10 @@ __Recipe Commands__
 
 Feature | Command  
 ------- | -------  
-addrecipe | `addrecipe /n <recipe name> /i <ingredient_name>:<quantity>:<category>[,..]`
+addrecipe | `addrecipe /n <recipe name> /i <ingredient_name>:<quantity>:<category>[,..]` <br> e.g. `addrecipe /n Rice Ball /i Rice:3:staple`
 deleterecipe | `deleterecipe /n <recipe_name>` OR `deleterecipe /i <recipe_index>` <br> e.g. `deleterecipe /n pasta` OR `deleterecipe /i 2`<br>
 searchrecipe | `searchrecipe KEYWORD` <br> e.g. `searchrecipe Chicken Stew`  
+cookrecipe | `cookrecipe /n <recipe_name> /p <number_of_pax>` <br> e.g. `cookrecipe /n chicken salad /p 2`
 
  
 __Chore Commands__  
