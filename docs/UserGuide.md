@@ -8,6 +8,7 @@ By: `Team CS2113T-M16-2` Since: `March 2020` License: `MIT`
     + [3.1. General Commands](#31-general-commands)  
        - [3.1.1. Viewing help: `help`](#311-viewing-help-help)  
        - [3.1.2. Exiting the Program: `exit`](#312-exiting-the-program-exit)  
+       - [3.1.3. Resetting the application: `reset`](#313-resetting-the-application-reset)  
     + [3.2. Ingredient](#32-ingredient)  
        - [3.2.1. Adding an ingredient: `addingredient`](#321-adding-an-ingredient-addingredient)  
        - [3.2.2. List ingredient: `listingredient`](#322-list-ingredient-listingredient)  
@@ -76,7 +77,7 @@ Exits the program.
 
 __Format:__ `exit`  
 
-#### 3.1.2. Resetting the application: `reset`
+#### 3.1.3. Resetting the application: `reset`
 You can reset the application which will wipe out all existing data  
 
 __Format:__ `reset`  
