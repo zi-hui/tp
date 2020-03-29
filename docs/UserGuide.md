@@ -76,6 +76,11 @@ Exits the program.
 
 __Format:__ `exit`  
 
+#### 3.1.2. Resetting the application: `reset`
+You can reset the application which will wipe out all existing data  
+
+__Format:__ `reset`  
+
 ### 3.2. Ingredient
 #### 3.2.1. Adding an ingredient: `addingredient`
 You can add an ingredient to the Kitchen Helper for tracking, containing various details.
