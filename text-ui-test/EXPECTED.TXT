@@ -306,35 +306,15 @@ deleteingredient /n HL milk
 HL Milk has been deleted.
 ===================================================
 deleteingredient /i 4
-The amount of money spent on this ingredient has already been recorded.
-Would you like to remove the amount spent on this item from the total expenditure?
-Ok! There are no changes to expenditure.
-Would you like to add the amount spent on this item to the amount used for cooking?
-Ok! There are no changes to expenditure.
 Lettuce has been deleted.
 ===================================================
 deleteingredient /i 3
-The amount of money spent on this ingredient has already been recorded.
-Would you like to remove the amount spent on this item from the total expenditure?
-Ok! There are no changes to expenditure.
-Would you like to add the amount spent on this item to the amount used for cooking?
-Ok! There are no changes to expenditure.
 Lettuce has been deleted.
 ===================================================
 deleteingredient /i 2
-The amount of money spent on this ingredient has already been recorded.
-Would you like to remove the amount spent on this item from the total expenditure?
-Ok! There are no changes to expenditure.
-Would you like to add the amount spent on this item to the amount used for cooking?
-Ok! There are no changes to expenditure.
 Chicken Breast has been deleted.
 ===================================================
 deleteingredient /i 1
-The amount of money spent on this ingredient has already been recorded.
-Would you like to remove the amount spent on this item from the total expenditure?
-Ok! There are no changes to expenditure.
-Would you like to add the amount spent on this item to the amount used for cooking?
-Ok! There are no changes to expenditure.
 Chicken Breast has been deleted.
 ===================================================
 deletechore 1
