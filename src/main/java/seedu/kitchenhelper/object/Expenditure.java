@@ -40,9 +40,9 @@ public class Expenditure {
     }
 
     /**
-     * Singleton instantiated by
+     * Instantiates singleton class.
      *
-     * @return
+     * @return already created or newly created Expenditure object.
      */
     public static Expenditure getInstance() {
         if (onlyInstance == null) {
