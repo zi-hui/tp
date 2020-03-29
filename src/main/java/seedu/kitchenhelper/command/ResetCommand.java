@@ -4,6 +4,7 @@ import seedu.kitchenhelper.exception.KitchenHelperException;
 import seedu.kitchenhelper.object.Chore;
 import seedu.kitchenhelper.object.Recipe;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
+import seedu.kitchenhelper.storage.Storage;
 
 import java.util.ArrayList;
 import java.util.logging.Logger;
@@ -28,6 +29,9 @@ public class ResetCommand extends Command {
         ingredientList.clear();
         recipeList.clear();
         choreList.clear();
+        Storage.saveIngredientData(ingredientList);
+        Storage.saveRecipeData(recipeList);
+        Storage.saveChoreData(choreList);
         return "All data has been wiped";
     }
 

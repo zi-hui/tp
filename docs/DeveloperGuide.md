@@ -7,6 +7,8 @@ By: `CS2113T-M16-2` Since: `2020`
     + [1.1. Purpose](#11-purpose)
     + [1.2. Scope](#12-scope)
   * [2. Setting up](#2-setting-up)
+    + [2.1. Prerequisites](#21-prerequisites)
+    + [2.2. Setting up the project in your computer](#22-setting-up-the-project-in-your-computer)
   * [3. Design](#3-design)
     + [3.1. Architecture](#31-architecture)
     + [3.2. Ui Component](#32-ui-component)
@@ -41,10 +43,13 @@ By: `CS2113T-M16-2` Since: `2020`
     + [Appendix C: Value proposition - Use cases](#appendix-c-value-proposition---use-cases)
     + [Appendix D: Non-Functional Requirements](#appendix-d-non-functional-requirements)
     + [Appendix E: Glossary](#appendix-e-glossary)
-    + [Appendix G: Instructions for Manual Testing](#appendix-g-instructions-for-manual-testing)
-      - [G.1. Launch and Shutdown](#g1-launch-and-shutdown)
-      - [G.2. Deleting a](#g2-deleting-a)
-      - [G.3. Saving data](#g3-saving-data)
+    + [Appendix F: Instructions for Manual Testing](#appendix-f-instructions-for-manual-testing)
+      - [F.1. Launch and Shutdown](#f1-launch-and-shutdown)
+      - [F.2. Add an ingredient](#f2-add-an-ingredient)
+      - [F.3. Search for ingredient](#f3-search-for-ingredient)
+      - [F.4. Search for recipe](#f4-search-for-recipe)
+      - [F.5. Search for chore](#f5-search-for-chore)
+      - [F.6. Saving data](#f6-saving-data)
 
 ## 1. Introduction
 ### 1.1. Purpose
@@ -52,11 +57,27 @@ By: `CS2113T-M16-2` Since: `2020`
 
 ## 2. Setting up
 
+### 2.1. Prerequisites
+1. JDK `11`.
+2. IntelliJ IDE.
+
+### 2.2. Setting up the project in your computer
+1. Fork this repository, and clone the fork repository to your computer.
+2. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first).
+3. Set up the correct JDK version for Gradle  
+   1. Click `Configure` > `Structure for New Projects` and then `Project Settings` > `Project` > `Project SDK`.
+   2. If `JDK 11` is listed in the drop down, select it. Otherwise, click `New…` and select the directory where you installed `JDK 11`.
+   3. Click `OK`.
+4. Click `Import Project`.
+5. Locate the `build.gradle` file and select it. Click `OK`.
+6. Click `Open as Project`.
+7. Click `OK` to accept the default settings if prompted. 
+
 ## 3. Design
 
 ### 3.1. Architecture
 ### 3.2. Ui Component
-![Ui Component](/docs/images/UI_Component.png)
+![Ui Component](images/UI_Component.png)
 
 API: `Ui.java`
  
@@ -68,9 +89,24 @@ The `Ui` component,
 * Listens for changes and outputs messages from the Command component
 
 ### 3.3. Logic Component
+
+![Logic Component](images/logic.png)
+
+1. `Kitchen Helper` uses `Parser` class to parse the user command.
+2. This results in a command object return back which is executed by `Kitchen Helper`.
+3. The command execution can affect the object (e.g. adding an ingredient).
+4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to `Ui` to display the message.
+
 ### 3.4. Model Component
+
+![Model Component](images/model.png)
+* Stores the ingredient data.
+* Stores the recipe data.
+* Stores the chore data.
+
 ### 3.5. Storage Component
-image::Storage.png[Storage Class Diagram]
+
+![Storage Class Diagram](images/Storage.png)
 
 A Storage object is created by the KitchenHelper class to handle the loading and saving of ingredients, recipes and chores data.
 
@@ -90,44 +126,64 @@ This section describes some details on how the features are being implemented. A
 #### 4.1.1. Addition of ingredient
 
 The addition of the ingredient feature allows the user to keep track of the ingredients in the ingredient’s list.   
-For example, `addingredient /n beef /c meat /q 2 /p 20 /e 2020-02-18` will add the ingredient `beef` 
-which have the following attributes:  category `meat`, quantity `2`, price `$20` and expiry `2020-02-18`  
+For example, `addingredient /n beef /c meat /q 2 /p 20 /e 18/02/2020` will add the ingredient `beef` 
+which have the following attributes:  category `meat`, quantity `2`, price `$20` and expiry `18/02/2020`  
 
-##### 4.1.1.1. Implementation
+##### Implementation
 
-{insert sequence diagram of addingredient command}  
+![addIngredientCommand](images/addIngredientCommand.png) 
 
 The following steps explained “Sequence diagram for an example `addingredient` command”:  
-1. The user enters  `addingredient /n beef /c meat /q 2 /p 20 /e 2020-02-18`.  
-2. `KitchenHelper` calls `Parser#parseUserCommand()` which splits the user’s input into 2 parts 
-and enters a switch case for execution.  
-3. `parseUserCommand` in the Parser object will call its own method `Parser#prepareAddIngredient`.  
-4. `prepareAddIngredient` will first validates the user’s remaining attributes and if successful, 
-it will execute `AddIngredientCommand` with the attributes, 
-otherwise it will throw an `InvalidCommand` along with the syntax of `addingredient command`  
-5. On execute(), the ingredient is added based on the category into the ingredient’s list.
+1. The user enters `addingredient /n beef /c meat /q 2 /p 20 /e 18/02/2020`.  
+2. `KitchenHelper` calls `Parser#parseUserCommand()`.  
+3. `Parser#parseUserCommand()` will call its own method `Parser#prepareAddIngredient()`.  
+4. `Parser#prepareAddIngredient()` will first validate the attributes and create an object `AddIngredientCommand` with the attributes if successful.  
+5. `KitchenHelper` calls it own method `executeCommand()` to execute the method in `AddIngredientCommand#execute()`.  
+6. On `AddIngredientCommand#execute()`, ingredient is added and return of the message.  
 
 #### 4.1.2. List all/ specific ingredient(s)
+The list feature allows showing details of Ingredients added by the user.  All ingredients added will be shown in a sorted order, by expiry, and shown by categories. The function will require a valid string , which belongs to `all/dairy/drink/fruit/meat/miscellaneous/staple/vegetable`, 
+to be added as a parameter. Failure to do so will trigger an exception where the user will be notified of an invalid command and the syntax of the listing of the ingredients will be displayed. 
 
-The listing of Ingredients feature shows the user the existing data that is added by the user. The user is also able to specify which category would they want to display.
-Command usage: `listingredient all` will show the details of all ingredients
-which have the following attributes:  category `all`
+##### Implementation
+When the user attempts to list the details of a particular category of ingredients, the `listIngredientCommand`, ‘Parser’ and `Ingredient` class will be accessed and the following sequence of actions are called to list details of  a particular category Ingredient list: <br>
+1. User executes `listingredient all` 
+    2. A `Ui` object will be created and calls `Ui#getUserCommand()`
+    3. Input will be parsed in `Command#parseUserCommand()` and identified with the keyword `listingredient`.
+    ![List Ingredient Step 1](images/AddRecipe1.png)
+2. Parsing of user input and creation of command object
+    2.This will automatically trigger the parsing of the user’s input string into a suitable format for the listing of a particular category of  `ingredient` object in `Command#prepareListIngredient()`.
+    3. A `ListIngredientCommand` object will be created.
+    ![List Ingredient Step 2](images/ListIngredientCommand.png)   
+3. Executing Command
+    2. The newly created object will call `#ListIngredientCommand#execute` which starts the process of listing a particular category’s ingredient details, thus calling `ListIngredientCommand#listIngredients()`.
+    3. The existing ingredientList arraylist and the category of the chosen ingredient category  will be passed through to the `ListIngredientCommand#listIngredients()`.
+    4. The function will find if the category name is valid, thus, creates `CommandResult` result storing the details of the ingredient belonging to the particular category.
+    ![List Ingredient Step 3](images/ListIngredientCommand2.png)
+4. The details will then be printed onto the console using `Ui#showResultToUser(result)`.
+    
 
-#### 4.1.2.1. Implementation
-{insert sequence diagram}
-Steps for `listingredient all` command:
-1. The user enters  `listingredient all`.  
-2. `KitchenHelper` calls `Parser#parseUserCommand()` which splits the user’s input into 2 parts 
-and enters a switch case for execution.  
-3. `parseUserCommand` in the Parser object will call its own method `Parser#prepareListIngredient`.  
-4. `prepareListIngredient` will first validate if the user's input is belongs to `all/dairy/drink/fruit/meat/miscellaneous/staple/vegetable`, 
-following, it will return the items belonging into the category, 
-otherwise it will throw an `InvalidCommand` along with the syntax of `listingredient command`  
-5. On execute(), the ingredient in the list will be printed out.
+##### Design Considerations
+Aspect: Finding the category name and print out ingredient belonging to the category
+
+Alternative 1: Looping through the whole ingredientList arraylist to find out all possible category name, then, do sorting and return result
+
+|     |     |
+|-----|-----|
+|**Pros** | The program will be able to detect all category name inside the ingredientList arraylist. |
+|**Cons** | This method will be slow when facing a huge amount of data in the arraylist as the program may have to go through every single item in the arraylist. |
+
+Alternative 2 (current choice): Creating a fixed array which includes the order and all possible category names.
+
+|     |     |
+|-----|-----|
+|**Pros** | Users would be able to get the details of the particular recipe accurately and fast. |
+|**Cons** | Program will not be able to handle any ingredient which isn’t belonging to the category names in the fixed array.  |
+
 #### 4.1.3. Delete all/ specific ingredients(s)
 The deletion feature for ingredients allows the user to delete ingredients either by the name or index of the ingredients. In addition to that, it allows users to reduce the quantity of a specific ingredient. 
 
-<b>Implementation</b><br>
+##### Implementation
 When the user attempts to reduce the quantity of ingredient at index 1 of the ingredients inventory by 4,  the `Kitchen Helper`, ‘Parser’ and ‘DeleteRecipeCommand` class will be called upon. The following sequence of steps will then occur: 
 1. The user keyed in “deleteingredient /i 1 /q 4”`. 
     2. A `UI` object will be created and it will call `UI#getUserCommand()` method to take in the input that the user has keyed in.
@@ -144,7 +200,7 @@ When the user attempts to reduce the quantity of ingredient at index 1 of the in
     7. Lastly, a String called `feedbackToUser`will be returned to the user to inform the user of the outcome of the command. 
 4. The details will then be printed onto the console using `Ui#showResultToUser(result)`.
 
-<b>Design Considerations</b> <br>
+##### Design Considerations
 Aspect: How is the `DeleteIngredientCommand` initialise. <br>
 <br>
 Alternative 1 (Current Choice) <br>
@@ -166,23 +222,23 @@ Alternative 2 <br>
 The search for ingredients feature allows the user to find ingredients using a keyword in the ingredient’s list.  
 For example, `searchingredient beef` will find all the ingredients that contain `beef`.  
 
-##### 4.1.4.1. Implementation  
+##### Implementation  
 
-{insert sequence diagram of searchingredient command}
+![SearchIngredientCommand](images/searchIngredientCommand1.png) 
 
-The following steps explained “Sequence diagram for an example `searchingredient` command”:
-1. The user enters `searchingredient beef`
-2. `KitchenHelper` calls `Parser#parseUserCommand()` which splits the user’s input into 2 parts 
-and enters a switch case for execution.
-3. `parseUserCommand` in the Parser object will call a method `SearchIngredientCommand`.
-4. On execute(), the list of ingredients that contains the keyword will be displayed.
+The following steps explained sequence diagram for `searchingredient` command:  
+1. The user enters `searchingredient beef`.  
+2. `KitchenHelper` calls `Parser#parseUserCommand()`.  
+3. `SearchIngredientCommand` object is created with the keyword passed in.  
+4. `KitchenHelper` calls it own method `executeCommand()` to execute the method in `SearchIngredientCommand#execute()`.  
+5. On `SearchIngredientCommand#execute()`, display the list of ingredients that matches the keyword. 
 
-##### 4.1.4.2. Design considerations:
+##### Design considerations:
 
 Aspects: How `searchingredient` executes:  
 
 - Alternative 1 (current choice): Find if the keyword is part of the substring of the ingredient, 
-`[Meat] Beef Qty:3 $20.00 Exp:2020-03-18.`  
+`[Meat] Beef Qty:3 $20.00 Exp:18/03/2020.`  
 
 |     |     |
 |-----|-----|
@@ -204,36 +260,36 @@ Users can add a new recipe to the application where there must be at least one o
 
 When the user attempts to create a new recipe, the `AddRecipeCommand`, ‘Parser’ and `Recipe` class will be accessed and the following sequence of actions are called to create a `recipe` object:
 
-##### 4.2.1.1. Implementation 
+##### Implementation 
 When the user attempts to create a new recipe, the `AddRecipeCommand`, ‘Parser’ and `Recipe` class will be accessed and the following sequence of actions are called to create a `recipe` object:
 
 1. User executes `addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable` 
     1. A `Ui` object will be created and calls `Ui#getUserCommand()`
     1. Input will be parsed in `Command#parseUserCommand()` and identified with the keyword `addrecipe`.
     
-    ![Add Recipe Step 1](/docs/images/AddRecipe1.png)
+    ![Add Recipe Step 1](images/AddRecipe1.png)
 2. Parsing of user input and creation of command object
     1. This will automatically trigger the parsing of the user’s input string into a suitable format for the addition of `recipe` object in `Command#prepareAddRecipe()`.
     1. A `AddRecipeCommand` object will be created and calls `AddRecipeCommand#setAttributesOfCmd()` to set the contents of the command into reader friendly formats.
     
-    ![Add Recipe Step 2](/docs/images/AddRecipe2.png)
+    ![Add Recipe Step 2](images/AddRecipe2.png)
 3. Executing Command
     1. The newly created object will call `#AddRecipeCommand#execute` which starts the process of adding a recipe, thus calling `Recipe#AddRecipe()`.
     1. A `Recipe` object will be created with its name that was parsed in step 2.
     1. An additional step is included where a check for an existing recipe with the same name is conducted with `#AddRecipeCommand#checkIfRecipeExist()`. A `KitchenHelperException` exception will be triggered when there is an existing recipe.
     
-    ![Add Recipe Step 3](/docs/images/AddRecipe3.png | width=150)
+    ![Add Recipe Step 3](images/AddRecipe3.png)
 4. `Ingredient`s parsed in step 2 will be added to the newly created recipe according to their category through the calling of `Recipe#addIngredientsToRecipe()`.
 	
-	![Add Recipe Step 4](/docs/images/AddRecipe4.png)
+	![Add Recipe Step 4](images/AddRecipe4.png)
 
 All description and warnings to the user utilises the `UI` class, which controls the printing of the text on the console. 
 
 The following sequence diagram shows how the `addrecipe` command works
 
-{insert diagram}
+![AddRecipeCommand](images/addRecipeSequenceDiagram.png) 
 
-##### 4.2.1.2. Design Considerations
+##### Design Considerations
 Aspect: Parsing of the user’s input command
 
 Alternative 1 (current choice): The key parameters that are required are divided by the delimiter of ‘/’ followed by a specific letter. `(i.e. /i)`
@@ -258,25 +314,48 @@ Alternative 3: User’s command are divided by space
 |**Cons** | Values for each variable cannot contain spaces which makes the application restrictive. |
 
 #### 4.2.2. List all/ specific recipe(s)
-The listing of Recipe feature shows the user the existing recipe and it's details that is added by the user.
-Command usage: `listrecipe 1` will show the details of recipe number `1`
-which have the following attributes:  recipe number `1`
+The list feature allows showing details of a particular recipe created by the user.  All ingredients added into the recipe will be shown in a sorted order and shown by categories. The function will require valid string of a integer or `all` to be added as a parameter. Failure to do so will trigger an exception where the user will be notified of an invalid command and the syntax of the listing of the recipe will be displayed. 
 
-#### 4.1.2.1. Implementation
-{insert sequence diagram}
-Steps for `listrecipe 1` command:
-1. The user enters  `listrecipe 1`.  
-2. `KitchenHelper` calls `Parser#parseUserCommand()` which splits the user’s input into 2 parts 
-and enters a switch case for execution.  
-3. `parseUserCommand` in the Parser object will call its own method `Parser#prepareListRecipe`.  
-4. `prepareListIngredient` will first validate if the user's input is a valid integer and if it's more than 0, 
-following, it will return the details belonging to the recipe, 
-otherwise it will throw an `InvalidCommand` along with the syntax of `listrecipe command`  
-5. On execute(), the details in the recipe will be printed out.
+##### Implementation
+When the user attempts to list the details of a particular recipe, the `listRecipeCommand`, ‘Parser’ and `Recipe` class will be accessed and the following sequence of actions are called to list details of  a particular `recipe` object:
+1. User executes `listrecipe 1`  
+    2. A `Ui` object will be created and calls `Ui#getUserCommand()`
+    3. Input will be parsed in `Command#parseUserCommand()` and identified with the keyword `listrecipe`.
+    ![List Ingredient Step 1](images/AddRecipe1.png)
+2. Parsing of user input and creation of command object
+    2.This will automatically trigger the parsing of the user’s input string into a suitable format for the listing of `recipe` object in `Command#prepareListRecipe()`.
+    3. A `ListRecipeCommand` object will be created.
+    ![List Ingredient Step 2](images/ListRecipeCommand.png)   
+3. Executing Command
+    2. The newly created object will call `ListRecipeCommand#execute` which starts the process of listing a particular recipe’s details, thus, calling `ListRecipeCommand#listRecipe()`.
+    3. The existing recipeList arraylist and the item number of the chosen recipe will be passed through to the `ListRecipeCommand#listRecipe()`.
+    4. The function will find if the item number is valid and contains details of the recipe, thus, creates a CommandResult storing the details of the particular recipe.
+    ![List Ingredient Step 3](images/ListRecipeCommand2.png)
+4. The details will then be printed onto the console using `Ui#showResultToUser(result)`.
+    
+
+##### Design Considerations
+Aspect: Finding the recipe requested by the user.
+
+Alternative 1: Looping through the whole recipeList arraylist to find the recipe requested by the user.
+
+|     |     |
+|-----|-----|
+|**Pros** | The program will be able to locate the recipe accurately. |
+|**Cons** | This method will be slow when facing a huge amount of data in the arraylist as the program may have to go through every single item in the arraylist. |
+
+Alternative 2 (current choice): Using arrayList.get(item) to get the recipe requested by the user.
+
+|     |     |
+|-----|-----|
+|**Pros** | Users would be able to get the details of the particular recipe accurately and fast. |
+|**Cons** | Without proper checks done before running the command, it will result in error if the number indicated by the user exceeds the arraylist / does not exist in the arraylist.  |
+
+
 #### 4.2.3. Delete all/ specific recipe(s)
 The deletion feature for specific recipes allows the user to delete recipes either by the name or index of the recipe. 
 
-<b>Implementation</b> <br>
+##### Implementation
 When the user attempts to delete the `Chicken Rice` recipe from Kitchen Helper, the `Kitchen Helper`, `Parser` and `DeleteRecipeCommand` class will be called upon. The following sequence of steps will then occur: 
 1. The user keyed in “deleterecipe /n `Chicken Rice”`.
     2. A `UI` object will be created and it will call `UI#getUserCommand()` method to take in the input that the user has keyed in. 
@@ -292,7 +371,7 @@ When the user attempts to delete the `Chicken Rice` recipe from Kitchen Helper, 
 4. The details will then be printed onto the console using `Ui#showResultToUser(result)`.
 
 
-<b>Design Considerations</b> <br>
+##### Design Considerations
 Aspect: How is the `DeleteRecipeCommand` initialise. <br>
 <br>
 Alternative 1 (Current Choice): Usage of 2 constructors <br>
@@ -316,18 +395,18 @@ The search for recipe feature allows the user to find recipes using a keyword in
 For example, `searchrecipe Chicken` will find all recipes that contain `Chicken`.  
 
 
-##### 4.2.4.1. Implementation
+##### Implementation
 
-{insert sequence diagram of searchrecipe command}
+![SearchRecipeCommand](images/searchRecipeCommand1.png)
 
-The following steps explained “Sequence diagram for an example `searchrecipe` command”:
-1. The user enters `searchrecipe Chicken`
-2. `KitchenHelper` calls `Parser#parseUserCommand()` which splits the user’s input into 2 parts 
-and enters a switch case for execution.  
-3. `parseUserCommand` in the Parser object will call a method `SearchRecipeCommand`.  
-4. On execute(), the list of recipes' name that contains the keyword will be displayed.  
+The following steps explained sequence diagram for `searchrecipe` command:  
+1. The user enters `searchrecipe Chicken`.  
+2. `KitchenHelper` calls `Parser#parseUserCommand()`.  
+3. `SearchRecipeCommand` object is created with the keyword passed in.  
+4. `KitchenHelper` calls it own method `executeCommand()` to execute the method in `SearchRecipeCommand#execute()`.  
+5. On `SearchRecipeCommand#execute()`, display the list of recipe's name that matches the keyword.
 
-##### 4.2.4.2. Design considerations:
+##### Design considerations:
 
 Aspects: How `searchrecipe` executes:  
 
@@ -346,6 +425,41 @@ and returns the recipe’s name and the index of recipe in the recipe’s list.
 |**Pros** | 1. More accurate searching of the recipe that uses the ingredients.|  
 |**Cons** | 1. Could be more memory intensive to find if the list is huge.|
 
+#### 4.2.5. Cooking a recipe
+##### Implementation
+##### Design considerations
+Aspect: Preparing the deduction of ingredients when cooking a recipe
+Alternative  1 (current choice): Checks for existence of recipe, existence of ingredients for the specified recipe and sufficiency of ingredients
+
+|   |   |
+|---|---|
+|**Pros**| Minimizes erroneous deduction of insufficient and nonexistent ingredients |
+|**Cons**|Additional computation and overhead |
+
+Alternative 2: Deductions are to be made to existing and available ingredients and users are notified when there are insufficient ingredients
+
+|   |   |
+|---|---|
+|**Pros**| Lesser overhead as there is lesser checks to be done
+|**Cons**| Hidden bugs and exceptions have to be well-covered to ensure that the deduction would be of the right value
+
+Aspect: Searching for the corresponding ingredients of a recipe/ Searching through list of recipes to check for existence of recipe
+Alternative 1 (current choice): Linear search, iterate through the arraylist of ingredients/ recipes and checking
+
+|   |   |
+|---|---|
+|**Pros**| Lesser use of complex data structure will save memory |
+|**Cons**| Not optimal as search will be O(n), larger amount of data may take a longer time |
+
+Alternative 2: building an index on the first letter of the recipe name
+
+|   |   |
+|---|---|
+|**Pros**| More efficient search as pool of search space would be significantly smaller
+|**Cons**| Needs to be constantly maintained which incurs overhead.
+
+
+
 ### 4.3. Chore-related Features
 #### 4.3.1. Addition of chore
 #### 4.3.2. List all/ specific chore(s)
@@ -355,18 +469,18 @@ and returns the recipe’s name and the index of recipe in the recipe’s list.
 The search for chore feature allows the user to find chores using a keyword in the chore’s list.  
 For example, `searchchore groceries` will find all chores that contain `groceries`.  
 
-##### 4.3.4.1. Implementation  
+##### Implementation  
 
-{insert sequence diagram of searchchore command}
+![SearchChoreCommand](images/searchChoreCommand1.png)
 
-The following steps explained “Sequence diagram for an example `searchchore` command”:  
-1. The user enters `searchchore groceries`  
-2. `KitchenHelper` calls `Parser#parseUserCommand()` which splits the user’s input into 2 parts 
-and enters a switch case for execution.  
-3. `parseUserCommand` in the Parser object will call a method `SearchChoreCommand`.  
-4. On execute(), the list of chore that contains the keyword will be displayed.  
+The following steps explained sequence diagram for `searchchore` command:  
+1. The user enters `searchchore groceries`.  
+2. `KitchenHelper` calls `Parser#parseUserCommand()`.  
+3. `SearchChoreCommand` object is created with the keyword passed in.  
+4. `KitchenHelper` calls it own method `executeCommand()` to execute the method in `SearchChoreCommand#execute()`.  
+5. On `SearchChoreCommand#execute()`, display the list of chore that matches the keyword.
 
-##### 4.3.4.2. Design considerations:
+##### Design considerations:
 
 - Alternative 1 (current choice): Find if the keyword is part of the substring of the chore, 
 `[x] buy groceries (by: Tuesday 12pm)`.   
@@ -390,7 +504,7 @@ The select files to load from and save to feature allows the user to choose an o
 
 If the user chooses the manual-save mode, it will overwrite all the data stored in auto-save mode. However, any subsequent changes made to the program data will be saved by auto-save mode regardless of initial load options. To save by manual-save mode, the user will have to use the save current state function with the save command (see section 4.4.2)[4.4.2. Save current state](#442-save-current-state).
     
-<b>Implementation</b> <br>
+##### Implementation
 1. For instance, if the User selects to load files from auto-save mode, User executes `1`
 	1. A `Ui` object will be created and calls `Ui#getUserChoice()` and returns String `UserChoice`. 
 	1. The `Ui` object then calls `Ui#validUserChoice()` with `UserChoice` as the parameter. If `UserChoice` is invalid, `Ui#validUserChoice()` will call `Ui#askForReInput()`.
@@ -412,9 +526,8 @@ If the user chooses the manual-save mode, it will overwrite all the data stored 
 All description and warnings to the user utilises the UI class, which controls the printing of the text on the console.
 
 The sequence diagram below summarizes how loading data works:
-image::Loading.jpeg[Load Data Sequence Diagram]
-
-<b>Design considerations:</b> <br>
+![Load Data Sequence Diagram](images/Loading.png)
+##### Design considerations:
 Aspects: How saving of files executes:  
 
 - Alternative 1 (current choice): Overwriting files with entire current ArrayLists every time changes are made.
@@ -434,7 +547,7 @@ Aspects: How saving of files executes:
 #### 4.4.2. Save current state
 The save current state feature allows the user to store the current state of the program data by manual-save mode. Manual-save mode data will be updated and replaced with the current state when save command is implemented.
 
-<b>Implementation</b> <br>
+##### Implementation
 The following steps explain how `save` command works:
 1. The user enters `save`
 2. `KitchenHelper` calls `Parser#parseUserCommand()` which splits the user’s input into 2 parts 
@@ -442,7 +555,7 @@ and enters a switch case for execution.
 3. `parseUserCommand` in the Parser object will call a method `SaveStateCommand`.  
 4. On execute(), `Storage.copyFile()` will be called three times to copy contents of ingredients, recipes and chore save files into their respective manual-mode save files.
 
-<b>Design considerations:</b> <br>
+##### Design considerations:
 Aspects: How saving of current state data executes:
 
 - Alternative 1 (current choice): Using Files.copy to copy content of auto-save files to manual-save files.
@@ -491,28 +604,161 @@ kitchenLogs.log(Level.WARNING, description_of_warning_here, e.toString());
 ## Appendices 
 ### Appendix A: Product Scope
 
+__Target user profile__:
+
+* Prefers desktop application over other types.  
+* Can type fast.  
+* Prefers typing over mouse input.  
+* Comfortable with using command line interface.  
+* Facilitate user to track kitchen related information easily.  
+* Enables user to remove consumed items easily.  
+* Reminds user of soon perishable food items.  
+* Reminds user to stock up enough food.  
+
+__Value proposition__: Manage food inventory quickly compared to a typical mouse or graphic user interface driven application which saves time and makes it more convenient.  
+
 ### Appendix B: User Stories
 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+|v1.0|housewife|add my groceries to the inventory|track my ingredients.|
+|v1.0|user|track the list of ingredients|stock up before I cook a meal.|
+|v1.0|user|delete an ingredient|so that i can remove the wrongly keyed item.|
+|v1.0|user|decrease the quantity of an item in the inventory|see it reflects the current amount after consuming.|
+|v1.0|user|create new recipes|keep a list of recipes in the application.|
+|v1.0|user|view the list of recipe|view the ingredients that are needed for the recipe.|
+|v1.0|user|delete the recipe|remove unwanted recipe.|
+|v1.0|housewife|add chore to the list|remind myself of the tasks that needs to be completed.|
+|v1.0|housewife|be able to see the chore list|check what is not completed.|
+|v1.0|housewife|remove the task|delete  a task that was keyed wrongly..|
+|v1.0|user|save all my ingredients|keep track of them when the application reloads.|
+|v1.0|user|save all my recipes|choose which recipe that i would like to cook when the application reloads.|
+|v1.0|user|save all my chores|view the chores that need to be done.|
+|v1.0|frequent user|view all my past data|get the latest update on my inventory when the application reloads|
+|v1.0|new user|view more information about the commands|learn to use the various commands.|
+|v2.0|user|search for a specific ingredient|view the details regarding the ingredient.|
+|v2.0|user|search the relevant recipe using a keyword|view the different recipe that are similar.|
+|v2.0|user|search for a chore using a keyword|view the status of the chore.|
+|v2.0|user|create unique recipe names|differentiate between my recipes.|
+|v2.0|user|choose a recipe that contains sufficient ingredients|keep track of my ingredients and cook this meal.|
+|v2.0|user|deduct the ingredients that i have from the recipe that i want to cook|save time from deleting manually.|
+|v2.0|housewife|mark the task as done|track the uncompleted task.|
+|v2.0|user|retrieve all of my past history that i have entered in the application|view them again.|
+|v2.0|user|reset all my ingredients, chores, recipes|restart the application.|
 
 ### Appendix C: Value proposition - Use cases
 
-{Describe the value proposition: what problem does it solve?}
+(For all use cases below, the __System__ is `Kitchen Helper` and the __Actor__ is the `user`, unless otherwise stated)
+```
+Use case: UC01 - Add an ingredient
+MSS:
+1. User purchases an ingredient.
+2. User wants to add to System for tracking purposes.
+3. System adds the ingredient.
+Use case ends.
+
+Extensions:
+2a. System detects invalid format in the entered data.
+  2a1. System throws invalid input format and shows a valid format example.
+  Use case resumes at step 2.
+```
+
+```
+Use case: UC02 - Search for ingredient
+MSS:
+1. User wants to find ingredients.
+2. User enters a keyword in the System.
+3. System displays the ingredient related to the keyword.
+Extentions: 
+3a. No matching ingredients related to the keyword.
+  3a1. Systems show no matching ingredient message
+Use case resumes at step 2.
+Use case ends.
+```
+
+```
+Use case: UC03 - Search for recipe
+MSS:
+1. User wants to find similar recipes.
+2. User enters a keyword in the System.
+3. System displays the recipe's name related to the keyword.
+Use case ends.
+Extentions: 
+3a. No matching recipe related to the keyword.
+  3a1. Systems show no matching recipe message
+Use case resumes at step 2.
+Use case ends.
+```
+
+```
+Use case: UC03 - Search for chore
+MSS:
+1. User wants to find chores.
+2. User enters a keyword in the System.
+3. System displays the chore related to the keyword.
+Use case ends.
+Extentions: 
+3a. No matching chore related to the keyword.
+  3a1. Systems show no matching chore message
+Use case resumes at step 2.
+Use case ends.
+```
 
 ### Appendix D: Non-Functional Requirements
 
 1. Should work on any mainstream OS as long as it has Java `11` or above installed.
 2. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+3. Should not require user to install program file.
+4. Should work for single user.
+5. Should be able to run without internet connection.
 
 ### Appendix E: Glossary
 
 * *Mainstream OS* - Windows, Linux, Unix, OS-X
 
-### Appendix G: Instructions for Manual Testing
-#### G.1. Launch and Shutdown
-#### G.2. Deleting a 
-#### G.3. Saving data
+### Appendix F: Instructions for Manual Testing
+
+#### F.1. Launch and Shutdown
+
+1. Initial launch
+   1. Download the jar file and copy into an empty folder.
+   2. Open up command prompt or terminal.
+   3. Change directory to where the jar file is located.
+   4. Run the command java -jar \<FILE\>.jar (FILE represents the filename)  
+   Expected: Shows a welcome message from Kitchen Helper.
+   
+#### F.2. Add an ingredient
+
+1. Add an ingredient into Kitchen Helper.
+   1. Prerequisites: List all the ingredient using the `listingredient all` command. 
+   2. Test case: 'addingredient /n beef /c meat /q 3 /p 20.20 /e 03/03/2020'    
+   Expected: Entry can be seen using `listingredient all` command.
+    
+#### F.3. Search for ingredient
+1. Search for ingredients in Kitchen Helper.
+   1. Prerequisites: The ingredient list should not be empty.
+   2. Test case: `searchingredient beef`  
+   Expected: Ingredient entries that have the keyword matching `beef` names are listed.
+   3. Test case: 'searchingredient meat'  
+   Expected: Ingredient entries that have the keyword matching `meat` category are listed.
+   4. Test case: `searchingredient 02/02/2020`  
+   Expected: Ingredient entries that have the keyword matching `02/02/2020` date are listed.
+   5. Test case: `searchingredient $20`  
+   Expected: Ingredient entries that have the keyword matching `$20` price are listed.
+   
+#### F.4. Search for recipe
+1. Search for similar recipe in Kitchen Helper.
+   1. Prerequisites: The recipe list should not be empty.
+   2. Test case: 'searchrecipe chicken' 
+   Expected: Recipe's name entries that have the keyword matching `chicken' are listed. 
+   
+#### F.5. Search for chore
+1. Search for chores in Kitchen Helper.
+   1. Prerequisites: The chore list should not be empty.
+   2. Test case: `searchchore groceries`  
+   Expected: Chore entries that have the keyword matching `groceries` description are listed.
+   3. Test case: `searchchore Tuesday`  
+   Expected: Chore entries that have the keyword matching `Tuesday` as a string are listed.  
+   
+#### F.6. Saving data
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}

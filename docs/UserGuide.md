@@ -61,7 +61,8 @@ So what are you waiting for? Let’s go!
 ## 3. Features 
 
 Command Format: 
-- Words that are enclosed by angle brackets are the parameters to be supplied by the user. E.g. `deleterecipe /n <recipe_name>`
+- Words that are enclosed by angle brackets are the parameters to be supplied by the user. E.g. `deleterecipe /n <recipe_name>` 
+From this example, `recipe_name` will be inputted by the user.
 - Items in angle brackets with the word “optional:'' are optional. E.g. `deleteingredient /n <ingredient_name>:<optional:quantity>` can be used as `deleteingredient /n apple or deleteingredient /n name /q 2`
 
 ### 3.1. General Commands
@@ -79,7 +80,7 @@ __Format:__ `exit`
 #### 3.2.1. Adding an ingredient: `addingredient`
 You can add an ingredient to the Kitchen Helper for tracking, containing various details.
 
-__Format:__ `addingredient /n <INGREDIENT> /c <CATEGORY< /q <QUANTITY> /p <PRICE> /e <EXPIRY>`  
+__Format:__ `addingredient /n <INGREDIENT> /c <CATEGORY> /q <QUANTITY> /p <PRICE> /e <EXPIRY>`  
 
 * `INGREDIENT` is the name of your ingredient.
 * `CATEGORY` is the category of your ingredient.  
@@ -92,7 +93,7 @@ The different types of `CATEGORY` are listed below:
   + `Drink`
   + `Miscellaneous`  
   
-:speech_balloon: Any `CATEGORY` that does not falls in the list would be put under `Miscellaneous`.
+Any `CATEGORY` that does not falls in the list would be put under `Miscellaneous`.
 * `QUANTITY` is the number of servings of the ingredient.
   + `QUANTITY` in the format of whole number.
 * `PRICE` is the cost of the ingredient.
@@ -107,26 +108,37 @@ Example |  Outcome
 **Command:** <br> `addingredient /n Milo /c Drink /q 30 /p 10 /e 20/12/2020` <br> **Description:** <br> Creates a new ingredient called `Milo`, which have the following attributes: category `Drink`, quantity `30`, price `10` , expiry date `20/12/2020`. | addingredient /n Milo /c Drink /q 30 /p 10 /e 20/12/2020 <br> You have added Ingredient:Milo Category:Drink Quantity:30 Price:$10.00 Expiry:20/12/2020 to the ingredient list<br>===================================================
 
 #### 3.2.2. List ingredient: `listingredient`
-Prints out a list of ingredients added by the user. Allow users to choose which category to print out from.
+Displays all the items currently in the ingredient list in Kitchen Helper.
 
-__Format:__ `listingredient <all/dairy/drink/fruit/meat/miscellaneous/staple/vegetable>`
-
-__Example of usage:__
-* `listingredient all`
-* `listingredient meat`
-* `listingredient vegetable`
-
-#### 3.2.3. Delete an ingredient: `deleteingredient`
-Delete the specified ingredient or reduce an ingredient’s quantity from the ingredients inventory in Kitchen Helper using ingredient's name or index. 
-The name or index of the ingredient can be found by displaying the list of ingredients. 
-
-__Format__: `deleteingredient /n <INGREDIENT> [/q QUANTITY]` OR `deleteingredient /i <INGREDIENT_INDEX> [/q QUANTITY]`
+__Format__: `listingredient <category>`
+<br>
+<br>
 
 Example |  Outcome
 --------|------------------
-Command: <br> `deleteingredient /n apple /q 2` <br> Description: <br> Deletes `2 apples` from the total quantity of `apples.` | `deleteingredient /n apple /q 2` <br> `The quantity of apple has been changed!`
-Command: <br> `deleteingredient /n wagyu beef` <br> Deletes the ingredient named `wagyu beef` from the ingredients list. | `deleteingredient /n wagyu beef` <br> `wagyu beef has been deleted.`
-Command: <br> `deleteingredient /i 1` <br> Deletes the item specified by `index 1` in the ingredient list. | `deleteingredient /i 1` <br> `apple has been deleted.`
+Command: <br> `listingredient all` <br><br> Description: <br> Displays all ingredients from `all` categories. | listingredient all <br> Here is the list of Ingredients in Inventory <br> Format : Ingredient Name / Quantity / Price / Expiry <br>All:<br>dairy:<br>drink:<br>fruit:<br>meat:<br> Beef / 30 / 20.2 / 20/02/2020 <br>miscellaneous:<br>staple:<br>vegetable:<br>kailan / 30 / 30.45 / 12/03/2020 <br><br>===================================================
+Command: <br> `listingredient meat` <br><br> Description: <br> Displays all ingredients from `meat` categories. | listingredient all <br> Here is the list of Ingredients in Inventory <br> Format : Ingredient Name / Quantity / Price / Expiry <br> Beef / 30 / 20.2 / 20/02/2020 <br><br>===================================================
+
+
+
+#### 3.2.3. Delete an ingredient: `deleteingredient`
+You can delete a specified ingredient or reduce an ingredient’s quantity from the ingredients' inventory in Kitchen Helper by using ingredient's name or index. <br>
+
+You may get the list of ingredients that you have previously keyed in, by referring to the [listingredient](#322-list-ingredient-listingredient) command section. <br>
+
+__Format__: `deleteingredient /n <ingredient_name> [/q quantity]` OR `deleteingredient /i <ingredient_index> [/q quantity]`
+<br>
+<br>
+`ingredient_name` : This refers to the name of the ingredient. <br>
+`ingredient_index`: This refers to the index of the ingredient. <br>
+`quantity` : This refers to the quantity of ingredient to be deducted. <br>
+<br>
+
+Example |  Outcome
+--------|------------------
+Command: <br> `deleteingredient /n apple /q 2` <br><br> Description: <br> Deletes `2 apples` from the total quantity of `apples.` | deleteingredient /n apple /q 2 <br> The quantity of apple has been changed!<br>===================================================
+Command: <br> `deleteingredient /n wagyu beef` <br><br> Deletes the ingredient named `wagyu beef` from the ingredients list. | deleteingredient /n wagyu beef <br> wagyu beef has been deleted.<br>===================================================
+Command: <br> `deleteingredient /i 1` <br><br> Deletes the item specified by `index 1` in the ingredient list. | deleteingredient /i 1 <br> apple has been deleted.<br>===================================================
 
 #### 3.2.4. Search for ingredient: `searchingredient`
 You can search for ingredients based on a given keyword.  
@@ -148,30 +160,56 @@ Adds a new unique recipe into the List in Kitchen Helper.
 
 __Format:__ `addrecipe /n <recipe_name> /i <ingredient_name>:<quantity>:<category>[,..]`
 
+* `recipe_name` is the name of your recipe.
+* `ingredient_name` is the name of your ingredient.
+* `quantity` number of servings of the ingredient.
+* `category` is the category of your ingredient.  
+
+The different types of `CATEGORY` are listed below: 
+  + `Meat`
+  + `Vegetable`
+  + `Staple`
+  + `Fruit`
+  + `Dairy`
+  + `Drink`
+  + `Miscellaneous`  
+  
+:speech_balloon: Any `category` that does not falls in the list could be put under `Miscellaneous`.
+
+:bulb: All `recipe_name` has to be unique. You can check the list of existing recipes by using [`listrecipe all`](#332-list-recipes-listrecipe-1)  
+
 Example |  Outcome
 --------|------------------
-Command: <br> `addrecipe /n Rice Ball /i Rice:3:staple` <br> Description: <br> Creates a new recipe called `Rice Ball` which contains one ingredient, `3` portions of `Rice`. | addrecipe /n Rice Ball /i Rice:3:staple <br>Rice Ball Recipe has been created with 1 ingredients inside.<br>===================================================`
+**Command**: <br> `addrecipe /n Rice Ball /i Rice:3:staple` <br><br> **Description**: <br> Creates a new recipe called `Rice Ball` which contains one ingredient, `3` portions of `Rice`. | addrecipe /n Rice Ball /i Rice:3:staple <br>Rice Ball Recipe has been created with 1 ingredients inside.<br>===================================================`
 
-#### 3.3.2. List recipes: `listrecipe 1`
-Prints out details of recipe added by the user. Allow users to choose which recipe to print out from.
+#### 3.3.2. List recipes: `listrecipe`
+Displays all recipe and its name or the items currently in a particular recipe in Kitchen Helper.
 
-#### Listing all recipes: `listrecipe all`
 
-__Format:__ `listrecipe <recipe number>`
+__Format__: `listrecipe <item number / all>`
+<br>
+<br>
 
-__Example of usage:__
-* `listingredient 1`
-* `listingredient 2`
+Example |  Outcome
+--------|------------------
+Command: <br> `listrecipe all` <br><br> Description: <br> Displays all recipe number and name from RecipeList. | listrecipe all <br>Here is the list of Recipe:<br><br>Format:Recipe Number / Recipe Name<br>1/Chicken Salad<br>2/Chicken Stew<br>===================================================
+Command: <br> `listrecipe 1` <br><br> Description: <br> Displays all ingredients used in recipe `1`. | listingredient 1<br>Here is the list of Ingredients in Recipe:<br><br>Format:Ingredient Name/Ingredient Category/Quantity/Price/Expiry<br>Recipe Name:Chicken Salad<br>milo/drink/10/0.0/null<br><br>===================================================
+
 
 #### 3.3.3. Delete a recipe: `deleterecipe`
-Deletes the specific recipe name or index from the list in Kitchen Helper. The name or index of the recipe can be found by displaying the list of recipes. 
+You can delete a recipe by using the recipe name or index from the list in Kitchen Helper. The name or index of the recipe can be found by displaying the list of recipes. 
 
-__Format__: `deleterecipe /n <RECIPE>` OR `deleterecipe /i <RECIPE_INDEX>`
+__Format__: `deleterecipe /n <recipe_name>` OR `deleterecipe /i <recipe_index>`
+<br>
+<br>
+`recipe_name` : This refers to the name of the recipe. <br>
+`recipe_index`: This refers to the index of the recipe. <br>
+<br>
 
 Example |  Outcome
 --------|------------------
-Command: <br> `deleterecipe /n pasta` <br> Description: <br> Deletes the recipe with the name of `pasta` from the recipe list.| `deleterecipe /n pasta` <br> `pasta has been deleted.`
-Command: <br> `deleterecipe /i 2` <br> Description: <br> Deletes recipe by index. In this case, delete recipe with the `index 2` from the recipe list. | `deleterecipe /i 2` <br> `Beef Salad has been deleted`
+Command: <br> `deleterecipe /n pasta` <br><br> Description: <br> Deletes the recipe with the name of `pasta` from the recipe list.| deleterecipe /n pasta <br> pasta has been deleted.<br>===================================================
+Command: <br> `deleterecipe /i 2` <br><br> Description: <br> Deletes recipe by index. In this case, delete recipe with the `index 2` from the recipe list. | deleterecipe /i 2 <br> Beef Salad has been deleted.<br>===================================================
 
 #### 3.3.4. Search for recipe: `searchrecipe`
 You can search for recipes based on a given keyword.  
@@ -189,9 +227,13 @@ Cooks a recipe specified by the user by the recipe’s name.
 
 __Format:__ `cookrecipe /n <recipe_name> /p <number_of_pax>`
 
+* `recipe_name` is the name of your recipe.
+* `number_of_pax` is the pax count for the specified recipe.
+
 Example |  Outcome
 --------|------------------
-`cookrecipe /n chicken salad /p 2` | Cooks the ‘chicken salad’ recipe with a pax 2.
+**Command**: <br> `cookrecipe /n chicken salad /p 2` <br><br> **Description**: <br> Cooks the recipe `Chicken Salad` for 2 people| Cooks the ‘chicken salad’ recipe with a pax 2.<br>===================================================
+
 
 ### 3.4. Chore
 
@@ -292,9 +334,10 @@ __Recipe Commands__
 
 Feature | Command  
 ------- | -------  
-addrecipe | `addrecipe /n <recipe name> /i <ingredient_name>:<quantity>:<category>[,..]`
+addrecipe | `addrecipe /n <recipe name> /i <ingredient_name>:<quantity>:<category>[,..]` <br> e.g. `addrecipe /n Rice Ball /i Rice:3:staple`
 deleterecipe | `deleterecipe /n <recipe_name>` OR `deleterecipe /i <recipe_index>` <br> e.g. `deleterecipe /n pasta` OR `deleterecipe /i 2`<br>
 searchrecipe | `searchrecipe KEYWORD` <br> e.g. `searchrecipe Chicken Stew`  
+cookrecipe | `cookrecipe /n <recipe_name> /p <number_of_pax>` <br> e.g. `cookrecipe /n chicken salad /p 2`
 
  
 __Chore Commands__  
