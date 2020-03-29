@@ -14,7 +14,7 @@ public class ListRecipeCommand extends Command {
     private String parameter;
     private int itemNumber;
     public static final String COMMAND_FORMAT = "listrecipe <item number/all>";
-    public static final String COMMAND_DESC = "Display the recipe";
+    public static final String COMMAND_DESC = "Display the recipe.";
     public static final String COMMAND_PARAMETER = "INTEGER";
     public static final String COMMAND_EXAMPLE = "Example: listrecipe 1";
     public static final String MESSAGE_USAGE = String.format("%s: %s", COMMAND_WORD, COMMAND_DESC) + Ui.LS + String
