@@ -4,6 +4,7 @@ import seedu.kitchenhelper.exception.KitchenHelperException;
 import seedu.kitchenhelper.object.Chore;
 import seedu.kitchenhelper.object.Recipe;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
+import seedu.kitchenhelper.storage.Storage;
 import seedu.kitchenhelper.ui.Ui;
 
 import java.lang.reflect.Array;
@@ -51,6 +52,7 @@ public class CookRecipeCommand extends Command {
 
         if (checkForSufficientIngredient(ingredientList, recipeToBeCooked)) {
             deductIngredients(ingredientList, recipeToBeCooked);
+            Storage.saveIngredientData(ingredientList);
         } else {
             return COMMAND_FAILURE_INSUFFICIENT_INGREDIENTS;
         }
