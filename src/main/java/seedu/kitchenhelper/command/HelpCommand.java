@@ -35,7 +35,8 @@ public class HelpCommand extends Command {
                 Ui.DIVIDER + Ui.LS + COMMON_LOGO + HelpCommand.MESSAGE_USAGE + Ui.LS + Ui.LS + ExitCommand.MESSAGE_USAGE
                 + Ui.LS + Ui.LS + INGREDIENT_LOGO + AddIngredientCommand.MESSAGE_USAGE + Ui.LS + Ui.LS
                 + ListIngredientCommand.MESSAGE_USAGE + Ui.LS + Ui.LS + DeleteIngredientCommand.MESSAGE_USAGE + Ui.LS
-                + Ui.LS + RECIPE_LOGO + AddRecipeCommand.MESSAGE_USAGE + Ui.LS + Ui.LS + ListRecipeCommand.MESSAGE_USAGE
+                + Ui.LS + RECIPE_LOGO + AddRecipeCommand.MESSAGE_USAGE + Ui.LS + Ui.LS + CookRecipeCommand.MESSAGE_USAGE
+                + Ui.LS + Ui.LS + ListRecipeCommand.MESSAGE_USAGE
                 + Ui.LS + Ui.LS + DeleteRecipeCommand.MESSAGE_USAGE + Ui.LS + Ui.LS + CHORE_LOGO
                 + AddChoreCommand.MESSAGE_USAGE + Ui.LS + Ui.LS + ListChoreCommand.MESSAGE_USAGE + Ui.LS + Ui.LS
                 + DeleteChoreCommand.MESSAGE_USAGE);
