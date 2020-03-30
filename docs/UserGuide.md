@@ -248,10 +248,7 @@ Command: <br> `done 1` <br> Description: <br> Marks the item specified by `index
 
 #### 3.5.1. Select Load Files
 Prompts the user with the option to either load their data from auto-save mode or the manual-save mode. If the user chooses the manual-save mode,  it will overwrite all the data stored in auto-save mode. However, any subsequent changes made to the program data will be saved through auto-save mode regardless of initial load options, to save through manual-save mode, user will have to use the save command [Section 3.5.3, "Save Current State"](#352-save-current-state-save).
-
-
-
-__Format:__ `addchore <task_description> /by <deadline>`  
+ 
 
 Example |  Outcome
 --------|------------------
