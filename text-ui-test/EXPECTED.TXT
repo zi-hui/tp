@@ -8,6 +8,10 @@ What can I do for you?
 ===================================================
 You have no deadlines upcoming in the next 3 days.
 ===================================================
+You have no ingredients that is expiring for the next 3 days.
+You have no ingredients that is low in stock [< 5].
+You have no ingredients that is expired.
+===================================================
 addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable
 Chicken Salad Recipe has been created with 2 ingredients inside.
 ===================================================
@@ -16,6 +20,24 @@ There is an existing recipe with the same name!
 ===================================================
 addrecipe /n Chicken Stew /i Chicken Breast:2:meat, Lettuce:4:vegetable
 Chicken Stew Recipe has been created with 2 ingredients inside.
+===================================================
+listrecipe 1
+
+Here is the list of Ingredients in Recipe:
+Format:Ingredient Name|Ingredient Category|Quantity|Price|Expiry
+Recipe Name:Chicken Salad
+Chicken Breast|meat|2|0.0|null
+Lettuce|vegetable|4|0.0|null
+
+===================================================
+listrecipe all
+
+Here is the list of Recipe:
+
+Format:Recipe Number|Recipe Name
+1|Chicken Salad
+2|Chicken Stew
+
 ===================================================
 addingredient /n Beef /c meat /q 3 /p 20 /e 18/03/2020
 You have added Ingredient:Beef Category:meat Quantity:3 Price:$20.00 Expiry:18/03/2020 to the ingredient list
@@ -51,24 +73,24 @@ You have added Ingredient:Lettuce Category:Vegetable Quantity:8 Price:$20.00 Exp
 ===================================================
 listingredient all
 Here is the list of Ingredients in Inventory:
-Format : Ingredient Name|Quantity|Price|Expiry
+Format : Ingredient Index|Ingredient Name|Quantity|Price|Expiry
 all:
 dairy:
-HL Milk|3|12.2|14/03/2020
+5|HL Milk|3|12.2|14/03/2020
 drink:
 fruit:
-Pear|1|1.0|02/02/2020
+8|Pear|1|1.0|02/02/2020
 meat:
-Beef|3|20.0|18/03/2020
-Beef cubes|3|20.0|18/03/2020
-Chicken Breast|3|20.0|18/03/2020
-Chicken Breast|4|20.0|20/03/2020
+1|Beef|3|20.0|18/03/2020
+2|Beef cubes|3|20.0|18/03/2020
+3|Chicken Breast|3|20.0|18/03/2020
+4|Chicken Breast|4|20.0|20/03/2020
 miscellaneous:
 staple:
 vegetable:
-Lettuce|8|20.0|09/03/2020
-Lettuce|4|20.0|20/03/2020
-kailan|30|30.45|12/03/2020
+6|Lettuce|8|20.0|09/03/2020
+7|Lettuce|4|20.0|20/03/2020
+9|kailan|30|30.45|12/03/2020
 
 ===================================================
 addingredient /n Apple /c fruit /q 1 /p 1 /e 02/02/2020
@@ -76,25 +98,25 @@ You have added Ingredient:Apple Category:fruit Quantity:1 Price:$1.00 Expiry:02/
 ===================================================
 listingredient all
 Here is the list of Ingredients in Inventory:
-Format : Ingredient Name|Quantity|Price|Expiry
+Format : Ingredient Index|Ingredient Name|Quantity|Price|Expiry
 all:
 dairy:
-HL Milk|3|12.2|14/03/2020
+6|HL Milk|3|12.2|14/03/2020
 drink:
 fruit:
-Apple|1|1.0|02/02/2020
-Pear|1|1.0|02/02/2020
+1|Apple|1|1.0|02/02/2020
+9|Pear|1|1.0|02/02/2020
 meat:
-Beef|3|20.0|18/03/2020
-Beef cubes|3|20.0|18/03/2020
-Chicken Breast|3|20.0|18/03/2020
-Chicken Breast|4|20.0|20/03/2020
+2|Beef|3|20.0|18/03/2020
+3|Beef cubes|3|20.0|18/03/2020
+4|Chicken Breast|3|20.0|18/03/2020
+5|Chicken Breast|4|20.0|20/03/2020
 miscellaneous:
 staple:
 vegetable:
-Lettuce|8|20.0|09/03/2020
-Lettuce|4|20.0|20/03/2020
-kailan|30|30.45|12/03/2020
+7|Lettuce|8|20.0|09/03/2020
+8|Lettuce|4|20.0|20/03/2020
+10|kailan|30|30.45|12/03/2020
 
 ===================================================
 addingredient /n Apple /c fruit /q 1 /p 1 /e 01/02/2020
@@ -102,26 +124,26 @@ You have added Ingredient:Apple Category:fruit Quantity:1 Price:$1.00 Expiry:01/
 ===================================================
 listingredient all
 Here is the list of Ingredients in Inventory:
-Format : Ingredient Name|Quantity|Price|Expiry
+Format : Ingredient Index|Ingredient Name|Quantity|Price|Expiry
 all:
 dairy:
-HL Milk|3|12.2|14/03/2020
+7|HL Milk|3|12.2|14/03/2020
 drink:
 fruit:
-Apple|1|1.0|01/02/2020
-Apple|1|1.0|02/02/2020
-Pear|1|1.0|02/02/2020
+1|Apple|1|1.0|01/02/2020
+2|Apple|1|1.0|02/02/2020
+10|Pear|1|1.0|02/02/2020
 meat:
-Beef|3|20.0|18/03/2020
-Beef cubes|3|20.0|18/03/2020
-Chicken Breast|3|20.0|18/03/2020
-Chicken Breast|4|20.0|20/03/2020
+3|Beef|3|20.0|18/03/2020
+4|Beef cubes|3|20.0|18/03/2020
+5|Chicken Breast|3|20.0|18/03/2020
+6|Chicken Breast|4|20.0|20/03/2020
 miscellaneous:
 staple:
 vegetable:
-Lettuce|8|20.0|09/03/2020
-Lettuce|4|20.0|20/03/2020
-kailan|30|30.45|12/03/2020
+8|Lettuce|8|20.0|09/03/2020
+9|Lettuce|4|20.0|20/03/2020
+11|kailan|30|30.45|12/03/2020
 
 ===================================================
 addingredient /n Apple /c fruit /q 1 /p 1 /e 03/02/2020
@@ -129,27 +151,27 @@ You have added Ingredient:Apple Category:fruit Quantity:1 Price:$1.00 Expiry:03/
 ===================================================
 listingredient all
 Here is the list of Ingredients in Inventory:
-Format : Ingredient Name|Quantity|Price|Expiry
+Format : Ingredient Index|Ingredient Name|Quantity|Price|Expiry
 all:
 dairy:
-HL Milk|3|12.2|14/03/2020
+8|HL Milk|3|12.2|14/03/2020
 drink:
 fruit:
-Apple|1|1.0|01/02/2020
-Apple|1|1.0|02/02/2020
-Apple|1|1.0|03/02/2020
-Pear|1|1.0|02/02/2020
+1|Apple|1|1.0|01/02/2020
+2|Apple|1|1.0|02/02/2020
+3|Apple|1|1.0|03/02/2020
+11|Pear|1|1.0|02/02/2020
 meat:
-Beef|3|20.0|18/03/2020
-Beef cubes|3|20.0|18/03/2020
-Chicken Breast|3|20.0|18/03/2020
-Chicken Breast|4|20.0|20/03/2020
+4|Beef|3|20.0|18/03/2020
+5|Beef cubes|3|20.0|18/03/2020
+6|Chicken Breast|3|20.0|18/03/2020
+7|Chicken Breast|4|20.0|20/03/2020
 miscellaneous:
 staple:
 vegetable:
-Lettuce|8|20.0|09/03/2020
-Lettuce|4|20.0|20/03/2020
-kailan|30|30.45|12/03/2020
+9|Lettuce|8|20.0|09/03/2020
+10|Lettuce|4|20.0|20/03/2020
+12|kailan|30|30.45|12/03/2020
 
 ===================================================
 deleteingredient /n Apple
@@ -166,23 +188,23 @@ Pear has been deleted.
 ===================================================
 listingredient all
 Here is the list of Ingredients in Inventory:
-Format : Ingredient Name|Quantity|Price|Expiry
+Format : Ingredient Index|Ingredient Name|Quantity|Price|Expiry
 all:
 dairy:
-HL Milk|3|12.2|14/03/2020
+5|HL Milk|3|12.2|14/03/2020
 drink:
 fruit:
 meat:
-Beef|3|20.0|18/03/2020
-Beef cubes|3|20.0|18/03/2020
-Chicken Breast|3|20.0|18/03/2020
-Chicken Breast|4|20.0|20/03/2020
+1|Beef|3|20.0|18/03/2020
+2|Beef cubes|3|20.0|18/03/2020
+3|Chicken Breast|3|20.0|18/03/2020
+4|Chicken Breast|4|20.0|20/03/2020
 miscellaneous:
 staple:
 vegetable:
-Lettuce|8|20.0|09/03/2020
-Lettuce|4|20.0|20/03/2020
-kailan|30|30.45|12/03/2020
+6|Lettuce|8|20.0|09/03/2020
+7|Lettuce|4|20.0|20/03/2020
+8|kailan|30|30.45|12/03/2020
 
 ===================================================
 addchore buy groceries /by Tuesday 12pm
@@ -260,9 +282,38 @@ You have deleted this chore:
 [x] buy groceries (by: Tuesday 12pm)
 Now you have 0 chores in the list.
 ===================================================
+addingredient /n Beef /c meat /q 3 /p 20 /e 18/03/2020
+You have added Ingredient:Beef Category:meat Quantity:3 Price:$20.00 Expiry:18/03/2020 to the ingredient list
+===================================================
+addchore buy groceries /by Tuesday 12pm
+You have added this chore:
+[x] buy groceries (by: Tuesday 12pm)
+Now you have 1 chore in the list.
+===================================================
 listingredient all
 Here is the list of Ingredients in Inventory:
-Format : Ingredient Name|Quantity|Price|Expiry
+Format : Ingredient Index|Ingredient Name|Quantity|Price|Expiry
+all:
+dairy:
+drink:
+fruit:
+meat:
+1|Beef|3|20.0|18/03/2020
+miscellaneous:
+staple:
+vegetable:
+
+===================================================
+listchore
+Here are the chores in your list:
+1. [x] buy groceries (by: Tuesday 12pm)
+===================================================
+reset
+All data has been wiped
+===================================================
+listingredient all
+Here is the list of Ingredients in Inventory:
+Format : Ingredient Index|Ingredient Name|Quantity|Price|Expiry
 The Ingredient List is currently empty.
 ===================================================
 listchore
