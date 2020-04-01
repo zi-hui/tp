@@ -65,8 +65,8 @@ public class IngredientNotification {
 
     public void addToNotification(ArrayList<Ingredient> ingredientArrayList) {
         for (Ingredient i : ingredientArrayList) {
-            notification += i.getIngredientName() + "|" + i.getQuantity() + "|"
-                    + i.getPrice() + "|" + i.getExpiryDate() + "\n";;
+            notification += "Ingredient name : " + i.getIngredientName() + " | " + i.getQuantity() + " portion(s) | $"
+                    + i.getPrice() + " | Expiry Date : " + i.getExpiryDate() + "\n";;
         }
     }
 
