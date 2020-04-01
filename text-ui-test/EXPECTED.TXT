@@ -76,21 +76,21 @@ Here is the list of Ingredients in Inventory:
 Format : [Ingredient Index] Ingredient Name | Quantity | Price | Expiry
 all:
 dairy:
-[5] HL Milk | 3 portion(s) | $12.2 | 14/03/2020
+[5] Ingredient Name : HL Milk | 3 portion(s) | $12.2 | Expiry Date : 14/03/2020
 drink:
 fruit:
-[8] Pear | 1 portion(s) | $1.0 | 02/02/2020
+[8] Ingredient Name : Pear | 1 portion(s) | $1.0 | Expiry Date : 02/02/2020
 meat:
-[1] Beef | 3 portion(s) | $20.0 | 18/03/2020
-[2] Beef cubes | 3 portion(s) | $20.0 | 18/03/2020
-[3] Chicken Breast | 3 portion(s) | $20.0 | 18/03/2020
-[4] Chicken Breast | 4 portion(s) | $20.0 | 20/03/2020
+[1] Ingredient Name : Beef | 3 portion(s) | $20.0 | Expiry Date : 18/03/2020
+[2] Ingredient Name : Beef cubes | 3 portion(s) | $20.0 | Expiry Date : 18/03/2020
+[3] Ingredient Name : Chicken Breast | 3 portion(s) | $20.0 | Expiry Date : 18/03/2020
+[4] Ingredient Name : Chicken Breast | 4 portion(s) | $20.0 | Expiry Date : 20/03/2020
 miscellaneous:
 staple:
 vegetable:
-[6] Lettuce | 8 portion(s) | $20.0 | 09/03/2020
-[7] Lettuce | 4 portion(s) | $20.0 | 20/03/2020
-[9] kailan | 30 portion(s) | $30.45 | 12/03/2020
+[6] Ingredient Name : Lettuce | 8 portion(s) | $20.0 | Expiry Date : 09/03/2020
+[7] Ingredient Name : Lettuce | 4 portion(s) | $20.0 | Expiry Date : 20/03/2020
+[9] Ingredient Name : kailan | 30 portion(s) | $30.45 | Expiry Date : 12/03/2020
 
 ===================================================
 addingredient /n Apple /c fruit /q 1 /p 1 /e 02/02/2020
@@ -101,22 +101,22 @@ Here is the list of Ingredients in Inventory:
 Format : [Ingredient Index] Ingredient Name | Quantity | Price | Expiry
 all:
 dairy:
-[6] HL Milk | 3 portion(s) | $12.2 | 14/03/2020
+[6] Ingredient Name : HL Milk | 3 portion(s) | $12.2 | Expiry Date : 14/03/2020
 drink:
 fruit:
-[1] Apple | 1 portion(s) | $1.0 | 02/02/2020
-[9] Pear | 1 portion(s) | $1.0 | 02/02/2020
+[1] Ingredient Name : Apple | 1 portion(s) | $1.0 | Expiry Date : 02/02/2020
+[9] Ingredient Name : Pear | 1 portion(s) | $1.0 | Expiry Date : 02/02/2020
 meat:
-[2] Beef | 3 portion(s) | $20.0 | 18/03/2020
-[3] Beef cubes | 3 portion(s) | $20.0 | 18/03/2020
-[4] Chicken Breast | 3 portion(s) | $20.0 | 18/03/2020
-[5] Chicken Breast | 4 portion(s) | $20.0 | 20/03/2020
+[2] Ingredient Name : Beef | 3 portion(s) | $20.0 | Expiry Date : 18/03/2020
+[3] Ingredient Name : Beef cubes | 3 portion(s) | $20.0 | Expiry Date : 18/03/2020
+[4] Ingredient Name : Chicken Breast | 3 portion(s) | $20.0 | Expiry Date : 18/03/2020
+[5] Ingredient Name : Chicken Breast | 4 portion(s) | $20.0 | Expiry Date : 20/03/2020
 miscellaneous:
 staple:
 vegetable:
-[7] Lettuce | 8 portion(s) | $20.0 | 09/03/2020
-[8] Lettuce | 4 portion(s) | $20.0 | 20/03/2020
-[10] kailan | 30 portion(s) | $30.45 | 12/03/2020
+[7] Ingredient Name : Lettuce | 8 portion(s) | $20.0 | Expiry Date : 09/03/2020
+[8] Ingredient Name : Lettuce | 4 portion(s) | $20.0 | Expiry Date : 20/03/2020
+[10] Ingredient Name : kailan | 30 portion(s) | $30.45 | Expiry Date : 12/03/2020
 
 ===================================================
 addingredient /n Apple /c fruit /q 1 /p 1 /e 01/02/2020
@@ -127,23 +127,23 @@ Here is the list of Ingredients in Inventory:
 Format : [Ingredient Index] Ingredient Name | Quantity | Price | Expiry
 all:
 dairy:
-[7] HL Milk | 3 portion(s) | $12.2 | 14/03/2020
+[7] Ingredient Name : HL Milk | 3 portion(s) | $12.2 | Expiry Date : 14/03/2020
 drink:
 fruit:
-[1] Apple | 1 portion(s) | $1.0 | 01/02/2020
-[2] Apple | 1 portion(s) | $1.0 | 02/02/2020
-[10] Pear | 1 portion(s) | $1.0 | 02/02/2020
+[1] Ingredient Name : Apple | 1 portion(s) | $1.0 | Expiry Date : 01/02/2020
+[2] Ingredient Name : Apple | 1 portion(s) | $1.0 | Expiry Date : 02/02/2020
+[10] Ingredient Name : Pear | 1 portion(s) | $1.0 | Expiry Date : 02/02/2020
 meat:
-[3] Beef | 3 portion(s) | $20.0 | 18/03/2020
-[4] Beef cubes | 3 portion(s) | $20.0 | 18/03/2020
-[5] Chicken Breast | 3 portion(s) | $20.0 | 18/03/2020
-[6] Chicken Breast | 4 portion(s) | $20.0 | 20/03/2020
+[3] Ingredient Name : Beef | 3 portion(s) | $20.0 | Expiry Date : 18/03/2020
+[4] Ingredient Name : Beef cubes | 3 portion(s) | $20.0 | Expiry Date : 18/03/2020
+[5] Ingredient Name : Chicken Breast | 3 portion(s) | $20.0 | Expiry Date : 18/03/2020
+[6] Ingredient Name : Chicken Breast | 4 portion(s) | $20.0 | Expiry Date : 20/03/2020
 miscellaneous:
 staple:
 vegetable:
-[8] Lettuce | 8 portion(s) | $20.0 | 09/03/2020
-[9] Lettuce | 4 portion(s) | $20.0 | 20/03/2020
-[11] kailan | 30 portion(s) | $30.45 | 12/03/2020
+[8] Ingredient Name : Lettuce | 8 portion(s) | $20.0 | Expiry Date : 09/03/2020
+[9] Ingredient Name : Lettuce | 4 portion(s) | $20.0 | Expiry Date : 20/03/2020
+[11] Ingredient Name : kailan | 30 portion(s) | $30.45 | Expiry Date : 12/03/2020
 
 ===================================================
 addingredient /n Apple /c fruit /q 1 /p 1 /e 03/02/2020
@@ -154,24 +154,24 @@ Here is the list of Ingredients in Inventory:
 Format : [Ingredient Index] Ingredient Name | Quantity | Price | Expiry
 all:
 dairy:
-[8] HL Milk | 3 portion(s) | $12.2 | 14/03/2020
+[8] Ingredient Name : HL Milk | 3 portion(s) | $12.2 | Expiry Date : 14/03/2020
 drink:
 fruit:
-[1] Apple | 1 portion(s) | $1.0 | 01/02/2020
-[2] Apple | 1 portion(s) | $1.0 | 02/02/2020
-[3] Apple | 1 portion(s) | $1.0 | 03/02/2020
-[11] Pear | 1 portion(s) | $1.0 | 02/02/2020
+[1] Ingredient Name : Apple | 1 portion(s) | $1.0 | Expiry Date : 01/02/2020
+[2] Ingredient Name : Apple | 1 portion(s) | $1.0 | Expiry Date : 02/02/2020
+[3] Ingredient Name : Apple | 1 portion(s) | $1.0 | Expiry Date : 03/02/2020
+[11] Ingredient Name : Pear | 1 portion(s) | $1.0 | Expiry Date : 02/02/2020
 meat:
-[4] Beef | 3 portion(s) | $20.0 | 18/03/2020
-[5] Beef cubes | 3 portion(s) | $20.0 | 18/03/2020
-[6] Chicken Breast | 3 portion(s) | $20.0 | 18/03/2020
-[7] Chicken Breast | 4 portion(s) | $20.0 | 20/03/2020
+[4] Ingredient Name : Beef | 3 portion(s) | $20.0 | Expiry Date : 18/03/2020
+[5] Ingredient Name : Beef cubes | 3 portion(s) | $20.0 | Expiry Date : 18/03/2020
+[6] Ingredient Name : Chicken Breast | 3 portion(s) | $20.0 | Expiry Date : 18/03/2020
+[7] Ingredient Name : Chicken Breast | 4 portion(s) | $20.0 | Expiry Date : 20/03/2020
 miscellaneous:
 staple:
 vegetable:
-[9] Lettuce | 8 portion(s) | $20.0 | 09/03/2020
-[10] Lettuce | 4 portion(s) | $20.0 | 20/03/2020
-[12] kailan | 30 portion(s) | $30.45 | 12/03/2020
+[9] Ingredient Name : Lettuce | 8 portion(s) | $20.0 | Expiry Date : 09/03/2020
+[10] Ingredient Name : Lettuce | 4 portion(s) | $20.0 | Expiry Date : 20/03/2020
+[12] Ingredient Name : kailan | 30 portion(s) | $30.45 | Expiry Date : 12/03/2020
 
 ===================================================
 deleteingredient /n Apple
@@ -191,20 +191,20 @@ Here is the list of Ingredients in Inventory:
 Format : [Ingredient Index] Ingredient Name | Quantity | Price | Expiry
 all:
 dairy:
-[5] HL Milk | 3 portion(s) | $12.2 | 14/03/2020
+[5] Ingredient Name : HL Milk | 3 portion(s) | $12.2 | Expiry Date : 14/03/2020
 drink:
 fruit:
 meat:
-[1] Beef | 3 portion(s) | $20.0 | 18/03/2020
-[2] Beef cubes | 3 portion(s) | $20.0 | 18/03/2020
-[3] Chicken Breast | 3 portion(s) | $20.0 | 18/03/2020
-[4] Chicken Breast | 4 portion(s) | $20.0 | 20/03/2020
+[1] Ingredient Name : Beef | 3 portion(s) | $20.0 | Expiry Date : 18/03/2020
+[2] Ingredient Name : Beef cubes | 3 portion(s) | $20.0 | Expiry Date : 18/03/2020
+[3] Ingredient Name : Chicken Breast | 3 portion(s) | $20.0 | Expiry Date : 18/03/2020
+[4] Ingredient Name : Chicken Breast | 4 portion(s) | $20.0 | Expiry Date : 20/03/2020
 miscellaneous:
 staple:
 vegetable:
-[6] Lettuce | 8 portion(s) | $20.0 | 09/03/2020
-[7] Lettuce | 4 portion(s) | $20.0 | 20/03/2020
-[8] kailan | 30 portion(s) | $30.45 | 12/03/2020
+[6] Ingredient Name : Lettuce | 8 portion(s) | $20.0 | Expiry Date : 09/03/2020
+[7] Ingredient Name : Lettuce | 4 portion(s) | $20.0 | Expiry Date : 20/03/2020
+[8] Ingredient Name : kailan | 30 portion(s) | $30.45 | Expiry Date : 12/03/2020
 
 ===================================================
 addchore buy groceries /by Tuesday 12pm
@@ -298,7 +298,7 @@ dairy:
 drink:
 fruit:
 meat:
-[1] Beef | 3 portion(s) | $20.0 | 18/03/2020
+[1] Ingredient Name : Beef | 3 portion(s) | $20.0 | Expiry Date : 18/03/2020
 miscellaneous:
 staple:
 vegetable:
