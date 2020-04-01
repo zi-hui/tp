@@ -46,11 +46,11 @@ public class Storage {
      * @param filePathRecipe String of filepath for stored Recipe data.
      * @param filePathChore String of filepath for stored Chore data.
      */
-    public Storage(String filePathIngredient, String filePathRecipe, String filePathChore) {
+    public Storage(String filePathIngredient, String filePathRecipe, String filePathChore, String filePathExpenditure) {
         this.filePathIngredient = filePathIngredient;
         this.filePathRecipe = filePathRecipe;
         this.filePathChore = filePathChore;
-        //this.filePathExpenditure = filePathExpenditure;
+        this.filePathExpenditure = filePathExpenditure;
     }
 
     public static void copyFile(File source, File dest) {
@@ -287,18 +287,18 @@ public class Storage {
 
         try {
             String[] variables = userData.split(",");
-            int expenditureIndex = variables[0].indexOf('$');
-            Double expenditure = Double.valueOf(variables[0].substring(expenditureIndex));
-            int amountUsedIndex = variables[1].indexOf("$");
-            Double amountUsed = Double.valueOf(variables[1].substring(amountUsedIndex));
+            int expenditureIndex = variables[0].indexOf('$') + 1;
+            double expenditure = Double.parseDouble(variables[0].substring(expenditureIndex));
+            int amountUsedIndex = variables[1].indexOf("$") + 1;
+            double amountUsed = Double.parseDouble(variables[1].substring(amountUsedIndex));
 
             DateFormat dateFormat = new SimpleDateFormat("EEE dd/MM/yyyy HH:mm:ss");
             Date lastSavedDate = dateFormat.parse(variables[2]);
             Expenditure.getInstance().loadExpenditureVariables(expenditure, amountUsed, lastSavedDate);
         } catch (IndexOutOfBoundsException e) {
-            Expenditure.getInstance().loadExpenditureVariables(0, 0, null);
+            throw new FileNotFoundException();
         } catch (ParseException e) {
-            System.out.println("lastSavedDate loading error");
+            throw new FileNotFoundException();
         } finally {
             scanner.close();
         }
@@ -360,9 +360,6 @@ public class Storage {
     public static void saveExpenditureData() {
         try {
             FileWriter fw = new FileWriter("outputExpenditure.txt");
-            /*for (Chore chore : choreList) {
-                fw.write(chore.toString() + System.lineSeparator());
-            }*/
             fw.write(Expenditure.getInstance().saveExpenditureFile());
             fw.close();
         } catch (IOException err) {

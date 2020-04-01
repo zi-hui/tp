@@ -1,0 +1,3 @@
+/n apple /c fruit /q 4 /p 0.8 /e 08/04/2020
+/n orange /c fruit /q 4 /p 0.3 /e 08/04/2020
+/n pear /c fruit /q 4 /p 1.0 /e 07/04/2020

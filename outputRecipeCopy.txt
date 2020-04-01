@@ -1,0 +1,2 @@
+/n Chicken Salad [/n Lettuce /c vegetable /q 4 /p 0.0 /e null, /n Chicken Breast /c meat /q 2 /p 0.0 /e null] 2
+/n orange juice [/n orange /c fruit /q 8 /p 0.0 /e null] 1

@@ -73,11 +73,7 @@ public class Expenditure {
         calendar.set(Calendar.HOUR_OF_DAY, 0);
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);
-        //DateFormat dateFormat = new SimpleDateFormat("EEE dd/MM/yyyy HH:mm:ss");
-        //System.out.println(dateFormat.format(c.getTime()));      // This past Monday [ May include today ]
         Date pastMonday = calendar.getTime(); //past Monday
-        //calendar.add(Calendar.DATE,7);
-        //Date nextMonday = calendar.getTime(); //next Monday
         if (lastSavedDate == null || lastSavedDate.before(pastMonday)) {
             totalExpenditure = 0;
             amountUsedInCooking = 0;
@@ -110,13 +106,13 @@ public class Expenditure {
 
     public void addAmountForCooking(Ingredient ingredientToDelete, Integer quantityToDelete) {
         amountUsedInCooking += changePrice(ingredientToDelete, quantityToDelete);
-        //Storage.saveExpenditureData();
+        Storage.saveExpenditureData();
     }
 
     public void editExpenditure(Ingredient ingredientToDelete, Integer quantityToDelete) {
         removeFromExpenditure(ingredientToDelete, quantityToDelete);
         addToAmountUsed(ingredientToDelete, quantityToDelete);
-        //Storage.saveExpenditureData();
+        Storage.saveExpenditureData();
     }
 
     public double changePrice(Ingredient ingredientToDelete, Integer quantityToDelete) {

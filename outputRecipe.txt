@@ -1,1 +1,3 @@
 /n Chicken Salad [/n Chicken Breast /c meat /q 2 /p 0.0 /e null, /n Lettuce /c vegetable /q 4 /p 0.0 /e null] 2
+/n orange juice [/n orange /c fruit /q 8 /p 0.0 /e null] 1
+/n buttered corn [/n butter /c dairy /q 1 /p 0.0 /e null, /n corn /c vegetable /q 4 /p 0.0 /e null] 2
