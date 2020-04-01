@@ -70,13 +70,6 @@ public class KitchenHelper {
      * Populate empty saved state files with current output files if save command have never been called by user.
      */
     private void createNewFiles() {
-        var sourceIngredient = new File("outputIngredient.txt");
-        var sourceRecipe = new File("outputRecipe.txt");
-        var sourceChore = new File("outputChore.txt");
-        var destIngredient = new File("outputIngredientCopy.txt");
-        var destRecipe = new File("outputRecipeCopy.txt");
-        var destChore = new File("outputChoreCopy.txt");
-
         File fileChore = new File("outputChore.txt");
         File fileIngredient = new File("outputIngredient.txt");
         File fileRecipe = new File("outputRecipe.txt");
@@ -97,10 +90,16 @@ public class KitchenHelper {
             e.printStackTrace();
         }
 
+        var sourceIngredient = new File("outputIngredient.txt");
+        var sourceRecipe = new File("outputRecipe.txt");
+        var sourceChore = new File("outputChore.txt");
+        var destIngredient = new File("outputIngredientCopy.txt");
+        var destRecipe = new File("outputRecipeCopy.txt");
+        var destChore = new File("outputChoreCopy.txt");
+
         if (destIngredient.length() == 0) {
             Storage.copyFile(sourceIngredient, destIngredient);
         }
-
         if (destRecipe.length() == 0) {
             Storage.copyFile(sourceRecipe, destRecipe);
         }

@@ -44,9 +44,9 @@ public class SaveStateCommand extends Command {
         var destRecipe = new File("outputRecipeCopy.txt");
         var destChore = new File("outputChoreCopy.txt");
 
-            Storage.copyFile(sourceIngredient, destIngredient);
-            Storage.copyFile(sourceRecipe, destRecipe);
-            Storage.copyFile(sourceChore, destChore);
+        Storage.copyFile(sourceIngredient, destIngredient);
+        Storage.copyFile(sourceRecipe, destRecipe);
+        Storage.copyFile(sourceChore, destChore);
     }
 
     /**
