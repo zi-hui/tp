@@ -77,6 +77,26 @@ public class KitchenHelper {
         var destRecipe = new File("outputRecipeCopy.txt");
         var destChore = new File("outputChoreCopy.txt");
 
+        File fileChore = new File("outputChore.txt");
+        File fileIngredient = new File("outputIngredient.txt");
+        File fileRecipe = new File("outputRecipe.txt");
+
+        try {
+            if (!fileChore.exists()) {
+                fileChore.createNewFile();
+            }
+
+            if (!fileIngredient.exists()) {
+                fileIngredient.createNewFile();
+            }
+
+            if (!fileRecipe.exists()) {
+                fileRecipe.createNewFile();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         if (destIngredient.length() == 0) {
             Storage.copyFile(sourceIngredient, destIngredient);
         }

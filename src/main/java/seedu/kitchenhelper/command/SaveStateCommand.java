@@ -7,6 +7,7 @@ import seedu.kitchenhelper.storage.Storage;
 import seedu.kitchenhelper.ui.Ui;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -35,7 +36,7 @@ public class SaveStateCommand extends Command {
     /**
      * Copy current output files of Kitchen Helper into new output files to save current state.
      */
-    private void chooseSaveOption() throws IOException {
+    private void chooseSaveOption() {
         var sourceIngredient = new File("outputIngredient.txt");
         var sourceRecipe = new File("outputRecipe.txt");
         var sourceChore = new File("outputChore.txt");
@@ -43,9 +44,9 @@ public class SaveStateCommand extends Command {
         var destRecipe = new File("outputRecipeCopy.txt");
         var destChore = new File("outputChoreCopy.txt");
 
-        Storage.copyFile(sourceIngredient, destIngredient);
-        Storage.copyFile(sourceRecipe, destRecipe);
-        Storage.copyFile(sourceChore, destChore);
+            Storage.copyFile(sourceIngredient, destIngredient);
+            Storage.copyFile(sourceRecipe, destRecipe);
+            Storage.copyFile(sourceChore, destChore);
     }
 
     /**
