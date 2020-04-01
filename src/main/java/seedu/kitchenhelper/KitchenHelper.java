@@ -38,7 +38,7 @@ public class KitchenHelper {
         String userChoice = ui.getUserChoice();
         ui.validUserChoice(userChoice);
         ui.showWelcomeMessage();
-        if (userChoice.equals("1")) {
+        if (userChoice.trim().equals("1")) {
             storage = new Storage("outputIngredient.txt", "outputRecipe.txt",
                     "outputChore.txt");
             try {
@@ -50,7 +50,7 @@ public class KitchenHelper {
                 recipeList = new ArrayList<>();
                 choreList = new ArrayList<>();
             }
-        } else if (userChoice.equals("2")) {
+        } else if (userChoice.trim().equals("2")) {
             createNewFiles();
             storage = new Storage("outputIngredientCopy.txt", "outputRecipeCopy.txt",
                     "outputChoreCopy.txt");
