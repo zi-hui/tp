@@ -138,6 +138,12 @@ public class Parser {
         return addCmd;
     }
 
+    /**
+     * Checker for command format for addrecipe command.
+     *
+     * @param command   The full user input without keyword.
+     * @return  true if is of valid command, otherwise false.
+     */
     public Boolean checkAddRecipeCmdFormat(String command) {
         Boolean isValid = true;
         String cmd = command;
