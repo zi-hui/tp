@@ -17,7 +17,7 @@ By: `Team CS2113T-M16-2` Since: `March 2020` License: `MIT`
 
     + [3.3. Recipe](#33-recipe)  
       - [3.3.1. Adding a recipe: `addrecipe`](#331-adding-a-recipe-addrecipe)  
-      - [3.3.2. List recipe: `listrecipe`](#332-list-recipes-listrecipe-1)  
+      - [3.3.2. List recipe: `listrecipe`](#332-list-recipes-listrecipe)  
       - [3.3.3. Delete a recipe: `deleterecipe`](#333-delete-a-recipe-deleterecipe)
       - [3.3.4. Search for recipe: `searchrecipe`](#334-search-for-recipe-searchrecipe)  
       - [3.3.5. Cooking a recipe: `cookrecipe`](#335-cooking-a-recipe-cookrecipe)
