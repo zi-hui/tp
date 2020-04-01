@@ -4,6 +4,14 @@ package seedu.kitchenhelper.exception;
  * Signals that some given data does not fulfill some constraints.
  */
 public class KitchenHelperException extends Exception {
+    
+    /**
+     * Empty constructor for KitchenHelperException.
+     */
+    public KitchenHelperException() {
+    
+    }
+    
     /**
      * Constructor for KitchenHelperException.
      *
@@ -12,4 +20,5 @@ public class KitchenHelperException extends Exception {
     public KitchenHelperException(String message) {
         super(message);
     }
+    
 }

@@ -54,8 +54,9 @@ By: `CS2113T-M16-2` Since: `2020`
 
 ## 1. Introduction
 ### 1.1. Purpose
+The document contains the specified architecture and software design specifications for the application, Kitchen Helper. 
 ### 1.2. Scope
-
+This describes the software architecture and software design requirements for Kitchen Helper. This guide is mainly for developers, designers and software engineers that are or going to work on Kitchen Helper. 
 ## 2. Setting up
 
 ### 2.1. Prerequisites
@@ -77,10 +78,24 @@ By: `CS2113T-M16-2` Since: `2020`
 ## 3. Design
 This section provides a high level overview of our application, Kitchen Helper.
 ### 3.1. Architecture
-Our architecture is broken down into six classes, mainly Command, Notification, Object, Parser, Storage and UI. All modules can be controlled and accessed by the main class, Kitchen Helper. 
-<br>
+
 ![Architecture](images/KitchenHelperMain.png)
-<br>
+The image above explains the design of the application, Kitchen Helper. 
+
+The main driver of the application is `Main: Kitchen Helper`. It is responsible for mainly two phases:
+- At application launch
+    - This class will initialise the components in the correct sequence and is in charge of connecting them with each other.
+- At shut down
+    - This class will invoke cleanup method for the components when necessary.
+    
+In addition to that, the architecture of Kitchen Helper is broken down into seven classes, mainly the following: 
+- `Ui`: This class mainly handles the UI of the application.
+- `Parser`: This class mainly handles the parsing and handling of user commands.
+- `Command`: This class handles the type of command.
+- `Ingredient`: This class manages the data of data type ingredient in memory.
+- `Chore`: This class manages the data of data type chore in memory.
+- `Recipe`: This class manages the data of data type recipe in memory.
+- `Storage`: This class reads data from and writes data back into a text file for future uses.
 
 ### 3.2. Ui Component
 ![Ui Component](images/UI_Component.png)
@@ -224,6 +239,8 @@ Alternative 2: Create 2 more constructors just for deduction of quantity for ing
 |-----|-----|
 |**Pros**|This gives us more flexibility on what object can be created with different variables since there are two methods of delete of ingredients.|
 |**Cons**|There is an overload of constructors.|
+<br>
+
 #### 4.1.4. Search for ingredients based on keyword(s)
 
 The search for ingredients feature allows the user to find ingredients using a keyword in the ingredient’s list.  
@@ -495,8 +512,60 @@ Alternative 2: building an index on the first letter of the recipe name
 
 ### 4.3. Chore-related Features
 #### 4.3.1. Addition of chore
+The feature for addition of `chore`s allows the user to add `chore`s to a list to keep track of their completion. For example, `addchore buy groceries /by Monday 12pm` adds the `chore` `buy groceries` with deadline `Monday 12pm` to the `chore` list, and marks it as undone. 
+
+##### Implementation  
+
+![AddChoreCommand](images/AddChoreCommand.png)
+
+Explanation of the sequence diagram above:
+1. The user inputs `addchore buy groceries /by Monday 12pm`.  
+2. The `Kitchen Helper` class calls `Parser#parseUserCommand()` which will split the user input into 2 substrings, the command and its attributes.  
+3. The `AddChoreCommand` has been determined by a switch case, and the `Parser#prepareAddChore` method is called. 
+4. If the method successfully extracts the task description and deadline, a new `AddChoreCommand` object is created. Otherwise, a new `InvalidCommand` object is created.  
+5. After which, the `AddChoreCommand` object will be returned to the `Kitchen Helper` class.
+6. The `Kitchen Helper` class will call the `execute()` method in the `AddChoreCommand` class, which calls its own `addChore()` method.
+7. This method will create a new `chore` and add it to the `chore` list.
+8. The execute() method returns a String to inform the user of the successful outcome. 
+
+##### Design considerations:
+
+- We came up with two ways that a user can set the deadline, either as a String or as a Date object. 
+
+|     |     |
+|-----|-----|
+|**Pros** | Increases flexibility if the user is unable to specify a date or time to complete the chore by.|  
+|**Cons** | Unable to alert the users of approaching deadlines that are set as Strings.|
+
 #### 4.3.2. List all/ specific chore(s)
+The feature to list `chore`s allows the user to view the `chore`s currently in the list and their completion statuses. For example, `listchore`.
+##### Implementation  
+
+1. The user inputs `listchore`.
+2. The `Kitchen Helper` class calls `Parser#parseUserCommand()` which will split the user input into 2 substrings, the command and its attributes, which would be empty in this case. 
+3.   The `ListChoreCommand` has been determined by a switch case, and the `Parser#prepareListChore` method is called.
+4.   If the substring of attributes is empty, a new `ListChoreCommand` object is created. Otherwise, an exception is thrown.
+5.   After which, the `ListChoreCommand` object will be returned to the `Kitchen Helper` class. 
+6.   The `Kitchen Helper` class will call the `execute()` method in the `ListChoreCommand` class, which calls its own `listChore()` method. 
+7.   This method will display each `chore` item in the list line by line or indicate an empty list if the list is empty.
+8.   The `execute()` method returns a String containing the formatted list of `chore`s to display. 
+ 
+
 #### 4.3.3. Delete all/ specific chore(s)
+The feature for deletion of `chore`s allows the user to remove the `chore` specified by the index in the list. For example, `deletechore 1` deletes the first `chore` in the `chore` list. 
+##### Implementation  
+
+1. The user inputs `deletechore 1`.
+2.   The `Kitchen Helper` class calls `Parser#parseUserCommand()` which will split the user input into 2 substrings, the command and its attributes. 
+3.   The `DeleteChoreCommand` has been determined by a switch case, and the `Parser#prepareDeleteChore` method is called.
+4.   If the method successfully obtains an integer, a new `DeleteChoreCommand` object is created. Otherwise, a new `InvalidCommand` object is created.
+5.   After which, the `DeleteChoreCommand` object will be returned to the `Kitchen Helper` class. 
+6.   The `Kitchen Helper` class will call the `execute()` method in the `DeleteChoreCommand` class, which calls its own `deleteChore()` method. 
+7.   If the integer obtained is an index in the list, this method will remove the `chore` in that position from the `chore` list. Otherwise, an exception is thrown.
+8.   The execute() method returns a String to inform the user if the outcome is successful.
+
+
+
 #### 4.3.4. Search for chore based on keyword(s)
 
 The search for chore feature allows the user to find chores using a keyword in the chore’s list.  
@@ -697,6 +766,7 @@ Extensions:
   2a1. System throws invalid input format and shows a valid format example.
   Use case resumes at step 2.
 ```
+<br>
 
 ```
 Use case: UC02 - Search for ingredient
@@ -710,6 +780,7 @@ Extentions:
 Use case resumes at step 2.
 Use case ends.
 ```
+<br>
 
 ```
 Use case: UC03 - Search for recipe
@@ -724,9 +795,10 @@ Extentions:
 Use case resumes at step 2.
 Use case ends.
 ```
+<br>
 
 ```
-Use case: UC03 - Search for chore
+Use case: UC04 - Search for chore
 MSS:
 1. User wants to find chores.
 2. User enters a keyword in the System.
@@ -742,7 +814,7 @@ Use case ends.
 ### Appendix D: Non-Functional Requirements
 
 1. Should work on any mainstream OS as long as it has Java `11` or above installed.
-2. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+2. An user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 3. Should not require user to install program file.
 4. Should work for single user.
 5. Should be able to run without internet connection.
@@ -796,4 +868,23 @@ Use case ends.
    Expected: Chore entries that have the keyword matching `Tuesday` as a string are listed.  
    
 #### F.6. Saving data
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+
+1. Load ingredient data into Kitchen Helper.
+   1. Prerequisites: The ingredient list save file should not be empty. 
+   1. Expected: Previously stored ingredient data can be seen using `listingredient all` command.
+
+1. Load recipe data into Kitchen Helper.
+   1. Prerequisites: The recipe list save file should not be empty. 
+   1. Expected: Previously stored recipe data can be seen using `listrecipe all` command.
+ 
+1. Load chore data into Kitchen Helper.
+   1. Prerequisites: The chore list save file should not be empty. 
+   1. Expected: Previously stored chore data can be seen using `listchore all` command.
+ 
+If any of the save files are empty, the user can choose to populate the files with their own user commands or alternatively, use any of the test cases below:
+
+1. `addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable`
+2. `addingredient /n Chicken Breast /c meat /q 3 /p 20 /e 18/03/2020`
+3. `addingredient /n kailan /c Vegetable /q 30 /p 30.45 /e 12/03/2020`
+4. `addingredient /n HL Milk /c Dairy /q 3 /p 12.2 /e 14/03/2020`
+5. `addchore buy groceries /by Tuesday 12pm`

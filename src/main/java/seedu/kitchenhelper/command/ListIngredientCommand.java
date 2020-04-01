@@ -25,7 +25,7 @@ public class ListIngredientCommand extends Command {
         Drink.INGREDIENT_WORD,Fruit.INGREDIENT_WORD,
         Meat.INGREDIENT_WORD,Miscellaneous.INGREDIENT_WORD,
         Staple.INGREDIENT_WORD,Vegetable.INGREDIENT_WORD};
-    public static final String COMMAND_DESC = "Display the ingredients in the list";
+    public static final String COMMAND_DESC = "Display the ingredients in the list.";
     public static final String COMMAND_PARAMETER = "<all|dairy|drink|fruit|meat|miscellaneous|staple|vegetable";
     public static final String COMMAND_EXAMPLE = "Example: listingredient all; listingredient meat";
     public static final String MESSAGE_USAGE = String.format("%s: %s", COMMAND_WORD, COMMAND_DESC) + Ui.LS + String
@@ -43,7 +43,7 @@ public class ListIngredientCommand extends Command {
 
     public String listIngredients(String category, ArrayList<Ingredient> ingredientList) {
         String result = "Here is the list of Ingredients in Inventory:\n"
-                + "Format : Ingredient Name|Quantity|Price|Expiry\n";
+                + "Format : Ingredient Index|Ingredient Name|Quantity|Price|Expiry\n";
         if (ingredientList.size() == 0) {
             result += "The Ingredient List is currently empty.";
         } else {
@@ -53,7 +53,8 @@ public class ListIngredientCommand extends Command {
                     for (int i = 0; i < ingredientList.size(); i++) {
                         Ingredient ingredientObj = ingredientList.get(i);
                         if (ingredientObj.getCategoryName().equalsIgnoreCase(categoryName)) {
-                            result += ingredientObj.getIngredientName() + "|" + ingredientObj.getQuantity() + "|"
+                            result += (i + 1) + "|" + ingredientObj.getIngredientName() + "|"
+                                    + ingredientObj.getQuantity() + "|"
                                     + ingredientObj.getPrice() + "|" + ingredientObj.getExpiryDate() + "\n";
                         }
                     }
