@@ -50,18 +50,18 @@ public class ListRecipeCommand extends Command {
         String result = "";
         if (parameter.equalsIgnoreCase("all")) {
             result = "\nHere is the list of Recipe:\n"
-                    + "\nFormat:Recipe Number|Recipe Name\n";
+                    + "\nFormat:[Recipe Number] Recipe Name\n";
             if (recipeArrayList.size() == 0) {
                 result += "The Recipe List is currently empty.";
             } else {
                 for (int i = 0; i < recipeArrayList.size(); i++) {
-                    result += (i + 1) + "|" + recipeArrayList.get(i).getRecipeName() + "\n";
+                    result += "[" + (i + 1) + "] " + recipeArrayList.get(i).getRecipeName() + "\n";
                 }
             }
         } else {
             int itemNum = this.itemNumber;
             result = "\nHere is the list of Ingredients in Recipe:"
-                    + "\nFormat:Ingredient Name|Ingredient Category|Quantity|Price|Expiry\n";
+                    + "\nFormat:Ingredient Name|Ingredient Category|Quantity\n";
             if (recipeArrayList.size() == 0 || itemNum > recipeArrayList.size() || itemNum < 0) {
                 result += "The Recipe List is currently empty.";
             } else {
@@ -71,8 +71,7 @@ public class ListRecipeCommand extends Command {
                 for (int i = 0; i < ingredientByCategory.size(); i++) {
                     Ingredient ingredientObj = ingredientByCategory.get(i);
                     result += ingredientObj.getIngredientName() + "|" + ingredientObj.getCategoryName()
-                            + "|" + Integer.toString(ingredientObj.getQuantity()) + "|"
-                            + Double.toString(ingredientObj.getPrice()) + "|" + ingredientObj.getExpiryDate() + "\n";
+                            + "|" + Integer.toString(ingredientObj.getQuantity()) + "\n";
                 }
             }
         }
