@@ -116,11 +116,11 @@ public class Parser {
             for (int i = 0; i < splitedIngr.length; i++) {
                 String item = splitedIngr[i];
                 String[] ingrContent = item.split(":");
-                int qty = Integer.parseInt(ingrContent[1]);
-                if (ingrContent[0].length() < 1 || qty < 1) {
+                if (!checkAddRecipeIngrValidity(item, ingrContent)) {
                     return new InvalidCommand(
                             String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, AddRecipeCommand.COMMAND_FORMAT));
                 }
+                System.out.println("hello:" + ingrContent[2]);
                 String[] nameAndType = new String[2];
                 nameAndType[0] = ingrContent[0];
                 nameAndType[1] = ingrContent[2];
@@ -133,6 +133,18 @@ public class Parser {
         }
         addCmd.setAttributesOfCmd(attributes, ingrAndQty);
         return addCmd;
+    }
+
+    public Boolean checkAddRecipeIngrValidity(String item, String[] ingrContent) {
+        Boolean isValid = true;
+        int lenOfCmd = ingrContent[0].length();
+        int qtyOfIngr = Integer.parseInt(ingrContent[1]);
+        int separatorCounter = item.length() - item.replace(":", "").length();
+        System.out.println(separatorCounter);
+        if (lenOfCmd < 1 || qtyOfIngr < 1 || separatorCounter > 2) {
+            isValid = false;
+        }
+        return isValid;
     }
 
     /**
