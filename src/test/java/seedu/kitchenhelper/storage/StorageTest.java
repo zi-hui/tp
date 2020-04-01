@@ -87,7 +87,6 @@ class StorageTest {
 
         @Override
         public ArrayList<Recipe> getRecipeData() throws FileNotFoundException {
-            ArrayList<Recipe> recipe = new ArrayList<>();
             Recipe freshRecipe = new Recipe();
             ArrayList<Ingredient> recipeItems = new ArrayList<>();
             freshRecipe.setRecipeNameForStorage("Chicken Salad");
@@ -95,13 +94,11 @@ class StorageTest {
             loadingRecipeItems("Chicken Breast", "meat", 2, 0.0, "null", recipeItems);
             loadingRecipeItems("Lettuce", "vegetable", 4, 0.0, "null", recipeItems);
             freshRecipe.addIngredientsToRecipeFromArrayList(recipeItems);
+            ArrayList<Recipe> recipe = new ArrayList<>();
             recipe.add(freshRecipe);
             recipe.add(freshRecipe);
             return recipe;
         }
-
-        //<[/n Chicken Salad [/n Chicken Breast /c meat /q 2 /p 0.0 /e null, /n Lettuce /c vegetable /q 4 /p 0.0 /e null] 2, /n Chicken Salad [/n Chicken Breast /c meat /q 2 /p 0.0 /e null, /n Lettuce /c vegetable /q 4 /p 0.0 /e null] 2]>
-        //<[/n Chicken Salad [/n Chicken Breast /c meat /q 2 /p 0.0 /e null, /n Lettuce /c vegetable /q 4 /p 0.0 /e null] 2]>
 
         @Override
         public ArrayList<Chore> getChoreData() throws FileNotFoundException {
