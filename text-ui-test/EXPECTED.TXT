@@ -24,10 +24,10 @@ Chicken Stew Recipe has been created with 2 ingredients inside.
 listrecipe 1
 
 Here is the list of Ingredients in Recipe:
-Format:Ingredient Name|Ingredient Category|Quantity
+Format:Ingredient Name | Ingredient Category | Quantity
 Recipe Name:Chicken Salad
-Chicken Breast|meat|2
-Lettuce|vegetable|4
+Ingredient Name : Chicken Breast | Category : meat | 2 portion(s) 
+Ingredient Name : Lettuce | Category : vegetable | 4 portion(s) 
 
 ===================================================
 listrecipe all

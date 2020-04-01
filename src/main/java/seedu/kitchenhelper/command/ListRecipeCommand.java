@@ -61,7 +61,7 @@ public class ListRecipeCommand extends Command {
         } else {
             int itemNum = this.itemNumber;
             result = "\nHere is the list of Ingredients in Recipe:"
-                    + "\nFormat:Ingredient Name|Ingredient Category|Quantity\n";
+                    + "\nFormat:Ingredient Name | Ingredient Category | Quantity\n";
             if (recipeArrayList.size() == 0 || itemNum > recipeArrayList.size() || itemNum < 0) {
                 result += "The Recipe List is currently empty.";
             } else {
@@ -70,8 +70,9 @@ public class ListRecipeCommand extends Command {
                 ArrayList<Ingredient> ingredientByCategory = recipeItem.getRecipeItem();
                 for (int i = 0; i < ingredientByCategory.size(); i++) {
                     Ingredient ingredientObj = ingredientByCategory.get(i);
-                    result += ingredientObj.getIngredientName() + "|" + ingredientObj.getCategoryName()
-                            + "|" + Integer.toString(ingredientObj.getQuantity()) + "\n";
+                    result += "Ingredient Name : " + ingredientObj.getIngredientName()
+                            + " | Category : " + ingredientObj.getCategoryName()
+                            + " | " + Integer.toString(ingredientObj.getQuantity()) + " portion(s) \n";
                 }
             }
         }
