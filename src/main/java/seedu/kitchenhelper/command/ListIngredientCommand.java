@@ -43,7 +43,7 @@ public class ListIngredientCommand extends Command {
 
     public String listIngredients(String category, ArrayList<Ingredient> ingredientList) {
         String result = "Here is the list of Ingredients in Inventory:\n"
-                + "Format : Ingredient Index|Ingredient Name|Quantity|Price|Expiry\n";
+                + "Format : [Ingredient Index] Ingredient Name|Quantity|Price|Expiry\n";
         if (ingredientList.size() == 0) {
             result += "The Ingredient List is currently empty.";
         } else {
@@ -53,7 +53,7 @@ public class ListIngredientCommand extends Command {
                     for (int i = 0; i < ingredientList.size(); i++) {
                         Ingredient ingredientObj = ingredientList.get(i);
                         if (ingredientObj.getCategoryName().equalsIgnoreCase(categoryName)) {
-                            result += (i + 1) + "|" + ingredientObj.getIngredientName() + "|"
+                            result += "[" + (i + 1) + "] " + ingredientObj.getIngredientName() + "|"
                                     + ingredientObj.getQuantity() + "|"
                                     + ingredientObj.getPrice() + "|" + ingredientObj.getExpiryDate() + "\n";
                         }
@@ -64,7 +64,7 @@ public class ListIngredientCommand extends Command {
                 for (int i = 0; i < ingredientList.size(); i++) {
                     Ingredient ingredientObj = ingredientList.get(i);
                     if (ingredientObj.getCategoryName().equalsIgnoreCase(category)) {
-                        result += ingredientObj.getIngredientName() + "|"
+                        result += "[" + (i + 1) + "] " + ingredientObj.getIngredientName() + "|"
                                 + Integer.toString(ingredientObj.getQuantity()) + "|"
                                 + Double.toString(ingredientObj.getPrice()) + "|"
                                 + ingredientObj.getExpiryDate() + "\n";
