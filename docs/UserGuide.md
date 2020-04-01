@@ -32,6 +32,9 @@ By: `Team CS2113T-M16-2` Since: `March 2020` License: `MIT`
       - [3.5.1. Select Load Files](#351-select-load-files)  
       - [3.5.2. Save Current State: `save`](#352-save-current-state-save)
  
+    + [3.6 Expenditure](#36-expenditure)  
+      - [3.6.1. Display User Expenditure](#361-display-user-expenditure)  
+       
   * [4. Command Summary](#4-command-summary)
 
 
@@ -312,6 +315,15 @@ Example |  Outcome
 --------|------------------
 **Command**: <br> `save` <br><br> **Description**: <br> Data saved into manual-save mode files.  | save <br> You have saved the current state in the following files: outputIngredientCopy.txt, outputRecipeCopy.txt, outputChoreCopy.txt  <br> =================================================== 
 
+#### 3.6.1. Display User Expenditure: `displayexpenditure`
+Displays total expenditure and amount used in cooking. Total expenditure increases whenever the user executes addingredient command to simulate purchase of groceries. Amount used in cooking indicates the cost of ingredients used in cooking, to help users know how much they made use of the ingredients they bought, and plan expenditure for future meals. 
+
+__Format:__ `displayexpenditure`  
+
+Example |  Outcome
+--------|------------------
+**Command**: <br> `displayexpenditure` <br>| displayexpenditure <br> This is the total amount you spent on buying Ingredients so far this week: $10.00  <br> This is the amount you actually spent for Ingredients used in your cooking this week: $6.00 <br> =================================================== 
+
 ## 4. Command Summary
 Here is a short summary of the command used in KitchenHelper application.  
 Refer back to [Section 3, "Features"](#3-features) for more information on the usage of commands.  
@@ -360,3 +372,9 @@ __Storage Commands__
 Feature | Command  
 ------- | -------  
 save current state | `save`  
+
+__Expenditure Commands__
+
+Feature | Command  
+------- | -------  
+displayexpenditure | `displayexpenditure` 
