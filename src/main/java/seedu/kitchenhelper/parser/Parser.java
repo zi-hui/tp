@@ -116,12 +116,16 @@ public class Parser {
             for (int i = 0; i < splitedIngr.length; i++) {
                 String item = splitedIngr[i];
                 String[] ingrContent = item.split(":");
+                if (ingrContent[0].length() < 1) {
+                    return new InvalidCommand(
+                            String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, AddRecipeCommand.COMMAND_FORMAT));
+                }
                 String[] nameAndType = new String[2];
                 nameAndType[0] = ingrContent[0];
                 nameAndType[1] = ingrContent[2];
                 ingrAndQty.put(nameAndType, Integer.parseInt(ingrContent[1]));
             }
-        } catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
             kitchenLogs.log(Level.WARNING, warningPrepareRecipe, e.toString());
             return new InvalidCommand(
                     String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, AddRecipeCommand.COMMAND_FORMAT));
@@ -216,9 +220,13 @@ public class Parser {
         try {
             String recipeName = attributes.substring(attributes.indexOf("/n") + 3, attributes.indexOf("/p") - 1);
             int numOfPax = Integer.parseInt(attributes.substring(attributes.indexOf("/p") + 3));
+            if (numOfPax < 1) {
+                return new InvalidCommand(
+                        String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, cookCmd.COMMAND_FORMAT));
+            }
             cookCmd.setRecipeName(recipeName);
             cookCmd.setRecipePax(numOfPax);
-        } catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
             return new InvalidCommand(
                     String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, cookCmd.COMMAND_FORMAT));
         }
@@ -280,10 +288,21 @@ public class Parser {
             if (parameters.isEmpty()) {
                 throw new KitchenHelperException("Invalid ListRecipe command.");
             }
+            parameters = parameters.replaceAll("\\s+","");
+            if (! parameters.equalsIgnoreCase("all")) {
+                if (! parameters.matches("-?\\d+")) {
+                    throw new KitchenHelperException("Invalid ListRecipe command.");
+                } else if (Integer.parseInt(parameters) <= 0) {
+                    throw new NumberFormatException("Invalid Ingredient Index. Must be > 0.");
+                }
+            }
             return new ListRecipeCommand(parameters);
         } catch (KitchenHelperException e) {
             kitchenLogs.log(Level.WARNING, LOG_WARNING_INDEX, e.toString());
             throw new KitchenHelperException(ListRecipeCommand.COMMAND_FORMAT);
+        } catch (NumberFormatException e) {
+            kitchenLogs.log(Level.WARNING, LOG_WARNING_INDEX, e.toString());
+            throw new KitchenHelperException(ListRecipeCommand.COMMAND_PARAMETER_LIMIT);
         }
     }
 

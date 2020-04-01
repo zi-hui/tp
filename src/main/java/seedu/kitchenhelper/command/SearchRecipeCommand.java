@@ -1,5 +1,6 @@
 package seedu.kitchenhelper.command;
 
+import seedu.kitchenhelper.exception.KitchenHelperException;
 import seedu.kitchenhelper.object.Chore;
 import seedu.kitchenhelper.object.Recipe;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
@@ -29,6 +30,8 @@ public class SearchRecipeCommand extends Command {
     public static final String LOG_INFO = "Entering execution of finding matching recipe";
     public static final String LOG_INFO_EMPTY = "Has non-matching recipe";
     public static final String LOG_INFO_Found = "Found matching recipe";
+    private static final String EMPTY_STRING = "";
+    private static final String EMPTY_STRING_MESSAGE = "Empty keyword detected, input a valid keyword.";
     
     private String keyword;
     
@@ -37,7 +40,7 @@ public class SearchRecipeCommand extends Command {
      * @param keyword the word to search.
      */
     public SearchRecipeCommand(String keyword) {
-        this.keyword = keyword;
+        this.keyword = keyword.trim();
     }
     
     /**
@@ -50,6 +53,15 @@ public class SearchRecipeCommand extends Command {
     @Override
     public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
                                  ArrayList<Chore> choreList) {
+    
+        try {
+            if (this.keyword.equals(EMPTY_STRING)) {
+                throw new KitchenHelperException();
+            }
+        } catch (KitchenHelperException khe) {
+            return new CommandResult(EMPTY_STRING_MESSAGE);
+        }
+        
         kitchenLogs.info(LOG_INFO);
         ArrayList<Recipe> findRecipeList = new ArrayList<>();
         ArrayList<Integer> recipeIndex = new ArrayList<>();

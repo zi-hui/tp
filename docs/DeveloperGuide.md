@@ -54,8 +54,9 @@ By: `CS2113T-M16-2` Since: `2020`
 
 ## 1. Introduction
 ### 1.1. Purpose
+The document contains the specified architecture and software design specifications for the application, Kitchen Helper. 
 ### 1.2. Scope
-
+This describes the software architecture and software design requirements for Kitchen Helper. This guide is mainly for developers, designers and software engineers that are or going to work on Kitchen Helper. 
 ## 2. Setting up
 
 ### 2.1. Prerequisites
@@ -511,8 +512,60 @@ Alternative 2: building an index on the first letter of the recipe name
 
 ### 4.3. Chore-related Features
 #### 4.3.1. Addition of chore
+The feature for addition of `chore`s allows the user to add `chore`s to a list to keep track of their completion. For example, `addchore buy groceries /by Monday 12pm` adds the `chore` `buy groceries` with deadline `Monday 12pm` to the `chore` list, and marks it as undone. 
+
+##### Implementation  
+
+![AddChoreCommand](images/AddChoreCommand.png)
+
+Explanation of the sequence diagram above:
+1. The user inputs `addchore buy groceries /by Monday 12pm`.  
+2. The `Kitchen Helper` class calls `Parser#parseUserCommand()` which will split the user input into 2 substrings, the command and its attributes.  
+3. The `AddChoreCommand` has been determined by a switch case, and the `Parser#prepareAddChore` method is called. 
+4. If the method successfully extracts the task description and deadline, a new `AddChoreCommand` object is created. Otherwise, a new `InvalidCommand` object is created.  
+5. After which, the `AddChoreCommand` object will be returned to the `Kitchen Helper` class.
+6. The `Kitchen Helper` class will call the `execute()` method in the `AddChoreCommand` class, which calls its own `addChore()` method.
+7. This method will create a new `chore` and add it to the `chore` list.
+8. The execute() method returns a String to inform the user of the successful outcome. 
+
+##### Design considerations:
+
+- We came up with two ways that a user can set the deadline, either as a String or as a Date object. 
+
+|     |     |
+|-----|-----|
+|**Pros** | Increases flexibility if the user is unable to specify a date or time to complete the chore by.|  
+|**Cons** | Unable to alert the users of approaching deadlines that are set as Strings.|
+
 #### 4.3.2. List all/ specific chore(s)
+The feature to list `chore`s allows the user to view the `chore`s currently in the list and their completion statuses. For example, `listchore`.
+##### Implementation  
+
+1. The user inputs `listchore`.
+2. The `Kitchen Helper` class calls `Parser#parseUserCommand()` which will split the user input into 2 substrings, the command and its attributes, which would be empty in this case. 
+3.   The `ListChoreCommand` has been determined by a switch case, and the `Parser#prepareListChore` method is called.
+4.   If the substring of attributes is empty, a new `ListChoreCommand` object is created. Otherwise, an exception is thrown.
+5.   After which, the `ListChoreCommand` object will be returned to the `Kitchen Helper` class. 
+6.   The `Kitchen Helper` class will call the `execute()` method in the `ListChoreCommand` class, which calls its own `listChore()` method. 
+7.   This method will display each `chore` item in the list line by line or indicate an empty list if the list is empty.
+8.   The `execute()` method returns a String containing the formatted list of `chore`s to display. 
+ 
+
 #### 4.3.3. Delete all/ specific chore(s)
+The feature for deletion of `chore`s allows the user to remove the `chore` specified by the index in the list. For example, `deletechore 1` deletes the first `chore` in the `chore` list. 
+##### Implementation  
+
+1. The user inputs `deletechore 1`.
+2.   The `Kitchen Helper` class calls `Parser#parseUserCommand()` which will split the user input into 2 substrings, the command and its attributes. 
+3.   The `DeleteChoreCommand` has been determined by a switch case, and the `Parser#prepareDeleteChore` method is called.
+4.   If the method successfully obtains an integer, a new `DeleteChoreCommand` object is created. Otherwise, a new `InvalidCommand` object is created.
+5.   After which, the `DeleteChoreCommand` object will be returned to the `Kitchen Helper` class. 
+6.   The `Kitchen Helper` class will call the `execute()` method in the `DeleteChoreCommand` class, which calls its own `deleteChore()` method. 
+7.   If the integer obtained is an index in the list, this method will remove the `chore` in that position from the `chore` list. Otherwise, an exception is thrown.
+8.   The execute() method returns a String to inform the user if the outcome is successful.
+
+
+
 #### 4.3.4. Search for chore based on keyword(s)
 
 The search for chore feature allows the user to find chores using a keyword in the chore’s list.  
