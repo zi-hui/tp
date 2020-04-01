@@ -110,6 +110,10 @@ public class Parser {
         HashMap<String[], Integer> ingrAndQty = new HashMap<>();
         String ingredientList;
         AddRecipeCommand addCmd = new AddRecipeCommand();
+        if (!checkAddRecipeCmdFormat(attributes)) {
+            return new InvalidCommand(
+                    String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, AddRecipeCommand.COMMAND_FORMAT));
+        }
         try {
             ingredientList = attributes.substring(attributes.indexOf("/i") + 3);
             String[] splitedIngr = ingredientList.split("[,][\\s]");
@@ -132,6 +136,20 @@ public class Parser {
         }
         addCmd.setAttributesOfCmd(attributes, ingrAndQty);
         return addCmd;
+    }
+
+    public Boolean checkAddRecipeCmdFormat(String command) {
+        Boolean isValid = true;
+        String cmd = command;
+        int sepCountForSlashN = cmd.length() - (cmd.replace("/n", "a").length());
+        cmd = cmd.replace("/n", "a");
+        int sepCountForSlashI = cmd.length() - (cmd.replace("/i", "a").length());
+        cmd = cmd.replace("/i", "a");
+        int sepCountForSlashOnly = cmd.length() - (cmd.replace("/", "").length());
+        if (sepCountForSlashN > 1 || sepCountForSlashI > 1 || sepCountForSlashOnly > 0) {
+            isValid = false;
+        }
+        return isValid;
     }
 
     /**

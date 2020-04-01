@@ -68,6 +68,8 @@ public class AddRecipeCommand extends Command {
     public String addRecipe(String attributes, ArrayList<Recipe> recipeList) throws KitchenHelperException {
         Recipe freshRecipe = new Recipe();
         freshRecipe.setRecipeName(attributes);
+        System.out.println("Hello im in addRecipe!");
+        System.out.println(freshRecipe.getRecipeName());
         if (checkIfRecipeExist(freshRecipe.getRecipeName(), recipeList)) {
             throw new KitchenHelperException("There is an existing recipe!");
         }
