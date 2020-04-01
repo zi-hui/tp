@@ -4,6 +4,7 @@ import seedu.kitchenhelper.object.Chore;
 import seedu.kitchenhelper.object.Recipe;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
 import seedu.kitchenhelper.storage.Storage;
+import seedu.kitchenhelper.ui.Ui;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,6 +17,9 @@ public class SaveStateCommand extends Command {
     public static final String FILE_PATH_INGREDIENT = "outputIngredientCopy.txt, ";
     public static final String FILE_PATH_RECIPE = "outputRecipeCopy.txt, ";
     public static final String FILE_PATH_CHORE = "outputChoreCopy.txt";
+    public static final String COMMAND_DESC = "Stores the current state of program in manual mode.";
+    public static final String MESSAGE_USAGE =
+            String.format("%s: %s", COMMAND_WORD, COMMAND_DESC) + Ui.LS + String.format("Example: %s", COMMAND_WORD);
 
 
     /**
