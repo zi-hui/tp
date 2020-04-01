@@ -5,6 +5,8 @@ import seedu.kitchenhelper.object.Chore;
 import seedu.kitchenhelper.object.Expenditure;
 import seedu.kitchenhelper.object.Recipe;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
+import seedu.kitchenhelper.storage.Storage;
+import seedu.kitchenhelper.ui.Ui;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -26,6 +28,8 @@ public class CookRecipeCommand extends Command {
                                                                             + "missing ingredients!";
     public static final String KITCHEN_HELPER_COOK = "Kitchen Helper is trying to cook!";
     public static final String COMMAND_SUCCESS = "%s was cooked with a pax of %d";
+    public static final String MESSAGE_USAGE = String.format("%s: %s", COMMAND_WORD, COMMAND_DESC) + Ui.LS + String
+            .format("Parameter: %s\n%s", COMMAND_PARAMETER, COMMAND_EXAMPLE);
     public String recipeName;
     public int pax;
 
@@ -49,6 +53,7 @@ public class CookRecipeCommand extends Command {
 
         if (checkForSufficientIngredient(ingredientList, recipeToBeCooked)) {
             deductIngredients(ingredientList, recipeToBeCooked);
+            Storage.saveIngredientData(ingredientList);
         } else {
             return COMMAND_FAILURE_INSUFFICIENT_INGREDIENTS;
         }
