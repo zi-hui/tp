@@ -4,6 +4,8 @@ import seedu.kitchenhelper.exception.KitchenHelperException;
 import seedu.kitchenhelper.object.Chore;
 import seedu.kitchenhelper.object.Recipe;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
+import seedu.kitchenhelper.storage.Storage;
+import seedu.kitchenhelper.ui.Ui;
 
 import java.util.ArrayList;
 import java.util.logging.Logger;
@@ -14,6 +16,10 @@ import java.util.logging.Logger;
 public class ResetCommand extends Command {
     public static final Logger kitchenLogs = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     public static final String COMMAND_WORD = "reset";
+    public static final String COMMAND_DESC = "Resets the application.";
+    public static final String COMMAND_EXAMPLE = "Example: reset";
+    public static final String MESSAGE_USAGE =
+            String.format("%s: %s", COMMAND_WORD, COMMAND_DESC) + Ui.LS + String.format("Example: %s", COMMAND_WORD);
 
     /**
      * Resets the arraylist contents that stores user's input.
@@ -28,6 +34,9 @@ public class ResetCommand extends Command {
         ingredientList.clear();
         recipeList.clear();
         choreList.clear();
+        Storage.saveIngredientData(ingredientList);
+        Storage.saveRecipeData(recipeList);
+        Storage.saveChoreData(choreList);
         return "All data has been wiped";
     }
 

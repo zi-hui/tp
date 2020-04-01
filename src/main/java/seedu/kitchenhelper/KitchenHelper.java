@@ -4,6 +4,7 @@ import seedu.kitchenhelper.command.Command;
 import seedu.kitchenhelper.command.CommandResult;
 import seedu.kitchenhelper.command.ExitCommand;
 import seedu.kitchenhelper.notification.ChoreNotification;
+import seedu.kitchenhelper.notification.IngredientNotification;
 import seedu.kitchenhelper.storage.Storage;
 import seedu.kitchenhelper.exception.KitchenHelperException;
 import seedu.kitchenhelper.object.Chore;
@@ -147,6 +148,9 @@ public class KitchenHelper {
         String choreNotification;
         choreNotification = new ChoreNotification().getNotifications(choreList);
         System.out.println(choreNotification);
+        String ingredientNotification;
+        ingredientNotification = new IngredientNotification().getNotifications(ingredientList);
+        System.out.println(ingredientNotification);
     }
     
     public static void main(String[] args) throws KitchenHelperException {
