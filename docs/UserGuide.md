@@ -9,28 +9,29 @@ By: `Team CS2113T-M16-2` Since: `March 2020` License: `MIT`
        - [3.1.1. Viewing help: `help`](#311-viewing-help-help)  
        - [3.1.2. Exiting the Program: `exit`](#312-exiting-the-program-exit)  
        - [3.1.3. Resetting the application: `reset`](#313-resetting-the-application-reset)  
-    + [3.2. Ingredient](#32-ingredient)  
-       - [3.2.1. Adding an ingredient: `addingredient`](#321-adding-an-ingredient-addingredient)  
-       - [3.2.2. List ingredient: `listingredient`](#322-list-ingredient-listingredient)  
-       - [3.2.3. Delete an ingredient: `deleteingredient`](#323-delete-an-ingredient-deleteingredient)  
-       - [3.2.4. Search for ingredient: `searchingredient`](#324-search-for-ingredient-searchingredient)  
+       
+    + [3.2 Storage](#32-storage)  
+       - [3.2.1. Select Load Files](#321-select-load-files)  
+       - [3.2.2. Save Current State: `save`](#322-save-current-state-save)
+             
+    + [3.3. Ingredient](#33-ingredient)  
+       - [3.3.1. Adding an ingredient: `addingredient`](#331-adding-an-ingredient-addingredient)  
+       - [3.3.2. List ingredient: `listingredient`](#332-list-ingredient-listingredient)  
+       - [3.3.3. Delete an ingredient: `deleteingredient`](#333-delete-an-ingredient-deleteingredient)  
+       - [3.3.4. Search for ingredient: `searchingredient`](#334-search-for-ingredient-searchingredient)  
 
-    + [3.3. Recipe](#33-recipe)  
-      - [3.3.1. Adding a recipe: `addrecipe`](#331-adding-a-recipe-addrecipe)  
-      - [3.3.2. List recipe: `listrecipe`](#332-list-recipes-listrecipe)  
-      - [3.3.3. Delete a recipe: `deleterecipe`](#333-delete-a-recipe-deleterecipe)
-      - [3.3.4. Search for recipe: `searchrecipe`](#334-search-for-recipe-searchrecipe)  
-      - [3.3.5. Cooking a recipe: `cookrecipe`](#335-cooking-a-recipe-cookrecipe)
+    + [3.4. Recipe](#34-recipe)  
+      - [3.4.1. Adding a recipe: `addrecipe`](#341-adding-a-recipe-addrecipe)  
+      - [3.4.2. List recipe: `listrecipe`](#342-list-recipes-listrecipe)  
+      - [3.4.3. Delete a recipe: `deleterecipe`](#343-delete-a-recipe-deleterecipe)
+      - [3.4.4. Search for recipe: `searchrecipe`](#344-search-for-recipe-searchrecipe)  
+      - [3.4.5. Cooking a recipe: `cookrecipe`](#345-cooking-a-recipe-cookrecipe)
 
-    + [3.4. Chore](#34-chore)  
-      - [3.4.1. Adding a chore: `addchore`](#341-adding-a-chore-addchore)  
-      - [3.4.2. List chore: `listchore`](#342-list-chore-listchore)  
-      - [3.4.3. Delete a chore: `deletechore`](#343-delete-a-chore-deletechore)  
-      - [3.4.4. Search for chore: `searchchore`](#344-search-for-chore-searchchore)  
- 
-    + [3.5 Storage](#35-storage)  
-      - [3.5.1. Select Load Files](#351-select-load-files)  
-      - [3.5.2. Save Current State: `save`](#352-save-current-state-save)
+    + [3.5. Chore](#35-chore)  
+      - [3.5.1. Adding a chore: `addchore`](#351-adding-a-chore-addchore)  
+      - [3.5.2. List chore: `listchore`](#352-list-chore-listchore)  
+      - [3.5.3. Delete a chore: `deletechore`](#353-delete-a-chore-deletechore)  
+      - [3.5.4. Search for chore: `searchchore`](#354-search-for-chore-searchchore)  
  
     + [3.6 Expenditure](#36-expenditure)  
       - [3.6.1. Display User Expenditure](#361-display-user-expenditure)  
@@ -85,8 +86,35 @@ You can reset the application which will wipe out all existing data
 
 __Format:__ `reset`  
 
-### 3.2. Ingredient
-#### 3.2.1. Adding an ingredient: `addingredient`
+### 3.2. Storage
+
+#### 3.2.1. Select Load Files
+
+At the start of Kitchen Helper, the user will be prompted with the option to either load the program data from auto-save mode or the manual-save mode. 
+
+The auto-save mode will load Kitchen Helper from the auto-save files which store the most updated and recent data from the last used session of the user. 
+
+Alternatively, if the user selects the manual-save mode, it will load Kitchen Helper from the manual-save files which store the version of data manually saved from the user’s last usage of the save command [Section 3.2.2, "Save Current State"](#322-save-current-state-save).  
+
+It is important to note that any subsequent changes made to the program data during the current session will be automatically saved into the auto-save files regardless of initial load options. 
+
+Example |  Outcome
+--------|------------------
+**Command**: <br> `1` <br><br> **Description**: <br> Data loaded from most recent auto-save mode files.  | Please enter '1' for auto-save and '2' for manual-save: <br> 1 <br> =================================================== <br> Okay auto-save chosen. <br> ===================================================
+**Command**: <br> `2` <br><br> **Description**: <br> Data loaded from most recent manual-save mode files.  | Please enter '1' for auto-save and '2' for manual-save: <br> 2 <br> =================================================== <br> Okay manual-save chosen. <br> ===================================================
+
+
+#### 3.2.2. Save Current State: `save`
+At any point of the session, if the user wishes to store a back-up copy of the current state of their program data, it is recommended that the user uses the save command. The save command will store all program data of the current state into manual-save files. 
+
+__Format:__ `save`  
+
+Example |  Outcome
+--------|------------------
+**Command**: <br> `save` <br><br> **Description**: <br> Data saved into manual-save mode files.  | save <br> You have saved the current state in the following files: outputIngredientCopy.txt, outputRecipeCopy.txt, outputChoreCopy.txt  <br> =================================================== 
+
+### 3.3. Ingredient
+#### 3.3.1. Adding an ingredient: `addingredient`
 You can add an ingredient to the Kitchen Helper for tracking, containing various details.
 
 __Format:__ `addingredient /n <INGREDIENT_NAME> /c <CATEGORY> /q <QUANTITY> /p <PRICE> /e <EXPIRY>`  
@@ -116,7 +144,7 @@ Example |  Outcome
 **Command**: <br> `addingredient /n kailan /c Vegetable /q 30 /p 30.45 /e 12/03/2020` <br><br> **Description:** <br> Creates a new ingredient called `kailan`, which have the following attributes: CATEGORY `Vegetable`, QUANTITY `30`, PRICE `30.45` , expiry date `12/03/2020`. | addingredient /n kailan /c Vegetable /q 30 /p 30.45 /e 12/03/2020 <br> You have added Ingredient:kailan Category:Vegetable Quantity:30 Price:$30.45 Expiry:12/03/2020 to the ingredient list<br>===================================================
 **Command**: <br> `addingredient /n Milo /c Drink /q 30 /p 10 /e 20/12/2020` <br><br> **Description:** <br> Creates a new ingredient called `Milo`, which have the following attributes: CATEGORY `Drink`, QUANTITY `30`, PRICE `10` , expiry date `20/12/2020`. | addingredient /n Milo /c Drink /q 30 /p 10 /e 20/12/2020 <br> You have added Ingredient:Milo Category:Drink Quantity:30 Price:$10.00 Expiry:20/12/2020 to the ingredient list<br>===================================================
 
-#### 3.2.2. List ingredient: `listingredient`
+#### 3.3.2. List ingredient: `listingredient`
 Displays all the items currently in the ingredient list in Kitchen Helper.
 
 __Format__: `listingredient <CATEGORY / ALL>`
@@ -128,7 +156,7 @@ Example |  Outcome
 
 
 
-#### 3.2.3. Delete an ingredient: `deleteingredient`
+#### 3.3.3. Delete an ingredient: `deleteingredient`
 You can delete a specified ingredient or reduce an ingredient’s QUANTITY from the ingredients' inventory in Kitchen Helper by using ingredient's name or index. <br>
 
 You may get the list of ingredients that you have previously keyed in, by referring to the [listingredient](#322-list-ingredient-listingredient) command section. <br>
@@ -147,7 +175,7 @@ Example |  Outcome
 **Command**: <br> `deleteingredient /n wagyu beef` <br><br> **Description**: Deletes the ingredient named `wagyu beef` from the ingredients list. | deleteingredient /n wagyu beef <br> wagyu beef has been deleted.<br>===================================================
 **Command**: <br> `deleteingredient /i 1` <br><br> **Description**: Deletes the item specified by `index 1` in the ingredient list. | deleteingredient /i 1 <br> apple has been deleted.<br>===================================================
 
-#### 3.2.4. Search for ingredient: `searchingredient`
+#### 3.3.4. Search for ingredient: `searchingredient`
 You can search for ingredients based on a given keyword.  
 
 __Format:__ `searchingredient <KEYWORD>`  
@@ -160,9 +188,9 @@ Example |  Outcome
 **Command**: <br> `searchingredient meat` <br> **Description:** <br> Search by ingredient's CATEGORY. | searchingredient meat <br> Here are your matching ingredients in your list <br> 1. \[Meat\] Beef Qty: 3 $20.00 Exp: 18/03/2020 <br> ===================================================
 **Command** :<br> `searchingredient 18/03/2020` <br> **Description:** <br> Search by ingredient's expiry date. | searchingredient 18/03/2020 <br> Here are your matching ingredients in your list <br> 1. \[Meat\] Beef Qty: 3 $20.00 Exp: 18/03/2020 <br> ===================================================
 
-### 3.3. Recipe
+### 3.4. Recipe
 
-#### 3.3.1. Adding a recipe: `addrecipe`
+#### 3.4.1. Adding a recipe: `addrecipe`
 Adds a new unique recipe into the List in Kitchen Helper.
 
 __Format:__ `addrecipe /n <RECIPE_NAME> /i <INGREDIENT_NAME>:<QUANTITY>:<CATEGORY>[,..]`
@@ -189,7 +217,7 @@ Example |  Outcome
 --------|------------------
 **Command**: <br> `addrecipe /n Rice Ball /i Rice:3:staple` <br><br> **Description**: <br> Creates a new recipe called `Rice Ball` which contains one ingredient, `3` portions of `Rice`. | addrecipe /n Rice Ball /i Rice:3:staple <br>Rice Ball Recipe has been created with 1 ingredients inside.<br>===================================================`
 
-#### 3.3.2. List recipes: `listrecipe`
+#### 3.4.2. List recipes: `listrecipe`
 Displays all recipe and its name or the items currently in a particular recipe in Kitchen Helper.
 
 
@@ -201,7 +229,7 @@ Example |  Outcome
 **Command**: <br> `listrecipe 1` <br><br> **Description**: <br> Displays all ingredients used in recipe `1`. | listingredient 1<br>Here is the list of Ingredients in Recipe:<br><br>Format:Ingredient Name/Ingredient Category/Quantity/Price/Expiry<br>Recipe Name:Chicken Salad<br>milo/drink/10/0.0/null<br><br>===================================================
 
 
-#### 3.3.3. Delete a recipe: `deleterecipe`
+#### 3.4.3. Delete a recipe: `deleterecipe`
 You can delete a recipe by using the recipe name or index from the list in Kitchen Helper. The name or index of the recipe can be found by displaying the list of recipes. 
 
 You may get the list of recipes that you have previously keyed in, by referring to the [listrecipe](#332-list-recipes-listrecipe) command section. <br>
@@ -218,7 +246,7 @@ Example |  Outcome
 **Command**: <br> `deleterecipe /n pasta` <br><br> **Description**: <br> Deletes the recipe with the name of `pasta` from the recipe list.| deleterecipe /n pasta <br> pasta has been deleted.<br>===================================================
 **Command**: <br> `deleterecipe /i 2` <br><br> **Description**: <br> Deletes recipe by index. In this case, delete recipe with the `index 2` from the recipe list. | deleterecipe /i 2 <br> Beef Salad has been deleted.<br>===================================================
 
-#### 3.3.4. Search for recipe: `searchrecipe`
+#### 3.4.4. Search for recipe: `searchrecipe`
 You can search for recipes based on a given keyword.  
 
 __Format:__ `searchrecipe <KEYWORD>`  
@@ -229,7 +257,7 @@ Example |  Outcome
 --------|------------------
 **Command**: <br> `searchrecipe Chicken Stew` <br><br> **Description**: <br> Search by recipe's name. | searchrecipe Chicken Stew <br> Here are your matching recipes in your list <br> 1.Chicken Stew located at listrecipe 1 <br> ===================================================
 
-#### 3.3.5. Cooking a recipe: `cookrecipe`
+#### 3.4.5. Cooking a recipe: `cookrecipe`
 Cooks a recipe specified by the user by the recipe’s name.
 
 __Format:__ `cookrecipe /n <RECIPE_NAME> /p <NUMBER_OF_PAX>`
@@ -242,9 +270,9 @@ Example |  Outcome
 **Command**: <br> `cookrecipe /n chicken salad /p 2` <br><br> **Description**: <br> Cooks the recipe `Chicken Salad` for 2 people| Cooks the ‘chicken salad’ recipe with a pax 2.<br>===================================================
 
 
-### 3.4. Chore
+### 3.5. Chore
 
-#### 3.4.1. Adding a chore: `addchore`
+#### 3.5.1. Adding a chore: `addchore`
 Adds a chore to the chore list in Kitchen Helper.
 
 __Format:__ `addchore <TASK_DESCRIPTION> /by <DEADLINE>`  
@@ -254,7 +282,7 @@ Example |  Outcome
 **Command**: <br> `addchore buy groceries /by Monday 12pm` <br><br> **Description**: <br> Creates a new chore called `buy groceries` which contains the deadline `Monday 12pm.` | addchore buy groceries /by Monday 12pm <br> You have added this chore: <br> [x] buy groceries (by: Monday 12pm) <br> Now you have 2 chores in the list. <br> ===================================================
 
 
-#### 3.4.2. List chore: `listchore`
+#### 3.5.2. List chore: `listchore`
 Displays all the items currently in the chore list in Kitchen Helper.
 
 __Format:__ `listchore`  
@@ -264,7 +292,7 @@ Example |  Outcome
 **Command**: <br> `listchore` | listchore <br> Here are the chores in your list: <br> 1. [x] buy groceries (by: Monday 12pm) <br> 2. [/] scrub the floor (by: this Saturday) <br> ===================================================
 
 
-#### 3.4.3. Delete a chore: `deletechore`
+#### 3.5.3. Delete a chore: `deletechore`
 Deletes the chore specified by the index in the chore list in Kitchen Helper. The index of the chore can be found by displaying the list of chores.
 
 __Format:__ `deletechore <INDEX_TO_DELETE>`  
@@ -274,7 +302,7 @@ Example |  Outcome
 **Command**: <br> `deletechore 1` <br><br> **Description**: <br> Deletes the item specified by `index 1` in the chore list. | deletechore 1 <br> You have deleted this chore: <br> [x] buy groceries (by: Monday 12pm) <br> Now you have 0 chores in the list. <br> ===================================================
 
 
-#### 3.4.4. Search for chore: `searchchore`
+#### 3.5.4. Search for chore: `searchchore`
 You can search for chores based on a given keyword.  
   
 __Format:__ `searchchore <KEYWORD>`  
@@ -287,7 +315,7 @@ Example |  Outcome
 **Command:** <br> `searchchore Tuesday` <br><br> **Description**: <br> Search by chore's date. | searchchore Tuesday <br> Here are your matching chores in your list <br> 1.\[x\] buy groceries (by: Tuesday 12pm) <br> ===================================================
 
 
-#### 3.4.5. Mark chore as done: `done`
+#### 3.5.5. Mark chore as done: `done`
 Marks the chore specified by the index in the chore list in Kitchen Helper as done. The index of the chore can be found by displaying the list of chores.
 
 __Format:__ `done <INDEX_TO_CHECK>`  
@@ -296,24 +324,7 @@ Example |  Outcome
 --------|------------------
 **Command**: <br> `done 1` <br><br> **Description**: <br> Marks the item specified by `index 1` in the chore list as done. | done 1 <br> You have completed this chore: <br> [/] buy groceries (by: Monday 12pm) <br> <br> ===================================================
 
-### 3.5. Storage
-
-#### 3.5.1. Select Load Files
-Prompts the user with the option to either load their data from auto-save mode or the manual-save mode. If the user chooses the manual-save mode,  it will overwrite all the data stored in auto-save mode. However, any subsequent changes made to the program data will be saved through auto-save mode regardless of initial load options, to save through manual-save mode, user will have to use the save command [Section 3.5.3, "Save Current State"](#352-save-current-state-save).
-
-Example |  Outcome
---------|------------------
-**Command**: <br> `1` <br><br> **Description**: <br> Data loaded from most recent auto-save mode files.  | Please enter '1' for auto-save and '2' for manual-save: <br> 1 <br> =================================================== <br> Okay auto-save chosen. <br> ===================================================
-**Command**: <br> `2` <br><br> **Description**: <br> Data loaded from most recent manual-save mode files.  | Please enter '1' for auto-save and '2' for manual-save: <br> 2 <br> =================================================== <br> Okay manual-save chosen. <br> ===================================================
-
-
-#### 3.5.2. Save Current State: `save`
-Saves the current state of the program into manual-save mode files. 
-__Format:__ `save`  
-
-Example |  Outcome
---------|------------------
-**Command**: <br> `save` <br><br> **Description**: <br> Data saved into manual-save mode files.  | save <br> You have saved the current state in the following files: outputIngredientCopy.txt, outputRecipeCopy.txt, outputChoreCopy.txt  <br> =================================================== 
+### 3.6. Expenditure
 
 #### 3.6.1. Display User Expenditure: `displayexpenditure`
 Displays total expenditure and amount used in cooking. Total expenditure increases whenever the user executes addingredient command to simulate purchase of groceries. Amount used in cooking indicates the cost of ingredients used in cooking, to help users know how much they made use of the ingredients they bought, and plan expenditure for future meals. 

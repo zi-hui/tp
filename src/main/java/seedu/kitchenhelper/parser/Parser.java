@@ -110,13 +110,17 @@ public class Parser {
         HashMap<String[], Integer> ingrAndQty = new HashMap<>();
         String ingredientList;
         AddRecipeCommand addCmd = new AddRecipeCommand();
+        if (!checkAddRecipeCmdFormat(attributes)) {
+            return new InvalidCommand(
+                    String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, AddRecipeCommand.COMMAND_FORMAT));
+        }
         try {
             ingredientList = attributes.substring(attributes.indexOf("/i") + 3);
             String[] splitedIngr = ingredientList.split("[,][\\s]");
             for (int i = 0; i < splitedIngr.length; i++) {
                 String item = splitedIngr[i];
                 String[] ingrContent = item.split(":");
-                if (ingrContent[0].length() < 1) {
+                if (!checkAddRecipeIngrValidity(item, ingrContent)) {
                     return new InvalidCommand(
                             String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, AddRecipeCommand.COMMAND_FORMAT));
                 }
@@ -132,6 +136,44 @@ public class Parser {
         }
         addCmd.setAttributesOfCmd(attributes, ingrAndQty);
         return addCmd;
+    }
+
+    /**
+     * Checker for command format for addrecipe command.
+     *
+     * @param command   The full user input without keyword.
+     * @return  true if is of valid command, otherwise false.
+     */
+    public Boolean checkAddRecipeCmdFormat(String command) {
+        Boolean isValid = true;
+        String cmd = command;
+        int sepCountForSlashN = cmd.length() - (cmd.replace("/n", "a").length());
+        cmd = cmd.replace("/n", "a");
+        int sepCountForSlashI = cmd.length() - (cmd.replace("/i", "a").length());
+        cmd = cmd.replace("/i", "a");
+        int sepCountForSlashOnly = cmd.length() - (cmd.replace("/", "").length());
+        if (sepCountForSlashN > 1 || sepCountForSlashI > 1 || sepCountForSlashOnly > 0) {
+            isValid = false;
+        }
+        return isValid;
+    }
+
+    /**
+     * Checker for prepareAddRecipe on the user input.
+     *
+     * @param item          Original string.
+     * @param ingrContent   List of ingredients.
+     * @return true if none of the conditions are violated, false otherwise.
+     */
+    public Boolean checkAddRecipeIngrValidity(String item, String[] ingrContent) {
+        Boolean isValid = true;
+        int lenOfCmd = ingrContent[0].length();
+        int qtyOfIngr = Integer.parseInt(ingrContent[1]);
+        int separatorCounter = item.length() - item.replace(":", "").length();
+        if (lenOfCmd < 1 || qtyOfIngr < 1 || separatorCounter > 2) {
+            isValid = false;
+        }
+        return isValid;
     }
 
     /**
