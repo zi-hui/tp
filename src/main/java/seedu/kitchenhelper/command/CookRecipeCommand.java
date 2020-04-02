@@ -62,17 +62,21 @@ public class CookRecipeCommand extends Command {
         if (checkForSufficientIngredient(ingredientList, recipeToBeCooked)) {
             deductIngredients(ingredientList, recipeToBeCooked);
             Storage.saveIngredientData(ingredientList);
-        } else if (expired){
+        } else if (expired) {
             String expiredList = craftExpiredList();
             return COMMAND_FAILURE_INSUFFICIENT_INGREDIENTS + expiredList.substring(0, expiredList.length() - 2);
         } else {
             return COMMAND_FAILURE_INSUFFICIENT_INGREDIENTS;
         }
-
         return String.format(COMMAND_SUCCESS, recipeName, pax);
     }
 
-    public String craftExpiredList(){
+    /**
+     * Form the string of expired ingredients.
+     *
+     * @return string of expired ingredients.
+     */
+    public String craftExpiredList() {
         String expiredList = "";
         for (String item : expiredIngrNames) {
             expiredList = expiredList + item + ", ";
