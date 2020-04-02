@@ -8,6 +8,7 @@ import seedu.kitchenhelper.storage.Storage;
 import seedu.kitchenhelper.ui.Ui;
 
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
@@ -97,10 +98,14 @@ public class DeleteChoreCommand extends Command {
     public String promptUser() {
         String userResponse;
         System.out.println(DELETE_ALL_PROMPT);
-        userResponse = new Scanner(System.in).nextLine().trim();
-        while (!isValidResponse(userResponse)) {
-            System.out.println("Please enter either \"Yes\"/\"No\"");
+        try {
             userResponse = new Scanner(System.in).nextLine().trim();
+            while (!isValidResponse(userResponse)) {
+                System.out.println("Please enter either \"Yes\"/\"No\"");
+                userResponse = new Scanner(System.in).nextLine().trim();
+            }
+        } catch (NoSuchElementException e) {
+            userResponse = "no";
         }
         return userResponse;
     }
