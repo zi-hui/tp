@@ -18,10 +18,11 @@ public class Expenditure {
 
     public static final String PROMPT_REMOVE_FROM_EXPENDITURE
             = "The amount of money spent on this ingredient has already been recorded.\n"
-            + "Would you like to remove the amount spent on this item from the total expenditure?";
+            + "Would you like to remove the amount spent on this item from the total expenditure?\n"
+            + Ui.DIVIDER;
     public static final String PROMPT_ADD_TO_AMOUNT_USED
             = "Would you like to add the amount spent on this item "
-            + "to the amount used for cooking?";
+            + "to the amount used for cooking?\n" + Ui.DIVIDER;
     public static final String REMOVAL_SUCCESS = "Ok! $%.2f is deducted from total expenditure.";
     public static final String INCREASE_AMOUNT_USED = "Ok! $%.2f is added to amount used in cooking.";
     public static final String NO_CHANGE = "Ok! There are no changes to expenditure.";
@@ -135,7 +136,7 @@ public class Expenditure {
             return "no";
         }
         while (!isValidResponse(userResponse)) {
-            System.out.println("Please enter either \"Yes\"/\"No\"");
+            System.out.println("Please enter either \"Yes\"/\"No\"\n" + Ui.DIVIDER);
             userResponse = new Scanner(System.in).nextLine().trim();
         }
         return userResponse;
