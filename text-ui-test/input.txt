@@ -5,7 +5,6 @@ addrecipe /n Chicken Stew /i Chicken Breast:2:meat, Lettuce:4:vegetable
 addrecipe /n warm milk /i HL Milk:1:Dairy
 addingredient /n HL Milk /c Dairy /q 3 /p 12.2 /e 01/03/2020
 cookrecipe /n warm milk /p 2
-listrecipe 1
 listrecipe all
 addingredient /n Beef /c meat /q 3 /p 20 /e 18/03/2020
 addingredient /n Beef cubes /c meat /q 3 /p 20 /e 18/03/2020

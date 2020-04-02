@@ -32,15 +32,6 @@ Kitchen Helper is trying to cook!
 There are insufficient/missing ingredients!
 Please check for these expired ingredients: hl milk
 ===================================================
-listrecipe 1
-
-Here is the list of Ingredients in Recipe:
-Format:Ingredient Name | Ingredient Category | Quantity
-Recipe Name:Chicken Salad
-Ingredient Name : Chicken Breast | Category : meat | 2 portion(s)
-Ingredient Name : Lettuce | Category : vegetable | 4 portion(s)
-
-===================================================
 listrecipe all
 
 Here is the list of Recipe:

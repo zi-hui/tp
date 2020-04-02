@@ -62,13 +62,14 @@ public class CookRecipeCommand extends Command {
             deductIngredients(ingredientList, recipeToBeCooked);
             Storage.saveIngredientData(ingredientList);
             return String.format(COMMAND_SUCCESS, recipeName, pax);
-        } else if ((sufficientIngr && !suffButLessExpiredIngr)  ||
-                (!sufficientIngr && !suffButLessExpiredIngr && expiredIngrNames.size()!=0)) {
+        } else if ((sufficientIngr && !suffButLessExpiredIngr)
+                || (!sufficientIngr && !suffButLessExpiredIngr && expiredIngrNames.size() != 0)) {
             String expiredList = craftExpiredList();
             if (expiredList.length() > 0) {
                 expiredList = expiredList.substring(0, expiredList.length() - 2);
             }
-            return COMMAND_FAILURE_INSUFFICIENT_INGREDIENTS +" \nPlease check for these expired ingredients: " + expiredList;
+            return COMMAND_FAILURE_INSUFFICIENT_INGREDIENTS
+                    + "\nPlease check for these expired ingredients: " + expiredList.trim();
         } else {
             return COMMAND_FAILURE_INSUFFICIENT_INGREDIENTS;
         }
