@@ -1,7 +1,9 @@
 package seedu.kitchenhelper.storage;
 
 import org.junit.jupiter.api.Test;
+import seedu.kitchenhelper.object.Recipe;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
+import seedu.kitchenhelper.object.Chore;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -40,10 +42,26 @@ class StorageTest {
 
     @Test
     void getRecipeData() {
+        try {
+            Storage newStorage = new StubStorage();
+            List<Recipe> recipe = storage.getRecipeData();
+            List<Recipe> stubRecipe = newStorage.getRecipeData();
+            assertEquals(recipe, stubRecipe);
+        } catch (Exception e) {
+            System.err.println(e);
+        }
     }
 
     @Test
     void getChoreData() {
+        try {
+            Storage newStorage = new StubStorage();
+            List<Chore> chore = storage.getChoreData();
+            List<Chore> stubChore = newStorage.getChoreData();
+            assertEquals(chore, stubChore);
+        } catch (Exception e) {
+            System.err.println(e);
+        }
     }
 
     @Test
@@ -69,6 +87,29 @@ class StorageTest {
             loadingIngredients("Beef", "meat", 3, 20.0, "2020-03-18",ingredients);
             loadingIngredients("Chicken", "meat", 3, 20.0, "2020-03-18", ingredients);
             return ingredients;
+        }
+
+        @Override
+        public ArrayList<Recipe> getRecipeData() throws FileNotFoundException {
+            Recipe freshRecipe = new Recipe();
+            ArrayList<Ingredient> recipeItems = new ArrayList<>();
+            freshRecipe.setRecipeNameForStorage("Chicken Salad");
+            freshRecipe.recipeIngrQty = 2;
+            loadingRecipeItems("Chicken Breast", "meat", 2, 0.0, "null", recipeItems);
+            loadingRecipeItems("Lettuce", "vegetable", 4, 0.0, "null", recipeItems);
+            freshRecipe.addIngredientsToRecipeFromArrayList(recipeItems);
+            ArrayList<Recipe> recipe = new ArrayList<>();
+            recipe.add(freshRecipe);
+            recipe.add(freshRecipe);
+            return recipe;
+        }
+
+        @Override
+        public ArrayList<Chore> getChoreData() throws FileNotFoundException {
+            ArrayList<Chore> chore = new ArrayList<>();
+            Chore todo = createChore("buy milk", "Tuesday 12pm");
+            chore.add(todo);
+            return chore;
         }
     }
 }

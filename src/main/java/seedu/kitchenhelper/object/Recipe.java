@@ -143,6 +143,22 @@ public class Recipe {
     }
 
     /**
+     * To compare two Recipe objects based on their attributes.
+     * @return boolean return false if any of the attributes are not equal to each other.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Recipe) {
+            Recipe i = (Recipe) o;
+            return this.recipeName.equals(i.recipeName)
+                    && this.recipeIngrQty == recipeIngrQty
+                    && this.recipeItems.equals(i.recipeItems);
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * To format all variables of add ingredient as a string.
      * @return String consisting of ingredient name, category, quantity, price and expiry.
      */

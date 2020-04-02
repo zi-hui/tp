@@ -39,7 +39,7 @@ public class KitchenHelper {
         String userChoice = ui.getUserChoice();
         ui.validUserChoice(userChoice);
         ui.showWelcomeMessage();
-        if (userChoice.equals("1")) {
+        if (userChoice.trim().equals("1")) {
             storage = new Storage("outputIngredient.txt", "outputRecipe.txt",
                     "outputChore.txt", "outputExpenditure.txt");
             try {
@@ -53,7 +53,7 @@ public class KitchenHelper {
                 choreList = new ArrayList<>();
                 Expenditure.getInstance().loadExpenditureVariables(0, 0, null);
             }
-        } else if (userChoice.equals("2")) {
+        } else if (userChoice.trim().equals("2")) {
             createNewFiles();
             storage = new Storage("outputIngredientCopy.txt", "outputRecipeCopy.txt",
                     "outputChoreCopy.txt", "outputExpenditureCopy.txt");
@@ -75,6 +75,26 @@ public class KitchenHelper {
      * Populate empty saved state files with current output files if save command have never been called by user.
      */
     private void createNewFiles() {
+        File fileChore = new File("outputChore.txt");
+        File fileIngredient = new File("outputIngredient.txt");
+        File fileRecipe = new File("outputRecipe.txt");
+
+        try {
+            if (!fileChore.exists()) {
+                fileChore.createNewFile();
+            }
+
+            if (!fileIngredient.exists()) {
+                fileIngredient.createNewFile();
+            }
+
+            if (!fileRecipe.exists()) {
+                fileRecipe.createNewFile();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         var sourceIngredient = new File("outputIngredient.txt");
         var sourceRecipe = new File("outputRecipe.txt");
         var sourceChore = new File("outputChore.txt");

@@ -138,7 +138,9 @@ public class CookRecipeCommand extends Command {
         boolean isSufficient = true;
         for (Ingredient ingr : recipeToBeCooked.getRecipeItem()) {
             int totalCookedQty = pax * ingr.getQuantity();
-            if (getIngredientQty(ingr.getIngredientName().toLowerCase(), ingredientList) < totalCookedQty) {
+            String ingrName = ingr.getIngredientName().toLowerCase();
+            String ingrCategory = ingr.getCategoryName().toLowerCase();
+            if (getIngredientQty(ingrName, ingrCategory, ingredientList) < totalCookedQty) {
                 isSufficient = false;
             }
         }
@@ -152,10 +154,11 @@ public class CookRecipeCommand extends Command {
      * @param ingredientList    the list of ingredients available.
      * @return the quantity of ingredients with the same name.
      */
-    public int getIngredientQty(String ingrName, ArrayList<Ingredient> ingredientList) {
+    public int getIngredientQty(String ingrName, String ingrCategory, ArrayList<Ingredient> ingredientList) {
         int availableIngrCount = 0;
         for (Ingredient ingr : ingredientList) {
-            if (ingr.getIngredientName().equalsIgnoreCase(ingrName)) {
+            if (ingr.getIngredientName().equalsIgnoreCase(ingrName)
+                    && ingr.getCategoryName().equalsIgnoreCase(ingrCategory)) {
                 availableIngrCount += ingr.getQuantity();
             }
         }

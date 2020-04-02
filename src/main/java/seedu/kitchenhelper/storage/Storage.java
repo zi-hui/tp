@@ -191,6 +191,7 @@ public class Storage {
             }
             freshRecipe.addIngredientsToRecipeFromArrayList(recipeItems);
             recipeList.add(freshRecipe);
+            recipeList.add(freshRecipe);
         }
         scanner.close();
         return recipeList;
@@ -207,7 +208,7 @@ public class Storage {
      * @param expiry ingredient expiry date.
      * @param recipeItems the ArrayList to store ingredients of the recipe.
      */
-    private void loadingRecipeItems(String name, String category, Integer quantity, Double price, String expiry,
+    public void loadingRecipeItems(String name, String category, Integer quantity, Double price, String expiry,
                                     ArrayList<Ingredient> recipeItems) {
 
         switch (category.toLowerCase()) {
