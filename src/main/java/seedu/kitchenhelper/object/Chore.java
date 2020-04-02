@@ -51,6 +51,22 @@ public class Chore {
         }
     }
 
+    /**
+     * To compare two Chore objects based on their attributes.
+     * @return boolean return false if any of the attributes are not equal to each other.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Chore) {
+            Chore i = (Chore) o;
+            return this.description.equals(i.description)
+                    && this.isDone == isDone
+                    && this.dateStr.equals(i.dateStr);
+        } else {
+            return false;
+        }
+    }
+
     public String toString() {
         return "[" + getStatusIcon() + "] " + description + " (by: " + convertDateToString() + ")";
     }
