@@ -22,22 +22,10 @@ addingredient /n Apple /c fruit /q 1 /p 1 /e 01/02/2020
 listingredient all
 addingredient /n Apple /c fruit /q 1 /p 1 /e 03/02/2020
 listingredient all
-displayexpenditure
 deleteingredient /n Apple
-yes
-no
-displayexpenditure
 deleteingredient /n Apple
-no
-yes
-displayexpenditure
 deleteingredient /n Apple
-no
-no
-displayexpenditure
 deleteingredient /n Pear
-no
-no
 listingredient all
 addchore buy groceries /by Tuesday 12pm
 addchore buy groceries
@@ -52,34 +40,17 @@ displayexpenditure
 cookrecipe /n Chicken Salad /p 3
 displayexpenditure
 deleteingredient /n Beef
-no
-no
 deleteingredient /n Beef cubes
-no
-no
 deleteingredient /n kailan /q 35
-no
-no
 deleteingredient /n kailan
 deleterecipe /n Chicken Salad
 deleterecipe /n Chicken Salad
 deleterecipe /n Chicken Stew
 deleteingredient /n HL milk
-no
-no
 deleteingredient /i 4
-no
-no
 deleteingredient /i 3
-no
-no
 deleteingredient /i 2
-no
-no
 deleteingredient /i 1
-no
-n
-no
 deletechore 1
 listchore
 addchore sweep the floor /by noon
