@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Date;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -284,9 +285,10 @@ public class Storage {
 
         File file = new File(filePathExpenditure);
         Scanner scanner = new Scanner(file);
-        String userData = scanner.nextLine();
+        //String userData = scanner.nextLine();
 
         try {
+            String userData = scanner.nextLine();
             String[] variables = userData.split(",");
             int expenditureIndex = variables[0].indexOf('$') + 1;
             double expenditure = Double.parseDouble(variables[0].substring(expenditureIndex));
@@ -296,6 +298,8 @@ public class Storage {
             DateFormat dateFormat = new SimpleDateFormat("EEE dd/MM/yyyy HH:mm:ss");
             Date lastSavedDate = dateFormat.parse(variables[2]);
             Expenditure.getInstance().loadExpenditureVariables(expenditure, amountUsed, lastSavedDate);
+        } catch(NoSuchElementException e){
+            throw new FileNotFoundException();
         } catch (IndexOutOfBoundsException e) {
             throw new FileNotFoundException();
         } catch (ParseException e) {

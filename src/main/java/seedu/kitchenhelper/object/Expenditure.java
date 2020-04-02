@@ -82,6 +82,7 @@ public class Expenditure {
 
     public void addToExpenditure(double price, int quantity) {
         totalExpenditure += (price * quantity);
+        Storage.saveExpenditureData();
     }
 
     public void removeFromExpenditure(Ingredient ingredientToDelete, Integer quantityToDelete) {
