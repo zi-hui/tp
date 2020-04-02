@@ -42,6 +42,10 @@ Format:Recipe Number|Recipe Name
 addingredient /n Beef /c meat /q 3 /p 20 /e 18/03/2020
 You have added Ingredient:Beef Category:meat Quantity:3 Price:$20.00 Expiry:18/03/2020 to the ingredient list
 ===================================================
+displayexpenditure
+This is the total amount you spent on buying Ingredients so far this week: $60.00
+This is the amount you actually spent for Ingredients used in your cooking this week: $0.00
+===================================================
 addingredient /n Beef cubes /c meat /q 3 /p 20 /e 18/03/2020
 You have added Ingredient:Beef cubes Category:meat Quantity:3 Price:$20.00 Expiry:18/03/2020 to the ingredient list
 ===================================================
@@ -174,13 +178,32 @@ vegetable:
 12|kailan|30|30.45|12/03/2020
 
 ===================================================
+displayexpenditure
+This is the total amount you spent on buying Ingredients so far this week: $1454.10
+This is the amount you actually spent for Ingredients used in your cooking this week: $0.00
+===================================================
+deleteingredient /n Apple
+The amount of money spent on this ingredient has already been recorded.
+Would you like to remove the amount spent on this item from the total expenditure?
+Ok! $1.00 is deducted from total expenditure.
+Would you like to add the amount spent on this item to the amount used for cooking?
+Ok! There are no changes to expenditure.
+Apple has been deleted.
+===================================================
+displayexpenditure
+This is the total amount you spent on buying Ingredients so far this week: $1453.10
+This is the amount you actually spent for Ingredients used in your cooking this week: $0.00
+===================================================
 deleteingredient /n Apple
 The amount of money spent on this ingredient has already been recorded.
 Would you like to remove the amount spent on this item from the total expenditure?
 Ok! There are no changes to expenditure.
 Would you like to add the amount spent on this item to the amount used for cooking?
-Ok! There are no changes to expenditure.
 Apple has been deleted.
+===================================================
+displayexpenditure
+This is the total amount you spent on buying Ingredients so far this week: $1453.10
+This is the amount you actually spent for Ingredients used in your cooking this week: $1.00
 ===================================================
 deleteingredient /n Apple
 The amount of money spent on this ingredient has already been recorded.
@@ -190,13 +213,9 @@ Would you like to add the amount spent on this item to the amount used for cooki
 Ok! There are no changes to expenditure.
 Apple has been deleted.
 ===================================================
-deleteingredient /n Apple
-The amount of money spent on this ingredient has already been recorded.
-Would you like to remove the amount spent on this item from the total expenditure?
-Ok! There are no changes to expenditure.
-Would you like to add the amount spent on this item to the amount used for cooking?
-Ok! There are no changes to expenditure.
-Apple has been deleted.
+displayexpenditure
+This is the total amount you spent on buying Ingredients so far this week: $1453.10
+This is the amount you actually spent for Ingredients used in your cooking this week: $1.00
 ===================================================
 deleteingredient /n Pear
 The amount of money spent on this ingredient has already been recorded.
@@ -237,9 +256,25 @@ Invalid Command Format!
 Adds a chore to the chore list. TASK /by DATE
 Example: addchore buy groceries /by Tuesday 12pm
 ===================================================
+addchore buy groceries /by 05/04/2020 08:30
+You have added this chore:
+[x] buy groceries (by: 05/04/2020 08:30)
+Now you have 2 chores in the list.
+===================================================
+listchore
+Here are the chores in your list:
+1. [x] buy groceries (by: Tuesday 12pm)
+2. [x] buy groceries (by: 05/04/2020 08:30)
+===================================================
+done 1
+You have completed this chore:
+[/] buy groceries (by: Tuesday 12pm)
+
+===================================================
 searchchore groceries
 Here are your matching chores in your list
-1.[x] buy groceries (by: Tuesday 12pm)
+1.[/] buy groceries (by: Tuesday 12pm)
+2.[x] buy groceries (by: 05/04/2020 08:30)
 ===================================================
 searchingredient beef
 Here are your matching ingredients in your list
@@ -255,9 +290,17 @@ cookrecipe /n Chicken Salad /p 2
 Kitchen Helper is trying to cook!
 Chicken Salad was cooked with a pax of 2
 ===================================================
+displayexpenditure
+This is the total amount you spent on buying Ingredients so far this week: $1453.10
+This is the amount you actually spent for Ingredients used in your cooking this week: $21.00
+===================================================
 cookrecipe /n Chicken Salad /p 3
 Kitchen Helper is trying to cook!
 There are insufficient/missing ingredients!
+===================================================
+displayexpenditure
+This is the total amount you spent on buying Ingredients so far this week: $1453.10
+This is the amount you actually spent for Ingredients used in your cooking this week: $21.00
 ===================================================
 deleteingredient /n Beef
 The amount of money spent on this ingredient has already been recorded.
@@ -303,32 +346,75 @@ deleterecipe /n Chicken Stew
 Chicken Stew has been deleted
 ===================================================
 deleteingredient /n HL milk
+The amount of money spent on this ingredient has already been recorded.
+Would you like to remove the amount spent on this item from the total expenditure?
+Ok! There are no changes to expenditure.
+Would you like to add the amount spent on this item to the amount used for cooking?
+Ok! There are no changes to expenditure.
 HL Milk has been deleted.
 ===================================================
 deleteingredient /i 4
+The amount of money spent on this ingredient has already been recorded.
+Would you like to remove the amount spent on this item from the total expenditure?
+Ok! There are no changes to expenditure.
+Would you like to add the amount spent on this item to the amount used for cooking?
+Ok! There are no changes to expenditure.
 Lettuce has been deleted.
 ===================================================
 deleteingredient /i 3
+The amount of money spent on this ingredient has already been recorded.
+Would you like to remove the amount spent on this item from the total expenditure?
+Ok! There are no changes to expenditure.
+Would you like to add the amount spent on this item to the amount used for cooking?
+Ok! There are no changes to expenditure.
 Lettuce has been deleted.
 ===================================================
 deleteingredient /i 2
+The amount of money spent on this ingredient has already been recorded.
+Would you like to remove the amount spent on this item from the total expenditure?
+Ok! There are no changes to expenditure.
+Would you like to add the amount spent on this item to the amount used for cooking?
+Ok! There are no changes to expenditure.
 Chicken Breast has been deleted.
 ===================================================
 deleteingredient /i 1
+The amount of money spent on this ingredient has already been recorded.
+Would you like to remove the amount spent on this item from the total expenditure?
+Ok! There are no changes to expenditure.
+Would you like to add the amount spent on this item to the amount used for cooking?
+Please enter either "Yes"/"No"
+Ok! There are no changes to expenditure.
 Chicken Breast has been deleted.
 ===================================================
 deletechore 1
 You have deleted this chore:
-[x] buy groceries (by: Tuesday 12pm)
-Now you have 0 chores in the list.
+[/] buy groceries (by: Tuesday 12pm)
+Now you have 1 chore in the list.
+===================================================
+listchore
+Here are the chores in your list:
+1. [x] buy groceries (by: 05/04/2020 08:30)
+===================================================
+addchore sweep the floor /by noon
+You have added this chore:
+[x] sweep the floor (by: noon)
+Now you have 2 chores in the list.
+===================================================
+listchore
+Here are the chores in your list:
+1. [x] buy groceries (by: 05/04/2020 08:30)
+2. [x] sweep the floor (by: noon)
+===================================================
+deletechore all
+Are you sure you want to delete all the chores in your list?
+Enter "Yes"/"No"
+You have deleted all the chores. Now you have 0 chores in the list.
+===================================================
+listchore
+Your list of chores is currently empty.
 ===================================================
 addingredient /n Beef /c meat /q 3 /p 20 /e 18/03/2020
 You have added Ingredient:Beef Category:meat Quantity:3 Price:$20.00 Expiry:18/03/2020 to the ingredient list
-===================================================
-addchore buy groceries /by Tuesday 12pm
-You have added this chore:
-[x] buy groceries (by: Tuesday 12pm)
-Now you have 1 chore in the list.
 ===================================================
 listingredient all
 Here is the list of Ingredients in Inventory:
@@ -344,10 +430,6 @@ staple:
 vegetable:
 
 ===================================================
-listchore
-Here are the chores in your list:
-1. [x] buy groceries (by: Tuesday 12pm)
-===================================================
 reset
 All data has been wiped
 ===================================================
@@ -355,9 +437,6 @@ listingredient all
 Here is the list of Ingredients in Inventory:
 Format : Ingredient Index|Ingredient Name|Quantity|Price|Expiry
 The Ingredient List is currently empty.
-===================================================
-listchore
-Your list of chores is currently empty.
 ===================================================
 exit
 Exiting KitchenHelper as requested ...

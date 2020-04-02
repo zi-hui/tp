@@ -5,6 +5,7 @@ addrecipe /n Chicken Stew /i Chicken Breast:2:meat, Lettuce:4:vegetable
 listrecipe 1
 listrecipe all
 addingredient /n Beef /c meat /q 3 /p 20 /e 18/03/2020
+displayexpenditure
 addingredient /n Beef cubes /c meat /q 3 /p 20 /e 18/03/2020
 addingredient /n Chicken Breast /c meat /q 4 /p 20 /e 20/03/2020
 addingredient /n Chicken Breast /c meat /q 3 /p 20 /e 18/03/2020
@@ -21,36 +22,73 @@ addingredient /n Apple /c fruit /q 1 /p 1 /e 01/02/2020
 listingredient all
 addingredient /n Apple /c fruit /q 1 /p 1 /e 03/02/2020
 listingredient all
+displayexpenditure
 deleteingredient /n Apple
+yes
+no
+displayexpenditure
 deleteingredient /n Apple
+no
+yes
+displayexpenditure
 deleteingredient /n Apple
+no
+no
+displayexpenditure
 deleteingredient /n Pear
+no
+no
 listingredient all
 addchore buy groceries /by Tuesday 12pm
 addchore buy groceries
+addchore buy groceries /by 05/04/2020 08:30
+listchore
+done 1
 searchchore groceries
 searchingredient beef
 searchrecipe chicken
 cookrecipe /n Chicken Salad /p 2
+displayexpenditure
 cookrecipe /n Chicken Salad /p 3
+displayexpenditure
 deleteingredient /n Beef
+no
+no
 deleteingredient /n Beef cubes
+no
+no
 deleteingredient /n kailan /q 35
+no
+no
 deleteingredient /n kailan
 deleterecipe /n Chicken Salad
 deleterecipe /n Chicken Salad
 deleterecipe /n Chicken Stew
 deleteingredient /n HL milk
+no
+no
 deleteingredient /i 4
+no
+no
 deleteingredient /i 3
+no
+no
 deleteingredient /i 2
+no
+no
 deleteingredient /i 1
+no
+n
+no
 deletechore 1
-addingredient /n Beef /c meat /q 3 /p 20 /e 18/03/2020
-addchore buy groceries /by Tuesday 12pm
-listingredient all
 listchore
+addchore sweep the floor /by noon
+listchore
+deletechore all
+yes
+listchore
+addingredient /n Beef /c meat /q 3 /p 20 /e 18/03/2020
+listingredient all
 reset
 listingredient all
-listchore
 exit
