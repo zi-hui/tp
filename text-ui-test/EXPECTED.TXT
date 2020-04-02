@@ -185,8 +185,10 @@ This is the amount you actually spent for Ingredients used in your cooking this 
 deleteingredient /n Apple
 The amount of money spent on this ingredient has already been recorded.
 Would you like to remove the amount spent on this item from the total expenditure?
+
 Ok! $1.00 is deducted from total expenditure.
 Would you like to add the amount spent on this item to the amount used for cooking?
+
 Ok! There are no changes to expenditure.
 Apple has been deleted.
 ===================================================
@@ -197,8 +199,10 @@ This is the amount you actually spent for Ingredients used in your cooking this 
 deleteingredient /n Apple
 The amount of money spent on this ingredient has already been recorded.
 Would you like to remove the amount spent on this item from the total expenditure?
+
 Ok! There are no changes to expenditure.
 Would you like to add the amount spent on this item to the amount used for cooking?
+
 Apple has been deleted.
 ===================================================
 displayexpenditure
@@ -208,8 +212,10 @@ This is the amount you actually spent for Ingredients used in your cooking this 
 deleteingredient /n Apple
 The amount of money spent on this ingredient has already been recorded.
 Would you like to remove the amount spent on this item from the total expenditure?
+
 Ok! There are no changes to expenditure.
 Would you like to add the amount spent on this item to the amount used for cooking?
+
 Ok! There are no changes to expenditure.
 Apple has been deleted.
 ===================================================
