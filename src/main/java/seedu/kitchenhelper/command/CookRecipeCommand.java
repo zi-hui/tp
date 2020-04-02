@@ -36,7 +36,6 @@ public class CookRecipeCommand extends Command {
             .format("Parameter: %s\n%s", COMMAND_PARAMETER, COMMAND_EXAMPLE);
     public final String logcookRecipe = "User attempted to cook with expired ingredient";
     public static ArrayList<String> expiredIngrNames = new ArrayList<>();
-    public static Boolean expired = false;
     public String recipeName;
     public int pax;
 
@@ -49,8 +48,7 @@ public class CookRecipeCommand extends Command {
      * @throws KitchenHelperException if there is no recipe that is wanted by user/ insufficient ingredients.
      */
     public String cookRecipe(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList) {
-        expired = false;
-        resetInsufficientIngrMsg();
+        expiredIngrNames.clear();
         // checks if the specified recipe given by user exists
         int indexOfRecipe = checkIfRecipeExist(recipeList);
         if (indexOfRecipe > recipeList.size()) {
@@ -58,17 +56,22 @@ public class CookRecipeCommand extends Command {
         }
         System.out.println(KITCHEN_HELPER_COOK);
         Recipe recipeToBeCooked = recipeList.get(indexOfRecipe - 1);
-
-        if (checkForSufficientIngredient(ingredientList, recipeToBeCooked)) {
+        Boolean sufficientIngr = checkForSufficientIngredient(ingredientList, recipeToBeCooked);
+        Boolean suffButLessExpiredIngr = checkNotExpiredIngredientQty(ingredientList, recipeToBeCooked);
+        if (sufficientIngr && suffButLessExpiredIngr) {
             deductIngredients(ingredientList, recipeToBeCooked);
             Storage.saveIngredientData(ingredientList);
-        } else if (expired) {
+            return String.format(COMMAND_SUCCESS, recipeName, pax);
+        } else if ((sufficientIngr && !suffButLessExpiredIngr)  ||
+                (!sufficientIngr && !suffButLessExpiredIngr && expiredIngrNames.size()!=0)) {
             String expiredList = craftExpiredList();
-            return COMMAND_FAILURE_INSUFFICIENT_INGREDIENTS + expiredList.substring(0, expiredList.length() - 2);
+            if (expiredList.length() > 0) {
+                expiredList = expiredList.substring(0, expiredList.length() - 2);
+            }
+            return COMMAND_FAILURE_INSUFFICIENT_INGREDIENTS +" \nPlease check for these expired ingredients: " + expiredList;
         } else {
             return COMMAND_FAILURE_INSUFFICIENT_INGREDIENTS;
         }
-        return String.format(COMMAND_SUCCESS, recipeName, pax);
     }
 
     /**
@@ -82,10 +85,6 @@ public class CookRecipeCommand extends Command {
             expiredList = expiredList + item + ", ";
         }
         return expiredList;
-    }
-
-    public void resetInsufficientIngrMsg() {
-        COMMAND_FAILURE_INSUFFICIENT_INGREDIENTS = "There are insufficient/" + "missing ingredients!";
     }
 
     /**
@@ -158,46 +157,41 @@ public class CookRecipeCommand extends Command {
      * @return true if there are sufficient ingredients, otherwise false.
      */
     public Boolean checkForSufficientIngredient(ArrayList<Ingredient> ingredientList, Recipe recipeToBeCooked) {
-        Date today = new Date();
         for (Ingredient ingr : recipeToBeCooked.getRecipeItem()) {
             int totalCookedQty = pax * ingr.getQuantity();
             String ingrName = ingr.getIngredientName().toLowerCase();
             String ingrCategory = ingr.getCategoryName().toLowerCase();
-            // CASE: insufficient ingredient
             if (getTotalIngredientQty(ingrName, ingrCategory, ingredientList) < totalCookedQty) {
                 return false;
             }
-            // CASE: sufficient ingredient but check expiry
-            ArrayList<Ingredient> listOfSameName = getIngredientsWithSameName(ingredientList, ingrName);
-            if (getNotExpiredIngredientQty(listOfSameName, today) < totalCookedQty) {
-                expiredIngrNames.add(ingrName);
-            }
-            expired = true;
-            COMMAND_FAILURE_INSUFFICIENT_INGREDIENTS += " \nPlease check for these expired ingredients: ";
         }
-        return false;
+        return true;
     }
 
-    /**
-     * Checks for quantity of non-expiring ingredients.
-     *
-     * @param listOfSameName    The list of ingredients with the same name.
-     * @param today             The current date.
-     * @return the total number of ingredients that have not expired.
-     */
-    public int getNotExpiredIngredientQty(ArrayList<Ingredient> listOfSameName, Date today) {
-        int goodIngrCount = 0;
-        for (Ingredient ingrNameInStore : listOfSameName) {
-            try {
-                Date date1 = new SimpleDateFormat("dd/MM/yyyy").parse(ingrNameInStore.getExpiryDate());
-                if (today.before(date1)) {
-                    goodIngrCount += ingrNameInStore.getQuantity();
+    public Boolean checkNotExpiredIngredientQty(ArrayList<Ingredient> ingredientList, Recipe recipeToBeCooked) {
+        Date today = new Date();
+        for (Ingredient ingr : recipeToBeCooked.getRecipeItem()) {
+            int totalCookedQty = pax * ingr.getQuantity();
+            String ingrName = ingr.getIngredientName().toLowerCase();
+            ArrayList<Ingredient> listOfSameName = getIngredientsWithSameName(ingredientList, ingrName);
+            int goodIngrCount = 0;
+            for (Ingredient ingrNameInStore : listOfSameName) {
+                try {
+                    Date date1 = new SimpleDateFormat("dd/MM/yyyy").parse(ingrNameInStore.getExpiryDate());
+                    if (today.before(date1)) {
+                        goodIngrCount += ingrNameInStore.getQuantity();
+                    } else {
+                        expiredIngrNames.add(ingrName);
+                    }
+                } catch (ParseException e) {
+                    kitchenLogs.info(logcookRecipe);
                 }
-            } catch (ParseException e) {
-                kitchenLogs.info(logcookRecipe);
+            }
+            if (goodIngrCount < totalCookedQty) {
+                return false;
             }
         }
-        return goodIngrCount;
+        return true;
     }
 
     /**

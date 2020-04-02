@@ -1,2 +1,4 @@
+/n Chicken Breast /c meat /q 0 /p 20.0 /e 20/12/2020
 /n HL Milk /c Dairy /q 3 /p 12.2 /e 01/03/2020
-/n chicken /c meat /q 8 /p 20.0 /e 18/10/2020
+/n Lettuce /c Vegetable /q 0 /p 20.0 /e 09/03/2020
+/n Lettuce /c Vegetable /q 4 /p 20.0 /e 20/12/2020

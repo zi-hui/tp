@@ -2,18 +2,21 @@
 addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable
 addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable
 addrecipe /n Chicken Stew /i Chicken Breast:2:meat, Lettuce:4:vegetable
+addrecipe /n warm milk /i HL Milk:1:Dairy
+addingredient /n HL Milk /c Dairy /q 3 /p 12.2 /e 01/03/2020
+cookrecipe /n warm milk /p 2
 listrecipe 1
 listrecipe all
 addingredient /n Beef /c meat /q 3 /p 20 /e 18/03/2020
 addingredient /n Beef cubes /c meat /q 3 /p 20 /e 18/03/2020
-addingredient /n Chicken Breast /c meat /q 4 /p 20 /e 20/03/2020
-addingredient /n Chicken Breast /c meat /q 3 /p 20 /e 18/03/2020
+addingredient /n Chicken Breast /c meat /q 4 /p 20 /e 20/12/2020
+addingredient /n Chicken Breast /c meat /q 3 /p 20 /e 18/12/2020
 addingredient /n kailan /c Vegetable /q 30 /p 30.45 /e 12/03/2020
-addingredient /n HL Milk /c Dairy /q 3 /p 12.2 /e 14/03/2020
+addingredient /n HL Milk /c Dairy /q 3 /p 12 /e 14/03/2020
 addingredient /n Milo /c Drink /q 30 /p 10 /e 20/012/2020
 addingredient /n Pear /c fruit /q 1 /p 1 /e 02/02/2020
-addingredient /n Lettuce /c Vegetable /q 4 /p 20 /e 20/03/2020
-addingredient /n Lettuce /c Vegetable /q 8 /p 20 /e 09/03/2020
+addingredient /n Lettuce /c Vegetable /q 10 /p 20 /e 20/12/2020
+addingredient /n Lettuce /c Vegetable /q 2 /p 20 /e 09/03/2020
 listingredient all
 addingredient /n Apple /c fruit /q 1 /p 1 /e 02/02/2020
 listingredient all
