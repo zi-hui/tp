@@ -107,7 +107,7 @@ class StorageTest {
         @Override
         public ArrayList<Chore> getChoreData() throws FileNotFoundException {
             ArrayList<Chore> chore = new ArrayList<>();
-            Chore todo = createChore("buy milk", "Tuesday 12pm");
+            Chore todo = Chore.createChoreWhenLoadFile("buy milk", "Tuesday 12pm");
             chore.add(todo);
             return chore;
         }
