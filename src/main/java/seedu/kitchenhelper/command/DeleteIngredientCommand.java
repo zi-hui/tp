@@ -95,7 +95,6 @@ public class DeleteIngredientCommand extends Command {
             feedbackToUser = String.format(COMMAND_SUCCESS, ingredientName);
         }
         ingredientsList.remove(ingredientToDelete);
-
         return feedbackToUser;
     }
 
