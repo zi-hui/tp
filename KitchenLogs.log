@@ -1,0 +1,4 @@
+Apr 03, 2020 1:26:46 AM seedu.kitchenhelper.parser.Parser prepareDeleteIngredient
+WARNING: An IndexOutOfBounds exception has been caught
+Apr 03, 2020 1:26:56 AM seedu.kitchenhelper.command.DeleteIngredientCommand deleteIngredient
+INFO: An ingredient has been deleted

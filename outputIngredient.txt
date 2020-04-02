@@ -1,0 +1,3 @@
+/n Beef cubes /c meat /q 3 /p 20.0 /e 18/03/2020
+/n Chicken Breast /c meat /q 3 /p 20.0 /e 18/03/2020
+/n Chicken Breast /c meat /q 4 /p 20.0 /e 20/03/2020

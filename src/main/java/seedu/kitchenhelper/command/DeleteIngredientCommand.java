@@ -13,17 +13,15 @@ import java.util.logging.Logger;
 public class DeleteIngredientCommand extends Command {
     public static final Logger kitchenLogs = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     public static final String COMMAND_WORD = "deleteingredient";
-    public static final String COMMAND_USAGE = "Usage: deleteingredient /n INGREDIENTNAME [/q QUANTITY] OR "
-                                                + "deleteingredient /i INGREDIENTINDEX [/q QUANTITY]";
-    public static final String COMMAND_PARAMETER = "/n INGREDIENTNAME [/q QUANTITY] OR"
-                                                    + "/i INGREDIENTINDEX [/q QUANTITY]";
+    public static final String COMMAND_USAGE = "Usage: deleteingredient /i INGREDIENTINDEX [/q QUANTITY]";
+    public static final String COMMAND_PARAMETER = "/i INGREDIENTINDEX [/q QUANTITY]";
     public static final String COMMAND_DESC = "Deletes an ingredient. ";
-    public static final String COMMAND_EXAMPLE = "Example: deleteingredient /n Beef /q 2 OR deleteingredient /i 1 /q 2";
+    public static final String COMMAND_EXAMPLE = "Example: deleteingredient /i 1 /q 2";
     public static final String COMMAND_FORMAT = String.format("%s\n%s\n%s", COMMAND_DESC, COMMAND_USAGE,
                                                             COMMAND_EXAMPLE);
     public static final String COMMAND_SUCCESS = "%s has been deleted.";
     public static final String COMMAND_FAILURE = "This ingredient does not exist! Please type in a correct "
-                                                    + "ingredient name/index.";
+                                                    + "ingredient index.";
     public static final String COMMAND_SUCCESS_QUANTITY = "The quantity of %s has been changed!";
     public static final String COMMAND_FAILURE_QUANTITY = "Please enter a valid quantity to delete!\nCurrently:"
                                                             + "\n%s : %d";
@@ -49,36 +47,65 @@ public class DeleteIngredientCommand extends Command {
     }
 
     /**
-     * Constructor for Delete Ingredient Command.
+     * Delete the ingredient by index.
      *
-     * @param ingredientName name of the ingredient to be deleted
-     * @param quantity number of serving of ingredient to be deleted
+     * @param ingredientsList the list of ingredients
+     * @return feedback to user
      */
 
-    public DeleteIngredientCommand(String ingredientName, Integer quantity) {
-        setActionType(COMMAND_WORD);
-        setObjectType(OBJECT_TYPE);
-        setObjectVariables(ingredientName);
-        this.quantity = quantity;
-        this.ingredientIndex = null;
+    public String deleteIngredientByIndex(ArrayList<Ingredient> ingredientsList) {
+        String feedbackToUser;
+        int ingredientIndex = this.ingredientIndex;
+        if (ingredientIndex > -1 && ingredientIndex < ingredientsList.size()) {
+            assert ingredientIndex >= 0;
+            Ingredient ingredientToDelete = ingredientsList.get(ingredientIndex);
+            //Delete the entire ingredient
+            if (quantity == null) {
+                feedbackToUser = deleteIngredient(ingredientToDelete, ingredientsList);
+            } else {
+                //Delete the quantity of the ingredient
+                feedbackToUser = deleteQuantity(ingredientToDelete);
+            }
+            Storage.saveIngredientData(ingredientsList);
+        } else {
+            feedbackToUser = COMMAND_FAILURE;
+        }
+        return feedbackToUser;
     }
 
     /**
-     * Getting the index of the ingredient to be deleted.
+     * Delete the ingredient from the ingredient list.
      *
-     * @param ingredientName the name of the ingredient to be deleted
+     * @param ingredientToDelete Ingredient to be deleted
      * @param ingredientsList the list of ingredients
-     * @return index if the ingredient is found in the ingredient list, else -1
+     * @return feedback to user
      */
 
-    public int getIngredientIndex(String ingredientName, ArrayList<Ingredient> ingredientsList) {
-        for (Ingredient ingredient : ingredientsList) {
-            if (ingredient.getIngredientName().equalsIgnoreCase(ingredientName)) {
-                int index = ingredientsList.indexOf(ingredient);
-                return index;
-            }
+    public String deleteIngredient(Ingredient ingredientToDelete, ArrayList<Ingredient> ingredientsList) {
+        kitchenLogs.log(Level.INFO, LOG_INFO);
+        ingredientsList.remove(ingredientToDelete);
+        String feedbackToUser = String.format(COMMAND_SUCCESS, ingredientToDelete.getIngredientName());
+        return feedbackToUser;
+    }
+
+    /**
+     * Deletes the quantity specified by the user from the ingredient
+     *
+     * @param ingredientToDelete Ingredient to be deleted
+     * @return feedback to user
+     */
+
+    public String deleteQuantity(Ingredient ingredientToDelete) {
+        String feedbackToUser;
+        String ingredientName = ingredientToDelete.getIngredientName();
+        int ingredientQuantity = ingredientToDelete.getQuantity();
+        if (quantity > 0) {
+            int newQuantity = ingredientQuantity - quantity;
+            feedbackToUser = updateNewQuantity(newQuantity, ingredientToDelete);
+        } else {
+            feedbackToUser = String.format(COMMAND_FAILURE_QUANTITY, ingredientName, ingredientQuantity);
         }
-        return -1;
+        return feedbackToUser;
     }
 
     /**
@@ -106,63 +133,6 @@ public class DeleteIngredientCommand extends Command {
     }
 
     /**
-     * Delete the ingredient by name.
-     *
-     * @param ingredientsList the list of ingredients
-     * @return feedback to user
-     */
-
-    public String deleteIngredientByName(ArrayList<Ingredient> ingredientsList) {
-        int ingredientIndex = getIngredientIndex(this.objectVariables, ingredientsList);
-        String feedbackToUser = deleteIngredient(ingredientsList, ingredientIndex);
-        return feedbackToUser;
-    }
-
-    /**
-     * Delete the ingredient by index.
-     *
-     * @param ingredientsList the list of ingredients
-     * @return feedback to user
-     */
-
-    public String deleteIngredientByIndex(ArrayList<Ingredient> ingredientsList) {
-        int ingredientIndex = this.ingredientIndex;
-        String feedbackToUser = deleteIngredient(ingredientsList, ingredientIndex);
-        return feedbackToUser;
-    }
-
-    /**
-     * Delete the ingredient from the ingredient list.
-     *
-     * @param ingredientsList the list of ingredients
-     * @return feedback to user
-     */
-
-    public String deleteIngredient(ArrayList<Ingredient> ingredientsList, Integer indexOfIngredient) {
-        String feedbackToUser;
-        if (indexOfIngredient > -1 && indexOfIngredient < ingredientsList.size()) {
-            assert indexOfIngredient >= 0;
-            Ingredient ingredientToDelete = ingredientsList.get(indexOfIngredient);
-            String ingredientName = ingredientToDelete.getIngredientName();
-            int ingredientQuantity = ingredientToDelete.getQuantity();
-            if (quantity == null) {
-                kitchenLogs.log(Level.INFO, LOG_INFO);
-                ingredientsList.remove(ingredientToDelete);
-                feedbackToUser = String.format(COMMAND_SUCCESS, ingredientName);
-            } else if (quantity > 0) {
-                int newQuantity = ingredientQuantity - quantity;
-                feedbackToUser = updateNewQuantity(newQuantity, ingredientToDelete);
-            } else {
-                feedbackToUser = String.format(COMMAND_FAILURE_QUANTITY, ingredientName, ingredientQuantity);
-            }
-            Storage.saveIngredientData(ingredientsList);
-        } else {
-            feedbackToUser = COMMAND_FAILURE;
-        }
-        return feedbackToUser;
-    }
-
-    /**
      * {@inheritDoc}
      *
      * @param ingredientList list of ingredients.
@@ -174,11 +144,7 @@ public class DeleteIngredientCommand extends Command {
     public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
                                   ArrayList<Chore> choreList) {
         String feedbackToUser;
-        if (this.ingredientIndex == null) {
-            feedbackToUser = deleteIngredientByName(ingredientList);
-        } else {
-            feedbackToUser = deleteIngredientByIndex(ingredientList);
-        }
+        feedbackToUser = deleteIngredientByIndex(ingredientList);
         CommandResult cmdResult = new CommandResult(feedbackToUser);
         return cmdResult;
     }
