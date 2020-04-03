@@ -21,10 +21,6 @@ addingredient /n Apple /c fruit /q 1 /p 1 /e 01/02/2020
 listingredient all
 addingredient /n Apple /c fruit /q 1 /p 1 /e 03/02/2020
 listingredient all
-deleteingredient /n Apple
-deleteingredient /n Apple
-deleteingredient /n Apple
-deleteingredient /n Pear
 listingredient all
 addchore buy groceries /by Tuesday 12pm
 addchore buy groceries
@@ -33,14 +29,15 @@ searchingredient beef
 searchrecipe chicken
 cookrecipe /n Chicken Salad /p 2
 cookrecipe /n Chicken Salad /p 3
-deleteingredient /n Beef
-deleteingredient /n Beef cubes
-deleteingredient /n kailan /q 35
-deleteingredient /n kailan
 deleterecipe /n Chicken Salad
 deleterecipe /n Chicken Salad
 deleterecipe /n Chicken Stew
 deleteingredient /n HL milk
+deleteingredient /i 1 /q 2
+deleteingredient /i 2 /q 40
+deleteingredient /i /q
+deleteingredient /i -1
+deleteingredient /i 1 /1 -1
 deleteingredient /i 4
 deleteingredient /i 3
 deleteingredient /i 2

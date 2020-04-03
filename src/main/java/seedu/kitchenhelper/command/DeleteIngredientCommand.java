@@ -15,7 +15,7 @@ public class DeleteIngredientCommand extends Command {
     public static final String COMMAND_WORD = "deleteingredient";
     public static final String COMMAND_USAGE = "Usage: deleteingredient /i INGREDIENTINDEX [/q QUANTITY]";
     public static final String COMMAND_PARAMETER = "/i INGREDIENTINDEX [/q QUANTITY]";
-    public static final String COMMAND_DESC = "Deletes an ingredient. ";
+    public static final String COMMAND_DESC = "Deletes an ingredient.";
     public static final String COMMAND_EXAMPLE = "Example: deleteingredient /i 1 /q 2";
     public static final String COMMAND_FORMAT = String.format("%s\n%s\n%s", COMMAND_DESC, COMMAND_USAGE,
                                                             COMMAND_EXAMPLE);
