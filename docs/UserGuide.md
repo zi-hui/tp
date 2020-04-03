@@ -154,26 +154,21 @@ Example |  Outcome
 **Command**: <br> `listingredient all` <br><br> **Description**: <br> Displays all ingredients from `all` categories. | listingredient all <br> Here is the list of Ingredients in Inventory <br> Format : Ingredient Name / Quantity / Price / Expiry <br>All:<br>dairy:<br>drink:<br>fruit:<br>meat:<br> Beef / 30 / 20.2 / 20/02/2020 <br>miscellaneous:<br>staple:<br>vegetable:<br>kailan / 30 / 30.45 / 12/03/2020 <br><br>===================================================
 **Command**: <br> `listingredient meat` <br><br> **Description**: <br> Displays all ingredients from `meat` categories. | listingredient all <br> Here is the list of Ingredients in Inventory <br> Format : Ingredient Name / Quantity / Price / Expiry <br> Beef / 30 / 20.2 / 20/02/2020 <br><br>===================================================
 
-
-
 #### 3.3.3. Delete an ingredient: `deleteingredient`
-You can delete a specified ingredient or reduce an ingredient’s QUANTITY from the ingredients' inventory in Kitchen Helper by using ingredient's name or index. <br>
+You can delete a specific ingredient and reduce the quantity of an ingredient from the ingredient's inventory in Kitchen Helper by using the ingredient's index. 
 
-You may get the list of ingredients that you have previously keyed in, by referring to the [listingredient](#322-list-ingredient-listingredient) command section. <br>
-
-__Format__: `deleteingredient /n <INGREDIENT_NAME> [/q <QUANTITY>]` OR `deleteingredient /i <INGREDIENT_INDEX> [/q <QUANTITY>]`
+__Format__: `deleteingredient /i <INGREDIENT_INDEX> [/q <QUANTITY>]`
 <br>
 <br>
-`INGREDIENT_NAME` : This refers to the name of the ingredient. <br>
-`INGREDIENT_INDEX`: This refers to the index of the ingredient. <br>
-`QUANTITY` : This refers to the QUANTITY of ingredient to be deducted. <br>
+`INGREDIENT_INDEX`: This refers to the index of the ingredient which is an identification number tagged to the ingredient.  <br>
+`QUANTITY` : This refers to the quantity of ingredient to be deducted. This is an optional argument.<br>
 <br>
+You may get the index for the ingredient that you would like to delete by getting the full list of ingredients that you have previously entered into Kitchen Helper. You may refer to the [listingredient](#332-list-ingredient-listingredient) command section to understand how to use the command. 
 
 Example |  Outcome
 --------|------------------
-**Command**: <br> `deleteingredient /n apple /q 2` <br><br> **Description**: <br> Deletes `2 apples` from the total quantity of `apples.` | deleteingredient /n apple /q 2 <br> The quantity of apple has been changed!<br>===================================================
-**Command**: <br> `deleteingredient /n wagyu beef` <br><br> **Description**: Deletes the ingredient named `wagyu beef` from the ingredients list. | deleteingredient /n wagyu beef <br> wagyu beef has been deleted.<br>===================================================
 **Command**: <br> `deleteingredient /i 1` <br><br> **Description**: Deletes the item specified by `index 1` in the ingredient list. | deleteingredient /i 1 <br> apple has been deleted.<br>===================================================
+**Command**: <br> `deleteingredient /i 2 /q 20` <br><br> **Description**: Reduces the ingredient specified by `index 2` in the ingredient list. | deleteingredient /i 2 /q 20 <br> The quantity of HL Milk has been changed!<br>===================================================
 
 #### 3.3.4. Search for ingredient: `searchingredient`
 You can search for ingredients based on a given keyword.  
@@ -232,14 +227,13 @@ Example |  Outcome
 #### 3.4.3. Delete a recipe: `deleterecipe`
 You can delete a recipe by using the recipe name or index from the list in Kitchen Helper. The name or index of the recipe can be found by displaying the list of recipes. 
 
-You may get the list of recipes that you have previously keyed in, by referring to the [listrecipe](#332-list-recipes-listrecipe) command section. <br>
-
 __Format__: `deleterecipe /n <RECIPE_NAME>` OR `deleterecipe /i <RECIPE_INDEX>`
 <br>
 <br>
 `RECIPE_NAME` : This refers to the name of the recipe. <br>
-`RECIPE_INDEX`: This refers to the index of the recipe. <br>
+`RECIPE_INDEX`: This refers to the index of the recipe which is an identification number tagged to the recipe.<br>
 <br>
+You may get the index or name for the recipe that you would like to delete by getting the full list of recipes that you have previously entered into Kitchen Helper. You may refer to the [listrecipe all](#342-list-recipes-listrecipe) command section to understand how to use the command. 
 
 Example |  Outcome
 --------|------------------
