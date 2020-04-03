@@ -186,42 +186,25 @@ Here is the list of Ingredients in Inventory:
 Format : Ingredient Index|Ingredient Name|Quantity|Price|Expiry
 all:
 dairy:
-<<<<<<< HEAD
-5|HL Milk|3|12.2|01/03/2020
-6|HL Milk|3|12.0|14/03/2020
-=======
-8|HL Milk|3|12.2|14/03/2020
->>>>>>> yanting-deleteIngredientBugFix
+8|HL Milk|3|12.2|01/03/2020
+9|HL Milk|3|12.0|14/03/2020
 drink:
 fruit:
 1|Apple|1|1.0|01/02/2020
 2|Apple|1|1.0|02/02/2020
 3|Apple|1|1.0|03/02/2020
-11|Pear|1|1.0|02/02/2020
+12|Pear|1|1.0|02/02/2020
 meat:
-<<<<<<< HEAD
-1|Beef|3|20.0|18/03/2020
-2|Beef cubes|3|20.0|18/03/2020
-3|Chicken Breast|3|20.0|18/12/2020
-4|Chicken Breast|4|20.0|20/12/2020
-miscellaneous:
-staple:
-vegetable:
-7|Lettuce|2|20.0|09/03/2020
-8|Lettuce|10|20.0|20/12/2020
-9|kailan|30|30.45|12/03/2020
-=======
 4|Beef|3|20.0|18/03/2020
 5|Beef cubes|3|20.0|18/03/2020
-6|Chicken Breast|3|20.0|18/03/2020
-7|Chicken Breast|4|20.0|20/03/2020
+6|Chicken Breast|3|20.0|18/12/2020
+7|Chicken Breast|4|20.0|20/12/2020
 miscellaneous:
 staple:
 vegetable:
-9|Lettuce|8|20.0|09/03/2020
-10|Lettuce|4|20.0|20/03/2020
-12|kailan|30|30.45|12/03/2020
->>>>>>> yanting-deleteIngredientBugFix
+10|Lettuce|2|20.0|09/03/2020
+11|Lettuce|10|20.0|20/12/2020
+13|kailan|30|30.45|12/03/2020
 
 ===================================================
 addchore buy groceries /by Tuesday 12pm
@@ -300,11 +283,7 @@ deleteingredient /i 4
 Beef has been deleted.
 ===================================================
 deleteingredient /i 3
-<<<<<<< HEAD
-HL Milk has been deleted.
-=======
 Apple has been deleted.
->>>>>>> yanting-deleteIngredientBugFix
 ===================================================
 deleteingredient /i 2
 Apple has been deleted.
@@ -330,21 +309,22 @@ Here is the list of Ingredients in Inventory:
 Format : Ingredient Index|Ingredient Name|Quantity|Price|Expiry
 all:
 dairy:
-5|HL Milk|3|12.2|14/03/2020
+5|HL Milk|3|12.2|01/03/2020
+6|HL Milk|3|12.0|14/03/2020
 drink:
 fruit:
-8|Pear|1|1.0|02/02/2020
+9|Pear|1|1.0|02/02/2020
 meat:
 1|Beef|3|20.0|18/03/2020
 2|Beef cubes|3|20.0|18/03/2020
-3|Chicken Breast|0|20.0|18/03/2020
-4|Chicken Breast|3|20.0|20/03/2020
+3|Chicken Breast|0|20.0|18/12/2020
+4|Chicken Breast|3|20.0|20/12/2020
 miscellaneous:
 staple:
 vegetable:
-6|Lettuce|0|20.0|09/03/2020
-7|Lettuce|4|20.0|20/03/2020
-9|kailan|30|30.45|12/03/2020
+7|Lettuce|0|20.0|09/03/2020
+8|Lettuce|4|20.0|20/12/2020
+10|kailan|30|30.45|12/03/2020
 
 ===================================================
 listchore
