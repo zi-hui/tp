@@ -47,6 +47,9 @@ You have added Ingredient:Beef Category:meat Quantity:3 Price:$20.00 Expiry:18/0
 addingredient /n Beef cubes /c meat /q 3 /p 20 /e 18/03/2022
 You have added Ingredient:Beef cubes Category:meat Quantity:3 Price:$20.00 Expiry:18/03/2022 to the ingredient list
 ===================================================
+addingredient /n Beef cubes /c meat /q 5 /p 20 /e 18/03/2022
+Kitchen Helper has updated the quantity of Beef cubes to 8 from 3
+===================================================
 addingredient /n Chicken Breast /c meat /q 4 /p 20 /e 20/12/2022
 You have added Ingredient:Chicken Breast Category:meat Quantity:4 Price:$20.00 Expiry:20/12/2022 to the ingredient list
 ===================================================
@@ -85,7 +88,7 @@ fruit:
 9|Pear|1|1.0|02/02/2022
 meat:
 1|Beef|3|20.0|18/03/2022
-2|Beef cubes|3|20.0|18/03/2022
+2|Beef cubes|8|20.0|18/03/2022
 3|Chicken Breast|3|20.0|18/12/2022
 4|Chicken Breast|4|20.0|20/12/2022
 miscellaneous:
@@ -112,7 +115,7 @@ fruit:
 10|Pear|1|1.0|02/02/2022
 meat:
 2|Beef|3|20.0|18/03/2022
-3|Beef cubes|3|20.0|18/03/2022
+3|Beef cubes|8|20.0|18/03/2022
 4|Chicken Breast|3|20.0|18/12/2022
 5|Chicken Breast|4|20.0|20/12/2022
 miscellaneous:
@@ -140,7 +143,7 @@ fruit:
 11|Pear|1|1.0|02/02/2022
 meat:
 3|Beef|3|20.0|18/03/2022
-4|Beef cubes|3|20.0|18/03/2022
+4|Beef cubes|8|20.0|18/03/2022
 5|Chicken Breast|3|20.0|18/12/2022
 6|Chicken Breast|4|20.0|20/12/2022
 miscellaneous:
@@ -169,7 +172,7 @@ fruit:
 12|Pear|1|1.0|02/02/2022
 meat:
 4|Beef|3|20.0|18/03/2022
-5|Beef cubes|3|20.0|18/03/2022
+5|Beef cubes|8|20.0|18/03/2022
 6|Chicken Breast|3|20.0|18/12/2022
 7|Chicken Breast|4|20.0|20/12/2022
 miscellaneous:
@@ -195,7 +198,7 @@ fruit:
 12|Pear|1|1.0|02/02/2022
 meat:
 4|Beef|3|20.0|18/03/2022
-5|Beef cubes|3|20.0|18/03/2022
+5|Beef cubes|8|20.0|18/03/2022
 6|Chicken Breast|3|20.0|18/12/2022
 7|Chicken Breast|4|20.0|20/12/2022
 miscellaneous:
@@ -223,7 +226,7 @@ Here are your matching chores in your list
 searchingredient beef
 Here are your matching ingredients in your list
 1.[Meat] Beef Qty:3 $20.00 Exp:18/03/2022
-2.[Meat] Beef cubes Qty:3 $20.00 Exp:18/03/2022
+2.[Meat] Beef cubes Qty:8 $20.00 Exp:18/03/2022
 ===================================================
 searchrecipe chicken
 Here are your matching recipes in your list
