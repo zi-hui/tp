@@ -1,12 +1,8 @@
-Apr 02, 2020 11:41:41 PM seedu.kitchenhelper.command.AddIngredientCommand execute
+Apr 03, 2020 4:02:24 PM seedu.kitchenhelper.parser.Parser prepareAddIngredient
+WARNING: Invalid Command Format! /n
+Apr 03, 2020 4:08:08 PM seedu.kitchenhelper.command.AddIngredientCommand execute
 INFO: A new ingredient has been added
-Apr 02, 2020 11:41:47 PM seedu.kitchenhelper.command.AddRecipeCommand addRecipe
-INFO: A new recipe has been added
-Apr 02, 2020 11:42:05 PM seedu.kitchenhelper.command.AddRecipeCommand addRecipe
-INFO: A new recipe has been added
-Apr 02, 2020 11:42:35 PM seedu.kitchenhelper.command.AddIngredientCommand execute
+Apr 03, 2020 4:08:29 PM seedu.kitchenhelper.command.AddIngredientCommand execute
 INFO: A new ingredient has been added
-Apr 02, 2020 11:42:41 PM seedu.kitchenhelper.command.AddIngredientCommand execute
-INFO: A new ingredient has been added
-Apr 02, 2020 11:43:08 PM seedu.kitchenhelper.command.AddIngredientCommand execute
+Apr 03, 2020 4:09:03 PM seedu.kitchenhelper.command.AddIngredientCommand execute
 INFO: A new ingredient has been added
