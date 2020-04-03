@@ -186,7 +186,8 @@ public class Parser {
         try {
             // Regex for checking the format of add ingredient
             String addInventoryRegex =
-                    "/n [a-zA-Z]+( [a-zA-Z]+)* /c [a-zA-Z]+ /q [0-9]+ /p \\d+(\\.\\d{1,2})? /e \\d{2}/\\d{2}/\\d{4}";
+                    "/n( )+[a-zA-Z]+( [a-zA-Z]+)*( )+/c( )+[a-zA-Z]+( )+/q( )+[0-9]+( )+/p( )+\\d+(\\.\\d{1,2})?( )"
+                    + "+/e( )+\\d{2}/\\d{2}/\\d{4}( )*";
             if (!isValidUserInputFormat(attributes, addInventoryRegex)) {
                 throw new KitchenHelperException("Invalid Add Inventory Format");
             }
@@ -218,7 +219,7 @@ public class Parser {
             return new InvalidCommand(INVALID_DATE);
         }
     }
-
+    
     /**
      * Prepares the addition of a chore into chore list.
      *
