@@ -89,6 +89,34 @@ public class CookRecipeCommand extends Command {
     }
 
     /**
+     * Check if the current ingredient is expired. If not, then deduct from the ingredient.
+     *
+     * @param ingredientToDeduct the ingredient where quantity is to be deducted from
+     * @param totalCookedQty the remaining quantity of ingredients needed to cook
+     * @return the remaining quantity of ingredients needed to cook
+     */
+
+    public int checkIfIngredientExpired(Ingredient ingredientToDeduct, int totalCookedQty) {
+        Date today = new Date();
+        int quantity = ingredientToDeduct.getQuantity();
+        try {
+            Date expiredDate = new SimpleDateFormat("dd/MM/yyyy").parse(ingredientToDeduct.getExpiryDate());
+            if (today.before(expiredDate)) {
+                if (quantity <= totalCookedQty) {
+                    totalCookedQty -= quantity;
+                    ingredientToDeduct.setQuantity(0);
+                } else {
+                    ingredientToDeduct.setQuantity(quantity - totalCookedQty);
+                    totalCookedQty = 0;
+                }
+            }
+        } catch (ParseException e) {
+            kitchenLogs.info(logcookRecipe);
+        }
+        return totalCookedQty;
+    }
+
+    /**
      * Deducts ingredients from list of ingredients sorted on expiry.
      *
      * @param ingredientList    the list of ingredients available.
@@ -100,15 +128,10 @@ public class CookRecipeCommand extends Command {
             ArrayList<Ingredient> listOfSameName = getIngredientsWithSameName(ingredientList, ingredientName);
             int totalCookedQty = pax * ingredient.getQuantity();
             for (Ingredient ingredientToDeduct : listOfSameName) {
-                int quantity = ingredientToDeduct.getQuantity();
                 if (totalCookedQty == 0) {
                     break;
-                } else if (quantity <= totalCookedQty) {
-                    totalCookedQty -= quantity;
-                    ingredientToDeduct.setQuantity(0);
-                } else if (quantity > totalCookedQty) {
-                    ingredientToDeduct.setQuantity(quantity - totalCookedQty);
-                    totalCookedQty = 0;
+                } else {
+                    totalCookedQty = checkIfIngredientExpired(ingredientToDeduct, totalCookedQty);
                 }
             }
         }

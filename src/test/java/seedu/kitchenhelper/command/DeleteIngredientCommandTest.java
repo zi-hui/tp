@@ -12,9 +12,9 @@ public class DeleteIngredientCommandTest {
     @Test
     public void deleteIngredientByIndex() {
         ArrayList<Ingredient> ingredientList = new ArrayList<>();
-        new AddIngredientCommand("Beef", "Meat", 30, 20.2, "2020-02-20")
+        new AddIngredientCommand("Beef", "Meat", 30, 20.2, "20/12/2020")
                                 .addToCategory("Meat", ingredientList);
-        new AddIngredientCommand("kailan", "Vegetable", 30, 30.45, "2020-03-12")
+        new AddIngredientCommand("kailan", "Vegetable", 30, 30.45, "18/12/2020")
                                 .addToCategory("Vegetable", ingredientList);
 
         int index = 1; //Beef
@@ -40,9 +40,9 @@ public class DeleteIngredientCommandTest {
     @Test
     public void deleteIngredient() {
         ArrayList<Ingredient> ingredientList = new ArrayList<>();
-        new AddIngredientCommand("Beef", "Meat", 30, 20.2, "2020-02-20")
+        new AddIngredientCommand("Beef", "Meat", 30, 20.2, "20/12/2020")
                 .addToCategory("Meat", ingredientList);
-        new AddIngredientCommand("kailan", "Vegetable", 30, 30.45, "2020-03-12")
+        new AddIngredientCommand("kailan", "Vegetable", 30, 30.45, "18/12/2020")
                 .addToCategory("Vegetable", ingredientList);
         DeleteIngredientCommand deleteIngredientQuantity = new DeleteIngredientCommand(1, 30);
         deleteIngredientQuantity.deleteIngredientByIndex(ingredientList);
@@ -68,9 +68,9 @@ public class DeleteIngredientCommandTest {
     @Test
     public void deleteQuantity() {
         ArrayList<Ingredient> ingredientList = new ArrayList<>();
-        new AddIngredientCommand("Beef", "Meat", 30, 20.2, "2020-02-20")
+        new AddIngredientCommand("Beef", "Meat", 30, 20.2, "20/12/2020")
                 .addToCategory("Meat", ingredientList);
-        new AddIngredientCommand("kailan", "Vegetable", 30, 30.45, "2020-03-12")
+        new AddIngredientCommand("kailan", "Vegetable", 30, 30.45, "18/12/2020")
                 .addToCategory("Vegetable", ingredientList);
 
         //test whether quantity > 0
@@ -91,10 +91,10 @@ public class DeleteIngredientCommandTest {
     @Test
     public void updateNewQuantity() {
         ArrayList<Ingredient> ingredientList = new ArrayList<>();
-        new AddIngredientCommand("Beef", "Meat", 30, 20.2, "2020-02-20")
-                                .addToCategory("Meat", ingredientList);
-        new AddIngredientCommand("kailan", "Vegetable", 30, 30.45, "2020-03-12")
-                                .addToCategory("Vegetable", ingredientList);
+        new AddIngredientCommand("Beef", "Meat", 30, 20.2, "20/12/2020")
+                .addToCategory("Meat", ingredientList);
+        new AddIngredientCommand("kailan", "Vegetable", 30, 30.45, "18/12/2020")
+                .addToCategory("Vegetable", ingredientList);
 
         int index = 1; //beef
         Ingredient ingredientToUpdate;
