@@ -74,6 +74,7 @@ public class DeleteIngredientCommandTest {
                 .addToCategory("Vegetable", ingredientList);
 
         //test whether quantity > 0
+        System.out.println(ingredientList.size());
         int index = 1;
         DeleteIngredientCommand deleteIngredientByQuantity = new DeleteIngredientCommand(index - 1, 29);
         Ingredient ingredientToDeleteQuantity1 = ingredientList.get(index - 1);
@@ -84,8 +85,7 @@ public class DeleteIngredientCommandTest {
         DeleteIngredientCommand deleteIngredientByQuantity2 = new DeleteIngredientCommand(index - 1, -1);
         Ingredient ingredientToDeleteQuantity2 = ingredientList.get(index - 1);
         deleteIngredientByQuantity2.deleteQuantity(ingredientToDeleteQuantity2);
-        assertEquals(ingredientToDeleteQuantity1.getQuantity(), 30);
-
+        assertEquals(ingredientToDeleteQuantity2.getQuantity(), 30);
     }
 
     @Test
