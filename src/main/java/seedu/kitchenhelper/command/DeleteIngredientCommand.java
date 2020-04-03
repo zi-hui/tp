@@ -99,7 +99,7 @@ public class DeleteIngredientCommand extends Command {
     }
 
     /**
-     * Deletes the quantity specified by the user from the ingredient
+     * Deletes the quantity specified by the user from the ingredient.
      *
      * @param ingredientToDelete Ingredient to be deleted
      * @return feedback to user
