@@ -22,7 +22,11 @@ import java.util.logging.Logger;
  * Adds the ingredient to the inventory list.
  */
 public class AddIngredientCommand extends Command {
-
+    
+    // Regex for checking the format of add ingredient
+    public static final String REGEX_FORMAT =
+            "/n( )+[a-zA-Z]+( [a-zA-Z]+)*( )+/c( )+[a-zA-Z]+( )+/q( )+[0-9]+( )+/p( )+\\d+(\\.\\d{1,2})?( )"
+            + "+/e( )+\\d{2}/\\d{2}/\\d{4}( )*";
     public static final Logger kitchenLogs = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     public static final String COMMAND_WORD = "addingredient";
     public static final String MESSAGE_SUCCESS =
@@ -35,6 +39,9 @@ public class AddIngredientCommand extends Command {
     public static final String MESSAGE_USAGE = String.format("%s: %s", COMMAND_WORD, COMMAND_DESC) + Ui.LS + String
             .format("Parameter: %s\n%s", COMMAND_PARAMETER, COMMAND_EXAMPLE);
     public final String logAddIngredient = "A new ingredient has been added";
+    public static final String EXPIRED_INGREDIENT_MESSAGE =
+            "Expired ingredient detected in input." + Ui.LS + "Please enter a non-expired expiry date.";
+    public static final String ZERO_QUANTITY_MESSAGE = "Please enter a quantity more than 0.";
     
     private String ingredientName;
     private String categoryName;
