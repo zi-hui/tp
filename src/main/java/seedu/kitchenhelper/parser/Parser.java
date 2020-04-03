@@ -355,7 +355,7 @@ public class Parser {
      * @return hashmap of a formatted list of parameters to be deleted.
      * @throws KitchenHelperException if the command is invalid
      */
-    private Command prepareDeleteRecipe(String parameters) throws KitchenHelperException {
+    public Command prepareDeleteRecipe(String parameters) throws KitchenHelperException {
         try {
             if (parameters.contains("/i")) {
                 String [] typeAndName = parameters.split(("/i\\s"), 2);
@@ -377,24 +377,16 @@ public class Parser {
      * @return hashmap of a formatted list of parameters to be deleted.
      * @throws KitchenHelperException if the command is invalid
      */
-    private Command prepareDeleteIngredient(String parameters) throws KitchenHelperException {
+    public Command prepareDeleteIngredient(String parameters) throws KitchenHelperException {
         try {
-            String [] typeAndName = parameters.split("/n|/i\\s", 2);
+            String [] typeAndName = parameters.split("/i\\s", 2);
             String [] nameAndQuantity = typeAndName[1].split("/q\\s", 2);
-            if (parameters.contains("/i")) {
-                if (nameAndQuantity.length > 1) {
-                    return new DeleteIngredientCommand(Integer.parseInt(nameAndQuantity[0].trim()) - 1,
-                                                        Integer.parseInt(nameAndQuantity[1]));
-                } else {
-                    return new DeleteIngredientCommand(Integer.parseInt(nameAndQuantity[0].trim()) - 1,
-                                                null);
-                }
+            if (nameAndQuantity.length > 1) {
+                return new DeleteIngredientCommand(Integer.parseInt(nameAndQuantity[0].trim()) - 1,
+                                                    Integer.parseInt(nameAndQuantity[1]));
             } else {
-                if (nameAndQuantity.length > 1) {
-                    return new DeleteIngredientCommand(nameAndQuantity[0].trim(), Integer.parseInt(nameAndQuantity[1]));
-                } else {
-                    return new DeleteIngredientCommand(nameAndQuantity[0].trim(), null);
-                }
+                return new DeleteIngredientCommand(Integer.parseInt(nameAndQuantity[0].trim()) - 1,
+                                            null);
             }
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             kitchenLogs.log(Level.WARNING, LOG_WARNING_INDEX, e.toString());

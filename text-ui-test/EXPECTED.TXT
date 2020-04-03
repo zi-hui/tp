@@ -181,28 +181,25 @@ vegetable:
 13|kailan|30|30.45|12/03/2020
 
 ===================================================
-deleteingredient /n Apple
-Apple has been deleted.
-===================================================
-deleteingredient /n Apple
-Apple has been deleted.
-===================================================
-deleteingredient /n Apple
-Apple has been deleted.
-===================================================
-deleteingredient /n Pear
-Pear has been deleted.
-===================================================
 listingredient all
 Here is the list of Ingredients in Inventory:
 Format : Ingredient Index|Ingredient Name|Quantity|Price|Expiry
 all:
 dairy:
+<<<<<<< HEAD
 5|HL Milk|3|12.2|01/03/2020
 6|HL Milk|3|12.0|14/03/2020
+=======
+8|HL Milk|3|12.2|14/03/2020
+>>>>>>> yanting-deleteIngredientBugFix
 drink:
 fruit:
+1|Apple|1|1.0|01/02/2020
+2|Apple|1|1.0|02/02/2020
+3|Apple|1|1.0|03/02/2020
+11|Pear|1|1.0|02/02/2020
 meat:
+<<<<<<< HEAD
 1|Beef|3|20.0|18/03/2020
 2|Beef cubes|3|20.0|18/03/2020
 3|Chicken Breast|3|20.0|18/12/2020
@@ -213,6 +210,18 @@ vegetable:
 7|Lettuce|2|20.0|09/03/2020
 8|Lettuce|10|20.0|20/12/2020
 9|kailan|30|30.45|12/03/2020
+=======
+4|Beef|3|20.0|18/03/2020
+5|Beef cubes|3|20.0|18/03/2020
+6|Chicken Breast|3|20.0|18/03/2020
+7|Chicken Breast|4|20.0|20/03/2020
+miscellaneous:
+staple:
+vegetable:
+9|Lettuce|8|20.0|09/03/2020
+10|Lettuce|4|20.0|20/03/2020
+12|kailan|30|30.45|12/03/2020
+>>>>>>> yanting-deleteIngredientBugFix
 
 ===================================================
 addchore buy groceries /by Tuesday 12pm
@@ -247,20 +256,6 @@ cookrecipe /n Chicken Salad /p 3
 Kitchen Helper is trying to cook!
 There are insufficient/missing ingredients!
 ===================================================
-deleteingredient /n Beef
-Beef has been deleted.
-===================================================
-deleteingredient /n Beef cubes
-Beef cubes has been deleted.
-===================================================
-deleteingredient /n kailan /q 35
-Please enter a valid quantity to delete!
-Currently:
-kailan : 30
-===================================================
-deleteingredient /n kailan
-kailan has been deleted.
-===================================================
 deleterecipe /n Chicken Salad
 Chicken Salad has been deleted
 ===================================================
@@ -271,19 +266,51 @@ deleterecipe /n Chicken Stew
 Chicken Stew has been deleted
 ===================================================
 deleteingredient /n HL milk
-HL Milk has been deleted.
+Invalid Command, please check your format!
+Deletes an ingredient.
+Usage: deleteingredient /i INGREDIENTINDEX [/q QUANTITY]
+Example: deleteingredient /i 1 /q 2
+===================================================
+deleteingredient /i 1 /q 2
+Please enter a valid quantity to delete!
+Currently:
+Apple : 1
+===================================================
+deleteingredient /i 2 /q 40
+Please enter a valid quantity to delete!
+Currently:
+Apple : 1
+===================================================
+deleteingredient /i /q
+Invalid Command, please check your format!
+Deletes an ingredient.
+Usage: deleteingredient /i INGREDIENTINDEX [/q QUANTITY]
+Example: deleteingredient /i 1 /q 2
+===================================================
+deleteingredient /i -1
+This ingredient does not exist! Please type in a correct ingredient index.
+===================================================
+deleteingredient /i 1 /1 -1
+Invalid Command, please check your format!
+Deletes an ingredient.
+Usage: deleteingredient /i INGREDIENTINDEX [/q QUANTITY]
+Example: deleteingredient /i 1 /q 2
 ===================================================
 deleteingredient /i 4
-Lettuce has been deleted.
+Beef has been deleted.
 ===================================================
 deleteingredient /i 3
+<<<<<<< HEAD
 HL Milk has been deleted.
+=======
+Apple has been deleted.
+>>>>>>> yanting-deleteIngredientBugFix
 ===================================================
 deleteingredient /i 2
-Chicken Breast has been deleted.
+Apple has been deleted.
 ===================================================
 deleteingredient /i 1
-Chicken Breast has been deleted.
+Apple has been deleted.
 ===================================================
 deletechore 1
 You have deleted this chore:
@@ -303,14 +330,21 @@ Here is the list of Ingredients in Inventory:
 Format : Ingredient Index|Ingredient Name|Quantity|Price|Expiry
 all:
 dairy:
+5|HL Milk|3|12.2|14/03/2020
 drink:
 fruit:
+8|Pear|1|1.0|02/02/2020
 meat:
 1|Beef|3|20.0|18/03/2020
+2|Beef cubes|3|20.0|18/03/2020
+3|Chicken Breast|0|20.0|18/03/2020
+4|Chicken Breast|3|20.0|20/03/2020
 miscellaneous:
 staple:
 vegetable:
-2|Lettuce|4|20.0|20/12/2020
+6|Lettuce|0|20.0|09/03/2020
+7|Lettuce|4|20.0|20/03/2020
+9|kailan|30|30.45|12/03/2020
 
 ===================================================
 listchore
