@@ -2,13 +2,7 @@ package seedu.kitchenhelper.parser;
 
 import org.junit.jupiter.api.Test;
 import seedu.kitchenhelper.KitchenHelper;
-import seedu.kitchenhelper.command.AddIngredientCommand;
-import seedu.kitchenhelper.command.AddChoreCommand;
-import seedu.kitchenhelper.command.DeleteChoreCommand;
-import seedu.kitchenhelper.command.InvalidCommand;
-import seedu.kitchenhelper.command.SearchIngredientCommand;
-import seedu.kitchenhelper.command.SearchRecipeCommand;
-import seedu.kitchenhelper.command.SearchChoreCommand;
+import seedu.kitchenhelper.command.*;
 import seedu.kitchenhelper.exception.KitchenHelperException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -68,6 +62,23 @@ class ParserTest {
                 + "Example: addchore buy groceries /by Tuesday 12pm";
         assertEquals(output, showToConsole(new KitchenHelper()
                 .executeCommand(new Parser().prepareAddChore(incorrectAttributes)).feedbackToUser));
+    }
+
+    @Test
+    void prepareDeleteIngredient_testPass() throws KitchenHelperException {
+        String correctAttributes = "/i 1";
+        //checking the instance of the DeleteIngredientCommand
+        assertTrue(new Parser().prepareDeleteIngredient(correctAttributes) instanceof DeleteIngredientCommand);
+    }
+
+    @Test
+    void prepareDeleteIngredient_testFail() throws KitchenHelperException {
+        String incorrectAttributes = "/i 1";
+        //checking the instance of the DeleteIngredientCommand
+        assertTrue(new Parser().prepareDeleteIngredient(incorrectAttributes) instanceof DeleteIngredientCommand);
+        String output = String.format(DeleteIngredientCommand.COMMAND_FAILURE);
+        assertEquals(output, showToConsole(new KitchenHelper()
+                .executeCommand(new Parser().prepareDeleteIngredient(incorrectAttributes)).feedbackToUser));
     }
 
     @Test

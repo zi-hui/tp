@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
 
 import java.util.ArrayList;
-import java.util.logging.Level;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
