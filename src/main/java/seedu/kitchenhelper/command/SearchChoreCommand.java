@@ -39,7 +39,7 @@ public class SearchChoreCommand extends Command {
      * @param keyword the word to search.
      */
     public SearchChoreCommand(String keyword) {
-        this.keyword = keyword.trim();
+        this.keyword = keyword.trim().toLowerCase();
     }
     
     /**
