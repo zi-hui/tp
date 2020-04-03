@@ -20,7 +20,9 @@ import seedu.kitchenhelper.command.ListIngredientCommand;
 import seedu.kitchenhelper.command.ListRecipeCommand;
 import seedu.kitchenhelper.command.InvalidCommand;
 import seedu.kitchenhelper.command.CookRecipeCommand;
+import seedu.kitchenhelper.exception.ExpiredException;
 import seedu.kitchenhelper.exception.KitchenHelperException;
+import seedu.kitchenhelper.exception.QuantityException;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -184,11 +186,8 @@ public class Parser {
      */
     public Command prepareAddIngredient(String attributes) {
         try {
-            // Regex for checking the format of add ingredient
-            String addInventoryRegex =
-                    "/n( )+[a-zA-Z]+( [a-zA-Z]+)*( )+/c( )+[a-zA-Z]+( )+/q( )+[0-9]+( )+/p( )+\\d+(\\.\\d{1,2})?( )"
-                    + "+/e( )+\\d{2}/\\d{2}/\\d{4}( )*";
-            if (!isValidUserInputFormat(attributes, addInventoryRegex)) {
+            
+            if (!isValidUserInputFormat(attributes, AddIngredientCommand.REGEX_FORMAT)) {
                 throw new KitchenHelperException("Invalid Add Inventory Format");
             }
 
@@ -203,12 +202,19 @@ public class Parser {
             String[] quantityAndOthers = categoryAndOthers[1].split("\\s+/p\\s+");
             int quantity = Integer.parseInt(quantityAndOthers[0]);
             assert quantity >= 0 : quantity;
-
+            
+            if (quantity <= 0) {
+                throw new QuantityException();
+            }
+            
             String[] priceAndExpiry = quantityAndOthers[1].split("\\s+/e\\s+");
             double price = Double.parseDouble(priceAndExpiry[0]);
             assert price >= 0.00 : price;
-
+    
             String expiry = parseDateFormat(priceAndExpiry[1]);
+            if(!isExpiredIngredient(expiry)) {
+                throw new ExpiredException();
+            }
             
             return new AddIngredientCommand(itemName, category, quantity, price, expiry);
         } catch (KitchenHelperException khe) {
@@ -217,6 +223,10 @@ public class Parser {
                     String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, AddIngredientCommand.COMMAND_FORMAT));
         } catch (DateTimeException dte) {
             return new InvalidCommand(INVALID_DATE);
+        } catch (ExpiredException ee) {
+            return new InvalidCommand(AddIngredientCommand.EXPIRED_INGREDIENT_MESSAGE);
+        } catch (QuantityException qe) {
+            return new InvalidCommand(AddIngredientCommand.ZERO_QUANTITY_MESSAGE);
         }
     }
     
@@ -462,14 +472,25 @@ public class Parser {
      * @return the date in the form of dd/MM/yyyy.
      */
     public String parseDateFormat(String expiry) {
+        LocalDate localDate = formatDate(expiry);
+        String formattedExpiry = localDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        formattedExpiry = formattedExpiry.replaceAll("-", "/");
+        return formattedExpiry;
+    }
+    
+    public LocalDate formatDate(String expiry) {
         String[] splitExpiry = expiry.split("/");
         LocalDate localDate;
         String day = splitExpiry[0];
         String month = splitExpiry[1];
         String year = splitExpiry[2];
         localDate = LocalDate.parse(year + "-" + month + "-" + day);
-        String formattedExpiry = localDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-        formattedExpiry = formattedExpiry.replaceAll("-", "/");
-        return formattedExpiry;
+        return localDate;
+    }
+    
+    public boolean isExpiredIngredient (String expiry) {
+        LocalDate dt1 = LocalDate.parse(formatDate(expiry).toString());
+        LocalDate dt2 = LocalDate.parse(LocalDate.now().toString());
+        return dt2.isBefore(dt1);
     }
 }
