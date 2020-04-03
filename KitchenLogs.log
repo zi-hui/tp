@@ -1,8 +1,36 @@
-Apr 03, 2020 4:02:24 PM seedu.kitchenhelper.parser.Parser prepareAddIngredient
-WARNING: Invalid Command Format! /n
-Apr 03, 2020 4:08:08 PM seedu.kitchenhelper.command.AddIngredientCommand execute
+Apr 03, 2020 8:08:41 PM seedu.kitchenhelper.command.DeleteIngredientCommand deleteIngredient
+INFO: An ingredient has been deleted
+Apr 03, 2020 8:08:45 PM seedu.kitchenhelper.command.DeleteIngredientCommand deleteIngredient
+INFO: An ingredient has been deleted
+Apr 03, 2020 8:09:01 PM seedu.kitchenhelper.command.DeleteIngredientCommand deleteIngredient
+INFO: An ingredient has been deleted
+Apr 03, 2020 8:13:11 PM seedu.kitchenhelper.command.AddRecipeCommand addRecipe
+INFO: A new recipe has been added
+Apr 03, 2020 8:13:27 PM seedu.kitchenhelper.command.AddIngredientCommand execute
 INFO: A new ingredient has been added
-Apr 03, 2020 4:08:29 PM seedu.kitchenhelper.command.AddIngredientCommand execute
+Apr 03, 2020 8:13:27 PM seedu.kitchenhelper.command.AddIngredientCommand execute
 INFO: A new ingredient has been added
-Apr 03, 2020 4:09:03 PM seedu.kitchenhelper.command.AddIngredientCommand execute
+Apr 03, 2020 8:14:26 PM seedu.kitchenhelper.command.AddIngredientCommand execute
+INFO: A new ingredient has been added
+Apr 03, 2020 8:15:25 PM seedu.kitchenhelper.command.AddIngredientCommand execute
+INFO: A new ingredient has been added
+Apr 03, 2020 8:15:25 PM seedu.kitchenhelper.command.AddIngredientCommand execute
+INFO: A new ingredient has been added
+Apr 03, 2020 8:15:46 PM seedu.kitchenhelper.command.AddIngredientCommand execute
+INFO: A new ingredient has been added
+Apr 03, 2020 8:18:39 PM seedu.kitchenhelper.command.AddIngredientCommand execute
+INFO: A new ingredient has been added
+Apr 03, 2020 8:20:01 PM seedu.kitchenhelper.command.AddIngredientCommand execute
+INFO: A new ingredient has been added
+Apr 03, 2020 8:20:09 PM seedu.kitchenhelper.command.AddIngredientCommand execute
+INFO: A new ingredient has been added
+Apr 03, 2020 8:20:09 PM seedu.kitchenhelper.command.AddIngredientCommand execute
+INFO: A new ingredient has been added
+Apr 03, 2020 8:20:15 PM seedu.kitchenhelper.command.AddIngredientCommand execute
+INFO: A new ingredient has been added
+Apr 03, 2020 8:20:15 PM seedu.kitchenhelper.command.AddIngredientCommand execute
+INFO: A new ingredient has been added
+Apr 03, 2020 8:21:18 PM seedu.kitchenhelper.command.AddRecipeCommand addRecipe
+INFO: A new recipe has been added
+Apr 03, 2020 8:25:24 PM seedu.kitchenhelper.command.AddIngredientCommand execute
 INFO: A new ingredient has been added
