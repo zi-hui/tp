@@ -23,7 +23,7 @@ class ParserTest {
     @Test
     void parseUserCommand_testPass() throws KitchenHelperException {
         assertTrue(new Parser().parseUserCommand(
-                "addingredient /n Beef /c Meat /q 30 /p 20.2 /e 20/02/2020") instanceof AddIngredientCommand);
+                "addingredient /n Beef /c Meat /q 30 /p 20.2 /e 20/02/2022") instanceof AddIngredientCommand);
         assertTrue(new Parser().parseUserCommand("searchingredient Beef") instanceof SearchIngredientCommand);
         assertTrue(new Parser().parseUserCommand("searchrecipe chicken") instanceof SearchRecipeCommand);
         assertTrue(new Parser().parseUserCommand("searchchore groceries") instanceof SearchChoreCommand);
@@ -37,9 +37,9 @@ class ParserTest {
     
     @Test
     void prepareAddInventory_testPass() {
-        String correctAttributes = "/n Beef /c Meat /q 30 /p 20.2 /e 20/02/2020";
+        String correctAttributes = "/n Beef /c Meat /q 30 /p 20.2 /e 20/02/2022";
         assertTrue(new Parser().prepareAddIngredient(correctAttributes) instanceof AddIngredientCommand);
-        String output = String.format(AddIngredientCommand.MESSAGE_SUCCESS, "Beef", "Meat", 30, 20.2, "20/02/2020");
+        String output = String.format(AddIngredientCommand.MESSAGE_SUCCESS, "Beef", "Meat", 30, 20.2, "20/02/2022");
         assertEquals(output, showToConsole(new KitchenHelper()
                 .executeCommand(new Parser().prepareAddIngredient(correctAttributes)).feedbackToUser));
     }
