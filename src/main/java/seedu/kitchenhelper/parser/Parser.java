@@ -23,6 +23,8 @@ import seedu.kitchenhelper.command.SearchIngredientCommand;
 import seedu.kitchenhelper.command.SearchRecipeCommand;
 import seedu.kitchenhelper.exception.KitchenHelperException;
 import seedu.kitchenhelper.object.Expenditure;
+import seedu.kitchenhelper.exception.ExpiredException;
+import seedu.kitchenhelper.exception.QuantityException;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -188,42 +190,51 @@ public class Parser {
      */
     public Command prepareAddIngredient(String attributes) {
         try {
-            // Regex for checking the format of add ingredient
-            String addInventoryRegex =
-                    "/n [a-zA-Z]+( [a-zA-Z]+)* /c [a-zA-Z]+ /q [0-9]+ /p \\d+(\\.\\d{1,2})? /e \\d{2}/\\d{2}/\\d{4}";
-            if (!isValidUserInputFormat(attributes, addInventoryRegex)) {
+            if (!isValidUserInputFormat(attributes, AddIngredientCommand.REGEX_FORMAT)) {
                 throw new KitchenHelperException("Invalid Add Inventory Format");
             }
-
+        
             String[] nameAndOthers = attributes.split("/c\\s", 2);
             String itemName = nameAndOthers[0].split("/n\\s+")[1].trim();
             assert itemName.length() > 0 : itemName;
-
+        
             String[] categoryAndOthers = nameAndOthers[1].split("\\s+/q\\s+");
             String category = categoryAndOthers[0].trim();
             assert category.length() > 0 : category;
-
+        
             String[] quantityAndOthers = categoryAndOthers[1].split("\\s+/p\\s+");
             int quantity = Integer.parseInt(quantityAndOthers[0]);
             assert quantity >= 0 : quantity;
-
+        
+            if (quantity <= 0) {
+                throw new QuantityException();
+            }
+        
             String[] priceAndExpiry = quantityAndOthers[1].split("\\s+/e\\s+");
             double price = Double.parseDouble(priceAndExpiry[0]);
             assert price >= 0.00 : price;
-            Expenditure.getInstance().addToExpenditure(price, quantity);
 
             String expiry = parseDateFormat(priceAndExpiry[1]);
-            
+            if (!isExpiredIngredient(expiry)) {
+                throw new ExpiredException();
+            }
+
+            Expenditure.getInstance().addToExpenditure(price, quantity);
+
             return new AddIngredientCommand(itemName, category, quantity, price, expiry);
         } catch (KitchenHelperException khe) {
-            kitchenLogs.log(Level.WARNING,InvalidCommand.MESSAGE_INVALID + " " + attributes);
+            kitchenLogs.log(Level.WARNING, InvalidCommand.MESSAGE_INVALID + " " + attributes);
             return new InvalidCommand(
                     String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, AddIngredientCommand.COMMAND_FORMAT));
         } catch (DateTimeException dte) {
             return new InvalidCommand(INVALID_DATE);
+        } catch (ExpiredException ee) {
+            return new InvalidCommand(AddIngredientCommand.EXPIRED_INGREDIENT_MESSAGE);
+        } catch (QuantityException qe) {
+            return new InvalidCommand(AddIngredientCommand.ZERO_QUANTITY_MESSAGE);
         }
     }
-
+    
     /**
      * Prepares the addition of a chore into chore list.
      *
@@ -360,7 +371,7 @@ public class Parser {
      * @return hashmap of a formatted list of parameters to be deleted.
      * @throws KitchenHelperException if the command is invalid
      */
-    private Command prepareDeleteRecipe(String parameters) throws KitchenHelperException {
+    public Command prepareDeleteRecipe(String parameters) throws KitchenHelperException {
         try {
             if (parameters.contains("/i")) {
                 String [] typeAndName = parameters.split(("/i\\s"), 2);
@@ -382,24 +393,16 @@ public class Parser {
      * @return hashmap of a formatted list of parameters to be deleted.
      * @throws KitchenHelperException if the command is invalid
      */
-    private Command prepareDeleteIngredient(String parameters) throws KitchenHelperException {
+    public Command prepareDeleteIngredient(String parameters) throws KitchenHelperException {
         try {
-            String [] typeAndName = parameters.split("/n|/i\\s", 2);
+            String [] typeAndName = parameters.split("/i\\s", 2);
             String [] nameAndQuantity = typeAndName[1].split("/q\\s", 2);
-            if (parameters.contains("/i")) {
-                if (nameAndQuantity.length > 1) {
-                    return new DeleteIngredientCommand(Integer.parseInt(nameAndQuantity[0].trim()) - 1,
-                                                        Integer.parseInt(nameAndQuantity[1]));
-                } else {
-                    return new DeleteIngredientCommand(Integer.parseInt(nameAndQuantity[0].trim()) - 1,
-                                                null);
-                }
+            if (nameAndQuantity.length > 1) {
+                return new DeleteIngredientCommand(Integer.parseInt(nameAndQuantity[0].trim()) - 1,
+                                                    Integer.parseInt(nameAndQuantity[1]));
             } else {
-                if (nameAndQuantity.length > 1) {
-                    return new DeleteIngredientCommand(nameAndQuantity[0].trim(), Integer.parseInt(nameAndQuantity[1]));
-                } else {
-                    return new DeleteIngredientCommand(nameAndQuantity[0].trim(), null);
-                }
+                return new DeleteIngredientCommand(Integer.parseInt(nameAndQuantity[0].trim()) - 1,
+                                            null);
             }
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             kitchenLogs.log(Level.WARNING, LOG_WARNING_INDEX, e.toString());
@@ -487,14 +490,35 @@ public class Parser {
      * @return the date in the form of dd/MM/yyyy.
      */
     public String parseDateFormat(String expiry) {
-        String[] splitExpiry = expiry.split("/");
-        LocalDate localDate;
-        String day = splitExpiry[0];
-        String month = splitExpiry[1];
-        String year = splitExpiry[2];
-        localDate = LocalDate.parse(year + "-" + month + "-" + day);
+        LocalDate localDate = changeDateToJavaFormat(expiry);
         String formattedExpiry = localDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         formattedExpiry = formattedExpiry.replaceAll("-", "/");
         return formattedExpiry;
+    }
+    
+    /**
+     * Change to standard Java Date format.
+     *
+     * @param expiry the user input expiry date.
+     * @return LocalDate of the expiry date.
+     */
+    public LocalDate changeDateToJavaFormat(String expiry) {
+        String[] splitExpiry = expiry.split("/");
+        String day = splitExpiry[0];
+        String month = splitExpiry[1];
+        String year = splitExpiry[2];
+        return LocalDate.parse(year + "-" + month + "-" + day);
+    }
+    
+    /**
+     * Check if the ingredient prior to adding is expired.
+     *
+     * @param expiry the user input expiry date.
+     * @return true is not expired, false if expired.
+     */
+    public boolean isExpiredIngredient(String expiry) {
+        LocalDate dt1 = LocalDate.parse(changeDateToJavaFormat(expiry).toString());
+        LocalDate dt2 = LocalDate.parse(LocalDate.now().toString());
+        return dt2.isBefore(dt1);
     }
 }
