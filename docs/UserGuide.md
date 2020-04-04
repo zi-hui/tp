@@ -191,7 +191,7 @@ Example |  Outcome
 ### 3.4. Recipe
 
 #### 3.4.1. Adding a recipe: `addrecipe`
-Adds a new unique recipe into the List in Kitchen Helper.
+Adds a new unique recipe into the List in Kitchen Helper. A recipe is a list of ingredients that are used to cook a dish.
 
 __Format:__ `addrecipe /n <RECIPE_NAME> /i <INGREDIENT_NAME>:<QUANTITY>:<CATEGORY>[,..]`
 
@@ -211,11 +211,13 @@ The different types of `CATEGORY` are listed below:
   
 Any `CATEGORY` that does not falls in the list could be put under `Miscellaneous`.
 
-All `RECIPE_NAME` has to be unique. You can check the list of existing recipes by using [`listrecipe all`](#332-list-recipes-listrecipe-1)  
+> All `RECIPE_NAME` has to be unique. You can check the list of existing recipes by using [`listrecipe all`](#332-list-recipes-listrecipe-1)  
+> Please note that `RECIPE_NAME` and `INGREGIENT_NAME` can contain spaces. These will not be removed after addition. (i.e. "____Chicken Stew" where `_` is space will remain )
 
 Example |  Outcome
 --------|------------------
 **Command**: <br> `addrecipe /n Rice Ball /i Rice:3:staple` <br><br> **Description**: <br> Creates a new recipe called `Rice Ball` which contains one ingredient, `3` portions of `Rice`. | addrecipe /n Rice Ball /i Rice:3:staple <br>Rice Ball Recipe has been created with 1 ingredients inside.<br>===================================================`
+**Command**: <br> `addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable` <br><br> **Description**: <br> Creates a new recipe called `Chicken Salad` which contains two ingredient, `2` portions of `Chicken breast` and `4` portions of `Lettuce`. | addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable<br>Chicken Salad Recipe has been created with 2 ingredients inside.<br>===================================================`
 
 #### 3.4.2. List recipes: `listrecipe`
 Displays all recipe and its name or the items currently in a particular recipe in Kitchen Helper.
@@ -264,6 +266,8 @@ __Format:__ `cookrecipe /n <RECIPE_NAME> /p <NUMBER_OF_PAX>`
 
 * `RECIPE_NAME` is the name of your recipe.
 * `NUMBER_OF_PAX` is the pax count for the specified recipe.
+
+> Please note that expired ingredients cannot be cooked.
 
 Example |  Outcome
 --------|------------------
