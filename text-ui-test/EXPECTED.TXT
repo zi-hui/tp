@@ -46,7 +46,6 @@ You have added Ingredient:Beef Category:meat Quantity:3 Price:$20.00 Expiry:18/0
 ===================================================
 addingredient /n Beef cubes /c meat /q 3 /p 20 /e 18/03/2022
 You have added Ingredient:Beef cubes Category:meat Quantity:3 Price:$20.00 Expiry:18/03/2022 to the ingredient list
->>>>>>> master
 ===================================================
 addingredient /n Beef cubes /c meat /q 5 /p 20 /e 18/03/2022
 Kitchen Helper has updated the quantity of Beef cubes to 8 from 3
