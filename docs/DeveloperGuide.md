@@ -53,9 +53,12 @@ By: `CS2113T-M16-2` Since: `2020`
       - [F.6. Saving data](#f6-saving-data)
 
 ## 1. Introduction
-### 1.1. Purpose
+### 1.1  Background
+Kitchen Helper, born from the need to keep track of kitchen inventory, is an application that is designed to manage kitchen inventory and chores. Users will be able to reduce food wastage and save money through the convenience of viewing the contents of the inventory.
+
+### 1.2. Purpose
 The document contains the specified architecture and software design specifications for the application, Kitchen Helper. 
-### 1.2. Scope
+### 1.3. Scope
 This describes the software architecture and software design requirements for Kitchen Helper. This guide is mainly for developers, designers and software engineers that are or going to work on Kitchen Helper. 
 ## 2. Setting up
 
@@ -397,7 +400,38 @@ When the user attempts to cook `Chicken Salad` recipe from `Kitchen Helper`, the
     6. Lastly, a String called `feedbackToUser` will be returned to the user to inform the user of the outcome of the command.
 4. The details will then be printed onto the console using `Ui#showResultToUser(result)`.
 
-##### Design Considerations 
+
+##### Design considerations
+Aspect: Preparing the deduction of ingredients when cooking a recipe
+
+Alternative  1 (current choice): Checks for existence of recipe, existence of ingredients for the specified recipe and sufficiency of ingredients
+
+|   |   |
+|---|---|
+|**Pros**| Minimizes erroneous deduction of insufficient and nonexistent ingredients |
+|**Cons**|Additional computation and overhead |
+
+Alternative 2: Deductions are to be made to existing and available ingredients and users are notified when there are insufficient ingredients
+
+|   |   |
+|---|---|
+|**Pros**| Lesser overhead as there is lesser checks to be done
+|**Cons**| Hidden bugs and exceptions have to be well-covered to ensure that the deduction would be of the right value
+
+Aspect: Searching for the corresponding ingredients of a recipe/ Searching through list of recipes to check for existence of recipe
+Alternative 1 (current choice): Linear search, iterate through the arraylist of ingredients/ recipes and checking
+
+|   |   |
+|---|---|
+|**Pros**| Lesser use of complex data structure will save memory |
+|**Cons**| Not optimal as search will be O(n), larger amount of data may take a longer time |
+
+Alternative 2: building an index on the first letter of the recipe name
+
+|   |   |
+|---|---|
+|**Pros**| More efficient search as pool of search space would be significantly smaller
+|**Cons**| Needs to be constantly maintained which incurs overhead.
 
 #### 4.2.4. Delete all/ specific recipe(s)
 The deletion feature for specific recipes allows the user to delete recipes either by the name or index of the recipe. 
@@ -474,41 +508,6 @@ and returns the recipe’s name and the index of recipe in the recipe’s list.
 |-----|-----|
 |**Pros** | 1. More accurate searching of the recipe that uses the ingredients.|  
 |**Cons** | 1. Could be more memory intensive to find if the list is huge.|
-
-#### 4.2.5. Cooking a recipe
-##### Implementation
-##### Design considerations
-Aspect: Preparing the deduction of ingredients when cooking a recipe
-Alternative  1 (current choice): Checks for existence of recipe, existence of ingredients for the specified recipe and sufficiency of ingredients
-
-|   |   |
-|---|---|
-|**Pros**| Minimizes erroneous deduction of insufficient and nonexistent ingredients |
-|**Cons**|Additional computation and overhead |
-
-Alternative 2: Deductions are to be made to existing and available ingredients and users are notified when there are insufficient ingredients
-
-|   |   |
-|---|---|
-|**Pros**| Lesser overhead as there is lesser checks to be done
-|**Cons**| Hidden bugs and exceptions have to be well-covered to ensure that the deduction would be of the right value
-
-Aspect: Searching for the corresponding ingredients of a recipe/ Searching through list of recipes to check for existence of recipe
-Alternative 1 (current choice): Linear search, iterate through the arraylist of ingredients/ recipes and checking
-
-|   |   |
-|---|---|
-|**Pros**| Lesser use of complex data structure will save memory |
-|**Cons**| Not optimal as search will be O(n), larger amount of data may take a longer time |
-
-Alternative 2: building an index on the first letter of the recipe name
-
-|   |   |
-|---|---|
-|**Pros**| More efficient search as pool of search space would be significantly smaller
-|**Cons**| Needs to be constantly maintained which incurs overhead.
-
-
 
 ### 4.3. Chore-related Features
 #### 4.3.1. Addition of chore
