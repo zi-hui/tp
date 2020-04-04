@@ -22,7 +22,11 @@ import java.util.logging.Logger;
  * Adds the ingredient to the inventory list.
  */
 public class AddIngredientCommand extends Command {
-
+    
+    // Regex for checking the format of add ingredient
+    public static final String REGEX_FORMAT =
+            "/n( )+[a-zA-Z]+( [a-zA-Z]+)*( )+/c( )+[a-zA-Z]+( )+/q( )+[0-9]+( )+/p( )+\\d+(\\.\\d{1,2})?( )"
+            + "+/e( )+\\d{2}/\\d{2}/\\d{4}( )*";
     public static final Logger kitchenLogs = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     public static final String COMMAND_WORD = "addingredient";
     public static final String MESSAGE_SUCCESS =
@@ -34,6 +38,12 @@ public class AddIngredientCommand extends Command {
             String.format("%s %s\n%s", COMMAND_DESC, COMMAND_PARAMETER, COMMAND_EXAMPLE);
     public static final String MESSAGE_USAGE = String.format("%s: %s", COMMAND_WORD, COMMAND_DESC) + Ui.LS + String
             .format("Parameter: %s\n%s", COMMAND_PARAMETER, COMMAND_EXAMPLE);
+    public static final String EXPIRED_INGREDIENT_MESSAGE =
+            "Expired ingredient detected in input." + Ui.LS + "Please enter a non-expired expiry date.";
+    public static final String ZERO_QUANTITY_MESSAGE = "Please enter a quantity more than 0.";
+    public static final String COMBINE_INGREDIENT_MESSAGE =
+            "Kitchen Helper has updated the quantity of %s to %d from %d";
+    private static final int NEGATIVE_ONE = -1;
     public final String logAddIngredient = "A new ingredient has been added";
     
     private String ingredientName;
@@ -69,54 +79,73 @@ public class AddIngredientCommand extends Command {
         switch (category.toLowerCase()) {
         case Meat.INGREDIENT_WORD:
             ingredientList.add(new Meat(ingredientName, categoryName, quantity, price, expiry));
-            sortIngredientList(ingredientList);
-            Storage.saveIngredientData(ingredientList);
             break;
         case Vegetable.INGREDIENT_WORD:
             ingredientList.add(new Vegetable(ingredientName, categoryName, quantity, price, expiry));
-            sortIngredientList(ingredientList);
-            Storage.saveIngredientData(ingredientList);
             break;
         case Drink.INGREDIENT_WORD:
             ingredientList.add(new Drink(ingredientName, categoryName, quantity, price, expiry));
-            sortIngredientList(ingredientList);
-            Storage.saveIngredientData(ingredientList);
             break;
         case Fruit.INGREDIENT_WORD:
             ingredientList.add(new Fruit(ingredientName, categoryName, quantity, price, expiry));
-            sortIngredientList(ingredientList);
-            Storage.saveIngredientData(ingredientList);
             break;
         case Staple.INGREDIENT_WORD:
             ingredientList.add(new Staple(ingredientName, categoryName, quantity, price, expiry));
-            sortIngredientList(ingredientList);
-            Storage.saveIngredientData(ingredientList);
             break;
         case Dairy.INGREDIENT_WORD:
             ingredientList.add(new Dairy(ingredientName, categoryName, quantity, price, expiry));
-            sortIngredientList(ingredientList);
-            Storage.saveIngredientData(ingredientList);
             break;
         case Miscellaneous.INGREDIENT_WORD:
             // Fallthrough
         default:
             this.categoryName = Miscellaneous.INGREDIENT_WORD;
             ingredientList.add(new Miscellaneous(ingredientName, categoryName, quantity, price, expiry));
-            sortIngredientList(ingredientList);
-            Storage.saveIngredientData(ingredientList);
             break;
         }
     }
-
+    
     /**
      * Sorts ingredientList arraylist by Category name, then, Ingredient name, then, Expiry Date.
-     *
      */
     public void sortIngredientList(ArrayList<Ingredient> ingredientList) {
-        Collections.sort(ingredientList, Comparator.comparing(Ingredient::getIngredientName)
-                .thenComparing(Ingredient::getExpiryDate));
+        Collections.sort(ingredientList,
+                Comparator.comparing(Ingredient::getIngredientName).thenComparing(Ingredient::getExpiryDate));
     }
-
+    
+    /**
+     * Check if the newly added ingredient has the same name (case ignored), same price and expiry date.
+     *
+     * @param i              ingredient object.
+     * @param ingredientName ingredient name.
+     * @param price          ingredient price.
+     * @param expiryDate     ingredient expiry date.
+     * @return true if has same name, price and expiry date, else return false.
+     */
+    public boolean hasSameNameAndPriceAndExpiry(Object i, String ingredientName, double price, String expiryDate) {
+        boolean sameName = ((Ingredient) i).getIngredientName().equalsIgnoreCase(ingredientName);
+        boolean samePrice = ((Ingredient) i).getPrice() == price;
+        boolean sameExpiry = ((Ingredient) i).getExpiryDate().equals(expiryDate);
+        return sameName && samePrice && sameExpiry;
+    }
+    
+    /**
+     * Get the index from the ingredientList if has matching name, price and expiry date.
+     *
+     * @param ingredientList list of ingredients.
+     * @return the index if found, else return NEGATIVE_ONE.
+     */
+    public int mergeTogetherIndex(ArrayList<Ingredient> ingredientList) {
+        int mergeIndex = 0;
+        for (Ingredient i : ingredientList) {
+            if (hasSameNameAndPriceAndExpiry(i, ingredientName, price, expiry)) {
+                i.setQuantity(i.getQuantity() + quantity);
+                return mergeIndex;
+            }
+            mergeIndex++;
+        }
+        return NEGATIVE_ONE;
+    }
+    
     /**
      * {@inheritDoc}
      *
@@ -128,8 +157,22 @@ public class AddIngredientCommand extends Command {
     @Override
     public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
                                  ArrayList<Chore> choreList) {
-        addToCategory(categoryName, ingredientList);
-        kitchenLogs.info(logAddIngredient);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, ingredientName, categoryName, quantity, price, expiry));
+        int index = mergeTogetherIndex(ingredientList);
+        
+        if (index != NEGATIVE_ONE) {
+            Ingredient i = ingredientList.get(index);
+            int currentQuantity = i.getQuantity();
+            sortIngredientList(ingredientList);
+            Storage.saveIngredientData(ingredientList);
+            return new CommandResult(String.format(COMBINE_INGREDIENT_MESSAGE, i.getIngredientName(), currentQuantity,
+                    currentQuantity - quantity));
+        } else {
+            addToCategory(categoryName, ingredientList);
+            sortIngredientList(ingredientList);
+            Storage.saveIngredientData(ingredientList);
+            kitchenLogs.info(logAddIngredient);
+            return new CommandResult(
+                    String.format(MESSAGE_SUCCESS, ingredientName, categoryName, quantity, price, expiry));
+        }
     }
 }

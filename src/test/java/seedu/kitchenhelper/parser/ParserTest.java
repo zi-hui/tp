@@ -23,7 +23,7 @@ class ParserTest {
     @Test
     void parseUserCommand_testPass() throws KitchenHelperException {
         assertTrue(new Parser().parseUserCommand(
-                "addingredient /n Beef /c Meat /q 30 /p 20.2 /e 20/02/2020") instanceof AddIngredientCommand);
+                "addingredient /n Beef /c Meat /q 30 /p 20.2 /e 20/02/2022") instanceof AddIngredientCommand);
         assertTrue(new Parser().parseUserCommand("searchingredient Beef") instanceof SearchIngredientCommand);
         assertTrue(new Parser().parseUserCommand("searchrecipe chicken") instanceof SearchRecipeCommand);
         assertTrue(new Parser().parseUserCommand("searchchore groceries") instanceof SearchChoreCommand);
@@ -37,9 +37,9 @@ class ParserTest {
     
     @Test
     void prepareAddInventory_testPass() {
-        String correctAttributes = "/n Beef /c Meat /q 30 /p 20.2 /e 20/02/2020";
+        String correctAttributes = "/n Beef /c Meat /q 30 /p 20.2 /e 20/02/2022";
         assertTrue(new Parser().prepareAddIngredient(correctAttributes) instanceof AddIngredientCommand);
-        String output = String.format(AddIngredientCommand.MESSAGE_SUCCESS, "Beef", "Meat", 30, 20.2, "20/02/2020");
+        String output = String.format(AddIngredientCommand.MESSAGE_SUCCESS, "Beef", "Meat", 30, 20.2, "20/02/2022");
         assertEquals(output, showToConsole(new KitchenHelper()
                 .executeCommand(new Parser().prepareAddIngredient(correctAttributes)).feedbackToUser));
     }
@@ -120,7 +120,8 @@ class ParserTest {
     
     @Test
     void isValidUserInputFormat_testPass() {
-        String regex = "/n [a-zA-Z]+( [a-zA-Z]+)* /c [a-zA-Z]+ /q [0-9]+ /p \\d+(\\.\\d{1,2})? /e \\d{2}/\\d{2}/\\d{4}";
+        String regex = "/n( )+[a-zA-Z]+( [a-zA-Z]+)*( )+/c( )+[a-zA-Z]+( )+/q( )+[0-9]+( )+/p( )+\\d+(\\.\\d{1,2})?( )"
+                       + "+/e( )+\\d{2}/\\d{2}/\\d{4}( )*";
         assertTrue(new Parser().isValidUserInputFormat("/n Beef /c Meat /q 30 /p 20.2 /e 20/02/2020", regex));
         assertTrue(new Parser().isValidUserInputFormat("/n Beef cubes /c Meat /q 30 /p 20.2 /e 20/02/2020", regex));
         assertTrue(new Parser().isValidUserInputFormat("/n Kailan /c Vegetable /q 30 /p 20 /e 20/02/2020", regex));
@@ -131,11 +132,14 @@ class ParserTest {
                 .isValidUserInputFormat("/n apple cider alcohol drink /c Drink /q 30 /p 50.1 /e 20/02/2020", regex));
         assertTrue(new Parser().isValidUserInputFormat("/n spoon /c miscellaneous /q 30 /p 20.2 /e 20/02/2020", regex));
         assertTrue(new Parser().isValidUserInputFormat("/n Beef cubes /c Meat /q 30 /p 20.2 /e 20/02/2020", regex));
+        // Extra space between ingredient'category and identifier /q
+        assertTrue(new Parser().isValidUserInputFormat("/n APPLE /c fRuit  /q 20 /p 20.22 /e 20/02/2020", regex));
     }
     
     @Test
     void isValidUserInputFormat_testFail() {
-        String regex = "/n [a-zA-Z]+( [a-zA-Z]+)* /c [a-zA-Z]+ /q [0-9]+ /p \\d+(\\.\\d{1,2})? /e \\d{2}/\\d{2}/\\d{4}";
+        String regex = "/n( )+[a-zA-Z]+( [a-zA-Z]+)*( )+/c( )+[a-zA-Z]+( )+/q( )+[0-9]+( )+/p( )+\\d+(\\.\\d{1,2})?( )"
+                       + "+/e( )+\\d{2}/\\d{2}/\\d{4}( )*";
         // Invalid price notation
         assertFalse(new Parser().isValidUserInputFormat("/n Beef /c Meat /q 30 /p 20.212 /e 20/02/2020", regex));
         // Invalid Date format
@@ -144,8 +148,6 @@ class ParserTest {
         assertFalse(new Parser().isValidUserInputFormat("Kailan /c Vegetable /q 30 /p 20 /e 20/02/2020", regex));
         // Missing space between ingredient name and identifier /c
         assertFalse(new Parser().isValidUserInputFormat("/n miLK/c dairy /q 30 /p 20.2 /e 20/02/2020", regex));
-        // Extra space between ingredient'category and identifier /q
-        assertFalse(new Parser().isValidUserInputFormat("/n APPLE /c fRuit  /q 20 /p 20.22 /e 20/02/2020", regex));
         // Invalid Date format, consist of 3 digit in day in a month
         assertFalse(new Parser().isValidUserInputFormat("/n Rice /c Staple /q 30 /p 222.11 /e 201/02/2020", regex));
         // Missing parameter
