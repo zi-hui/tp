@@ -187,7 +187,7 @@ __Format:__ `searchingredient <KEYWORD>`
 Example |  Outcome
 --------|------------------
 **Command**: <br> `searchingredient beef` <br> **Description:** <br> Search by ingredient's name. | searchingredient beef <br> Here are your matching ingredients in your list <br> 1. \[Meat\] Beef Qty: 3 $20.00 Exp: 18/03/2020 <br> ===================================================
-**Command**: <br> `searchingredient meat` <br> **Description:** <br> Search by ingredient's CATEGORY. | searchingredient meat <br> Here are your matching ingredients in your list <br> 1. \[Meat\] Beef Qty: 3 $20.00 Exp: 18/03/2020 <br> ===================================================
+**Command**: <br> `searchingredient meat` <br> **Description:** <br> Search by ingredient's category. | searchingredient meat <br> Here are your matching ingredients in your list <br> 1. \[Meat\] Beef Qty: 3 $20.00 Exp: 18/03/2020 <br> ===================================================
 **Command** :<br> `searchingredient 18/03/2020` <br> **Description:** <br> Search by ingredient's expiry date. | searchingredient 18/03/2020 <br> Here are your matching ingredients in your list <br> 1. \[Meat\] Beef Qty: 3 $20.00 Exp: 18/03/2020 <br> ===================================================
 
 ### 3.4. Recipe
