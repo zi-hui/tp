@@ -135,6 +135,7 @@ public class DeleteIngredientCommand extends Command {
             feedbackToUser = String.format(COMMAND_FAILURE_QUANTITY, ingredientName, ingredientQuantity);
             assert ingredientQuantity != newQuantity;
         } else {
+            //Expenditure.getInstance().editExpenditure(ingredientToDelete, quantity);
             ingredientToDelete.setQuantity(newQuantity);
             feedbackToUser = String.format(COMMAND_SUCCESS_QUANTITY, ingredientName);
             assert ingredientToDelete.getQuantity() == newQuantity;

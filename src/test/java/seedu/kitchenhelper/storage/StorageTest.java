@@ -16,13 +16,17 @@ class StorageTest {
     public static final String OUTPUT_INGREDIENT = currentDirectory + "/src/test/data/StorageTest/outputIngredient.txt";
     public static final String OUTPUT_RECIPE = currentDirectory + "/src/test/data/StorageTest/outputRecipe.txt";
     public static final String OUTPUT_CHORE = currentDirectory + "/src/test/data/StorageTest/outputChore.txt";
+    public static final String OUTPUT_EXPENDITURE = currentDirectory
+            + "/src/test/data/StorageTest/outputExpenditure.txt";
     public static final String NEW_OUTPUT_INGREDIENT = currentDirectory
             + "/src/test/data/NewStorageTest/outputIngredient.txt";
     public static final String NEW_OUTPUT_RECIPE = currentDirectory + "/src/test/data/NewStorageTest/outputRecipe.txt";
     public static final String NEW_OUTPUT_CHORE = currentDirectory + "/src/test/data/NewStorageTest/outputChore.txt";
+    public static final String NEW_OUTPUT_EXPENDITURE = currentDirectory
+            + "/src/test/data/NewStorageTest/outputExpenditure.txt";
 
 
-    public Storage storage = new Storage(OUTPUT_INGREDIENT, OUTPUT_RECIPE, OUTPUT_CHORE);
+    public Storage storage = new Storage(OUTPUT_INGREDIENT, OUTPUT_RECIPE, OUTPUT_CHORE, OUTPUT_EXPENDITURE);
 
     @Test
     void getIngredientDataTest() {
@@ -74,7 +78,7 @@ class StorageTest {
 
     private class StubStorage extends Storage {
         public StubStorage() {
-            super(NEW_OUTPUT_INGREDIENT, NEW_OUTPUT_RECIPE, NEW_OUTPUT_CHORE);
+            super(NEW_OUTPUT_INGREDIENT, NEW_OUTPUT_RECIPE, NEW_OUTPUT_CHORE, NEW_OUTPUT_EXPENDITURE);
         }
 
         @Override
@@ -103,7 +107,7 @@ class StorageTest {
         @Override
         public ArrayList<Chore> getChoreData() throws FileNotFoundException {
             ArrayList<Chore> chore = new ArrayList<>();
-            Chore todo = createChore("buy milk", "Tuesday 12pm");
+            Chore todo = Chore.createChoreWhenLoadFile("buy milk", "Tuesday 12pm");
             chore.add(todo);
             return chore;
         }

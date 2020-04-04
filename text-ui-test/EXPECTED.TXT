@@ -219,9 +219,25 @@ Invalid Command Format!
 Adds a chore to the chore list. TASK /by DATE
 Example: addchore buy groceries /by Tuesday 12pm
 ===================================================
+addchore buy groceries /by 05/04/2020 08:30
+You have added this chore:
+[x] buy groceries (by: 05/04/2020 08:30)
+Now you have 2 chores in the list.
+===================================================
+listchore
+Here are the chores in your list:
+1. [x] buy groceries (by: Tuesday 12pm)
+2. [x] buy groceries (by: 05/04/2020 08:30)
+===================================================
+done 1
+You have completed this chore:
+[/] buy groceries (by: Tuesday 12pm)
+
+===================================================
 searchchore groceries
 Here are your matching chores in your list
-1.[x] buy groceries (by: Tuesday 12pm)
+1.[/] buy groceries (by: Tuesday 12pm)
+2.[x] buy groceries (by: 05/04/2020 08:30)
 ===================================================
 searchingredient beef
 Here are your matching ingredients in your list
@@ -298,16 +314,11 @@ Beef cubes has been deleted.
 ===================================================
 deletechore 1
 You have deleted this chore:
-[x] buy groceries (by: Tuesday 12pm)
-Now you have 0 chores in the list.
+[/] buy groceries (by: Tuesday 12pm)
+Now you have 1 chore in the list.
 ===================================================
 addingredient /n Beef /c meat /q 3 /p 20 /e 18/03/2022
 You have added Ingredient:Beef Category:meat Quantity:3 Price:$20.00 Expiry:18/03/2022 to the ingredient list
-===================================================
-addchore buy groceries /by Tuesday 12pm
-You have added this chore:
-[x] buy groceries (by: Tuesday 12pm)
-Now you have 1 chore in the list.
 ===================================================
 listingredient all
 Here is the list of Ingredients in Inventory:
@@ -331,10 +342,6 @@ vegetable:
 9|kailan|30|30.45|12/03/2022
 
 ===================================================
-listchore
-Here are the chores in your list:
-1. [x] buy groceries (by: Tuesday 12pm)
-===================================================
 reset
 All data has been wiped
 ===================================================
@@ -342,9 +349,6 @@ listingredient all
 Here is the list of Ingredients in Inventory:
 Format : Ingredient Index|Ingredient Name|Quantity|Price|Expiry
 The Ingredient List is currently empty.
-===================================================
-listchore
-Your list of chores is currently empty.
 ===================================================
 exit
 Exiting KitchenHelper as requested ...
