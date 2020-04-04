@@ -212,8 +212,8 @@ Any `CATEGORY` that does not falls in the list could be put under `Miscellaneous
 Example |  Outcome
 --------|------------------
 **Command**: <br> `addrecipe /n Rice Ball /i Rice:3:staple` <br><br> **Description**: <br> Creates a new recipe called `Rice Ball` which contains one ingredient, `3` portions of `Rice`. | addrecipe /n Rice Ball /i Rice:3:staple <br>Rice Ball Recipe has been created with 1 ingredients inside.<br>===================================================`
-**Command**: <br> `addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable` <br><br> **Description**: <br> Creates a new recipe called `Chicken Salad` which contains two ingredient, `2` portions of `Chicken breast` and `4` portions of `Lettuce`. | addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable<br>Chicken Salad Recipe has been created with 2 ingredients inside.<br>===================================================`
-
+**Command**: <br> `addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable` <br><br> **Description**: <br> Creates a new recipe called `Chicken Salad` which contains two ingredient, `2` portions of `Chicken breast` and `4` portions of `Lettuce`. | addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable<br>Chicken Salad Recipe has been created with 2 ingredients inside.<br>===================================================
+**Command**: <br> `addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable` <br><br> **Description**: <br> A duplicate recipe has been found | addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable<br>There is an existing recipe with the same name!<br>===================================================
 #### 3.4.2. List recipes: `listrecipe`
 Displays all recipe and its name or the items currently in a particular recipe in Kitchen Helper.
 
@@ -261,12 +261,17 @@ __Format:__ `cookrecipe /n <RECIPE_NAME> /p <NUMBER_OF_PAX>`
 * `RECIPE_NAME` is the name of your recipe.
 * `NUMBER_OF_PAX` is the pax count for the specified recipe.
 
-> Please note that expired ingredients cannot be cooked.
+> Please note that expired ingredients cannot be cooked and will be prompted to clear them.
 
-Example |  Outcome
---------|------------------
-**Command**: <br> `cookrecipe /n chicken salad /p 2` <br><br> **Description**: <br> Cooks the recipe `Chicken Salad` for 2 people| Cooks the ‘chicken salad’ recipe with a pax 2.<br>===================================================
+> Please note that the ingredients used in the recipe will be matched strictly by their `INGREDIENT_NAME` and `CATEGORY` when cooking a recipe. You may refer to the [addrecipe](#341-adding-a-recipe-addrecipe) command section
 
+The `ingredient`s used in the specified recipe will be automatically deducted when there is sufficient non-expired `ingredient`s.
+
+Situation | Example |  Outcome
+----------|--------|------------------
+Sufficient ingredients for all ingredients required in the specified recipe. | **Command**: <br> `cookrecipe /n chicken salad /p 2` <br><br> **Description**: <br> Cooks the recipe `Chicken Salad` for 2 people| cookrecipe /n Chicken Salad /p 2<br>Kitchen Helper is trying to cook!<br>Cooks the ‘chicken salad’ recipe with a pax 2.<br>===================================================
+Insufficient ingredients for all ingredients required in the specified recipe regardless if the `ingredients` have expired or not. | **Command**: <br> `cookrecipe /n Chicken Salad /p 3`<br><br> **Description**: <br> Cooks the recipe `Chicken Salad` for 3 people| cookrecipe /n Chicken Salad /p 3<br>Kitchen Helper is trying to cook!<br>There are insufficient/missing ingredients!<br>===================================================
+Insufficient non-expired ingredients available. | **Command**: <br>`cookrecipe /n warm milk /p 2`  <br><br> **Description**: <br>Cooks the recipe `warm milk` for 2 people | cookrecipe /n warm milk /p 2<br>Kitchen Helper is trying to cook!<br>There are insufficient/missing ingredients!<br>Please check for these expired ingredients: hl milk<br>===================================================
 
 ### 3.5. Chore
 
