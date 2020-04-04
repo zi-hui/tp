@@ -120,6 +120,7 @@ You can add an ingredient to the Kitchen Helper for tracking, containing various
 __Format:__ `addingredient /n <INGREDIENT_NAME> /c <CATEGORY> /q <QUANTITY> /p <PRICE> /e <EXPIRY>`  
 
 * `INGREDIENT_NAME` is the name of your ingredient.
+  + `INGREDIENT NAME` can only consists of alphabet letters only.
 * `CATEGORY` is the CATEGORY of your ingredient.  
 The different types of `CATEGORY` are listed below: 
   + `Meat`
@@ -137,12 +138,18 @@ Any `CATEGORY` that does not falls in the list would be put under `Miscellaneous
   + `PRICE` can be given up to 2 decimal points.
 * `EXPIRY` is the expiry date of the ingredient.
   + `EXPIRY` in the format of dd/MM/yyyy e.g. 01/12/2020.
+  + Note: System will automatically flag ingredient as expired if expiry date is same as the current date. 
+  
+__Notable Behavior__:
++ If you add an ingredient with the same name (case-ignored), same price and same expiry date. Kitchen Helper will increase the quantity from the existing data.
++ The expiry date used in `addingredient` given in the `User Guide` may be outdated.   
+Please ensure that you input a valid date of the ingredient that is not expired. Otherwise, you may encounter problem adding a new ingredient to `Kitchen Helper`.  
 
 Example |  Outcome
 --------|------------------
-**Command**: <br> `addingredient /n Beef cubes /c meat /q 3 /p 20 /e 18/03/2020` <br><br> **Description:** <br> Creates a new ingredient called `Beef cubes`, which have the following attributes: CATEGORY `meat`, QUANTITY `3`, PRICE `20` , expiry date `18/03/2020`. | addingredient /n Beef cubes /c meat /q 3 /p 20 /e 18/03/2020 <br> You have added Ingredient:Beef cubes Category:meat Quantity:3 Price:$20.00 Expiry:18/03/2020 to the ingredient list<br>===================================================
-**Command**: <br> `addingredient /n kailan /c Vegetable /q 30 /p 30.45 /e 12/03/2020` <br><br> **Description:** <br> Creates a new ingredient called `kailan`, which have the following attributes: CATEGORY `Vegetable`, QUANTITY `30`, PRICE `30.45` , expiry date `12/03/2020`. | addingredient /n kailan /c Vegetable /q 30 /p 30.45 /e 12/03/2020 <br> You have added Ingredient:kailan Category:Vegetable Quantity:30 Price:$30.45 Expiry:12/03/2020 to the ingredient list<br>===================================================
-**Command**: <br> `addingredient /n Milo /c Drink /q 30 /p 10 /e 20/12/2020` <br><br> **Description:** <br> Creates a new ingredient called `Milo`, which have the following attributes: CATEGORY `Drink`, QUANTITY `30`, PRICE `10` , expiry date `20/12/2020`. | addingredient /n Milo /c Drink /q 30 /p 10 /e 20/12/2020 <br> You have added Ingredient:Milo Category:Drink Quantity:30 Price:$10.00 Expiry:20/12/2020 to the ingredient list<br>===================================================
+**Command**: <br> `addingredient /n Beef cubes /c meat /q 3 /p 20 /e 18/03/2022` <br><br> **Description:** <br> Creates a new ingredient called `Beef cubes`, which have the following attributes: CATEGORY `meat`, QUANTITY `3`, PRICE `20` , expiry date `18/03/2022`. | addingredient /n Beef cubes /c meat /q 3 /p 20 /e 18/03/2022 <br> You have added Ingredient:Beef cubes Category:meat Quantity:3 Price:$20.00 Expiry:18/03/2022 to the ingredient list<br>===================================================
+**Command**: <br> `addingredient /n Beef cubes /c meat /q 4 /p 20 /e 18/03/2022` <br><br> **Description:** <br> Creates a new ingredient called `Beef cubes`, which have the following attributes: CATEGORY `meat`, QUANTITY `3`, PRICE `20` , expiry date `18/03/2022`. | addingredient /n Beef cubes /c meat /q 3 /p 20 /e 18/03/2022 <br> Kitchen Helper has updated the quantity of Beef cubes to 7 from 3 <br>===================================================
+**Command**: <br> `addingredient /n Milo /c Drink /q 30 /p 10 /e 20/03/2020` <br><br> **Description:** <br> Creates a new ingredient called `Milo`, which have the following attributes: CATEGORY `Drink`, QUANTITY `30`, PRICE `10` , expiry date `20/03/2020`. | addingredient /n Milo /c Drink /q 30 /p 10 /e 20/03/2020 <br> Expired ingredient detected in input. <br> Please enter a non-expired expiry date.<br>===================================================
 
 #### 3.3.2. List ingredient: `listingredient`
 Displays all the items currently in the ingredient list in Kitchen Helper.
@@ -345,7 +352,7 @@ __Ingredient Commands__
 
 Feature | Command  
 ------- | -------  
-addingredient | `addingredient /n <INGREDIENT_NAME> /c <CATEGORY> /q <QUANTITY> /p <PRICE> /e <EXPIRY>`<br> e.g. `addingredient /n Beef cubes /c meat /q 3 /p 20 /e 2020-03-18`  
+addingredient | `addingredient /n <INGREDIENT_NAME> /c <CATEGORY> /q <QUANTITY> /p <PRICE> /e <EXPIRY>`<br> e.g. `addingredient /n Beef cubes /c meat /q 3 /p 20 /e 18/03/2022`  
 listingredient | `listingredient <CATEGORY / ALL>` <br> e.g. `listingredient all` OR `listingredient meat`
 deleteingredient | `deleteingredient /n <INGREDIENT_NAME> [/q <QUANTITY>]` OR `deleteingredient /i <ingredient_index> [/q <QUANTITY>]` <br> e.g.`deleteingredient /n apple /q 2` OR `deleteingredient /i 1`<br>
 searchingredient | `searchingredient <KEYWORD>` <br> e.g. `searchingredient beef`  
