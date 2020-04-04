@@ -853,13 +853,29 @@ Use case ends.
    5. Test case: `searchingredient $20`  
    Expected: Ingredient entries that have the keyword matching `$20` price are listed.
    
-#### F.4. Search for recipe
+#### F.4. Add a recipe
+1. Add a recipe into Kitchen Helper
+    1. Prerequisites: List all the ingredient using the `listingredient all` command.
+    1. Test case: `addrecipe /n warm milk /i HL Milk:1:Dairy`\
+    Expected: Entry can be found using `listingredient all` command. 
+
+#### F.5. Cook a recipe
+1. Cooks the specified recipe and ingredients in the recipe will be automatically deducted.
+    1. Prerequisites: List all the ingredient using the `listingredient all` command.
+    1. Test case (sufficient ingredient): `cookrecipe /n warm milk /p 2`\
+    Expected: A reduction of the ingredients' quantity multiplied by `2` can be noticed when listing the ingredients with `listingredient all`
+    1. Test case (Sufficient even with expired ingredients):  `cookrecipe /n warm milk /p 2`\
+    Expected: The automatic deduction will not be carried out and expired item will be notified to user.
+    1. Test case: (Insufficient even with expired ingredients): `cookrecipe /n warm milk /p 2`\
+    Expected: The automatic deduction will not be carried out.
+
+#### F.6. Search for recipe
 1. Search for similar recipe in Kitchen Helper.
    1. Prerequisites: The recipe list should not be empty.
    2. Test case: 'searchrecipe chicken' 
    Expected: Recipe's name entries that have the keyword matching `chicken' are listed. 
    
-#### F.5. Search for chore
+#### F.7. Search for chore
 1. Search for chores in Kitchen Helper.
    1. Prerequisites: The chore list should not be empty.
    2. Test case: `searchchore groceries`  
@@ -867,7 +883,7 @@ Use case ends.
    3. Test case: `searchchore Tuesday`  
    Expected: Chore entries that have the keyword matching `Tuesday` as a string are listed.  
    
-#### F.6. Saving data
+#### F.8. Saving data
 
 1. Load ingredient data into Kitchen Helper.
    1. Prerequisites: The ingredient list save file should not be empty. 
