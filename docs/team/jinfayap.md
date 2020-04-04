@@ -1,4 +1,3 @@
-
 #### Overview 
 Kitchen Helper is a desktop application mainly targeted for home user who often have trouble tracking their ingredients in their kitchen. This application allows the user to keep track of their ingredient efficiently, regardless of buying new ingredients at a supermarket or cooking a meal at home. Moreover, the user interaction is mainly through command line interface(CLI), that brings convenience to user who prefers fast typing.
 
@@ -60,6 +59,7 @@ They showcase my ability to write documentation targeting end-users.
 + [Search for recipe](https://ay1920s2-cs2113t-m16-2.github.io/tp/UserGuide#344-search-for-recipe-searchrecipe)
 
 + [Search for chore](https://ay1920s2-cs2113t-m16-2.github.io/tp/UserGuide#354-search-for-chore-searchchore)
+
 #### Contributions to the Developer Guide
 
 ```
