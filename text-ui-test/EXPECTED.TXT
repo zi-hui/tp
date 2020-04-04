@@ -21,14 +21,16 @@ There is an existing recipe with the same name!
 addrecipe /n Chicken Stew /i Chicken Breast:2:meat, Lettuce:4:vegetable
 Chicken Stew Recipe has been created with 2 ingredients inside.
 ===================================================
-listrecipe 1
-
-Here is the list of Ingredients in Recipe:
-Format:Ingredient Name | Ingredient Category | Quantity
-Recipe Name:Chicken Salad
-Ingredient Name : Chicken Breast | Category : meat | 2 portion(s) 
-Ingredient Name : Lettuce | Category : vegetable | 4 portion(s) 
-
+addrecipe /n warm milk /i HL Milk:1:Dairy
+warm milk Recipe has been created with 1 ingredients inside.
+===================================================
+addingredient /n HL Milk /c Dairy /q 3 /p 12.2 /e 01/03/2020
+You have added Ingredient:HL Milk Category:Dairy Quantity:3 Price:$12.20 Expiry:01/03/2020 to the ingredient list
+===================================================
+cookrecipe /n warm milk /p 2
+Kitchen Helper is trying to cook!
+There are insufficient/missing ingredients!
+Please check for these expired ingredients: hl milk
 ===================================================
 listrecipe all
 
@@ -37,6 +39,7 @@ Here is the list of Recipe:
 Format:[Recipe Number] Recipe Name
 [1] Chicken Salad
 [2] Chicken Stew
+[3] warm milk
 
 ===================================================
 addingredient /n Beef /c meat /q 3 /p 20 /e 18/03/2020
@@ -45,17 +48,17 @@ You have added Ingredient:Beef Category:meat Quantity:3 Price:$20.00 Expiry:18/0
 addingredient /n Beef cubes /c meat /q 3 /p 20 /e 18/03/2020
 You have added Ingredient:Beef cubes Category:meat Quantity:3 Price:$20.00 Expiry:18/03/2020 to the ingredient list
 ===================================================
-addingredient /n Chicken Breast /c meat /q 4 /p 20 /e 20/03/2020
-You have added Ingredient:Chicken Breast Category:meat Quantity:4 Price:$20.00 Expiry:20/03/2020 to the ingredient list
+addingredient /n Chicken Breast /c meat /q 4 /p 20 /e 20/12/2020
+You have added Ingredient:Chicken Breast Category:meat Quantity:4 Price:$20.00 Expiry:20/12/2020 to the ingredient list
 ===================================================
-addingredient /n Chicken Breast /c meat /q 3 /p 20 /e 18/03/2020
-You have added Ingredient:Chicken Breast Category:meat Quantity:3 Price:$20.00 Expiry:18/03/2020 to the ingredient list
+addingredient /n Chicken Breast /c meat /q 3 /p 20 /e 18/12/2020
+You have added Ingredient:Chicken Breast Category:meat Quantity:3 Price:$20.00 Expiry:18/12/2020 to the ingredient list
 ===================================================
 addingredient /n kailan /c Vegetable /q 30 /p 30.45 /e 12/03/2020
 You have added Ingredient:kailan Category:Vegetable Quantity:30 Price:$30.45 Expiry:12/03/2020 to the ingredient list
 ===================================================
-addingredient /n HL Milk /c Dairy /q 3 /p 12.2 /e 14/03/2020
-You have added Ingredient:HL Milk Category:Dairy Quantity:3 Price:$12.20 Expiry:14/03/2020 to the ingredient list
+addingredient /n HL Milk /c Dairy /q 3 /p 12 /e 14/03/2020
+You have added Ingredient:HL Milk Category:Dairy Quantity:3 Price:$12.00 Expiry:14/03/2020 to the ingredient list
 ===================================================
 addingredient /n Milo /c Drink /q 30 /p 10 /e 20/012/2020
 Invalid Command Format!
@@ -65,32 +68,33 @@ Example: addingredient /n Beef /c Meat /q 1 /p 13.5 /e 13/02/2020
 addingredient /n Pear /c fruit /q 1 /p 1 /e 02/02/2020
 You have added Ingredient:Pear Category:fruit Quantity:1 Price:$1.00 Expiry:02/02/2020 to the ingredient list
 ===================================================
-addingredient /n Lettuce /c Vegetable /q 4 /p 20 /e 20/03/2020
-You have added Ingredient:Lettuce Category:Vegetable Quantity:4 Price:$20.00 Expiry:20/03/2020 to the ingredient list
+addingredient /n Lettuce /c Vegetable /q 10 /p 20 /e 20/12/2020
+You have added Ingredient:Lettuce Category:Vegetable Quantity:10 Price:$20.00 Expiry:20/12/2020 to the ingredient list
 ===================================================
-addingredient /n Lettuce /c Vegetable /q 8 /p 20 /e 09/03/2020
-You have added Ingredient:Lettuce Category:Vegetable Quantity:8 Price:$20.00 Expiry:09/03/2020 to the ingredient list
+addingredient /n Lettuce /c Vegetable /q 2 /p 20 /e 09/03/2020
+You have added Ingredient:Lettuce Category:Vegetable Quantity:2 Price:$20.00 Expiry:09/03/2020 to the ingredient list
 ===================================================
 listingredient all
 Here is the list of Ingredients in Inventory:
 Format : Ingredient Index|Ingredient Name|Quantity|Price|Expiry
 all:
 dairy:
-5|HL Milk|3|12.2|14/03/2020
+5|HL Milk|3|12.2|01/03/2020
+6|HL Milk|3|12.0|14/03/2020
 drink:
 fruit:
-8|Pear|1|1.0|02/02/2020
+9|Pear|1|1.0|02/02/2020
 meat:
 1|Beef|3|20.0|18/03/2020
 2|Beef cubes|3|20.0|18/03/2020
-3|Chicken Breast|3|20.0|18/03/2020
-4|Chicken Breast|4|20.0|20/03/2020
+3|Chicken Breast|3|20.0|18/12/2020
+4|Chicken Breast|4|20.0|20/12/2020
 miscellaneous:
 staple:
 vegetable:
-6|Lettuce|8|20.0|09/03/2020
-7|Lettuce|4|20.0|20/03/2020
-9|kailan|30|30.45|12/03/2020
+7|Lettuce|2|20.0|09/03/2020
+8|Lettuce|10|20.0|20/12/2020
+10|kailan|30|30.45|12/03/2020
 
 ===================================================
 addingredient /n Apple /c fruit /q 1 /p 1 /e 02/02/2020
@@ -101,22 +105,23 @@ Here is the list of Ingredients in Inventory:
 Format : Ingredient Index|Ingredient Name|Quantity|Price|Expiry
 all:
 dairy:
-6|HL Milk|3|12.2|14/03/2020
+6|HL Milk|3|12.2|01/03/2020
+7|HL Milk|3|12.0|14/03/2020
 drink:
 fruit:
 1|Apple|1|1.0|02/02/2020
-9|Pear|1|1.0|02/02/2020
+10|Pear|1|1.0|02/02/2020
 meat:
 2|Beef|3|20.0|18/03/2020
 3|Beef cubes|3|20.0|18/03/2020
-4|Chicken Breast|3|20.0|18/03/2020
-5|Chicken Breast|4|20.0|20/03/2020
+4|Chicken Breast|3|20.0|18/12/2020
+5|Chicken Breast|4|20.0|20/12/2020
 miscellaneous:
 staple:
 vegetable:
-7|Lettuce|8|20.0|09/03/2020
-8|Lettuce|4|20.0|20/03/2020
-10|kailan|30|30.45|12/03/2020
+8|Lettuce|2|20.0|09/03/2020
+9|Lettuce|10|20.0|20/12/2020
+11|kailan|30|30.45|12/03/2020
 
 ===================================================
 addingredient /n Apple /c fruit /q 1 /p 1 /e 01/02/2020
@@ -127,23 +132,24 @@ Here is the list of Ingredients in Inventory:
 Format : Ingredient Index|Ingredient Name|Quantity|Price|Expiry
 all:
 dairy:
-7|HL Milk|3|12.2|14/03/2020
+7|HL Milk|3|12.2|01/03/2020
+8|HL Milk|3|12.0|14/03/2020
 drink:
 fruit:
 1|Apple|1|1.0|01/02/2020
 2|Apple|1|1.0|02/02/2020
-10|Pear|1|1.0|02/02/2020
+11|Pear|1|1.0|02/02/2020
 meat:
 3|Beef|3|20.0|18/03/2020
 4|Beef cubes|3|20.0|18/03/2020
-5|Chicken Breast|3|20.0|18/03/2020
-6|Chicken Breast|4|20.0|20/03/2020
+5|Chicken Breast|3|20.0|18/12/2020
+6|Chicken Breast|4|20.0|20/12/2020
 miscellaneous:
 staple:
 vegetable:
-8|Lettuce|8|20.0|09/03/2020
-9|Lettuce|4|20.0|20/03/2020
-11|kailan|30|30.45|12/03/2020
+9|Lettuce|2|20.0|09/03/2020
+10|Lettuce|10|20.0|20/12/2020
+12|kailan|30|30.45|12/03/2020
 
 ===================================================
 addingredient /n Apple /c fruit /q 1 /p 1 /e 03/02/2020
@@ -154,57 +160,51 @@ Here is the list of Ingredients in Inventory:
 Format : Ingredient Index|Ingredient Name|Quantity|Price|Expiry
 all:
 dairy:
-8|HL Milk|3|12.2|14/03/2020
+8|HL Milk|3|12.2|01/03/2020
+9|HL Milk|3|12.0|14/03/2020
 drink:
 fruit:
 1|Apple|1|1.0|01/02/2020
 2|Apple|1|1.0|02/02/2020
 3|Apple|1|1.0|03/02/2020
-11|Pear|1|1.0|02/02/2020
+12|Pear|1|1.0|02/02/2020
 meat:
 4|Beef|3|20.0|18/03/2020
 5|Beef cubes|3|20.0|18/03/2020
-6|Chicken Breast|3|20.0|18/03/2020
-7|Chicken Breast|4|20.0|20/03/2020
+6|Chicken Breast|3|20.0|18/12/2020
+7|Chicken Breast|4|20.0|20/12/2020
 miscellaneous:
 staple:
 vegetable:
-9|Lettuce|8|20.0|09/03/2020
-10|Lettuce|4|20.0|20/03/2020
-12|kailan|30|30.45|12/03/2020
+10|Lettuce|2|20.0|09/03/2020
+11|Lettuce|10|20.0|20/12/2020
+13|kailan|30|30.45|12/03/2020
 
-===================================================
-deleteingredient /n Apple
-Apple has been deleted.
-===================================================
-deleteingredient /n Apple
-Apple has been deleted.
-===================================================
-deleteingredient /n Apple
-Apple has been deleted.
-===================================================
-deleteingredient /n Pear
-Pear has been deleted.
 ===================================================
 listingredient all
 Here is the list of Ingredients in Inventory:
 Format : Ingredient Index|Ingredient Name|Quantity|Price|Expiry
 all:
 dairy:
-5|HL Milk|3|12.2|14/03/2020
+8|HL Milk|3|12.2|01/03/2020
+9|HL Milk|3|12.0|14/03/2020
 drink:
 fruit:
+1|Apple|1|1.0|01/02/2020
+2|Apple|1|1.0|02/02/2020
+3|Apple|1|1.0|03/02/2020
+12|Pear|1|1.0|02/02/2020
 meat:
-1|Beef|3|20.0|18/03/2020
-2|Beef cubes|3|20.0|18/03/2020
-3|Chicken Breast|3|20.0|18/03/2020
-4|Chicken Breast|4|20.0|20/03/2020
+4|Beef|3|20.0|18/03/2020
+5|Beef cubes|3|20.0|18/03/2020
+6|Chicken Breast|3|20.0|18/12/2020
+7|Chicken Breast|4|20.0|20/12/2020
 miscellaneous:
 staple:
 vegetable:
-6|Lettuce|8|20.0|09/03/2020
-7|Lettuce|4|20.0|20/03/2020
-8|kailan|30|30.45|12/03/2020
+10|Lettuce|2|20.0|09/03/2020
+11|Lettuce|10|20.0|20/12/2020
+13|kailan|30|30.45|12/03/2020
 
 ===================================================
 addchore buy groceries /by Tuesday 12pm
@@ -239,20 +239,6 @@ cookrecipe /n Chicken Salad /p 3
 Kitchen Helper is trying to cook!
 There are insufficient/missing ingredients!
 ===================================================
-deleteingredient /n Beef
-Beef has been deleted.
-===================================================
-deleteingredient /n Beef cubes
-Beef cubes has been deleted.
-===================================================
-deleteingredient /n kailan /q 35
-Please enter a valid quantity to delete!
-Currently:
-kailan : 30
-===================================================
-deleteingredient /n kailan
-kailan has been deleted.
-===================================================
 deleterecipe /n Chicken Salad
 Chicken Salad has been deleted
 ===================================================
@@ -263,19 +249,50 @@ deleterecipe /n Chicken Stew
 Chicken Stew has been deleted
 ===================================================
 deleteingredient /n HL milk
-HL Milk has been deleted.
+Invalid Command, please check your format!
+Deletes an ingredient.
+Usage: deleteingredient /i INGREDIENTINDEX [/q QUANTITY]
+Example: deleteingredient /i 1 /q 2
+===================================================
+deleteingredient /i 1 /q 2
+Please enter a valid quantity to delete!
+Currently:
+Apple : 1
+===================================================
+deleteingredient /i 2 /q 40
+Please enter a valid quantity to delete!
+Currently:
+Apple : 1
+===================================================
+deleteingredient /i /q
+Invalid Command, please check your format!
+Deletes an ingredient.
+Usage: deleteingredient /i INGREDIENTINDEX [/q QUANTITY]
+Example: deleteingredient /i 1 /q 2
+===================================================
+deleteingredient /i -1
+This ingredient does not exist! Please type in a correct ingredient index.
+===================================================
+deleteingredient /i 1 /1 -1
+Invalid Command, please check your format!
+Deletes an ingredient.
+Usage: deleteingredient /i INGREDIENTINDEX [/q QUANTITY]
+Example: deleteingredient /i 1 /q 2
 ===================================================
 deleteingredient /i 4
-Lettuce has been deleted.
+Beef has been deleted.
 ===================================================
 deleteingredient /i 3
-Lettuce has been deleted.
+Apple has been deleted.
 ===================================================
 deleteingredient /i 2
-Chicken Breast has been deleted.
+Apple has been deleted.
 ===================================================
 deleteingredient /i 1
-Chicken Breast has been deleted.
+Apple has been deleted.
+===================================================
+deleteingredient /i 1
+Beef cubes has been deleted.
 ===================================================
 deletechore 1
 You have deleted this chore:
@@ -295,13 +312,21 @@ Here is the list of Ingredients in Inventory:
 Format : Ingredient Index|Ingredient Name|Quantity|Price|Expiry
 all:
 dairy:
+4|HL Milk|3|12.2|01/03/2020
+5|HL Milk|3|12.0|14/03/2020
 drink:
 fruit:
+8|Pear|1|1.0|02/02/2020
 meat:
 1|Beef|3|20.0|18/03/2020
+2|Chicken Breast|0|20.0|18/12/2020
+3|Chicken Breast|3|20.0|20/12/2020
 miscellaneous:
 staple:
 vegetable:
+6|Lettuce|2|20.0|09/03/2020
+7|Lettuce|2|20.0|20/12/2020
+9|kailan|30|30.45|12/03/2020
 
 ===================================================
 listchore
