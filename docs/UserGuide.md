@@ -34,7 +34,7 @@ By: `Team CS2113T-M16-2` Since: `March 2020` License: `MIT`
       - [3.5.4. Search for chore: `searchchore`](#354-search-for-chore-searchchore)  
  
     + [3.6 Expenditure](#36-expenditure)  
-      - [3.6.1. Display User Expenditure](#361-display-user-expenditure)  
+      - [3.6.1. Display User Expenditure](#361-display-user-expenditure-displayexpenditure)  
        
   * [4. Command Summary](#4-command-summary)
 
@@ -206,7 +206,7 @@ The different types of `CATEGORY` are listed below:
   
 Any `CATEGORY` that does not falls in the list could be put under `Miscellaneous`.
 
-All `RECIPE_NAME` has to be unique. You can check the list of existing recipes by using [`listrecipe all`](#332-list-recipes-listrecipe-1)  
+All `RECIPE_NAME` has to be unique. You can check the list of existing recipes by using [`listrecipe all`](#342-list-recipes-listrecipe)  
 
 Example |  Outcome
 --------|------------------
