@@ -325,21 +325,19 @@ Here is the list of Ingredients in Inventory:
 Format : Ingredient Index|Ingredient Name|Quantity|Price|Expiry
 all:
 dairy:
-4|HL Milk|1|12.2|01/03/2022
-5|HL Milk|3|12.0|14/03/2022
+3|HL Milk|1|12.2|01/03/2022
+4|HL Milk|3|12.0|14/03/2022
 drink:
 fruit:
-8|Pear|1|1.0|02/02/2022
+6|Pear|1|1.0|02/02/2022
 meat:
 1|Beef|3|20.0|18/03/2022
-2|Chicken Breast|0|20.0|18/12/2022
-3|Chicken Breast|3|20.0|20/12/2022
+2|Chicken Breast|3|20.0|20/12/2022
 miscellaneous:
 staple:
 vegetable:
-6|Lettuce|0|20.0|09/03/2022
-7|Lettuce|4|20.0|20/12/2022
-9|kailan|30|30.45|12/03/2022
+5|Lettuce|4|20.0|20/12/2022
+7|kailan|30|30.45|12/03/2022
 
 ===================================================
 reset
