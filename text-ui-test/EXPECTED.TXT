@@ -8,11 +8,11 @@ What can I do for you?
 ===================================================
 You have no deadlines upcoming in the next 3 days.
 ===================================================
-You have no ingredients that is expiring for the next 3 days.
+You have no ingredients that are expiring for the next 3 days.
 ===================================================
-You have no ingredients that is low in stock [< 5].
+You have no ingredients that are low in stock [< 5].
 ===================================================
-You have no ingredients that is expired.
+You have no ingredients that are expired.
 ===================================================
 
 addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable
