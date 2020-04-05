@@ -74,7 +74,15 @@ public class Expenditure {
         calendar.set(Calendar.HOUR_OF_DAY, 0);
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);
-        Date pastMonday = calendar.getTime(); //past Monday
+        Date anyMonday = calendar.getTime(); //past Monday
+        Date today = new Date();
+        Date pastMonday;
+        if (anyMonday.after(today)) {
+            calendar.add(Calendar.DATE,-7);
+            pastMonday = calendar.getTime();
+        } else {
+            pastMonday = anyMonday;
+        }
         if (lastSavedDate == null || lastSavedDate.before(pastMonday)) {
             totalExpenditure = 0;
             amountUsedInCooking = 0;

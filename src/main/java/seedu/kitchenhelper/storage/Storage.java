@@ -298,11 +298,7 @@ public class Storage {
             DateFormat dateFormat = new SimpleDateFormat("EEE dd/MM/yyyy HH:mm:ss");
             Date lastSavedDate = dateFormat.parse(variables[2]);
             Expenditure.getInstance().loadExpenditureVariables(expenditure, amountUsed, lastSavedDate);
-        } catch (NoSuchElementException e) {
-            throw new FileNotFoundException();
-        } catch (IndexOutOfBoundsException e) {
-            throw new FileNotFoundException();
-        } catch (ParseException e) {
+        } catch (NoSuchElementException | IndexOutOfBoundsException | ParseException e) {
             throw new FileNotFoundException();
         } finally {
             scanner.close();

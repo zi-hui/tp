@@ -78,6 +78,8 @@ public class KitchenHelper {
         File fileChore = new File("outputChore.txt");
         File fileIngredient = new File("outputIngredient.txt");
         File fileRecipe = new File("outputRecipe.txt");
+        File fileExpenditure = new File("outputExpenditure.txt");
+
 
         try {
             if (!fileChore.exists()) {
@@ -90,6 +92,10 @@ public class KitchenHelper {
 
             if (!fileRecipe.exists()) {
                 fileRecipe.createNewFile();
+            }
+
+            if (!fileExpenditure.exists()) {
+                fileExpenditure.createNewFile();
             }
         } catch (IOException e) {
             e.printStackTrace();
