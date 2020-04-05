@@ -4,11 +4,16 @@ import seedu.kitchenhelper.object.Chore;
 import seedu.kitchenhelper.object.Recipe;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
 import seedu.kitchenhelper.storage.Storage;
+import seedu.kitchenhelper.ui.Ui;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Saves the program at the current point in time when user calls it manually.
+ */
 public class SaveStateCommand extends Command {
 
     public static final String COMMAND_WORD = "save";
@@ -16,6 +21,9 @@ public class SaveStateCommand extends Command {
     public static final String FILE_PATH_INGREDIENT = "outputIngredientCopy.txt, ";
     public static final String FILE_PATH_RECIPE = "outputRecipeCopy.txt, ";
     public static final String FILE_PATH_CHORE = "outputChoreCopy.txt";
+    public static final String COMMAND_DESC = "Stores the current state of program in manual mode.";
+    public static final String MESSAGE_USAGE =
+            String.format("%s: %s", COMMAND_WORD, COMMAND_DESC) + Ui.LS + String.format("Example: %s", COMMAND_WORD);
 
 
     /**
@@ -31,7 +39,7 @@ public class SaveStateCommand extends Command {
     /**
      * Copy current output files of Kitchen Helper into new output files to save current state.
      */
-    private void chooseSaveOption() throws IOException {
+    private void chooseSaveOption() {
         var sourceIngredient = new File("outputIngredient.txt");
         var sourceRecipe = new File("outputRecipe.txt");
         var sourceChore = new File("outputChore.txt");

@@ -4,6 +4,8 @@ import seedu.kitchenhelper.command.Command;
 import seedu.kitchenhelper.command.CommandResult;
 import seedu.kitchenhelper.command.ExitCommand;
 import seedu.kitchenhelper.notification.ChoreNotification;
+import seedu.kitchenhelper.notification.IngredientNotification;
+import seedu.kitchenhelper.object.Expenditure;
 import seedu.kitchenhelper.storage.Storage;
 import seedu.kitchenhelper.exception.KitchenHelperException;
 import seedu.kitchenhelper.object.Chore;
@@ -37,30 +39,34 @@ public class KitchenHelper {
         String userChoice = ui.getUserChoice();
         ui.validUserChoice(userChoice);
         ui.showWelcomeMessage();
-        if (userChoice.equals("1")) {
+        if (userChoice.trim().equals("1")) {
             storage = new Storage("outputIngredient.txt", "outputRecipe.txt",
-                    "outputChore.txt");
+                    "outputChore.txt", "outputExpenditure.txt");
             try {
                 ingredientList = new ArrayList<>(storage.getIngredientData());
                 recipeList = new ArrayList<>(storage.getRecipeData());
                 choreList = new ArrayList<>(storage.getChoreData());
+                storage.loadExpenditureData();
             } catch (FileNotFoundException err) {
                 ingredientList = new ArrayList<>();
                 recipeList = new ArrayList<>();
                 choreList = new ArrayList<>();
+                Expenditure.getInstance().loadExpenditureVariables(0, 0, null);
             }
-        } else if (userChoice.equals("2")) {
+        } else if (userChoice.trim().equals("2")) {
             createNewFiles();
             storage = new Storage("outputIngredientCopy.txt", "outputRecipeCopy.txt",
-                    "outputChoreCopy.txt");
+                    "outputChoreCopy.txt", "outputExpenditureCopy.txt");
             try {
                 ingredientList = new ArrayList<>(storage.getIngredientData());
                 recipeList = new ArrayList<>(storage.getRecipeData());
                 choreList = new ArrayList<>(storage.getChoreData());
+                storage.loadExpenditureData();
             } catch (FileNotFoundException err) {
                 ingredientList = new ArrayList<>();
                 recipeList = new ArrayList<>();
                 choreList = new ArrayList<>();
+                Expenditure.getInstance().loadExpenditureVariables(0, 0, null);
             }
         }
     }
@@ -69,9 +75,36 @@ public class KitchenHelper {
      * Populate empty saved state files with current output files if save command have never been called by user.
      */
     private void createNewFiles() {
+        File fileChore = new File("outputChore.txt");
+        File fileIngredient = new File("outputIngredient.txt");
+        File fileRecipe = new File("outputRecipe.txt");
+        File fileExpenditure = new File("outputExpenditure.txt");
+
+
+        try {
+            if (!fileChore.exists()) {
+                fileChore.createNewFile();
+            }
+
+            if (!fileIngredient.exists()) {
+                fileIngredient.createNewFile();
+            }
+
+            if (!fileRecipe.exists()) {
+                fileRecipe.createNewFile();
+            }
+
+            if (!fileExpenditure.exists()) {
+                fileExpenditure.createNewFile();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         var sourceIngredient = new File("outputIngredient.txt");
         var sourceRecipe = new File("outputRecipe.txt");
         var sourceChore = new File("outputChore.txt");
+        var sourceExpenditure = new File("outputExpenditure.txt");
         var destIngredient = new File("outputIngredientCopy.txt");
         var destRecipe = new File("outputRecipeCopy.txt");
         var destChore = new File("outputChoreCopy.txt");
@@ -79,12 +112,16 @@ public class KitchenHelper {
         if (destIngredient.length() == 0) {
             Storage.copyFile(sourceIngredient, destIngredient);
         }
-
         if (destRecipe.length() == 0) {
             Storage.copyFile(sourceRecipe, destRecipe);
         }
         if (destChore.length() == 0) {
             Storage.copyFile(sourceChore, destChore);
+        }
+
+        var destExpenditure = new File("outputExpenditureCopy.txt");
+        if (destExpenditure.length() == 0) {
+            Storage.copyFile(sourceExpenditure, destExpenditure);
         }
     }
     
@@ -147,6 +184,9 @@ public class KitchenHelper {
         String choreNotification;
         choreNotification = new ChoreNotification().getNotifications(choreList);
         System.out.println(choreNotification);
+        String ingredientNotification;
+        ingredientNotification = new IngredientNotification().getNotifications(ingredientList);
+        System.out.println(ingredientNotification);
     }
     
     public static void main(String[] args) throws KitchenHelperException {

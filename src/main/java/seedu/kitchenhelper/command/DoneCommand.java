@@ -10,7 +10,7 @@ import seedu.kitchenhelper.ui.Ui;
 import java.util.ArrayList;
 
 /**
- * Represent the keyword used to identify the action.
+ * Marks a chore as done.
  */
 public class DoneCommand extends Command {
 

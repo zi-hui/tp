@@ -2,16 +2,24 @@ package seedu.kitchenhelper.command;
 
 import seedu.kitchenhelper.exception.KitchenHelperException;
 import seedu.kitchenhelper.object.Chore;
+import seedu.kitchenhelper.object.Expenditure;
 import seedu.kitchenhelper.object.Recipe;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
+import seedu.kitchenhelper.storage.Storage;
+import seedu.kitchenhelper.ui.Ui;
 
 import java.lang.reflect.Array;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.Logger;
 
 /**
  * Cooks a recipe.
  */
 public class CookRecipeCommand extends Command {
+    public static final Logger kitchenLogs = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     public static final String COMMAND_WORD = "cookrecipe";
     public static final String COMMAND_DESC = "Cooks a recipe from the recipe list.";
     public static final String COMMAND_PARAMETER
@@ -21,10 +29,14 @@ public class CookRecipeCommand extends Command {
     public static final String COMMAND_FORMAT =
             String.format("%s %s\n%s", COMMAND_DESC, COMMAND_PARAMETER, COMMAND_EXAMPLE);
     public static final String COMMAND_FAILURE_RECIPE_NOT_EXISTS = "The given recipe name does not exist!";
-    public static final String COMMAND_FAILURE_INSUFFICIENT_INGREDIENTS = "There are insufficient/"
+    public static String COMMAND_FAILURE_INSUFFICIENT_INGREDIENTS = "There are insufficient/"
                                                                             + "missing ingredients!";
     public static final String KITCHEN_HELPER_COOK = "Kitchen Helper is trying to cook!";
     public static final String COMMAND_SUCCESS = "%s was cooked with a pax of %d";
+    public static final String MESSAGE_USAGE = String.format("%s: %s", COMMAND_WORD, COMMAND_DESC) + Ui.LS + String
+            .format("Parameter: %s\n%s", COMMAND_PARAMETER, COMMAND_EXAMPLE);
+    public final String logcookRecipe = "User attempted to cook with expired ingredient";
+    public static ArrayList<String> expiredIngrNames = new ArrayList<>();
     public String recipeName;
     public int pax;
 
@@ -36,8 +48,8 @@ public class CookRecipeCommand extends Command {
      * @return the message after a successful cook.
      * @throws KitchenHelperException if there is no recipe that is wanted by user/ insufficient ingredients.
      */
-    public String cookRecipe(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList)
-            throws KitchenHelperException {
+    public String cookRecipe(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList) {
+        expiredIngrNames.clear();
         // checks if the specified recipe given by user exists
         int indexOfRecipe = checkIfRecipeExist(recipeList);
         if (indexOfRecipe > recipeList.size()) {
@@ -45,14 +57,70 @@ public class CookRecipeCommand extends Command {
         }
         System.out.println(KITCHEN_HELPER_COOK);
         Recipe recipeToBeCooked = recipeList.get(indexOfRecipe - 1);
-
-        if (checkForSufficientIngredient(ingredientList, recipeToBeCooked)) {
+        Boolean sufficientIngr = checkForSufficientIngredient(ingredientList, recipeToBeCooked);
+        Boolean suffButLessExpiredIngr = checkNotExpiredIngredientQty(ingredientList, recipeToBeCooked);
+        if (sufficientIngr && suffButLessExpiredIngr) {
             deductIngredients(ingredientList, recipeToBeCooked);
+            Storage.saveIngredientData(ingredientList);
+            return String.format(COMMAND_SUCCESS, recipeName, pax);
+        } else if ((sufficientIngr && !suffButLessExpiredIngr)
+                || (!sufficientIngr && !suffButLessExpiredIngr && expiredIngrNames.size() != 0)) {
+            String expiredList = craftExpiredList();
+            if (expiredList.length() > 0) {
+                expiredList = expiredList.substring(0, expiredList.length() - 2);
+            }
+            return COMMAND_FAILURE_INSUFFICIENT_INGREDIENTS
+                    + "\nPlease check for these expired ingredients: " + expiredList.trim();
         } else {
             return COMMAND_FAILURE_INSUFFICIENT_INGREDIENTS;
         }
+    }
 
-        return String.format(COMMAND_SUCCESS, recipeName, pax);
+    /**
+     * Form the string of expired ingredients.
+     *
+     * @return string of expired ingredients.
+     */
+    public String craftExpiredList() {
+        String expiredList = "";
+        for (String item : expiredIngrNames) {
+            expiredList = expiredList + item + ", ";
+        }
+        return expiredList;
+    }
+
+    /**
+     * Check if the current ingredient is expired. If not, then deduct from the ingredient.
+     *
+     * @param ingredientToDeduct the ingredient where quantity is to be deducted from
+     * @param totalCookedQty the remaining quantity of ingredients needed to cook
+     * @return the remaining quantity of ingredients needed to cook
+     */
+
+    public int checkIfIngredientExpired(Ingredient ingredientToDeduct, int totalCookedQty,
+                                        ArrayList<Ingredient> ingredientsList) {
+        Date today = new Date();
+        int quantity = ingredientToDeduct.getQuantity();
+        try {
+            Date expiredDate = new SimpleDateFormat("dd/MM/yyyy").parse(ingredientToDeduct.getExpiryDate());
+            if (today.before(expiredDate)) {
+                if (quantity <= totalCookedQty) {
+                    totalCookedQty -= quantity;
+                    Expenditure.getInstance().addAmountForCooking(ingredientToDeduct, quantity);
+                    ingredientToDeduct.setQuantity(0);
+                } else {
+                    Expenditure.getInstance().addAmountForCooking(ingredientToDeduct, totalCookedQty);
+                    ingredientToDeduct.setQuantity(quantity - totalCookedQty);
+                    totalCookedQty = 0;
+                }
+            }
+            if (ingredientToDeduct.getQuantity() == 0) {
+                ingredientsList.remove(ingredientToDeduct);
+            }
+        } catch (ParseException e) {
+            kitchenLogs.info(logcookRecipe);
+        }
+        return totalCookedQty;
     }
 
     /**
@@ -67,15 +135,10 @@ public class CookRecipeCommand extends Command {
             ArrayList<Ingredient> listOfSameName = getIngredientsWithSameName(ingredientList, ingredientName);
             int totalCookedQty = pax * ingredient.getQuantity();
             for (Ingredient ingredientToDeduct : listOfSameName) {
-                int quantity = ingredientToDeduct.getQuantity();
                 if (totalCookedQty == 0) {
                     break;
-                } else if (quantity <= totalCookedQty) {
-                    totalCookedQty -= quantity;
-                    ingredientToDeduct.setQuantity(0);
-                } else if (quantity > totalCookedQty) {
-                    ingredientToDeduct.setQuantity(quantity - totalCookedQty);
-                    totalCookedQty = 0;
+                } else {
+                    totalCookedQty = checkIfIngredientExpired(ingredientToDeduct, totalCookedQty, ingredientList);
                 }
             }
         }
@@ -88,7 +151,6 @@ public class CookRecipeCommand extends Command {
      * @param ingredientName  the ingredient to check for its occurrence in the ingredientlist
      * @return a list of ingredients with the same name as ingredientName
      */
-
     public ArrayList<Ingredient> getIngredientsWithSameName(ArrayList<Ingredient> ingredientList,
                                                             String ingredientName) {
         ArrayList<Ingredient> listOfSameName = new ArrayList<>();
@@ -99,7 +161,6 @@ public class CookRecipeCommand extends Command {
         }
         return listOfSameName;
     }
-
 
     /**
      * Checks if the recipe user wants exist.
@@ -127,14 +188,41 @@ public class CookRecipeCommand extends Command {
      * @return true if there are sufficient ingredients, otherwise false.
      */
     public Boolean checkForSufficientIngredient(ArrayList<Ingredient> ingredientList, Recipe recipeToBeCooked) {
-        boolean isSufficient = true;
         for (Ingredient ingr : recipeToBeCooked.getRecipeItem()) {
             int totalCookedQty = pax * ingr.getQuantity();
-            if (getIngredientQty(ingr.getIngredientName().toLowerCase(), ingredientList) < totalCookedQty) {
-                isSufficient = false;
+            String ingrName = ingr.getIngredientName().toLowerCase();
+            String ingrCategory = ingr.getCategoryName().toLowerCase();
+            if (getTotalIngredientQty(ingrName, ingrCategory, ingredientList) < totalCookedQty) {
+                return false;
             }
         }
-        return isSufficient;
+        return true;
+    }
+
+    public Boolean checkNotExpiredIngredientQty(ArrayList<Ingredient> ingredientList, Recipe recipeToBeCooked) {
+        Date today = new Date();
+        for (Ingredient ingr : recipeToBeCooked.getRecipeItem()) {
+            int totalCookedQty = pax * ingr.getQuantity();
+            String ingrName = ingr.getIngredientName().toLowerCase();
+            ArrayList<Ingredient> listOfSameName = getIngredientsWithSameName(ingredientList, ingrName);
+            int goodIngrCount = 0;
+            for (Ingredient ingrNameInStore : listOfSameName) {
+                try {
+                    Date date1 = new SimpleDateFormat("dd/MM/yyyy").parse(ingrNameInStore.getExpiryDate());
+                    if (today.before(date1)) {
+                        goodIngrCount += ingrNameInStore.getQuantity();
+                    } else {
+                        expiredIngrNames.add(ingrName);
+                    }
+                } catch (ParseException e) {
+                    kitchenLogs.info(logcookRecipe);
+                }
+            }
+            if (goodIngrCount < totalCookedQty) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -144,10 +232,11 @@ public class CookRecipeCommand extends Command {
      * @param ingredientList    the list of ingredients available.
      * @return the quantity of ingredients with the same name.
      */
-    public int getIngredientQty(String ingrName, ArrayList<Ingredient> ingredientList) {
+    public int getTotalIngredientQty(String ingrName, String ingrCategory, ArrayList<Ingredient> ingredientList) {
         int availableIngrCount = 0;
         for (Ingredient ingr : ingredientList) {
-            if (ingr.getIngredientName().equalsIgnoreCase(ingrName)) {
+            if (ingr.getIngredientName().equalsIgnoreCase(ingrName)
+                    && ingr.getCategoryName().equalsIgnoreCase(ingrCategory)) {
                 availableIngrCount += ingr.getQuantity();
             }
         }

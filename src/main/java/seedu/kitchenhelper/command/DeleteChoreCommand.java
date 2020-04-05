@@ -8,6 +8,7 @@ import seedu.kitchenhelper.storage.Storage;
 import seedu.kitchenhelper.ui.Ui;
 
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
@@ -52,12 +53,12 @@ public class DeleteChoreCommand extends Command {
     /**
      * Deletes a chore from the chore list.
      *
-     * @param choreList the ArrayList of chores.
+     * @param choreList the list of Chores.
      * @return success message for successful deletion and error message for invalid index specified.
      */
     public String deleteChore(ArrayList<Chore> choreList) {
         try {
-            if (indexToDelete > choreList.size()) {
+            if (indexToDelete > choreList.size() || indexToDelete <= 0) {
                 throw new KitchenHelperException(INVALID_INDEX);
             }
             Chore choreToDelete = choreList.get(indexToDelete - 1);
@@ -70,6 +71,13 @@ public class DeleteChoreCommand extends Command {
         }
     }
 
+    /**
+     * Deletes all the chores in the list.
+     *
+     * @param choreList the list of Chores.
+     * @return message success of deleting all chores or
+     *      message showing cancellation of action to delete all chores.
+     */
     public String deleteAll(ArrayList<Chore> choreList) {
         String userResponse = promptUser();
         if (userResponse.equalsIgnoreCase("no")) {
@@ -82,22 +90,35 @@ public class DeleteChoreCommand extends Command {
         }
     }
 
+    /**
+     * Prompts user to ensure user wants to delete all chores from list.
+     *
+     * @return user response to confirmation of deletion.
+     */
     public String promptUser() {
         String userResponse;
         System.out.println(DELETE_ALL_PROMPT);
-        userResponse = new Scanner(System.in).nextLine().trim();
-        while (!isValidResponse(userResponse)) {
-            System.out.println("Please enter either \"Yes\"/\"No\"");
+        try {
             userResponse = new Scanner(System.in).nextLine().trim();
+            while (!isValidResponse(userResponse)) {
+                System.out.println("Please enter either \"Yes\"/\"No\"");
+                userResponse = new Scanner(System.in).nextLine().trim();
+            }
+        } catch (NoSuchElementException e) {
+            userResponse = "no";
         }
         return userResponse;
     }
 
+    /**
+     * Checks if user responds with either "yes" or "no".
+     *
+     * @param userResponse user input in commandline.
+     * @return True if user responds with either "yes" or "no".
+     */
     public boolean isValidResponse(String userResponse) {
         String response = userResponse;
-        if (response.equalsIgnoreCase("no")) {
-            return true;
-        } else if (response.equalsIgnoreCase("yes")) {
+        if (response.equalsIgnoreCase("no") || response.equalsIgnoreCase("yes")) {
             return true;
         }
         return false;
@@ -109,7 +130,7 @@ public class DeleteChoreCommand extends Command {
      * @param ingredientList list of ingredients.
      * @param recipeList list of recipes.
      * @param choreList list of chores.
-     * @return the success or error message of deleting a chore from the chore list.
+     * @return the success or error message of deleting one or all chores from the chore list.
      */
     @Override
     public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,

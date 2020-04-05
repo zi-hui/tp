@@ -14,7 +14,7 @@ public class ListChoreCommand extends Command {
 
 
     public static final String COMMAND_WORD = "listchore";
-    public static final String COMMAND_DESC = "Display all the chores";
+    public static final String COMMAND_DESC = "Display all the chores.";
     public static final String COMMAND_FORMAT = "listchore *No parameter";
     public static final String MESSAGE_USAGE = String.format("%s: %s", COMMAND_WORD, COMMAND_DESC) + Ui.LS + String
             .format("Example: %s", COMMAND_WORD);

@@ -8,18 +8,23 @@ import seedu.kitchenhelper.ui.Ui;
 
 import java.util.ArrayList;
 
+/**
+ * Shows the user how to execute different commands supported by this program.
+ */
 public class HelpCommand extends Command {
     
     public static final String COMMAND_WORD = "help";
-    public static final String INGREDIENT_LOGO = Ui.DIVIDER + Ui.LS + "Ingredient" + Ui.LS + Ui.DIVIDER + Ui.LS;
-    public static final String RECIPE_LOGO = Ui.DIVIDER + Ui.LS + "Recipe" + Ui.LS + Ui.DIVIDER + Ui.LS;
-    public static final String CHORE_LOGO = Ui.DIVIDER + Ui.LS + "Chore" + Ui.LS + Ui.DIVIDER + Ui.LS;
-    public static final String COMMON_LOGO = Ui.DIVIDER + Ui.LS + "Common" + Ui.LS + Ui.DIVIDER + Ui.LS;
-    public static final String COMMAND_DESC = "Shows the program command line interface instructions";
+    public static final String LS_LS = Ui.LS + Ui.LS;
+    public static final String DLS = Ui.DIVIDER + Ui.LS;
+    public static final String INGREDIENT_LOGO = DLS + "Ingredient" + Ui.LS + DLS;
+    public static final String RECIPE_LOGO = DLS + "Recipe" + Ui.LS + DLS;
+    public static final String CHORE_LOGO = DLS + "Chore" + Ui.LS + DLS;
+    public static final String COMMON_LOGO = DLS + "Common" + Ui.LS + DLS;
+    public static final String COMMAND_DESC = "Shows the program command line interface instructions.";
     public static final String MESSAGE_USAGE =
             String.format("%s: %s", COMMAND_WORD, COMMAND_DESC) + Ui.LS + String.format("Example: %s", COMMAND_WORD);
-
-
+    
+    
     /**
      * {@inheritDoc}
      *
@@ -30,14 +35,29 @@ public class HelpCommand extends Command {
      */
     @Override
     public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
-                                 ArrayList<Chore> choreList) throws KitchenHelperException {
+                                 ArrayList<Chore> choreList) {
         return new CommandResult(
-                Ui.DIVIDER + Ui.LS + COMMON_LOGO + HelpCommand.MESSAGE_USAGE + Ui.LS + Ui.LS + ExitCommand.MESSAGE_USAGE
-                + Ui.LS + Ui.LS + INGREDIENT_LOGO + AddIngredientCommand.MESSAGE_USAGE + Ui.LS + Ui.LS
-                + ListIngredientCommand.MESSAGE_USAGE + Ui.LS + Ui.LS + DeleteIngredientCommand.MESSAGE_USAGE + Ui.LS
-                + Ui.LS + RECIPE_LOGO + AddRecipeCommand.MESSAGE_USAGE + Ui.LS + Ui.LS + ListRecipeCommand.MESSAGE_USAGE
-                + Ui.LS + Ui.LS + DeleteRecipeCommand.MESSAGE_USAGE + Ui.LS + Ui.LS + CHORE_LOGO
-                + AddChoreCommand.MESSAGE_USAGE + Ui.LS + Ui.LS + ListChoreCommand.MESSAGE_USAGE + Ui.LS + Ui.LS
-                + DeleteChoreCommand.MESSAGE_USAGE);
+                DLS + COMMON_LOGO
+                + HelpCommand.MESSAGE_USAGE + LS_LS
+                + ResetCommand.MESSAGE_USAGE + LS_LS
+                + SaveStateCommand.MESSAGE_USAGE + LS_LS
+                + ExitCommand.MESSAGE_USAGE + LS_LS
+                + INGREDIENT_LOGO
+                + AddIngredientCommand.MESSAGE_USAGE + LS_LS
+                + ListIngredientCommand.MESSAGE_USAGE + LS_LS
+                + DeleteIngredientCommand.MESSAGE_USAGE + LS_LS
+                + SearchIngredientCommand.MESSAGE_USAGE + LS_LS
+                + RECIPE_LOGO
+                + AddRecipeCommand.MESSAGE_USAGE + LS_LS
+                + ListRecipeCommand.MESSAGE_USAGE + LS_LS
+                + CookRecipeCommand.MESSAGE_USAGE + LS_LS
+                + DeleteRecipeCommand.MESSAGE_USAGE + LS_LS
+                + SearchRecipeCommand.MESSAGE_USAGE + LS_LS
+                + CHORE_LOGO
+                + AddChoreCommand.MESSAGE_USAGE + LS_LS
+                + ListChoreCommand.MESSAGE_USAGE + LS_LS
+                + DoneCommand.MESSAGE_USAGE + LS_LS
+                + DeleteChoreCommand.MESSAGE_USAGE + LS_LS
+                + SearchChoreCommand.MESSAGE_USAGE);
     }
 }
