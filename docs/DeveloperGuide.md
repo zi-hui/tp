@@ -4,8 +4,9 @@ By: `CS2113T-M16-2` Since: `2020`
 ![Supported Java versions](https://img.shields.io/badge/Java-11-blue.svg) ![Supported OS](https://img.shields.io/badge/Supported%20OS-Windows|MacOS|Linux-yellow.svg) 
 - [Developer Guide](#developer-guide)
   * [1. Introduction](#1-introduction)
-    + [1.1. Purpose](#11-purpose)
-    + [1.2. Scope](#12-scope)
+    + [1.1. Background](#11-background)
+    + [1.2. Purpose](#12-purpose)
+    + [1.3. Scope](#13-scope)
   * [2. Setting up](#2-setting-up)
     + [2.1. Prerequisites](#21-prerequisites)
     + [2.2. Setting up the project in your computer](#22-setting-up-the-project-in-your-computer)
@@ -53,7 +54,7 @@ By: `CS2113T-M16-2` Since: `2020`
       - [F.6. Saving data](#f6-saving-data)
 
 ## 1. Introduction
-### 1.1  Background
+### 1.1.  Background
 Kitchen Helper, born from the need to keep track of kitchen inventory, is an application that is designed to manage kitchen inventory and chores. Users will be able to reduce food wastage and save money through the convenience of viewing the contents of the inventory.
 
 ### 1.2. Purpose
