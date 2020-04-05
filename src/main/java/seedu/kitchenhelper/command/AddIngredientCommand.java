@@ -32,8 +32,6 @@ public class AddIngredientCommand extends Command {
             + "+/e( )+\\d{2}/\\d{2}/\\d{4}( )*";
     public static final Logger kitchenLogs = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     public static final String COMMAND_WORD = "addingredient";
-    public static final String MESSAGE_SUCCESS =
-            "You have added Ingredient:%s Category:%s Quantity:%d Price:$%.2f Expiry:%s to the ingredient list";
     public static final String COMMAND_DESC = "Adds a ingredient to the ingredient list.";
     public static final String COMMAND_PARAMETER = "/n <INGREDIENT> /c <CATEGORY> /q <QUANTITY> /p <PRICE> /e <EXPIRY>";
     public static final String COMMAND_EXAMPLE = "Example: addingredient /n Beef /c Meat /q 1 /p 13.5 /e 13/02/2022";
@@ -169,7 +167,8 @@ public class AddIngredientCommand extends Command {
             Storage.saveIngredientData(ingredientList);
             kitchenLogs.info(Messages.MESSAGE_ADD_INGREDIENT_LOG);
             return new CommandResult(
-                    String.format(MESSAGE_SUCCESS, ingredientName, categoryName, quantity, price, expiry));
+                    String.format(Messages.MESSAGE_ADD_INGREDIENT_SUCCESS, ingredientName, categoryName, quantity,
+                            price, expiry));
         }
     }
 }

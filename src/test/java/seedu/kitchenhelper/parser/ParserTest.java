@@ -10,6 +10,7 @@ import seedu.kitchenhelper.command.SearchRecipeCommand;
 import seedu.kitchenhelper.command.DeleteChoreCommand;
 import seedu.kitchenhelper.command.DeleteIngredientCommand;
 import seedu.kitchenhelper.command.InvalidCommand;
+import seedu.kitchenhelper.common.Messages;
 import seedu.kitchenhelper.exception.KitchenHelperException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -39,7 +40,7 @@ class ParserTest {
     void prepareAddInventory_testPass() {
         String correctAttributes = "/n Beef /c Meat /q 30 /p 20.2 /e 20/02/2022";
         assertTrue(new Parser().prepareAddIngredient(correctAttributes) instanceof AddIngredientCommand);
-        String output = String.format(AddIngredientCommand.MESSAGE_SUCCESS, "Beef", "Meat", 30, 20.2, "20/02/2022");
+        String output = String.format(Messages.MESSAGE_ADD_INGREDIENT_SUCCESS, "Beef", "Meat", 30, 20.2, "20/02/2022");
         assertEquals(output, showToConsole(new KitchenHelper()
                 .executeCommand(new Parser().prepareAddIngredient(correctAttributes)).feedbackToUser));
     }

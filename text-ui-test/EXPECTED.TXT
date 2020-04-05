@@ -23,7 +23,7 @@ Chicken Stew Recipe has been created with 2 ingredients inside.
 ===================================================
 warm milk Recipe has been created with 1 ingredients inside.
 ===================================================
-You have added Ingredient:HL Milk Category:Dairy Quantity:3 Price:$12.20 Expiry:01/03/2022 to the ingredient list
+KitchenHelper has added: Ingredient:HL Milk Category:Dairy Quantity:3 Price:$12.20 Expiry:01/03/2022
 ===================================================
 Kitchen Helper is trying to cook!
 warm milk was cooked with a pax of 2
@@ -37,29 +37,29 @@ Format:[Recipe Number] Recipe Name
 [3] warm milk
 
 ===================================================
-You have added Ingredient:Beef Category:meat Quantity:3 Price:$20.00 Expiry:18/03/2022 to the ingredient list
+KitchenHelper has added: Ingredient:Beef Category:meat Quantity:3 Price:$20.00 Expiry:18/03/2022
 ===================================================
-You have added Ingredient:Beef cubes Category:meat Quantity:3 Price:$20.00 Expiry:18/03/2022 to the ingredient list
+KitchenHelper has added: Ingredient:Beef cubes Category:meat Quantity:3 Price:$20.00 Expiry:18/03/2022
 ===================================================
 Kitchen Helper has updated the quantity of Beef cubes to 8 from 3
 ===================================================
-You have added Ingredient:Chicken Breast Category:meat Quantity:4 Price:$20.00 Expiry:20/12/2022 to the ingredient list
+KitchenHelper has added: Ingredient:Chicken Breast Category:meat Quantity:4 Price:$20.00 Expiry:20/12/2022
 ===================================================
-You have added Ingredient:Chicken Breast Category:meat Quantity:3 Price:$20.00 Expiry:18/12/2022 to the ingredient list
+KitchenHelper has added: Ingredient:Chicken Breast Category:meat Quantity:3 Price:$20.00 Expiry:18/12/2022
 ===================================================
-You have added Ingredient:kailan Category:Vegetable Quantity:30 Price:$30.45 Expiry:12/03/2022 to the ingredient list
+KitchenHelper has added: Ingredient:kailan Category:Vegetable Quantity:30 Price:$30.45 Expiry:12/03/2022
 ===================================================
-You have added Ingredient:HL Milk Category:Dairy Quantity:3 Price:$12.00 Expiry:14/03/2022 to the ingredient list
+KitchenHelper has added: Ingredient:HL Milk Category:Dairy Quantity:3 Price:$12.00 Expiry:14/03/2022
 ===================================================
 Invalid Command Format!
 Adds a ingredient to the ingredient list. /n <INGREDIENT> /c <CATEGORY> /q <QUANTITY> /p <PRICE> /e <EXPIRY>
 Example: addingredient /n Beef /c Meat /q 1 /p 13.5 /e 13/02/2022
 ===================================================
-You have added Ingredient:Pear Category:fruit Quantity:1 Price:$1.00 Expiry:02/02/2022 to the ingredient list
+KitchenHelper has added: Ingredient:Pear Category:fruit Quantity:1 Price:$1.00 Expiry:02/02/2022
 ===================================================
-You have added Ingredient:Lettuce Category:Vegetable Quantity:10 Price:$20.00 Expiry:20/12/2022 to the ingredient list
+KitchenHelper has added: Ingredient:Lettuce Category:Vegetable Quantity:10 Price:$20.00 Expiry:20/12/2022
 ===================================================
-You have added Ingredient:Lettuce Category:Vegetable Quantity:2 Price:$20.00 Expiry:09/03/2022 to the ingredient list
+KitchenHelper has added: Ingredient:Lettuce Category:Vegetable Quantity:2 Price:$20.00 Expiry:09/03/2022
 ===================================================
 Here is the list of Ingredients in Inventory:
 Format : [Ingredient Index] Ingredient Name | Quantity | Price | Expiry
@@ -83,7 +83,7 @@ vegetable:
 [10] kailan | 30 portion(s) | $30.45 | Expiry Date : 12/03/2022
 
 ===================================================
-You have added Ingredient:Apple Category:fruit Quantity:1 Price:$1.00 Expiry:02/02/2022 to the ingredient list
+KitchenHelper has added: Ingredient:Apple Category:fruit Quantity:1 Price:$1.00 Expiry:02/02/2022
 ===================================================
 Here is the list of Ingredients in Inventory:
 Format : [Ingredient Index] Ingredient Name | Quantity | Price | Expiry
@@ -108,7 +108,7 @@ vegetable:
 [11] kailan | 30 portion(s) | $30.45 | Expiry Date : 12/03/2022
 
 ===================================================
-You have added Ingredient:Apple Category:fruit Quantity:1 Price:$1.00 Expiry:01/02/2022 to the ingredient list
+KitchenHelper has added: Ingredient:Apple Category:fruit Quantity:1 Price:$1.00 Expiry:01/02/2022
 ===================================================
 Here is the list of Ingredients in Inventory:
 Format : [Ingredient Index] Ingredient Name | Quantity | Price | Expiry
@@ -134,7 +134,7 @@ vegetable:
 [12] kailan | 30 portion(s) | $30.45 | Expiry Date : 12/03/2022
 
 ===================================================
-You have added Ingredient:Apple Category:fruit Quantity:1 Price:$1.00 Expiry:03/02/2022 to the ingredient list
+KitchenHelper has added: Ingredient:Apple Category:fruit Quantity:1 Price:$1.00 Expiry:03/02/2022
 ===================================================
 Here is the list of Ingredients in Inventory:
 Format : [Ingredient Index] Ingredient Name | Quantity | Price | Expiry
@@ -269,7 +269,7 @@ You have deleted this chore:
 [/] buy groceries (by: Tuesday 12pm)
 Now you have 1 chore in the list.
 ===================================================
-You have added Ingredient:Beef Category:meat Quantity:3 Price:$20.00 Expiry:18/03/2022 to the ingredient list
+KitchenHelper has added: Ingredient:Beef Category:meat Quantity:3 Price:$20.00 Expiry:18/03/2022
 ===================================================
 Here is the list of Ingredients in Inventory:
 Format : [Ingredient Index] Ingredient Name | Quantity | Price | Expiry
