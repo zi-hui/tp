@@ -30,6 +30,6 @@ public class Messages {
     public static final String MESSAGE_COMBINE_INGREDIENT =
             "Kitchen Helper has updated the quantity of %s to %d from %d";
     public static final String MESSAGE_ADD_INGREDIENT_LOG = "A new ingredient has been added";
-    
+    public static final String MESSAGE_INVALID_DATE = "Invalid date entered.";
     
 }
