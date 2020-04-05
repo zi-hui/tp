@@ -5,4 +5,4 @@
 /n kailan /c Vegetable /q 30 /p 30.45 /e 18/12/2020
 /n orange /c fruit /q 4 /p 0.3 /e 08/04/2020
 /n pear /c fruit /q 4 /p 1.0 /e 07/04/2020
-/n soursop /c fruit /q 5 /p 1.0 /e 20/04/2020
+/n soursop /c fruit /q 2 /p 1.0 /e 21/04/2020

@@ -106,8 +106,10 @@ public class CookRecipeCommand extends Command {
             if (today.before(expiredDate)) {
                 if (quantity <= totalCookedQty) {
                     totalCookedQty -= quantity;
+                    Expenditure.getInstance().addAmountForCooking(ingredientToDeduct, quantity);
                     ingredientToDeduct.setQuantity(0);
                 } else {
+                    Expenditure.getInstance().addAmountForCooking(ingredientToDeduct, totalCookedQty);
                     ingredientToDeduct.setQuantity(quantity - totalCookedQty);
                     totalCookedQty = 0;
                 }
