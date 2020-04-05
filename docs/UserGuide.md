@@ -90,28 +90,28 @@ __Format:__ `reset`
 
 #### 3.2.1. Select Load Files
 
-At the start of Kitchen Helper, the user will be prompted with the option to either load the program data from auto-save mode or the manual-save mode. 
+At the start of Kitchen Helper, the user will be prompted with the option to either load the program data normally or from the most recent backup storage files.
 
-The auto-save mode will load Kitchen Helper from the auto-save files which store the most updated and recent data from the last used session of the user. 
+The normal mode will load Kitchen Helper from the main storage files which store the data from the last used session of the user.
 
-Alternatively, if the user selects the manual-save mode, it will load Kitchen Helper from the manual-save files which store the version of data manually saved from the user’s last usage of the save command [Section 3.2.2, "Save Current State"](#322-save-current-state-save).  
+Alternatively, if the user selects the restore mode, it will load Kitchen Helper from the backup storage files which store the version of data manually saved from the user’s last usage of the save command [Section 3.2.2, "Save Current State"](#322-save-current-state-save). The restore mode gives users access to the backup storage files, however, users will have to use the save command to update the backup storage files.
 
-It is important to note that any subsequent changes made to the program data during the current session will be automatically saved into the auto-save files regardless of initial load options. 
+It is important to note that any subsequent changes made to the program data during the current session will be automatically saved into the main storage files regardless of initial load options. 
 
 Example |  Outcome
 --------|------------------
-**Command**: <br> `1` <br><br> **Description**: <br> Data loaded from most recent auto-save mode files.  | Please enter '1' for auto-save and '2' for manual-save: <br> 1 <br> =================================================== <br> Okay auto-save chosen. <br> ===================================================
-**Command**: <br> `2` <br><br> **Description**: <br> Data loaded from most recent manual-save mode files.  | Please enter '1' for auto-save and '2' for manual-save: <br> 2 <br> =================================================== <br> Okay manual-save chosen. <br> ===================================================
+**Command**: <br> `1` <br><br> **Description**: <br> Data loaded from the most recent main storage files.  | Please enter '1' to load data from normal mode or '2' to load data from restore mode: <br> 1 <br> =================================================== <br> Okay data have been loaded from the main storage files. <br> ===================================================
+**Command**: <br> `2` <br><br> **Description**: <br> Data loaded from the most recent backup storage files.  | Please enter '1' to load data from normal mode or '2' to load data from restore mode: <br> 2 <br> =================================================== <br> Okay data have been loaded from the backup storage files. <br> ===================================================
 
 
 #### 3.2.2. Save Current State: `save`
-At any point of the session, if the user wishes to store a back-up copy of the current state of their program data, it is recommended that the user uses the save command. The save command will store all program data of the current state into manual-save files. 
+At any point of the session, if the user wishes to store a backup copy of the current state of their program data, it is recommended that the user uses the save command. The save command will store all program data of the current state into the backup storage files.
 
 __Format:__ `save`  
 
 Example |  Outcome
 --------|------------------
-**Command**: <br> `save` <br><br> **Description**: <br> Data saved into manual-save mode files.  | save <br> You have saved the current state in the following files: outputIngredientCopy.txt, outputRecipeCopy.txt, outputChoreCopy.txt  <br> =================================================== 
+**Command**: <br> `save` <br><br> **Description**: <br> Data saved into backup storage files.  | save <br> You have saved the current state in the following files: outputIngredientCopy.txt, outputRecipeCopy.txt, outputChoreCopy.txt  <br> =================================================== 
 
 ### 3.3. Ingredient
 #### 3.3.1. Adding an ingredient: `addingredient`
