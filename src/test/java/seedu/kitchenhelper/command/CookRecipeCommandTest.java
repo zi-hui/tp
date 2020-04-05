@@ -16,8 +16,10 @@ public class CookRecipeCommandTest {
     @Test
     public void cookRecipe_testPassCase1() throws KitchenHelperException {
         ArrayList<Ingredient> ingredientList = new ArrayList<>();
-        new AddIngredientCommand("Chicken Breast", "Meat", 30, 20.2, "20/12/2020").addToCategory("Meat", ingredientList);
-        new AddIngredientCommand("Lettuce", "Vegetable", 15, 20.2, "15/12/2020").addToCategory("Vegetable", ingredientList);
+        new AddIngredientCommand("Chicken Breast", "Meat", 30, 20.2,
+                "20/12/2020").addToCategory("Meat", ingredientList);
+        new AddIngredientCommand("Lettuce", "Vegetable", 15, 20.2,
+                "15/12/2020").addToCategory("Vegetable", ingredientList);
         assertEquals(2, ingredientList.size());
         assertEquals(30, ingredientList.get(0).getQuantity());
         assertEquals(15, ingredientList.get(1).getQuantity());
@@ -39,15 +41,19 @@ public class CookRecipeCommandTest {
         cookRecipe.setRecipeName("Chicken Salad");
         cookRecipe.setRecipePax(2);
         assertEquals(Boolean.TRUE, cookRecipe.checkForSufficientIngredient(ingredientList, recipeList.get(0)));
-        assertEquals("Chicken Salad was cooked with a pax of 2", cookRecipe.cookRecipe(ingredientList, recipeList));
+        assertEquals("Chicken Salad was cooked with a pax of 2",
+                cookRecipe.cookRecipe(ingredientList, recipeList));
     }
 
     @Test
     public void cookRecipe_testPassCase2() throws KitchenHelperException {
         ArrayList<Ingredient> ingredientList = new ArrayList<>();
-        new AddIngredientCommand("Chicken Breast", "Meat", 1, 20.2, "20/12/2020").addToCategory("Meat", ingredientList);
-        new AddIngredientCommand("Lettuce", "Vegetable", 5, 20.2, "15/12/2020").addToCategory("Vegetable", ingredientList);
-        new AddIngredientCommand("Lettuce", "Vegetable", 5, 20.2, "15/12/2020").addToCategory("Vegetable", ingredientList);
+        new AddIngredientCommand("Chicken Breast", "Meat", 1, 20.2,
+                "20/12/2020").addToCategory("Meat", ingredientList);
+        new AddIngredientCommand("Lettuce", "Vegetable", 5, 20.2,
+                "15/12/2020").addToCategory("Vegetable", ingredientList);
+        new AddIngredientCommand("Lettuce", "Vegetable", 5, 20.2,
+                "15/12/2020").addToCategory("Vegetable", ingredientList);
         HashMap<String[], Integer> parsedIngr = new HashMap<>();
         String[] ingr = new String[2];
         ingr[0] = "Chicken Breast";
@@ -65,15 +71,19 @@ public class CookRecipeCommandTest {
         CookRecipeCommand cookRecipe = new CookRecipeCommand();
         cookRecipe.setRecipeName("Chicken Salad");
         cookRecipe.setRecipePax(2);
-        assertEquals("There are insufficient/missing ingredients!", cookRecipe.cookRecipe(ingredientList, recipeList));
+        assertEquals("There are insufficient/missing ingredients!",
+                cookRecipe.cookRecipe(ingredientList, recipeList));
     }
 
     @Test
     public void cookRecipe_testPassCase3() throws KitchenHelperException {
         ArrayList<Ingredient> ingredientList = new ArrayList<>();
-        new AddIngredientCommand("Chicken Breast", "Meat", 5, 20.2, "20/12/2020").addToCategory("Meat", ingredientList);
-        new AddIngredientCommand("Lettuce", "Vegetable", 5, 20.2, "15/02/2020").addToCategory("Vegetable", ingredientList);
-        new AddIngredientCommand("Lettuce", "Vegetable", 5, 20.2, "15/12/2020").addToCategory("Vegetable", ingredientList);
+        new AddIngredientCommand("Chicken Breast", "Meat", 5, 20.2,
+                "20/12/2020").addToCategory("Meat", ingredientList);
+        new AddIngredientCommand("Lettuce", "Vegetable", 5, 20.2,
+                "15/02/2020").addToCategory("Vegetable", ingredientList);
+        new AddIngredientCommand("Lettuce", "Vegetable", 5, 20.2,
+                "15/12/2020").addToCategory("Vegetable", ingredientList);
         HashMap<String[], Integer> parsedIngr = new HashMap<>();
         String[] ingr = new String[2];
         ingr[0] = "Chicken Breast";
@@ -91,17 +101,21 @@ public class CookRecipeCommandTest {
         CookRecipeCommand cookRecipe = new CookRecipeCommand();
         cookRecipe.setRecipeName("Chicken Salad");
         cookRecipe.setRecipePax(2);
-        assertEquals("There are insufficient/missing ingredients!\nPlease check for these expired ingredients: lettuce", cookRecipe.cookRecipe(ingredientList, recipeList));
+        assertEquals("There are insufficient/missing ingredients!"
+                + "\nPlease check for these expired ingredients: lettuce",
+                cookRecipe.cookRecipe(ingredientList, recipeList));
     }
 
     @Test
     public void cookRecipe_testPassCase4() {
-        ArrayList<Recipe> recipeList = new ArrayList<>();
         ArrayList<Ingredient> ingredientList = new ArrayList<>();
-        new AddIngredientCommand("Chicken Breast", "Meat", 5, 20.2, "20/12/2020").addToCategory("Meat", ingredientList);
-        new AddIngredientCommand("Lettuce", "Vegetable", 5, 20.2, "15/02/2020").addToCategory("Vegetable", ingredientList);
+        new AddIngredientCommand("Chicken Breast", "Meat", 5, 20.2,
+                "20/12/2020").addToCategory("Meat", ingredientList);
+        new AddIngredientCommand("Lettuce", "Vegetable", 5, 20.2,
+                "15/02/2020").addToCategory("Vegetable", ingredientList);
         CookRecipeCommand cookRecipe = new CookRecipeCommand();
         cookRecipe.setRecipeName("Chicken Salad");
+        ArrayList<Recipe> recipeList = new ArrayList<>();
         assertEquals("The given recipe name does not exist!", cookRecipe.cookRecipe(ingredientList, recipeList));
     }
 
@@ -161,55 +175,74 @@ public class CookRecipeCommandTest {
     @Test
     public void getTotalIngredientQty_testPass() {
         ArrayList<Ingredient> ingredientList = new ArrayList<>();
-        new AddIngredientCommand("Chicken Breast", "Meat", 30, 20.2, "20/12/2020").addToCategory("Meat", ingredientList);
-        new AddIngredientCommand("Chicken Breast", "Meat", 5, 20.2, "25/12/2020").addToCategory("Meat", ingredientList);
+        new AddIngredientCommand("Chicken Breast", "Meat", 30, 20.2,
+                "20/12/2020").addToCategory("Meat", ingredientList);
+        new AddIngredientCommand("Chicken Breast", "Meat", 5, 20.2,
+                "25/12/2020").addToCategory("Meat", ingredientList);
         assertEquals(2, ingredientList.size());
         CookRecipeCommand cookRecipe = new CookRecipeCommand();
-        assertEquals(35, cookRecipe.getTotalIngredientQty("Chicken Breast", "Meat", ingredientList));
+        assertEquals(35, cookRecipe.getTotalIngredientQty("Chicken Breast",
+                "Meat", ingredientList));
     }
 
     @Test
     public void getTotalIngredientQty_testFail() {
         ArrayList<Ingredient> ingredientList = new ArrayList<>();
-        new AddIngredientCommand("Chicken Breast", "Meat", 30, 20.2, "20/12/2020").addToCategory("Meat", ingredientList);
-        new AddIngredientCommand("Chicken Breast", "Meat", 5, 20.2, "25/12/2020").addToCategory("Meat", ingredientList);
+        new AddIngredientCommand("Chicken Breast", "Meat", 30, 20.2,
+                "20/12/2020").addToCategory("Meat", ingredientList);
+        new AddIngredientCommand("Chicken Breast", "Meat", 5, 20.2,
+                "25/12/2020").addToCategory("Meat", ingredientList);
         assertEquals(2, ingredientList.size());
         CookRecipeCommand cookRecipe = new CookRecipeCommand();
-        assertNotEquals(50, cookRecipe.getTotalIngredientQty("Chicken Breast", "Meat", ingredientList));
+        assertNotEquals(50, cookRecipe.getTotalIngredientQty("Chicken Breast",
+                "Meat", ingredientList));
     }
 
     @Test
     public void getIngredientsWithSameName_testPass() {
         ArrayList<Ingredient> ingredientList = new ArrayList<>();
-        new AddIngredientCommand("Chicken Breast", "Meat", 30, 20.2, "20/12/2020").addToCategory("Meat", ingredientList);
-        new AddIngredientCommand("Chicken Breast", "Meat", 5, 20.2, "25/12/2020").addToCategory("Meat", ingredientList);
-        new AddIngredientCommand("Lettuce", "Vegetable", 3, 20.2, "15/12/2020").addToCategory("Vegetable", ingredientList);
+        new AddIngredientCommand("Chicken Breast", "Meat", 30, 20.2,
+                "20/12/2020").addToCategory("Meat", ingredientList);
+        new AddIngredientCommand("Chicken Breast", "Meat", 5, 20.2,
+                "25/12/2020").addToCategory("Meat", ingredientList);
+        new AddIngredientCommand("Lettuce", "Vegetable", 3, 20.2,
+                "15/12/2020").addToCategory("Vegetable", ingredientList);
         assertEquals(3, ingredientList.size());
         ArrayList<Ingredient> ingredientList2 = new ArrayList<>();
-        new AddIngredientCommand("Chicken Breast", "Meat", 30, 20.2, "20/12/2020").addToCategory("Meat", ingredientList2);
-        new AddIngredientCommand("Chicken Breast", "Meat", 5, 20.2, "25/12/2020").addToCategory("Meat", ingredientList2);
+        new AddIngredientCommand("Chicken Breast", "Meat", 30, 20.2,
+                "20/12/2020").addToCategory("Meat", ingredientList2);
+        new AddIngredientCommand("Chicken Breast", "Meat", 5, 20.2,
+                "25/12/2020").addToCategory("Meat", ingredientList2);
         assertEquals(2, ingredientList2.size());
         CookRecipeCommand cookRecipe = new CookRecipeCommand();
-        assertEquals(ingredientList2, cookRecipe.getIngredientsWithSameName(ingredientList, "Chicken Breast"));
+        assertEquals(ingredientList2, cookRecipe.getIngredientsWithSameName(ingredientList,
+                "Chicken Breast"));
     }
 
     @Test
     public void getIngredientsWithSameName_testFail() {
         ArrayList<Ingredient> ingredientList = new ArrayList<>();
-        new AddIngredientCommand("Chicken Breast", "Meat", 30, 20.2, "20/12/2020").addToCategory("Meat", ingredientList);
-        new AddIngredientCommand("Chicken Breast", "Meat", 5, 20.2, "25/12/2020").addToCategory("Meat", ingredientList);
-        new AddIngredientCommand("Lettuce", "Vegetable", 3, 20.2, "15/12/2020").addToCategory("Meat", ingredientList);
+        new AddIngredientCommand("Chicken Breast", "Meat", 30, 20.2,
+                "20/12/2020").addToCategory("Meat", ingredientList);
+        new AddIngredientCommand("Chicken Breast", "Meat", 5, 20.2,
+                "25/12/2020").addToCategory("Meat", ingredientList);
+        new AddIngredientCommand("Lettuce", "Vegetable", 3, 20.2,
+                "15/12/2020").addToCategory("Meat", ingredientList);
         assertEquals(3, ingredientList.size());
         CookRecipeCommand cookRecipe = new CookRecipeCommand();
-        assertNotEquals(ingredientList, cookRecipe.getIngredientsWithSameName(ingredientList, "Chicken Breast"));
+        assertNotEquals(ingredientList, cookRecipe.getIngredientsWithSameName(ingredientList,
+                "Chicken Breast"));
     }
 
     @Test
     public void checkForSufficientIngredient_testPass() throws KitchenHelperException {
         ArrayList<Ingredient> ingredientList = new ArrayList<>();
-        new AddIngredientCommand("Chicken Breast", "Meat", 30, 20.2, "20/12/2020").addToCategory("Meat", ingredientList);
-        new AddIngredientCommand("Chicken Breast", "Meat", 5, 20.2, "25/12/2020").addToCategory("Meat", ingredientList);
-        new AddIngredientCommand("Lettuce", "Vegetable", 3, 20.2, "15/12/2020").addToCategory("Meat", ingredientList);
+        new AddIngredientCommand("Chicken Breast", "Meat", 30, 20.2,
+                "20/12/2020").addToCategory("Meat", ingredientList);
+        new AddIngredientCommand("Chicken Breast", "Meat", 5, 20.2,
+                "25/12/2020").addToCategory("Meat", ingredientList);
+        new AddIngredientCommand("Lettuce", "Vegetable", 3, 20.2,
+                "15/12/2020").addToCategory("Meat", ingredientList);
         assertEquals(3, ingredientList.size());
         HashMap<String[], Integer> parsedIngr = new HashMap<>();
         String[] ingr = new String[2];
