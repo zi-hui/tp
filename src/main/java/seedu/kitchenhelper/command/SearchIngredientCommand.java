@@ -1,5 +1,6 @@
 package seedu.kitchenhelper.command;
 
+import seedu.kitchenhelper.common.Messages;
 import seedu.kitchenhelper.exception.KitchenHelperException;
 import seedu.kitchenhelper.object.Chore;
 import seedu.kitchenhelper.object.Recipe;
@@ -23,15 +24,7 @@ public class SearchIngredientCommand extends Command {
             String.format("%s %s\n%s", COMMAND_DESC, COMMAND_PARAMETER, COMMAND_EXAMPLE);
     public static final String MESSAGE_USAGE = String.format("%s: %s", COMMAND_WORD, COMMAND_DESC) + Ui.LS + String
             .format("Parameter: %s\n%s", COMMAND_PARAMETER, COMMAND_EXAMPLE);
-    private static final String EMPTY_LIST = "There are no matching ingredient in your list.";
-    private static final String NON_EMPTY_LIST = "Here are your matching ingredients in your list";
-    private static final String NUMBER_FORMAT = "%d.";
-    public static final String LOG_INFO = "Entering execution of finding matching ingredients";
-    public static final String LOG_INFO_EMPTY = "Has non-matching ingredient";
-    public static final String LOG_INFO_Found = "Found matching ingredient";
-    private static final String EMPTY_STRING = "";
-    private static final String EMPTY_STRING_MESSAGE = "Empty keyword detected, input a valid keyword.";
-    private static final String INGREDIENT_INDEX = " located at index %d";
+    private static final String SEARCH_TYPE = "ingredients";
     
     private String keyword;
     
@@ -54,14 +47,14 @@ public class SearchIngredientCommand extends Command {
     public CommandResult execute(ArrayList<Ingredient> ingredientList, ArrayList<Recipe> recipeList,
                                  ArrayList<Chore> choreList) {
         try {
-            if (this.keyword.equals(EMPTY_STRING)) {
+            if (this.keyword.equals(Messages.EMPTY_STRING)) {
                 throw new KitchenHelperException();
             }
         } catch (KitchenHelperException khe) {
-            return new CommandResult(EMPTY_STRING_MESSAGE);
+            return new CommandResult(Messages.MESSAGE_SEARCH_EMPTY_STRING);
         }
         
-        kitchenLogs.info(LOG_INFO);
+        kitchenLogs.info(String.format(Messages.MESSAGE_SEARCH_LOG_INFO, SEARCH_TYPE));
         ArrayList<Ingredient> findIngredientList = new ArrayList<>();
         ArrayList<Integer> ingredientIndex = new ArrayList<>();
         int currIndex = 1;
@@ -74,24 +67,24 @@ public class SearchIngredientCommand extends Command {
         }
         
         if (findIngredientList.isEmpty()) {
-            kitchenLogs.info(LOG_INFO_EMPTY);
-            return new CommandResult(EMPTY_LIST);
+            kitchenLogs.info(String.format(Messages.MESSAGE_SEARCH_LOG_INFO_EMPTY, SEARCH_TYPE));
+            return new CommandResult(String.format(Messages.MESSAGE_SEARCH_EMPTY_LIST, SEARCH_TYPE));
         }
         StringBuilder sb = new StringBuilder();
-        sb.append(NON_EMPTY_LIST)
+        sb.append(String.format(Messages.MESSAGE_SEARCH_NON_EMPTY_LIST, SEARCH_TYPE))
                 .append(Ui.LS);
         assert findIngredientList.size() > 0;
-        kitchenLogs.info(LOG_INFO_Found);
+        kitchenLogs.info(String.format(Messages.MESSAGE_SEARCH_LOG_INFO_FOUND, SEARCH_TYPE));
         for (int i = 0; i < findIngredientList.size(); ++i) {
             if (i == findIngredientList.size() - 1) {
-                sb.append(String.format(NUMBER_FORMAT, i + 1))
+                sb.append(String.format(Messages.NUMBER_FORMAT, i + 1))
                         .append(findIngredientList.get(i).toFind())
-                        .append(String.format(INGREDIENT_INDEX, ingredientIndex.get(i)));
+                        .append(String.format(Messages.SEARCH_INDEX, ingredientIndex.get(i)));
                 break;
             }
-            sb.append(String.format(NUMBER_FORMAT, i + 1))
+            sb.append(String.format(Messages.NUMBER_FORMAT, i + 1))
                     .append(findIngredientList.get(i).toFind())
-                    .append(String.format(INGREDIENT_INDEX, ingredientIndex.get(i)))
+                    .append(String.format(Messages.SEARCH_INDEX, ingredientIndex.get(i)))
                     .append(Ui.LS);
         }
         return new CommandResult(sb.toString());

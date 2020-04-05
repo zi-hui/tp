@@ -207,16 +207,16 @@ You have completed this chore:
 
 ===================================================
 Here are your matching chores in your list
-1.[/] buy groceries (by: Tuesday 12pm)
-2.[x] buy groceries (by: 05/04/2020 08:30)
+1.[/] buy groceries (by: Tuesday 12pm) [Location: Index 1]
+2.[x] buy groceries (by: 05/04/2020 08:30) [Location: Index 2]
 ===================================================
 Here are your matching ingredients in your list
-1.[Meat] Beef Qty:3 $20.00 Exp:18/03/2022
-2.[Meat] Beef cubes Qty:8 $20.00 Exp:18/03/2022
+1.[Meat] Beef Qty:3 $20.00 Exp:18/03/2022 [Location: Index 4]
+2.[Meat] Beef cubes Qty:8 $20.00 Exp:18/03/2022 [Location: Index 5]
 ===================================================
 Here are your matching recipes in your list
-1.Chicken Salad located at listrecipe 1
-2.Chicken Stew located at listrecipe 2
+1.Chicken Salad [Location: Index 1]
+2.Chicken Stew [Location: Index 2]
 ===================================================
 Kitchen Helper is trying to cook!
 Chicken Salad was cooked with a pax of 2
