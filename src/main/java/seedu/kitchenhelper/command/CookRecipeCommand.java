@@ -243,6 +243,10 @@ public class CookRecipeCommand extends Command {
         return availableIngrCount;
     }
 
+    public void setExpiredIngrNames(ArrayList<String> expiredIngrNames){
+        this.expiredIngrNames = expiredIngrNames;
+    }
+
     /**
      * Sets the Recipe to be cooked.
      *
