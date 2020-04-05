@@ -56,7 +56,7 @@ public class DeleteIngredientCommand extends Command {
      */
 
     public String deleteIngredientByIndex(ArrayList<Ingredient> ingredientsList) {
-        String feedbackToUser ="";
+        String feedbackToUser = "";
         int ingredientIndex = this.ingredientIndex;
         if (ingredientIndex > -1 && ingredientIndex < ingredientsList.size()) {
             assert ingredientIndex >= 0;
