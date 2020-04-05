@@ -52,8 +52,8 @@ You have added Ingredient:kailan Category:Vegetable Quantity:30 Price:$30.45 Exp
 You have added Ingredient:HL Milk Category:Dairy Quantity:3 Price:$12.00 Expiry:14/03/2022 to the ingredient list
 ===================================================
 Invalid Command Format!
-Adds a ingredient to the ingredient list. /n INGREDIENT /c CATEGORY /q QUANTITY /p PRICE /e EXPIRY
-Example: addingredient /n Beef /c Meat /q 1 /p 13.5 /e 13/02/2020
+Adds a ingredient to the ingredient list. /n <INGREDIENT> /c <CATEGORY> /q <QUANTITY> /p <PRICE> /e <EXPIRY>
+Example: addingredient /n Beef /c Meat /q 1 /p 13.5 /e 13/02/2022
 ===================================================
 You have added Ingredient:Pear Category:fruit Quantity:1 Price:$1.00 Expiry:02/02/2022 to the ingredient list
 ===================================================

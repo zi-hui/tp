@@ -18,7 +18,7 @@ public class SearchIngredientCommand extends Command {
     public static final Logger kitchenLogs = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     public static final String COMMAND_WORD = "searchingredient";
     public static final String COMMAND_DESC = "Find ingredients in the ingredient list using a keyword.";
-    public static final String COMMAND_PARAMETER = "KEYWORD";
+    public static final String COMMAND_PARAMETER = "<KEYWORD>";
     public static final String COMMAND_EXAMPLE = "Example: searchingredient beef";
     public static final String COMMAND_FORMAT =
             String.format("%s %s\n%s", COMMAND_DESC, COMMAND_PARAMETER, COMMAND_EXAMPLE);
