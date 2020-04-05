@@ -48,9 +48,11 @@ By: `CS2113T-M16-2` Since: `2020`
       - [F.1. Launch and Shutdown](#f1-launch-and-shutdown)
       - [F.2. Add an ingredient](#f2-add-an-ingredient)
       - [F.3. Search for ingredient](#f3-search-for-ingredient)
-      - [F.4. Search for recipe](#f4-search-for-recipe)
-      - [F.5. Search for chore](#f5-search-for-chore)
-      - [F.6. Saving data](#f6-saving-data)
+      - [F.4. Add a recipe](#f4-add-a-recipe)
+      - [F.5. Cook a recipe](#f5-cook-a-recipe)
+      - [F.6. Search for recipe](#f6-search-for-recipe)
+      - [F.7. Search for chore](#f7-search-for-chore)
+      - [F.8. Saving data](#f8-saving-data)
 
 ## 1. Introduction
 ### 1.1. Purpose
