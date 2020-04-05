@@ -2,6 +2,7 @@ package seedu.kitchenhelper.command;
 
 import seedu.kitchenhelper.exception.KitchenHelperException;
 import seedu.kitchenhelper.object.Chore;
+import seedu.kitchenhelper.object.Expenditure;
 import seedu.kitchenhelper.object.Recipe;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
 import seedu.kitchenhelper.storage.Storage;
@@ -105,8 +106,10 @@ public class CookRecipeCommand extends Command {
             if (today.before(expiredDate)) {
                 if (quantity <= totalCookedQty) {
                     totalCookedQty -= quantity;
+                    Expenditure.getInstance().addAmountForCooking(ingredientToDeduct, quantity);
                     ingredientToDeduct.setQuantity(0);
                 } else {
+                    Expenditure.getInstance().addAmountForCooking(ingredientToDeduct, totalCookedQty);
                     ingredientToDeduct.setQuantity(quantity - totalCookedQty);
                     totalCookedQty = 0;
                 }
