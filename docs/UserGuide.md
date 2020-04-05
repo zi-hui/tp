@@ -111,7 +111,7 @@ __Format:__ `save`
 
 Example |  Outcome
 --------|------------------
-**Command**: <br> `save` <br><br> **Description**: <br> Data saved into backup storage files.  | save <br> You have saved the current state in the following files: outputIngredientCopy.txt, outputRecipeCopy.txt, outputChoreCopy.txt  <br> =================================================== 
+**Command**: <br> `save` <br><br> **Description**: <br> Data saved into backup storage files.  | <br> You have saved the current state in the following files: outputIngredientCopy.txt, outputRecipeCopy.txt, outputChoreCopy.txt  <br> =================================================== 
 
 ### 3.3. Ingredient
 #### 3.3.1. Adding an ingredient: `addingredient`
