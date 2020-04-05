@@ -53,7 +53,7 @@ public class ListIngredientCommand extends Command {
                     for (int i = 0; i < ingredientList.size(); i++) {
                         Ingredient ingredientObj = ingredientList.get(i);
                         if (ingredientObj.getCategoryName().equalsIgnoreCase(categoryName)) {
-                            result += "[" + (i + 1) + "] Ingredient Name : " + ingredientObj.getIngredientName() + " | "
+                            result += "[" + (i + 1) + "] " + ingredientObj.getIngredientName() + " | "
                                     + ingredientObj.getQuantity() + " portion(s) | $"
                                     + ingredientObj.getPrice() + " | Expiry Date : "
                                     + ingredientObj.getExpiryDate() + "\n";
