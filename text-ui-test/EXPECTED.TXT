@@ -1,7 +1,7 @@
 ===================================================
-Please enter '1' for auto-save and '2' for manual-save:
+Please enter '1' to load data from normal mode or '2' to load data from restore mode:
 ===================================================
-Okay auto-save chosen.
+Okay data have been loaded from the main storage files.
 ===================================================
 Hello! I'm KitchenHelper here
 What can I do for you?
