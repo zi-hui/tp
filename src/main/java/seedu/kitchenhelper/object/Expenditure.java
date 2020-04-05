@@ -68,6 +68,12 @@ public class Expenditure {
         renewExpenditureValue();
     }
 
+    public void resetExpenditureData() {
+        this.totalExpenditure = 0;
+        this.amountUsedInCooking = 0;
+        this.lastSavedDate = new Date();
+    }
+
     public void renewExpenditureValue() {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
