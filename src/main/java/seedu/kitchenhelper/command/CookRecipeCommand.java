@@ -97,7 +97,8 @@ public class CookRecipeCommand extends Command {
      * @return the remaining quantity of ingredients needed to cook
      */
 
-    public int checkIfIngredientExpired(Ingredient ingredientToDeduct, int totalCookedQty) {
+    public int checkIfIngredientExpired(Ingredient ingredientToDeduct, int totalCookedQty,
+                                        ArrayList<Ingredient> ingredientsList) {
         Date today = new Date();
         int quantity = ingredientToDeduct.getQuantity();
         try {
@@ -110,6 +111,9 @@ public class CookRecipeCommand extends Command {
                     ingredientToDeduct.setQuantity(quantity - totalCookedQty);
                     totalCookedQty = 0;
                 }
+            }
+            if (ingredientToDeduct.getQuantity() == 0) {
+                ingredientsList.remove(ingredientToDeduct);
             }
         } catch (ParseException e) {
             kitchenLogs.info(logcookRecipe);
@@ -132,7 +136,7 @@ public class CookRecipeCommand extends Command {
                 if (totalCookedQty == 0) {
                     break;
                 } else {
-                    totalCookedQty = checkIfIngredientExpired(ingredientToDeduct, totalCookedQty);
+                    totalCookedQty = checkIfIngredientExpired(ingredientToDeduct, totalCookedQty, ingredientList);
                 }
             }
         }
