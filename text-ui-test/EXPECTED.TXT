@@ -78,25 +78,25 @@ You have added Ingredient:Lettuce Category:Vegetable Quantity:2 Price:$20.00 Exp
 ===================================================
 listingredient all
 Here is the list of Ingredients in Inventory:
-Format : Ingredient Index|Ingredient Name|Quantity|Price|Expiry
+Format : [Ingredient Index] Ingredient Name | Quantity | Price | Expiry
 all:
 dairy:
-5|HL Milk|1|12.2|01/03/2022
-6|HL Milk|3|12.0|14/03/2022
+[5] HL Milk | 1 portion(s) | $12.2 | Expiry Date : 01/03/2022
+[6] HL Milk | 3 portion(s) | $12.0 | Expiry Date : 14/03/2022
 drink:
 fruit:
-9|Pear|1|1.0|02/02/2022
+[9] Pear | 1 portion(s) | $1.0 | Expiry Date : 02/02/2022
 meat:
-1|Beef|3|20.0|18/03/2022
-2|Beef cubes|8|20.0|18/03/2022
-3|Chicken Breast|3|20.0|18/12/2022
-4|Chicken Breast|4|20.0|20/12/2022
+[1] Beef | 3 portion(s) | $20.0 | Expiry Date : 18/03/2022
+[2] Beef cubes | 8 portion(s) | $20.0 | Expiry Date : 18/03/2022
+[3] Chicken Breast | 3 portion(s) | $20.0 | Expiry Date : 18/12/2022
+[4] Chicken Breast | 4 portion(s) | $20.0 | Expiry Date : 20/12/2022
 miscellaneous:
 staple:
 vegetable:
-7|Lettuce|2|20.0|09/03/2022
-8|Lettuce|10|20.0|20/12/2022
-10|kailan|30|30.45|12/03/2022
+[7] Lettuce | 2 portion(s) | $20.0 | Expiry Date : 09/03/2022
+[8] Lettuce | 10 portion(s) | $20.0 | Expiry Date : 20/12/2022
+[10] kailan | 30 portion(s) | $30.45 | Expiry Date : 12/03/2022
 
 ===================================================
 addingredient /n Apple /c fruit /q 1 /p 1 /e 02/02/2022
@@ -104,26 +104,26 @@ You have added Ingredient:Apple Category:fruit Quantity:1 Price:$1.00 Expiry:02/
 ===================================================
 listingredient all
 Here is the list of Ingredients in Inventory:
-Format : Ingredient Index|Ingredient Name|Quantity|Price|Expiry
+Format : [Ingredient Index] Ingredient Name | Quantity | Price | Expiry
 all:
 dairy:
-6|HL Milk|1|12.2|01/03/2022
-7|HL Milk|3|12.0|14/03/2022
+[6] HL Milk | 1 portion(s) | $12.2 | Expiry Date : 01/03/2022
+[7] HL Milk | 3 portion(s) | $12.0 | Expiry Date : 14/03/2022
 drink:
 fruit:
-1|Apple|1|1.0|02/02/2022
-10|Pear|1|1.0|02/02/2022
+[1] Apple | 1 portion(s) | $1.0 | Expiry Date : 02/02/2022
+[10] Pear | 1 portion(s) | $1.0 | Expiry Date : 02/02/2022
 meat:
-2|Beef|3|20.0|18/03/2022
-3|Beef cubes|8|20.0|18/03/2022
-4|Chicken Breast|3|20.0|18/12/2022
-5|Chicken Breast|4|20.0|20/12/2022
+[2] Beef | 3 portion(s) | $20.0 | Expiry Date : 18/03/2022
+[3] Beef cubes | 8 portion(s) | $20.0 | Expiry Date : 18/03/2022
+[4] Chicken Breast | 3 portion(s) | $20.0 | Expiry Date : 18/12/2022
+[5] Chicken Breast | 4 portion(s) | $20.0 | Expiry Date : 20/12/2022
 miscellaneous:
 staple:
 vegetable:
-8|Lettuce|2|20.0|09/03/2022
-9|Lettuce|10|20.0|20/12/2022
-11|kailan|30|30.45|12/03/2022
+[8] Lettuce | 2 portion(s) | $20.0 | Expiry Date : 09/03/2022
+[9] Lettuce | 10 portion(s) | $20.0 | Expiry Date : 20/12/2022
+[11] kailan | 30 portion(s) | $30.45 | Expiry Date : 12/03/2022
 
 ===================================================
 addingredient /n Apple /c fruit /q 1 /p 1 /e 01/02/2022
@@ -131,27 +131,27 @@ You have added Ingredient:Apple Category:fruit Quantity:1 Price:$1.00 Expiry:01/
 ===================================================
 listingredient all
 Here is the list of Ingredients in Inventory:
-Format : Ingredient Index|Ingredient Name|Quantity|Price|Expiry
+Format : [Ingredient Index] Ingredient Name | Quantity | Price | Expiry
 all:
 dairy:
-7|HL Milk|1|12.2|01/03/2022
-8|HL Milk|3|12.0|14/03/2022
+[7] HL Milk | 1 portion(s) | $12.2 | Expiry Date : 01/03/2022
+[8] HL Milk | 3 portion(s) | $12.0 | Expiry Date : 14/03/2022
 drink:
 fruit:
-1|Apple|1|1.0|01/02/2022
-2|Apple|1|1.0|02/02/2022
-11|Pear|1|1.0|02/02/2022
+[1] Apple | 1 portion(s) | $1.0 | Expiry Date : 01/02/2022
+[2] Apple | 1 portion(s) | $1.0 | Expiry Date : 02/02/2022
+[11] Pear | 1 portion(s) | $1.0 | Expiry Date : 02/02/2022
 meat:
-3|Beef|3|20.0|18/03/2022
-4|Beef cubes|8|20.0|18/03/2022
-5|Chicken Breast|3|20.0|18/12/2022
-6|Chicken Breast|4|20.0|20/12/2022
+[3] Beef | 3 portion(s) | $20.0 | Expiry Date : 18/03/2022
+[4] Beef cubes | 8 portion(s) | $20.0 | Expiry Date : 18/03/2022
+[5] Chicken Breast | 3 portion(s) | $20.0 | Expiry Date : 18/12/2022
+[6] Chicken Breast | 4 portion(s) | $20.0 | Expiry Date : 20/12/2022
 miscellaneous:
 staple:
 vegetable:
-9|Lettuce|2|20.0|09/03/2022
-10|Lettuce|10|20.0|20/12/2022
-12|kailan|30|30.45|12/03/2022
+[9] Lettuce | 2 portion(s) | $20.0 | Expiry Date : 09/03/2022
+[10] Lettuce | 10 portion(s) | $20.0 | Expiry Date : 20/12/2022
+[12] kailan | 30 portion(s) | $30.45 | Expiry Date : 12/03/2022
 
 ===================================================
 addingredient /n Apple /c fruit /q 1 /p 1 /e 03/02/2022
@@ -159,54 +159,54 @@ You have added Ingredient:Apple Category:fruit Quantity:1 Price:$1.00 Expiry:03/
 ===================================================
 listingredient all
 Here is the list of Ingredients in Inventory:
-Format : Ingredient Index|Ingredient Name|Quantity|Price|Expiry
+Format : [Ingredient Index] Ingredient Name | Quantity | Price | Expiry
 all:
 dairy:
-8|HL Milk|1|12.2|01/03/2022
-9|HL Milk|3|12.0|14/03/2022
+[8] HL Milk | 1 portion(s) | $12.2 | Expiry Date : 01/03/2022
+[9] HL Milk | 3 portion(s) | $12.0 | Expiry Date : 14/03/2022
 drink:
 fruit:
-1|Apple|1|1.0|01/02/2022
-2|Apple|1|1.0|02/02/2022
-3|Apple|1|1.0|03/02/2022
-12|Pear|1|1.0|02/02/2022
+[1] Apple | 1 portion(s) | $1.0 | Expiry Date : 01/02/2022
+[2] Apple | 1 portion(s) | $1.0 | Expiry Date : 02/02/2022
+[3] Apple | 1 portion(s) | $1.0 | Expiry Date : 03/02/2022
+[12] Pear | 1 portion(s) | $1.0 | Expiry Date : 02/02/2022
 meat:
-4|Beef|3|20.0|18/03/2022
-5|Beef cubes|8|20.0|18/03/2022
-6|Chicken Breast|3|20.0|18/12/2022
-7|Chicken Breast|4|20.0|20/12/2022
+[4] Beef | 3 portion(s) | $20.0 | Expiry Date : 18/03/2022
+[5] Beef cubes | 8 portion(s) | $20.0 | Expiry Date : 18/03/2022
+[6] Chicken Breast | 3 portion(s) | $20.0 | Expiry Date : 18/12/2022
+[7] Chicken Breast | 4 portion(s) | $20.0 | Expiry Date : 20/12/2022
 miscellaneous:
 staple:
 vegetable:
-10|Lettuce|2|20.0|09/03/2022
-11|Lettuce|10|20.0|20/12/2022
-13|kailan|30|30.45|12/03/2022
+[10] Lettuce | 2 portion(s) | $20.0 | Expiry Date : 09/03/2022
+[11] Lettuce | 10 portion(s) | $20.0 | Expiry Date : 20/12/2022
+[13] kailan | 30 portion(s) | $30.45 | Expiry Date : 12/03/2022
 
 ===================================================
 listingredient all
 Here is the list of Ingredients in Inventory:
-Format : Ingredient Index|Ingredient Name|Quantity|Price|Expiry
+Format : [Ingredient Index] Ingredient Name | Quantity | Price | Expiry
 all:
 dairy:
-8|HL Milk|1|12.2|01/03/2022
-9|HL Milk|3|12.0|14/03/2022
+[8] HL Milk | 1 portion(s) | $12.2 | Expiry Date : 01/03/2022
+[9] HL Milk | 3 portion(s) | $12.0 | Expiry Date : 14/03/2022
 drink:
 fruit:
-1|Apple|1|1.0|01/02/2022
-2|Apple|1|1.0|02/02/2022
-3|Apple|1|1.0|03/02/2022
-12|Pear|1|1.0|02/02/2022
+[1] Apple | 1 portion(s) | $1.0 | Expiry Date : 01/02/2022
+[2] Apple | 1 portion(s) | $1.0 | Expiry Date : 02/02/2022
+[3] Apple | 1 portion(s) | $1.0 | Expiry Date : 03/02/2022
+[12] Pear | 1 portion(s) | $1.0 | Expiry Date : 02/02/2022
 meat:
-4|Beef|3|20.0|18/03/2022
-5|Beef cubes|8|20.0|18/03/2022
-6|Chicken Breast|3|20.0|18/12/2022
-7|Chicken Breast|4|20.0|20/12/2022
+[4] Beef | 3 portion(s) | $20.0 | Expiry Date : 18/03/2022
+[5] Beef cubes | 8 portion(s) | $20.0 | Expiry Date : 18/03/2022
+[6] Chicken Breast | 3 portion(s) | $20.0 | Expiry Date : 18/12/2022
+[7] Chicken Breast | 4 portion(s) | $20.0 | Expiry Date : 20/12/2022
 miscellaneous:
 staple:
 vegetable:
-10|Lettuce|2|20.0|09/03/2022
-11|Lettuce|10|20.0|20/12/2022
-13|kailan|30|30.45|12/03/2022
+[10] Lettuce | 2 portion(s) | $20.0 | Expiry Date : 09/03/2022
+[11] Lettuce | 10 portion(s) | $20.0 | Expiry Date : 20/12/2022
+[13] kailan | 30 portion(s) | $30.45 | Expiry Date : 12/03/2022
 
 ===================================================
 addchore buy groceries /by Tuesday 12pm
@@ -322,22 +322,22 @@ You have added Ingredient:Beef Category:meat Quantity:3 Price:$20.00 Expiry:18/0
 ===================================================
 listingredient all
 Here is the list of Ingredients in Inventory:
-Format : Ingredient Index|Ingredient Name|Quantity|Price|Expiry
+Format : [Ingredient Index] Ingredient Name | Quantity | Price | Expiry
 all:
 dairy:
-3|HL Milk|1|12.2|01/03/2022
-4|HL Milk|3|12.0|14/03/2022
+[3] HL Milk | 1 portion(s) | $12.2 | Expiry Date : 01/03/2022
+[4] HL Milk | 3 portion(s) | $12.0 | Expiry Date : 14/03/2022
 drink:
 fruit:
-6|Pear|1|1.0|02/02/2022
+[6] Pear | 1 portion(s) | $1.0 | Expiry Date : 02/02/2022
 meat:
-1|Beef|3|20.0|18/03/2022
-2|Chicken Breast|3|20.0|20/12/2022
+[1] Beef | 3 portion(s) | $20.0 | Expiry Date : 18/03/2022
+[2] Chicken Breast | 3 portion(s) | $20.0 | Expiry Date : 20/12/2022
 miscellaneous:
 staple:
 vegetable:
-5|Lettuce|4|20.0|20/12/2022
-7|kailan|30|30.45|12/03/2022
+[5] Lettuce | 4 portion(s) | $20.0 | Expiry Date : 20/12/2022
+[7] kailan | 30 portion(s) | $30.45 | Expiry Date : 12/03/2022
 
 ===================================================
 reset
@@ -345,7 +345,7 @@ All data has been wiped
 ===================================================
 listingredient all
 Here is the list of Ingredients in Inventory:
-Format : Ingredient Index|Ingredient Name|Quantity|Price|Expiry
+Format : [Ingredient Index] Ingredient Name | Quantity | Price | Expiry
 The Ingredient List is currently empty.
 ===================================================
 exit

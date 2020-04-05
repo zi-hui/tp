@@ -43,7 +43,7 @@ public class ListIngredientCommand extends Command {
 
     public String listIngredients(String category, ArrayList<Ingredient> ingredientList) {
         String result = "Here is the list of Ingredients in Inventory:\n"
-                + "Format : Ingredient Index|Ingredient Name|Quantity|Price|Expiry\n";
+                + "Format : [Ingredient Index] Ingredient Name | Quantity | Price | Expiry\n";
         if (ingredientList.size() == 0) {
             result += "The Ingredient List is currently empty.";
         } else {
@@ -53,9 +53,10 @@ public class ListIngredientCommand extends Command {
                     for (int i = 0; i < ingredientList.size(); i++) {
                         Ingredient ingredientObj = ingredientList.get(i);
                         if (ingredientObj.getCategoryName().equalsIgnoreCase(categoryName)) {
-                            result += (i + 1) + "|" + ingredientObj.getIngredientName() + "|"
-                                    + ingredientObj.getQuantity() + "|"
-                                    + ingredientObj.getPrice() + "|" + ingredientObj.getExpiryDate() + "\n";
+                            result += "[" + (i + 1) + "] " + ingredientObj.getIngredientName() + " | "
+                                    + ingredientObj.getQuantity() + " portion(s) | $"
+                                    + ingredientObj.getPrice() + " | Expiry Date : "
+                                    + ingredientObj.getExpiryDate() + "\n";
                         }
                     }
                 }
@@ -64,9 +65,9 @@ public class ListIngredientCommand extends Command {
                 for (int i = 0; i < ingredientList.size(); i++) {
                     Ingredient ingredientObj = ingredientList.get(i);
                     if (ingredientObj.getCategoryName().equalsIgnoreCase(category)) {
-                        result += ingredientObj.getIngredientName() + "|"
-                                + Integer.toString(ingredientObj.getQuantity()) + "|"
-                                + Double.toString(ingredientObj.getPrice()) + "|"
+                        result += "[" + (i + 1) + "] Ingredient Name : " + ingredientObj.getIngredientName() + " | "
+                                + Integer.toString(ingredientObj.getQuantity()) + " portion(s) | $"
+                                + Double.toString(ingredientObj.getPrice()) + " | Expiry Date : "
                                 + ingredientObj.getExpiryDate() + "\n";
                     }
 
