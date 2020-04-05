@@ -1,5 +1,7 @@
 package seedu.kitchenhelper.object;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -48,6 +50,32 @@ public class Chore {
             return new SimpleDateFormat("dd/MM/yyyy HH:mm").format(date);
         } else {
             return dateStr;
+        }
+    }
+
+    public static Chore createChoreWhenLoadFile(String description, String dateStr) {
+        try {
+            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+            Date date = dateFormat.parse(dateStr);
+            return new Chore(description, date);
+        } catch (ParseException e) {
+            return new Chore(description, dateStr);
+        }
+    }
+
+    /**
+     * To compare two Chore objects based on their attributes.
+     * @return boolean return false if any of the attributes are not equal to each other.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Chore) {
+            Chore i = (Chore) o;
+            return this.description.equals(i.description)
+                    && this.isDone == isDone
+                    && this.dateStr.equals(i.dateStr);
+        } else {
+            return false;
         }
     }
 

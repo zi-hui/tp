@@ -7,9 +7,13 @@ import seedu.kitchenhelper.storage.Storage;
 import seedu.kitchenhelper.ui.Ui;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Saves the program at the current point in time when user calls it manually.
+ */
 public class SaveStateCommand extends Command {
 
     public static final String COMMAND_WORD = "save";
@@ -35,7 +39,7 @@ public class SaveStateCommand extends Command {
     /**
      * Copy current output files of Kitchen Helper into new output files to save current state.
      */
-    private void chooseSaveOption() throws IOException {
+    private void chooseSaveOption() {
         var sourceIngredient = new File("outputIngredient.txt");
         var sourceRecipe = new File("outputRecipe.txt");
         var sourceChore = new File("outputChore.txt");

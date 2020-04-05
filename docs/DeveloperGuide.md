@@ -4,8 +4,9 @@ By: `CS2113T-M16-2` Since: `2020`
 ![Supported Java versions](https://img.shields.io/badge/Java-11-blue.svg) ![Supported OS](https://img.shields.io/badge/Supported%20OS-Windows|MacOS|Linux-yellow.svg) 
 - [Developer Guide](#developer-guide)
   * [1. Introduction](#1-introduction)
-    + [1.1. Purpose](#11-purpose)
-    + [1.2. Scope](#12-scope)
+    + [1.1. Background](#11-background)
+    + [1.2. Purpose](#12-purpose)
+    + [1.3. Scope](#13-scope)
   * [2. Setting up](#2-setting-up)
     + [2.1. Prerequisites](#21-prerequisites)
     + [2.2. Setting up the project in your computer](#22-setting-up-the-project-in-your-computer)
@@ -48,14 +49,19 @@ By: `CS2113T-M16-2` Since: `2020`
       - [F.1. Launch and Shutdown](#f1-launch-and-shutdown)
       - [F.2. Add an ingredient](#f2-add-an-ingredient)
       - [F.3. Search for ingredient](#f3-search-for-ingredient)
-      - [F.4. Search for recipe](#f4-search-for-recipe)
-      - [F.5. Search for chore](#f5-search-for-chore)
-      - [F.6. Saving data](#f6-saving-data)
+      - [F.4. Add a recipe](#f4-add-a-recipe)
+      - [F.5. Cook a recipe](#f5-cook-a-recipe)
+      - [F.6. Search for recipe](#f6-search-for-recipe)
+      - [F.7. Search for chore](#f7-search-for-chore)
+      - [F.8. Saving data](#f8-saving-data)
 
 ## 1. Introduction
-### 1.1. Purpose
+### 1.1.  Background
+Kitchen Helper, born from the need to keep track of kitchen inventory, is an application that is designed to manage kitchen inventory and chores. Users will be able to reduce food wastage and save money through the convenience of viewing the contents of the inventory.
+
+### 1.2. Purpose
 The document contains the specified architecture and software design specifications for the application, Kitchen Helper. 
-### 1.2. Scope
+### 1.3. Scope
 This describes the software architecture and software design requirements for Kitchen Helper. This guide is mainly for developers, designers and software engineers that are or going to work on Kitchen Helper. 
 ## 2. Setting up
 
@@ -397,7 +403,38 @@ When the user attempts to cook `Chicken Salad` recipe from `Kitchen Helper`, the
     6. Lastly, a String called `feedbackToUser` will be returned to the user to inform the user of the outcome of the command.
 4. The details will then be printed onto the console using `Ui#showResultToUser(result)`.
 
-##### Design Considerations 
+
+##### Design considerations
+Aspect: Preparing the deduction of ingredients when cooking a recipe
+
+Alternative  1 (current choice): Checks for existence of recipe, existence of ingredients for the specified recipe and sufficiency of ingredients
+
+|   |   |
+|---|---|
+|**Pros**| Minimizes erroneous deduction of insufficient and nonexistent ingredients |
+|**Cons**|Additional computation and overhead |
+
+Alternative 2: Deductions are to be made to existing and available ingredients and users are notified when there are insufficient ingredients
+
+|   |   |
+|---|---|
+|**Pros**| Lesser overhead as there is lesser checks to be done
+|**Cons**| Hidden bugs and exceptions have to be well-covered to ensure that the deduction would be of the right value
+
+Aspect: Searching for the corresponding ingredients of a recipe/ Searching through list of recipes to check for existence of recipe
+Alternative 1 (current choice): Linear search, iterate through the arraylist of ingredients/ recipes and checking
+
+|   |   |
+|---|---|
+|**Pros**| Lesser use of complex data structure will save memory |
+|**Cons**| Not optimal as search will be O(n), larger amount of data may take a longer time |
+
+Alternative 2: building an index on the first letter of the recipe name
+
+|   |   |
+|---|---|
+|**Pros**| More efficient search as pool of search space would be significantly smaller
+|**Cons**| Needs to be constantly maintained which incurs overhead.
 
 #### 4.2.4. Delete all/ specific recipe(s)
 The deletion feature for specific recipes allows the user to delete recipes either by the name or index of the recipe. 
@@ -474,41 +511,6 @@ and returns the recipe’s name and the index of recipe in the recipe’s list.
 |-----|-----|
 |**Pros** | 1. More accurate searching of the recipe that uses the ingredients.|  
 |**Cons** | 1. Could be more memory intensive to find if the list is huge.|
-
-#### 4.2.5. Cooking a recipe
-##### Implementation
-##### Design considerations
-Aspect: Preparing the deduction of ingredients when cooking a recipe
-Alternative  1 (current choice): Checks for existence of recipe, existence of ingredients for the specified recipe and sufficiency of ingredients
-
-|   |   |
-|---|---|
-|**Pros**| Minimizes erroneous deduction of insufficient and nonexistent ingredients |
-|**Cons**|Additional computation and overhead |
-
-Alternative 2: Deductions are to be made to existing and available ingredients and users are notified when there are insufficient ingredients
-
-|   |   |
-|---|---|
-|**Pros**| Lesser overhead as there is lesser checks to be done
-|**Cons**| Hidden bugs and exceptions have to be well-covered to ensure that the deduction would be of the right value
-
-Aspect: Searching for the corresponding ingredients of a recipe/ Searching through list of recipes to check for existence of recipe
-Alternative 1 (current choice): Linear search, iterate through the arraylist of ingredients/ recipes and checking
-
-|   |   |
-|---|---|
-|**Pros**| Lesser use of complex data structure will save memory |
-|**Cons**| Not optimal as search will be O(n), larger amount of data may take a longer time |
-
-Alternative 2: building an index on the first letter of the recipe name
-
-|   |   |
-|---|---|
-|**Pros**| More efficient search as pool of search space would be significantly smaller
-|**Cons**| Needs to be constantly maintained which incurs overhead.
-
-
 
 ### 4.3. Chore-related Features
 #### 4.3.1. Addition of chore
@@ -853,13 +855,29 @@ Use case ends.
    5. Test case: `searchingredient $20`  
    Expected: Ingredient entries that have the keyword matching `$20` price are listed.
    
-#### F.4. Search for recipe
+#### F.4. Add a recipe
+1. Add a recipe into Kitchen Helper
+    1. Prerequisites: List all the ingredient using the `listingredient all` command.
+    1. Test case: `addrecipe /n warm milk /i HL Milk:1:Dairy`\
+    Expected: Entry can be found using `listingredient all` command. 
+
+#### F.5. Cook a recipe
+1. Cooks the specified recipe and ingredients in the recipe will be automatically deducted.
+    1. Prerequisites: List all the ingredient using the `listingredient all` command.
+    1. Test case (sufficient ingredient): `cookrecipe /n warm milk /p 2`\
+    Expected: A reduction of the ingredients' quantity multiplied by `2` can be noticed when listing the ingredients with `listingredient all`
+    1. Test case (Sufficient even with expired ingredients):  `cookrecipe /n warm milk /p 2`\
+    Expected: The automatic deduction will not be carried out and expired item will be notified to user.
+    1. Test case: (Insufficient even with expired ingredients): `cookrecipe /n warm milk /p 2`\
+    Expected: The automatic deduction will not be carried out.
+
+#### F.6. Search for recipe
 1. Search for similar recipe in Kitchen Helper.
    1. Prerequisites: The recipe list should not be empty.
    2. Test case: 'searchrecipe chicken' 
    Expected: Recipe's name entries that have the keyword matching `chicken' are listed. 
    
-#### F.5. Search for chore
+#### F.7. Search for chore
 1. Search for chores in Kitchen Helper.
    1. Prerequisites: The chore list should not be empty.
    2. Test case: `searchchore groceries`  
@@ -867,7 +885,7 @@ Use case ends.
    3. Test case: `searchchore Tuesday`  
    Expected: Chore entries that have the keyword matching `Tuesday` as a string are listed.  
    
-#### F.6. Saving data
+#### F.8. Saving data
 
 1. Load ingredient data into Kitchen Helper.
    1. Prerequisites: The ingredient list save file should not be empty. 

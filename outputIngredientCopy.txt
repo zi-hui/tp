@@ -1,4 +1,0 @@
-/n Cow /c meat /q 5 /p 20.0 /e 29/03/2020
-/n Cow /c meat /q 5 /p 20.0 /e 29/04/2020
-/n Lamb /c meat /q 2 /p 20.0 /e 29/03/2020
-/n Sheep /c meat /q 5 /p 20.0 /e 02/03/2020
