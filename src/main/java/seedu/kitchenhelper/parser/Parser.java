@@ -21,6 +21,7 @@ import seedu.kitchenhelper.command.SaveStateCommand;
 import seedu.kitchenhelper.command.SearchChoreCommand;
 import seedu.kitchenhelper.command.SearchIngredientCommand;
 import seedu.kitchenhelper.command.SearchRecipeCommand;
+import seedu.kitchenhelper.common.Messages;
 import seedu.kitchenhelper.exception.KitchenHelperException;
 import seedu.kitchenhelper.object.Expenditure;
 import seedu.kitchenhelper.exception.ExpiredException;
@@ -229,9 +230,9 @@ public class Parser {
         } catch (DateTimeException dte) {
             return new InvalidCommand(INVALID_DATE);
         } catch (ExpiredException ee) {
-            return new InvalidCommand(AddIngredientCommand.EXPIRED_INGREDIENT_MESSAGE);
+            return new InvalidCommand(Messages.MESSAGE_EXPIRED_INGREDIENT);
         } catch (QuantityException qe) {
-            return new InvalidCommand(AddIngredientCommand.ZERO_QUANTITY_MESSAGE);
+            return new InvalidCommand(Messages.MESSAGE_ZERO_QUANTITY);
         }
     }
     

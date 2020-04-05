@@ -1,5 +1,6 @@
 package seedu.kitchenhelper.command;
 
+import seedu.kitchenhelper.common.Messages;
 import seedu.kitchenhelper.storage.Storage;
 import seedu.kitchenhelper.object.Chore;
 import seedu.kitchenhelper.object.Recipe;
@@ -17,6 +18,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.logging.Logger;
+
+import static seedu.kitchenhelper.common.Messages.NEGATIVE_ONE;
 
 /**
  * Adds the ingredient to the inventory list.
@@ -38,14 +41,7 @@ public class AddIngredientCommand extends Command {
             String.format("%s %s\n%s", COMMAND_DESC, COMMAND_PARAMETER, COMMAND_EXAMPLE);
     public static final String MESSAGE_USAGE = String.format("%s: %s", COMMAND_WORD, COMMAND_DESC) + Ui.LS + String
             .format("Parameter: %s\n%s", COMMAND_PARAMETER, COMMAND_EXAMPLE);
-    public static final String EXPIRED_INGREDIENT_MESSAGE =
-            "Expired ingredient detected in input." + Ui.LS + "Please enter a non-expired expiry date.";
-    public static final String ZERO_QUANTITY_MESSAGE = "Please enter a quantity more than 0.";
-    public static final String COMBINE_INGREDIENT_MESSAGE =
-            "Kitchen Helper has updated the quantity of %s to %d from %d";
-    private static final int NEGATIVE_ONE = -1;
-    public final String logAddIngredient = "A new ingredient has been added";
-    
+
     private String ingredientName;
     private String categoryName;
     private int quantity;
@@ -164,13 +160,13 @@ public class AddIngredientCommand extends Command {
             int currentQuantity = i.getQuantity();
             sortIngredientList(ingredientList);
             Storage.saveIngredientData(ingredientList);
-            return new CommandResult(String.format(COMBINE_INGREDIENT_MESSAGE, i.getIngredientName(), currentQuantity,
+            return new CommandResult(String.format(Messages.MESSAGE_COMBINE_INGREDIENT, i.getIngredientName(), currentQuantity,
                     currentQuantity - quantity));
         } else {
             addToCategory(categoryName, ingredientList);
             sortIngredientList(ingredientList);
             Storage.saveIngredientData(ingredientList);
-            kitchenLogs.info(logAddIngredient);
+            kitchenLogs.info(Messages.MESSAGE_ADD_INGREDIENT_LOG);
             return new CommandResult(
                     String.format(MESSAGE_SUCCESS, ingredientName, categoryName, quantity, price, expiry));
         }
