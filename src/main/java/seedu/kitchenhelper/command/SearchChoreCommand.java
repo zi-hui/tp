@@ -31,6 +31,7 @@ public class SearchChoreCommand extends Command {
     public static final String LOG_INFO_Found = "Found matching chore";
     private static final String EMPTY_STRING = "";
     private static final String EMPTY_STRING_MESSAGE = "Empty keyword detected, input a valid keyword.";
+    private static final String CHORE_INDEX = " located at index %d";
     
     private String keyword;
     
@@ -63,10 +64,14 @@ public class SearchChoreCommand extends Command {
         
         kitchenLogs.info(LOG_INFO);
         ArrayList<Chore> findChoreList = new ArrayList<>();
+        ArrayList<Integer> choreIndex = new ArrayList<>();
+        int currIndex = 1;
         for (Chore chore : choreList) {
             if (chore.toString().toLowerCase().contains(keyword)) {
                 findChoreList.add(chore);
+                choreIndex.add(currIndex);
             }
+            currIndex++;
         }
         
         if (findChoreList.isEmpty()) {
@@ -81,11 +86,13 @@ public class SearchChoreCommand extends Command {
         for (int i = 0; i < findChoreList.size(); ++i) {
             if (i == findChoreList.size() - 1) {
                 sb.append(String.format(NUMBER_FORMAT, i + 1))
-                        .append(findChoreList.get(i).toString());
+                        .append(findChoreList.get(i).toString())
+                        .append(String.format(CHORE_INDEX, choreIndex.get(i)));
                 break;
             }
             sb.append(String.format(NUMBER_FORMAT, i + 1))
                     .append(findChoreList.get(i).toString())
+                    .append(String.format(CHORE_INDEX, choreIndex.get(i)))
                     .append(Ui.LS);
         }
         return new CommandResult(sb.toString());

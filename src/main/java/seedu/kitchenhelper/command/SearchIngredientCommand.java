@@ -31,6 +31,7 @@ public class SearchIngredientCommand extends Command {
     public static final String LOG_INFO_Found = "Found matching ingredient";
     private static final String EMPTY_STRING = "";
     private static final String EMPTY_STRING_MESSAGE = "Empty keyword detected, input a valid keyword.";
+    private static final String INGREDIENT_INDEX = " located at index %d";
     
     private String keyword;
     
@@ -62,10 +63,14 @@ public class SearchIngredientCommand extends Command {
         
         kitchenLogs.info(LOG_INFO);
         ArrayList<Ingredient> findIngredientList = new ArrayList<>();
+        ArrayList<Integer> ingredientIndex = new ArrayList<>();
+        int currIndex = 1;
         for (Ingredient ingredient : ingredientList) {
             if (ingredient.toFind().toLowerCase().contains(this.keyword)) {
                 findIngredientList.add(ingredient);
+                ingredientIndex.add(currIndex);
             }
+            currIndex++;
         }
         
         if (findIngredientList.isEmpty()) {
@@ -80,12 +85,14 @@ public class SearchIngredientCommand extends Command {
         for (int i = 0; i < findIngredientList.size(); ++i) {
             if (i == findIngredientList.size() - 1) {
                 sb.append(String.format(NUMBER_FORMAT, i + 1))
-                        .append(findIngredientList.get(i).toFind());
+                        .append(findIngredientList.get(i).toFind())
+                        .append(String.format(INGREDIENT_INDEX, ingredientIndex.get(i)));
                 break;
             }
             sb.append(String.format(NUMBER_FORMAT, i + 1))
-                    .append(findIngredientList.get(i)
-                            .toFind()).append(Ui.LS);
+                    .append(findIngredientList.get(i).toFind())
+                    .append(String.format(INGREDIENT_INDEX, ingredientIndex.get(i)))
+                    .append(Ui.LS);
         }
         return new CommandResult(sb.toString());
     }
