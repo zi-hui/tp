@@ -28,7 +28,8 @@ public class Ui {
     public static final String MESSAGE_TO_CHOOSE_STATE = "Please enter '1' for auto-save and '2' for manual-save:";
     public static final String MESSAGE_FOR_AUTO_SAVE = "Okay auto-save chosen.";
     public static final String MESSAGE_FOR_SAVED_STATE = "Okay manual-save chosen.";
-    public static final String MESSAGE_INVALID_USER_CHOICE = "Invalid Choice! PLease choose either option 1 or 2";
+    public static final String MESSAGE_INVALID_CHOICE = "Invalid Choice! PLease choose either '1' for auto-save or "
+            + "'2' for manual-save.";
     
     private final Scanner in;
     private final PrintStream out;
@@ -59,15 +60,15 @@ public class Ui {
     }
 
     public void askForReInput() {
-        System.out.println(MESSAGE_INVALID_USER_CHOICE);
+        System.out.println(MESSAGE_INVALID_CHOICE);
         validUserChoice(getUserChoice());
     }
 
     public void validUserChoice(String userChoice) {
         System.out.println(DIVIDER);
-        if (userChoice.equals("1")) {
+        if (userChoice.trim().equals("1")) {
             System.out.println(MESSAGE_FOR_AUTO_SAVE);
-        } else if (userChoice.equals("2")) {
+        } else if (userChoice.trim().equals("2")) {
             System.out.println(MESSAGE_FOR_SAVED_STATE);
         } else {
             askForReInput();

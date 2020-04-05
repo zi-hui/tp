@@ -40,7 +40,7 @@ public class SearchRecipeCommand extends Command {
      * @param keyword the word to search.
      */
     public SearchRecipeCommand(String keyword) {
-        this.keyword = keyword.trim();
+        this.keyword = keyword.trim().toLowerCase();
     }
     
     /**

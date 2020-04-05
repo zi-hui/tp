@@ -39,7 +39,7 @@ public class SearchIngredientCommand extends Command {
      * @param keyword the word to search.
      */
     public SearchIngredientCommand(String keyword) {
-        this.keyword = keyword.trim();
+        this.keyword = keyword.trim().toLowerCase();
     }
     
     /**
