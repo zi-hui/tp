@@ -46,15 +46,17 @@ public class DeleteIngredientCommandTest {
                 .addToCategory("Vegetable", ingredientList);
         DeleteIngredientCommand deleteIngredientQuantity = new DeleteIngredientCommand(1, 30);
         deleteIngredientQuantity.deleteIngredientByIndex(ingredientList);
-        assertEquals(ingredientList.get(1).getQuantity(), 0);
+        assertEquals(ingredientList.size(), 1);
 
         //quantity == 0 case and quantity is not null
         int index = 1; //Beef
         DeleteIngredientCommand deleteIngredient = new DeleteIngredientCommand(index - 1, 2);
         Ingredient ingredientToDelete = ingredientList.get(index - 1);
         deleteIngredient.deleteIngredient(ingredientToDelete, ingredientList);
-        assertEquals(ingredientList.size(), 1);
+        assertEquals(ingredientList.size(), 0);
 
+        new AddIngredientCommand("kailan", "Vegetable", 30, 30.45, "18/12/2020")
+                .addToCategory("Vegetable", ingredientList);
         //else case
         index = 1; //kailan
         DeleteIngredientCommand deleteIngredientQuantityNull = new DeleteIngredientCommand(index - 1, null);

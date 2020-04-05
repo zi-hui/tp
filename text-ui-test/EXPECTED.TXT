@@ -134,7 +134,7 @@ vegetable:
 [12] kailan | 30 portion(s) | $30.45 | Expiry Date : 12/03/2022
 
 ===================================================
-KitchenHelper has added: Ingredient:Apple Category:fruit Quantity:1 Price:$1.00 Expiry:03/02/2022
+KitchenHelper has added: Ingredient:Apple Category:fruit Quantity:2 Price:$1.00 Expiry:03/02/2022
 ===================================================
 Here is the list of Ingredients in Inventory:
 Format : [Ingredient Index] Ingredient Name | Quantity | Price | Expiry
@@ -146,7 +146,7 @@ drink:
 fruit:
 [1] Apple | 1 portion(s) | $1.0 | Expiry Date : 01/02/2022
 [2] Apple | 1 portion(s) | $1.0 | Expiry Date : 02/02/2022
-[3] Apple | 1 portion(s) | $1.0 | Expiry Date : 03/02/2022
+[3] Apple | 2 portion(s) | $1.0 | Expiry Date : 03/02/2022
 [12] Pear | 1 portion(s) | $1.0 | Expiry Date : 02/02/2022
 meat:
 [4] Beef | 3 portion(s) | $20.0 | Expiry Date : 18/03/2022
@@ -171,7 +171,7 @@ drink:
 fruit:
 [1] Apple | 1 portion(s) | $1.0 | Expiry Date : 01/02/2022
 [2] Apple | 1 portion(s) | $1.0 | Expiry Date : 02/02/2022
-[3] Apple | 1 portion(s) | $1.0 | Expiry Date : 03/02/2022
+[3] Apple | 2 portion(s) | $1.0 | Expiry Date : 03/02/2022
 [12] Pear | 1 portion(s) | $1.0 | Expiry Date : 02/02/2022
 meat:
 [4] Beef | 3 portion(s) | $20.0 | Expiry Date : 18/03/2022
@@ -239,9 +239,14 @@ Please enter a valid quantity to delete!
 Currently:
 Apple : 1
 ===================================================
+The quantity of Apple has been changed!
+This ingredient has a quantity of 0 after deduction, so it has been deleted.
+===================================================
 Please enter a valid quantity to delete!
 Currently:
-Apple : 1
+Apple : 2
+===================================================
+The quantity of Apple has been changed!
 ===================================================
 Invalid Command, please check your format!
 Deletes an ingredient.
@@ -255,15 +260,15 @@ Deletes an ingredient.
 Usage: deleteingredient /i INGREDIENTINDEX [/q QUANTITY]
 Example: deleteingredient /i 1 /q 2
 ===================================================
+Beef cubes has been deleted.
+===================================================
 Beef has been deleted.
 ===================================================
 Apple has been deleted.
 ===================================================
 Apple has been deleted.
 ===================================================
-Apple has been deleted.
-===================================================
-Beef cubes has been deleted.
+Chicken Breast has been deleted.
 ===================================================
 You have deleted this chore:
 [/] buy groceries (by: Tuesday 12pm)
@@ -275,19 +280,18 @@ Here is the list of Ingredients in Inventory:
 Format : [Ingredient Index] Ingredient Name | Quantity | Price | Expiry
 all:
 dairy:
-[3] HL Milk | 1 portion(s) | $12.2 | Expiry Date : 01/03/2022
-[4] HL Milk | 3 portion(s) | $12.0 | Expiry Date : 14/03/2022
+[2] HL Milk | 1 portion(s) | $12.2 | Expiry Date : 01/03/2022
+[3] HL Milk | 3 portion(s) | $12.0 | Expiry Date : 14/03/2022
 drink:
 fruit:
-[6] Pear | 1 portion(s) | $1.0 | Expiry Date : 02/02/2022
+[5] Pear | 1 portion(s) | $1.0 | Expiry Date : 02/02/2022
 meat:
 [1] Beef | 3 portion(s) | $20.0 | Expiry Date : 18/03/2022
-[2] Chicken Breast | 3 portion(s) | $20.0 | Expiry Date : 20/12/2022
 miscellaneous:
 staple:
 vegetable:
-[5] Lettuce | 4 portion(s) | $20.0 | Expiry Date : 20/12/2022
-[7] kailan | 30 portion(s) | $30.45 | Expiry Date : 12/03/2022
+[4] Lettuce | 4 portion(s) | $20.0 | Expiry Date : 20/12/2022
+[6] kailan | 30 portion(s) | $30.45 | Expiry Date : 12/03/2022
 
 ===================================================
 All data has been wiped
