@@ -23,6 +23,7 @@ By: `CS2113T-M16-2` Since: `2020`
       - [4.1.2. List all/ specific ingredient(s)](#412-list-all-specific-ingredients)
       - [4.1.3. Delete all/ specific ingredients(s)](#413-delete-all-specific-ingredientss)
       - [4.1.4. Search for ingredients based on keyword(s)](#414-search-for-ingredients-based-on-keywords)
+      - [4.1.5. Notification for ingredients warning](#415-notification-for-ingredients-warning)
     + [4.2. Recipe-related Features](#42-recipe-related-features)
       - [4.2.1. Addition of recipe](#421-addition-of-recipe)
       - [4.2.2. List all/ specific recipe(s)](#422-list-all-specific-recipes)
@@ -282,6 +283,50 @@ Aspects: How `searchingredient` executes:
 |**Pros** | 1. More accurate searching of the ingredient is available for the user.|  
 |**Cons** | 1. Requires users to enter more precise predicate keywords which could be more inconvenient.|
 
+#### 4.1.5. Notification for ingredients warning
+Function runs automatically when the application starts. Runs a check on all ingredient and list down ingredients that have expiring [< 3 days], expired and low quantity [< 5]. <br>
+For example, <br>
+`You have no ingredients that are expiring for the next 3 days.\`
+<br>
+`===================================================`
+ <br>
+ `You have no ingredients that are low in stock [< 5].`
+ <br>
+ `===================================================`
+ <br>
+ `You have no ingredients that are expired.`
+ <br>
+ `===================================================`
+<br>
+##### Implementation  
+
+
+
+The following steps explained sequence diagram for `searchingredient` command:  
+1. The user enters `searchingredient beef`.  
+2. `KitchenHelper` calls `Parser#parseUserCommand()`.  
+3. `SearchIngredientCommand` object is created with the keyword passed in.  
+4. `KitchenHelper` calls it own method `executeCommand()` to execute the method in `SearchIngredientCommand#execute()`.  
+5. On `SearchIngredientCommand#execute()`, display the list of ingredients that matches the keyword. 
+
+##### Design considerations:
+
+Aspects: How `searchingredient` executes:  
+
+- Alternative 1 (current choice): Find if the keyword is part of the substring of the ingredient, 
+`[Meat] Beef Qty:3 $20.00 Exp:18/03/2020.`  
+
+|     |     |
+|-----|-----|
+|**Pros** | 1. Easily to find by any attributes such as category, ingredient’s name,  quantity, price and expiry date.|  
+|**Cons** | 1. Searching `beef [meat]` will fail to show any matching result.|
+
+- Alternative 2: Take in all the predicates given by the user and find using the predicates as a keyword
+
+|     |     |
+|-----|-----|
+|**Pros** | 1. More accurate searching of the ingredient is available for the user.|  
+|**Cons** | 1. Requires users to enter more precise predicate keywords which could be more inconvenient.|
 ### 4.2. Recipe-related Features
 #### 4.2.1. Addition of recipe
 Users can add a new recipe to the application where there must be at least one or more `ingredient`s. The failure to do so will trigger an exception where the user will be notified of an invalid command and the syntax of the addition of recipe will be displayed. 
