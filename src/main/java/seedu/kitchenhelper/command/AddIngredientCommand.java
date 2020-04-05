@@ -41,7 +41,7 @@ public class AddIngredientCommand extends Command {
             String.format("%s %s\n%s", COMMAND_DESC, COMMAND_PARAMETER, COMMAND_EXAMPLE);
     public static final String MESSAGE_USAGE = String.format("%s: %s", COMMAND_WORD, COMMAND_DESC) + Ui.LS + String
             .format("Parameter: %s\n%s", COMMAND_PARAMETER, COMMAND_EXAMPLE);
-
+    
     private String ingredientName;
     private String categoryName;
     private int quantity;
@@ -160,8 +160,9 @@ public class AddIngredientCommand extends Command {
             int currentQuantity = i.getQuantity();
             sortIngredientList(ingredientList);
             Storage.saveIngredientData(ingredientList);
-            return new CommandResult(String.format(Messages.MESSAGE_COMBINE_INGREDIENT, i.getIngredientName(), currentQuantity,
-                    currentQuantity - quantity));
+            return new CommandResult(
+                    String.format(Messages.MESSAGE_COMBINE_INGREDIENT, i.getIngredientName(), currentQuantity,
+                            currentQuantity - quantity));
         } else {
             addToCategory(categoryName, ingredientList);
             sortIngredientList(ingredientList);
