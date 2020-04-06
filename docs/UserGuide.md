@@ -177,15 +177,18 @@ You can delete a specific ingredient and reduce the quantity of an ingredient fr
 __Format__: `deleteingredient /i <INGREDIENT_INDEX> [/q <QUANTITY>]`
 <br>
 <br>
-`INGREDIENT_INDEX`: This refers to the index of the ingredient which is an identification number tagged to the ingredient.  <br>
-`QUANTITY` : This refers to the quantity of ingredient to be deducted. This is an optional argument.<br>
+* `INGREDIENT_INDEX`: This refers to the index of the ingredient which is an identification number tagged to the ingredient.  <br>
+* `QUANTITY` : This refers to the quantity of ingredient to be deducted. This is an optional argument.<br>
 <br>
-You may get the index for the ingredient that you would like to delete by getting the full list of ingredients that you have previously entered into Kitchen Helper. You may refer to the [listingredient](#332-list-ingredient-listingredient) command section to understand how to use the command. 
+> You may get the index for the ingredient that you would like to delete by getting the full list of ingredients that you have previously entered into Kitchen Helper. You may refer to the [listingredient](#332-list-ingredient-listingredient) command section to understand how to use the command. <br>
+
+> One thing to note: If the final quantity of your ingredient will be zero after deduction, the ingredient will be deleted from the ingredient list subsequently. 
 
 Example |  Outcome
 --------|------------------
-**Command**: <br> `deleteingredient /i 1` <br><br> **Description**: Deletes the item specified by `index 1` in the ingredient list. | deleteingredient /i 1 <br> apple has been deleted.<br>===================================================
-**Command**: <br> `deleteingredient /i 2 /q 20` <br><br> **Description**: Reduces the ingredient specified by `index 2` in the ingredient list. | deleteingredient /i 2 /q 20 <br> The quantity of HL Milk has been changed!<br>===================================================
+**Command**: <br> `deleteingredient /i 1` <br><br> **Description**: Deletes the item specified by `index 1` in the ingredient list. | apple has been deleted.<br>===================================================
+**Command**: <br> `deleteingredient /i 2 /q 20` <br><br> **Description**: Reduces the ingredient specified by `index 2` in the ingredient list. | The quantity of HL Milk has been changed!<br>===================================================
+**Command**: <br> `deleteingredient /i 2 /q 1` <br><br> **Description**: Assuming that the current ingredient of `index 2` has a `quantity` of `1`, reduces the ingredient specified by `index 2` in the ingredient list. | The quantity of Beef has been changed!<br>This ingredient has a quantity of 0 after deduction, so it has been deleted.<br>===================================================
 
 [&#8593; Return to Top](#kitchen-helper---user-guide)
 
@@ -260,15 +263,15 @@ You can delete a recipe by using the recipe name or index from the list in Kitch
 __Format__: `deleterecipe /n <RECIPE_NAME>` OR `deleterecipe /i <RECIPE_INDEX>`
 <br>
 <br>
-`RECIPE_NAME` : This refers to the name of the recipe. <br>
-`RECIPE_INDEX`: This refers to the index of the recipe which is an identification number tagged to the recipe.<br>
+* `RECIPE_NAME` : This refers to the name of the recipe. <br>
+* `RECIPE_INDEX`: This refers to the index of the recipe which is an identification number tagged to the recipe.<br>
 <br>
-You may get the index or name for the recipe that you would like to delete by getting the full list of recipes that you have previously entered into Kitchen Helper. You may refer to the [listrecipe all](#342-list-recipes-listrecipe) command section to understand how to use the command. 
+> You may get the index or name for the recipe that you would like to delete by getting the full list of recipes that you have previously entered into Kitchen Helper. You may refer to the [listrecipe all](#342-list-recipes-listrecipe) command section to understand how to use the command. 
 
 Example |  Outcome
 --------|------------------
-**Command**: <br> `deleterecipe /n pasta` <br><br> **Description**: <br> Deletes the recipe with the name of `pasta` from the recipe list.| deleterecipe /n pasta <br> pasta has been deleted.<br>===================================================
-**Command**: <br> `deleterecipe /i 2` <br><br> **Description**: <br> Deletes recipe by index. In this case, delete recipe with the `index 2` from the recipe list. | deleterecipe /i 2 <br> Beef Salad has been deleted.<br>===================================================
+**Command**: <br> `deleterecipe /n pasta` <br><br> **Description**: <br> Deletes the recipe with the name of `pasta` from the recipe list.| pasta has been deleted.<br>===================================================
+**Command**: <br> `deleterecipe /i 2` <br><br> **Description**: <br> Deletes recipe by index. In this case, delete recipe with the `index 2` from the recipe list. | Beef Salad has been deleted.<br>===================================================
 
 [&#8593; Return to Top](#kitchen-helper---user-guide)
 
@@ -299,6 +302,8 @@ __Format:__ `cookrecipe /n <RECIPE_NAME> /p <NUMBER_OF_PAX>`
 > Please note that expired ingredients cannot be cooked and will be prompted to clear them.
 
 > Please note that the ingredients used in the recipe will be matched strictly by their `INGREDIENT_NAME` and `CATEGORY` when cooking a recipe. You may refer to the [addrecipe](#341-adding-a-recipe-addrecipe) command section
+
+> Please note that if the recipe has been successfully cooked, the quantity of the ingredients associated to the recipe will be deducted. If the final quantity of some of the ingredients is zero after deduction, the respective ingredients will be removed from the ingredient list.
 
 The `ingredient`s used in the specified recipe will be automatically deducted when there is sufficient non-expired `ingredient`s.
 
@@ -404,7 +409,7 @@ Feature | Command
 ------- | -------  
 addingredient | `addingredient /n <INGREDIENT_NAME> /c <CATEGORY> /q <QUANTITY> /p <PRICE> /e <EXPIRY>`<br> e.g. `addingredient /n Beef cubes /c meat /q 3 /p 20 /e 18/03/2022`  
 listingredient | `listingredient <CATEGORY / ALL>` <br> e.g. `listingredient all` OR `listingredient meat`
-deleteingredient | `deleteingredient /n <INGREDIENT_NAME> [/q <QUANTITY>]` OR `deleteingredient /i <ingredient_index> [/q <QUANTITY>]` <br> e.g.`deleteingredient /n apple /q 2` OR `deleteingredient /i 1`<br>
+deleteingredient | `deleteingredient /i <ingredient_index> [/q <QUANTITY>]` <br> e.g. `deleteingredient /i 1`<br>
 searchingredient | `searchingredient <KEYWORD>` <br> e.g. `searchingredient beef`  
 
 
