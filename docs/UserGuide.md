@@ -140,7 +140,7 @@ The different types of `CATEGORY` are listed below:
 Any `CATEGORY` that **does not falls in the list** would be put under `Miscellaneous`.
 * `QUANTITY` is the number of servings of the ingredient.
   + `QUANTITY` in the format of **whole number**.
-* `PRICE` is the **unit cost** of the ingredient.
+* `PRICE` is the **unit cost** of a single quantity for ingredient.
   + `PRICE` can be given up to **2 decimal places**.
 * `EXPIRY` is the expiry date of the ingredient.
   + `EXPIRY` in the format of **dd/MM/yyyy** e.g. 01/12/2020.
