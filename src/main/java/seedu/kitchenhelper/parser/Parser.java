@@ -132,7 +132,8 @@ public class Parser {
                 }
                 String[] nameAndType = new String[2];
                 nameAndType[0] = ingrContent[0];
-                nameAndType[1] = ingrContent[2];
+                nameAndType[1] = ingrContent[2].trim();
+                System.out.println(nameAndType[1]);
                 ingrAndQty.put(nameAndType, Integer.parseInt(ingrContent[1]));
             }
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
