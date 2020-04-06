@@ -213,22 +213,27 @@ The deletion feature for ingredients allows the user to delete ingredients eithe
 ![DeleteIngredient Sequence Diagram](images/deleteIngredientSequenceDiagram.png)
 
 ##### Implementation
-When the user attempts to reduce the quantity of ingredient at index 1 of the ingredients inventory by 4,  the `Kitchen Helper`, ‘Parser’ and ‘DeleteRecipeCommand` class will be called upon. The following sequence of steps will then occur: 
-1. The user keyed in “deleteingredient /i 1 /q 4”`. 
+When the user attempts to reduce the quantity of ingredient at index 1 of the ingredients inventory by 4,  the `Kitchen Helper`, ‘Parser’ and ‘DeleteIngredientCommand` class will be called upon. The following sequence of steps will then occur: 
+
+The following image below shows the sequence of steps for step 1 and 2:
+![DeleteIngredient Sequence Diagram](images/deleteIngredientSequenceDiagramPart1.png)
+
+1) The user keyed in “deleteingredient /i 1 /q 4”`. 
     2. A `UI` object will be created and it will call `UI#getUserCommand()` method to take in the input that the user has keyed in.
     3. A `String` object will be returned and saved into the `userCommandInput` variable in `Kitchen Helper`.
     4. The variable `userCommandInput` is being parsed into the `Parser` class as an argument for this method `Parser#parseUserCommand`.
-2. The command inserted by the user is being parsed into the `Parser` and a new `Command` object is being created. 
+2) The command inserted by the user is being parsed into the `Parser` and a new `Command` object is being created. 
     2. The variable `userCommandInput` will be identified as `deleteingredient` in the `Parser#parseUserCommand()`.The `Parser#prepareDeleteIngredient()` is being called to prepare the `userCommandInput` string to create a `DeleteIngredientCommand` object.
     3. The `DeleteIngredientCommand` object is created with the ingredientIndex and quantity set to 4. 
-3. The Command is now being executed. 
-    2. The `DeleteIngredientCommand#execute()` will be called.
-    3. As this is a deletion by ingredient index, the `ingredientIndex` variable is not null. As the `ingredientIndex` is not null, `DeleteIngredientCommand#deleteIngredientByIndex()`.
-    4. Next, `DeleteIngredientCommand#deleteIngredient()` is called to reduce the quantity of this ingredient since the `quantity` variable is not null. 
-    6. Next, `DeleteIngredientCommand#updateNewQuantity()` will be called to update the quantity of this ingredient in our ingredients’ inventory.
-    7. Lastly, a String called `feedbackToUser`will be returned to the user to inform the user of the outcome of the command. 
-4. The details will then be printed onto the console using `Ui#showResultToUser(result)`.
 
+3) After creating `DeleteIngredientCommand` object, this Command will now be executed. The following image below shows the sequence for the next steps:
+    ![DeleteIngredient Sequence Diagram](images/deleteIngredientSequenceDiagramPart2.png)
+    2. The `DeleteIngredientCommand#execute()` will be called which in turned called DeleteIngredientCommand#deleteIngredientByIndex()`. 
+    3. Since the `quantity` of this ingredient is not null, the `DeleteIngredientCommand#deleteQuantity()` will be called to reduce the quantity of this ingredient.  
+    4. When `DeleteIngredientCommand#deleteQuantity()` has returned, the program will get the quantity of the current ingredient after deduction. If the quantity is zero or null, the `DeleteIngredientCommand#deleteIngredient()` will be called to remove `ingredient` from the `ingredientsList` which contains all the ingredients. 
+    5. Then, `Storage#saveIngredientData()` will be called to save the current `ingredientsList` into an output file.
+    6. Lastly, a String called `feedbackToUser`will be returned to the user to inform the user of the outcome of the command. 
+4)  The details will then be printed onto the console using `Ui#showResultToUser(result)`.
 ##### Design Considerations
 Aspect 1: How to differentiate `deleteingredientByQuantity` and `deleteIngredient` <br>
 <br>
@@ -239,13 +244,28 @@ Alternative 1: The `quantity` of ingredient in `DeleteIngredientCommand` constru
 |**Pros**|Only a `quantity` variable needs to be set. This increases more convenience and no overload of constructors.|
 |**Cons**|Dependent on the variable to check if the ingredient is to be deleted. | 
 
-Alternative 2: Create 2 more constructors just for deduction of quantity for ingredients. <br>
+Alternative 2: Create 1 more constructor just for deduction of quantity for ingredients. <br>
 
 |     |     |
 |-----|-----|
-|**Pros**|This gives us more flexibility on what object can be created with different variables since there are two methods of delete of ingredients.|
-|**Cons**|There is an overload of constructors.|
+|**Pros**|This gives us more flexibility on what object can be created with different variables.|
+|**Cons**|There may be an overload of constructors.|
 <br>
+Aspect 2: Calling of function for deletion of `ingredient` when `ingredient` has the quantity of zero is found in 
+<br> 
+Alternative 1: One `if-else` block to cater for `deleteQuantity`and `deleteIngredient`
+
+|     |     |
+|-----|-----|
+|**Pros**|Concise block of `if-else`.|
+|**Cons**|The `if-else` block will be nested with another `if-else` block. This will violate the SLAP in code quality and the program will have to check for multiple conditions instead of one.
+
+Alternative 2: Two non-nested `if-else` blocks to cater for `deleteQuantity` and `deleteIngredient`. (Current Choice)
+
+|     |     |
+|-----|-----|
+|**Pros**|SLAP is not violated. |
+|**Cons**|| 
 
 #### 4.1.4. Search for ingredients based on keyword(s)
 
