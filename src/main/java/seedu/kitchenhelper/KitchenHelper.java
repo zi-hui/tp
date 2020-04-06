@@ -39,6 +39,7 @@ public class KitchenHelper {
         String userChoice = ui.getUserChoice();
         ui.validUserChoice(userChoice);
         ui.showWelcomeMessage();
+        createNewFiles();
         if (userChoice.trim().equals("1")) {
             storage = new Storage("outputIngredient.txt", "outputRecipe.txt",
                     "outputChore.txt", "outputExpenditure.txt");
@@ -54,7 +55,6 @@ public class KitchenHelper {
                 Expenditure.getInstance().loadExpenditureVariables(0, 0, null);
             }
         } else if (userChoice.trim().equals("2")) {
-            createNewFiles();
             storage = new Storage("outputIngredientCopy.txt", "outputRecipeCopy.txt",
                     "outputChoreCopy.txt", "outputExpenditureCopy.txt");
             try {
@@ -79,7 +79,10 @@ public class KitchenHelper {
         File fileIngredient = new File("outputIngredient.txt");
         File fileRecipe = new File("outputRecipe.txt");
         File fileExpenditure = new File("outputExpenditure.txt");
-
+        File fileChoreCopy = new File("outputChoreCopy.txt");
+        File fileIngredientCopy = new File("outputIngredientCopy.txt");
+        File fileRecipeCopy = new File("outputRecipeCopy.txt");
+        File fileExpenditureCopy = new File("outputExpenditureCopy.txt");
 
         try {
             if (!fileChore.exists()) {
@@ -97,31 +100,23 @@ public class KitchenHelper {
             if (!fileExpenditure.exists()) {
                 fileExpenditure.createNewFile();
             }
+            if (!fileChore.exists()) {
+                fileChoreCopy.createNewFile();
+            }
+
+            if (!fileIngredient.exists()) {
+                fileIngredientCopy.createNewFile();
+            }
+
+            if (!fileRecipe.exists()) {
+                fileRecipeCopy.createNewFile();
+            }
+
+            if (!fileExpenditure.exists()) {
+                fileExpenditureCopy.createNewFile();
+            }
         } catch (IOException e) {
             e.printStackTrace();
-        }
-
-        var sourceIngredient = new File("outputIngredient.txt");
-        var sourceRecipe = new File("outputRecipe.txt");
-        var sourceChore = new File("outputChore.txt");
-        var sourceExpenditure = new File("outputExpenditure.txt");
-        var destIngredient = new File("outputIngredientCopy.txt");
-        var destRecipe = new File("outputRecipeCopy.txt");
-        var destChore = new File("outputChoreCopy.txt");
-
-        if (destIngredient.length() == 0) {
-            Storage.copyFile(sourceIngredient, destIngredient);
-        }
-        if (destRecipe.length() == 0) {
-            Storage.copyFile(sourceRecipe, destRecipe);
-        }
-        if (destChore.length() == 0) {
-            Storage.copyFile(sourceChore, destChore);
-        }
-
-        var destExpenditure = new File("outputExpenditureCopy.txt");
-        if (destExpenditure.length() == 0) {
-            Storage.copyFile(sourceExpenditure, destExpenditure);
         }
     }
     
