@@ -21,6 +21,7 @@ import seedu.kitchenhelper.command.SaveStateCommand;
 import seedu.kitchenhelper.command.SearchChoreCommand;
 import seedu.kitchenhelper.command.SearchIngredientCommand;
 import seedu.kitchenhelper.command.SearchRecipeCommand;
+import seedu.kitchenhelper.common.Messages;
 import seedu.kitchenhelper.exception.KitchenHelperException;
 import seedu.kitchenhelper.object.Expenditure;
 import seedu.kitchenhelper.exception.ExpiredException;
@@ -49,7 +50,6 @@ public class Parser {
     public static final Logger kitchenLogs = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     public static final String LOG_WARNING_INDEX = "An IndexOutOfBounds exception has been caught";
     public final String warningPrepareRecipe = "An IO exception has been caught";
-    public static final String INVALID_DATE = "An invalid date has been entered";
 
     /**
      * Parses user input into command for execution.
@@ -227,11 +227,11 @@ public class Parser {
             return new InvalidCommand(
                     String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, AddIngredientCommand.COMMAND_FORMAT));
         } catch (DateTimeException dte) {
-            return new InvalidCommand(INVALID_DATE);
+            return new InvalidCommand(Messages.MESSAGE_INVALID_DATE);
         } catch (ExpiredException ee) {
-            return new InvalidCommand(AddIngredientCommand.EXPIRED_INGREDIENT_MESSAGE);
+            return new InvalidCommand(Messages.MESSAGE_EXPIRED_INGREDIENT);
         } catch (QuantityException qe) {
-            return new InvalidCommand(AddIngredientCommand.ZERO_QUANTITY_MESSAGE);
+            return new InvalidCommand(Messages.MESSAGE_ZERO_QUANTITY);
         }
     }
     
