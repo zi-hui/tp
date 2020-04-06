@@ -436,7 +436,7 @@ When the user attempts to cook `Chicken Salad` recipe from `Kitchen Helper`, the
 4. The details will then be printed onto the console using `Ui#showResultToUser(result)`.
 
 The following shows the full sequence diagram for this command:
-![Cook Recipe Sequence Diagram](images/cookRecipeSequenceDiagram.png)
+![Cook Recipe Sequence Diagram](images/cookRecipeCommandSequenceDiagram.png)
 
 ##### Design considerations
 Aspect: Preparing the deduction of ingredients when cooking a recipe
@@ -883,16 +883,16 @@ Use case ends.
    
 #### F.3. Delete an ingredient 
 1. Delete an ingredient from Kitchen Helper.
-   1. Prerequisites: List all the recipes using the `listingredient all` command. 
-   2. Test case (if ingredient index exists): `deleteingredient /i 1`
+   1. Prerequisites: List all the recipes using the `listingredient all` command.
+   2. Test case (if ingredient index exists): `deleteingredient /i 1`<br>
    Expected: The ingredient will be deleted. It can be noticed by using the `listingredient all` command. 
-   3. Test case (if ingredient index does not exists): `deleteingredient /i -1` 
+   3. Test case (if ingredient index does not exists): `deleteingredient /i -1`<br>
    Expected: No ingredients are deleted. It can be noticed by using the `listingredient all` command. 
-   4. Test case (if there is sufficient quantity to be reduced from the ingredient): `deleteingredient /i 1 /q 2`
+   4. Test case (if there is sufficient quantity to be reduced from the ingredient): `deleteingredient /i 1 /q 2`<br>
    Expected: The quantity of the ingredient will change as seen by using `listingredient all` command.
-   5. Test case (if there are insufficient quantity to be reduced from the ingredient): `deleteingredient /i 1 /q 10`
+   5. Test case (if there are insufficient quantity to be reduced from the ingredient): `deleteingredient /i 1 /q 10`<br>
    Expected: The quantity of the ingredient will not changed as seen by using `listingredient all` command. 
-   6. Test case (if the quantity of the ingredient is reduced to zero after deduction): `deleteingredient /i 1 /q 1`
+   6. Test case (if the quantity of the ingredient is reduced to zero after deduction): `deleteingredient /i 1 /q 1`<br>
    Expected: The ingredient will be deleted as its final quantity is zero. This can be noticed by using `listingredient all` command.
     
 #### F.4. Search for ingredient
@@ -926,9 +926,9 @@ Use case ends.
 #### F.7. Delete a recipe 
 1. Delete a recipe from Kitchen Helper.
    1. Prerequisites: List all the recipes using the `listrecipe all` command. 
-   2. Test case (if recipe index or name exists): `deleterecipe /i 1` OR `deleterecipe /i warm milk`
+   2. Test case (if recipe index or name exists): `deleterecipe /i 1` OR `deleterecipe /i warm milk`<br>
    Expected: The recipe will be deleted. It can be noticed by using the `listrecipe all` command. 
-   3. Test case (if recipe index or name does not exists): `deleterecipe /i -1` OR `deleterecipe /n Beef Stew`
+   3. Test case (if recipe index or name does not exists): `deleterecipe /i -1` OR `deleterecipe /n Beef Stew`<br>
    Expected: No recipes are deleted. It can be noticed by using the `listrecipe all` command. 
 
 #### F.8. Search for recipe
