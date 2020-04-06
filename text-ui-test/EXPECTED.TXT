@@ -1,7 +1,7 @@
 ===================================================
-Please enter '1' for auto-save and '2' for manual-save:
+Please enter '1' to load data from normal mode or '2' to load data from restore mode:
 ===================================================
-Okay auto-save chosen.
+Okay data have been loaded from the main storage files.
 ===================================================
 Hello! I'm KitchenHelper here
 What can I do for you?
@@ -157,8 +157,8 @@ vegetable:
 [12] kailan | 30 portion(s) | $30.45 | Expiry Date : 12/03/2022
 
 ===================================================
-addingredient /n Apple /c fruit /q 1 /p 1 /e 03/02/2022
-You have added Ingredient:Apple Category:fruit Quantity:1 Price:$1.00 Expiry:03/02/2022 to the ingredient list
+addingredient /n Apple /c fruit /q 2 /p 1 /e 03/02/2022
+You have added Ingredient:Apple Category:fruit Quantity:2 Price:$1.00 Expiry:03/02/2022 to the ingredient list
 ===================================================
 listingredient all
 Here is the list of Ingredients in Inventory:
@@ -171,7 +171,7 @@ drink:
 fruit:
 [1] Apple | 1 portion(s) | $1.0 | Expiry Date : 01/02/2022
 [2] Apple | 1 portion(s) | $1.0 | Expiry Date : 02/02/2022
-[3] Apple | 1 portion(s) | $1.0 | Expiry Date : 03/02/2022
+[3] Apple | 2 portion(s) | $1.0 | Expiry Date : 03/02/2022
 [12] Pear | 1 portion(s) | $1.0 | Expiry Date : 02/02/2022
 meat:
 [4] Beef | 3 portion(s) | $20.0 | Expiry Date : 18/03/2022
@@ -197,7 +197,7 @@ drink:
 fruit:
 [1] Apple | 1 portion(s) | $1.0 | Expiry Date : 01/02/2022
 [2] Apple | 1 portion(s) | $1.0 | Expiry Date : 02/02/2022
-[3] Apple | 1 portion(s) | $1.0 | Expiry Date : 03/02/2022
+[3] Apple | 2 portion(s) | $1.0 | Expiry Date : 03/02/2022
 [12] Pear | 1 portion(s) | $1.0 | Expiry Date : 02/02/2022
 meat:
 [4] Beef | 3 portion(s) | $20.0 | Expiry Date : 18/03/2022
@@ -280,10 +280,17 @@ Please enter a valid quantity to delete!
 Currently:
 Apple : 1
 ===================================================
+deleteingredient /i 1 /q 1
+The quantity of Apple has been changed!
+This ingredient has a quantity of 0 after deduction, so it has been deleted.
+===================================================
 deleteingredient /i 2 /q 40
 Please enter a valid quantity to delete!
 Currently:
-Apple : 1
+Apple : 2
+===================================================
+deleteingredient /i 2 /q 1
+The quantity of Apple has been changed!
 ===================================================
 deleteingredient /i /q
 Invalid Command, please check your format!
@@ -301,10 +308,10 @@ Usage: deleteingredient /i INGREDIENTINDEX [/q QUANTITY]
 Example: deleteingredient /i 1 /q 2
 ===================================================
 deleteingredient /i 4
-Beef has been deleted.
+Beef cubes has been deleted.
 ===================================================
 deleteingredient /i 3
-Apple has been deleted.
+Beef has been deleted.
 ===================================================
 deleteingredient /i 2
 Apple has been deleted.
@@ -313,7 +320,7 @@ deleteingredient /i 1
 Apple has been deleted.
 ===================================================
 deleteingredient /i 1
-Beef cubes has been deleted.
+Chicken Breast has been deleted.
 ===================================================
 deletechore 1
 You have deleted this chore:
@@ -328,19 +335,18 @@ Here is the list of Ingredients in Inventory:
 Format : [Ingredient Index] Ingredient Name | Quantity | Price | Expiry
 all:
 dairy:
-[3] HL Milk | 1 portion(s) | $12.2 | Expiry Date : 01/03/2022
-[4] HL Milk | 3 portion(s) | $12.0 | Expiry Date : 14/03/2022
+[2] HL Milk | 1 portion(s) | $12.2 | Expiry Date : 01/03/2022
+[3] HL Milk | 3 portion(s) | $12.0 | Expiry Date : 14/03/2022
 drink:
 fruit:
-[6] Pear | 1 portion(s) | $1.0 | Expiry Date : 02/02/2022
+[5] Pear | 1 portion(s) | $1.0 | Expiry Date : 02/02/2022
 meat:
 [1] Beef | 3 portion(s) | $20.0 | Expiry Date : 18/03/2022
-[2] Chicken Breast | 3 portion(s) | $20.0 | Expiry Date : 20/12/2022
 miscellaneous:
 staple:
 vegetable:
-[5] Lettuce | 4 portion(s) | $20.0 | Expiry Date : 20/12/2022
-[7] kailan | 30 portion(s) | $30.45 | Expiry Date : 12/03/2022
+[4] Lettuce | 4 portion(s) | $20.0 | Expiry Date : 20/12/2022
+[6] kailan | 30 portion(s) | $30.45 | Expiry Date : 12/03/2022
 
 ===================================================
 reset
