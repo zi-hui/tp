@@ -1,38 +1,33 @@
 ===================================================
-Please enter '1' for auto-save and '2' for manual-save:
+Please enter '1' to load data from normal mode or '2' to load data from restore mode:
 ===================================================
-Okay auto-save chosen.
+Okay data have been loaded from the main storage files.
 ===================================================
 Hello! I'm KitchenHelper here
 What can I do for you?
 ===================================================
 You have no deadlines upcoming in the next 3 days.
 ===================================================
-You have no ingredients that is expiring for the next 3 days.
-You have no ingredients that is low in stock [< 5].
-You have no ingredients that is expired.
+You have no ingredients that are expiring for the next 3 days.
 ===================================================
-addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable
+You have no ingredients that are low in stock [< 5].
+===================================================
+You have no ingredients that are expired.
+===================================================
+
 Chicken Salad Recipe has been created with 2 ingredients inside.
 ===================================================
-addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable
 There is an existing recipe with the same name!
 ===================================================
-addrecipe /n Chicken Stew /i Chicken Breast:2:meat, Lettuce:4:vegetable
 Chicken Stew Recipe has been created with 2 ingredients inside.
 ===================================================
-addrecipe /n warm milk /i HL Milk:1:Dairy
 warm milk Recipe has been created with 1 ingredients inside.
 ===================================================
-addingredient /n HL Milk /c Dairy /q 3 /p 12.2 /e 01/03/2020
-You have added Ingredient:HL Milk Category:Dairy Quantity:3 Price:$12.20 Expiry:01/03/2020 to the ingredient list
+KitchenHelper has added: Ingredient:HL Milk Category:Dairy Quantity:3 Price:$12.20 Expiry:01/03/2022
 ===================================================
-cookrecipe /n warm milk /p 2
 Kitchen Helper is trying to cook!
-There are insufficient/missing ingredients!
-Please check for these expired ingredients: hl milk
+warm milk was cooked with a pax of 2
 ===================================================
-listrecipe all
 
 Here is the list of Recipe:
 
@@ -42,308 +37,268 @@ Format:[Recipe Number] Recipe Name
 [3] warm milk
 
 ===================================================
-addingredient /n Beef /c meat /q 3 /p 20 /e 18/03/2020
-You have added Ingredient:Beef Category:meat Quantity:3 Price:$20.00 Expiry:18/03/2020 to the ingredient list
+KitchenHelper has added: Ingredient:Beef Category:meat Quantity:3 Price:$20.00 Expiry:18/03/2022
 ===================================================
-addingredient /n Beef cubes /c meat /q 3 /p 20 /e 18/03/2020
-You have added Ingredient:Beef cubes Category:meat Quantity:3 Price:$20.00 Expiry:18/03/2020 to the ingredient list
+KitchenHelper has added: Ingredient:Beef cubes Category:meat Quantity:3 Price:$20.00 Expiry:18/03/2022
 ===================================================
-addingredient /n Chicken Breast /c meat /q 4 /p 20 /e 20/12/2020
-You have added Ingredient:Chicken Breast Category:meat Quantity:4 Price:$20.00 Expiry:20/12/2020 to the ingredient list
+Kitchen Helper has updated the quantity of Beef cubes to 8 from 3
 ===================================================
-addingredient /n Chicken Breast /c meat /q 3 /p 20 /e 18/12/2020
-You have added Ingredient:Chicken Breast Category:meat Quantity:3 Price:$20.00 Expiry:18/12/2020 to the ingredient list
+KitchenHelper has added: Ingredient:Chicken Breast Category:meat Quantity:4 Price:$20.00 Expiry:20/12/2022
 ===================================================
-addingredient /n kailan /c Vegetable /q 30 /p 30.45 /e 12/03/2020
-You have added Ingredient:kailan Category:Vegetable Quantity:30 Price:$30.45 Expiry:12/03/2020 to the ingredient list
+KitchenHelper has added: Ingredient:Chicken Breast Category:meat Quantity:3 Price:$20.00 Expiry:18/12/2022
 ===================================================
-addingredient /n HL Milk /c Dairy /q 3 /p 12 /e 14/03/2020
-You have added Ingredient:HL Milk Category:Dairy Quantity:3 Price:$12.00 Expiry:14/03/2020 to the ingredient list
+KitchenHelper has added: Ingredient:kailan Category:Vegetable Quantity:30 Price:$30.45 Expiry:12/03/2022
 ===================================================
-addingredient /n Milo /c Drink /q 30 /p 10 /e 20/012/2020
+KitchenHelper has added: Ingredient:HL Milk Category:Dairy Quantity:3 Price:$12.00 Expiry:14/03/2022
+===================================================
 Invalid Command Format!
-Adds a ingredient to the ingredient list. /n INGREDIENT /c CATEGORY /q QUANTITY /p PRICE /e EXPIRY
-Example: addingredient /n Beef /c Meat /q 1 /p 13.5 /e 13/02/2020
+Adds a ingredient to the ingredient list. /n <INGREDIENT> /c <CATEGORY> /q <QUANTITY> /p <PRICE> /e <EXPIRY>
+Example: addingredient /n Beef /c Meat /q 1 /p 13.5 /e 13/02/2022
 ===================================================
-addingredient /n Pear /c fruit /q 1 /p 1 /e 02/02/2020
-You have added Ingredient:Pear Category:fruit Quantity:1 Price:$1.00 Expiry:02/02/2020 to the ingredient list
+KitchenHelper has added: Ingredient:Pear Category:fruit Quantity:1 Price:$1.00 Expiry:02/02/2022
 ===================================================
-addingredient /n Lettuce /c Vegetable /q 10 /p 20 /e 20/12/2020
-You have added Ingredient:Lettuce Category:Vegetable Quantity:10 Price:$20.00 Expiry:20/12/2020 to the ingredient list
+KitchenHelper has added: Ingredient:Lettuce Category:Vegetable Quantity:10 Price:$20.00 Expiry:20/12/2022
 ===================================================
-addingredient /n Lettuce /c Vegetable /q 2 /p 20 /e 09/03/2020
-You have added Ingredient:Lettuce Category:Vegetable Quantity:2 Price:$20.00 Expiry:09/03/2020 to the ingredient list
+KitchenHelper has added: Ingredient:Lettuce Category:Vegetable Quantity:2 Price:$20.00 Expiry:09/03/2022
 ===================================================
-listingredient all
 Here is the list of Ingredients in Inventory:
-Format : Ingredient Index|Ingredient Name|Quantity|Price|Expiry
+Format : [Ingredient Index] Ingredient Name | Quantity | Price | Expiry
 all:
 dairy:
-5|HL Milk|3|12.2|01/03/2020
-6|HL Milk|3|12.0|14/03/2020
+[5] HL Milk | 1 portion(s) | $12.2 | Expiry Date : 01/03/2022
+[6] HL Milk | 3 portion(s) | $12.0 | Expiry Date : 14/03/2022
 drink:
 fruit:
-9|Pear|1|1.0|02/02/2020
+[9] Pear | 1 portion(s) | $1.0 | Expiry Date : 02/02/2022
 meat:
-1|Beef|3|20.0|18/03/2020
-2|Beef cubes|3|20.0|18/03/2020
-3|Chicken Breast|3|20.0|18/12/2020
-4|Chicken Breast|4|20.0|20/12/2020
+[1] Beef | 3 portion(s) | $20.0 | Expiry Date : 18/03/2022
+[2] Beef cubes | 8 portion(s) | $20.0 | Expiry Date : 18/03/2022
+[3] Chicken Breast | 3 portion(s) | $20.0 | Expiry Date : 18/12/2022
+[4] Chicken Breast | 4 portion(s) | $20.0 | Expiry Date : 20/12/2022
 miscellaneous:
 staple:
 vegetable:
-7|Lettuce|2|20.0|09/03/2020
-8|Lettuce|10|20.0|20/12/2020
-10|kailan|30|30.45|12/03/2020
+[7] Lettuce | 2 portion(s) | $20.0 | Expiry Date : 09/03/2022
+[8] Lettuce | 10 portion(s) | $20.0 | Expiry Date : 20/12/2022
+[10] kailan | 30 portion(s) | $30.45 | Expiry Date : 12/03/2022
 
 ===================================================
-addingredient /n Apple /c fruit /q 1 /p 1 /e 02/02/2020
-You have added Ingredient:Apple Category:fruit Quantity:1 Price:$1.00 Expiry:02/02/2020 to the ingredient list
+KitchenHelper has added: Ingredient:Apple Category:fruit Quantity:1 Price:$1.00 Expiry:02/02/2022
 ===================================================
-listingredient all
 Here is the list of Ingredients in Inventory:
-Format : Ingredient Index|Ingredient Name|Quantity|Price|Expiry
+Format : [Ingredient Index] Ingredient Name | Quantity | Price | Expiry
 all:
 dairy:
-6|HL Milk|3|12.2|01/03/2020
-7|HL Milk|3|12.0|14/03/2020
+[6] HL Milk | 1 portion(s) | $12.2 | Expiry Date : 01/03/2022
+[7] HL Milk | 3 portion(s) | $12.0 | Expiry Date : 14/03/2022
 drink:
 fruit:
-1|Apple|1|1.0|02/02/2020
-10|Pear|1|1.0|02/02/2020
+[1] Apple | 1 portion(s) | $1.0 | Expiry Date : 02/02/2022
+[10] Pear | 1 portion(s) | $1.0 | Expiry Date : 02/02/2022
 meat:
-2|Beef|3|20.0|18/03/2020
-3|Beef cubes|3|20.0|18/03/2020
-4|Chicken Breast|3|20.0|18/12/2020
-5|Chicken Breast|4|20.0|20/12/2020
+[2] Beef | 3 portion(s) | $20.0 | Expiry Date : 18/03/2022
+[3] Beef cubes | 8 portion(s) | $20.0 | Expiry Date : 18/03/2022
+[4] Chicken Breast | 3 portion(s) | $20.0 | Expiry Date : 18/12/2022
+[5] Chicken Breast | 4 portion(s) | $20.0 | Expiry Date : 20/12/2022
 miscellaneous:
 staple:
 vegetable:
-8|Lettuce|2|20.0|09/03/2020
-9|Lettuce|10|20.0|20/12/2020
-11|kailan|30|30.45|12/03/2020
+[8] Lettuce | 2 portion(s) | $20.0 | Expiry Date : 09/03/2022
+[9] Lettuce | 10 portion(s) | $20.0 | Expiry Date : 20/12/2022
+[11] kailan | 30 portion(s) | $30.45 | Expiry Date : 12/03/2022
 
 ===================================================
-addingredient /n Apple /c fruit /q 1 /p 1 /e 01/02/2020
-You have added Ingredient:Apple Category:fruit Quantity:1 Price:$1.00 Expiry:01/02/2020 to the ingredient list
+KitchenHelper has added: Ingredient:Apple Category:fruit Quantity:1 Price:$1.00 Expiry:01/02/2022
 ===================================================
-listingredient all
 Here is the list of Ingredients in Inventory:
-Format : Ingredient Index|Ingredient Name|Quantity|Price|Expiry
+Format : [Ingredient Index] Ingredient Name | Quantity | Price | Expiry
 all:
 dairy:
-7|HL Milk|3|12.2|01/03/2020
-8|HL Milk|3|12.0|14/03/2020
+[7] HL Milk | 1 portion(s) | $12.2 | Expiry Date : 01/03/2022
+[8] HL Milk | 3 portion(s) | $12.0 | Expiry Date : 14/03/2022
 drink:
 fruit:
-1|Apple|1|1.0|01/02/2020
-2|Apple|1|1.0|02/02/2020
-11|Pear|1|1.0|02/02/2020
+[1] Apple | 1 portion(s) | $1.0 | Expiry Date : 01/02/2022
+[2] Apple | 1 portion(s) | $1.0 | Expiry Date : 02/02/2022
+[11] Pear | 1 portion(s) | $1.0 | Expiry Date : 02/02/2022
 meat:
-3|Beef|3|20.0|18/03/2020
-4|Beef cubes|3|20.0|18/03/2020
-5|Chicken Breast|3|20.0|18/12/2020
-6|Chicken Breast|4|20.0|20/12/2020
+[3] Beef | 3 portion(s) | $20.0 | Expiry Date : 18/03/2022
+[4] Beef cubes | 8 portion(s) | $20.0 | Expiry Date : 18/03/2022
+[5] Chicken Breast | 3 portion(s) | $20.0 | Expiry Date : 18/12/2022
+[6] Chicken Breast | 4 portion(s) | $20.0 | Expiry Date : 20/12/2022
 miscellaneous:
 staple:
 vegetable:
-9|Lettuce|2|20.0|09/03/2020
-10|Lettuce|10|20.0|20/12/2020
-12|kailan|30|30.45|12/03/2020
+[9] Lettuce | 2 portion(s) | $20.0 | Expiry Date : 09/03/2022
+[10] Lettuce | 10 portion(s) | $20.0 | Expiry Date : 20/12/2022
+[12] kailan | 30 portion(s) | $30.45 | Expiry Date : 12/03/2022
 
 ===================================================
-addingredient /n Apple /c fruit /q 1 /p 1 /e 03/02/2020
-You have added Ingredient:Apple Category:fruit Quantity:1 Price:$1.00 Expiry:03/02/2020 to the ingredient list
+KitchenHelper has added: Ingredient:Apple Category:fruit Quantity:2 Price:$1.00 Expiry:03/02/2022
 ===================================================
-listingredient all
 Here is the list of Ingredients in Inventory:
-Format : Ingredient Index|Ingredient Name|Quantity|Price|Expiry
+Format : [Ingredient Index] Ingredient Name | Quantity | Price | Expiry
 all:
 dairy:
-8|HL Milk|3|12.2|01/03/2020
-9|HL Milk|3|12.0|14/03/2020
+[8] HL Milk | 1 portion(s) | $12.2 | Expiry Date : 01/03/2022
+[9] HL Milk | 3 portion(s) | $12.0 | Expiry Date : 14/03/2022
 drink:
 fruit:
-1|Apple|1|1.0|01/02/2020
-2|Apple|1|1.0|02/02/2020
-3|Apple|1|1.0|03/02/2020
-12|Pear|1|1.0|02/02/2020
+[1] Apple | 1 portion(s) | $1.0 | Expiry Date : 01/02/2022
+[2] Apple | 1 portion(s) | $1.0 | Expiry Date : 02/02/2022
+[3] Apple | 2 portion(s) | $1.0 | Expiry Date : 03/02/2022
+[12] Pear | 1 portion(s) | $1.0 | Expiry Date : 02/02/2022
 meat:
-4|Beef|3|20.0|18/03/2020
-5|Beef cubes|3|20.0|18/03/2020
-6|Chicken Breast|3|20.0|18/12/2020
-7|Chicken Breast|4|20.0|20/12/2020
+[4] Beef | 3 portion(s) | $20.0 | Expiry Date : 18/03/2022
+[5] Beef cubes | 8 portion(s) | $20.0 | Expiry Date : 18/03/2022
+[6] Chicken Breast | 3 portion(s) | $20.0 | Expiry Date : 18/12/2022
+[7] Chicken Breast | 4 portion(s) | $20.0 | Expiry Date : 20/12/2022
 miscellaneous:
 staple:
 vegetable:
-10|Lettuce|2|20.0|09/03/2020
-11|Lettuce|10|20.0|20/12/2020
-13|kailan|30|30.45|12/03/2020
+[10] Lettuce | 2 portion(s) | $20.0 | Expiry Date : 09/03/2022
+[11] Lettuce | 10 portion(s) | $20.0 | Expiry Date : 20/12/2022
+[13] kailan | 30 portion(s) | $30.45 | Expiry Date : 12/03/2022
 
 ===================================================
-listingredient all
 Here is the list of Ingredients in Inventory:
-Format : Ingredient Index|Ingredient Name|Quantity|Price|Expiry
+Format : [Ingredient Index] Ingredient Name | Quantity | Price | Expiry
 all:
 dairy:
-8|HL Milk|3|12.2|01/03/2020
-9|HL Milk|3|12.0|14/03/2020
+[8] HL Milk | 1 portion(s) | $12.2 | Expiry Date : 01/03/2022
+[9] HL Milk | 3 portion(s) | $12.0 | Expiry Date : 14/03/2022
 drink:
 fruit:
-1|Apple|1|1.0|01/02/2020
-2|Apple|1|1.0|02/02/2020
-3|Apple|1|1.0|03/02/2020
-12|Pear|1|1.0|02/02/2020
+[1] Apple | 1 portion(s) | $1.0 | Expiry Date : 01/02/2022
+[2] Apple | 1 portion(s) | $1.0 | Expiry Date : 02/02/2022
+[3] Apple | 2 portion(s) | $1.0 | Expiry Date : 03/02/2022
+[12] Pear | 1 portion(s) | $1.0 | Expiry Date : 02/02/2022
 meat:
-4|Beef|3|20.0|18/03/2020
-5|Beef cubes|3|20.0|18/03/2020
-6|Chicken Breast|3|20.0|18/12/2020
-7|Chicken Breast|4|20.0|20/12/2020
+[4] Beef | 3 portion(s) | $20.0 | Expiry Date : 18/03/2022
+[5] Beef cubes | 8 portion(s) | $20.0 | Expiry Date : 18/03/2022
+[6] Chicken Breast | 3 portion(s) | $20.0 | Expiry Date : 18/12/2022
+[7] Chicken Breast | 4 portion(s) | $20.0 | Expiry Date : 20/12/2022
 miscellaneous:
 staple:
 vegetable:
-10|Lettuce|2|20.0|09/03/2020
-11|Lettuce|10|20.0|20/12/2020
-13|kailan|30|30.45|12/03/2020
+[10] Lettuce | 2 portion(s) | $20.0 | Expiry Date : 09/03/2022
+[11] Lettuce | 10 portion(s) | $20.0 | Expiry Date : 20/12/2022
+[13] kailan | 30 portion(s) | $30.45 | Expiry Date : 12/03/2022
 
 ===================================================
-addchore buy groceries /by Tuesday 12pm
 You have added this chore:
 [x] buy groceries (by: Tuesday 12pm)
 Now you have 1 chore in the list.
 ===================================================
-addchore buy groceries
 Invalid Command Format!
 Adds a chore to the chore list. TASK /by DATE
 Example: addchore buy groceries /by Tuesday 12pm
 ===================================================
-searchchore groceries
+You have added this chore:
+[x] buy groceries (by: 05/04/2020 08:30)
+Now you have 2 chores in the list.
+===================================================
+Here are the chores in your list:
+1. [x] buy groceries (by: Tuesday 12pm)
+2. [x] buy groceries (by: 05/04/2020 08:30)
+===================================================
+You have completed this chore:
+[/] buy groceries (by: Tuesday 12pm)
+
+===================================================
 Here are your matching chores in your list
-1.[x] buy groceries (by: Tuesday 12pm)
+1.[/] buy groceries (by: Tuesday 12pm) [Location: Index 1]
+2.[x] buy groceries (by: 05/04/2020 08:30) [Location: Index 2]
 ===================================================
-searchingredient beef
 Here are your matching ingredients in your list
-1.[Meat] Beef Qty:3 $20.00 Exp:18/03/2020
-2.[Meat] Beef cubes Qty:3 $20.00 Exp:18/03/2020
+1.[Meat] Beef Qty:3 $20.00 Exp:18/03/2022 [Location: Index 4]
+2.[Meat] Beef cubes Qty:8 $20.00 Exp:18/03/2022 [Location: Index 5]
 ===================================================
-searchrecipe chicken
 Here are your matching recipes in your list
-1.Chicken Salad located at listrecipe 1
-2.Chicken Stew located at listrecipe 2
+1.Chicken Salad [Location: Index 1]
+2.Chicken Stew [Location: Index 2]
 ===================================================
-cookrecipe /n Chicken Salad /p 2
 Kitchen Helper is trying to cook!
 Chicken Salad was cooked with a pax of 2
 ===================================================
-cookrecipe /n Chicken Salad /p 3
 Kitchen Helper is trying to cook!
 There are insufficient/missing ingredients!
 ===================================================
-deleterecipe /n Chicken Salad
 Chicken Salad has been deleted
 ===================================================
-deleterecipe /n Chicken Salad
 This recipe does not exist! Please type in a correct recipe name/index.
 ===================================================
-deleterecipe /n Chicken Stew
 Chicken Stew has been deleted
 ===================================================
-deleteingredient /n HL milk
 Invalid Command, please check your format!
 Deletes an ingredient.
 Usage: deleteingredient /i INGREDIENTINDEX [/q QUANTITY]
 Example: deleteingredient /i 1 /q 2
 ===================================================
-deleteingredient /i 1 /q 2
 Please enter a valid quantity to delete!
 Currently:
 Apple : 1
 ===================================================
-deleteingredient /i 2 /q 40
+The quantity of Apple has been changed!
+This ingredient has a quantity of 0 after deduction, so it has been deleted.
+===================================================
 Please enter a valid quantity to delete!
 Currently:
-Apple : 1
+Apple : 2
 ===================================================
-deleteingredient /i /q
+The quantity of Apple has been changed!
+===================================================
 Invalid Command, please check your format!
 Deletes an ingredient.
 Usage: deleteingredient /i INGREDIENTINDEX [/q QUANTITY]
 Example: deleteingredient /i 1 /q 2
 ===================================================
-deleteingredient /i -1
 This ingredient does not exist! Please type in a correct ingredient index.
 ===================================================
-deleteingredient /i 1 /1 -1
 Invalid Command, please check your format!
 Deletes an ingredient.
 Usage: deleteingredient /i INGREDIENTINDEX [/q QUANTITY]
 Example: deleteingredient /i 1 /q 2
 ===================================================
-deleteingredient /i 4
-Beef has been deleted.
-===================================================
-deleteingredient /i 3
-Apple has been deleted.
-===================================================
-deleteingredient /i 2
-Apple has been deleted.
-===================================================
-deleteingredient /i 1
-Apple has been deleted.
-===================================================
-deleteingredient /i 1
 Beef cubes has been deleted.
 ===================================================
-deletechore 1
+Beef has been deleted.
+===================================================
+Apple has been deleted.
+===================================================
+Apple has been deleted.
+===================================================
+Chicken Breast has been deleted.
+===================================================
 You have deleted this chore:
-[x] buy groceries (by: Tuesday 12pm)
-Now you have 0 chores in the list.
-===================================================
-addingredient /n Beef /c meat /q 3 /p 20 /e 18/03/2020
-You have added Ingredient:Beef Category:meat Quantity:3 Price:$20.00 Expiry:18/03/2020 to the ingredient list
-===================================================
-addchore buy groceries /by Tuesday 12pm
-You have added this chore:
-[x] buy groceries (by: Tuesday 12pm)
+[/] buy groceries (by: Tuesday 12pm)
 Now you have 1 chore in the list.
 ===================================================
-listingredient all
+KitchenHelper has added: Ingredient:Beef Category:meat Quantity:3 Price:$20.00 Expiry:18/03/2022
+===================================================
 Here is the list of Ingredients in Inventory:
-Format : Ingredient Index|Ingredient Name|Quantity|Price|Expiry
+Format : [Ingredient Index] Ingredient Name | Quantity | Price | Expiry
 all:
 dairy:
-4|HL Milk|3|12.2|01/03/2020
-5|HL Milk|3|12.0|14/03/2020
+[2] HL Milk | 1 portion(s) | $12.2 | Expiry Date : 01/03/2022
+[3] HL Milk | 3 portion(s) | $12.0 | Expiry Date : 14/03/2022
 drink:
 fruit:
-8|Pear|1|1.0|02/02/2020
+[5] Pear | 1 portion(s) | $1.0 | Expiry Date : 02/02/2022
 meat:
-1|Beef|3|20.0|18/03/2020
-2|Chicken Breast|0|20.0|18/12/2020
-3|Chicken Breast|3|20.0|20/12/2020
+[1] Beef | 3 portion(s) | $20.0 | Expiry Date : 18/03/2022
 miscellaneous:
 staple:
 vegetable:
-6|Lettuce|2|20.0|09/03/2020
-7|Lettuce|2|20.0|20/12/2020
-9|kailan|30|30.45|12/03/2020
+[4] Lettuce | 4 portion(s) | $20.0 | Expiry Date : 20/12/2022
+[6] kailan | 30 portion(s) | $30.45 | Expiry Date : 12/03/2022
 
 ===================================================
-listchore
-Here are the chores in your list:
-1. [x] buy groceries (by: Tuesday 12pm)
-===================================================
-reset
 All data has been wiped
 ===================================================
-listingredient all
 Here is the list of Ingredients in Inventory:
-Format : Ingredient Index|Ingredient Name|Quantity|Price|Expiry
+Format : [Ingredient Index] Ingredient Name | Quantity | Price | Expiry
 The Ingredient List is currently empty.
 ===================================================
-listchore
-Your list of chores is currently empty.
-===================================================
-exit
 Exiting KitchenHelper as requested ...
 ===================================================

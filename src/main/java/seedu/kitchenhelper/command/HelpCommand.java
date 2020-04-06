@@ -8,6 +8,9 @@ import seedu.kitchenhelper.ui.Ui;
 
 import java.util.ArrayList;
 
+/**
+ * Shows the user how to execute different commands supported by this program.
+ */
 public class HelpCommand extends Command {
     
     public static final String COMMAND_WORD = "help";
