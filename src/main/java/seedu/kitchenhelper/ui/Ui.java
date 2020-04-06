@@ -131,7 +131,6 @@ public class Ui {
             fullInputLine = in.nextLine();
         }
         
-        out.println(fullInputLine);
         return fullInputLine;
     }
     //@@author
