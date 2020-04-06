@@ -25,9 +25,9 @@ class SearchRecipeCommandTest {
         String expectedOutput =
                 "Here are your matching recipes in your list"
                 + Ui.LS
-                + "1.Chicken Salad located at listrecipe 1"
+                + "1.Chicken Salad [Location: Index 1]"
                 + Ui.LS
-                + "2.Chicken Stew located at listrecipe 2";
+                + "2.Chicken Stew [Location: Index 2]";
         String output = new Parser().parseUserCommand("searchrecipe chicken")
                 .execute(ingredientArrayList, recipeArrayList, choreArrayList).feedbackToUser;
         assertEquals(expectedOutput, output);
