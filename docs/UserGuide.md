@@ -75,16 +75,19 @@ From this example, `RECIPE_NAME` will be inputted by the user.
 Shows a list of available commands and their usages.  
 
 __Format:__ `help`  
+[&#8593; Return to Top](#kitchen-helper---user-guide)
 
 #### 3.1.2. Exiting the Program: `exit`
 Exits the program.  
 
 __Format:__ `exit`  
+[&#8593; Return to Top](#kitchen-helper---user-guide)
 
 #### 3.1.3. Resetting the application: `reset`
 You can reset the application which will wipe out all existing data  
 
 __Format:__ `reset`  
+[&#8593; Return to Top](#kitchen-helper---user-guide)
 
 ### 3.2. Storage
 
@@ -103,6 +106,7 @@ Example |  Outcome
 **Command**: <br> `1` <br><br> **Description**: <br> Data loaded from most recent auto-save mode files.  | Please enter '1' for auto-save and '2' for manual-save: <br> 1 <br> =================================================== <br> Okay auto-save chosen. <br> ===================================================
 **Command**: <br> `2` <br><br> **Description**: <br> Data loaded from most recent manual-save mode files.  | Please enter '1' for auto-save and '2' for manual-save: <br> 2 <br> =================================================== <br> Okay manual-save chosen. <br> ===================================================
 
+[&#8593; Return to Top](#kitchen-helper---user-guide)
 
 #### 3.2.2. Save Current State: `save`
 At any point of the session, if the user wishes to store a back-up copy of the current state of their program data, it is recommended that the user uses the save command. The save command will store all program data of the current state into manual-save files. 
@@ -112,6 +116,8 @@ __Format:__ `save`
 Example |  Outcome
 --------|------------------
 **Command**: <br> `save` <br><br> **Description**: <br> Data saved into manual-save mode files.  | save <br> You have saved the current state in the following files: outputIngredientCopy.txt, outputRecipeCopy.txt, outputChoreCopy.txt  <br> =================================================== 
+
+[&#8593; Return to Top](#kitchen-helper---user-guide)
 
 ### 3.3. Ingredient
 #### 3.3.1. Adding an ingredient: `addingredient` (Jin Fa)
@@ -151,6 +157,7 @@ Ingredient with same name, price and expiry does not exist in the Kitchen Helper
 Ingredient with same name, price and expiry exists in the Kitchen Helper. | **Command**: <br> `addingredient /n Beef cubes /c meat /q 4 /p 20 /e 18/03/2022` <br><br> **Description:** <br> Creates a new ingredient called `Beef cubes`, which have the following attributes: Category `meat`, Quantity `4`, Price `20` , Expiry date `18/03/2022`. | Kitchen Helper has updated the quantity of Beef cubes to 7 from 3 <br>===================================================
 Ingredient entered with an expired expiry date. | **Command**: <br> `addingredient /n Milo /c Drink /q 30 /p 10 /e 20/03/2020` <br><br> **Description:** <br> Creates a new ingredient called `Milo`, which have the following attributes: Category `Drink`, Quantity `30`, Price `10` , Expiry date `20/03/2020`. | Expired ingredient detected in input. <br> Please enter a non-expired expiry date.<br>===================================================
 
+[&#8593; Return to Top](#kitchen-helper---user-guide)
 
 #### 3.3.2. List ingredient: `listingredient`
 Displays all the items currently in the ingredient list in Kitchen Helper.
@@ -161,6 +168,8 @@ Example |  Outcome
 --------|------------------
 **Command**: <br> `listingredient all` <br><br> **Description**: <br> Displays all ingredients from `all` categories. | listingredient all <br> Here is the list of Ingredients in Inventory <br> Format : Ingredient Name / Quantity / Price / Expiry <br>All:<br>dairy:<br>drink:<br>fruit:<br>meat:<br> Beef / 30 / 20.2 / 20/02/2020 <br>miscellaneous:<br>staple:<br>vegetable:<br>kailan / 30 / 30.45 / 12/03/2020 <br><br>===================================================
 **Command**: <br> `listingredient meat` <br><br> **Description**: <br> Displays all ingredients from `meat` categories. | listingredient all <br> Here is the list of Ingredients in Inventory <br> Format : Ingredient Name / Quantity / Price / Expiry <br> Beef / 30 / 20.2 / 20/02/2020 <br><br>===================================================
+
+[&#8593; Return to Top](#kitchen-helper---user-guide)
 
 #### 3.3.3. Delete an ingredient: `deleteingredient`
 You can delete a specific ingredient and reduce the quantity of an ingredient from the ingredient's inventory in Kitchen Helper by using the ingredient's index. 
@@ -178,6 +187,8 @@ Example |  Outcome
 **Command**: <br> `deleteingredient /i 1` <br><br> **Description**: Deletes the item specified by `index 1` in the ingredient list. | deleteingredient /i 1 <br> apple has been deleted.<br>===================================================
 **Command**: <br> `deleteingredient /i 2 /q 20` <br><br> **Description**: Reduces the ingredient specified by `index 2` in the ingredient list. | deleteingredient /i 2 /q 20 <br> The quantity of HL Milk has been changed!<br>===================================================
 
+[&#8593; Return to Top](#kitchen-helper---user-guide)
+
 #### 3.3.4. Search for ingredient: `searchingredient` (Jin Fa)
 You can search for ingredients based on a given keyword.  
 
@@ -193,6 +204,8 @@ Example |  Outcome
 **Command**: <br> `searchingredient beef` <br> **Description:** <br> Search by ingredient's category. | Here are your matching ingredients in your list <br> 1.[Meat] Beef cubes Qty:7 $20.00 Exp:18/03/2022 \[Location: Index 1\] <br> ===================================================
 **Command**: <br> `searchingredient meat` <br> **Description:** <br> Search by ingredient's category. | Here are your matching ingredients in your list <br> 1.[Meat] Beef cubes Qty:7 $20.00 Exp:18/03/2022 \[Location: Index 1\] <br> ===================================================
 **Command** :<br> `searchingredient 18/03/2022` <br> **Description:** <br> Search by ingredient's category. | Here are your matching ingredients in your list <br> 1.[Meat] Beef cubes Qty:7 $20.00 Exp:18/03/2022 \[Location: Index 1\] <br> ===================================================
+
+[&#8593; Return to Top](#kitchen-helper---user-guide)
 
 ### 3.4. Recipe
 
@@ -225,6 +238,9 @@ Example |  Outcome
 **Command**: <br> `addrecipe /n Rice Ball /i Rice:3:staple` <br><br> **Description**: <br> Creates a new recipe called `Rice Ball` which contains one ingredient, `3` portions of `Rice`. | Rice Ball Recipe has been created with 1 ingredients inside.<br>===================================================`
 **Command**: <br> `addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable` <br><br> **Description**: <br> Creates a new recipe called `Chicken Salad` which contains two ingredient, `2` portions of `Chicken breast` and `4` portions of `Lettuce`. | Chicken Salad Recipe has been created with 2 ingredients inside.<br>===================================================
 **Command**: <br> `addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable` <br><br> **Description**: <br> A duplicate recipe has been found | There is an existing recipe with the same name!<br>===================================================
+
+[&#8593; Return to Top](#kitchen-helper---user-guide)
+
 #### 3.4.2. List recipes: `listrecipe`
 Displays all recipe and its name or the items currently in a particular recipe in Kitchen Helper.
 
@@ -236,6 +252,7 @@ Example |  Outcome
 **Command**: <br> `listrecipe all` <br><br> **Description**: <br> Displays all recipe number and name from RecipeList. | listrecipe all <br>Here is the list of Recipe:<br><br>Format:Recipe Number / Recipe Name<br>1/Chicken Salad<br>2/Chicken Stew<br>===================================================
 **Command**: <br> `listrecipe 1` <br><br> **Description**: <br> Displays all ingredients used in recipe `1`. | listingredient 1<br>Here is the list of Ingredients in Recipe:<br><br>Format:Ingredient Name/Ingredient Category/Quantity/Price/Expiry<br>Recipe Name:Chicken Salad<br>milo/drink/10/0.0/null<br><br>===================================================
 
+[&#8593; Return to Top](#kitchen-helper---user-guide)
 
 #### 3.4.3. Delete a recipe: `deleterecipe`
 You can delete a recipe by using the recipe name or index from the list in Kitchen Helper. The name or index of the recipe can be found by displaying the list of recipes. 
@@ -253,6 +270,8 @@ Example |  Outcome
 **Command**: <br> `deleterecipe /n pasta` <br><br> **Description**: <br> Deletes the recipe with the name of `pasta` from the recipe list.| deleterecipe /n pasta <br> pasta has been deleted.<br>===================================================
 **Command**: <br> `deleterecipe /i 2` <br><br> **Description**: <br> Deletes recipe by index. In this case, delete recipe with the `index 2` from the recipe list. | deleterecipe /i 2 <br> Beef Salad has been deleted.<br>===================================================
 
+[&#8593; Return to Top](#kitchen-helper---user-guide)
+
 #### 3.4.4. Search for recipe: `searchrecipe` (Jin Fa)
 You can search for recipes based on a given keyword.  
 
@@ -266,6 +285,8 @@ __Format:__ `searchrecipe <KEYWORD>`
 Example |  Outcome
 --------|------------------
 **Command**: <br> `searchrecipe Chicken Salad` <br><br> **Description**: <br> Search by recipe's name. | Here are your matching recipes in your list <br> 1.Chicken Salad \[Location: Index 1\] <br> ===================================================
+
+[&#8593; Return to Top](#kitchen-helper---user-guide)
 
 #### 3.4.5. Cooking a recipe: `cookrecipe`
 Cooks a recipe specified by the user by the recipe’s name.
@@ -287,6 +308,8 @@ Sufficient ingredients for all ingredients required in the specified recipe. | *
 Insufficient ingredients for all ingredients required in the specified recipe regardless if the `ingredients` have expired or not. | **Command**: <br> `cookrecipe /n Chicken Salad /p 3`<br><br> **Description**: <br> Cooks the recipe `Chicken Salad` for 3 people| Kitchen Helper is trying to cook!<br>There are insufficient/missing ingredients!<br>===================================================
 Insufficient non-expired ingredients available. | **Command**: <br>`cookrecipe /n warm milk /p 2`  <br><br> **Description**: <br>Cooks the recipe `warm milk` for 2 people | Kitchen Helper is trying to cook!<br>There are insufficient/missing ingredients!<br>Please check for these expired ingredients: hl milk<br>===================================================
 
+[&#8593; Return to Top](#kitchen-helper---user-guide)
+
 ### 3.5. Chore
 
 #### 3.5.1. Adding a chore: `addchore`
@@ -298,6 +321,7 @@ Example |  Outcome
 --------|------------------
 **Command**: <br> `addchore buy groceries /by Monday 12pm` <br><br> **Description**: <br> Creates a new chore called `buy groceries` which contains the deadline `Monday 12pm.` | addchore buy groceries /by Monday 12pm <br> You have added this chore: <br> [x] buy groceries (by: Monday 12pm) <br> Now you have 2 chores in the list. <br> ===================================================
 
+[&#8593; Return to Top](#kitchen-helper---user-guide)
 
 #### 3.5.2. List chore: `listchore`
 Displays all the items currently in the chore list in Kitchen Helper.
@@ -308,6 +332,7 @@ Example |  Outcome
 --------|------------------
 **Command**: <br> `listchore` | listchore <br> Here are the chores in your list: <br> 1. [x] buy groceries (by: Monday 12pm) <br> 2. [/] scrub the floor (by: this Saturday) <br> ===================================================
 
+[&#8593; Return to Top](#kitchen-helper---user-guide)
 
 #### 3.5.3. Delete a chore: `deletechore`
 Deletes the chore specified by the index in the chore list in Kitchen Helper. The index of the chore can be found by displaying the list of chores.
@@ -318,6 +343,7 @@ Example |  Outcome
 --------|------------------
 **Command**: <br> `deletechore 1` <br><br> **Description**: <br> Deletes the item specified by `index 1` in the chore list. | deletechore 1 <br> You have deleted this chore: <br> [x] buy groceries (by: Monday 12pm) <br> Now you have 0 chores in the list. <br> ===================================================
 
+[&#8593; Return to Top](#kitchen-helper---user-guide)
 
 #### 3.5.4. Search for chore: `searchchore` (Jin Fa)
 You can search for chores based on a given keyword.  
@@ -334,6 +360,7 @@ Example |  Outcome
 **Command:** <br> `searchchore groceries` <br><br> **Description**: <br> Search by chore's description. | Here are your matching chores in your list <br> 1.\[x\] buy groceries (by: Monday 12pm) \[Location: Index 1\] <br> ===================================================
 **Command:** <br> `searchchore Monday` <br><br> **Description**: <br> Search by chore's description. | Here are your matching chores in your list <br> 1.\[x\] buy groceries (by: Monday 12pm) \[Location: Index 1\] <br> ===================================================
 
+[&#8593; Return to Top](#kitchen-helper---user-guide)
 
 #### 3.5.5. Mark chore as done: `done`
 Marks the chore specified by the index in the chore list in Kitchen Helper as done. The index of the chore can be found by displaying the list of chores.
@@ -343,6 +370,8 @@ __Format:__ `done <INDEX_TO_CHECK>`
 Example |  Outcome
 --------|------------------
 **Command**: <br> `done 1` <br><br> **Description**: <br> Marks the item specified by `index 1` in the chore list as done. | done 1 <br> You have completed this chore: <br> [/] buy groceries (by: Monday 12pm) <br> <br> ===================================================
+
+[&#8593; Return to Top](#kitchen-helper---user-guide)
 
 ### 3.6. Expenditure
 
@@ -354,6 +383,8 @@ __Format:__ `displayexpenditure`
 Example |  Outcome
 --------|------------------
 **Command**: <br> `displayexpenditure` <br>| displayexpenditure <br> This is the total amount you spent on buying Ingredients so far this week: $10.00  <br> This is the amount you actually spent for Ingredients used in your cooking this week: $6.00 <br> =================================================== 
+
+[&#8593; Return to Top](#kitchen-helper---user-guide)
 
 ## 4. Command Summary
 Here is a short summary of the command used in KitchenHelper application.  
@@ -409,3 +440,5 @@ __Expenditure Commands__
 Feature | Command  
 ------- | -------  
 displayexpenditure | `displayexpenditure` 
+
+[&#8593; Return to Top](#kitchen-helper---user-guide)
