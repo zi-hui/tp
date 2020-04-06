@@ -118,29 +118,6 @@ public class KitchenHelper {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        var sourceIngredient = new File("outputIngredient.txt");
-        var sourceRecipe = new File("outputRecipe.txt");
-        var sourceChore = new File("outputChore.txt");
-        var sourceExpenditure = new File("outputExpenditure.txt");
-        var destIngredient = new File("outputIngredientCopy.txt");
-        var destRecipe = new File("outputRecipeCopy.txt");
-        var destChore = new File("outputChoreCopy.txt");
-
-        if (destIngredient.length() == 0) {
-            Storage.copyFile(sourceIngredient, destIngredient);
-        }
-        if (destRecipe.length() == 0) {
-            Storage.copyFile(sourceRecipe, destRecipe);
-        }
-        if (destChore.length() == 0) {
-            Storage.copyFile(sourceChore, destChore);
-        }
-
-        var destExpenditure = new File("outputExpenditureCopy.txt");
-        if (destExpenditure.length() == 0) {
-            Storage.copyFile(sourceExpenditure, destExpenditure);
-        }
     }
     
     private void run() throws KitchenHelperException {
