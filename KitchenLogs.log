@@ -1,6 +1,0 @@
-Apr 06, 2020 2:12:20 PM seedu.kitchenhelper.parser.Parser prepareAddRecipe
-WARNING: An IO exception has been caught
-Apr 06, 2020 2:12:48 PM seedu.kitchenhelper.object.Recipe createIngr
-WARNING: An unidentifiable ingredient has been added to ingredient of Miscellaneous category
-Apr 06, 2020 2:12:48 PM seedu.kitchenhelper.command.AddRecipeCommand addRecipe
-INFO: A new recipe has been added
