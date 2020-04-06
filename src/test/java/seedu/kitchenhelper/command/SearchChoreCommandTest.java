@@ -24,9 +24,9 @@ class SearchChoreCommandTest {
         choreArrayList.add(new Chore("buy groceries", "Wednesday 12pm"));
         String expectedOutput = "Here are your matching chores in your list"
                                 + Ui.LS
-                                + "1.[x] buy groceries (by: Tuesday 12pm)"
+                                + "1.[x] buy groceries (by: Tuesday 12pm) [Location: Index 1]"
                                 + Ui.LS
-                                + "2.[x] buy groceries (by: Wednesday 12pm)";
+                                + "2.[x] buy groceries (by: Wednesday 12pm) [Location: Index 2]";
         String output = new Parser().parseUserCommand("searchchore groceries")
                 .execute(ingredientArrayList, recipeArrayList, choreArrayList).feedbackToUser;
         assertEquals(expectedOutput, output);
