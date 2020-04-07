@@ -244,7 +244,7 @@ When the user attempts to reduce the quantity of ingredient at index 1 of the in
 The following image below shows the sequence of steps for step 1 and 2:
 ![DeleteIngredient Sequence Diagram](images/deleteIngredientSequenceDiagramPart1.png)
 
-1) The user keyed in `deleteingredient /i 1 /q 4`.
+1. The user keyed in `deleteingredient /i 1 /q 4`.
    
     1. A `UI` object will be created and it will call `UI#getUserCommand()` method to take in the input that the user has keyed in.
     2. A `String` object will be returned and saved into the `userCommandInput` variable in `Kitchen Helper`.
@@ -252,14 +252,14 @@ The following image below shows the sequence of steps for step 1 and 2:
     
     ![DeleteIngredient State 1](images/deleteIngredientState1.png) 
     
-2) The command inserted by the user is being parsed into the `Parser` and a new `Command` object is being created. 
+2. The command inserted by the user is being parsed into the `Parser` and a new `Command` object is being created. 
     
     1. The variable `userCommandInput` will be identified as `deleteingredient` in the `Parser#parseUserCommand()`.The `Parser#prepareDeleteIngredient()` is being called to prepare the `userCommandInput` string to create a `DeleteIngredientCommand` object.
     2. The `DeleteIngredientCommand` object is created with the ingredientIndex and quantity set to 4. 
     
     ![DeleteIngredient State 2](images/deleteIngredientState2.png)
     
-3) After creating `DeleteIngredientCommand` object, this Command will now be executed. 
+3. After creating `DeleteIngredientCommand` object, this Command will now be executed. 
     
     The following image below shows the sequence for the next steps:
     
@@ -273,7 +273,7 @@ The following image below shows the sequence of steps for step 1 and 2:
     
     ![DeleteIngredient State 3](images/deleteIngredientState3.png)
     
-4)  The details will then be printed onto the console using `Ui#showResultToUser(result)`.
+4.  The details will then be printed onto the console using `Ui#showResultToUser(result)`.
 
 The following shows the full sequence diagram for this command:
 
@@ -298,20 +298,40 @@ Alternative 2: Create 1 more constructor just for deduction of quantity for ingr
 
 <br>
 Aspect 2: Calling of function for deletion of `ingredient` when `ingredient` has the quantity of zero.
-<br> 
-Alternative 1: One nested `if-else` block to cater for `deleteQuantity`and `deleteIngredient`
-
-|     |     |
-|-----|-----|
-|**Pros**|Concise block of `if-else`.|
-|**Cons**|The `if-else` block will be nested with another `if-else` block. This will violate the SLAP in code quality and the program will have to check for multiple conditions instead of one.
-
-Alternative 2: Two non-nested `if-else` blocks to cater for `deleteQuantity` and `deleteIngredient`. (Current Choice)
+<br><br>
+Alternative 1: Two non-nested `if-else` blocks to cater for `deleteQuantity` and `deleteIngredient`. (Current Choice)
 
 |     |     |
 |-----|-----|
 |**Pros**|SLAP is not violated. |
 |**Cons**|Longer lengths of codes. | 
+<br>
+Alternative 2: One nested `if-else` block to cater for `deleteQuantity`and `deleteIngredient`
+
+|     |     |
+|-----|-----|
+|**Pros**|Concise block of `if-else`.|
+|**Cons**|The `if-else` block will be nested with another `if-else` block. This will violate the SLAP in code quality and the program will have to check for multiple conditions instead of one.|
+<br>
+Aspect 3: Deletion by index instead of name for ingredients 
+<br>
+<br>
+Alternative 1: Deletion by index only (Current Choice)
+
+|     |     |
+|-----|-----|
+|**Pros**|Only a very specific ingredient can be deleted. Only need to get the ingredient from the list of ingredients by index. It is a more specific way to get the ingredient to delete. |
+|**Cons**|Users will not be able to delete the ingredient by name.| 
+
+Alternative 2: Deletion by both index and name 
+
+|     |     |
+|-----|-----|
+|**Pros**|Users will be able to delete by ingredients' name and index. |
+|**Cons**|There may be confusion when it comes to the deletion by name for the users as the algorithm that was supposed to be implemented for deletion by name will delete the first instance of ingredient that is found. In the case, whereby the list of ingredients have two `apples` but different expiry date and the user just want to delete the second `apple` that has a later expiry date. It will not be able to do so through deletion of name as the first instance of `apple` is the one that has an earlier expiry date. | 
+
+In the end, for `aspect 3`, we have chosen `alternative 1` which is to delete by index for ingredients only so that the users can have a more convenient time in deleting the specific ingredient that they want to delete. However, deletion by name for ingredients may be implemented and enhanced in the future implementations once we have finalised our idea for its implementation. 
+
 
 [&#8593; Return to Top](#developer-guide)
 
