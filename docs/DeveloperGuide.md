@@ -264,6 +264,7 @@ Alternative 2: Create 1 more constructor just for deduction of quantity for ingr
 |-----|-----|
 |**Pros**|This gives us more flexibility on what object can be created with different variables.|
 |**Cons**|There may be an overload of constructors.|
+
 <br>
 Aspect 2: Calling of function for deletion of `ingredient` when `ingredient` has the quantity of zero.
 <br> 
@@ -746,7 +747,7 @@ Logging Levels:
 Additional logging can be done by adding the calling of the global logger and invoking the function `log()`. This will ensure that all loggings will be made to the same file across the various classes. 
 
 An example is shown below:
-```java
+```
 public static final Logger kitchenLogs = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 kitchenLogs.log(Level.WARNING, description_of_warning_here, e.toString());
 ```
