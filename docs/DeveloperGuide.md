@@ -4,7 +4,7 @@ By: `CS2113T-M16-2` Since: `2020`
 ![Supported Java versions](https://img.shields.io/badge/Java-11-blue.svg) ![Supported OS](https://img.shields.io/badge/Supported%20OS-Windows|MacOS|Linux-yellow.svg) 
 - [Developer Guide](#developer-guide)
   * [1. Introduction](#1-introduction)
-    + [1.1. Background](#11-background)
+    + [1.1. Background](#11--background)
     + [1.2. Purpose](#12-purpose)
     + [1.3. Scope](#13-scope)
   * [2. Setting up](#2-setting-up)
@@ -37,8 +37,9 @@ By: `CS2113T-M16-2` Since: `2020`
     + [4.4. Storage](#44-storage)
       - [4.4.1. Select files to load from and save to](#441-select-files-to-load-from-and-save-to)
       - [4.4.2. Save current state](#442-save-current-state)
-    + [4.5. Logging](#45-logging)
-    + [4.6. Configuration](#46-configuration)
+    + [4.5. Display Expenditure](#45-display-expenditure)  
+    + [4.6. Logging](#46-logging)
+    + [4.7. Configuration](#47-configuration)
   * [Appendices](#appendices)
     + [Appendix A: Product Scope](#appendix-a-product-scope)
     + [Appendix B: User Stories](#appendix-b-user-stories)
@@ -48,12 +49,20 @@ By: `CS2113T-M16-2` Since: `2020`
     + [Appendix F: Instructions for Manual Testing](#appendix-f-instructions-for-manual-testing)
       - [F.1. Launch and Shutdown](#f1-launch-and-shutdown)
       - [F.2. Add an ingredient](#f2-add-an-ingredient)
-      - [F.3. Search for ingredient](#f3-search-for-ingredient)
-      - [F.4. Add a recipe](#f4-add-a-recipe)
-      - [F.5. Cook a recipe](#f5-cook-a-recipe)
-      - [F.6. Search for recipe](#f6-search-for-recipe)
-      - [F.7. Search for chore](#f7-search-for-chore)
-      - [F.8. Saving data](#f8-saving-data)
+      - [F.3. List ingredient](#f3-list-ingredient)
+      - [F.4. Delete an ingredient](#f4-delete-an-ingredient)
+      - [F.5. Search for ingredient](#f5-search-for-ingredient)
+      - [F.6. Add a recipe](#f6-add-a-recipe)
+      - [F.7. List recipe](#f7-list-recipe)
+      - [F.8. Cook a recipe](#f8-cook-a-recipe)
+      - [F.9. Delete a recipe](#f9-delete-a-recipe)
+      - [F.10. Search for recipe](#f10-search-for-recipe)
+      - [F.11. Add a chore](#f11-add-a-chore)
+      - [F.12. List chore](#f12-list-a-chore)
+      - [F.13. Delete a chore](#f13-delete-a-chore)
+      - [F.14. Search for chore](#f14-search-for-chore)
+      - [F.15. Saving data](#f15-saving-data)
+      - [F.16. Display expenditure](#f16-display-expenditure)
 
 ## 1. Introduction
 ### 1.1.  Background
@@ -714,8 +723,9 @@ Aspects: How saving of current state data executes:
 |**Pros** | The FileChannels technique is usually faster than its alternatives such as basic streams.|  
 |**Cons** | It may fail for very large files and more lines of codes are needed for implementation.|
 
+### 4.5. Display Expenditure
 
-### 4.5. Logging
+### 4.6. Logging
 Logging in the application refers to storing exceptions, warnings and messages that occur during the execution of Kitchen Helper. It was included to help developers to identify bugs and to simplify their debugging process. 
 
 The `java.util.logging` package in Java is used for logging. The logging mechanism can be managed from the `KitchenHelper` class through the `kitchenLogs` logger object.
@@ -741,7 +751,7 @@ public static final Logger kitchenLogs = Logger.getLogger(Logger.GLOBAL_LOGGER_N
 kitchenLogs.log(Level.WARNING, description_of_warning_here, e.toString());
 ```
 
-### 4.6. Configuration
+### 4.7. Configuration
 
 ## Appendices 
 ### Appendix A: Product Scope
@@ -881,7 +891,9 @@ Use case ends.
    2. Test case: 'addingredient /n beef /c meat /q 3 /p 20.20 /e 03/03/2020'    
    Expected: Entry can be seen using `listingredient all` command.
    
-#### F.3. Delete an ingredient 
+#### F.3. List ingredient 
+
+#### F.4. Delete an ingredient 
 1. Delete an ingredient from Kitchen Helper.
    1. Prerequisites: List all the recipes using the `listingredient all` command.
    2. Test case (if ingredient index exists): `deleteingredient /i 1`<br>
@@ -895,7 +907,7 @@ Use case ends.
    6. Test case (if the quantity of the ingredient is reduced to zero after deduction): `deleteingredient /i 1 /q 1`<br>
    Expected: The ingredient will be deleted as its final quantity is zero. This can be noticed by using `listingredient all` command.
     
-#### F.4. Search for ingredient
+#### F.5. Search for ingredient
 1. Search for ingredients in Kitchen Helper.
    1. Prerequisites: The ingredient list should not be empty.
    2. Test case: `searchingredient beef`  
@@ -907,13 +919,15 @@ Use case ends.
    5. Test case: `searchingredient $20`  
    Expected: Ingredient entries that have the keyword matching `$20` price are listed.
    
-#### F.5. Add a recipe
+#### F.6. Add a recipe
 1. Add a recipe into Kitchen Helper
     1. Prerequisites: List all the ingredient using the `listingredient all` command.
     1. Test case: `addrecipe /n warm milk /i HL Milk:1:Dairy`\
     Expected: Entry can be found using `listingredient all` command. 
 
-#### F.6. Cook a recipe
+#### F.7. List recipe
+
+#### F.8. Cook a recipe
 1. Cooks the specified recipe and ingredients in the recipe will be automatically deducted.
     1. Prerequisites: List all the ingredient using the `listingredient all` command.
     1. Test case (sufficient ingredient): `cookrecipe /n warm milk /p 2`\
@@ -923,7 +937,7 @@ Use case ends.
     1. Test case: (Insufficient even with expired ingredients): `cookrecipe /n warm milk /p 2`\
     Expected: The automatic deduction will not be carried out.
     
-#### F.7. Delete a recipe 
+#### F.9. Delete a recipe 
 1. Delete a recipe from Kitchen Helper.
    1. Prerequisites: List all the recipes using the `listrecipe all` command. 
    2. Test case (if recipe index or name exists): `deleterecipe /i 1` OR `deleterecipe /i warm milk`<br>
@@ -931,13 +945,19 @@ Use case ends.
    3. Test case (if recipe index or name does not exists): `deleterecipe /i -1` OR `deleterecipe /n Beef Stew`<br>
    Expected: No recipes are deleted. It can be noticed by using the `listrecipe all` command. 
 
-#### F.8. Search for recipe
+#### F.10. Search for recipe
 1. Search for similar recipe in Kitchen Helper.
    1. Prerequisites: The recipe list should not be empty.
    2. Test case: 'searchrecipe chicken' 
    Expected: Recipe's name entries that have the keyword matching `chicken' are listed. 
+
+#### F.11. Add a chore
+
+#### F.12. List a chore
+
+#### F.13. Delete a chore
    
-#### F.9. Search for chore
+#### F.14. Search for chore
 1. Search for chores in Kitchen Helper.
    1. Prerequisites: The chore list should not be empty.
    2. Test case: `searchchore groceries`  
@@ -945,7 +965,7 @@ Use case ends.
    3. Test case: `searchchore Tuesday`  
    Expected: Chore entries that have the keyword matching `Tuesday` as a string are listed.  
    
-#### F.10. Saving data
+#### F.15. Saving data
 
 1. Load ingredient data into Kitchen Helper.
    1. Prerequisites: The ingredient list save file should not be empty. 
@@ -966,3 +986,5 @@ If any of the save files are empty, the user can choose to populate the files wi
 3. `addingredient /n kailan /c Vegetable /q 30 /p 30.45 /e 12/03/2020`
 4. `addingredient /n HL Milk /c Dairy /q 3 /p 12.2 /e 14/03/2020`
 5. `addchore buy groceries /by Tuesday 12pm`
+
+#### F.16. Display expenditure
