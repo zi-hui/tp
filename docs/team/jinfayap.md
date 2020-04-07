@@ -52,13 +52,13 @@ Kitchen Helper is a desktop application mainly targeted for home user who often 
 Given below are sections I contributed to the User Guide.   
 They showcase my ability to write documentation targeting end-users.
 ```
-+ [Adding an ingredient](https://ay1920s2-cs2113t-m16-2.github.io/tp/UserGuide#331-adding-an-ingredient-addingredient) 
++ [Adding an ingredient](https://ay1920s2-cs2113t-m16-2.github.io/tp/UserGuide#331-adding-an-ingredient-addingredient-jin-fa) 
 
-+ [Search for ingredient](https://ay1920s2-cs2113t-m16-2.github.io/tp/UserGuide#334-search-for-ingredient-searchingredient)
++ [Search for ingredient](https://ay1920s2-cs2113t-m16-2.github.io/tp/UserGuide#334-search-for-ingredient-searchingredient-jin-fa)
 
-+ [Search for recipe](https://ay1920s2-cs2113t-m16-2.github.io/tp/UserGuide#344-search-for-recipe-searchrecipe)
++ [Search for recipe](https://ay1920s2-cs2113t-m16-2.github.io/tp/UserGuide#344-search-for-recipe-searchrecipe-jin-fa)
 
-+ [Search for chore](https://ay1920s2-cs2113t-m16-2.github.io/tp/UserGuide#354-search-for-chore-searchchore)
++ [Search for chore](https://ay1920s2-cs2113t-m16-2.github.io/tp/UserGuide#354-search-for-chore-searchchore-jin-fa)
 
 #### Contributions to the Developer Guide
 
@@ -77,4 +77,7 @@ They showcase my ability to write technical documentation and the technical dept
 
 + [Part of Use cases in Appendix C](https://ay1920s2-cs2113t-m16-2.github.io/tp/DeveloperGuide#appendix-c-value-proposition---use-cases)
 
-+ Instructions for Manual Testing in Appendix F (Example: [1](https://ay1920s2-cs2113t-m16-2.github.io/tp/DeveloperGuide#f2-add-an-ingredient), [2](https://ay1920s2-cs2113t-m16-2.github.io/tp/DeveloperGuide#f3-search-for-ingredient), [3](https://ay1920s2-cs2113t-m16-2.github.io/tp/DeveloperGuide#f4-search-for-recipe), [4](https://ay1920s2-cs2113t-m16-2.github.io/tp/DeveloperGuide#f5-search-for-chore))
++ Instructions for Manual Testing in Appendix F (Example: [1](https://ay1920s2-cs2113t-m16-2.github.io/tp/DeveloperGuide#f2-add-an-ingredient)
+, [2](https://ay1920s2-cs2113t-m16-2.github.io/tp/DeveloperGuide#f5-search-for-ingredient)
+, [3](https://ay1920s2-cs2113t-m16-2.github.io/tp/DeveloperGuide#f10-search-for-recipe)
+, [4](https://ay1920s2-cs2113t-m16-2.github.io/tp/DeveloperGuide#f14-search-for-chore))
