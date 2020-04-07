@@ -216,27 +216,39 @@ When the user attempts to reduce the quantity of ingredient at index 1 of the in
 The following image below shows the sequence of steps for step 1 and 2:
 ![DeleteIngredient Sequence Diagram](images/deleteIngredientSequenceDiagramPart1.png)
 
-1) The user keyed in “deleteingredient /i 1 /q 4”`.
+1) The user keyed in `deleteingredient /i 1 /q 4`.
+   
+    1. A `UI` object will be created and it will call `UI#getUserCommand()` method to take in the input that the user has keyed in.
+    2. A `String` object will be returned and saved into the `userCommandInput` variable in `Kitchen Helper`.
+    3. The variable `userCommandInput` is being parsed into the `Parser` class as an argument for this method `Parser#parseUserCommand`.
+    
     ![DeleteIngredient State 1](images/deleteIngredientState1.png) 
-    2. A `UI` object will be created and it will call `UI#getUserCommand()` method to take in the input that the user has keyed in.
-    3. A `String` object will be returned and saved into the `userCommandInput` variable in `Kitchen Helper`.
-    4. The variable `userCommandInput` is being parsed into the `Parser` class as an argument for this method `Parser#parseUserCommand`.
+    
 2) The command inserted by the user is being parsed into the `Parser` and a new `Command` object is being created. 
+    
+    1. The variable `userCommandInput` will be identified as `deleteingredient` in the `Parser#parseUserCommand()`.The `Parser#prepareDeleteIngredient()` is being called to prepare the `userCommandInput` string to create a `DeleteIngredientCommand` object.
+    2. The `DeleteIngredientCommand` object is created with the ingredientIndex and quantity set to 4. 
+    
     ![DeleteIngredient State 2](images/deleteIngredientState2.png)
-    2. The variable `userCommandInput` will be identified as `deleteingredient` in the `Parser#parseUserCommand()`.The `Parser#prepareDeleteIngredient()` is being called to prepare the `userCommandInput` string to create a `DeleteIngredientCommand` object.
-    3. The `DeleteIngredientCommand` object is created with the ingredientIndex and quantity set to 4. 
+    
 3) After creating `DeleteIngredientCommand` object, this Command will now be executed. 
-    ![DeleteIngredient State 3](images/deleteIngredientState3.png)
+    
     The following image below shows the sequence for the next steps:
+    
     ![DeleteIngredient Sequence Diagram](images/deleteIngredientSequenceDiagramPart2.png)
-    2. The `DeleteIngredientCommand#execute()` will be called which in turned called DeleteIngredientCommand#deleteIngredientByIndex()`. 
-    3. Since the `quantity` of this ingredient is not null, the `DeleteIngredientCommand#deleteQuantity()` will be called to reduce the quantity of this ingredient.  
-    4. When `DeleteIngredientCommand#deleteQuantity()` has returned, the program will get the quantity of the current ingredient after deduction. If the quantity is zero or null, the `DeleteIngredientCommand#deleteIngredient()` will be called to remove `ingredient` from the `ingredientsList` which contains all the ingredients. 
-    5. Then, `Storage#saveIngredientData()` will be called to save the current `ingredientsList` into an output file.
-    6. Lastly, a String called `feedbackToUser`will be returned to the user to inform the user of the outcome of the command. 
+    
+    1. The `DeleteIngredientCommand#execute()` will be called which in turned called DeleteIngredientCommand#deleteIngredientByIndex()`. 
+    2. Since the `quantity` of this ingredient is not null, the `DeleteIngredientCommand#deleteQuantity()` will be called to reduce the quantity of this ingredient.  
+    3. When `DeleteIngredientCommand#deleteQuantity()` has returned, the program will get the quantity of the current ingredient after deduction. If the quantity is zero or null, the `DeleteIngredientCommand#deleteIngredient()` will be called to remove `ingredient` from the `ingredientsList` which contains all the ingredients. 
+    4. Then, `Storage#saveIngredientData()` will be called to save the current `ingredientsList` into an output file.
+    5. Lastly, a String called `feedbackToUser`will be returned to the user to inform the user of the outcome of the command. 
+    
+    ![DeleteIngredient State 3](images/deleteIngredientState3.png)
+    
 4)  The details will then be printed onto the console using `Ui#showResultToUser(result)`.
 
 The following shows the full sequence diagram for this command:
+
 ![Delete Ingredient Sequence Diagram](images/deleteIngredientSequenceDiagram.png)
 
 ##### Design Considerations
@@ -412,30 +424,42 @@ The feature allows the user to cook a recipe if there are sufficient ingredients
 ##### Implementation 
 When the user attempts to cook `Chicken Salad` recipe from `Kitchen Helper`, the `Kitchen Helper`, `Parser` and `cookRecipeCommand` class will be called upon. The following sequence of steps will then occur:
 1. The user keyed in "cookrecipe /n `Chicken Salad`".
-    2. A `UI` object will be created and it will call `UI#getUserCommand()` method to take in the input that the user has keyed in. 
-    3. A `String` object will be returned and saved into the `userCommandInput` variable in `Kitchen Helper`. 
-    4. The variable `userCommandInput` is being parsed into the `Parser` class as an argument for this method `Parser#parseUserCommand()`.
+    
+    1. A `UI` object will be created and it will call `UI#getUserCommand()` method to take in the input that the user has keyed in. 
+    2. A `String` object will be returned and saved into the `userCommandInput` variable in `Kitchen Helper`. 
+    3. The variable `userCommandInput` is being parsed into the `Parser` class as an argument for this method `Parser#parseUserCommand()`.
+   
     ![Cook Recipe State 1](images/cookRecipeState1.png)
+    
 2. The command inserted by the user is being parsed into the `Parser` and a new `Command` object is being created. 
-    2. The variable `userCommandInput` will be identified as `cookrecipe` in the `Parser#parseUserCommand()`.The `Parser#prepareCookRecipe()` is being called to prepare the `userCommandInput` string to create a `CookRecipeCommand` object.
+    
+    1. The variable `userCommandInput` will be identified as `cookrecipe` in the `Parser#parseUserCommand()`.The `Parser#prepareCookRecipe()` is being called to prepare the `userCommandInput` string to create a `CookRecipeCommand` object.
+    
     ![Cook Recipe State 2](images/cookRecipeState2.png)
+    
 3. The command is now being executed.
-    2. The `CookRecipeCommand#execute()` will be called.
-    3. The `CookRecipeCommand#cookRecipe()` is called and it checks whether the recipe inputted by the user exists by calling the `CookRecipeCommand#checkIfRecipeExists()` method.
-    4. If recipe exists, the `CookRecipeCommand#checkIfRecipeExists()` method will return the index of the recipe, else it will return a number that is bigger than the size of `recipelist`. In this case, the recipe `Chicken Salad` exists, so it will return the index of the recipe 
-    5. Next, it is to check if there are sufficient non-expiring ingredients to be deducted from the ingredients' inventory to cater for the number of pax for the specific recipe by calling `CookRecipeCommand#checkForSufficientIngredients()` and `CookRecipeCommand#checkNotExpiredIngredientQty()` which their results are saved into `sufficientIngr` and `suffButLessExpiredIngr` boolean values respectively. 
+
+    1. The `CookRecipeCommand#execute()` will be called.
+    2. The `CookRecipeCommand#cookRecipe()` is called and it checks whether the recipe inputted by the user exists by calling the `CookRecipeCommand#checkIfRecipeExists()` method.
+    3. If recipe exists, the `CookRecipeCommand#checkIfRecipeExists()` method will return the index of the recipe, else it will return a number that is bigger than the size of `recipelist`. In this case, the recipe `Chicken Salad` exists, so it will return the index of the recipe 
+    4. Next, it is to check if there are sufficient non-expiring ingredients to be deducted from the ingredients' inventory to cater for the number of pax for the specific recipe by calling `CookRecipeCommand#checkForSufficientIngredients()` and `CookRecipeCommand#checkNotExpiredIngredientQty()` which their results are saved into `sufficientIngr` and `suffButLessExpiredIngr` boolean values respectively. 
+    
     ![Cook Recipe Sequence Diagram Part 2](images/cookRecipeCommandSequenceDiagramPart2.png)
-    6. Then, three of the following cases may happen:
-	   2. If both `sufficientIngr` and `suffButLessExpiredIngr` return true
-	       2. `CookRecipeCommand#deductIngredients()` will be called to deduct the ingredients in the ingredients' inventory.
-	       3. Then, `Storage#saveIngredientData()` will be called to save the current `ingredientsList` into an output file.
-	   3. If `sufficientIngr` returns true but `suffButLessExpiredIngr` returns false or both `sufficientIngr` and `suffButLessExpiredIngr` return false and the size of `expiredIngrNames` is not zero
-	       2. `CookRecipeCommand#craftExpiredList()` will be called to craft the list of expired ingredients which will be returned to tell the users the ingredients that are expired. 
-    7. Lastly, a String called `feedbackToUser` will be returned to the user to inform the user of the outcome of the command.
+    
+    5. Then, three of the following cases may happen:
+	   1. If both `sufficientIngr` and `suffButLessExpiredIngr` return true
+	       1. `CookRecipeCommand#deductIngredients()` will be called to deduct the ingredients in the ingredients' inventory.
+	       2. Then, `Storage#saveIngredientData()` will be called to save the current `ingredientsList` into an output file.
+	   2. If `sufficientIngr` returns true but `suffButLessExpiredIngr` returns false or both `sufficientIngr` and `suffButLessExpiredIngr` return false and the size of `expiredIngrNames` is not zero
+	       1. `CookRecipeCommand#craftExpiredList()` will be called to craft the list of expired ingredients which will be returned to tell the users the ingredients that are expired. 
+    6. Lastly, a String called `feedbackToUser` will be returned to the user to inform the user of the outcome of the command.
+    
     ![Cook Recipe State 3](images/cookRecipeState3.png)
+    
 4. The details will then be printed onto the console using `Ui#showResultToUser(result)`.
 
 The following shows the full sequence diagram for this command:
+
 ![Cook Recipe Sequence Diagram](images/cookRecipeCommandSequenceDiagram.png)
 
 ##### Design considerations
@@ -476,22 +500,32 @@ The deletion feature for specific recipes allows the user to delete recipes eith
 ##### Implementation
 When the user attempts to delete the `Chicken Rice` recipe from Kitchen Helper, the `Kitchen Helper`, `Parser` and `DeleteRecipeCommand` class will be called upon. The following sequence of steps will then occur: 
 1. The user keyed in “deleterecipe /n `Chicken Rice`".
+    
+    1. A `UI` object will be created and it will call `UI#getUserCommand()` method to take in the input that the user has keyed in. 
+    2. A `String` object will be returned and saved into the `userCommandInput` variable in `Kitchen Helper`. 
+    3. The variable `userCommandInput` is being parsed into the `Parser` class as an argument for this method `Parser#parseUserCommand()`.
+    
     ![Delete Recipe State 1](images/deleteRecipeState1.png)
-    2. A `UI` object will be created and it will call `UI#getUserCommand()` method to take in the input that the user has keyed in. 
-    3. A `String` object will be returned and saved into the `userCommandInput` variable in `Kitchen Helper`. 
-    4. The variable `userCommandInput` is being parsed into the `Parser` class as an argument for this method `Parser#parseUserCommand()`.
+    
 2. The command inserted by the user is being parsed into the `Parser` and a new `Command` object is being created. 
+    
+    1. The variable `userCommandInput` will be identified as `deleterecipe` in the `Parser#parseUserCommand()`.The `Parser#prepareDeleteRecipe()` is being called to prepare the `userCommandInput` string to create a `DeleteRecipeCommand` object.
+    
     ![Delete Recipe State 1](images/deleteRecipeState2.png)
-    2. The variable `userCommandInput` will be identified as `deleterecipe` in the `Parser#parseUserCommand()`.The `Parser#prepareDeleteRecipe()` is being called to prepare the `userCommandInput` string to create a `DeleteRecipeCommand` object.
+    
 3. The command is now being executed.
+    
+    1. The `DeleteRecipeCommand#execute()` will be called.
+    2. As this is a deletion by recipe name, the `recipeIndex` variable is set as null. As the variable is null, `DeleteRecipeCommand#deleteRecipeByName()` will be called.
+    3. Next, the `DeleteRecipeCommand#getRecipeIndex()` to get the index based on the recipe name that the user has inputted. With the given index, `DeleteRecipeCommand#deleteRecipe()` will be called to delete the recipe. 
+    4. Lastly, a String called `feedbackToUser` will be returned to the user to inform the user of the outcome of the command. 
+    
     ![Delete Recipe State 1](images/deleteRecipeState3.png)
-    2. The `DeleteRecipeCommand#execute()` will be called.
-    3. As this is a deletion by recipe name, the `recipeIndex` variable is set as null. As the variable is null, `DeleteRecipeCommand#deleteRecipeByName()` will be called.
-    4. Next, the `DeleteRecipeCommand#getRecipeIndex()` to get the index based on the recipe name that the user has inputted. With the given index, `DeleteRecipeCommand#deleteRecipe()` will be called to delete the recipe. 
-    5. Lastly, a String called `feedbackToUser` will be returned to the user to inform the user of the outcome of the command. 
+    
 4. The details will then be printed onto the console using `Ui#showResultToUser(result)`.
 
 The following shows the full sequence diagram for this command:
+
 ![Delete Recipe Sequence Diagram](images/deleteRecipeSequenceDiagram.png)
 
 ##### Design Considerations
