@@ -210,24 +210,34 @@ Alternative 2 (current choice): Creating a fixed array which includes the order 
 #### 4.1.3. Delete all/ specific ingredients(s)
 The deletion feature for ingredients allows the user to delete ingredients either by the name or index of the ingredients. In addition to that, it allows users to reduce the quantity of a specific ingredient. 
 
-![DeleteIngredient Sequence Diagram](images/deleteIngredientSequenceDiagram.png)
-
 ##### Implementation
-When the user attempts to reduce the quantity of ingredient at index 1 of the ingredients inventory by 4,  the `Kitchen Helper`, ‘Parser’ and ‘DeleteRecipeCommand` class will be called upon. The following sequence of steps will then occur: 
-1. The user keyed in “deleteingredient /i 1 /q 4”`. 
+When the user attempts to reduce the quantity of ingredient at index 1 of the ingredients inventory by 4,  the `Kitchen Helper`, ‘Parser’ and ‘DeleteIngredientCommand` class will be called upon. The following sequence of steps will then occur: 
+
+The following image below shows the sequence of steps for step 1 and 2:
+![DeleteIngredient Sequence Diagram](images/deleteIngredientSequenceDiagramPart1.png)
+
+1) The user keyed in “deleteingredient /i 1 /q 4”`.
+    ![DeleteIngredient State 1](images/deleteIngredientState1.png) 
     2. A `UI` object will be created and it will call `UI#getUserCommand()` method to take in the input that the user has keyed in.
     3. A `String` object will be returned and saved into the `userCommandInput` variable in `Kitchen Helper`.
     4. The variable `userCommandInput` is being parsed into the `Parser` class as an argument for this method `Parser#parseUserCommand`.
-2. The command inserted by the user is being parsed into the `Parser` and a new `Command` object is being created. 
+2) The command inserted by the user is being parsed into the `Parser` and a new `Command` object is being created. 
+    ![DeleteIngredient State 2](images/deleteIngredientState2.png)
     2. The variable `userCommandInput` will be identified as `deleteingredient` in the `Parser#parseUserCommand()`.The `Parser#prepareDeleteIngredient()` is being called to prepare the `userCommandInput` string to create a `DeleteIngredientCommand` object.
     3. The `DeleteIngredientCommand` object is created with the ingredientIndex and quantity set to 4. 
-3. The Command is now being executed. 
-    2. The `DeleteIngredientCommand#execute()` will be called.
-    3. As this is a deletion by ingredient index, the `ingredientIndex` variable is not null. As the `ingredientIndex` is not null, `DeleteIngredientCommand#deleteIngredientByIndex()`.
-    4. Next, `DeleteIngredientCommand#deleteIngredient()` is called to reduce the quantity of this ingredient since the `quantity` variable is not null. 
-    6. Next, `DeleteIngredientCommand#updateNewQuantity()` will be called to update the quantity of this ingredient in our ingredients’ inventory.
-    7. Lastly, a String called `feedbackToUser`will be returned to the user to inform the user of the outcome of the command. 
-4. The details will then be printed onto the console using `Ui#showResultToUser(result)`.
+3) After creating `DeleteIngredientCommand` object, this Command will now be executed. 
+    ![DeleteIngredient State 3](images/deleteIngredientState3.png)
+    The following image below shows the sequence for the next steps:
+    ![DeleteIngredient Sequence Diagram](images/deleteIngredientSequenceDiagramPart2.png)
+    2. The `DeleteIngredientCommand#execute()` will be called which in turned called DeleteIngredientCommand#deleteIngredientByIndex()`. 
+    3. Since the `quantity` of this ingredient is not null, the `DeleteIngredientCommand#deleteQuantity()` will be called to reduce the quantity of this ingredient.  
+    4. When `DeleteIngredientCommand#deleteQuantity()` has returned, the program will get the quantity of the current ingredient after deduction. If the quantity is zero or null, the `DeleteIngredientCommand#deleteIngredient()` will be called to remove `ingredient` from the `ingredientsList` which contains all the ingredients. 
+    5. Then, `Storage#saveIngredientData()` will be called to save the current `ingredientsList` into an output file.
+    6. Lastly, a String called `feedbackToUser`will be returned to the user to inform the user of the outcome of the command. 
+4)  The details will then be printed onto the console using `Ui#showResultToUser(result)`.
+
+The following shows the full sequence diagram for this command:
+![Delete Ingredient Sequence Diagram](images/deleteIngredientSequenceDiagram.png)
 
 ##### Design Considerations
 Aspect 1: How to differentiate `deleteingredientByQuantity` and `deleteIngredient` <br>
@@ -239,13 +249,28 @@ Alternative 1: The `quantity` of ingredient in `DeleteIngredientCommand` constru
 |**Pros**|Only a `quantity` variable needs to be set. This increases more convenience and no overload of constructors.|
 |**Cons**|Dependent on the variable to check if the ingredient is to be deleted. | 
 
-Alternative 2: Create 2 more constructors just for deduction of quantity for ingredients. <br>
+Alternative 2: Create 1 more constructor just for deduction of quantity for ingredients. <br>
 
 |     |     |
 |-----|-----|
-|**Pros**|This gives us more flexibility on what object can be created with different variables since there are two methods of delete of ingredients.|
-|**Cons**|There is an overload of constructors.|
+|**Pros**|This gives us more flexibility on what object can be created with different variables.|
+|**Cons**|There may be an overload of constructors.|
 <br>
+Aspect 2: Calling of function for deletion of `ingredient` when `ingredient` has the quantity of zero.
+<br> 
+Alternative 1: One nested `if-else` block to cater for `deleteQuantity`and `deleteIngredient`
+
+|     |     |
+|-----|-----|
+|**Pros**|Concise block of `if-else`.|
+|**Cons**|The `if-else` block will be nested with another `if-else` block. This will violate the SLAP in code quality and the program will have to check for multiple conditions instead of one.
+
+Alternative 2: Two non-nested `if-else` blocks to cater for `deleteQuantity` and `deleteIngredient`. (Current Choice)
+
+|     |     |
+|-----|-----|
+|**Pros**|SLAP is not violated. |
+|**Cons**|Longer lengths of codes. | 
 
 #### 4.1.4. Search for ingredients based on keyword(s)
 
@@ -384,25 +409,34 @@ Alternative 2 (current choice): Using arrayList.get(item) to get the recipe requ
 #### 4.2.3. Cooking of recipe
 The feature allows the user to cook a recipe if there are sufficient ingredients. The user will also indicate how many pax this recipe would be cooked for.
 
-![Cook Recipe Sequence Diagram](images/cookRecipeCommandSequenceDiagram.png)
-
 ##### Implementation 
 When the user attempts to cook `Chicken Salad` recipe from `Kitchen Helper`, the `Kitchen Helper`, `Parser` and `cookRecipeCommand` class will be called upon. The following sequence of steps will then occur:
 1. The user keyed in "cookrecipe /n `Chicken Salad`".
     2. A `UI` object will be created and it will call `UI#getUserCommand()` method to take in the input that the user has keyed in. 
     3. A `String` object will be returned and saved into the `userCommandInput` variable in `Kitchen Helper`. 
     4. The variable `userCommandInput` is being parsed into the `Parser` class as an argument for this method `Parser#parseUserCommand()`.
+    ![Cook Recipe State 1](images/cookRecipeState1.png)
 2. The command inserted by the user is being parsed into the `Parser` and a new `Command` object is being created. 
     2. The variable `userCommandInput` will be identified as `cookrecipe` in the `Parser#parseUserCommand()`.The `Parser#prepareCookRecipe()` is being called to prepare the `userCommandInput` string to create a `CookRecipeCommand` object.
+    ![Cook Recipe State 2](images/cookRecipeState2.png)
 3. The command is now being executed.
     2. The `CookRecipeCommand#execute()` will be called.
     3. The `CookRecipeCommand#cookRecipe()` is called and it checks whether the recipe inputted by the user exists by calling the `CookRecipeCommand#checkIfRecipeExists()` method.
-    4. If recipe exists, the `CookRecipeCommand#checkIfRecipeExists()` method will return the index of the recipe, else it will return a number that is bigger than the size of `recipelist`.
-    5. Next, it is to check if there are sufficient ingredients to be deducted from the ingredients' inventory to cater for the number of pax for the specific recipe by calling `CookRecipeCommand#checkForSufficientIngredients()` method.
-    6. If `CookRecipeCommand#checkForSufficientIngredients()` returns true, then `CookRecipeCommand#deductIngredients()` will be called to deduct the ingredients in the ingredients' inventory.
-    6. Lastly, a String called `feedbackToUser` will be returned to the user to inform the user of the outcome of the command.
+    4. If recipe exists, the `CookRecipeCommand#checkIfRecipeExists()` method will return the index of the recipe, else it will return a number that is bigger than the size of `recipelist`. In this case, the recipe `Chicken Salad` exists, so it will return the index of the recipe 
+    5. Next, it is to check if there are sufficient non-expiring ingredients to be deducted from the ingredients' inventory to cater for the number of pax for the specific recipe by calling `CookRecipeCommand#checkForSufficientIngredients()` and `CookRecipeCommand#checkNotExpiredIngredientQty()` which their results are saved into `sufficientIngr` and `suffButLessExpiredIngr` boolean values respectively. 
+    ![Cook Recipe Sequence Diagram Part 2](images/cookRecipeCommandSequenceDiagramPart2.png)
+    6. Then, three of the following cases may happen:
+	   2. If both `sufficientIngr` and `suffButLessExpiredIngr` return true
+	       2. `CookRecipeCommand#deductIngredients()` will be called to deduct the ingredients in the ingredients' inventory.
+	       3. Then, `Storage#saveIngredientData()` will be called to save the current `ingredientsList` into an output file.
+	   3. If `sufficientIngr` returns true but `suffButLessExpiredIngr` returns false or both `sufficientIngr` and `suffButLessExpiredIngr` return false and the size of `expiredIngrNames` is not zero
+	       2. `CookRecipeCommand#craftExpiredList()` will be called to craft the list of expired ingredients which will be returned to tell the users the ingredients that are expired. 
+    7. Lastly, a String called `feedbackToUser` will be returned to the user to inform the user of the outcome of the command.
+    ![Cook Recipe State 3](images/cookRecipeState3.png)
 4. The details will then be printed onto the console using `Ui#showResultToUser(result)`.
 
+The following shows the full sequence diagram for this command:
+![Cook Recipe Sequence Diagram](images/cookRecipeCommandSequenceDiagram.png)
 
 ##### Design considerations
 Aspect: Preparing the deduction of ingredients when cooking a recipe
@@ -439,22 +473,26 @@ Alternative 2: building an index on the first letter of the recipe name
 #### 4.2.4. Delete all/ specific recipe(s)
 The deletion feature for specific recipes allows the user to delete recipes either by the name or index of the recipe. 
 
-![Delete Recipe Sequence Diagram](images/deleteRecipeSequenceDiagram.png)
 ##### Implementation
 When the user attempts to delete the `Chicken Rice` recipe from Kitchen Helper, the `Kitchen Helper`, `Parser` and `DeleteRecipeCommand` class will be called upon. The following sequence of steps will then occur: 
 1. The user keyed in “deleterecipe /n `Chicken Rice`".
+    ![Delete Recipe State 1](images/deleteRecipeState1.png)
     2. A `UI` object will be created and it will call `UI#getUserCommand()` method to take in the input that the user has keyed in. 
     3. A `String` object will be returned and saved into the `userCommandInput` variable in `Kitchen Helper`. 
     4. The variable `userCommandInput` is being parsed into the `Parser` class as an argument for this method `Parser#parseUserCommand()`.
 2. The command inserted by the user is being parsed into the `Parser` and a new `Command` object is being created. 
+    ![Delete Recipe State 1](images/deleteRecipeState2.png)
     2. The variable `userCommandInput` will be identified as `deleterecipe` in the `Parser#parseUserCommand()`.The `Parser#prepareDeleteRecipe()` is being called to prepare the `userCommandInput` string to create a `DeleteRecipeCommand` object.
 3. The command is now being executed.
+    ![Delete Recipe State 1](images/deleteRecipeState3.png)
     2. The `DeleteRecipeCommand#execute()` will be called.
     3. As this is a deletion by recipe name, the `recipeIndex` variable is set as null. As the variable is null, `DeleteRecipeCommand#deleteRecipeByName()` will be called.
     4. Next, the `DeleteRecipeCommand#getRecipeIndex()` to get the index based on the recipe name that the user has inputted. With the given index, `DeleteRecipeCommand#deleteRecipe()` will be called to delete the recipe. 
     5. Lastly, a String called `feedbackToUser` will be returned to the user to inform the user of the outcome of the command. 
 4. The details will then be printed onto the console using `Ui#showResultToUser(result)`.
 
+The following shows the full sequence diagram for this command:
+![Delete Recipe Sequence Diagram](images/deleteRecipeSequenceDiagram.png)
 
 ##### Design Considerations
 Aspect: How is the `DeleteRecipeCommand` initialise. <br>
@@ -750,7 +788,7 @@ __Value proposition__: Manage food inventory quickly compared to a typical mouse
 |v2.0|user|retrieve all of my past history that i have entered in the application|view them again.|
 |v2.0|user|reset all my ingredients, chores, recipes|restart the application.|
 |v2.0|user|deduct ingredients that expire first|do not waste my ingredients.|
-|v2.0|user|be informed if I have sufficient ingredients to cook a specific recipe|find other recipes to cook.\
+|v2.0|user|be informed if I have sufficient ingredients to cook a specific recipe|find other recipes to cook.|
 
 ### Appendix C: Value proposition - Use cases
 
@@ -842,8 +880,22 @@ Use case ends.
    1. Prerequisites: List all the ingredient using the `listingredient all` command. 
    2. Test case: 'addingredient /n beef /c meat /q 3 /p 20.20 /e 03/03/2020'    
    Expected: Entry can be seen using `listingredient all` command.
+   
+#### F.3. Delete an ingredient 
+1. Delete an ingredient from Kitchen Helper.
+   1. Prerequisites: List all the recipes using the `listingredient all` command.
+   2. Test case (if ingredient index exists): `deleteingredient /i 1`<br>
+   Expected: The ingredient will be deleted. It can be noticed by using the `listingredient all` command. 
+   3. Test case (if ingredient index does not exists): `deleteingredient /i -1`<br>
+   Expected: No ingredients are deleted. It can be noticed by using the `listingredient all` command. 
+   4. Test case (if there is sufficient quantity to be reduced from the ingredient): `deleteingredient /i 1 /q 2`<br>
+   Expected: The quantity of the ingredient will change as seen by using `listingredient all` command.
+   5. Test case (if there are insufficient quantity to be reduced from the ingredient): `deleteingredient /i 1 /q 10`<br>
+   Expected: The quantity of the ingredient will not changed as seen by using `listingredient all` command. 
+   6. Test case (if the quantity of the ingredient is reduced to zero after deduction): `deleteingredient /i 1 /q 1`<br>
+   Expected: The ingredient will be deleted as its final quantity is zero. This can be noticed by using `listingredient all` command.
     
-#### F.3. Search for ingredient
+#### F.4. Search for ingredient
 1. Search for ingredients in Kitchen Helper.
    1. Prerequisites: The ingredient list should not be empty.
    2. Test case: `searchingredient beef`  
@@ -855,13 +907,13 @@ Use case ends.
    5. Test case: `searchingredient $20`  
    Expected: Ingredient entries that have the keyword matching `$20` price are listed.
    
-#### F.4. Add a recipe
+#### F.5. Add a recipe
 1. Add a recipe into Kitchen Helper
     1. Prerequisites: List all the ingredient using the `listingredient all` command.
     1. Test case: `addrecipe /n warm milk /i HL Milk:1:Dairy`\
     Expected: Entry can be found using `listingredient all` command. 
 
-#### F.5. Cook a recipe
+#### F.6. Cook a recipe
 1. Cooks the specified recipe and ingredients in the recipe will be automatically deducted.
     1. Prerequisites: List all the ingredient using the `listingredient all` command.
     1. Test case (sufficient ingredient): `cookrecipe /n warm milk /p 2`\
@@ -870,14 +922,22 @@ Use case ends.
     Expected: The automatic deduction will not be carried out and expired item will be notified to user.
     1. Test case: (Insufficient even with expired ingredients): `cookrecipe /n warm milk /p 2`\
     Expected: The automatic deduction will not be carried out.
+    
+#### F.7. Delete a recipe 
+1. Delete a recipe from Kitchen Helper.
+   1. Prerequisites: List all the recipes using the `listrecipe all` command. 
+   2. Test case (if recipe index or name exists): `deleterecipe /i 1` OR `deleterecipe /i warm milk`<br>
+   Expected: The recipe will be deleted. It can be noticed by using the `listrecipe all` command. 
+   3. Test case (if recipe index or name does not exists): `deleterecipe /i -1` OR `deleterecipe /n Beef Stew`<br>
+   Expected: No recipes are deleted. It can be noticed by using the `listrecipe all` command. 
 
-#### F.6. Search for recipe
+#### F.8. Search for recipe
 1. Search for similar recipe in Kitchen Helper.
    1. Prerequisites: The recipe list should not be empty.
    2. Test case: 'searchrecipe chicken' 
    Expected: Recipe's name entries that have the keyword matching `chicken' are listed. 
    
-#### F.7. Search for chore
+#### F.9. Search for chore
 1. Search for chores in Kitchen Helper.
    1. Prerequisites: The chore list should not be empty.
    2. Test case: `searchchore groceries`  
@@ -885,7 +945,7 @@ Use case ends.
    3. Test case: `searchchore Tuesday`  
    Expected: Chore entries that have the keyword matching `Tuesday` as a string are listed.  
    
-#### F.8. Saving data
+#### F.10. Saving data
 
 1. Load ingredient data into Kitchen Helper.
    1. Prerequisites: The ingredient list save file should not be empty. 
