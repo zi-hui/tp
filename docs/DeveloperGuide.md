@@ -247,15 +247,15 @@ The following image below shows the sequence of steps for step 1 and 2:
 1. The user keyed in `deleteingredient /i 1 /q 4`.
    
     1. A `UI` object will be created and it will call `UI#getUserCommand()` method to take in the input that the user has keyed in.
-    2. A `String` object will be returned and saved into the `userCommandInput` variable in `Kitchen Helper`.
-    3. The variable `userCommandInput` is being parsed into the `Parser` class as an argument for this method `Parser#parseUserCommand`.
+    1. A `String` object will be returned and saved into the `userCommandInput` variable in `Kitchen Helper`.
+    1. The variable `userCommandInput` is being parsed into the `Parser` class as an argument for this method `Parser#parseUserCommand`.
     
     ![DeleteIngredient State 1](images/deleteIngredientState1.png) 
     
 2. The command inserted by the user is being parsed into the `Parser` and a new `Command` object is being created. 
     
     1. The variable `userCommandInput` will be identified as `deleteingredient` in the `Parser#parseUserCommand()`.The `Parser#prepareDeleteIngredient()` is being called to prepare the `userCommandInput` string to create a `DeleteIngredientCommand` object.
-    2. The `DeleteIngredientCommand` object is created with the ingredientIndex and quantity set to 4. 
+    1. The `DeleteIngredientCommand` object is created with the ingredientIndex and quantity set to 4. 
     
     ![DeleteIngredient State 2](images/deleteIngredientState2.png)
     
@@ -266,10 +266,10 @@ The following image below shows the sequence of steps for step 1 and 2:
     ![DeleteIngredient Sequence Diagram](images/deleteIngredientSequenceDiagramPart2.png)
     
     1. The `DeleteIngredientCommand#execute()` will be called which in turned called DeleteIngredientCommand#deleteIngredientByIndex()`. 
-    2. Since the `quantity` of this ingredient is not null, the `DeleteIngredientCommand#deleteQuantity()` will be called to reduce the quantity of this ingredient.  
-    3. When `DeleteIngredientCommand#deleteQuantity()` has returned, the program will get the quantity of the current ingredient after deduction. If the quantity is zero or null, the `DeleteIngredientCommand#deleteIngredient()` will be called to remove `ingredient` from the `ingredientsList` which contains all the ingredients. 
-    4. Then, `Storage#saveIngredientData()` will be called to save the current `ingredientsList` into an output file.
-    5. Lastly, a String called `feedbackToUser`will be returned to the user to inform the user of the outcome of the command. 
+    1. Since the `quantity` of this ingredient is not null, the `DeleteIngredientCommand#deleteQuantity()` will be called to reduce the quantity of this ingredient.  
+    1. When `DeleteIngredientCommand#deleteQuantity()` has returned, the program will get the quantity of the current ingredient after deduction. If the quantity is zero or null, the `DeleteIngredientCommand#deleteIngredient()` will be called to remove `ingredient` from the `ingredientsList` which contains all the ingredients. 
+    1. Then, `Storage#saveIngredientData()` will be called to save the current `ingredientsList` into an output file.
+    1. Lastly, a String called `feedbackToUser`will be returned to the user to inform the user of the outcome of the command. 
     
     ![DeleteIngredient State 3](images/deleteIngredientState3.png)
     
@@ -280,58 +280,54 @@ The following shows the full sequence diagram for this command:
 ![Delete Ingredient Sequence Diagram](images/deleteIngredientSequenceDiagram.png)
 
 ##### Design Considerations
-Aspect 1: How to differentiate `deleteingredientByQuantity` and `deleteIngredient` <br>
-<br>
-Alternative 1: The `quantity` of ingredient in `DeleteIngredientCommand` constructor is set to the `quantity` that was inputted by the user. In the case where the user would like to delete an ingredient, the `quantity` variable will be set to `null`. (Current Choice)
++ Aspect 1: How to differentiate `deleteingredientByQuantity` and `deleteIngredient` <br>
+    + Alternative 1 (Current Choice): The `quantity` of ingredient in `DeleteIngredientCommand` constructor is set to the `quantity` that was inputted by the user. In the case where the user would like to delete an ingredient, the `quantity` variable will be set to `null`.
 
-|     |     |
-|-----|-----|
-|**Pros**|Only a `quantity` variable needs to be set. This increases more convenience and no overload of constructors.|
-|**Cons**|Dependent on the variable to check if the ingredient is to be deleted. | 
+        |     |     |
+        |-----|-----|
+        |**Pros**|Only a `quantity` variable needs to be set. This increases more convenience and no overload of constructors.|
+        |**Cons**|It is dependent on the variable to check if the ingredient is to be deleted. | 
 
-Alternative 2: Create 1 more constructor just for deduction of quantity for ingredients. <br>
+    + Alternative 2: Create 1 more constructor just for deduction of quantity for ingredients. <br>
 
-|     |     |
-|-----|-----|
-|**Pros**|This gives us more flexibility on what object can be created with different variables.|
-|**Cons**|There may be an overload of constructors.|
+        |     |     |
+        |-----|-----|
+        |**Pros**|This gives us more flexibility on what object can be created with different variables.|
+        |**Cons**|There may be an overload of constructors.|
+        
+    In the end, for `aspect 1`. we have chosen `alternative 1` because there will not be an overload of constructors.
 
-<br>
-Aspect 2: Calling of function for deletion of `ingredient` when `ingredient` has the quantity of zero.
-<br><br>
-Alternative 1: Two non-nested `if-else` blocks to cater for `deleteQuantity` and `deleteIngredient`. (Current Choice)
++ Aspect 2: Calling of function for deletion of `ingredient` when `ingredient` has the quantity of zero.
+    + Alternative 1 (Current Choice) : Two non-nested `if-else` blocks to cater for `deleteQuantity` and `deleteIngredient`.
+        
+        |     |     |
+        |-----|-----|
+        |**Pros**|SLAP is not violated. |
+        |**Cons**|Longer lengths of codes. | 
+    + Alternative 2: One nested `if-else` block to cater for `deleteQuantity`and `deleteIngredient`
 
-|     |     |
-|-----|-----|
-|**Pros**|SLAP is not violated. |
-|**Cons**|Longer lengths of codes. | 
-<br>
-Alternative 2: One nested `if-else` block to cater for `deleteQuantity`and `deleteIngredient`
+        |     |     |
+        |-----|-----|
+        |**Pros**|Concise block of `if-else`.|
+        |**Cons**|The `if-else` block will be nested with another `if-else` block. This will violate the SLAP in code quality and the program will have to check for multiple conditions instead of one.|
+        
+    In the end, for `aspect 2`, we have chosen `alternative 1` because there will be more concise blocks of `if-else` which helps to contribute to the non-violation of SLAP for the method.
++ Aspect 3: Deletion by index instead of name for ingredients 
+    + Alternative 1 (Current Choice): Deletion by index only
 
-|     |     |
-|-----|-----|
-|**Pros**|Concise block of `if-else`.|
-|**Cons**|The `if-else` block will be nested with another `if-else` block. This will violate the SLAP in code quality and the program will have to check for multiple conditions instead of one.|
-<br>
-Aspect 3: Deletion by index instead of name for ingredients 
-<br>
-<br>
-Alternative 1: Deletion by index only (Current Choice)
+        |     |     |
+        |-----|-----|
+        |**Pros**|Only a very specific ingredient can be deleted. Only need to get the ingredient from the list of ingredients by index. It is a more specific way to get the ingredient to delete. |
+        |**Cons**|Users will not be able to delete the ingredient by name.| 
 
-|     |     |
-|-----|-----|
-|**Pros**|Only a very specific ingredient can be deleted. Only need to get the ingredient from the list of ingredients by index. It is a more specific way to get the ingredient to delete. |
-|**Cons**|Users will not be able to delete the ingredient by name.| 
+    + Alternative 2: Deletion by both index and name 
 
-Alternative 2: Deletion by both index and name 
+        |     |     |
+        |-----|-----|
+        |**Pros**|Users will be able to delete by ingredients' name and index. |
+        |**Cons**|There may be confusion when it comes to the deletion by name for the users as the algorithm that was supposed to be implemented for deletion by name will delete the first instance of ingredient that is found. In the case, whereby the list of ingredients have two `apples` but different expiry date and the user just want to delete the second `apple` that has a later expiry date. It will not be able to do so through deletion of name as the first instance of `apple` is the one that has an earlier expiry date. | 
 
-|     |     |
-|-----|-----|
-|**Pros**|Users will be able to delete by ingredients' name and index. |
-|**Cons**|There may be confusion when it comes to the deletion by name for the users as the algorithm that was supposed to be implemented for deletion by name will delete the first instance of ingredient that is found. In the case, whereby the list of ingredients have two `apples` but different expiry date and the user just want to delete the second `apple` that has a later expiry date. It will not be able to do so through deletion of name as the first instance of `apple` is the one that has an earlier expiry date. | 
-
-In the end, for `aspect 3`, we have chosen `alternative 1` which is to delete by index for ingredients only so that the users can have a more convenient time in deleting the specific ingredient that they want to delete. However, deletion by name for ingredients may be implemented and enhanced in the future implementations once we have finalised our idea for its implementation. 
-
+    In the end, for `aspect 3`, we have chosen `alternative 1` which is to delete by index for ingredients only so that the users can have a more convenient time in deleting the specific ingredient that they want to delete. However, deletion by name for ingredients may be implemented and enhanced in the future implementations once we have finalised our idea for its implementation. 
 
 [&#8593; Return to Top](#developer-guide)
 
@@ -588,24 +584,40 @@ The following shows the full sequence diagram for this command:
 ![Delete Recipe Sequence Diagram](images/deleteRecipeSequenceDiagram.png)
 
 ##### Design Considerations
-Aspect: How is the `DeleteRecipeCommand` initialise. <br>
-<br>
-Alternative 1 (Current Choice): Usage of 2 constructors <br>
++ Aspect 1: How is the `DeleteRecipeCommand` initialise. <br>
+    + Alternative 1 (Current Choice): Usage of 2 constructors <br>
+        
+        |     |     |
+        |-----|-----|
+        |**Pros** | This gives us more flexibility on what object can be created with different variables since there are two methods of recipe deletion. |  
+        |**Cons** | There is an overload of constructors.|
+        
+    + Alternative 2: Usage of 1 constructor <br>
+    
+        |     |     |
+        |-----|-----|
+        |**Pros** |The Parser can call for one main default constructor. |
+        |**Cons** | The single constructor will need to deal with 2 different methods of deletion, causing the constructor to have more than one purpose.|
+    
+    In the end, for `aspect 1`, we have chosen `alternative 1` as there are two different types of deletion, it would be simpler and increase cohesion as it is more easier to express these constructors' functionality at a higher level.
 
-|     |     |
-|-----|-----|
-|**Pros** | This gives us more flexibility on what object can be created with different variables since there are two methods of recipe deletion. |  
-|**Cons** | There is an overload of constructors.|
-
-Rationale for using this: As there are two different types of deletion, it would be simpler and increase cohesion as it is more easier to express these constructors' functionality at a higher level.
-
-Alternative 2: Usage of 1 constructor <br>
-
-|     |     |
-|-----|-----|
-|**Pros** |The Parser can call for one main default constructor. |
-|**Cons** | The single constructor will need to deal with 2 different methods of deletion, causing the constructor to have more than one purpose.|
-
++ Aspect 2: Deletion by both index and name for recipes
+    + Alternative 1: Deletion by index only
+    
+        |     |     |
+        |-----|-----|
+        |**Pros**|A very specific recipe can be deleted.|
+        |**Cons**|Users will not be able to delete the recipe by name.| 
+    
+    + Alternative 2 (Current Choice): Deletion by both index and name 
+    
+        |     |     |
+        |-----|-----|
+        |**Pros**|Users will be able to delete by recipe's name and index. As the recipe names are specific, it will be easier to get the recipe from list of recipe by getting the index from the recipe name given or the index given by the user.|
+        |**Cons**|There may be more overhead as there is a need to find the index of the recipe if the user has given the recipe name for deletion. | 
+    
+    In the end, for `aspect 2`, we have chosen `alternative 2` which is to delete by index and name for recipes as the recipe names are unique when they are added, hence the users will be able to delete that specific recipe.
+    
 [&#8593; Return to Top](#developer-guide)
 
 #### 4.2.5. Search for recipe based on keyword(s)
