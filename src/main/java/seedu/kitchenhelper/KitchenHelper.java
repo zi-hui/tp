@@ -51,10 +51,11 @@ public class KitchenHelper {
         }
     }
 
+
     /**
      * Loads data from storage files into respective ingredient, recipe and chore lists as well as weekly expenditure.
      */
-    private void loadFromStorage(){
+    private void loadFromStorage() {
         try {
             ingredientList = new ArrayList<>(storage.getIngredientData());
             recipeList = new ArrayList<>(storage.getRecipeData());
@@ -170,7 +171,7 @@ public class KitchenHelper {
                 ui.printDivider();
             }
         } while (!userCommandInput.equalsIgnoreCase(ExitCommand.COMMAND_WORD));
-        
+
     }
 
     private void showNotifications() {
