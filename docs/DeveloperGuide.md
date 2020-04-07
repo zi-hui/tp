@@ -923,8 +923,11 @@ Use case ends.
 
 ### Appendix E: Glossary
 
-* *Mainstream OS* - Windows, Linux, Unix, OS-X
-
+* Category - The group of the ingredient belongs to
+* Price - Unit cost of a single quantity
+* Expiry - The expiry date of the ingredient
+* *Mainstream OS* - Windows, Linux, Unix, OS-X  
+ 
 [&#8593; Return to Top](#developer-guide)
 
 ### Appendix F: Instructions for Manual Testing
