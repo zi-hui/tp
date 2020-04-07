@@ -39,7 +39,6 @@ By: `CS2113T-M16-2` Since: `2020`
       - [4.4.2. Save current state](#442-save-current-state)
     + [4.5. Display Expenditure](#45-display-expenditure)  
     + [4.6. Logging](#46-logging)
-    + [4.7. Configuration](#47-configuration)
   * [Appendices](#appendices)
     + [Appendix A: Product Scope](#appendix-a-product-scope)
     + [Appendix B: User Stories](#appendix-b-user-stories)
@@ -798,10 +797,6 @@ kitchenLogs.log(Level.WARNING, description_of_warning_here, e.toString());
 
 [&#8593; Return to Top](#developer-guide)
 
-### 4.7. Configuration
-
-[&#8593; Return to Top](#developer-guide)
-
 ## Appendices 
 ### Appendix A: Product Scope
 
@@ -947,8 +942,12 @@ Use case ends.
 
 1. Add an ingredient into Kitchen Helper.
    1. Prerequisites: List all the ingredient using the `listingredient all` command. 
-   2. Test case: 'addingredient /n beef /c meat /q 3 /p 20.20 /e 03/03/2020'    
+   2. Test case: 'addingredient /n beef /c meat /q 3 /p 20.20 /e 03/03/2022'    
    Expected: Entry can be seen using `listingredient all` command.
+   3. Test case: 'addingredient /n chicken /c meat /q 3 /p 3 /e 03/03/2020'  
+   Expected: Expired ingredient detected in input. <br> Please enter a non-expired expiry date.
+   4. Test case: 'addingredient /n milo /c drink /q 0 /p 1 /e 03/03/2022'
+   Expected: Please enter a quantity more than 0.
    
 #### F.3. List ingredient 
 
@@ -973,8 +972,8 @@ Use case ends.
    Expected: Ingredient entries that have the keyword matching `beef` names are listed.
    3. Test case: 'searchingredient meat'  
    Expected: Ingredient entries that have the keyword matching `meat` category are listed.
-   4. Test case: `searchingredient 02/02/2020`  
-   Expected: Ingredient entries that have the keyword matching `02/02/2020` date are listed.
+   4. Test case: `searchingredient 02/02/2022`  
+   Expected: Ingredient entries that have the keyword matching `02/02/2022` date are listed.
    5. Test case: `searchingredient $20`  
    Expected: Ingredient entries that have the keyword matching `$20` price are listed.
    
