@@ -181,7 +181,7 @@ which have the following attributes:  category `meat`, quantity `2`, price `$20`
 
 ##### Implementation
 
-![addIngredientCommand](images/addIngredientCommand.png) 
+![addIngredientCommand](images/addIngredient_update.png) 
 
 The following steps explained “Sequence diagram for an example `addingredient` command”:  
 1. The user enters `addingredient /n beef /c meat /q 2 /p 20 /e 18/02/2020`.  
@@ -309,7 +309,7 @@ For example, `searchingredient beef` will find all the ingredients that contain 
 
 ##### Implementation  
 
-![SearchIngredientCommand](images/searchIngredientCommand1.png) 
+![SearchIngredientCommand](images/searchIngredient_update.png) 
 
 The following steps explained sequence diagram for `searchingredient` command:  
 1. The user enters `searchingredient beef`.  
@@ -561,7 +561,7 @@ For example, `searchrecipe Chicken` will find all recipes that contain `Chicken`
 
 ##### Implementation
 
-![SearchRecipeCommand](images/searchRecipeCommand1.png)
+![SearchRecipeCommand](images/searchrecipe_update.png)
 
 The following steps explained sequence diagram for `searchrecipe` command:  
 1. The user enters `searchrecipe Chicken`.  
@@ -657,7 +657,7 @@ For example, `searchchore groceries` will find all chores that contain `grocerie
 
 ##### Implementation  
 
-![SearchChoreCommand](images/searchChoreCommand1.png)
+![SearchChoreCommand](images/searchchore_update.png)
 
 The following steps explained sequence diagram for `searchchore` command:  
 1. The user enters `searchchore groceries`.  
