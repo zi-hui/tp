@@ -4,7 +4,7 @@ By: `CS2113T-M16-2` Since: `2020`
 ![Supported Java versions](https://img.shields.io/badge/Java-11-blue.svg) ![Supported OS](https://img.shields.io/badge/Supported%20OS-Windows|MacOS|Linux-yellow.svg) 
 - [Developer Guide](#developer-guide)
   * [1. Introduction](#1-introduction)
-    + [1.1. Background](#11-background)
+    + [1.1. Background](#11--background)
     + [1.2. Purpose](#12-purpose)
     + [1.3. Scope](#13-scope)
   * [2. Setting up](#2-setting-up)
@@ -37,8 +37,8 @@ By: `CS2113T-M16-2` Since: `2020`
     + [4.4. Storage](#44-storage)
       - [4.4.1. Select files to load from and save to](#441-select-files-to-load-from-and-save-to)
       - [4.4.2. Save current state](#442-save-current-state)
-    + [4.5. Logging](#45-logging)
-    + [4.6. Configuration](#46-configuration)
+    + [4.5. Display Expenditure](#45-display-expenditure)  
+    + [4.6. Logging](#46-logging)
   * [Appendices](#appendices)
     + [Appendix A: Product Scope](#appendix-a-product-scope)
     + [Appendix B: User Stories](#appendix-b-user-stories)
@@ -48,12 +48,20 @@ By: `CS2113T-M16-2` Since: `2020`
     + [Appendix F: Instructions for Manual Testing](#appendix-f-instructions-for-manual-testing)
       - [F.1. Launch and Shutdown](#f1-launch-and-shutdown)
       - [F.2. Add an ingredient](#f2-add-an-ingredient)
-      - [F.3. Search for ingredient](#f3-search-for-ingredient)
-      - [F.4. Add a recipe](#f4-add-a-recipe)
-      - [F.5. Cook a recipe](#f5-cook-a-recipe)
-      - [F.6. Search for recipe](#f6-search-for-recipe)
-      - [F.7. Search for chore](#f7-search-for-chore)
-      - [F.8. Saving data](#f8-saving-data)
+      - [F.3. List ingredient](#f3-list-ingredient)
+      - [F.4. Delete an ingredient](#f4-delete-an-ingredient)
+      - [F.5. Search for ingredient](#f5-search-for-ingredient)
+      - [F.6. Add a recipe](#f6-add-a-recipe)
+      - [F.7. List recipe](#f7-list-recipe)
+      - [F.8. Cook a recipe](#f8-cook-a-recipe)
+      - [F.9. Delete a recipe](#f9-delete-a-recipe)
+      - [F.10. Search for recipe](#f10-search-for-recipe)
+      - [F.11. Add a chore](#f11-add-a-chore)
+      - [F.12. List chore](#f12-list-a-chore)
+      - [F.13. Delete a chore](#f13-delete-a-chore)
+      - [F.14. Search for chore](#f14-search-for-chore)
+      - [F.15. Saving data](#f15-saving-data)
+      - [F.16. Display expenditure](#f16-display-expenditure)
 
 ## 1. Introduction
 ### 1.1.  Background
@@ -81,6 +89,8 @@ This describes the software architecture and software design requirements for Ki
 6. Click `Open as Project`.
 7. Click `OK` to accept the default settings if prompted. 
 
+[&#8593; Return to Top](#developer-guide)
+
 ## 3. Design
 This section provides a high level overview of our application, Kitchen Helper.
 ### 3.1. Architecture
@@ -103,6 +113,8 @@ In addition to that, the architecture of Kitchen Helper is broken down into seve
 - `Recipe`: This class manages the data of data type recipe in memory.
 - `Storage`: This class reads data from and writes data back into a text file for future uses.
 
+[&#8593; Return to Top](#developer-guide)
+
 ### 3.2. Ui Component
 ![Ui Component](images/UI_Component.png)
 
@@ -115,21 +127,29 @@ The `Ui` component,
 * Executes user commands using the command component
 * Listens for changes and outputs messages from the Command component
 
+[&#8593; Return to Top](#developer-guide)
+
 ### 3.3. Logic Component
 
-![Logic Component](images/logic.png)
+![Logic Component](images/logic_update.png)
 
 1. `Kitchen Helper` uses `Parser` class to parse the user command.
 2. This results in a command object return back which is executed by `Kitchen Helper`.
 3. The command execution can affect the object (e.g. adding an ingredient).
 4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to `Ui` to display the message.
 
+[&#8593; Return to Top](#developer-guide)
+
 ### 3.4. Model Component
 
 ![Model Component](images/model.png)
-* Stores the ingredient data.
-* Stores the recipe data.
-* Stores the chore data.
+
+The Model component contains `Ingredient`, `Recipe` and `Chore` classes, which store the user's input in Kitchen Helper.
+* Ingredient: Stores the ingredient data.
+* Recipe: Stores the recipe data.
+* Chore: Stores the chore data.
+
+[&#8593; Return to Top](#developer-guide)
 
 ### 3.5. Storage Component
 
@@ -143,8 +163,12 @@ The getIngredientData(), getRecipeData() and getChoreData() methods are used to 
 
 The saveIngredientData(), saveRecipeData() and saveChoreData() methods write the current state of KitchenHelper into the local save files by calling them in command classes such as AddChoreCommand and DeleteIngredientCommand.
 
+[&#8593; Return to Top](#developer-guide)
+
 ### 3.6. Common Classes 
 Classes used by multiple components are in the `seedu.kitchenhelper.object` package.
+
+[&#8593; Return to Top](#developer-guide)
 
 ## 4. Implementation
 This section describes some details on how the features are being implemented. All recipe/ ingredient/ chore-related features can be broken down into 4 distinct functionality, addition, listing, deletion and searching.
@@ -158,7 +182,7 @@ which have the following attributes:  category `meat`, quantity `2`, price `$20`
 
 ##### Implementation
 
-![addIngredientCommand](images/addIngredientCommand.png) 
+![addIngredientCommand](images/addIngredient_update.png) 
 
 The following steps explained “Sequence diagram for an example `addingredient` command”:  
 1. The user enters `addingredient /n beef /c meat /q 2 /p 20 /e 18/02/2020`.  
@@ -167,6 +191,8 @@ The following steps explained “Sequence diagram for an example `addingredient`
 4. `Parser#prepareAddIngredient()` will first validate the attributes and create an object `AddIngredientCommand` with the attributes if successful.  
 5. `KitchenHelper` calls it own method `executeCommand()` to execute the method in `AddIngredientCommand#execute()`.  
 6. On `AddIngredientCommand#execute()`, ingredient is added and return of the message.  
+
+[&#8593; Return to Top](#developer-guide)
 
 #### 4.1.2. List all/ specific ingredient(s)
 The list feature allows showing details of Ingredients added by the user.  All ingredients added will be shown in a sorted order, by expiry, and shown by categories. The function will require a valid string , which belongs to `all/dairy/drink/fruit/meat/miscellaneous/staple/vegetable`, 
@@ -206,6 +232,8 @@ Alternative 2 (current choice): Creating a fixed array which includes the order 
 |-----|-----|
 |**Pros** | Users would be able to get the details of the particular recipe accurately and fast. |
 |**Cons** | Program will not be able to handle any ingredient which isn’t belonging to the category names in the fixed array.  |
+
+[&#8593; Return to Top](#developer-guide)
 
 #### 4.1.3. Delete all/ specific ingredients(s)
 The deletion feature for ingredients allows the user to delete ingredients either by the name or index of the ingredients. In addition to that, it allows users to reduce the quantity of a specific ingredient. 
@@ -255,6 +283,7 @@ Alternative 2: Create 1 more constructor just for deduction of quantity for ingr
 |-----|-----|
 |**Pros**|This gives us more flexibility on what object can be created with different variables.|
 |**Cons**|There may be an overload of constructors.|
+
 <br>
 Aspect 2: Calling of function for deletion of `ingredient` when `ingredient` has the quantity of zero.
 <br> 
@@ -272,6 +301,8 @@ Alternative 2: Two non-nested `if-else` blocks to cater for `deleteQuantity` and
 |**Pros**|SLAP is not violated. |
 |**Cons**|Longer lengths of codes. | 
 
+[&#8593; Return to Top](#developer-guide)
+
 #### 4.1.4. Search for ingredients based on keyword(s)
 
 The search for ingredients feature allows the user to find ingredients using a keyword in the ingredient’s list.  
@@ -279,7 +310,7 @@ For example, `searchingredient beef` will find all the ingredients that contain 
 
 ##### Implementation  
 
-![SearchIngredientCommand](images/searchIngredientCommand1.png) 
+![SearchIngredientCommand](images/searchIngredient_update.png) 
 
 The following steps explained sequence diagram for `searchingredient` command:  
 1. The user enters `searchingredient beef`.  
@@ -306,6 +337,8 @@ Aspects: How `searchingredient` executes:
 |-----|-----|
 |**Pros** | 1. More accurate searching of the ingredient is available for the user.|  
 |**Cons** | 1. Requires users to enter more precise predicate keywords which could be more inconvenient.|
+
+[&#8593; Return to Top](#developer-guide)
 
 ### 4.2. Recipe-related Features
 #### 4.2.1. Addition of recipe
@@ -368,6 +401,8 @@ Alternative 3: User’s command are divided by space
 |**Pros** | The parsing can be easily done by calling Java built-in function `.split()` |
 |**Cons** | Values for each variable cannot contain spaces which makes the application restrictive. |
 
+[&#8593; Return to Top](#developer-guide)
+
 #### 4.2.2. List all/ specific recipe(s)
 The list feature allows showing details of a particular recipe created by the user.  All ingredients added into the recipe will be shown in a sorted order and shown by categories. The function will require valid string of a integer or `all` to be added as a parameter. Failure to do so will trigger an exception where the user will be notified of an invalid command and the syntax of the listing of the recipe will be displayed. 
 
@@ -405,6 +440,8 @@ Alternative 2 (current choice): Using arrayList.get(item) to get the recipe requ
 |-----|-----|
 |**Pros** | Users would be able to get the details of the particular recipe accurately and fast. |
 |**Cons** | Without proper checks done before running the command, it will result in error if the number indicated by the user exceeds the arraylist / does not exist in the arraylist.  |
+
+[&#8593; Return to Top](#developer-guide)
 
 #### 4.2.3. Cooking of recipe
 The feature allows the user to cook a recipe if there are sufficient ingredients. The user will also indicate how many pax this recipe would be cooked for.
@@ -470,6 +507,8 @@ Alternative 2: building an index on the first letter of the recipe name
 |**Pros**| More efficient search as pool of search space would be significantly smaller
 |**Cons**| Needs to be constantly maintained which incurs overhead.
 
+[&#8593; Return to Top](#developer-guide)
+
 #### 4.2.4. Delete all/ specific recipe(s)
 The deletion feature for specific recipes allows the user to delete recipes either by the name or index of the recipe. 
 
@@ -513,6 +552,7 @@ Alternative 2: Usage of 1 constructor <br>
 |**Pros** |The Parser can call for one main default constructor. |
 |**Cons** | The single constructor will need to deal with 2 different methods of deletion, causing the constructor to have more than one purpose.|
 
+[&#8593; Return to Top](#developer-guide)
 
 #### 4.2.5. Search for recipe based on keyword(s)
 
@@ -522,7 +562,7 @@ For example, `searchrecipe Chicken` will find all recipes that contain `Chicken`
 
 ##### Implementation
 
-![SearchRecipeCommand](images/searchRecipeCommand1.png)
+![SearchRecipeCommand](images/searchrecipe_update.png)
 
 The following steps explained sequence diagram for `searchrecipe` command:  
 1. The user enters `searchrecipe Chicken`.  
@@ -549,6 +589,8 @@ and returns the recipe’s name and the index of recipe in the recipe’s list.
 |-----|-----|
 |**Pros** | 1. More accurate searching of the recipe that uses the ingredients.|  
 |**Cons** | 1. Could be more memory intensive to find if the list is huge.|
+
+[&#8593; Return to Top](#developer-guide)
 
 ### 4.3. Chore-related Features
 #### 4.3.1. Addition of chore
@@ -577,6 +619,8 @@ Explanation of the sequence diagram above:
 |**Pros** | Increases flexibility if the user is unable to specify a date or time to complete the chore by.|  
 |**Cons** | Unable to alert the users of approaching deadlines that are set as Strings.|
 
+[&#8593; Return to Top](#developer-guide)
+
 #### 4.3.2. List all/ specific chore(s)
 The feature to list `chore`s allows the user to view the `chore`s currently in the list and their completion statuses. For example, `listchore`.
 ##### Implementation  
@@ -590,6 +634,7 @@ The feature to list `chore`s allows the user to view the `chore`s currently in t
 7.   This method will display each `chore` item in the list line by line or indicate an empty list if the list is empty.
 8.   The `execute()` method returns a String containing the formatted list of `chore`s to display. 
  
+[&#8593; Return to Top](#developer-guide)
 
 #### 4.3.3. Delete all/ specific chore(s)
 The feature for deletion of `chore`s allows the user to remove the `chore` specified by the index in the list. For example, `deletechore 1` deletes the first `chore` in the `chore` list. 
@@ -604,7 +649,7 @@ The feature for deletion of `chore`s allows the user to remove the `chore` speci
 7.   If the integer obtained is an index in the list, this method will remove the `chore` in that position from the `chore` list. Otherwise, an exception is thrown.
 8.   The execute() method returns a String to inform the user if the outcome is successful.
 
-
+[&#8593; Return to Top](#developer-guide)
 
 #### 4.3.4. Search for chore based on keyword(s)
 
@@ -613,7 +658,7 @@ For example, `searchchore groceries` will find all chores that contain `grocerie
 
 ##### Implementation  
 
-![SearchChoreCommand](images/searchChoreCommand1.png)
+![SearchChoreCommand](images/searchchore_update.png)
 
 The following steps explained sequence diagram for `searchchore` command:  
 1. The user enters `searchchore groceries`.  
@@ -638,6 +683,8 @@ The following steps explained sequence diagram for `searchchore` command:
 |-----|-----|
 |**Pros** | 1. More accurate searching of the chore is available for the user..|  
 |**Cons** | 1. Requires users to enter more precise predicate keywords which could be more inconvenient.|
+
+[&#8593; Return to Top](#developer-guide)
 
 ### 4.4. Storage
 #### 4.4.1. Select files to load from and save to
@@ -686,6 +733,8 @@ Aspects: How saving of files executes:
 |**Pros** | Faster as there is no need to go through the whole ArrayList whenever we save since changes are appended individually.|  
 |**Cons** | Difficult and slower to implement for commands that require deletion of objects.|
 
+[&#8593; Return to Top](#developer-guide)
+
 #### 4.4.2. Save current state
 The save current state feature allows the user to store the current state of the program data by manual-save mode. Manual-save mode data will be updated and replaced with the current state when save command is implemented.
 
@@ -714,8 +763,13 @@ Aspects: How saving of current state data executes:
 |**Pros** | The FileChannels technique is usually faster than its alternatives such as basic streams.|  
 |**Cons** | It may fail for very large files and more lines of codes are needed for implementation.|
 
+[&#8593; Return to Top](#developer-guide)
 
-### 4.5. Logging
+### 4.5. Display Expenditure
+
+[&#8593; Return to Top](#developer-guide)
+
+### 4.6. Logging
 Logging in the application refers to storing exceptions, warnings and messages that occur during the execution of Kitchen Helper. It was included to help developers to identify bugs and to simplify their debugging process. 
 
 The `java.util.logging` package in Java is used for logging. The logging mechanism can be managed from the `KitchenHelper` class through the `kitchenLogs` logger object.
@@ -736,12 +790,12 @@ Logging Levels:
 Additional logging can be done by adding the calling of the global logger and invoking the function `log()`. This will ensure that all loggings will be made to the same file across the various classes. 
 
 An example is shown below:
-```java
+```
 public static final Logger kitchenLogs = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 kitchenLogs.log(Level.WARNING, description_of_warning_here, e.toString());
 ```
 
-### 4.6. Configuration
+[&#8593; Return to Top](#developer-guide)
 
 ## Appendices 
 ### Appendix A: Product Scope
@@ -758,6 +812,8 @@ __Target user profile__:
 * Reminds user to stock up enough food.  
 
 __Value proposition__: Manage food inventory quickly compared to a typical mouse or graphic user interface driven application which saves time and makes it more convenient.  
+
+[&#8593; Return to Top](#developer-guide)
 
 ### Appendix B: User Stories
 
@@ -790,6 +846,8 @@ __Value proposition__: Manage food inventory quickly compared to a typical mouse
 |v2.0|user|deduct ingredients that expire first|do not waste my ingredients.|
 |v2.0|user|be informed if I have sufficient ingredients to cook a specific recipe|find other recipes to cook.|
 
+[&#8593; Return to Top](#developer-guide)
+
 ### Appendix C: Value proposition - Use cases
 
 (For all use cases below, the __System__ is `Kitchen Helper` and the __Actor__ is the `user`, unless otherwise stated)
@@ -804,6 +862,12 @@ Use case ends.
 Extensions:
 2a. System detects invalid format in the entered data.
   2a1. System throws invalid input format and shows a valid format example.
+  Use case resumes at step 2.
+2b. System detects zero quantity in the entered data.
+  2b1. Systems alerts you to enter a quantity more than zero.
+  Use case resumes at step 2.
+2c. System detects a expired expiry date in the entered data.
+  2c1. System alerts you that Expired ingredient detected in input. Please enter a non-expired expiry date.
   Use case resumes at step 2.
 ```
 <br>
@@ -851,6 +915,8 @@ Use case resumes at step 2.
 Use case ends.
 ```
 
+[&#8593; Return to Top](#developer-guide)
+
 ### Appendix D: Non-Functional Requirements
 
 1. Should work on any mainstream OS as long as it has Java `11` or above installed.
@@ -859,29 +925,42 @@ Use case ends.
 4. Should work for single user.
 5. Should be able to run without internet connection.
 
+[&#8593; Return to Top](#developer-guide)
+
 ### Appendix E: Glossary
 
-* *Mainstream OS* - Windows, Linux, Unix, OS-X
+* Category - The group of the ingredient belongs to
+* Price - Unit cost of a single quantity
+* Expiry - The expiry date of the ingredient
+* *Mainstream OS* - Windows, Linux, Unix, OS-X  
+ 
+[&#8593; Return to Top](#developer-guide)
 
 ### Appendix F: Instructions for Manual Testing
 
 #### F.1. Launch and Shutdown
 
 1. Initial launch
-   1. Download the jar file and copy into an empty folder.
+   1. Download the jar file, renamed it to `kitchenhelper` and copy into an empty folder.
    2. Open up command prompt or terminal.
    3. Change directory to where the jar file is located.
-   4. Run the command java -jar \<FILE\>.jar (FILE represents the filename)  
+   4. Run the command `java -jar kitchenhelper.jar` 
    Expected: Shows a welcome message from Kitchen Helper.
    
 #### F.2. Add an ingredient
 
 1. Add an ingredient into Kitchen Helper.
    1. Prerequisites: List all the ingredient using the `listingredient all` command. 
-   2. Test case: 'addingredient /n beef /c meat /q 3 /p 20.20 /e 03/03/2020'    
+   2. Test case: 'addingredient /n beef /c meat /q 3 /p 20.20 /e 03/03/2022'    
    Expected: Entry can be seen using `listingredient all` command.
+   3. Test case: 'addingredient /n chicken /c meat /q 3 /p 3 /e 03/03/2020'  
+   Expected: Expired ingredient detected in input. <br> Please enter a non-expired expiry date.
+   4. Test case: 'addingredient /n milo /c drink /q 0 /p 1 /e 03/03/2022'
+   Expected: Please enter a quantity more than 0.
    
-#### F.3. Delete an ingredient 
+#### F.3. List ingredient 
+
+#### F.4. Delete an ingredient 
 1. Delete an ingredient from Kitchen Helper.
    1. Prerequisites: List all the recipes using the `listingredient all` command.
    2. Test case (if ingredient index exists): `deleteingredient /i 1`<br>
@@ -895,25 +974,27 @@ Use case ends.
    6. Test case (if the quantity of the ingredient is reduced to zero after deduction): `deleteingredient /i 1 /q 1`<br>
    Expected: The ingredient will be deleted as its final quantity is zero. This can be noticed by using `listingredient all` command.
     
-#### F.4. Search for ingredient
+#### F.5. Search for ingredient
 1. Search for ingredients in Kitchen Helper.
    1. Prerequisites: The ingredient list should not be empty.
    2. Test case: `searchingredient beef`  
    Expected: Ingredient entries that have the keyword matching `beef` names are listed.
    3. Test case: 'searchingredient meat'  
    Expected: Ingredient entries that have the keyword matching `meat` category are listed.
-   4. Test case: `searchingredient 02/02/2020`  
-   Expected: Ingredient entries that have the keyword matching `02/02/2020` date are listed.
+   4. Test case: `searchingredient 02/02/2022`  
+   Expected: Ingredient entries that have the keyword matching `02/02/2022` date are listed.
    5. Test case: `searchingredient $20`  
    Expected: Ingredient entries that have the keyword matching `$20` price are listed.
    
-#### F.5. Add a recipe
+#### F.6. Add a recipe
 1. Add a recipe into Kitchen Helper
     1. Prerequisites: List all the ingredient using the `listingredient all` command.
     1. Test case: `addrecipe /n warm milk /i HL Milk:1:Dairy`\
     Expected: Entry can be found using `listingredient all` command. 
 
-#### F.6. Cook a recipe
+#### F.7. List recipe
+
+#### F.8. Cook a recipe
 1. Cooks the specified recipe and ingredients in the recipe will be automatically deducted.
     1. Prerequisites: List all the ingredient using the `listingredient all` command.
     1. Test case (sufficient ingredient): `cookrecipe /n warm milk /p 2`\
@@ -923,7 +1004,7 @@ Use case ends.
     1. Test case: (Insufficient even with expired ingredients): `cookrecipe /n warm milk /p 2`\
     Expected: The automatic deduction will not be carried out.
     
-#### F.7. Delete a recipe 
+#### F.9. Delete a recipe 
 1. Delete a recipe from Kitchen Helper.
    1. Prerequisites: List all the recipes using the `listrecipe all` command. 
    2. Test case (if recipe index or name exists): `deleterecipe /i 1` OR `deleterecipe /i warm milk`<br>
@@ -931,13 +1012,19 @@ Use case ends.
    3. Test case (if recipe index or name does not exists): `deleterecipe /i -1` OR `deleterecipe /n Beef Stew`<br>
    Expected: No recipes are deleted. It can be noticed by using the `listrecipe all` command. 
 
-#### F.8. Search for recipe
+#### F.10. Search for recipe
 1. Search for similar recipe in Kitchen Helper.
    1. Prerequisites: The recipe list should not be empty.
    2. Test case: 'searchrecipe chicken' 
    Expected: Recipe's name entries that have the keyword matching `chicken' are listed. 
+
+#### F.11. Add a chore
+
+#### F.12. List a chore
+
+#### F.13. Delete a chore
    
-#### F.9. Search for chore
+#### F.14. Search for chore
 1. Search for chores in Kitchen Helper.
    1. Prerequisites: The chore list should not be empty.
    2. Test case: `searchchore groceries`  
@@ -945,7 +1032,7 @@ Use case ends.
    3. Test case: `searchchore Tuesday`  
    Expected: Chore entries that have the keyword matching `Tuesday` as a string are listed.  
    
-#### F.10. Saving data
+#### F.15. Saving data
 
 1. Load ingredient data into Kitchen Helper.
    1. Prerequisites: The ingredient list save file should not be empty. 
@@ -966,3 +1053,7 @@ If any of the save files are empty, the user can choose to populate the files wi
 3. `addingredient /n kailan /c Vegetable /q 30 /p 30.45 /e 12/03/2020`
 4. `addingredient /n HL Milk /c Dairy /q 3 /p 12.2 /e 14/03/2020`
 5. `addchore buy groceries /by Tuesday 12pm`
+
+#### F.16. Display expenditure
+
+[&#8593; Return to Top](#developer-guide)
