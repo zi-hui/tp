@@ -132,7 +132,7 @@ The `Ui` component,
 
 ### 3.3. Logic Component
 
-![Logic Component](images/logic.png)
+![Logic Component](images/logic_update.png)
 
 1. `Kitchen Helper` uses `Parser` class to parse the user command.
 2. This results in a command object return back which is executed by `Kitchen Helper`.
@@ -144,9 +144,11 @@ The `Ui` component,
 ### 3.4. Model Component
 
 ![Model Component](images/model.png)
-* Stores the ingredient data.
-* Stores the recipe data.
-* Stores the chore data.
+
+The Model component contains `Ingredient`, `Recipe` and `Chore` classes, which store the user's input in Kitchen Helper.
+* Ingredient: Stores the ingredient data.
+* Recipe: Stores the recipe data.
+* Chore: Stores the chore data.
 
 [&#8593; Return to Top](#developer-guide)
 
