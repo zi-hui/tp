@@ -935,10 +935,10 @@ Use case ends.
 #### F.1. Launch and Shutdown
 
 1. Initial launch
-   1. Download the jar file and copy into an empty folder.
+   1. Download the jar file, renamed it to `kitchenhelper` and copy into an empty folder.
    2. Open up command prompt or terminal.
    3. Change directory to where the jar file is located.
-   4. Run the command java -jar \<FILE\>.jar (FILE represents the filename)  
+   4. Run the command `java -jar kitchenhelper.jar` 
    Expected: Shows a welcome message from Kitchen Helper.
    
 #### F.2. Add an ingredient
