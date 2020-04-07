@@ -863,6 +863,12 @@ Extensions:
 2a. System detects invalid format in the entered data.
   2a1. System throws invalid input format and shows a valid format example.
   Use case resumes at step 2.
+2b. System detects zero quantity in the entered data.
+  2b1. Systems alerts you to enter a quantity more than zero.
+  Use case resumes at step 2.
+2c. System detects a expired expiry date in the entered data.
+  2c1. System alerts you that Expired ingredient detected in input. Please enter a non-expired expiry date.
+  Use case resumes at step 2.
 ```
 <br>
 
