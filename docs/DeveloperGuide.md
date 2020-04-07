@@ -978,18 +978,18 @@ Use case ends.
    1. Download the jar file, renamed it to `kitchenhelper` and copy into an empty folder.
    2. Open up command prompt or terminal.
    3. Change directory to where the jar file is located.
-   4. Run the command `java -jar kitchenhelper.jar` 
-   Expected: Shows a welcome message from Kitchen Helper.
+   4. Run the command `java -jar kitchenhelper.jar`   
+   Expected: Shows a message to load data from normal mode or restore mode.
    
 #### F.2. Add an ingredient
 
 1. Add an ingredient into Kitchen Helper.
    1. Prerequisites: List all the ingredient using the `listingredient all` command. 
-   2. Test case: 'addingredient /n beef /c meat /q 3 /p 20.20 /e 03/03/2022'    
+   2. Test case: `addingredient /n beef /c meat /q 3 /p 20.20 /e 03/03/2022`    
    Expected: Entry can be seen using `listingredient all` command.
-   3. Test case: 'addingredient /n chicken /c meat /q 3 /p 3 /e 03/03/2020'  
+   3. Test case: `addingredient /n chicken /c meat /q 3 /p 3 /e 03/03/2020` 
    Expected: Expired ingredient detected in input. <br> Please enter a non-expired expiry date.
-   4. Test case: 'addingredient /n milo /c drink /q 0 /p 1 /e 03/03/2022'
+   4. Test case: `addingredient /n milo /c drink /q 0 /p 1 /e 03/03/2022`
    Expected: Please enter a quantity more than 0.
    
 #### F.3. List ingredient 
