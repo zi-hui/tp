@@ -118,7 +118,8 @@ public class Recipe {
     public void setRecipeName(String attributes) throws KitchenHelperException {
         try {
             String recipeNameAndIngr = attributes.substring(attributes.indexOf("/n") + 3, attributes.indexOf("/i") - 1);
-            recipeName = recipeNameAndIngr;
+            String trimmedRecipeName = recipeNameAndIngr.trim();
+            recipeName = trimmedRecipeName;
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             throw new KitchenHelperException("Invalid command");
         }

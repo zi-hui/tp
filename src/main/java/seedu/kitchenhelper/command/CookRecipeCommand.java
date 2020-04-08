@@ -2,6 +2,7 @@ package seedu.kitchenhelper.command;
 
 import seedu.kitchenhelper.exception.KitchenHelperException;
 import seedu.kitchenhelper.object.Chore;
+import seedu.kitchenhelper.object.Expenditure;
 import seedu.kitchenhelper.object.Recipe;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
 import seedu.kitchenhelper.storage.Storage;
@@ -96,7 +97,8 @@ public class CookRecipeCommand extends Command {
      * @return the remaining quantity of ingredients needed to cook
      */
 
-    public int checkIfIngredientExpired(Ingredient ingredientToDeduct, int totalCookedQty) {
+    public int checkIfIngredientExpired(Ingredient ingredientToDeduct, int totalCookedQty,
+                                        ArrayList<Ingredient> ingredientsList) {
         Date today = new Date();
         int quantity = ingredientToDeduct.getQuantity();
         try {
@@ -104,11 +106,16 @@ public class CookRecipeCommand extends Command {
             if (today.before(expiredDate)) {
                 if (quantity <= totalCookedQty) {
                     totalCookedQty -= quantity;
+                    Expenditure.getInstance().addAmountForCooking(ingredientToDeduct, quantity);
                     ingredientToDeduct.setQuantity(0);
                 } else {
+                    Expenditure.getInstance().addAmountForCooking(ingredientToDeduct, totalCookedQty);
                     ingredientToDeduct.setQuantity(quantity - totalCookedQty);
                     totalCookedQty = 0;
                 }
+            }
+            if (ingredientToDeduct.getQuantity() == 0) {
+                ingredientsList.remove(ingredientToDeduct);
             }
         } catch (ParseException e) {
             kitchenLogs.info(logcookRecipe);
@@ -131,7 +138,7 @@ public class CookRecipeCommand extends Command {
                 if (totalCookedQty == 0) {
                     break;
                 } else {
-                    totalCookedQty = checkIfIngredientExpired(ingredientToDeduct, totalCookedQty);
+                    totalCookedQty = checkIfIngredientExpired(ingredientToDeduct, totalCookedQty, ingredientList);
                 }
             }
         }
@@ -234,6 +241,10 @@ public class CookRecipeCommand extends Command {
             }
         }
         return availableIngrCount;
+    }
+
+    public void setExpiredIngrNames(ArrayList<String> expiredIngrNames) {
+        this.expiredIngrNames = expiredIngrNames;
     }
 
     /**

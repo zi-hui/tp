@@ -1,5 +1,6 @@
 package seedu.kitchenhelper.storage;
 
+import seedu.kitchenhelper.object.Expenditure;
 import seedu.kitchenhelper.object.Recipe;
 import seedu.kitchenhelper.object.Chore;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Date;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -35,6 +37,8 @@ public class Storage {
     private String filePathIngredient;
     private String filePathRecipe;
     private String filePathChore;
+    private String filePathExpenditure;
+
 
 
     /**
@@ -43,10 +47,11 @@ public class Storage {
      * @param filePathRecipe String of filepath for stored Recipe data.
      * @param filePathChore String of filepath for stored Chore data.
      */
-    public Storage(String filePathIngredient, String filePathRecipe, String filePathChore) {
+    public Storage(String filePathIngredient, String filePathRecipe, String filePathChore, String filePathExpenditure) {
         this.filePathIngredient = filePathIngredient;
         this.filePathRecipe = filePathRecipe;
         this.filePathChore = filePathChore;
+        this.filePathExpenditure = filePathExpenditure;
     }
 
     public static void copyFile(File source, File dest) {
@@ -263,9 +268,9 @@ public class Storage {
             String userData = scanner.nextLine();
             char isDone = userData.charAt(1);
             String[] description = userData.substring(4).split(" \\(by: ");
-            //Chore todo = new Chore(description[0], description[1].substring(0, description[1].length() - 1));
             Chore todo =
-                    createChore(description[0], description[1].substring(0, description[1].length() - 1));
+                    Chore.createChoreWhenLoadFile(description[0],
+                            description[1].substring(0, description[1].length() - 1));
 
             if (isDone == '/') {
                 todo.markAsDone();
@@ -276,14 +281,29 @@ public class Storage {
         return choreList;
     }
 
-    public Chore createChore(String description, String dateStr) {
+    public void loadExpenditureData() throws FileNotFoundException {
+
+        File file = new File(filePathExpenditure);
+        Scanner scanner = new Scanner(file);
+        //String userData = scanner.nextLine();
+
         try {
-            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-            Date date = dateFormat.parse(dateStr);
-            return new Chore(description, date);
-        } catch (ParseException e) {
-            return new Chore(description, dateStr);
+            String userData = scanner.nextLine();
+            String[] variables = userData.split(",");
+            int expenditureIndex = variables[0].indexOf('$') + 1;
+            double expenditure = Double.parseDouble(variables[0].substring(expenditureIndex));
+            int amountUsedIndex = variables[1].indexOf("$") + 1;
+            double amountUsed = Double.parseDouble(variables[1].substring(amountUsedIndex));
+
+            DateFormat dateFormat = new SimpleDateFormat("EEE dd/MM/yyyy HH:mm:ss");
+            Date lastSavedDate = dateFormat.parse(variables[2]);
+            Expenditure.getInstance().loadExpenditureVariables(expenditure, amountUsed, lastSavedDate);
+        } catch (NoSuchElementException | IndexOutOfBoundsException | ParseException e) {
+            throw new FileNotFoundException();
+        } finally {
+            scanner.close();
         }
+
     }
 
 
@@ -331,6 +351,16 @@ public class Storage {
             for (Chore chore : choreList) {
                 fw.write(chore.toString() + System.lineSeparator());
             }
+            fw.close();
+        } catch (IOException err) {
+            err.printStackTrace();
+        }
+    }
+
+    public static void saveExpenditureData() {
+        try {
+            FileWriter fw = new FileWriter("outputExpenditure.txt");
+            fw.write(Expenditure.getInstance().saveExpenditureFile());
             fw.close();
         } catch (IOException err) {
             err.printStackTrace();

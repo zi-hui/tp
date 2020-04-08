@@ -23,8 +23,8 @@ public class DeleteIngredientCommand extends Command {
     public static final String COMMAND_FAILURE = "This ingredient does not exist! Please type in a correct "
                                                     + "ingredient index.";
     public static final String COMMAND_SUCCESS_QUANTITY = "The quantity of %s has been changed!";
-    public static final String COMMAND_SUCCESS_ZERO_QUANTITY = "This ingredient that you are trying to deduct has "
-                                                                 + "a quantity of 0.\n";
+    public static final String COMMAND_SUCCESS_ZERO_QUANTITY = "\nThis ingredient has a quantity of 0 after "
+                                                                + "deduction, so it has been deleted.";
     public static final String COMMAND_FAILURE_QUANTITY = "Please enter a valid quantity to delete!\nCurrently:"
                                                             + "\n%s : %d";
     public static final String MESSAGE_USAGE = String.format("%s: %s", COMMAND_WORD, COMMAND_DESC) + Ui.LS + String
@@ -56,18 +56,18 @@ public class DeleteIngredientCommand extends Command {
      */
 
     public String deleteIngredientByIndex(ArrayList<Ingredient> ingredientsList) {
-        String feedbackToUser;
+        String feedbackToUser = "";
         int ingredientIndex = this.ingredientIndex;
         if (ingredientIndex > -1 && ingredientIndex < ingredientsList.size()) {
             assert ingredientIndex >= 0;
             Ingredient ingredientToDelete = ingredientsList.get(ingredientIndex);
-            int ingredientQuantity = ingredientToDelete.getQuantity();
             //Delete the entire ingredient when quantity is equals to zero too
-            if (quantity == null || ingredientQuantity == 0) {
-                feedbackToUser = deleteIngredient(ingredientToDelete, ingredientsList);
-            } else {
-                //Delete the quantity of the ingredient
+            if (quantity != null) {
                 feedbackToUser = deleteQuantity(ingredientToDelete);
+            }
+            int ingredientQuantity = ingredientToDelete.getQuantity();
+            if (ingredientQuantity == 0 || quantity == null) {
+                feedbackToUser += deleteIngredient(ingredientToDelete, ingredientsList);
             }
             Storage.saveIngredientData(ingredientsList);
         } else {
@@ -90,7 +90,7 @@ public class DeleteIngredientCommand extends Command {
         String ingredientName = ingredientToDelete.getIngredientName();
         int ingredientQuantity = ingredientToDelete.getQuantity();
         if (ingredientQuantity == 0 && quantity != null) {
-            feedbackToUser = String.format(COMMAND_SUCCESS_ZERO_QUANTITY + COMMAND_SUCCESS, ingredientName);
+            feedbackToUser = String.format(COMMAND_SUCCESS_ZERO_QUANTITY, ingredientName);
         } else {
             feedbackToUser = String.format(COMMAND_SUCCESS, ingredientName);
         }
@@ -135,6 +135,7 @@ public class DeleteIngredientCommand extends Command {
             feedbackToUser = String.format(COMMAND_FAILURE_QUANTITY, ingredientName, ingredientQuantity);
             assert ingredientQuantity != newQuantity;
         } else {
+            //Expenditure.getInstance().editExpenditure(ingredientToDelete, quantity);
             ingredientToDelete.setQuantity(newQuantity);
             feedbackToUser = String.format(COMMAND_SUCCESS_QUANTITY, ingredientName);
             assert ingredientToDelete.getQuantity() == newQuantity;
