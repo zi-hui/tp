@@ -23,7 +23,6 @@ By: `CS2113T-M16-2` Since: `2020`
       - [4.1.2. List all/ specific ingredient(s)](#412-list-all-specific-ingredients)
       - [4.1.3. Delete all/ specific ingredients(s)](#413-delete-all-specific-ingredientss)
       - [4.1.4. Search for ingredients based on keyword(s)](#414-search-for-ingredients-based-on-keywords)
-      - [4.1.5. Notification for ingredients warning](#415-notification-for-ingredients-warning)
     + [4.2. Recipe-related Features](#42-recipe-related-features)
       - [4.2.1. Addition of recipe](#421-addition-of-recipe)
       - [4.2.2. List all/ specific recipe(s)](#422-list-all-specific-recipes)
@@ -201,8 +200,6 @@ to be added as a parameter. Failure to do so will trigger an exception where the
 
 ##### Implementation
 When the user attempts to list the details of a particular category of ingredients, the `listIngredientCommand`, ‘Parser’ and `Ingredient` class will be accessed and the following sequence of actions are called to list details of  a particular category Ingredient list: <br>
-The following image below shows the sequence of steps for step 1 and 2:
-![ListIngredient Sequence Diagram](images/listIngredientSequenceDiagramPart1.png)
 1. User executes `listingredient all` 
     2. A `Ui` object will be created and calls `Ui#getUserCommand()`
     3. Input will be parsed in `Command#parseUserCommand()` and identified with the keyword `listingredient`.
@@ -212,18 +209,13 @@ The following image below shows the sequence of steps for step 1 and 2:
     3. A `ListIngredientCommand` object will be created.
     ![List Ingredient Step 2](images/ListIngredientCommand.png)   
 3. Executing Command
-    The following image below shows the sequence for the next steps:
-    
-    ![ListIngredient Sequence Diagram](images/listIngredientSequenceDiagramPart2.png)
     2. The newly created object will call `#ListIngredientCommand#execute` which starts the process of listing a particular category’s ingredient details, thus calling `ListIngredientCommand#listIngredients()`.
     3. The existing ingredientList arraylist and the category of the chosen ingredient category  will be passed through to the `ListIngredientCommand#listIngredients()`.
     4. The function will find if the category name is valid, thus, creates `CommandResult` result storing the details of the ingredient belonging to the particular category.
     ![List Ingredient Step 3](images/ListIngredientCommand2.png)
 4. The details will then be printed onto the console using `Ui#showResultToUser(result)`.
     
-The following shows the full sequence diagram for this command:
 
-![List Ingredient Sequence Diagram](images/listIngredientSequenceDiagram.png)
 ##### Design Considerations
 Aspect: Finding the category name and print out ingredient belonging to the category
 
@@ -374,55 +366,8 @@ Aspects: How `searchingredient` executes:
 |**Pros** | 1. More accurate searching of the ingredient is available for the user.|  
 |**Cons** | 1. Requires users to enter more precise predicate keywords which could be more inconvenient.|
 
-<<<<<<< HEAD
-#### 4.1.5. Notification for ingredients warning
-Function runs automatically when the application starts. Runs a check on all ingredient and list down ingredients that have expiring [< 3 days], expired and low quantity [< 5]. <br>
-For example, <br>
-`You have no ingredients that are expiring for the next 3 days.\`
-<br>
-`===================================================`
- <br>
- `You have no ingredients that are low in stock [< 5].`
- <br>
- `===================================================`
- <br>
- `You have no ingredients that are expired.`
- <br>
- `===================================================`
-<br>
-##### Implementation  
-
-
-
-The following steps explained sequence diagram for `searchingredient` command:  
-1. The user enters `searchingredient beef`.  
-2. `KitchenHelper` calls `Parser#parseUserCommand()`.  
-3. `SearchIngredientCommand` object is created with the keyword passed in.  
-4. `KitchenHelper` calls it own method `executeCommand()` to execute the method in `SearchIngredientCommand#execute()`.  
-5. On `SearchIngredientCommand#execute()`, display the list of ingredients that matches the keyword. 
-
-##### Design considerations:
-
-Aspects: How `searchingredient` executes:  
-
-- Alternative 1 (current choice): Find if the keyword is part of the substring of the ingredient, 
-`[Meat] Beef Qty:3 $20.00 Exp:18/03/2020.`  
-
-|     |     |
-|-----|-----|
-|**Pros** | 1. Easily to find by any attributes such as category, ingredient’s name,  quantity, price and expiry date.|  
-|**Cons** | 1. Searching `beef [meat]` will fail to show any matching result.|
-
-- Alternative 2: Take in all the predicates given by the user and find using the predicates as a keyword
-
-|     |     |
-|-----|-----|
-|**Pros** | 1. More accurate searching of the ingredient is available for the user.|  
-|**Cons** | 1. Requires users to enter more precise predicate keywords which could be more inconvenient.|
-=======
 [&#8593; Return to Top](#developer-guide)
 
->>>>>>> 6bce8cf1eafb17c110bf8a6025cad10ed3f10416
 ### 4.2. Recipe-related Features
 #### 4.2.1. Addition of recipe
 Users can add a new recipe to the application where there must be at least one or more `ingredient`s. The failure to do so will trigger an exception where the user will be notified of an invalid command and the syntax of the addition of recipe will be displayed. 
@@ -491,28 +436,21 @@ The list feature allows showing details of a particular recipe created by the us
 
 ##### Implementation
 When the user attempts to list the details of a particular recipe, the `listRecipeCommand`, ‘Parser’ and `Recipe` class will be accessed and the following sequence of actions are called to list details of  a particular `recipe` object:
-The following image below shows the sequence of steps for step 1 and 2:
-![ListRecipe Sequence Diagram](images/listRecipeSequenceDiagramPart1.png)
 1. User executes `listrecipe 1`  
     2. A `Ui` object will be created and calls `Ui#getUserCommand()`
     3. Input will be parsed in `Command#parseUserCommand()` and identified with the keyword `listrecipe`.
-    ![List Recipe Step 1](images/AddRecipe1.png)
+    ![List Ingredient Step 1](images/AddRecipe1.png)
 2. Parsing of user input and creation of command object
     2.This will automatically trigger the parsing of the user’s input string into a suitable format for the listing of `recipe` object in `Command#prepareListRecipe()`.
     3. A `ListRecipeCommand` object will be created.
-    ![List Recipe Step 2](images/ListRecipeCommand.png)   
+    ![List Ingredient Step 2](images/ListRecipeCommand.png)   
 3. Executing Command
-    The following image below shows the sequence for the next steps:
-    
-    ![Recipe Sequence Diagram](images/listRecipeSequenceDiagramPart2.png)
     2. The newly created object will call `ListRecipeCommand#execute` which starts the process of listing a particular recipe’s details, thus, calling `ListRecipeCommand#listRecipe()`.
     3. The existing recipeList arraylist and the item number of the chosen recipe will be passed through to the `ListRecipeCommand#listRecipe()`.
     4. The function will find if the item number is valid and contains details of the recipe, thus, creates a CommandResult storing the details of the particular recipe.
-    ![List Recipe Step 3](images/ListRecipeCommand2.png)
+    ![List Ingredient Step 3](images/ListRecipeCommand2.png)
 4. The details will then be printed onto the console using `Ui#showResultToUser(result)`.
-The following shows the full sequence diagram for this command:
-
-![List Recipe Sequence Diagram](images/listRecipeSequenceDiagram.png)    
+    
 
 ##### Design Considerations
 Aspect: Finding the recipe requested by the user.
