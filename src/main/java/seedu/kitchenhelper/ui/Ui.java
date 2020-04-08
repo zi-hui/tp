@@ -1,6 +1,8 @@
 package seedu.kitchenhelper.ui;
 
+import seedu.kitchenhelper.command.Command;
 import seedu.kitchenhelper.command.CommandResult;
+import seedu.kitchenhelper.command.ExitCommand;
 
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -31,7 +33,8 @@ public class Ui {
     public static final String MESSAGE_FOR_RESTORE_MODE = "Okay data have been loaded from the backup storage files.";
     public static final String MESSAGE_INVALID_CHOICE = "Invalid Choice! PLease choose either '1' for normal mode or"
             + " '2' for restore mode.";
-    
+    public static final String MESSAGE_TO_EXIT = "Please enter the exit command after selecting a loading mode.";
+
     private final Scanner in;
     private final PrintStream out;
     
@@ -71,11 +74,14 @@ public class Ui {
             System.out.println(MESSAGE_FOR_NORMAL_MODE);
         } else if (userChoice.trim().equals("2")) {
             System.out.println(MESSAGE_FOR_RESTORE_MODE);
+        } else if (userChoice.trim().equalsIgnoreCase(ExitCommand.COMMAND_WORD)) {
+            System.out.println(MESSAGE_TO_EXIT);
+            askForReInput();
         } else {
             askForReInput();
         }
     }
-    
+
     //@@author AY1920S2-CS2113T-M16-2-reused
     //Reused from
     //https://github.com/nus-cs2113-AY1920S2/personbook/blob/master/src/main/java/seedu/personbook/ui/TextUi.java
