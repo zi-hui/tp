@@ -11,8 +11,8 @@ By: `Team CS2113T-M16-2` Since: `March 2020` License: `MIT`
        - [3.1.3. Resetting the application: `reset`](#313-resetting-the-application-reset)  
        
     + [3.2 Storage](#32-storage)  
-       - [3.2.1. Select Load Files](#321-select-load-files)  
-       - [3.2.2. Save Current State: `save`](#322-save-current-state-save)
+       - [3.2.1. Select Load Files](#321-select-load-files-zi-hui)  
+       - [3.2.2. Save Current State: `save`](#322-save-current-state-save-zi-hui)
              
     + [3.3. Ingredient](#33-ingredient)  
        - [3.3.1. Adding an ingredient: `addingredient`](#331-adding-an-ingredient-addingredient-jin-fa)  
