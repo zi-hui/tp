@@ -21,11 +21,11 @@ By: `Team CS2113T-M16-2` Since: `March 2020` License: `MIT`
        - [3.3.4. Search for ingredient: `searchingredient`](#334-search-for-ingredient-searchingredient-jin-fa)  
 
     + [3.4. Recipe](#34-recipe)  
-      - [3.4.1. Adding a recipe: `addrecipe`](#341-adding-a-recipe-addrecipe)  
+      - [3.4.1. Adding a recipe: `addrecipe`](#341-adding-a-recipe-addrecipe-hui-zhen)  
       - [3.4.2. List recipe: `listrecipe`](#342-list-recipes-listrecipe)  
       - [3.4.3. Delete a recipe: `deleterecipe`](#343-delete-a-recipe-deleterecipe)
       - [3.4.4. Search for recipe: `searchrecipe`](#344-search-for-recipe-searchrecipe-jin-fa)  
-      - [3.4.5. Cooking a recipe: `cookrecipe`](#345-cooking-a-recipe-cookrecipe)
+      - [3.4.5. Cooking a recipe: `cookrecipe`](#345-cooking-a-recipe-cookrecipe-hui-zhen)
 
     + [3.5. Chore](#35-chore)  
       - [3.5.1. Adding a chore: `addchore`](#351-adding-a-chore-addchore)  
