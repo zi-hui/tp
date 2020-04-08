@@ -201,6 +201,8 @@ to be added as a parameter. Failure to do so will trigger an exception where the
 
 ##### Implementation
 When the user attempts to list the details of a particular category of ingredients, the `listIngredientCommand`, ‘Parser’ and `Ingredient` class will be accessed and the following sequence of actions are called to list details of  a particular category Ingredient list: <br>
+The following image below shows the sequence of steps for step 1 and 2:
+![ListIngredient Sequence Diagram](images/listIngredientSequenceDiagramPart1.png)
 1. User executes `listingredient all` 
     2. A `Ui` object will be created and calls `Ui#getUserCommand()`
     3. Input will be parsed in `Command#parseUserCommand()` and identified with the keyword `listingredient`.
@@ -210,13 +212,18 @@ When the user attempts to list the details of a particular category of ingredien
     3. A `ListIngredientCommand` object will be created.
     ![List Ingredient Step 2](images/ListIngredientCommand.png)   
 3. Executing Command
+    The following image below shows the sequence for the next steps:
+    
+    ![ListIngredient Sequence Diagram](images/listIngredientSequenceDiagramPart2.png)
     2. The newly created object will call `#ListIngredientCommand#execute` which starts the process of listing a particular category’s ingredient details, thus calling `ListIngredientCommand#listIngredients()`.
     3. The existing ingredientList arraylist and the category of the chosen ingredient category  will be passed through to the `ListIngredientCommand#listIngredients()`.
     4. The function will find if the category name is valid, thus, creates `CommandResult` result storing the details of the ingredient belonging to the particular category.
     ![List Ingredient Step 3](images/ListIngredientCommand2.png)
 4. The details will then be printed onto the console using `Ui#showResultToUser(result)`.
     
+The following shows the full sequence diagram for this command:
 
+![List Ingredient Sequence Diagram](images/listIngredientSequenceDiagram.png)
 ##### Design Considerations
 Aspect: Finding the category name and print out ingredient belonging to the category
 
@@ -484,21 +491,28 @@ The list feature allows showing details of a particular recipe created by the us
 
 ##### Implementation
 When the user attempts to list the details of a particular recipe, the `listRecipeCommand`, ‘Parser’ and `Recipe` class will be accessed and the following sequence of actions are called to list details of  a particular `recipe` object:
+The following image below shows the sequence of steps for step 1 and 2:
+![ListRecipe Sequence Diagram](images/listRecipeSequenceDiagramPart1.png)
 1. User executes `listrecipe 1`  
     2. A `Ui` object will be created and calls `Ui#getUserCommand()`
     3. Input will be parsed in `Command#parseUserCommand()` and identified with the keyword `listrecipe`.
-    ![List Ingredient Step 1](images/AddRecipe1.png)
+    ![List Recipe Step 1](images/AddRecipe1.png)
 2. Parsing of user input and creation of command object
     2.This will automatically trigger the parsing of the user’s input string into a suitable format for the listing of `recipe` object in `Command#prepareListRecipe()`.
     3. A `ListRecipeCommand` object will be created.
-    ![List Ingredient Step 2](images/ListRecipeCommand.png)   
+    ![List Recipe Step 2](images/ListRecipeCommand.png)   
 3. Executing Command
+    The following image below shows the sequence for the next steps:
+    
+    ![Recipe Sequence Diagram](images/listRecipeSequenceDiagramPart2.png)
     2. The newly created object will call `ListRecipeCommand#execute` which starts the process of listing a particular recipe’s details, thus, calling `ListRecipeCommand#listRecipe()`.
     3. The existing recipeList arraylist and the item number of the chosen recipe will be passed through to the `ListRecipeCommand#listRecipe()`.
     4. The function will find if the item number is valid and contains details of the recipe, thus, creates a CommandResult storing the details of the particular recipe.
-    ![List Ingredient Step 3](images/ListRecipeCommand2.png)
+    ![List Recipe Step 3](images/ListRecipeCommand2.png)
 4. The details will then be printed onto the console using `Ui#showResultToUser(result)`.
-    
+The following shows the full sequence diagram for this command:
+
+![List Recipe Sequence Diagram](images/listRecipeSequenceDiagram.png)    
 
 ##### Design Considerations
 Aspect: Finding the recipe requested by the user.
