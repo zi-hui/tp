@@ -206,7 +206,7 @@ The following image below shows the sequence of steps for step 1 and 2:
 1. User executes `listingredient all` 
     2. A `Ui` object will be created and calls `Ui#getUserCommand()`
     3. Input will be parsed in `Command#parseUserCommand()` and identified with the keyword `listingredient`.
-    ![List Ingredient Step 1](images/AddRecipe1.png)
+    ![List Ingredient Step 1](images/listIngredient1.png)
 2. Parsing of user input and creation of command object
     2.This will automatically trigger the parsing of the user’s input string into a suitable format for the listing of a particular category of  `ingredient` object in `Command#prepareListIngredient()`.
     3. A `ListIngredientCommand` object will be created.
@@ -441,7 +441,7 @@ Alternative 3: User’s command are divided by space
 
 [&#8593; Return to Top](#developer-guide)
 
-#### 4.2.2. List all/ specific recipe(s)
+#### 4.2.2. List all/ specific recipe(s) 
 The list feature allows showing details of a particular recipe created by the user.  All ingredients added into the recipe will be shown in a sorted order and shown by categories. The function will require valid string of a integer or `all` to be added as a parameter. Failure to do so will trigger an exception where the user will be notified of an invalid command and the syntax of the listing of the recipe will be displayed. 
 
 ##### Implementation
@@ -451,7 +451,7 @@ The following image below shows the sequence of steps for step 1 and 2:
 1. User executes `listrecipe 1`  
     2. A `Ui` object will be created and calls `Ui#getUserCommand()`
     3. Input will be parsed in `Command#parseUserCommand()` and identified with the keyword `listrecipe`.
-    ![List Recipe Step 1](images/AddRecipe1.png)
+    ![List Recipe Step 1](images/listRecipe1.png)
 2. Parsing of user input and creation of command object
     2.This will automatically trigger the parsing of the user’s input string into a suitable format for the listing of `recipe` object in `Command#prepareListRecipe()`.
     3. A `ListRecipeCommand` object will be created.
