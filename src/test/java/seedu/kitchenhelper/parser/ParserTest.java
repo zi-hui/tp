@@ -10,6 +10,7 @@ import seedu.kitchenhelper.command.SearchRecipeCommand;
 import seedu.kitchenhelper.command.DeleteChoreCommand;
 import seedu.kitchenhelper.command.DeleteIngredientCommand;
 import seedu.kitchenhelper.command.InvalidCommand;
+import seedu.kitchenhelper.common.Messages;
 import seedu.kitchenhelper.exception.KitchenHelperException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -39,7 +40,7 @@ class ParserTest {
     void prepareAddInventory_testPass() {
         String correctAttributes = "/n Beef /c Meat /q 30 /p 20.2 /e 20/02/2022";
         assertTrue(new Parser().prepareAddIngredient(correctAttributes) instanceof AddIngredientCommand);
-        String output = String.format(AddIngredientCommand.MESSAGE_SUCCESS, "Beef", "Meat", 30, 20.2, "20/02/2022");
+        String output = String.format(Messages.MESSAGE_ADD_INGREDIENT_SUCCESS, "Beef", "Meat", 30, 20.2, "20/02/2022");
         assertEquals(output, showToConsole(new KitchenHelper()
                 .executeCommand(new Parser().prepareAddIngredient(correctAttributes)).feedbackToUser));
     }
@@ -49,35 +50,35 @@ class ParserTest {
         String incorrectAttributes = "/ Beef /c Meat /q 30 /p 20.2 /e 20/02/2020";
         assertTrue(new Parser().prepareAddIngredient(incorrectAttributes) instanceof InvalidCommand);
         String output = "Invalid Command Format!\n"
-                        + "Adds a ingredient to the ingredient list. /n INGREDIENT /c CATEGORY /q QUANTITY /p PRICE /e"
-                        + " EXPIRY\n" + "Example: addingredient /n Beef /c Meat /q 1 /p 13.5 /e 13/02/2020";
+                        + "Adds a ingredient to the ingredient list. /n <INGREDIENT> /c <CATEGORY> /q <QUANTITY> /p "
+                        + "<PRICE> /e"
+                        + " <EXPIRY>\n" + "Example: addingredient /n Beef /c Meat /q 1 /p 13.5 /e 13/02/2022";
         assertEquals(output, showToConsole(new KitchenHelper()
                 .executeCommand(new Parser().prepareAddIngredient(incorrectAttributes)).feedbackToUser));
     }
-
+    
     @Test
     void prepareAddChore_testPass() {
         String correctAttributes = "buy groceries /by Tuesday 12pm";
         assertTrue(new Parser().prepareAddChore(correctAttributes) instanceof AddChoreCommand);
     }
-
+    
     @Test
     void prepareAddChore_testFail() {
         String incorrectAttributes = "buy groceries";
-        String output = "Invalid Command Format!\n"
-                + "Adds a chore to the chore list. TASK /by DATE\n"
-                + "Example: addchore buy groceries /by Tuesday 12pm";
-        assertEquals(output, showToConsole(new KitchenHelper()
-                .executeCommand(new Parser().prepareAddChore(incorrectAttributes)).feedbackToUser));
+        String output = "Invalid Command Format!\n" + "Adds a chore to the chore list. TASK /by DATE\n"
+                        + "Example: addchore buy groceries /by Tuesday 12pm";
+        assertEquals(output, showToConsole(
+                new KitchenHelper().executeCommand(new Parser().prepareAddChore(incorrectAttributes)).feedbackToUser));
     }
-
+    
     @Test
     void prepareDeleteIngredient_testPass() throws KitchenHelperException {
         String correctAttributes = "/i 1";
         //checking the instance of the DeleteIngredientCommand
         assertTrue(new Parser().prepareDeleteIngredient(correctAttributes) instanceof DeleteIngredientCommand);
     }
-
+    
     @Test
     void prepareDeleteIngredient_testFail() throws KitchenHelperException {
         String incorrectAttributes = "/i 1";
@@ -87,23 +88,22 @@ class ParserTest {
         assertEquals(output, showToConsole(new KitchenHelper()
                 .executeCommand(new Parser().prepareDeleteIngredient(incorrectAttributes)).feedbackToUser));
     }
-
+    
     @Test
     void prepareDeleteChore_testPass() {
         String correctAttributes = "1";
         assertTrue(new Parser().prepareDeleteChore(correctAttributes) instanceof DeleteChoreCommand);
     }
-
+    
     @Test
     void prepareDeleteChore_testFail() {
         String incorrectAttributes = "one";
-        String output = "Invalid Command Format!\n"
-                + "Deletes a chore from the chore list. <index>\n"
-                + "Example: deletechore 1";
+        String output = "Invalid Command Format!\n" + "Deletes a chore from the chore list. <index>\n"
+                        + "Example: deletechore 1";
         assertEquals(output, showToConsole(new KitchenHelper()
                 .executeCommand(new Parser().prepareDeleteChore(incorrectAttributes)).feedbackToUser));
     }
-
+    
     @Test
     void splitInputLine_testPass() {
         String userInput = "addingredient /n Beef /c Meat /q 30 /p 20.2 /e 20/02/2020";

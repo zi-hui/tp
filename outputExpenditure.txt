@@ -1,1 +1,4 @@
+<<<<<<< HEAD
 Expenditure: $0.00,Amount used in cooking: $0.00,Sun 05/04/2020 17:58:49
+=======
+>>>>>>> 6bce8cf1eafb17c110bf8a6025cad10ed3f10416

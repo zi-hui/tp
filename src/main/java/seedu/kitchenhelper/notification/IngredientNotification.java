@@ -14,13 +14,13 @@ import java.util.Date;
 
 public class IngredientNotification {
 
-    public static final String EXPIRING_NOTIFICATION = "These ingredients expiring date is approaching!\n";
-    public static final String LOWQUANTITY_NOTIFICATION = "These ingredients is currently low stock [< 5]!\n";
+    public static final String EXPIRING_NOTIFICATION = "These ingredients expiring date are approaching!\n";
+    public static final String LOWQUANTITY_NOTIFICATION = "These ingredients are currently low stock [< 5]!\n";
     public static final String EXPIRED_NOTIFICATION = "These ingredients are expired!\n";
-    public static final String EMPTYEXPIRING_NOTIFICATION = "You have no ingredients that is "
+    public static final String EMPTYEXPIRING_NOTIFICATION = "You have no ingredients that are "
             + "expiring for the next 3 days.\n";
-    public static final String EMPTYLOWQUANTITY_NOTIFICATION = "You have no ingredients that is low in stock [< 5].\n";
-    public static final String EMPTYEXPIRED_NOTIFICATION = "You have no ingredients that is expired.\n";
+    public static final String EMPTYLOWQUANTITY_NOTIFICATION = "You have no ingredients that are low in stock [< 5].\n";
+    public static final String EMPTYEXPIRED_NOTIFICATION = "You have no ingredients that are expired.\n";
     private String notification = "";
 
     public String getNotifications(ArrayList<Ingredient> ingredientArrayList) {
@@ -32,21 +32,24 @@ public class IngredientNotification {
         if (!ingredientExpiring.isEmpty()) {
             notification += EXPIRING_NOTIFICATION;
             addToNotification(ingredientExpiring);
+            notification += Ui.DIVIDER + "\n";
         } else {
             notification += EMPTYEXPIRING_NOTIFICATION;
+            notification += Ui.DIVIDER + "\n";
         }
         if (!ingredientLowQuantity.isEmpty()) {
             notification += LOWQUANTITY_NOTIFICATION;
             addToNotification(ingredientLowQuantity);
+            notification += Ui.DIVIDER + "\n";
         } else {
-            notification += EMPTYLOWQUANTITY_NOTIFICATION;
+            notification += EMPTYLOWQUANTITY_NOTIFICATION + Ui.DIVIDER  + "\n";
         }
         if (!ingredientExpired.isEmpty()) {
             notification += EXPIRED_NOTIFICATION;
             addToNotification(ingredientExpired);
-            notification += Ui.DIVIDER;
+            notification += Ui.DIVIDER  + "\n";
         } else {
-            notification += EMPTYEXPIRED_NOTIFICATION + Ui.DIVIDER;
+            notification += EMPTYEXPIRED_NOTIFICATION + Ui.DIVIDER + "\n";
         }
 
         return notification;
@@ -64,9 +67,12 @@ public class IngredientNotification {
     }
 
     public void addToNotification(ArrayList<Ingredient> ingredientArrayList) {
+        int counter = 1;
         for (Ingredient i : ingredientArrayList) {
-            notification += i.getIngredientName() + "|" + i.getQuantity() + "|"
-                    + i.getPrice() + "|" + i.getExpiryDate() + "\n";;
+            notification += "[" + counter + "] Ingredient name : " + i.getIngredientName()
+                    + " | " + i.getQuantity() + " portion(s) | $"
+                    + i.getPrice() + " | Expiry Date : " + i.getExpiryDate() + "\n";
+            counter++;
         }
     }
 

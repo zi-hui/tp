@@ -1,0 +1,11 @@
+<<<<<<< HEAD
+=======
+Apr 06, 2020 8:32:16 PM seedu.kitchenhelper.command.DeleteIngredientCommand deleteIngredient
+INFO: An ingredient has been deleted
+Apr 06, 2020 8:32:28 PM seedu.kitchenhelper.parser.Parser prepareAddIngredient
+WARNING: Invalid Command Format! 
+Apr 06, 2020 8:32:38 PM seedu.kitchenhelper.command.AddIngredientCommand execute
+INFO: A new ingredient has been added
+Apr 06, 2020 8:33:46 PM seedu.kitchenhelper.parser.Parser prepareListIngredient
+WARNING: An IndexOutOfBounds exception has been caught
+>>>>>>> 6bce8cf1eafb17c110bf8a6025cad10ed3f10416
