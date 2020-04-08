@@ -74,7 +74,7 @@ public class Ui {
             System.out.println(MESSAGE_FOR_NORMAL_MODE);
         } else if (userChoice.trim().equals("2")) {
             System.out.println(MESSAGE_FOR_RESTORE_MODE);
-        } else if (userChoice.equalsIgnoreCase(ExitCommand.COMMAND_WORD)) {
+        } else if (userChoice.trim().equalsIgnoreCase(ExitCommand.COMMAND_WORD)) {
             System.out.println(MESSAGE_TO_EXIT);
             askForReInput();
         } else {
