@@ -212,7 +212,7 @@ Example |  Outcome
 
 ### 3.4. Recipe
 
-#### 3.4.1. Adding a recipe: `addrecipe`
+#### 3.4.1. Adding a recipe: `addrecipe` (Hui Zhen)
 Adds a new unique recipe into the List in Kitchen Helper. A recipe is a list of ingredients that are used to cook a dish.
 
 __Format:__ `addrecipe /n <RECIPE_NAME> /i <INGREDIENT_NAME>:<QUANTITY>:<CATEGORY>[,..]`
@@ -291,7 +291,7 @@ Example |  Outcome
 
 [&#8593; Return to Top](#kitchen-helper---user-guide)
 
-#### 3.4.5. Cooking a recipe: `cookrecipe`
+#### 3.4.5. Cooking a recipe: `cookrecipe` (Hui Zhen)
 Cooks a recipe specified by the user by the recipe’s name.
 
 __Format:__ `cookrecipe /n <RECIPE_NAME> /p <NUMBER_OF_PAX>`
