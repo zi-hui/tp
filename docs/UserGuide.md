@@ -91,7 +91,7 @@ __Format:__ `reset`
 
 ### 3.2. Storage
 
-#### 3.2.1. Select Load Files
+#### 3.2.1. Select Load Files (Zi Hui)
 
 At the start of Kitchen Helper, the user will be prompted with the option to either load the program data normally or from the most recent backup storage files.
 
@@ -108,7 +108,7 @@ Example |  Outcome
 
 [&#8593; Return to Top](#kitchen-helper---user-guide)
 
-#### 3.2.2. Save Current State: `save`
+#### 3.2.2. Save Current State: `save` (Zi Hui)
 At any point of the session, if the user wishes to store a backup copy of the current state of their program data, it is recommended that the user uses the save command. The save command will store all program data of the current state into the backup storage files.
 
 __Format:__ `save`  
