@@ -51,7 +51,8 @@ public class Chore {
 
     /**
      * Displays icon that represents whether chore is done or not.
-     * @return
+     *
+     * @return tick if chore is done and cross otherwise.
      */
     public String getStatusIcon() {
         if (isDone) {
@@ -61,6 +62,12 @@ public class Chore {
         }
     }
 
+    /**
+     * Checks if there is only one chore in the chorelist.
+     *
+     * @param choreList the list of Chores.
+     * @return "s" to append to "chore" in feedback to user if zero or multiple chores.
+     */
     public String checkSingular(ArrayList<Chore> choreList) {
         if (choreList.size() == 1) {
             return "";
@@ -69,6 +76,12 @@ public class Chore {
         }
     }
 
+    /**
+     * Converts deadline to a String in specified format
+     * if it is Java Date object.
+     *
+     * @return the deadline of type String.
+     */
     public String convertDateToString() {
         if (dateStr == null) {
             return new SimpleDateFormat("dd/MM/yyyy HH:mm").format(date);
@@ -77,6 +90,14 @@ public class Chore {
         }
     }
 
+    /**
+     * Distinguishes the deadline saved in text file between
+     * String or Date object.
+     *
+     * @param description the task description.
+     * @param dateStr the deadline saved in text file.
+     * @return a new Chore object with either Date or String deadline.
+     */
     public static Chore createChoreWhenLoadFile(String description, String dateStr) {
         try {
             DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
@@ -89,6 +110,7 @@ public class Chore {
 
     /**
      * To compare two Chore objects based on their attributes.
+     *
      * @return boolean return false if any of the attributes are not equal to each other.
      */
     @Override
@@ -103,6 +125,11 @@ public class Chore {
         }
     }
 
+    /**
+     * To format each Chore as a String for display to user.
+     *
+     * @return String consisting of completion status, task description and deadline.
+     */
     public String toString() {
         return "[" + getStatusIcon() + "] " + description + " (by: " + convertDateToString() + ")";
     }
