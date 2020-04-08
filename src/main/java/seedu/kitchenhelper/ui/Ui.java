@@ -1,6 +1,8 @@
 package seedu.kitchenhelper.ui;
 
+import seedu.kitchenhelper.command.Command;
 import seedu.kitchenhelper.command.CommandResult;
+import seedu.kitchenhelper.command.ExitCommand;
 
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -25,12 +27,14 @@ public class Ui {
     private static final String COMMENT_LINE_FORMAT_REGEX = "#.*";
     private static final String WELCOME_MESSAGE = "Hello! I'm KitchenHelper here" + LS + "What can I do for you?";
 
-    public static final String MESSAGE_TO_CHOOSE_STATE = "Please enter '1' for auto-save and '2' for manual-save:";
-    public static final String MESSAGE_FOR_AUTO_SAVE = "Okay auto-save chosen.";
-    public static final String MESSAGE_FOR_SAVED_STATE = "Okay manual-save chosen.";
-    public static final String MESSAGE_INVALID_CHOICE = "Invalid Choice! PLease choose either '1' for auto-save or "
-            + "'2' for manual-save.";
-    
+    public static final String MESSAGE_TO_CHOOSE_STATE = "Please enter '1' to load data from normal mode or '2' to"
+            + " load data from restore mode:";
+    public static final String MESSAGE_FOR_NORMAL_MODE = "Okay data have been loaded from the main storage files.";
+    public static final String MESSAGE_FOR_RESTORE_MODE = "Okay data have been loaded from the backup storage files.";
+    public static final String MESSAGE_INVALID_CHOICE = "Invalid Choice! PLease choose either '1' for normal mode or"
+            + " '2' for restore mode.";
+    public static final String MESSAGE_TO_EXIT = "Please enter the exit command after selecting a loading mode.";
+
     private final Scanner in;
     private final PrintStream out;
     
@@ -67,14 +71,17 @@ public class Ui {
     public void validUserChoice(String userChoice) {
         System.out.println(DIVIDER);
         if (userChoice.trim().equals("1")) {
-            System.out.println(MESSAGE_FOR_AUTO_SAVE);
+            System.out.println(MESSAGE_FOR_NORMAL_MODE);
         } else if (userChoice.trim().equals("2")) {
-            System.out.println(MESSAGE_FOR_SAVED_STATE);
+            System.out.println(MESSAGE_FOR_RESTORE_MODE);
+        } else if (userChoice.trim().equalsIgnoreCase(ExitCommand.COMMAND_WORD)) {
+            System.out.println(MESSAGE_TO_EXIT);
+            askForReInput();
         } else {
             askForReInput();
         }
     }
-    
+
     //@@author AY1920S2-CS2113T-M16-2-reused
     //Reused from
     //https://github.com/nus-cs2113-AY1920S2/personbook/blob/master/src/main/java/seedu/personbook/ui/TextUi.java
@@ -130,7 +137,6 @@ public class Ui {
             fullInputLine = in.nextLine();
         }
         
-        out.println(fullInputLine);
         return fullInputLine;
     }
     //@@author
