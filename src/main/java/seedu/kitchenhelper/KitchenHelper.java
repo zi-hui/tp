@@ -43,36 +43,34 @@ public class KitchenHelper {
         if (userChoice.trim().equals("1")) {
             storage = new Storage("outputIngredient.txt", "outputRecipe.txt",
                     "outputChore.txt", "outputExpenditure.txt");
-            try {
-                ingredientList = new ArrayList<>(storage.getIngredientData());
-                recipeList = new ArrayList<>(storage.getRecipeData());
-                choreList = new ArrayList<>(storage.getChoreData());
-                storage.loadExpenditureData();
-            } catch (FileNotFoundException err) {
-                ingredientList = new ArrayList<>();
-                recipeList = new ArrayList<>();
-                choreList = new ArrayList<>();
-                Expenditure.getInstance().loadExpenditureVariables(0, 0, null);
-            }
+            loadFromStorage();
         } else if (userChoice.trim().equals("2")) {
             storage = new Storage("outputIngredientCopy.txt", "outputRecipeCopy.txt",
                     "outputChoreCopy.txt", "outputExpenditureCopy.txt");
-            try {
-                ingredientList = new ArrayList<>(storage.getIngredientData());
-                recipeList = new ArrayList<>(storage.getRecipeData());
-                choreList = new ArrayList<>(storage.getChoreData());
-                storage.loadExpenditureData();
-            } catch (FileNotFoundException err) {
-                ingredientList = new ArrayList<>();
-                recipeList = new ArrayList<>();
-                choreList = new ArrayList<>();
-                Expenditure.getInstance().loadExpenditureVariables(0, 0, null);
-            }
+            loadFromStorage();
+        }
+    }
+
+
+    /**
+     * Loads data from storage files into respective ingredient, recipe and chore lists as well as weekly expenditure.
+     */
+    private void loadFromStorage() {
+        try {
+            ingredientList = new ArrayList<>(storage.getIngredientData());
+            recipeList = new ArrayList<>(storage.getRecipeData());
+            choreList = new ArrayList<>(storage.getChoreData());
+            storage.loadExpenditureData();
+        } catch (FileNotFoundException err) {
+            ingredientList = new ArrayList<>();
+            recipeList = new ArrayList<>();
+            choreList = new ArrayList<>();
+            Expenditure.getInstance().loadExpenditureVariables(0, 0, null);
         }
     }
 
     /**
-     * Populate empty saved state files with current output files if save command have never been called by user.
+     * Create storage output files if they do not exist.
      */
     private void createNewFiles() {
         File fileChore = new File("outputChore.txt");
@@ -100,6 +98,7 @@ public class KitchenHelper {
             if (!fileExpenditure.exists()) {
                 fileExpenditure.createNewFile();
             }
+
             if (!fileChore.exists()) {
                 fileChoreCopy.createNewFile();
             }
@@ -117,29 +116,6 @@ public class KitchenHelper {
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }
-
-        var sourceIngredient = new File("outputIngredient.txt");
-        var sourceRecipe = new File("outputRecipe.txt");
-        var sourceChore = new File("outputChore.txt");
-        var sourceExpenditure = new File("outputExpenditure.txt");
-        var destIngredient = new File("outputIngredientCopy.txt");
-        var destRecipe = new File("outputRecipeCopy.txt");
-        var destChore = new File("outputChoreCopy.txt");
-
-        if (destIngredient.length() == 0) {
-            Storage.copyFile(sourceIngredient, destIngredient);
-        }
-        if (destRecipe.length() == 0) {
-            Storage.copyFile(sourceRecipe, destRecipe);
-        }
-        if (destChore.length() == 0) {
-            Storage.copyFile(sourceChore, destChore);
-        }
-
-        var destExpenditure = new File("outputExpenditureCopy.txt");
-        if (destExpenditure.length() == 0) {
-            Storage.copyFile(sourceExpenditure, destExpenditure);
         }
     }
     
@@ -195,7 +171,7 @@ public class KitchenHelper {
                 ui.printDivider();
             }
         } while (!userCommandInput.equalsIgnoreCase(ExitCommand.COMMAND_WORD));
-        
+
     }
 
     private void showNotifications() {

@@ -118,7 +118,8 @@ public class Recipe {
     public void setRecipeName(String attributes) throws KitchenHelperException {
         try {
             String recipeNameAndIngr = attributes.substring(attributes.indexOf("/n") + 3, attributes.indexOf("/i") - 1);
-            recipeName = recipeNameAndIngr;
+            String trimmedRecipeName = recipeNameAndIngr.trim();
+            recipeName = trimmedRecipeName;
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             throw new KitchenHelperException("Invalid command");
         }
@@ -140,6 +141,22 @@ public class Recipe {
      */
     public ArrayList<Ingredient> getRecipeItem() {
         return this.recipeItems;
+    }
+
+    /**
+     * To compare two Recipe objects based on their attributes.
+     * @return boolean return false if any of the attributes are not equal to each other.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Recipe) {
+            Recipe i = (Recipe) o;
+            return this.recipeName.equals(i.recipeName)
+                    && this.recipeIngrQty == recipeIngrQty
+                    && this.recipeItems.equals(i.recipeItems);
+        } else {
+            return false;
+        }
     }
 
     /**
