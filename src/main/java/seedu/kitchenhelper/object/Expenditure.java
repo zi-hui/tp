@@ -21,7 +21,8 @@ public class Expenditure {
             = "Would you like to add the amount spent on this item "
             + "to the amount used for cooking or consumption?\n" + Ui.DIVIDER;
     public static final String REMOVAL_SUCCESS = "Ok! $%.2f is deducted from total expenditure.";
-    public static final String INCREASE_AMOUNT_USED = "Ok! $%.2f is added to amount used in cooking.";
+    public static final String INCREASE_AMOUNT_USED =
+            "Ok! $%.2f is added to amount used in cooking or consumption.";
     public static final String NO_CHANGE = "Ok! There are no changes to expenditure.";
 
 

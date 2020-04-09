@@ -1,6 +1,5 @@
 package seedu.kitchenhelper.parser;
 
-import seedu.kitchenhelper.KitchenHelper;
 import seedu.kitchenhelper.command.AddChoreCommand;
 import seedu.kitchenhelper.command.AddIngredientCommand;
 import seedu.kitchenhelper.command.AddRecipeCommand;

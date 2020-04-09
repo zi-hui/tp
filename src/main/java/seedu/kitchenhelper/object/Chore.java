@@ -14,7 +14,6 @@ public class Chore {
     public String dateStr = null;
     public Date date = null;
     public boolean isDone;
-    public static final String MESSAGE_SUCCESS = "You have %s this chore:\n%s\nNow you have %s chore%s in the list.";
 
     /**
      * Constructor for Chore object.
@@ -117,9 +116,15 @@ public class Chore {
     public boolean equals(Object o) {
         if (o instanceof Chore) {
             Chore i = (Chore) o;
-            return this.description.equals(i.description)
-                    && this.isDone == isDone
-                    && this.dateStr.equals(i.dateStr);
+            if (dateStr == null) {
+                return this.description.equals(i.description)
+                        && this.isDone == isDone
+                        && this.date.equals(i.date);
+            } else {
+                return this.description.equals(i.description)
+                        && this.isDone == isDone
+                        && this.dateStr.equals(i.dateStr);
+            }
         } else {
             return false;
         }

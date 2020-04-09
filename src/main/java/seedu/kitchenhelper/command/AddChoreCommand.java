@@ -17,8 +17,9 @@ public class AddChoreCommand extends Command {
     public static final String COMMAND_WORD = "addchore";
     public static final String MESSAGE_SUCCESS = "You have added this chore:\n%s\nNow you have %s chore%s in the list.";
     public static final String COMMAND_DESC = "Adds a chore to the chore list.";
-    public static final String COMMAND_PARAMETER = "TASK /by DATE";
-    public static final String COMMAND_EXAMPLE = "Example: addchore buy groceries /by Tuesday 12pm";
+    public static final String COMMAND_PARAMETER = "TASK /by DATE OR TASK /by <dd/MM/yyyy HH:mm>";
+    public static final String COMMAND_EXAMPLE = "Example: addchore buy groceries /by Tuesday 12pm "
+            + "OR addchore buy groceries /by 14/04/2020 12:00";
     public static final String COMMAND_FORMAT =
             String.format("%s %s\n%s", COMMAND_DESC, COMMAND_PARAMETER, COMMAND_EXAMPLE);
     public static final String MESSAGE_USAGE = String.format("%s: %s", COMMAND_WORD, COMMAND_DESC) + Ui.LS + String
