@@ -34,6 +34,13 @@ public class KitchenHelper {
     private Ui ui;
     private Storage storage;
 
+    /**
+     * Retrieves private ui from main class so other classes can use
+     * to write to standard output or read from standard input without
+     * triggering errors during runtest.
+     *
+     * @return private ui from this main class.
+     */
     private Ui getUi() {
         return ui;
     }

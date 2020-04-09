@@ -4,12 +4,9 @@ import seedu.kitchenhelper.object.ingredient.Ingredient;
 import seedu.kitchenhelper.storage.Storage;
 import seedu.kitchenhelper.ui.Ui;
 
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
 
 /**
  * Calculate user expenditure.
@@ -41,6 +38,12 @@ public class Expenditure {
     private Expenditure() {
     }
 
+    /**
+     * Import private ui from main KitchenHelper class so can prompt user
+     * to edit expenditure.
+     *
+     * @param ui private ui from main.
+     */
     public void setUi(Ui ui) {
         this.ui = ui;
     }

@@ -33,13 +33,19 @@ public class AddChoreCommand extends Command {
      * Constructor for AddChoreCommand.
      *
      * @param description the description of the chore.
-     * @param dateStr the date or time to complete the chore by.
+     * @param dateStr the deadline in String.
      */
     public AddChoreCommand(String description, String dateStr) {
         this.description = description;
         this.dateStr = dateStr;
     }
 
+    /**
+     * Constructor for AddChoreCommand.
+     *
+     * @param description the description of the chore.
+     * @param date the deadline as Java Date object.
+     */
     public AddChoreCommand(String description, Date date) {
         this.description = description;
         this.date = date;
