@@ -44,7 +44,7 @@ public class DoneCommand extends Command {
      */
     public String markChoreDone(ArrayList<Chore> choreList) {
         try {
-            if (indexToCheck > choreList.size()) {
+            if (indexToCheck > choreList.size() || indexToCheck <= 0) {
                 throw new KitchenHelperException(INVALID_INDEX);
             }
             Chore choreToCheck = choreList.get(indexToCheck - 1);
