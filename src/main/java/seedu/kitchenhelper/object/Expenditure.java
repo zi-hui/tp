@@ -194,8 +194,12 @@ public class Expenditure {
      * @param quantityToDelete amount of the ingredient to be deleted.
      */
     public void editExpenditure(Ingredient ingredientToDelete, Integer quantityToDelete) {
-        if (!removeFromExpenditure(ingredientToDelete, quantityToDelete)) {
-            addToAmountUsed(ingredientToDelete, quantityToDelete);
+        try {
+            if (!removeFromExpenditure(ingredientToDelete, quantityToDelete)) {
+                addToAmountUsed(ingredientToDelete, quantityToDelete);
+            }
+        } catch (Exception e) {
+            return;
         }
         Storage.saveExpenditureData();
     }
@@ -219,8 +223,7 @@ public class Expenditure {
     }
 
     /**
-     * Prompts the user for either a "yes" or "no" response and
-     * assumes a "no" if missing user input.
+     * Prompts the user for either a "yes" or "no" response.
      *
      * @param prompt the question to prompt the user.
      * @return "yes" or "no".
