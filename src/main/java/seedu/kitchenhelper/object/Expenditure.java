@@ -28,6 +28,7 @@ public class Expenditure {
     public static final String NO_CHANGE = "Ok! There are no changes to expenditure.";
 
 
+    private Ui ui;
     public double totalExpenditure;
     public double amountUsedInCooking;
     public Date lastSavedDate;
@@ -38,6 +39,10 @@ public class Expenditure {
      * Only one instance of Expenditure class can be instantiated.
      */
     private Expenditure() {
+    }
+
+    public void setUi(Ui ui) {
+        this.ui = ui;
     }
 
     /**
@@ -138,9 +143,9 @@ public class Expenditure {
         if (userResponse.equalsIgnoreCase("yes")) {
             double price = changePrice(ingredientToDelete, quantityToDelete);
             totalExpenditure -= price;
-            System.out.println(String.format((REMOVAL_SUCCESS), price));
+            ui.print(String.format((REMOVAL_SUCCESS), price) + ui.LS + ui.DIVIDER);
         } else {
-            System.out.println(NO_CHANGE);
+            ui.print(NO_CHANGE + ui.LS + ui.DIVIDER);
         }
     }
 
@@ -155,8 +160,9 @@ public class Expenditure {
         String userResponse = promptUser(PROMPT_ADD_TO_AMOUNT_USED);
         if (userResponse.equalsIgnoreCase("yes")) {
             addAmountForCooking(ingredientToDelete, quantityToDelete);
+            ui.printDivider();
         } else {
-            System.out.println(NO_CHANGE);
+            ui.print(NO_CHANGE + ui.LS + ui.DIVIDER);
         }
     }
 
@@ -211,15 +217,17 @@ public class Expenditure {
      */
     public String promptUser(String prompt) {
         String userResponse;
-        System.out.println(prompt);
-        try {
-            userResponse = new Scanner(System.in).nextLine().trim();
+        ui.print(prompt);
+        //Scanner sc = new Scanner(System.in);
+        /*try {
+            userResponse = sc.next().trim();
         } catch (NoSuchElementException e) {
             return "no";
-        }
+        }*/
+        userResponse = ui.getUserCommand().trim();
         while (!isValidResponse(userResponse)) {
-            System.out.println("Please enter either \"Yes\"/\"No\"\n" + Ui.DIVIDER);
-            userResponse = new Scanner(System.in).nextLine().trim();
+            ui.print("Please enter either \"Yes\"/\"No\"\n" + ui.DIVIDER);
+            userResponse = ui.getUserCommand().trim();
         }
         return userResponse;
     }

@@ -3,6 +3,7 @@ package seedu.kitchenhelper.command;
 import seedu.kitchenhelper.object.Chore;
 import seedu.kitchenhelper.object.Recipe;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
+import seedu.kitchenhelper.object.Expenditure;
 import seedu.kitchenhelper.storage.Storage;
 import seedu.kitchenhelper.ui.Ui;
 
@@ -93,6 +94,7 @@ public class DeleteIngredientCommand extends Command {
             feedbackToUser = String.format(COMMAND_SUCCESS_ZERO_QUANTITY, ingredientName);
         } else {
             feedbackToUser = String.format(COMMAND_SUCCESS, ingredientName);
+            Expenditure.getInstance().editExpenditure(ingredientToDelete, quantity);
         }
         ingredientsList.remove(ingredientToDelete);
         return feedbackToUser;
@@ -135,7 +137,7 @@ public class DeleteIngredientCommand extends Command {
             feedbackToUser = String.format(COMMAND_FAILURE_QUANTITY, ingredientName, ingredientQuantity);
             assert ingredientQuantity != newQuantity;
         } else {
-            //Expenditure.getInstance().editExpenditure(ingredientToDelete, quantity);
+            Expenditure.getInstance().editExpenditure(ingredientToDelete, quantity);
             ingredientToDelete.setQuantity(newQuantity);
             feedbackToUser = String.format(COMMAND_SUCCESS_QUANTITY, ingredientName);
             assert ingredientToDelete.getQuantity() == newQuantity;
