@@ -46,6 +46,7 @@ public class Storage {
      * @param filePathIngredient String of filepath for stored Ingredient data.
      * @param filePathRecipe String of filepath for stored Recipe data.
      * @param filePathChore String of filepath for stored Chore data.
+     * @param filePathExpenditure String of filepath for stored Expenditure data.
      */
     public Storage(String filePathIngredient, String filePathRecipe, String filePathChore, String filePathExpenditure) {
         this.filePathIngredient = filePathIngredient;
@@ -281,6 +282,12 @@ public class Storage {
         return choreList;
     }
 
+    /**
+     * Loads the saved Expenditure data from the text file
+     * into the singleton Expenditure class.
+     *
+     * @throws FileNotFoundException if file from file path does not exist.
+     */
     public void loadExpenditureData() throws FileNotFoundException {
 
         File file = new File(filePathExpenditure);
@@ -357,6 +364,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the Expenditure data into a text file.
+     */
     public static void saveExpenditureData() {
         try {
             FileWriter fw = new FileWriter("outputExpenditure.txt");
