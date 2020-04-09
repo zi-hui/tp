@@ -19,7 +19,7 @@ public class Expenditure {
             + Ui.DIVIDER;
     public static final String PROMPT_ADD_TO_AMOUNT_USED
             = "Would you like to add the amount spent on this item "
-            + "to the amount used for cooking?\n" + Ui.DIVIDER;
+            + "to the amount used for cooking or consumption?\n" + Ui.DIVIDER;
     public static final String REMOVAL_SUCCESS = "Ok! $%.2f is deducted from total expenditure.";
     public static final String INCREASE_AMOUNT_USED = "Ok! $%.2f is added to amount used in cooking.";
     public static final String NO_CHANGE = "Ok! There are no changes to expenditure.";
@@ -141,20 +141,23 @@ public class Expenditure {
      * @param ingredientToDelete ingredient to be deleted.
      * @param quantityToDelete amount of the ingredient to be deleted.
      */
-    public void removeFromExpenditure(Ingredient ingredientToDelete, Integer quantityToDelete) {
+    public boolean removeFromExpenditure(Ingredient ingredientToDelete, Integer quantityToDelete) {
         String userResponse = promptUser(PROMPT_REMOVE_FROM_EXPENDITURE);
         if (userResponse.equalsIgnoreCase("yes")) {
             double price = changePrice(ingredientToDelete, quantityToDelete);
             totalExpenditure -= price;
             ui.print(String.format((REMOVAL_SUCCESS), price) + ui.LS + ui.DIVIDER);
+            return true;
         } else {
             ui.print(NO_CHANGE + ui.LS + ui.DIVIDER);
+            return false;
         }
     }
 
     /**
      * Adds prices of these ingredients to amount used in cooking,
-     * when user deletes ingredient manually after using to cook.
+     * when user deletes ingredient manually after using to cook
+     * or consuming.
      *
      * @param ingredientToDelete ingredient to be deleted.
      * @param quantityToDelete amount of the ingredient to be deleted.
@@ -162,8 +165,9 @@ public class Expenditure {
     public void addToAmountUsed(Ingredient ingredientToDelete, Integer quantityToDelete) {
         String userResponse = promptUser(PROMPT_ADD_TO_AMOUNT_USED);
         if (userResponse.equalsIgnoreCase("yes")) {
-            addAmountForCooking(ingredientToDelete, quantityToDelete);
-            ui.printDivider();
+            double price = changePrice(ingredientToDelete, quantityToDelete);
+            amountUsedInCooking += price;
+            ui.print(String.format((INCREASE_AMOUNT_USED), price) + ui.LS + ui.DIVIDER);
         } else {
             ui.print(NO_CHANGE + ui.LS + ui.DIVIDER);
         }
@@ -181,15 +185,17 @@ public class Expenditure {
     }
 
     /**
-     * Prompts the user if they want to remove amount from total expenditure or
-     * add amount to amount used in cooking when they call deleteingredient command.
+     * Prompts the user if they want to remove amount from total expenditure
+     * and if not, then prompt whether to add amount to amount used in cooking
+     * when they call deleteingredient command.
      *
      * @param ingredientToDelete ingredient to be deleted.
      * @param quantityToDelete amount of the ingredient to be deleted.
      */
     public void editExpenditure(Ingredient ingredientToDelete, Integer quantityToDelete) {
-        removeFromExpenditure(ingredientToDelete, quantityToDelete);
-        addToAmountUsed(ingredientToDelete, quantityToDelete);
+        if (!removeFromExpenditure(ingredientToDelete, quantityToDelete)) {
+            addToAmountUsed(ingredientToDelete, quantityToDelete);
+        }
         Storage.saveExpenditureData();
     }
 
@@ -221,12 +227,6 @@ public class Expenditure {
     public String promptUser(String prompt) {
         String userResponse;
         ui.print(prompt);
-        //Scanner sc = new Scanner(System.in);
-        /*try {
-            userResponse = sc.next().trim();
-        } catch (NoSuchElementException e) {
-            return "no";
-        }*/
         userResponse = ui.getUserCommand().trim();
         while (!isValidResponse(userResponse)) {
             ui.print("Please enter either \"Yes\"/\"No\"\n" + ui.DIVIDER);
