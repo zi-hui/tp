@@ -1,5 +1,6 @@
 package seedu.kitchenhelper.parser;
 
+import seedu.kitchenhelper.KitchenHelper;
 import seedu.kitchenhelper.command.AddChoreCommand;
 import seedu.kitchenhelper.command.AddIngredientCommand;
 import seedu.kitchenhelper.command.AddRecipeCommand;
@@ -421,9 +422,6 @@ public class Parser {
             int indexToDelete = Integer.parseInt(parameters.trim());
             return new DeleteChoreCommand(indexToDelete);
         } catch (NumberFormatException e) {
-            if (parameters.trim().equalsIgnoreCase("all")) {
-                return new DeleteChoreCommand();
-            }
             return new InvalidCommand(
                     String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, DeleteChoreCommand.COMMAND_FORMAT));
         }
