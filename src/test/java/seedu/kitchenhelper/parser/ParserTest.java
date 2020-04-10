@@ -70,7 +70,7 @@ class ParserTest {
     void prepareAddChore_testFail() {
         String incorrectAttributes = "buy groceries";
         String output = "Invalid Command Format!\nAdds a chore to the chore list. "
-                + "TASK /by DATE OR TASK /by <dd/MM/yyyy HH:mm>\n"
+                + "TASK /by DEADLINE OR TASK /by <dd/MM/yyyy HH:mm>\n"
                         + "Example: addchore buy groceries /by Tuesday 12pm "
                 + "OR addchore buy groceries /by 14/04/2020 12:00";
         assertEquals(output, showToConsole(
