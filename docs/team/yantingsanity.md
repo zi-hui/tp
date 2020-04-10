@@ -10,7 +10,7 @@ Kitchen Helper is a command line interface (CLI) application that is mainly targ
     + Justification: This feature improves the product slightly because a user may make a mistake and input the wrong parameters for an ingredient or a recipe. With this feature, the user will be able to delete this ingredient or recipe that he/she has keyed in and add a new one. 
     + Highlights: This enhancement was done by deleting the ingredient based on their index so that the users can delete a specific ingredient that they want. However, for deletion of recipe, there is an additional enhancement of deletion by name as the recipe names are unique so the users can delete a specific recipe by deleting through the names.
 + Deduction of quantity of ingredients 
-    + What it does: It allows the user to reduce the quantity of an ingredient with regards to the list of ingredients in Kitchen Helper. 
+    + What it does: It allows the user to reduce the quantity of an ingredient.
     + Justification: This feature improves the product slightly because a user may just want to utilize a few quantities of the ingredient without cooking the recipe. Example, if a user wants to just eat an apple, the user can use this feature to deduct the quantity of apple by 1.
     + Highlights: This enhancement deletes the ingredient automatically if the final quantity after the deduction is zero for the ingredient. 
 + Added the <b>deduction of ingredients from list of ingredients</b> after a user has cooked a recipe
@@ -40,6 +40,7 @@ The link below showed my code contributions to Kitchen Helper:
 #### Documentation
 ### Contributions to the User Guide
 > Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.
+
 + [Delete Ingredient](https://ay1920s2-cs2113t-m16-2.github.io/tp/UserGuide.html#333-delete-an-ingredient-deleteingredient)
 + [Delete Recipe](https://ay1920s2-cs2113t-m16-2.github.io/tp/UserGuide.html#343-delete-a-recipe-deleterecipe)
 + [Cook Recipe](https://ay1920s2-cs2113t-m16-2.github.io/tp/UserGuide.html#345-cooking-a-recipe-cookrecipe) 
@@ -47,6 +48,7 @@ The link below showed my code contributions to Kitchen Helper:
     
 ### Contributions to the Developer Guide 
 > Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project.
+
 + [Architecture](https://ay1920s2-cs2113t-m16-2.github.io/tp/DeveloperGuide.html#31-architecture)
 + [Delete Ingredient](https://ay1920s2-cs2113t-m16-2.github.io/tp/DeveloperGuide.html#413-delete-all-specific-ingredientss)
 + [Delete Recipe](https://ay1920s2-cs2113t-m16-2.github.io/tp/DeveloperGuide.html#424-delete-all-specific-recipes)
