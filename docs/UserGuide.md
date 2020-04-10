@@ -17,20 +17,20 @@ By: `Team CS2113T-M16-2` Since: `March 2020` License: `MIT`
     + [3.3. Ingredient](#33-ingredient)  
        - [3.3.1. Adding an ingredient: `addingredient`](#331-adding-an-ingredient-addingredient-jin-fa)  
        - [3.3.2. List ingredient: `listingredient`](#332-list-ingredient-listingredient)  
-       - [3.3.3. Delete an ingredient: `deleteingredient`](#333-delete-an-ingredient-deleteingredient-yan-ting-and-isabella)  
+       - [3.3.3. Delete an ingredient: `deleteingredient`](#333-delete-an-ingredient-deleteingredient-isabella-and-yan-ting)  
        - [3.3.4. Search for ingredient: `searchingredient`](#334-search-for-ingredient-searchingredient-jin-fa)  
 
     + [3.4. Recipe](#34-recipe)  
       - [3.4.1. Adding a recipe: `addrecipe`](#341-adding-a-recipe-addrecipe-hui-zhen)  
       - [3.4.2. List recipe: `listrecipe`](#342-list-recipes-listrecipe)  
-      - [3.4.3. Delete a recipe: `deleterecipe`](#343-delete-a-recipe-deleterecipe)
+      - [3.4.3. Delete a recipe: `deleterecipe`](#343-delete-a-recipe-deleterecipe-yan-ting)
       - [3.4.4. Search for recipe: `searchrecipe`](#344-search-for-recipe-searchrecipe-jin-fa)  
-      - [3.4.5. Cooking a recipe: `cookrecipe`](#345-cooking-a-recipe-cookrecipe-hui-zhen)
+      - [3.4.5. Cooking a recipe: `cookrecipe`](#345-cooking-a-recipe-cookrecipe-hui-zhen-and-yan-ting)
 
     + [3.5. Chore](#35-chore)  
-      - [3.5.1. Adding a chore: `addchore`](#351-adding-a-chore-addchore)  
-      - [3.5.2. List chore: `listchore`](#352-list-chore-listchore)  
-      - [3.5.3. Delete a chore: `deletechore`](#353-delete-a-chore-deletechore)  
+      - [3.5.1. Adding a chore: `addchore`](#351-adding-a-chore-addchore-isabella)  
+      - [3.5.2. List chore: `listchore`](#352-list-chore-listchore-isabella)  
+      - [3.5.3. Delete a chore: `deletechore`](#353-delete-a-chore-deletechore-isabella)  
       - [3.5.4. Search for chore: `searchchore`](#354-search-for-chore-searchchore-jin-fa) 
       - [3.5.5. Mark chore as done: `done`](#355-mark-chore-as-done-done-isabella)  
  
@@ -53,7 +53,7 @@ So what are you waiting for? Let’s go!
 
 1. Ensure that you have Java `11` or above installed on your computer.
 2. Download the latest version of `KitchenHelper` from [here](https://github.com/AY1920S2-CS2113T-M16-2/tp/releases).
-3. Copy the file to the folder you want to use as the home folder for KitchenHelper.
+3. Save the file as `kitchenhelper.jar` and copy the file to the folder you want to use as the home folder for KitchenHelper.
 4. Type the command `java -jar kitchenhelper.jar` in the command prompt to start the application.
 5. Type the command in the command box and press `Enter` to execute it.  
    e.g. typing `help` and pressing `Enter` will display help information.
@@ -98,7 +98,7 @@ At the start of Kitchen Helper, the user will be prompted with the option to eit
 
 The normal mode will load Kitchen Helper from the main storage files which store the data from the last used session of the user.
 
-Alternatively, if the user selects the restore mode, it will load Kitchen Helper from the backup storage files which store the version of data manually saved from the user’s last usage of the save command [Section 3.2.2, "Save Current State"](#322-save-current-state-save). The restore mode gives users access to the backup storage files, however, users will have to use the save command to update the backup storage files.
+Alternatively, if the user selects the restore mode, it will load Kitchen Helper from the backup storage files which store the version of data manually saved from the user’s last usage of the save command [Section 3.2.2, "Save Current State"](#322-save-current-state-save-zi-hui). The restore mode gives users access to the backup storage files, however, users will have to use the save command to update the backup storage files.
 
 It is important to note that any subsequent changes made to the program data during the current session will be automatically saved into the main storage files regardless of initial load options. 
 
@@ -172,7 +172,7 @@ Example |  Outcome
 
 [&#8593; Return to Top](#kitchen-helper---user-guide)
 
-#### 3.3.3. Delete an ingredient: `deleteingredient`
+#### 3.3.3. Delete an ingredient: `deleteingredient` (Isabella and Yan Ting)
 You can delete a specific ingredient and reduce the quantity of an ingredient from the ingredient's inventory in Kitchen Helper by using the ingredient's index. 
 <br> You will be prompted whether to delete ingredient cost from total expenditure, in the event you are deleting this ingredient because you added it wrongly and would not like to count its cost into total expenditure. 
 <br> If you refuse this prompt, you will then be prompted whether to add ingredient cost to amount used in cooking, in the event you are manually deleting ingredients you have cooked or consumed.
@@ -183,11 +183,12 @@ __Format__: `deleteingredient /i <INGREDIENT_INDEX> [/q <QUANTITY>]`
 * `INGREDIENT_INDEX`: This refers to the index of the ingredient which is an identification number tagged to the ingredient.  <br>
 * `QUANTITY` : This refers to the quantity of ingredient to be deducted. This is an optional argument.<br>
 <br>
-> You may get the index for the ingredient that you would like to delete by getting the full list of ingredients that you have previously entered into Kitchen Helper. You may refer to the [listingredient](#332-list-ingredient-listingredient) command section to understand how to use the command. <br>
+
+> You may get the index for the ingredient that you would like to delete by getting the full list of ingredients that you have previously entered into Kitchen Helper or search for an ingredient. You may refer to the [listingredient](#332-list-ingredient-listingredient) and [searchingredient](#334-search-for-ingredient-searchingredient-jin-fa) command sections to understand how to use the command. <br>
 
 > One thing to note: If the final quantity of your ingredient will be zero after deduction, the ingredient will be deleted from the ingredient list subsequently. 
 
-> The user expenditure might change depending on your response to the prompts. You can view the changes with `displayexpenditure` command. Please refer to [3.6.1. Display User Expenditure](#361-display-user-expenditure-displayexpenditure).
+> The user expenditure might change depending on your response to the prompts. You can view the changes with `displayexpenditure` command. Please refer to [3.6.1. Display User Expenditure](#361-display-user-expenditure-displayexpenditure-isabella).
 
 Example |  Outcome
 --------|------------------
@@ -201,7 +202,7 @@ Example |  Outcome
 You can search for ingredients based on a given keyword.  
 
 The output also returns `Location: Index <Number>`, which you can make use of the `Number` to delete an ingredient or change the quantity of an ingredient.  
- You may refer to [Section 3.3.3. Delete an ingredient](#333-delete-an-ingredient-deleteingredient) command section to understand how to use the command.  
+ You may refer to [Section 3.3.3. Delete an ingredient](#333-delete-an-ingredient-deleteingredient-isabella-and-yan-ting) command section to understand how to use the command.  
 
 __Format:__ `searchingredient <KEYWORD>`  
 
@@ -236,16 +237,17 @@ The different types of `CATEGORY` are listed below:
   + `Drink`
   + `Miscellaneous`  
   
-Any `CATEGORY` that does not falls in the list could be put under `Miscellaneous`.
+Any `CATEGORY` that does not falls in the list could be put under `Miscellaneous`.  
 
 > All `RECIPE_NAME` has to be unique. You can check the list of existing recipes by using [`listrecipe all`](#342-list-recipes-listrecipe)  
-> Please note that `RECIPE_NAME` and `INGREDIENT_NAME` can contain spaces. These will not be removed after addition. (i.e. "Chicken____Stew" where `_` is space will remain )
 
-Example |  Outcome
---------|------------------
-**Command**: <br> `addrecipe /n Rice Ball /i Rice:3:staple` <br><br> **Description**: <br> Creates a new recipe called `Rice Ball` which contains one ingredient, `3` portions of `Rice`. | Rice Ball Recipe has been created with 1 ingredients inside.<br>===================================================`
-**Command**: <br> `addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable` <br><br> **Description**: <br> Creates a new recipe called `Chicken Salad` which contains two ingredient, `2` portions of `Chicken breast` and `4` portions of `Lettuce`. | Chicken Salad Recipe has been created with 2 ingredients inside.<br>===================================================
-**Command**: <br> `addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable` <br><br> **Description**: <br> A duplicate recipe has been found | There is an existing recipe with the same name!<br>===================================================
+> Please note that `RECIPE_NAME` and `INGREDIENT_NAME` can contain spaces. These will not be removed after addition. (i.e. "Chicken____Stew" where `_` is space will remain )  
+
+| Example |  Outcome |
+|---------|----------|
+|**Command**: <br> `addrecipe /n Rice Ball /i Rice:3:staple` <br><br>**Description**: <br> Creates a new recipe called `Rice Ball` which contains one ingredient, `3` portions of `Rice`. | Rice Ball Recipe has been created with 1 ingredients inside.<br>===================================================.|
+|**Command** : <br> `addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable` <br><br> **Description**: <br> Creates a new recipe called `Chicken Salad` which contains two ingredient, `2` portions of `Chicken breast` and `4` portions of `Lettuce`. | Chicken Salad Recipe has been created with 2 ingredients inside.<br>===================================================|
+|**Command**: <br> `addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable` <br><br> **Description**: <br> A duplicate recipe has been found | There is an existing recipe with the same name!<br>===================================================|
 
 [&#8593; Return to Top](#kitchen-helper---user-guide)
 
@@ -262,7 +264,7 @@ Example |  Outcome
 
 [&#8593; Return to Top](#kitchen-helper---user-guide)
 
-#### 3.4.3. Delete a recipe: `deleterecipe`
+#### 3.4.3. Delete a recipe: `deleterecipe` (Yan Ting)
 You can delete a recipe by using the recipe name or index from the list in Kitchen Helper. The name or index of the recipe can be found by displaying the list of recipes. 
 
 __Format__: `deleterecipe /n <RECIPE_NAME>` OR `deleterecipe /i <RECIPE_INDEX>`
@@ -271,6 +273,7 @@ __Format__: `deleterecipe /n <RECIPE_NAME>` OR `deleterecipe /i <RECIPE_INDEX>`
 * `RECIPE_NAME` : This refers to the name of the recipe. <br>
 * `RECIPE_INDEX`: This refers to the index of the recipe which is an identification number tagged to the recipe.<br>
 <br>
+
 > You may get the index or name for the recipe that you would like to delete by getting the full list of recipes that you have previously entered into Kitchen Helper. You may refer to the [listrecipe all](#342-list-recipes-listrecipe) command section to understand how to use the command. 
 
 Example |  Outcome
@@ -284,7 +287,7 @@ Example |  Outcome
 You can search for recipes based on a given keyword.  
 
 The output also returns `Location: Index <Number>`, which you can make use of the `Number` to view information in the recipe or delete a recipe through an index.  
- You may refer to [Section 3.4.2. List recipes](#342-list-recipes-listrecipe) and [Section 3.4.3. Delete a recipe](#343-delete-a-recipe-deleterecipe) command section to understand how to use the command.  
+ You may refer to [Section 3.4.2. List recipes](#342-list-recipes-listrecipe) and [Section 3.4.3. Delete a recipe](#343-delete-a-recipe-deleterecipe-yan-ting) command section to understand how to use the command.  
  
 __Format:__ `searchrecipe <KEYWORD>`  
 
@@ -296,7 +299,7 @@ Example |  Outcome
 
 [&#8593; Return to Top](#kitchen-helper---user-guide)
 
-#### 3.4.5. Cooking a recipe: `cookrecipe` (Hui Zhen)
+#### 3.4.5. Cooking a recipe: `cookrecipe` (Hui Zhen and Yan Ting)
 Cooks a recipe specified by the user by the recipe’s name.
 
 __Format:__ `cookrecipe /n <RECIPE_NAME> /p <NUMBER_OF_PAX>`
@@ -369,7 +372,7 @@ Example |  Outcome
 You can search for chores based on a given keyword.  
 
 The output also returns `Location: Index <Number>`, which you can make use of the `Number` to delete a chore or mark a chore as completed.   
- You may refer to [Section 3.5.3. Delete a chore](#353-delete-a-chore-deletechore) and [Section 3.5.5 Mark chore as done](#355-mark-chore-as-done-done) command section to understand how to use the command.  
+ You may refer to [Section 3.5.3. Delete a chore](#353-delete-a-chore-deletechore-isabella) and [Section 3.5.5 Mark chore as done](#355-mark-chore-as-done-done-isabella) command section to understand how to use the command.  
  
 __Format:__ `searchchore <KEYWORD>`  
 
@@ -399,9 +402,9 @@ Example |  Outcome
 
 #### 3.6.1. Display User Expenditure: `displayexpenditure` (Isabella)
 Displays the total expenditure and amount used in cooking for the week to help the user gauge future expenditure on ingredients.
-* Total expenditure increases whenever the user executes `addingredient` command to simulate purchase of groceries. You may refer to [3.3.1. Adding an ingredient](#331-adding-an-ingredient-addingredient).
+* Total expenditure increases whenever the user executes `addingredient` command to simulate purchase of groceries. You may refer to [3.3.1. Adding an ingredient](#331-adding-an-ingredient-addingredient-jin-fa).
 * Amount used in cooking is the cost of all the ingredients the user manages to use for cooking and represents the amount of expenditure the user benefited from.
-<br>Amount used in cooking increases when user executes `cookrecipe` command or when user responds with `yes` to the corresponding prompt when executing `deleteingredient`. You may refer to [3.4.5. Cooking a recipe](#345-cooking-a-recipe-cookrecipe) and [Section 3.3.3. Delete an ingredient](#333-delete-an-ingredient-deleteingredient). 
+<br>Amount used in cooking increases when user executes `cookrecipe` command or when user responds with `yes` to the corresponding prompt when executing `deleteingredient`. You may refer to [3.4.5. Cooking a recipe](#345-cooking-a-recipe-cookrecipe-hui-zhen-and-yan-ting) and [Section 3.3.3. Delete an ingredient](#333-delete-an-ingredient-deleteingredient-isabella-and-yan-ting). 
 
 __Format:__ `displayexpenditure`  
 
