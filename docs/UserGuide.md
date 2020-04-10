@@ -398,10 +398,10 @@ Example |  Outcome
 ### 3.6. Expenditure
 
 #### 3.6.1. Display User Expenditure: `displayexpenditure` (Isabella)
-Displays the weekly total expenditure and amount used in cooking. Amount used in cooking indicates the monetary value of ingredients the user ended up making use of in their cooking.
-<br>Total expenditure increases whenever the user executes `addingredient` command to simulate purchase of groceries. 
-<br>Amount used in cooking increases when user executes `cookrecipe` command or when user responds with `yes` to the corresponding prompt when executing `deleteingredient`.
-<br> You may refer to [Section 3.3.3. Delete an ingredient](#333-delete-an-ingredient-deleteingredient) command section to understand how to use the command.
+Displays the total expenditure and amount used in cooking for the week to help the user gauge future expenditure on ingredients.
+* Total expenditure increases whenever the user executes `addingredient` command to simulate purchase of groceries. You may refer to [3.3.1. Adding an ingredient](#331-adding-an-ingredient-addingredient).
+* Amount used in cooking is the cost of all the ingredients the user manages to use for cooking and represents the amount of expenditure the user benefited from.
+<br>Amount used in cooking increases when user executes `cookrecipe` command or when user responds with `yes` to the corresponding prompt when executing `deleteingredient`. You may refer to [3.4.5. Cooking a recipe](#345-cooking-a-recipe-cookrecipe) and [Section 3.3.3. Delete an ingredient](#333-delete-an-ingredient-deleteingredient). 
 
 __Format:__ `displayexpenditure`  
 
