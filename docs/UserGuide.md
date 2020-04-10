@@ -31,17 +31,18 @@ By: `Team CS2113T-M16-2` Since: `March 2020` License: `MIT`
       - [3.5.1. Adding a chore: `addchore`](#351-adding-a-chore-addchore)  
       - [3.5.2. List chore: `listchore`](#352-list-chore-listchore)  
       - [3.5.3. Delete a chore: `deletechore`](#353-delete-a-chore-deletechore)  
-      - [3.5.4. Search for chore: `searchchore`](#354-search-for-chore-searchchore-jin-fa)  
+      - [3.5.4. Search for chore: `searchchore`](#354-search-for-chore-searchchore-jin-fa) 
+      - [3.5.5. Mark chore as done: `done`](#355-mark-chore-as-done-done-isabella)  
  
     + [3.6 Expenditure](#36-expenditure)  
-      - [3.6.1. Display User Expenditure](#361-display-user-expenditure-displayexpenditure)  
+      - [3.6.1. Display User Expenditure](#361-display-user-expenditure-displayexpenditure-isabella)  
        
   * [4. Command Summary](#4-command-summary)
 
 
 ## 1. Introduction
 
-Our Project, Kitchen Helper is a kitchen application that is designed to facilitate users to track their kitchen inventory effectively. Kitchen Helper also enables users to create recipes with different ingredients and allows auto deduction when you cook using the recipe. Also, Kitchen Helper provides prompts when your ingredient are expiring or its quantity is running low, it also prompts for chores that should be completed by a deadline.      
+Our Project, Kitchen Helper is a kitchen application that is designed to facilitate users to track their kitchen inventory effectively. Kitchen Helper enables users to create recipes with different ingredients and allows auto deduction when you cook using the recipe. Kitchen Helper provides prompts when your ingredient are expiring or its quantity is running low. It also prompts for chores that should be completed by a deadline. Additionally, KitchenHelper helps users track expenditure.      
 
 Kitchen Helper is optimised for those who prefer working with Command Line Interface (CLI). It increases the level of convenience in our busy lives, so give this application a chance to help you!
  
@@ -317,36 +318,46 @@ Insufficient non-expired ingredients available. | **Command**: <br>`cookrecipe /
 
 ### 3.5. Chore
 
-#### 3.5.1. Adding a chore: `addchore`
+#### 3.5.1. Adding a chore: `addchore` (Isabella)
 Adds a chore to the chore list in Kitchen Helper.
 
-__Format:__ `addchore <TASK_DESCRIPTION> /by <DEADLINE>`  
+__Format:__ `addchore <TASK_DESCRIPTION> /by <DEADLINE>`  OR `addchore <TASK_DESCRIPTION> /by <dd/MM/yyyy HH:mm>`
+
+* `TASK_DESCRIPTION` : This refers to the description of the chore to complete. <br>
+* `DEADLINE`: This refers to the deadline specified by the user in String. <br>
+* `dd/MM/yyyy HH:mm`: This refers to the deadline as a date object that has to be specified in this exact format.
+
+> Please note that the deadline has to be specified exactly like the given format for it to be considered a Date object, otherwise it would be considered as a String. The deadline specified as a String has no content or format restrictions. <br>
+> Please note that the expiry date used in `addchore` given in the `User Guide` may be outdated.
 
 Example |  Outcome
 --------|------------------
-**Command**: <br> `addchore buy groceries /by Monday 12pm` <br><br> **Description**: <br> Creates a new chore called `buy groceries` which contains the deadline `Monday 12pm.` | addchore buy groceries /by Monday 12pm <br> You have added this chore: <br> [x] buy groceries (by: Monday 12pm) <br> Now you have 2 chores in the list. <br> ===================================================
-
+**Command**: <br> `addchore buy groceries /by Monday 12pm` <br><br> **Description**: <br> Creates a new chore called `buy groceries` which contains the deadline `Monday 12pm.` | You have added this chore: <br> [x] buy groceries (by: Monday 12pm) <br> Now you have 1 chore in the list. <br> ===================================================
+**Command**: <br> `addchore buy groceries /by 20/04/2020 12:00` <br><br> **Description**: <br> Creates a new chore called `buy groceries` which contains the deadline `20/04/2020 12:00.` | You have added this chore: <br> [x] buy groceries (by: 20/04/2020 12:00) <br> Now you have 2 chores in the list. <br> ===================================================                                                                                                                                                                                          
+                                                                                                                                                                                            
 [&#8593; Return to Top](#kitchen-helper---user-guide)
 
-#### 3.5.2. List chore: `listchore`
+#### 3.5.2. List chore: `listchore` (Isabella)
 Displays all the items currently in the chore list in Kitchen Helper.
 
 __Format:__ `listchore`  
 
 Example |  Outcome
 --------|------------------
-**Command**: <br> `listchore` | listchore <br> Here are the chores in your list: <br> 1. [x] buy groceries (by: Monday 12pm) <br> 2. [/] scrub the floor (by: this Saturday) <br> ===================================================
+**Command**: <br> `listchore` | Here are the chores in your list: <br> 1. [x] buy groceries (by: Monday 12pm) <br> 2. [x] buy groceries (by: 20/04/2020 12:00) <br> ===================================================
 
 [&#8593; Return to Top](#kitchen-helper---user-guide)
 
-#### 3.5.3. Delete a chore: `deletechore`
+#### 3.5.3. Delete a chore: `deletechore` (Isabella)
 Deletes the chore specified by the index in the chore list in Kitchen Helper. The index of the chore can be found by displaying the list of chores.
 
-__Format:__ `deletechore <INDEX_TO_DELETE>`  
+__Format:__ `deletechore <INDEX_TO_DELETE>`
+
+* `INDEX_TO_DELETE`: This refers to the index of the chore in the chorelist to delete.  
 
 Example |  Outcome
 --------|------------------
-**Command**: <br> `deletechore 1` <br><br> **Description**: <br> Deletes the item specified by `index 1` in the chore list. | deletechore 1 <br> You have deleted this chore: <br> [x] buy groceries (by: Monday 12pm) <br> Now you have 0 chores in the list. <br> ===================================================
+**Command**: <br> `deletechore 1` <br><br> **Description**: <br> Deletes the item specified by `index 1` in the chore list. | You have deleted this chore: <br> [x] buy groceries (by: Monday 12pm) <br> Now you have 1 chore in the list. <br> ===================================================
 
 [&#8593; Return to Top](#kitchen-helper---user-guide)
 
@@ -367,14 +378,16 @@ Example |  Outcome
 
 [&#8593; Return to Top](#kitchen-helper---user-guide)
 
-#### 3.5.5. Mark chore as done: `done`
+#### 3.5.5. Mark chore as done: `done` (Isabella)
 Marks the chore specified by the index in the chore list in Kitchen Helper as done. The index of the chore can be found by displaying the list of chores.
 
 __Format:__ `done <INDEX_TO_CHECK>`  
 
+* `INDEX_TO_CHECK`: This refers to the index of the chore in the chorelist to mark as done.
+
 Example |  Outcome
 --------|------------------
-**Command**: <br> `done 1` <br><br> **Description**: <br> Marks the item specified by `index 1` in the chore list as done. | done 1 <br> You have completed this chore: <br> [/] buy groceries (by: Monday 12pm) <br> <br> ===================================================
+**Command**: <br> `done 1` <br><br> **Description**: <br> Marks the item specified by `index 1` in the chore list as done. | You have completed this chore: <br> [/] buy groceries (by: 20/04/2020 12:00) <br> <br> ===================================================
 
 [&#8593; Return to Top](#kitchen-helper---user-guide)
 
