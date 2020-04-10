@@ -17,7 +17,7 @@ By: `Team CS2113T-M16-2` Since: `March 2020` License: `MIT`
     + [3.3. Ingredient](#33-ingredient)  
        - [3.3.1. Adding an ingredient: `addingredient`](#331-adding-an-ingredient-addingredient-jin-fa)  
        - [3.3.2. List ingredient: `listingredient`](#332-list-ingredient-listingredient)  
-       - [3.3.3. Delete an ingredient: `deleteingredient`](#333-delete-an-ingredient-deleteingredient)  
+       - [3.3.3. Delete an ingredient: `deleteingredient`](#333-delete-an-ingredient-deleteingredient-yan-ting-and-isabella)  
        - [3.3.4. Search for ingredient: `searchingredient`](#334-search-for-ingredient-searchingredient-jin-fa)  
 
     + [3.4. Recipe](#34-recipe)  
@@ -174,6 +174,8 @@ Example |  Outcome
 
 #### 3.3.3. Delete an ingredient: `deleteingredient`
 You can delete a specific ingredient and reduce the quantity of an ingredient from the ingredient's inventory in Kitchen Helper by using the ingredient's index. 
+<br> You will be prompted whether to delete ingredient cost from total expenditure, in the event you are deleting this ingredient because you added it wrongly and would not like to count its cost into total expenditure. 
+<br> If you refuse this prompt, you will then be prompted whether to add ingredient cost to amount used in cooking, in the event you are manually deleting ingredients you have cooked or consumed.
 
 __Format__: `deleteingredient /i <INGREDIENT_INDEX> [/q <QUANTITY>]`
 <br>
@@ -185,11 +187,13 @@ __Format__: `deleteingredient /i <INGREDIENT_INDEX> [/q <QUANTITY>]`
 
 > One thing to note: If the final quantity of your ingredient will be zero after deduction, the ingredient will be deleted from the ingredient list subsequently. 
 
+> The user expenditure might change depending on your response to the prompts. You can view the changes with `displayexpenditure` command. Please refer to [3.6.1. Display User Expenditure](#361-display-user-expenditure-displayexpenditure).
+
 Example |  Outcome
 --------|------------------
-**Command**: <br> `deleteingredient /i 1` <br><br> **Description**: Deletes the item specified by `index 1` in the ingredient list. | apple has been deleted.<br>===================================================
-**Command**: <br> `deleteingredient /i 2 /q 20` <br><br> **Description**: Reduces the ingredient specified by `index 2` in the ingredient list. | The quantity of HL Milk has been changed!<br>===================================================
-**Command**: <br> `deleteingredient /i 2 /q 1` <br><br> **Description**: Assuming that the current ingredient of `index 2` has a `quantity` of `1`, reduces the ingredient specified by `index 2` in the ingredient list. | The quantity of Beef has been changed!<br>This ingredient has a quantity of 0 after deduction, so it has been deleted.<br>===================================================
+**Command**: <br> `deleteingredient /i 1` <br><br> **Description**: Deletes the item specified by `index 1` in the ingredient list. | The amount of money spent on this ingredient has already been recorded. <br> Would you like to remove the amount spent on this item from the total expenditure? <br> =================================================== <br> `yes` <br> Ok! $3.00 is deducted from total expenditure. <br> =================================================== <br> apple has been deleted.<br>===================================================
+**Command**: <br> `deleteingredient /i 2 /q 20` <br><br> **Description**: Reduces the ingredient specified by `index 2` in the ingredient list. | The amount of money spent on this ingredient has already been recorded. <br> Would you like to remove the amount spent on this item from the total expenditure? <br> =================================================== <br> `no` <br> Ok! There are no changes to expenditure. <br> =================================================== <br> Would you like to add the amount spent on this item to the amount used for cooking or consumption? <br> =================================================== <br> `yes` <br> Ok! $50.00 is added to amount used in cooking or consumption. <br> =================================================== <br> The quantity of HL Milk has been changed!<br>===================================================
+**Command**: <br> `deleteingredient /i 2 /q 1` <br><br> **Description**: Assuming that the current ingredient of `index 2` has a `quantity` of `1`, reduces the ingredient specified by `index 2` in the ingredient list. | The amount of money spent on this ingredient has already been recorded. <br> Would you like to remove the amount spent on this item from the total expenditure? <br> =================================================== <br> `no` <br> Ok! There are no changes to expenditure. <br> =================================================== <br> Would you like to add the amount spent on this item to the amount used for cooking or consumption? <br> =================================================== <br> `no` <br> Ok! There are no changes to expenditure. <br> =================================================== <br> The quantity of Beef has been changed!<br>This ingredient has a quantity of 0 after deduction, so it has been deleted. <br> ===================================================
 
 [&#8593; Return to Top](#kitchen-helper---user-guide)
 
