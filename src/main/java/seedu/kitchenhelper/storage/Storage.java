@@ -193,7 +193,7 @@ public class Storage {
             }
             freshRecipe.addIngredientsToRecipeFromArrayList(recipeItems);
             recipeList.add(freshRecipe);
-            recipeList.add(freshRecipe);
+            //recipeList.add(freshRecipe);
         }
         scanner.close();
         return recipeList;
@@ -306,7 +306,7 @@ public class Storage {
             Date lastSavedDate = dateFormat.parse(variables[2]);
             Expenditure.getInstance().loadExpenditureVariables(expenditure, amountUsed, lastSavedDate);
         } catch (NoSuchElementException | IndexOutOfBoundsException | ParseException e) {
-            throw new FileNotFoundException();
+            Expenditure.getInstance().loadExpenditureVariables(0, 0, null);
         } finally {
             scanner.close();
         }
