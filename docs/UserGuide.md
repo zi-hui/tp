@@ -301,7 +301,7 @@ __Format:__ `cookrecipe /n <RECIPE_NAME> /p <NUMBER_OF_PAX>`
 
 > Please note that expired ingredients cannot be cooked and will be prompted to clear them.
 
-> Please note that the ingredients used in the recipe will be matched strictly by their `INGREDIENT_NAME` and `CATEGORY` when cooking a recipe. You may refer to the [addrecipe](#341-adding-a-recipe-addrecipe) command section
+> Please note that the ingredients used in the recipe will be matched strictly by their `INGREDIENT_NAME` and `CATEGORY` when cooking a recipe. You may refer to the [addrecipe](#341-adding-a-recipe-addrecipe-hui-zhen)  command section
 
 > Please note that if the recipe has been successfully cooked, the quantity of the ingredients associated to the recipe will be deducted. If the final quantity of some of the ingredients is zero after deduction, the respective ingredients will be removed from the ingredient list.
 
