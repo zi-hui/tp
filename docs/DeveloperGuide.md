@@ -386,7 +386,7 @@ For example, `beef` ingredient's expired date is 02/02/2020 and have quantity of
 
 ##### Implementation  
 
-![SearchIngredientCommand](images/searchIngredient_update.png) 
+<Image to be added>
 
 The following steps explained sequence diagram for `showNotification` command:  
 1. The user starts `KitchenHelper`.  
@@ -1092,6 +1092,71 @@ Use case resumes at step 3.
 Use case ends.
 ```
 
+<br>
+
+```
+Use case: UC08 - List Ingredients
+MSS:
+1. User wants to see the whole ingredient list.
+2. User use the category 'all' to display whole ingredient list.
+3. System displays all ingredients regardless of category.
+Use case ends.
+
+Extensions:
+2a. System detects invalid format in the entered data.
+  2a1. System throws invalid input format and shows a valid format example.
+  Use case resumes at step 2.
+```
+
+<br>
+
+```
+Use case: UC09 - List Ingredients from Meat category
+MSS:
+1. User wants to see the whole ingredient list.
+2. User use the category 'meat' to display whole ingredient list.
+3. System displays ingredients under the category, `meat`.
+Use case ends.
+
+Extensions:
+2a. System detects invalid format in the entered data.
+  2a1. System throws invalid input format and shows a valid format example.
+2b. System detects invalid category in the entered data.
+  2b1. System throws invalid category name and shows the valid category names.
+  Use case resumes at step 2.
+```
+
+<br>
+
+```
+Use case: UC10 - List Recipe name
+MSS:
+1. User wants to see the whole list of Recipe name.
+2. User use the category 'all' to display whole recipe name list.
+3. System displays all recipe name.
+Use case ends.
+
+Extensions:
+2a. System detects invalid format in the entered data.
+  2a1. System throws invalid input format and shows a valid format example.
+  Use case resumes at step 2.
+```
+
+<br>
+
+```
+Use case: UC11 - List of Ingredients in Recipe
+MSS:
+1. User wants to see the ingredient list inside a Recipe.
+2. User use the recipe number '1' to display the ingredient list needed to cook the recipe.
+3. System displays all ingredients under the recipe.
+Use case ends.
+
+Extensions:
+2a. System detects invalid format in the entered data.
+  2a1. System throws invalid input format and shows a valid format example.
+```
+
 [&#8593; Return to Top](#developer-guide)
 
 ### Appendix D: Non-Functional Requirements
@@ -1136,7 +1201,18 @@ Use case ends.
    Expected: Please enter a quantity more than 0.
    
 #### F.3. List ingredient 
+1. List Ingredient
+   1. Prerequisites: Add ingredient using the `addingredient /n beef /c meat /q 3 /p 20.20 /e 03/03/2022` command. 
+   2. Test case: `listingredient all`    
+   Expected: Entry can be seen using `listingredient all` command and all other categories.
+   3. Test case: `listingredient meat` 
+   Expected: Entry can be seen using `listingredient all` command and only `meat` category is shown.
+   4. Test case: `listingredient 1`
+   Expected: Invalid Command, please check your format!
+   5. Test case: `listingredient airplane`
+   Expected: Invalid Command, please check your format!
 
+   
 #### F.4. Delete an ingredient 
 1. Delete an ingredient from Kitchen Helper.
    1. Prerequisites: List all the recipes using the `listingredient all` command.
@@ -1170,7 +1246,16 @@ Use case ends.
     Expected: Entry can be found using `listingredient all` command. 
 
 #### F.7. List recipe
-
+1. List Recipe
+   1. Prerequisites: Add ingredient using the `addrecipe /n warm milk /i HL Milk:1:Dairy` command. 
+   2. Test case: `listrecipe all`    
+   Expected: Entry can be seen using `listrecipe all` command, shows all recipe's name added.
+   3. Test case: `listrecipe 1` 
+   Expected: Entry can be seen using `listrecipe 1` command and shows all ingredients registered in the recipe.
+   4. Test case: `listrecipe 2`
+   Expected: The Recipe List is currently empty.
+   5. Test case: `listrecipe notsure`
+   Expected: Invalid Command, please check your format!
 #### F.8. Cook a recipe
 1. Cooks the specified recipe and ingredients in the recipe will be automatically deducted.
     1. Prerequisites: List all the ingredient using the `listingredient all` command.
