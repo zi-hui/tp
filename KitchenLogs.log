@@ -1,6 +1,0 @@
-Apr 10, 2020 10:48:08 PM seedu.kitchenhelper.parser.Parser prepareListIngredient
-WARNING: An IndexOutOfBounds exception has been caught
-Apr 10, 2020 10:48:40 PM seedu.kitchenhelper.parser.Parser prepareListIngredient
-WARNING: An IndexOutOfBounds exception has been caught
-Apr 10, 2020 10:51:22 PM seedu.kitchenhelper.parser.Parser prepareListRecipe
-WARNING: An IndexOutOfBounds exception has been caught
