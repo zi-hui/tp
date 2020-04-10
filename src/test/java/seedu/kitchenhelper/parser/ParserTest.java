@@ -2,7 +2,15 @@ package seedu.kitchenhelper.parser;
 
 import org.junit.jupiter.api.Test;
 import seedu.kitchenhelper.KitchenHelper;
-import seedu.kitchenhelper.command.*;
+import seedu.kitchenhelper.command.AddChoreCommand;
+import seedu.kitchenhelper.command.AddIngredientCommand;
+import seedu.kitchenhelper.command.DeleteRecipeCommand;
+import seedu.kitchenhelper.command.DeleteChoreCommand;
+import seedu.kitchenhelper.command.DeleteIngredientCommand;
+import seedu.kitchenhelper.command.InvalidCommand;
+import seedu.kitchenhelper.command.SearchChoreCommand;
+import seedu.kitchenhelper.command.SearchRecipeCommand;
+import seedu.kitchenhelper.command.SearchIngredientCommand;
 import seedu.kitchenhelper.common.Messages;
 import seedu.kitchenhelper.exception.KitchenHelperException;
 
