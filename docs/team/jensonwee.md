@@ -61,7 +61,5 @@ They showcase my ability to write technical documentation and the technical dept
 
 + [Part of Use cases in Appendix C](https://ay1920s2-cs2113t-m16-2.github.io/tp/DeveloperGuide#appendix-c-value-proposition---use-cases)
 
-+ Instructions for Manual Testing in Appendix F (Example: [1](https://ay1920s2-cs2113t-m16-2.github.io/tp/DeveloperGuide#f2-add-an-ingredient)
-, [2](https://ay1920s2-cs2113t-m16-2.github.io/tp/DeveloperGuide#f5-search-for-ingredient)
-, [3](https://ay1920s2-cs2113t-m16-2.github.io/tp/DeveloperGuide#f10-search-for-recipe)
-, [4](https://ay1920s2-cs2113t-m16-2.github.io/tp/DeveloperGuide#f14-search-for-chore))
++ Instructions for Manual Testing in Appendix F (Example: [1](https://ay1920s2-cs2113t-m16-2.github.io/tp/DeveloperGuide#f3-list-ingredient)
+, [2](https://ay1920s2-cs2113t-m16-2.github.io/tp/DeveloperGuide#f7-list-recipe))
