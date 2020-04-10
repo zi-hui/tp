@@ -57,9 +57,9 @@ public class ChoreNotification {
     public boolean isApproachingDeadline(Chore chore) {
         Date deadline = chore.date;
         Calendar calendar = Calendar.getInstance();
-        calendar.setTime(deadline); //sets the time to deadline
-        calendar.add(Calendar.DATE, -3); //find out what the date 3 days before deadline
-        Date threeDaysBefore = calendar.getTime(); //get this time in Date object form
+        calendar.setTime(deadline);
+        calendar.add(Calendar.DATE, -3);
+        Date threeDaysBefore = calendar.getTime();
         Date currentDate = new Date();
 
         if (threeDaysBefore.before(currentDate) && deadline.after(currentDate)) {

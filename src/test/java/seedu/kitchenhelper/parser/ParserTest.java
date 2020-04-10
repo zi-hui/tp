@@ -59,15 +59,19 @@ class ParserTest {
     
     @Test
     void prepareAddChore_testPass() {
-        String correctAttributes = "buy groceries /by Tuesday 12pm";
-        assertTrue(new Parser().prepareAddChore(correctAttributes) instanceof AddChoreCommand);
+        String correctAttributesWithString = "buy groceries /by Tuesday 12pm";
+        assertTrue(new Parser().prepareAddChore(correctAttributesWithString) instanceof AddChoreCommand);
+        String correctAttributesWithDate = "buy groceries /by 14/04/2020 12:00";
+        assertTrue(new Parser().prepareAddChore(correctAttributesWithDate) instanceof AddChoreCommand);
     }
     
     @Test
     void prepareAddChore_testFail() {
         String incorrectAttributes = "buy groceries";
-        String output = "Invalid Command Format!\n" + "Adds a chore to the chore list. TASK /by DATE\n"
-                        + "Example: addchore buy groceries /by Tuesday 12pm";
+        String output = "Invalid Command Format!\nAdds a chore to the chore list. "
+                + "TASK /by DATE OR TASK /by <dd/MM/yyyy HH:mm>\n"
+                        + "Example: addchore buy groceries /by Tuesday 12pm "
+                + "OR addchore buy groceries /by 14/04/2020 12:00";
         assertEquals(output, showToConsole(
                 new KitchenHelper().executeCommand(new Parser().prepareAddChore(incorrectAttributes)).feedbackToUser));
     }

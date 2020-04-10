@@ -3,8 +3,11 @@ addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable
 addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable
 addrecipe /n Chicken Stew /i Chicken Breast:2:meat, Lettuce:4:vegetable
 addrecipe /n warm milk /i HL Milk:1:Dairy
+displayexpenditure
 addingredient /n HL Milk /c Dairy /q 3 /p 12.2 /e 01/03/2022
+displayexpenditure
 cookrecipe /n warm milk /p 2
+displayexpenditure
 listrecipe all
 addingredient /n Beef /c meat /q 3 /p 20 /e 18/03/2022
 addingredient /n Beef cubes /c meat /q 3 /p 20 /e 18/03/2022
@@ -38,19 +41,37 @@ cookrecipe /n Chicken Salad /p 3
 deleterecipe /n Chicken Salad
 deleterecipe /n Chicken Salad
 deleterecipe /n Chicken Stew
+displayexpenditure
 deleteingredient /n HL milk
 deleteingredient /i 1 /q 2
 deleteingredient /i 1 /q 1
+no
+no
+displayexpenditure
 deleteingredient /i 2 /q 40
 deleteingredient /i 2 /q 1
+no
+yes
+displayexpenditure
 deleteingredient /i /q
 deleteingredient /i -1
 deleteingredient /i 1 /1 -1
 deleteingredient /i 4
+yes
+displayexpenditure
 deleteingredient /i 3
+n
+no
+no
 deleteingredient /i 2
+no
+no
 deleteingredient /i 1
+no
+no
 deleteingredient /i 1
+no
+no
 deletechore 1
 addingredient /n Beef /c meat /q 3 /p 20 /e 18/03/2022
 listingredient all
