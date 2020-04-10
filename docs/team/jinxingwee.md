@@ -41,13 +41,10 @@ Kitchen Helper is a desktop application mainly targeted for home user who often 
 Given below are sections I contributed to the User Guide.   
 They showcase my ability to write documentation targeting end-users.
 ```
-+ [List Ingredient](https://ay1920s2-cs2113t-m16-2.github.io/tp/UserGuide#331-adding-an-ingredient-addingredient-jin-fa) 
++ [List Ingredient](https://ay1920s2-cs2113t-m16-2.github.io/tp/UserGuide#332-list-ingredient-listingredient) 
 
-+ [Search for ingredient](https://ay1920s2-cs2113t-m16-2.github.io/tp/UserGuide#334-search-for-ingredient-searchingredient-jin-fa)
++ [List Recipe](https://ay1920s2-cs2113t-m16-2.github.io/tp/UserGuide#342-list-recipes-listrecipe)
 
-+ [Search for recipe](https://ay1920s2-cs2113t-m16-2.github.io/tp/UserGuide#344-search-for-recipe-searchrecipe-jin-fa)
-
-+ [Search for chore](https://ay1920s2-cs2113t-m16-2.github.io/tp/UserGuide#354-search-for-chore-searchchore-jin-fa)
 
 #### Contributions to the Developer Guide
 
@@ -56,13 +53,11 @@ Given below are sections I contributed to the Developer Guide.
 They showcase my ability to write technical documentation and the technical depth of my contributions to the project.
 ```
 
-+ [Addition of ingredient](https://ay1920s2-cs2113t-m16-2.github.io/tp/DeveloperGuide#411-addition-of-ingredient)
++ [List all/ specific ingredient(s)](https://ay1920s2-cs2113t-m16-2.github.io/tp/DeveloperGuide#412-list-all-specific-ingredients)
 
-+ [Search for ingredients based on keyword(s)](https://ay1920s2-cs2113t-m16-2.github.io/tp/DeveloperGuide#414-search-for-ingredients-based-on-keywords)
++ [List all/ specific recipe(s)](https://ay1920s2-cs2113t-m16-2.github.io/tp/DeveloperGuide#422-list-all-specific-recipes)
 
-+ [Search for recipe based on keyword(s)](https://ay1920s2-cs2113t-m16-2.github.io/tp/DeveloperGuide#425-search-for-recipe-based-on-keywords)
-
-+ [Search for chore based on keyword(s)](https://ay1920s2-cs2113t-m16-2.github.io/tp/DeveloperGuide#434-search-for-chore-based-on-keywords)
++ [Notification for ingredients warning](https://ay1920s2-cs2113t-m16-2.github.io/tp/DeveloperGuide#415-notification-for-ingredients-warning)
 
 + [Part of Use cases in Appendix C](https://ay1920s2-cs2113t-m16-2.github.io/tp/DeveloperGuide#appendix-c-value-proposition---use-cases)
 
