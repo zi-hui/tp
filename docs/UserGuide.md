@@ -53,7 +53,7 @@ So what are you waiting for? Let’s go!
 
 1. Ensure that you have Java `11` or above installed on your computer.
 2. Download the latest version of `KitchenHelper` from [here](https://github.com/AY1920S2-CS2113T-M16-2/tp/releases).
-3. Copy the file to the folder you want to use as the home folder for KitchenHelper.
+3. Save the file as `kitchenhelper.jar` and copy the file to the folder you want to use as the home folder for KitchenHelper.
 4. Type the command `java -jar kitchenhelper.jar` in the command prompt to start the application.
 5. Type the command in the command box and press `Enter` to execute it.  
    e.g. typing `help` and pressing `Enter` will display help information.
