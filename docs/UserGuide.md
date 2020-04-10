@@ -285,7 +285,7 @@ Example |  Outcome
 You can search for recipes based on a given keyword.  
 
 The output also returns `Location: Index <Number>`, which you can make use of the `Number` to view information in the recipe or delete a recipe through an index.  
- You may refer to [Section 3.4.2. List recipes](#342-list-recipes-listrecipe) and [Section 3.4.3. Delete a recipe](#343-delete-a-recipe-deleterecipe) command section to understand how to use the command.  
+ You may refer to [Section 3.4.2. List recipes](#342-list-recipes-listrecipe) and [Section 3.4.3. Delete a recipe](#343-delete-a-recipe-deleterecipe-yan-ting) command section to understand how to use the command.  
  
 __Format:__ `searchrecipe <KEYWORD>`  
 
