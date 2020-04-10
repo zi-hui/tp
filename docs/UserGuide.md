@@ -243,11 +243,11 @@ Any `CATEGORY` that does not falls in the list could be put under `Miscellaneous
 
 > Please note that `RECIPE_NAME` and `INGREDIENT_NAME` can contain spaces. These will not be removed after addition. (i.e. "Chicken____Stew" where `_` is space will remain )  
 
-Example |  Outcome
---------|------------------
-**Command**: <br> `addrecipe /n Rice Ball /i Rice:3:staple` <br><br> **Description**: <br> Creates a new recipe called `Rice Ball` which contains one ingredient, `3` portions of `Rice`. | Rice Ball Recipe has been created with 1 ingredients inside.<br>===================================================`
-**Command**: <br> `addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable` <br><br> **Description**: <br> Creates a new recipe called `Chicken Salad` which contains two ingredient, `2` portions of `Chicken breast` and `4` portions of `Lettuce`. | Chicken Salad Recipe has been created with 2 ingredients inside.<br>===================================================
-**Command**: <br> `addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable` <br><br> **Description**: <br> A duplicate recipe has been found | There is an existing recipe with the same name!<br>===================================================
+| Example |  Outcome |
+|---------|----------|
+|**Command**: <br> `addrecipe /n Rice Ball /i Rice:3:staple` <br><br>**Description**: <br> Creates a new recipe called `Rice Ball` which contains one ingredient, `3` portions of `Rice`. | Rice Ball Recipe has been created with 1 ingredients inside.<br>===================================================`.|
+|**Command** : <br> `addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable` <br><br> **Description**: <br> Creates a new recipe called `Chicken Salad` which contains two ingredient, `2` portions of `Chicken breast` and `4` portions of `Lettuce`. | Chicken Salad Recipe has been created with 2 ingredients inside.<br>===================================================|
+|**Command**: <br> `addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable` <br><br> **Description**: <br> A duplicate recipe has been found | There is an existing recipe with the same name!<br>===================================================|
 
 [&#8593; Return to Top](#kitchen-helper---user-guide)
 
