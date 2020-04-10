@@ -272,6 +272,7 @@ __Format__: `deleterecipe /n <RECIPE_NAME>` OR `deleterecipe /i <RECIPE_INDEX>`
 * `RECIPE_NAME` : This refers to the name of the recipe. <br>
 * `RECIPE_INDEX`: This refers to the index of the recipe which is an identification number tagged to the recipe.<br>
 <br>
+
 > You may get the index or name for the recipe that you would like to delete by getting the full list of recipes that you have previously entered into Kitchen Helper. You may refer to the [listrecipe all](#342-list-recipes-listrecipe) command section to understand how to use the command. 
 
 Example |  Outcome
