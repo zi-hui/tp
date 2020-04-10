@@ -388,19 +388,22 @@ __Format:__ `done <INDEX_TO_CHECK>`
 Example |  Outcome
 --------|------------------
 **Command**: <br> `done 1` <br><br> **Description**: <br> Marks the item specified by `index 1` in the chore list as done. | You have completed this chore: <br> [/] buy groceries (by: 20/04/2020 12:00) <br> <br> ===================================================
-
+ 
 [&#8593; Return to Top](#kitchen-helper---user-guide)
 
 ### 3.6. Expenditure
 
-#### 3.6.1. Display User Expenditure: `displayexpenditure`
-Displays total expenditure and amount used in cooking. Total expenditure increases whenever the user executes addingredient command to simulate purchase of groceries. Amount used in cooking indicates the cost of ingredients used in cooking, to help users know how much they made use of the ingredients they bought, and plan expenditure for future meals. 
+#### 3.6.1. Display User Expenditure: `displayexpenditure` (Isabella)
+Displays the weekly total expenditure and amount used in cooking. Amount used in cooking indicates the monetary value of ingredients the user ended up making use of in their cooking.
+<br>Total expenditure increases whenever the user executes `addingredient` command to simulate purchase of groceries. 
+<br>Amount used in cooking increases when user executes `cookrecipe` command or when user responds with `yes` to the corresponding prompt when executing `deleteingredient`.
+<br> You may refer to [Section 3.3.3. Delete an ingredient](#333-delete-an-ingredient-deleteingredient) command section to understand how to use the command.
 
 __Format:__ `displayexpenditure`  
 
 Example |  Outcome
 --------|------------------
-**Command**: <br> `displayexpenditure` <br>| displayexpenditure <br> This is the total amount you spent on buying Ingredients so far this week: $10.00  <br> This is the amount you actually spent for Ingredients used in your cooking this week: $6.00 <br> =================================================== 
+**Command**: <br> `displayexpenditure` <br>| This is the total amount you spent on buying Ingredients so far this week: $140.00  <br> This is the amount you actually spent for Ingredients used in your cooking this week: $60.00 <br> =================================================== 
 
 [&#8593; Return to Top](#kitchen-helper---user-guide)
 
