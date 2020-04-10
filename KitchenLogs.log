@@ -1,8 +1,8 @@
-Apr 06, 2020 8:32:16 PM seedu.kitchenhelper.command.DeleteIngredientCommand deleteIngredient
-INFO: An ingredient has been deleted
-Apr 06, 2020 8:32:28 PM seedu.kitchenhelper.parser.Parser prepareAddIngredient
-WARNING: Invalid Command Format! 
-Apr 06, 2020 8:32:38 PM seedu.kitchenhelper.command.AddIngredientCommand execute
-INFO: A new ingredient has been added
-Apr 06, 2020 8:33:46 PM seedu.kitchenhelper.parser.Parser prepareListIngredient
+Apr 10, 2020 9:22:04 PM seedu.kitchenhelper.parser.Parser prepareDeleteRecipe
+WARNING: An IndexOutOfBounds exception has been caught
+Apr 10, 2020 9:22:17 PM seedu.kitchenhelper.parser.Parser prepareDeleteRecipe
+WARNING: An IndexOutOfBounds exception has been caught
+Apr 10, 2020 9:22:29 PM seedu.kitchenhelper.parser.Parser prepareDeleteRecipe
+WARNING: An IndexOutOfBounds exception has been caught
+Apr 10, 2020 9:22:47 PM seedu.kitchenhelper.parser.Parser prepareDeleteRecipe
 WARNING: An IndexOutOfBounds exception has been caught
