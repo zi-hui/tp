@@ -33,4 +33,8 @@ public class Messages {
     public static final String MESSAGE_INVALID_DATE = "Invalid date entered.";
     public static final String MESSAGE_ADD_INGREDIENT_SUCCESS =
             "KitchenHelper has added: Ingredient:%s Category:%s Quantity:%d Price:$%.2f Expiry:%s";
+
+    //AddChore Command Message
+    public static final String MESSAGE_OVERDUE_CHORE = "The deadline entered has already past."
+            + Ui.LS + "Please enter a future date.";
 }
