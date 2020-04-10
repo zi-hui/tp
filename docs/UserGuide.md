@@ -237,10 +237,11 @@ The different types of `CATEGORY` are listed below:
   + `Drink`
   + `Miscellaneous`  
   
-Any `CATEGORY` that does not falls in the list could be put under `Miscellaneous`.
+Any `CATEGORY` that does not falls in the list could be put under `Miscellaneous`.  
 
 > All `RECIPE_NAME` has to be unique. You can check the list of existing recipes by using [`listrecipe all`](#342-list-recipes-listrecipe)  
-> Please note that `RECIPE_NAME` and `INGREDIENT_NAME` can contain spaces. These will not be removed after addition. (i.e. "Chicken____Stew" where `_` is space will remain )
+
+> Please note that `RECIPE_NAME` and `INGREDIENT_NAME` can contain spaces. These will not be removed after addition. (i.e. "Chicken____Stew" where `_` is space will remain )  
 
 Example |  Outcome
 --------|------------------
