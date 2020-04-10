@@ -261,7 +261,7 @@ public class Parser {
         try {
             DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
             Date date = dateFormat.parse(dateStr);
-            if(isOverdueChore(date)) {
+            if (isOverdueChore(date)) {
                 throw new ExpiredException();
             }
             return new AddChoreCommand(description, date);
