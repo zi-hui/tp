@@ -384,25 +384,23 @@ Users can add a new recipe to the application where there must be at least one o
 
 > It is important that the name of the new recipe has not appeared in the list of recipes in the application.
 
-When the user attempts to create a new recipe, the `AddRecipeCommand`, ‘Parser’ and `Recipe` class will be accessed and the following sequence of actions are called to create a `recipe` object:
-
 ##### Implementation 
-When the user attempts to create a new recipe, the `AddRecipeCommand`, ‘Parser’ and `Recipe` class will be accessed and the following sequence of actions are called to create a `recipe` object:
+When the user attempts to create a new recipe, the `AddRecipeCommand`, `Parser` and `Recipe` class will be accessed and the following sequence of actions are called to create a `recipe` object:
 
 1. User executes `addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable` 
     1. A `Ui` object will be created and calls `Ui#getUserCommand()`
-    1. Input will be parsed in `Command#parseUserCommand()` and identified with the keyword `addrecipe`.
+    1. Input will be parsed in `Parser#parseUserCommand()` and identified with the keyword `addrecipe`.
     
     ![Add Recipe Step 1](images/AddRecipe1.png)
 2. Parsing of user input and creation of command object
-    1. This will automatically trigger the parsing of the user’s input string into a suitable format for the addition of `recipe` object in `Command#prepareAddRecipe()`.
+    1. This will automatically trigger the parsing of the user’s input string into a suitable format for the addition of `recipe` object in `Parser#prepareAddRecipe()`.
     1. A `AddRecipeCommand` object will be created and calls `AddRecipeCommand#setAttributesOfCmd()` to set the contents of the command into reader friendly formats.
     
     ![Add Recipe Step 2](images/AddRecipe2.png)
 3. Executing Command
-    1. The newly created object will call `#AddRecipeCommand#execute` which starts the process of adding a recipe, thus calling `Recipe#AddRecipe()`.
+    1. The newly created object will call `AddRecipeCommand#execute()` which starts the process of adding a recipe, thus calling `Recipe#AddRecipe()`.
     1. A `Recipe` object will be created with its name that was parsed in step 2.
-    1. An additional step is included where a check for an existing recipe with the same name is conducted with `#AddRecipeCommand#checkIfRecipeExist()`. A `KitchenHelperException` exception will be triggered when there is an existing recipe.
+    1. An additional step is included where a check for an existing recipe with the same name is conducted with `AddRecipeCommand#checkIfRecipeExist()`. A `KitchenHelperException` exception will be triggered when there is an existing recipe.
     
     ![Add Recipe Step 3](images/AddRecipe3.png)
 4. `Ingredient`s parsed in step 2 will be added to the newly created recipe according to their category through the calling of `Recipe#addIngredientsToRecipe()`.
