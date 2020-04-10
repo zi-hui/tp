@@ -1,7 +1,7 @@
 # Lim Yan Ting Project Portfolio
 
 ### Overview - Kitchen Helper
-Kitchen Helper is an application that is mainly targeted for household users who have difficulty in remembering what they have in their kitchen. This application aids them in the tracking of ingredients that are currently in their kitchen more efficiently in terms of buying new ingredients or deducting quantity of ingredients after they cook a recipe. In addition to that, this application is built through a command line inteface (CLI) which will be more attractive to users who likes CLI applications. 
+Kitchen Helper is a command line interface (CLI) application that is mainly targeted for household users who have difficulty in remembering what they have in their kitchen. This application aids them in the tracking of ingredients that are currently in their kitchen more efficiently in terms of buying new ingredients or deducting quantity of ingredients after they cook a recipe.
 
 ### Contributions
 #### Enhancements implemented
