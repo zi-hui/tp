@@ -261,9 +261,14 @@ public class Parser {
         try {
             DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
             Date date = dateFormat.parse(dateStr);
+            if(isOverdueChore(date)) {
+                throw new ExpiredException();
+            }
             return new AddChoreCommand(description, date);
         } catch (ParseException e) {
             return new AddChoreCommand(description, dateStr);
+        } catch (ExpiredException ee) {
+            return new InvalidCommand(Messages.MESSAGE_OVERDUE_CHORE);
         }
     }
 
@@ -531,4 +536,20 @@ public class Parser {
         LocalDate dt2 = LocalDate.parse(LocalDate.now().toString());
         return dt2.isBefore(dt1);
     }
+
+    /**
+     * Check if the chore is overdue prior to adding.
+     *
+     * @param choreDate the user input chore deadline.
+     * @return true if chore is overdue, false otherwise.
+     */
+    public boolean isOverdueChore(Date choreDate) {
+        Date currentDate = new Date();
+        if (choreDate.before(currentDate)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
