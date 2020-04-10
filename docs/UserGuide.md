@@ -17,15 +17,15 @@ By: `Team CS2113T-M16-2` Since: `March 2020` License: `MIT`
     + [3.3. Ingredient](#33-ingredient)  
        - [3.3.1. Adding an ingredient: `addingredient`](#331-adding-an-ingredient-addingredient-jin-fa)  
        - [3.3.2. List ingredient: `listingredient`](#332-list-ingredient-listingredient)  
-       - [3.3.3. Delete an ingredient: `deleteingredient`](#333-delete-an-ingredient-deleteingredient-yan-ting-and-isabella)  
+       - [3.3.3. Delete an ingredient: `deleteingredient`](#333-delete-an-ingredient-deleteingredient-isabella-and-yan-ting)  
        - [3.3.4. Search for ingredient: `searchingredient`](#334-search-for-ingredient-searchingredient-jin-fa)  
 
     + [3.4. Recipe](#34-recipe)  
       - [3.4.1. Adding a recipe: `addrecipe`](#341-adding-a-recipe-addrecipe-hui-zhen)  
       - [3.4.2. List recipe: `listrecipe`](#342-list-recipes-listrecipe)  
-      - [3.4.3. Delete a recipe: `deleterecipe`](#343-delete-a-recipe-deleterecipe)
+      - [3.4.3. Delete a recipe: `deleterecipe`](#343-delete-a-recipe-deleterecipe-yan-ting)
       - [3.4.4. Search for recipe: `searchrecipe`](#344-search-for-recipe-searchrecipe-jin-fa)  
-      - [3.4.5. Cooking a recipe: `cookrecipe`](#345-cooking-a-recipe-cookrecipe-hui-zhen)
+      - [3.4.5. Cooking a recipe: `cookrecipe`](#345-cooking-a-recipe-cookrecipe-hui-zhen-and-yan-ting)
 
     + [3.5. Chore](#35-chore)  
       - [3.5.1. Adding a chore: `addchore`](#351-adding-a-chore-addchore)  
@@ -172,7 +172,7 @@ Example |  Outcome
 
 [&#8593; Return to Top](#kitchen-helper---user-guide)
 
-#### 3.3.3. Delete an ingredient: `deleteingredient`
+#### 3.3.3. Delete an ingredient: `deleteingredient` (Isabella and Yan Ting)
 You can delete a specific ingredient and reduce the quantity of an ingredient from the ingredient's inventory in Kitchen Helper by using the ingredient's index. 
 <br> You will be prompted whether to delete ingredient cost from total expenditure, in the event you are deleting this ingredient because you added it wrongly and would not like to count its cost into total expenditure. 
 <br> If you refuse this prompt, you will then be prompted whether to add ingredient cost to amount used in cooking, in the event you are manually deleting ingredients you have cooked or consumed.
@@ -183,7 +183,8 @@ __Format__: `deleteingredient /i <INGREDIENT_INDEX> [/q <QUANTITY>]`
 * `INGREDIENT_INDEX`: This refers to the index of the ingredient which is an identification number tagged to the ingredient.  <br>
 * `QUANTITY` : This refers to the quantity of ingredient to be deducted. This is an optional argument.<br>
 <br>
-> You may get the index for the ingredient that you would like to delete by getting the full list of ingredients that you have previously entered into Kitchen Helper. You may refer to the [listingredient](#332-list-ingredient-listingredient) command section to understand how to use the command. <br>
+
+> You may get the index for the ingredient that you would like to delete by getting the full list of ingredients that you have previously entered into Kitchen Helper or search for an ingredient. You may refer to the [listingredient](#332-list-ingredient-listingredient) and [searchingredient](#334-search-for-ingredient-searchingredient-jin-fa) command sections to understand how to use the command. <br>
 
 > One thing to note: If the final quantity of your ingredient will be zero after deduction, the ingredient will be deleted from the ingredient list subsequently. 
 
@@ -201,7 +202,7 @@ Example |  Outcome
 You can search for ingredients based on a given keyword.  
 
 The output also returns `Location: Index <Number>`, which you can make use of the `Number` to delete an ingredient or change the quantity of an ingredient.  
- You may refer to [Section 3.3.3. Delete an ingredient](#333-delete-an-ingredient-deleteingredient) command section to understand how to use the command.  
+ You may refer to [Section 3.3.3. Delete an ingredient](#333-delete-an-ingredient-deleteingredient-isabella-and-yan-ting) command section to understand how to use the command.  
 
 __Format:__ `searchingredient <KEYWORD>`  
 
@@ -262,7 +263,7 @@ Example |  Outcome
 
 [&#8593; Return to Top](#kitchen-helper---user-guide)
 
-#### 3.4.3. Delete a recipe: `deleterecipe`
+#### 3.4.3. Delete a recipe: `deleterecipe` (Yan Ting)
 You can delete a recipe by using the recipe name or index from the list in Kitchen Helper. The name or index of the recipe can be found by displaying the list of recipes. 
 
 __Format__: `deleterecipe /n <RECIPE_NAME>` OR `deleterecipe /i <RECIPE_INDEX>`
@@ -296,7 +297,7 @@ Example |  Outcome
 
 [&#8593; Return to Top](#kitchen-helper---user-guide)
 
-#### 3.4.5. Cooking a recipe: `cookrecipe` (Hui Zhen)
+#### 3.4.5. Cooking a recipe: `cookrecipe` (Hui Zhen and Yan Ting)
 Cooks a recipe specified by the user by the recipe’s name.
 
 __Format:__ `cookrecipe /n <RECIPE_NAME> /p <NUMBER_OF_PAX>`
@@ -401,7 +402,7 @@ Example |  Outcome
 Displays the total expenditure and amount used in cooking for the week to help the user gauge future expenditure on ingredients.
 * Total expenditure increases whenever the user executes `addingredient` command to simulate purchase of groceries. You may refer to [3.3.1. Adding an ingredient](#331-adding-an-ingredient-addingredient).
 * Amount used in cooking is the cost of all the ingredients the user manages to use for cooking and represents the amount of expenditure the user benefited from.
-<br>Amount used in cooking increases when user executes `cookrecipe` command or when user responds with `yes` to the corresponding prompt when executing `deleteingredient`. You may refer to [3.4.5. Cooking a recipe](#345-cooking-a-recipe-cookrecipe) and [Section 3.3.3. Delete an ingredient](#333-delete-an-ingredient-deleteingredient). 
+<br>Amount used in cooking increases when user executes `cookrecipe` command or when user responds with `yes` to the corresponding prompt when executing `deleteingredient`. You may refer to [3.4.5. Cooking a recipe](#345-cooking-a-recipe-cookrecipe-hui-zhen-and-yan-ting) and [Section 3.3.3. Delete an ingredient](#333-delete-an-ingredient-deleteingredient-isabella-and-yan-ting). 
 
 __Format:__ `displayexpenditure`  
 
