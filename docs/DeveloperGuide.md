@@ -158,11 +158,11 @@ The Model component contains `Ingredient`, `Recipe` and `Chore` classes, which s
 
 A Storage object is created by the KitchenHelper class to handle the loading and saving of ingredients, recipes and chores data.
 
-The Storage() method acts as a constructor with filepaths to local save files for ingredients, recipes and chores data.
+The Storage() method acts as a constructor with filepaths to local save files for ingredients, recipes, chores and expenditure data.
 
-The getIngredientData(), getRecipeData() and getChoreData() methods are used to read saved data from local files into the current session of KitchenHelper. loadingIngredients() and loadingRecipeItems() methods are called in getIngredientData() and getRecipeData() respectively to sort out which Ingredient object class each object belongs to.
+The getIngredientData(), getRecipeData(), getChoreData() and loadExpenditureData() methods are used to read saved data from local files into the current session of KitchenHelper. loadingIngredients() and loadingRecipeItems() methods are called in getIngredientData() and getRecipeData() respectively to sort out which Ingredient object class each object belongs to.
 
-The saveIngredientData(), saveRecipeData() and saveChoreData() methods write the current state of KitchenHelper into the local save files by calling them in command classes such as AddChoreCommand and DeleteIngredientCommand.
+The saveIngredientData(), saveRecipeData(), saveChoreData() and saveExpenditureData() methods write the current state of KitchenHelper into the local save files by calling them in various command classes such as AddChoreCommand and DeleteIngredientCommand.
 
 [&#8593; Return to Top](#developer-guide)
 
@@ -772,16 +772,17 @@ The following steps explained sequence diagram for `searchchore` command:
 ### 4.4. Storage
 #### 4.4.1. Select files to load from and save to
 
-The select files to load from and save to feature allows the user to choose an option to either load their data from the auto-save mode or the manual-save mode. The auto-save mode keeps track of and stores all changes made in the program and provides the user with the most recent representation of their inventory. While the manual-save mode stores the state of the program data from the most recent usage of the save command by the user. 
+The select files to load from and save to feature allows the user to choose an option to either load their data from the normal or restore mode. The normal mode will load Kitchen Helper from the main storage files which store the data from the last used session of the user, providing the most recent representation of their inventory. 
 
-If the user chooses the manual-save mode, it will overwrite all the data stored in auto-save mode. However, any subsequent changes made to the program data will be saved by auto-save mode regardless of initial load options. To save by manual-save mode, the user will have to use the save current state function with the save command (see section 4.4.2)[4.4.2. Save current state](#442-save-current-state).
+On the other hand, the restore mode will load Kitchen Helper from the backup storage files which store the version of data manually saved from the user’s last usage of the save command. The restore mode gives users access to the backup storage files, however, users will have to use the save command to update the backup storage files.
+
+Any subsequent changes made to the program data will be saved into the main storage files regardless of initial load options. To save a backup of the current session, the user will have to use the save current state function with the save command (see section 4.4.2)[4.4.2. Save current state](#442-save-current-state).
     
 ##### Implementation
 1. For instance, if the User selects to load files from auto-save mode, User executes `1`
 	1. A `Ui` object will be created and calls `Ui#getUserChoice()` and returns String `UserChoice`. 
 	1. The `Ui` object then calls `Ui#validUserChoice()` with `UserChoice` as the parameter. If `UserChoice` is invalid, `Ui#validUserChoice()` will call `Ui#askForReInput()`.
-	1. The variable `userCommandInput` is being parsed into the `Parser` class as an argument for this method `Parser#parseUserCommand()`.
-
+	
 2. Creation of storage object
     
     Ingredient data:
@@ -794,6 +795,9 @@ If the user chooses the manual-save mode, it will overwrite all the data stored 
 
     Chore data:
     1. A `Storage` object will be created and calls `Storage#getChoreData()` to load and parse the contents of chore save file into a newly created `choreList ArrayList<Chore>`.
+
+    Expenditure data:
+    1. `Storage#loadExpenditureData()` is called to load and parse the contents of expenditure save file and creates an instance of `Expenditure`.
 
 All description and warnings to the user utilises the UI class, which controls the printing of the text on the console.
 
@@ -819,7 +823,7 @@ Aspects: How saving of files executes:
 [&#8593; Return to Top](#developer-guide)
 
 #### 4.4.2. Save current state
-The save current state feature allows the user to store the current state of the program data by manual-save mode. Manual-save mode data will be updated and replaced with the current state when save command is implemented.
+The save current state feature allows the user to store the current state of the program data into the backup storage files. The contents of the backup storage files will be updated and replaced with the current state when save command is implemented by the user.
 
 ##### Implementation
 The following steps explain how `save` command works:
@@ -827,7 +831,7 @@ The following steps explain how `save` command works:
 2. `KitchenHelper` calls `Parser#parseUserCommand()` which splits the user’s input into 2 parts 
 and enters a switch case for execution.  
 3. `parseUserCommand` in the Parser object will call a method `SaveStateCommand`.  
-4. On execute(), `Storage.copyFile()` will be called three times to copy contents of ingredients, recipes and chore save files into their respective manual-mode save files.
+4. On execute(), `Storage.copyFile()` will be called four times to copy contents of ingredients, recipes, chores and expenditure save files into their respective backup storage files.
 
 ##### Design considerations:
 Aspects: How saving of current state data executes:
@@ -1129,6 +1133,10 @@ Use case ends.
    1. Prerequisites: The chore list save file should not be empty. 
    1. Expected: Previously stored chore data can be seen using `listchore all` command.
  
+1. Load expenditure data into Kitchen Helper.
+   1. Prerequisites: The expenditure save file should not be empty. 
+   1. Expected: Previously stored expenditure data of the week can be seen using `displayexpenditure` command.
+ 
 If any of the save files are empty, the user can choose to populate the files with their own user commands or alternatively, use any of the test cases below:
 
 1. `addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable`
@@ -1136,6 +1144,8 @@ If any of the save files are empty, the user can choose to populate the files wi
 3. `addingredient /n kailan /c Vegetable /q 30 /p 30.45 /e 12/03/2020`
 4. `addingredient /n HL Milk /c Dairy /q 3 /p 12.2 /e 14/03/2020`
 5. `addchore buy groceries /by Tuesday 12pm`
+
+Note that expenditure changes when `addingredient`, `deleteingredient`, or `cookrecipe` commands are used.
 
 #### F.16. Display expenditure
 
