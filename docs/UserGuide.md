@@ -28,9 +28,9 @@ By: `Team CS2113T-M16-2` Since: `March 2020` License: `MIT`
       - [3.4.5. Cooking a recipe: `cookrecipe`](#345-cooking-a-recipe-cookrecipe-hui-zhen-and-yan-ting)
 
     + [3.5. Chore](#35-chore)  
-      - [3.5.1. Adding a chore: `addchore`](#351-adding-a-chore-addchore)  
-      - [3.5.2. List chore: `listchore`](#352-list-chore-listchore)  
-      - [3.5.3. Delete a chore: `deletechore`](#353-delete-a-chore-deletechore)  
+      - [3.5.1. Adding a chore: `addchore`](#351-adding-a-chore-addchore-isabella)  
+      - [3.5.2. List chore: `listchore`](#352-list-chore-listchore-isabella)  
+      - [3.5.3. Delete a chore: `deletechore`](#353-delete-a-chore-deletechore-isabella)  
       - [3.5.4. Search for chore: `searchchore`](#354-search-for-chore-searchchore-jin-fa) 
       - [3.5.5. Mark chore as done: `done`](#355-mark-chore-as-done-done-isabella)  
  
@@ -53,7 +53,7 @@ So what are you waiting for? Let’s go!
 
 1. Ensure that you have Java `11` or above installed on your computer.
 2. Download the latest version of `KitchenHelper` from [here](https://github.com/AY1920S2-CS2113T-M16-2/tp/releases).
-3. Copy the file to the folder you want to use as the home folder for KitchenHelper.
+3. Save the file as `kitchenhelper.jar` and copy the file to the folder you want to use as the home folder for KitchenHelper.
 4. Type the command `java -jar kitchenhelper.jar` in the command prompt to start the application.
 5. Type the command in the command box and press `Enter` to execute it.  
    e.g. typing `help` and pressing `Enter` will display help information.
@@ -98,7 +98,7 @@ At the start of Kitchen Helper, the user will be prompted with the option to eit
 
 The normal mode will load Kitchen Helper from the main storage files which store the data from the last used session of the user.
 
-Alternatively, if the user selects the restore mode, it will load Kitchen Helper from the backup storage files which store the version of data manually saved from the user’s last usage of the save command [Section 3.2.2, "Save Current State"](#322-save-current-state-save). The restore mode gives users access to the backup storage files, however, users will have to use the save command to update the backup storage files.
+Alternatively, if the user selects the restore mode, it will load Kitchen Helper from the backup storage files which store the version of data manually saved from the user’s last usage of the save command [Section 3.2.2, "Save Current State"](#322-save-current-state-save-zi-hui). The restore mode gives users access to the backup storage files, however, users will have to use the save command to update the backup storage files.
 
 It is important to note that any subsequent changes made to the program data during the current session will be automatically saved into the main storage files regardless of initial load options. 
 
@@ -188,7 +188,7 @@ __Format__: `deleteingredient /i <INGREDIENT_INDEX> [/q <QUANTITY>]`
 
 > One thing to note: If the final quantity of your ingredient will be zero after deduction, the ingredient will be deleted from the ingredient list subsequently. 
 
-> The user expenditure might change depending on your response to the prompts. You can view the changes with `displayexpenditure` command. Please refer to [3.6.1. Display User Expenditure](#361-display-user-expenditure-displayexpenditure).
+> The user expenditure might change depending on your response to the prompts. You can view the changes with `displayexpenditure` command. Please refer to [3.6.1. Display User Expenditure](#361-display-user-expenditure-displayexpenditure-isabella).
 
 Example |  Outcome
 --------|------------------
@@ -372,7 +372,7 @@ Example |  Outcome
 You can search for chores based on a given keyword.  
 
 The output also returns `Location: Index <Number>`, which you can make use of the `Number` to delete a chore or mark a chore as completed.   
- You may refer to [Section 3.5.3. Delete a chore](#353-delete-a-chore-deletechore) and [Section 3.5.5 Mark chore as done](#355-mark-chore-as-done-done) command section to understand how to use the command.  
+ You may refer to [Section 3.5.3. Delete a chore](#353-delete-a-chore-deletechore-isabella) and [Section 3.5.5 Mark chore as done](#355-mark-chore-as-done-done-isabella) command section to understand how to use the command.  
  
 __Format:__ `searchchore <KEYWORD>`  
 
@@ -402,7 +402,7 @@ Example |  Outcome
 
 #### 3.6.1. Display User Expenditure: `displayexpenditure` (Isabella)
 Displays the total expenditure and amount used in cooking for the week to help the user gauge future expenditure on ingredients.
-* Total expenditure increases whenever the user executes `addingredient` command to simulate purchase of groceries. You may refer to [3.3.1. Adding an ingredient](#331-adding-an-ingredient-addingredient).
+* Total expenditure increases whenever the user executes `addingredient` command to simulate purchase of groceries. You may refer to [3.3.1. Adding an ingredient](#331-adding-an-ingredient-addingredient-jin-fa).
 * Amount used in cooking is the cost of all the ingredients the user manages to use for cooking and represents the amount of expenditure the user benefited from.
 <br>Amount used in cooking increases when user executes `cookrecipe` command or when user responds with `yes` to the corresponding prompt when executing `deleteingredient`. You may refer to [3.4.5. Cooking a recipe](#345-cooking-a-recipe-cookrecipe-hui-zhen-and-yan-ting) and [Section 3.3.3. Delete an ingredient](#333-delete-an-ingredient-deleteingredient-isabella-and-yan-ting). 
 
