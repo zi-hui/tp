@@ -379,7 +379,45 @@ Aspects: How `searchingredient` executes:
 
 [&#8593; Return to Top](#developer-guide)
 
+#### 4.1.5. Notification for ingredients warning
 
+The notification for ingredients warning runs everytime the program starts. Checks the ingredient list for ingredient that is expiring in 3 days, expired or low quantity (< 5).
+For example, `beef` ingredient's expired date is 02/02/2020 and have quantity of 3. The program will list down the ingredient in the categories when the application start.
+
+##### Implementation  
+
+![SearchIngredientCommand](images/searchIngredient_update.png) 
+
+The following steps explained sequence diagram for `showNotification` command:  
+1. The user starts `KitchenHelper`.  
+2. `KitchenHelper` calls `showNotification()`.  
+3. `KitchenHelper#IngredientNotification` object is created when the method `IngredientNotification#getNotifications(ingredientList)` is called.  
+4. Result from `IngredientNotification#checkForExpiringIngr(ingredientList)`,`IngredientNotification#checkForLowQuantityIngr`, `IngredientNotification#checkForExpiredIngr` will be combined.
+    1. `IngredientNotification#checkForExpiringIngr(ingredientList)` checks for ingredients that is going to expire in 3 days.
+    1. `IngredientNotification#checkForLowQuantityIngr` checks for ingredients that has quantity of 5 or lower.
+    1. `IngredientNotification#checkForExpiredIngr` checks for ingredients that is expired.
+5. `IngredientNotification#getNotifications(ingredientList)` returns result to `KitchenHelper#ingredientNotification` and displays.
+
+##### Design considerations:
+
+Aspects: How `showNotification` executes:  
+
+- Alternative 1 (current choice): Create a function to compile results from the three different methods, 
+
+|     |     |
+|-----|-----|
+|**Pros** | 1. Decreases the need to indicate three lines of code to call out the three different methods.|  
+|**Cons** | 1. Developer have to go into `IngredientNotification#getNotifications(ingredientList)` to find out what function |
+
+- Alternative 2: Create three different methods in `KitchenHelper.java`
+
+|     |     |
+|-----|-----|
+|**Pros** | 1. Clear indication what the method is doing|  
+|**Cons** | 1. Not very 'OOP' like|
+
+
+[&#8593; Return to Top](#developer-guide)
 ### 4.2. Recipe-related Features
 #### 4.2.1. Addition of recipe
 Users can add a new recipe to the application where there must be at least one or more `ingredient`s. The failure to do so will trigger an exception where the user will be notified of an invalid command and the syntax of the addition of recipe will be displayed. 
