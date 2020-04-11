@@ -736,19 +736,16 @@ When the user attempts to add a `chore` `buy groceries` with deadline `13/04/202
     1. A `UI` object will be created and calls `UI#getUserCommand()`. 
     1. Input will be parsed in `Parser#parseUserCommand()` and identified with the keyword `addchore`.   
     
-    ![Add Recipe Step 1](images/AddRecipe1.png)
 2. Parsing of user input and creation of command object
     1. This will automatically trigger the parsing of the user’s input string into a suitable format for the addition of `chore` object in `Parser#prepareAddChore()`.
     1. A `AddChoreCommand` object will be created with parameters `buy groceries` as String description and `13/04/2020 09:45` as Date deadline.
     
-    ![Add Recipe Step 2](images/AddRecipe2.png)
 3. Executing Command
     1. The newly created object will call `AddChoreCommand#execute()` which starts the process of adding a chore, thus calling `AddChoreCommand#addChore()`.
     1. A `Chore` object will be created with the description and deadline that was parsed in step 2. Since the String deadline value is null, the deadline of the `Chore` will be a `Date` object.
     1. The `Chore` will be added to the `choreList`.
     1. Then, `Storage#saveChoreData()` will be called to save the current `choreList` into an output file.
     1. Lastly, a String called `feedbackToUser` containing the outcome of the command will be returned to `KitchenHelper`. 
-    ![Add Recipe Step 3](images/AddRecipe3.png)
 
 4. The outcome of the command will then be printed onto the console using `Ui#showResultToUser(result)`.
 
@@ -778,27 +775,17 @@ The feature to list `chore`s allows the user to view the `chore`s currently in t
 
 ##### Implementation  
 When the user attempts to list `chore`s, the `Kitchen Helper`, `Parser` and `ListChoreCommand` class will be called upon. The following sequence of steps will then occur:
-1. The user keyed in `listchore`.
-    
+1. The user keyed in `listchore`.  
     1. A `UI` object will be created and calls `UI#getUserCommand()`. 
     1. Input will be parsed in `Parser#parseUserCommand()` and identified with the keyword `listchore`.   
-    
-    ![Add Recipe Step 1](images/AddRecipe1.png)
 2. Parsing of user input and creation of command object
     1. This will automatically trigger the parsing of the user’s input string in `Parser#prepareListChore()` to ensure the parameters are empty, or an exception will be thrown.
     1. The `ListChoreCommand` object will be created. 
-    
-    ![Add Recipe Step 2](images/AddRecipe2.png)
 3. Executing Command
     1. The newly created object will call `ListChoreCommand#execute()` which starts the process of displaying all the chores, thus calling `ListChoreCommand#listChore()`.
     1. The `choreList` will be looped through, displaying each `Chore` in String format and its corresponding position in the list.
     1. Lastly, a String called `feedbackToUser` containing the displayed list of chores will be returned to `KitchenHelper`. 
-    ![Add Recipe Step 3](images/AddRecipe3.png)
-
 4. The displayed list of chores will then be printed onto the console using `Ui#showResultToUser(result)`.
-
-The following sequence diagram shows how the `AddChoreCommand` works    
-    ![AddChoreCommand](images/AddChoreCommand.png)
 
 ##### Design considerations:
 
@@ -824,27 +811,17 @@ The feature for deletion of `chore`s allows the user to remove the `chore` speci
 ##### Implementation  
 When the user attempts to delete a `chore` by its index, the `Kitchen Helper`, `Parser` and `DeleteChoreCommand` class will be called upon. The following sequence of steps will then occur:
 1. The user keyed in `deletechore 1`.
-    
     1. A `UI` object will be created and calls `UI#getUserCommand()`. 
     1. Input will be parsed in `Parser#parseUserCommand()` and identified with the keyword `deletechore`.   
-    
-    ![Add Recipe Step 1](images/AddRecipe1.png)
 2. Parsing of user input and creation of command object
     1. This will automatically trigger the parsing of the user’s input string for the deletion of `chore` object in `Parser#prepareDeleteChore()` which ensures the parameter is a single number, or an exception will be thrown. 
     1. If an exception is caught, an InvalidCommand will be created. Otherwise, a `DeleteChoreCommand` object will be created with parameters `1` as the index to delete.
-    
-    ![Add Recipe Step 2](images/AddRecipe2.png)
 3. Executing Command
     1. The newly created object will call `DeleteChoreCommand#execute()` which starts the process of deleting a chore, thus calling `DeleteChoreCommand#deleteChore()`.
     1. The index is checked to be an index within the `choreList`, then the `Chore` specified by the index in the `choreList` is removed.
     1. Then, `Storage#saveChoreData()` will be called to save the current `choreList` into an output file.
     1. Lastly, a String called `feedbackToUser` containing the outcome of the command will be returned to `KitchenHelper`. 
-    ![Add Recipe Step 3](images/AddRecipe3.png)
-
 4. The outcome of the command will then be printed onto the console using `Ui#showResultToUser(result)`.
-
-The following sequence diagram shows how the `DeleteChoreCommand` works    
-    ![AddChoreCommand](images/AddChoreCommand.png)
 
 ##### Design considerations:
 
@@ -905,28 +882,19 @@ The feature for marking of `chore` as done allows the user to change the complet
 ##### Implementation  
 When the user attempts to mark a `chore` as done, the `Kitchen Helper`, `Parser` and `DoneCommand` class will be called upon. The following sequence of steps will then occur:
 1. The user keyed in `done 1`.
-    
     1. A `UI` object will be created and calls `UI#getUserCommand()`. 
-    1. Input will be parsed in `Parser#parseUserCommand()` and identified with the keyword `done`.   
-    
-    ![Add Recipe Step 1](images/AddRecipe1.png)
+    1. Input will be parsed in `Parser#parseUserCommand()` and identified with the keyword `done`.       
 2. Parsing of user input and creation of command object
     1. This will automatically trigger the parsing of the user’s input string for the checking of `chore` object in `Parser#prepareDoneChore()` which ensures the parameter is a single number, or an exception will be thrown. 
-    1. If an exception is caught, an InvalidCommand will be created. Otherwise, a `DoneCommand` object will be created with parameters `1` as the index to check.
-    
-    ![Add Recipe Step 2](images/AddRecipe2.png)
+    1. If an exception is caught, an InvalidCommand will be created. Otherwise, a `DoneCommand` object will be created with parameters `1` as the index to check.   
 3. Executing Command
     1. The newly created object will call `DoneCommand#execute()` which starts the process of marking a chore as done, thus calling `DoneChoreCommand#markChoreDone()`.
     1. The index is checked to be an index within the `choreList` and completion status of the `Chore` specified by the index is checked to be undone. Otherwise, an exception will be thrown.
     1. The Chore is then marked as done.
     1. Then, `Storage#saveChoreData()` will be called to save the current `choreList` into an output file.
     1. Lastly, a String called `feedbackToUser` containing the outcome of the command will be returned to `KitchenHelper`. 
-    ![Add Recipe Step 3](images/AddRecipe3.png)
-
 4. The outcome of the command will then be printed onto the console using `Ui#showResultToUser(result)`.
 
-The following sequence diagram shows how the `DoneCommand` works    
-    ![AddChoreCommand](images/AddChoreCommand.png)
 
 ##### Design considerations:
 
@@ -936,11 +904,7 @@ The following sequence diagram shows how the `DoneCommand` works
 The notification for chores warning runs every time the program starts. It checks the `choreList` for `Chores` that are already overdue or have deadlines approaching in 3 days.
 For example, `take cake out of oven` is overdue since `11/04/2020 15:30`. Deadlines of `Chores` specified in String will not trigger notification warnings.
 
-##### Implementation  
-
-<Image to be added>
-
-The following steps explains the sequence diagram for this feature:  
+##### Implementation   
 1. The user starts `KitchenHelper` and `KitchenHelper#run` is called.  
 2. `KitchenHelper` calls `showNotification()`.  
 3. `ChoreNotification` object is created and `ChoreNotification#getNotifications(choreList)` is called.   
@@ -1062,24 +1026,15 @@ The feature for displayexpenditure allows the user to keep track of their total 
 ##### Implementation  
 When the user attempts to display `expenditure`, the `Kitchen Helper`, `Parser` and `DisplayExpenditureCommand` class will be called upon. The following sequence of steps will then occur:
 1. The user keyed in `displayexpenditure`.
-    
     1. A `UI` object will be created and calls `UI#getUserCommand()`. 
     1. Input will be parsed in `Parser#parseUserCommand()` and identified with the keyword `displayexpenditure`.   
-    
-    ![Add Recipe Step 1](images/AddRecipe1.png)
 2. Parsing of user input and creation of command object
     1. This will automatically trigger the parsing of the user’s input string in `Parser#prepareDisplayExpenditure()` to ensure the parameters are empty, or an exception will be thrown.
     1. The `DisplayExpenditureCommand` object will be created. 
-    ![Add Recipe Step 2](images/AddRecipe2.png)
 3. Executing Command
     1. The newly created object will call `DisplayExpenditureCommand#execute()` which will format the expenditure information into how it will be displayed.
     1. Lastly, a String called `feedbackToUser` containing the information to display will be returned to `KitchenHelper`. 
-    ![Add Recipe Step 3](images/AddRecipe3.png)
-
 4. The expenditure information will then be printed onto the console using `Ui#showResultToUser(result)`.
-
-The following sequence diagram shows how the `DisplayExpenditureCommand` works    
-    ![AddChoreCommand](images/AddChoreCommand.png)
 
 ##### Design considerations:
 
@@ -1100,7 +1055,6 @@ The following sequence diagram shows how the `DisplayExpenditureCommand` works
     
 #### 4.5.2. Expenditure functionality
 The Expenditure function mainly keeps track of two variables, `totalExpenditure` and `amountUsedInCooking`. Total expenditure is the amount spent on purchase of ingredients for the week. Amount used in cooking indicates the price of all the ingredients used for cooking or consumption in the week. The latter variable reflects the extent to which the user makes use of his purchase and hence the amount of expenditure he benefited from.
-<br> 
 
 ##### Implementation  
 The values of the variables in Expenditure change in the the following situations:
@@ -1122,8 +1076,6 @@ The values of the variables in Expenditure change in the the following situation
     1. If the user responds with `no`, the `totalExpenditure` value and `amountUseInCooking` value remain unchanged.
     1. `Storage#saveExpenditureData` saves the updated value.
 
-The following sequence diagram shows how the `DisplayExpenditureCommand` works    
-<insert diagram
 
 ##### Design considerations:
 
