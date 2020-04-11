@@ -1254,7 +1254,7 @@ Extensions:
    
 #### F.6. Add a recipe
 1. Add a recipe into Kitchen Helper
-    1. Prerequisites: List all the ingredient using the `listingredient all` command.
+    1. Prerequisites: List all the ingredient using the `listrecipe all` command.
     1. Test case: `addrecipe /n warm milk /i HL Milk:1:Dairy`  
     Expected: Entry can be found using `listrecipe all` command. 
 
