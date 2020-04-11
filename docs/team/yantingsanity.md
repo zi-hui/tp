@@ -27,7 +27,8 @@ The link below showed my code contributions to Kitchen Helper:
 
 #### Other Contributions 
 + Project Management:
-    + Managed the Issue Tracker and Milestones by creating issues to track the members' progress for Kitchen Helper
+    + Managed the Issue Tracker and Milestones by creating and closing unnecessary issues to track the members' progress for Kitchen Helper with respect to User Stories and bugs
+    + Helped to merge and review PR to maintain the repository
 
 + Documentation:
     + Added the architecture diagram and use cases of above implementation in Developer Guide
