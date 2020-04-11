@@ -20,4 +20,7 @@ Kitchen Helper is a Command Line application to help users manage their kitchen 
     + Justification: This feature improves the product slightly because users can better manage their completion of chores when they can be reminded of more pressing chores.
     + Highlights: This enhancement is possible because of the deadline specified by Date. 
 + Expenditure
-    + What it does: 
+    + What it does: It tracks the weekly total expenditure, as well as the amount used in cooking in the week. The value resets every week at Monday midnight.
+    + Justification: This feature improves the product slightly because it helps users to manage expenditure. By comparing the amount used in cooking with their expenditure, users can see how much of their purchase they actually made use of and gauge their future spending on ingredients accordingly.
+    + Highlights: The expenditure automatically increases whenever user executes the `addingredient` command. The amount used in cooking automatically increases when users execute `cookrecipe` command. Users will also be prompted to edit expenditure values when they execute `deleteingredient`.
+    
