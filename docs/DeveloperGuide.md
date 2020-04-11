@@ -1523,23 +1523,27 @@ Extensions:
     2. Test case (Date deadline): `addchore buy groceries /by 13/04/2020 12:00`<br> Expected: The chore is added. Entry can be found using `listchore` command.
     3. Test case (Incorrect date format): `addchore buy groceries /by 13-04-2020` <br> Expected: Deadline will be a String object type. The chore is added. Entry can be found using `listchore` command.
     4. Test case (Invalid format): `addchore buy groceries` <br>  Expected: The chore is not added. Entry cannot be found using `listchore` command.
+    
 #### F.12. List a chore
 1. List the chores.
     1. Test case (Empty list): `listchore` <br> Expected: "Your list of chores is currently empty."
     2. Test case (Non-empty list): `listchore` <br> Expected: All the chore entries displayed.
     3. Test case (Invalid format): `listchore aa` <br> Expected: "Invalid ListChore command." No chore entries displayed.
+    
 #### F.13. Delete a chore
 1. Delete a chore from Kitchen Helper.
     1. Prerequisites: List all the chores using `listchore` command.
     2. Test case (Index in list): `deletechore 1` <br> The chore is deleted. It can be noticed by using the `listchore` command.
     3. Test case (Index not in list or incorrect format): `deletechore 10` OR `deletechore -1` OR `deletechore buy groceries` <br> Expected: The chore is not deleted. It can be noticed by using the `listchore` command.
+    
 #### F.14. Search for chore
 1. Search for chores in Kitchen Helper. 
    1. Prerequisites: The chore list should not be empty. You should at least add the following chore by using `addchore buy groceries /by Tuesday 12pm` before the search.  
    2. Test case: `searchchore groceries`  
    Expected: Chore entries that have the keyword matching `groceries` description are listed.
    3. Test case: `searchchore Tuesday`  
-   Expected: Chore entries that have the keyword matching `Tuesday` as a string are listed.  
+   Expected: Chore entries that have the keyword matching `Tuesday` as a string are listed. 
+    
 #### F.15. Mark a chore as done
 1. Change the completion status of a chore to done.
     1. Prerequisites: List all the chores using `listchore` command.
@@ -1585,4 +1589,5 @@ Note that expenditure changes when `addingredient`, `deleteingredient`, or `cook
     6. Test case 3: `displayexpenditure` <br> Expected: The value of total expenditure decreases by the cost of ingredient multiplied by the quantity deleted.
     7. Prerequisite 4: Delete an ingredient using `deleteingredient` command and respond with `no` when prompted to remove cost of ingredient from total expenditure and respond with `yes` when prompted to add cost of ingredient to amount used in cooking.
     8. Test case 4: `displayexpenditure` <br> Expected: The value of amount used in cooking increases by the cost of ingredient multiplied by the quantity deleted.
+    
 [&#8593; Return to Top](#developer-guide)
