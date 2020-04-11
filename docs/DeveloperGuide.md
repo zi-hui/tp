@@ -166,7 +166,7 @@ The Model component contains `Ingredient`, `Recipe` and `Chore` classes, which s
 
 ![Storage Class Diagram](images/Storage.png)
 
-A Storage object is created by the KitchenHelper class to handle the loading and saving of ingredients, recipes and chores data.
+A Storage object is created by the KitchenHelper class to handle the loading and saving of ingredients, recipes, chores and expenditure data.
 
 The Storage() method acts as a constructor with filepaths to local save files for ingredients, recipes, chores and expenditure data.
 
@@ -1473,7 +1473,7 @@ Extensions:
    
 #### F.6. Add a recipe
 1. Add a recipe into Kitchen Helper
-    1. Prerequisites: List all the ingredient using the `listrecipe all` command.
+    1. Prerequisites: List all the recipes using the `listrecipe all` command.
     1. Test case: `addrecipe /n warm milk /i HL Milk:1:Dairy`  
     Expected: Entry can be found using `listrecipe all` command. 
 
@@ -1491,7 +1491,7 @@ Extensions:
 
 #### F.8. Cook a recipe
 1. Cooks the specified recipe and ingredients in the recipe will be automatically deducted.
-    1. Prerequisites: List all the ingredient using the `listingredient all` command.
+    1. Prerequisites: List all the recipes using the `listrecipe all` command.
     1. Test case (sufficient ingredient): `cookrecipe /n warm milk /p 2`  
     Expected: A reduction of the ingredients' quantity multiplied by `2` can be noticed when listing the ingredients with `listingredient all`
     1. Test case (Sufficient even with expired ingredients):  `cookrecipe /n warm milk /p 2`  
