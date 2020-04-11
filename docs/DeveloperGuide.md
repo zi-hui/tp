@@ -391,11 +391,10 @@ For example, `beef` ingredient's expired date is 02/02/2020 and have quantity of
 
 ##### Implementation  
 
-<<<<<<< HEAD
+
 ![NotificationIngredientCommand](images/notificationIngredient.png) 
 
-=======
->>>>>>> 5c22bd3b295038e401b72ff85c04b6b2e53af6d4
+
 The following steps explained sequence diagram for `showNotification` command:  
 1. The user starts `KitchenHelper`.  
 2. `KitchenHelper` calls `showNotification()`.  
