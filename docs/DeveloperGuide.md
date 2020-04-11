@@ -717,60 +717,140 @@ and returns the recipe’s name and the index of recipe in the recipe’s list.
 
 ### 4.3. Chore-related Features
 #### 4.3.1. Addition of chore
-The feature for addition of `chore`s allows the user to add `chore`s to a list to keep track of their completion. For example, `addchore buy groceries /by Monday 12pm` adds the `chore` `buy groceries` with deadline `Monday 12pm` to the `chore` list, and marks it as undone. 
+The feature for addition of `chore`s allows the user to add `chore`s to a list to keep track of their completion. The deadline of the `chore` can be a String or Date object.  The status completion of a `chore` is always undone when it is created. 
 
 ##### Implementation  
+When the user attempts to add a `chore` `buy groceries` with deadline `13/04/2020 09:45`, the `Kitchen Helper`, `Parser` and `AddChoreCommand` class will be called upon. The following sequence of steps will then occur:
+1. The user keyed in `addchore buy groceries /by 13/04/2020 09:45`.
+    
+    1. A `UI` object will be created and calls `UI#getUserCommand()`. 
+    1. Input will be parsed in `Parser#parseUserCommand()` and identified with the keyword `addchore`.   
+    
+    ![Add Recipe Step 1](images/AddRecipe1.png)
+2. Parsing of user input and creation of command object
+    1. This will automatically trigger the parsing of the user’s input string into a suitable format for the addition of `chore` object in `Parser#prepareAddChore()`.
+    1. A `AddChoreCommand` object will be created with parameters `buy groceries` as String description and `13/04/2020 09:45` as Date deadline.
+    
+    ![Add Recipe Step 2](images/AddRecipe2.png)
+3. Executing Command
+    1. The newly created object will call `AddChoreCommand#execute()` which starts the process of adding a chore, thus calling `AddChoreCommand#addChore()`.
+    1. A `Chore` object will be created with the description and deadline that was parsed in step 2. Since the String deadline value is null, the deadline of the `Chore` will be a `Date` object.
+    1. The `Chore` will be added to the `choreList`.
+    1. Then, `Storage#saveChoreData()` will be called to save the current `choreList` into an output file.
+    1. Lastly, a String called `feedbackToUser` containing the outcome of the command will be returned to `KitchenHelper`. 
+    ![Add Recipe Step 3](images/AddRecipe3.png)
 
-![AddChoreCommand](images/AddChoreCommand.png)
+4. The outcome of the command will then be printed onto the console using `Ui#showResultToUser(result)`.
 
-Explanation of the sequence diagram above:
-1. The user inputs `addchore buy groceries /by Monday 12pm`.  
-2. The `Kitchen Helper` class calls `Parser#parseUserCommand()` which will split the user input into 2 substrings, the command and its attributes.  
-3. The `AddChoreCommand` has been determined by a switch case, and the `Parser#prepareAddChore` method is called. 
-4. If the method successfully extracts the task description and deadline, a new `AddChoreCommand` object is created. Otherwise, a new `InvalidCommand` object is created.  
-5. After which, the `AddChoreCommand` object will be returned to the `Kitchen Helper` class.
-6. The `Kitchen Helper` class will call the `execute()` method in the `AddChoreCommand` class, which calls its own `addChore()` method.
-7. This method will create a new `chore` and add it to the `chore` list.
-8. The execute() method returns a String to inform the user of the successful outcome. 
+The following sequence diagram shows how the `AddChoreCommand` works    
+    ![AddChoreCommand](images/AddChoreCommand.png)
 
 ##### Design considerations:
 
-- We came up with two ways that a user can set the deadline, either as a String or as a Date object. 
+- Alternative 1(current implementation): The `Chore` with different deadline types is created by constructor overloading. 
 
 |     |     |
 |-----|-----|
-|**Pros** | Increases flexibility if the user is unable to specify a date or time to complete the chore by.|  
-|**Cons** | Unable to alert the users of approaching deadlines that are set as Strings.|
+|**Pros** | It is neater and more OOP. It indicates that both `Chores` with different deadline types have the same object function, but just take in different parameters. |
+|**Cons** | The need to maintain both a String deadline and Date deadline variable within the `Chore` object even though one of them is not used.|
+
+- Alternative 2: Creation of `Chore` object by setting up variables using if-else loop.
+
+|     |     |
+|-----|-----|
+|**Pros** | More basic implementation.|  
+|**Cons** | Less OOP and does not make it obvious that deadline is an essential attribute of a `Chore` object that has two type signatures to choose from. 
 
 [&#8593; Return to Top](#developer-guide)
 
 #### 4.3.2. List all/ specific chore(s)
-The feature to list `chore`s allows the user to view the `chore`s currently in the list and their completion statuses. For example, `listchore`.
-##### Implementation  
+The feature to list `chore`s allows the user to view the `chore`s currently in the `choreList` and their completion statuses. 
 
-1. The user inputs `listchore`.
-2. The `Kitchen Helper` class calls `Parser#parseUserCommand()` which will split the user input into 2 substrings, the command and its attributes, which would be empty in this case. 
-3.   The `ListChoreCommand` has been determined by a switch case, and the `Parser#prepareListChore` method is called.
-4.   If the substring of attributes is empty, a new `ListChoreCommand` object is created. Otherwise, an exception is thrown.
-5.   After which, the `ListChoreCommand` object will be returned to the `Kitchen Helper` class. 
-6.   The `Kitchen Helper` class will call the `execute()` method in the `ListChoreCommand` class, which calls its own `listChore()` method. 
-7.   This method will display each `chore` item in the list line by line or indicate an empty list if the list is empty.
-8.   The `execute()` method returns a String containing the formatted list of `chore`s to display. 
- 
+##### Implementation  
+When the user attempts to list `chore`s, the `Kitchen Helper`, `Parser` and `ListChoreCommand` class will be called upon. The following sequence of steps will then occur:
+1. The user keyed in `listchore`.
+    
+    1. A `UI` object will be created and calls `UI#getUserCommand()`. 
+    1. Input will be parsed in `Parser#parseUserCommand()` and identified with the keyword `listchore`.   
+    
+    ![Add Recipe Step 1](images/AddRecipe1.png)
+2. Parsing of user input and creation of command object
+    1. This will automatically trigger the parsing of the user’s input string in `Parser#prepareListChore()` to ensure the parameters are empty, or an exception will be thrown.
+    1. The `ListChoreCommand` object will be created. 
+    
+    ![Add Recipe Step 2](images/AddRecipe2.png)
+3. Executing Command
+    1. The newly created object will call `ListChoreCommand#execute()` which starts the process of displaying all the chores, thus calling `ListChoreCommand#listChore()`.
+    1. The `choreList` will be looped through, displaying each `Chore` in String format and its corresponding position in the list.
+    1. Lastly, a String called `feedbackToUser` containing the displayed list of chores will be returned to `KitchenHelper`. 
+    ![Add Recipe Step 3](images/AddRecipe3.png)
+
+4. The displayed list of chores will then be printed onto the console using `Ui#showResultToUser(result)`.
+
+The following sequence diagram shows how the `AddChoreCommand` works    
+    ![AddChoreCommand](images/AddChoreCommand.png)
+
+##### Design considerations:
+
+- Alternative 1(current implementation): Using for-loop to loop through the `Chore` ArrayList.
+
+|     |     |
+|-----|-----|
+|**Pros** | It is easier to retrieve the position of each `Chore` in the list, just by looking at the iterator value.
+|**Cons** | More basic implementation.|
+
+- Alternative 2: Using ListIterator to loop through the `Chore` ArrayList.
+
+|     |     |
+|-----|-----|
+|**Pros** | Makes use of the Java Collection framework.|  
+|**Cons** | Requires another counter or variable to keep track of `Chore` position in the list.|
+
 [&#8593; Return to Top](#developer-guide)
 
 #### 4.3.3. Delete all/ specific chore(s)
-The feature for deletion of `chore`s allows the user to remove the `chore` specified by the index in the list. For example, `deletechore 1` deletes the first `chore` in the `chore` list. 
-##### Implementation  
+The feature for deletion of `chore`s allows the user to remove the `chore` specified by the index in the list. 
 
-1. The user inputs `deletechore 1`.
-2.   The `Kitchen Helper` class calls `Parser#parseUserCommand()` which will split the user input into 2 substrings, the command and its attributes. 
-3.   The `DeleteChoreCommand` has been determined by a switch case, and the `Parser#prepareDeleteChore` method is called.
-4.   If the method successfully obtains an integer, a new `DeleteChoreCommand` object is created. Otherwise, a new `InvalidCommand` object is created.
-5.   After which, the `DeleteChoreCommand` object will be returned to the `Kitchen Helper` class. 
-6.   The `Kitchen Helper` class will call the `execute()` method in the `DeleteChoreCommand` class, which calls its own `deleteChore()` method. 
-7.   If the integer obtained is an index in the list, this method will remove the `chore` in that position from the `chore` list. Otherwise, an exception is thrown.
-8.   The execute() method returns a String to inform the user if the outcome is successful.
+##### Implementation  
+When the user attempts to delete a `chore` by its index, the `Kitchen Helper`, `Parser` and `DeleteChoreCommand` class will be called upon. The following sequence of steps will then occur:
+1. The user keyed in `deletechore 1`.
+    
+    1. A `UI` object will be created and calls `UI#getUserCommand()`. 
+    1. Input will be parsed in `Parser#parseUserCommand()` and identified with the keyword `deletechore`.   
+    
+    ![Add Recipe Step 1](images/AddRecipe1.png)
+2. Parsing of user input and creation of command object
+    1. This will automatically trigger the parsing of the user’s input string for the deletion of `chore` object in `Parser#prepareDeleteChore()` which ensures the parameter is a single number, or an exception will be thrown. 
+    1. If an exception is caught, an InvalidCommand will be created. Otherwise, a `DeleteChoreCommand` object will be created with parameters `1` as the index to delete.
+    
+    ![Add Recipe Step 2](images/AddRecipe2.png)
+3. Executing Command
+    1. The newly created object will call `DeleteChoreCommand#execute()` which starts the process of deleting a chore, thus calling `DeleteChoreCommand#deleteChore()`.
+    1. The index is checked to be an index within the `choreList`, then the `Chore` specified by the index in the `choreList` is removed.
+    1. Then, `Storage#saveChoreData()` will be called to save the current `choreList` into an output file.
+    1. Lastly, a String called `feedbackToUser` containing the outcome of the command will be returned to `KitchenHelper`. 
+    ![Add Recipe Step 3](images/AddRecipe3.png)
+
+4. The outcome of the command will then be printed onto the console using `Ui#showResultToUser(result)`.
+
+The following sequence diagram shows how the `DeleteChoreCommand` works    
+    ![AddChoreCommand](images/AddChoreCommand.png)
+
+##### Design considerations:
+
+- Alternative 1(current implementation): Delete `Chore` by specifying index of `Chore` in `choreList`.
+
+|     |     |
+|-----|-----|
+|**Pros** | Quick and easy deletion by using choreList.get() to retrieve Chore to delete. |
+|**Cons** | Lesser alternatives for the user and user would have to identify the index first by executing `listchore` to get index of `Chore` in `choreList`. |
+
+- Alternative 2: Delete `Chore` by specifying `Chore` description or keywords in `Chore` description.
+
+|     |     |
+|-----|-----|
+|**Pros** | More alternatives for user. |  
+|**Cons** |  1. Extra overhead required to search through entire `choreList` to identify `Chore` with similar description. <br> 2. Possible accidental deletion of wrong `Chore` with identical descriptions or keywords. <br> 3. More troublesome for the user to type out exact description of `Chore`. |
 
 [&#8593; Return to Top](#developer-guide)
 
@@ -808,6 +888,40 @@ The following steps explained sequence diagram for `searchchore` command:
 |**Cons** | 1. Requires users to enter more precise predicate keywords which could be more inconvenient.|
 
 [&#8593; Return to Top](#developer-guide)
+
+#### 4.3.5. Mark chore as done
+The feature for marking of `chore` as done allows the user to change the completion status of the `chore` specified by the index in the list to done. 
+
+##### Implementation  
+When the user attempts to mark a `chore` as done, the `Kitchen Helper`, `Parser` and `DoneCommand` class will be called upon. The following sequence of steps will then occur:
+1. The user keyed in `done 1`.
+    
+    1. A `UI` object will be created and calls `UI#getUserCommand()`. 
+    1. Input will be parsed in `Parser#parseUserCommand()` and identified with the keyword `done`.   
+    
+    ![Add Recipe Step 1](images/AddRecipe1.png)
+2. Parsing of user input and creation of command object
+    1. This will automatically trigger the parsing of the user’s input string for the checking of `chore` object in `Parser#prepareDoneChore()` which ensures the parameter is a single number, or an exception will be thrown. 
+    1. If an exception is caught, an InvalidCommand will be created. Otherwise, a `DoneCommand` object will be created with parameters `1` as the index to check.
+    
+    ![Add Recipe Step 2](images/AddRecipe2.png)
+3. Executing Command
+    1. The newly created object will call `DoneCommand#execute()` which starts the process of marking a chore as done, thus calling `DoneChoreCommand#markChoreDone()`.
+    1. The index is checked to be an index within the `choreList` and completion status of the `Chore` specified by the index is checked to be undone. Otherwise, an exception will be thrown.
+    1. The Chore is then marked as done.
+    1. Then, `Storage#saveChoreData()` will be called to save the current `choreList` into an output file.
+    1. Lastly, a String called `feedbackToUser` containing the outcome of the command will be returned to `KitchenHelper`. 
+    ![Add Recipe Step 3](images/AddRecipe3.png)
+
+4. The outcome of the command will then be printed onto the console using `Ui#showResultToUser(result)`.
+
+The following sequence diagram shows how the `DoneCommand` works    
+    ![AddChoreCommand](images/AddChoreCommand.png)
+
+##### Design considerations:
+
+- Similar to DeleteChoreCommand.
+
 
 ### 4.4. Storage
 #### 4.4.1. Select files to load from and save to
