@@ -200,16 +200,16 @@ You have added this chore:
 Now you have 1 chore in the list.
 ===================================================
 Invalid Command Format!
-Adds a chore to the chore list. TASK /by DATE OR TASK /by <dd/MM/yyyy HH:mm>
+Adds a chore to the chore list. TASK /by DEADLINE OR TASK /by <dd/MM/yyyy HH:mm>
 Example: addchore buy groceries /by Tuesday 12pm OR addchore buy groceries /by 14/04/2020 12:00
 ===================================================
 You have added this chore:
-[x] buy groceries (by: 05/04/2020 08:30)
+[x] buy groceries (by: 05/04/2021 08:30)
 Now you have 2 chores in the list.
 ===================================================
 Here are the chores in your list:
 1. [x] buy groceries (by: Tuesday 12pm)
-2. [x] buy groceries (by: 05/04/2020 08:30)
+2. [x] buy groceries (by: 05/04/2021 08:30)
 ===================================================
 You have completed this chore:
 [/] buy groceries (by: Tuesday 12pm)
@@ -217,7 +217,7 @@ You have completed this chore:
 ===================================================
 Here are your matching chores in your list
 1.[/] buy groceries (by: Tuesday 12pm) [Location: Index 1]
-2.[x] buy groceries (by: 05/04/2020 08:30) [Location: Index 2]
+2.[x] buy groceries (by: 05/04/2021 08:30) [Location: Index 2]
 ===================================================
 Here are your matching ingredients in your list
 1.[Meat] Beef Qty:3 $20.00 Exp:18/03/2022 [Location: Index 4]

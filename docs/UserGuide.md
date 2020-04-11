@@ -16,13 +16,13 @@ By: `Team CS2113T-M16-2` Since: `March 2020` License: `MIT`
              
     + [3.3. Ingredient](#33-ingredient)  
        - [3.3.1. Adding an ingredient: `addingredient`](#331-adding-an-ingredient-addingredient-jin-fa)  
-       - [3.3.2. List ingredient: `listingredient`](#332-list-ingredient-listingredient)  
+       - [3.3.2. List ingredient: `listingredient`](#332-list-ingredient-listingredient-jin-xing)
        - [3.3.3. Delete an ingredient: `deleteingredient`](#333-delete-an-ingredient-deleteingredient-isabella-and-yan-ting)  
        - [3.3.4. Search for ingredient: `searchingredient`](#334-search-for-ingredient-searchingredient-jin-fa)  
 
     + [3.4. Recipe](#34-recipe)  
       - [3.4.1. Adding a recipe: `addrecipe`](#341-adding-a-recipe-addrecipe-hui-zhen)  
-      - [3.4.2. List recipe: `listrecipe`](#342-list-recipes-listrecipe)  
+      - [3.4.2. List recipe: `listrecipe`](#342-list-recipes-listrecipe-jin-xing)  
       - [3.4.3. Delete a recipe: `deleterecipe`](#343-delete-a-recipe-deleterecipe-yan-ting)
       - [3.4.4. Search for recipe: `searchrecipe`](#344-search-for-recipe-searchrecipe-jin-fa)  
       - [3.4.5. Cooking a recipe: `cookrecipe`](#345-cooking-a-recipe-cookrecipe-hui-zhen-and-yan-ting)
@@ -160,7 +160,7 @@ Ingredient entered with an expired expiry date. | **Command**: <br> `addingredie
 
 [&#8593; Return to Top](#kitchen-helper---user-guide)
 
-#### 3.3.2. List ingredient: `listingredient`
+#### 3.3.2. List ingredient: `listingredient` (Jin Xing)
 Displays all the items currently in the ingredient list in Kitchen Helper.
 
 __Format__: `listingredient <CATEGORY / ALL>`
@@ -184,7 +184,7 @@ __Format__: `deleteingredient /i <INGREDIENT_INDEX> [/q <QUANTITY>]`
 * `QUANTITY` : This refers to the quantity of ingredient to be deducted. This is an optional argument.<br>
 <br>
 
-> You may get the index for the ingredient that you would like to delete by getting the full list of ingredients that you have previously entered into Kitchen Helper or search for an ingredient. You may refer to the [listingredient](#332-list-ingredient-listingredient) and [searchingredient](#334-search-for-ingredient-searchingredient-jin-fa) command sections to understand how to use the command. <br>
+> You may get the index for the ingredient that you would like to delete by getting the full list of ingredients that you have previously entered into Kitchen Helper or search for an ingredient. You may refer to the [listingredient](#332-list-ingredient-listingredient-jin-xing) and [searchingredient](#334-search-for-ingredient-searchingredient-jin-fa) command sections to understand how to use the command. <br>
 
 > One thing to note: If the final quantity of your ingredient will be zero after deduction, the ingredient will be deleted from the ingredient list subsequently. 
 
@@ -239,7 +239,7 @@ The different types of `CATEGORY` are listed below:
   
 Any `CATEGORY` that does not falls in the list could be put under `Miscellaneous`.  
 
-> All `RECIPE_NAME` has to be unique. You can check the list of existing recipes by using [`listrecipe all`](#342-list-recipes-listrecipe)  
+> All `RECIPE_NAME` has to be unique. You can check the list of existing recipes by using [`listrecipe all`](#342-list-recipes-listrecipe-jin-xing)  
 
 > Please note that `RECIPE_NAME` and `INGREDIENT_NAME` can contain spaces. These will not be removed after addition. (i.e. "Chicken____Stew" where `_` is space will remain )  
 
@@ -251,7 +251,7 @@ Any `CATEGORY` that does not falls in the list could be put under `Miscellaneous
 
 [&#8593; Return to Top](#kitchen-helper---user-guide)
 
-#### 3.4.2. List recipes: `listrecipe`
+#### 3.4.2. List recipes: `listrecipe` (Jin Xing)
 Displays all recipe and its name or the items currently in a particular recipe in Kitchen Helper.
 
 
@@ -274,7 +274,7 @@ __Format__: `deleterecipe /n <RECIPE_NAME>` OR `deleterecipe /i <RECIPE_INDEX>`
 * `RECIPE_INDEX`: This refers to the index of the recipe which is an identification number tagged to the recipe.<br>
 <br>
 
-> You may get the index or name for the recipe that you would like to delete by getting the full list of recipes that you have previously entered into Kitchen Helper. You may refer to the [listrecipe all](#342-list-recipes-listrecipe) command section to understand how to use the command. 
+> You may get the index or name for the recipe that you would like to delete by getting the full list of recipes that you have previously entered into Kitchen Helper. You may refer to the [listrecipe all](#342-list-recipes-listrecipe-jin-xing) command section to understand how to use the command. 
 
 Example |  Outcome
 --------|------------------
@@ -287,7 +287,7 @@ Example |  Outcome
 You can search for recipes based on a given keyword.  
 
 The output also returns `Location: Index <Number>`, which you can make use of the `Number` to view information in the recipe or delete a recipe through an index.  
- You may refer to [Section 3.4.2. List recipes](#342-list-recipes-listrecipe) and [Section 3.4.3. Delete a recipe](#343-delete-a-recipe-deleterecipe-yan-ting) command section to understand how to use the command.  
+ You may refer to [Section 3.4.2. List recipes](#342-list-recipes-listrecipe-jin-xing) and [Section 3.4.3. Delete a recipe](#343-delete-a-recipe-deleterecipe-yan-ting) command section to understand how to use the command.  
  
 __Format:__ `searchrecipe <KEYWORD>`  
 
