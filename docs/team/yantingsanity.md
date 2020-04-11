@@ -4,10 +4,12 @@
 Kitchen Helper is a command line interface (CLI) application that is mainly targeted for household users who have difficulty in remembering what they have in their kitchen. This application aids them in the tracking of ingredients that are currently in their kitchen more efficiently.
 
 ### Contributions
++ Responsibility: Issue Tracker
+
 #### Enhancements implemented
 + Deletion of ingredients and recipes
     + What it does: It allows the user to delete any ingredient or recipe with regards to the list of ingredients or recipes in Kitchen Helper respectively. 
-    + Justification: This feature improves the product slightly because a user may make a mistake and input the wrong parameters for an ingredient or a recipe. With this feature, the user will be able to delete this ingredient or recipe that he/she has keyed in and add a new one. 
+    + Justification: This feature improves the product slightly because a user may make a mistake and input the wrong parameters for an ingredient or a recipe. With this feature, the user will be able to delete this wrongly keyed ingredient or recipe. 
     + Highlights: This enhancement was done by deleting the ingredient based on their index so that the users can delete a specific ingredient that they want. However, for deletion of recipe, there is an additional enhancement of deletion by name as the recipe names are unique so the users can delete a specific recipe by deleting through the names.
 + Deduction of quantity of ingredients 
     + What it does: It allows the user to reduce the quantity of an ingredient.
@@ -16,7 +18,7 @@ Kitchen Helper is a command line interface (CLI) application that is mainly targ
 + Added the <b>deduction of ingredients from list of ingredients</b> after a user has cooked a recipe
     + What it does: It automatically deducts the ingredients found in the recipe that the user has specified to cook if there are enough and non-expiring ingredients in the list of ingredients. 
     + Justification: This feature improves the product slightly because a user does not have to manually deduct the quantity of ingredients which increases convenience for the users in managing their ingredients’ inventory. 
-    + Highlights: This enhancement also deletes the ingredient automatically if the final quantity after the deduction is zero for the ingredient.
+    + Highlights: Similar to <b>Deduction of quantity of ingredients</b>
 
 #### Code Contributions 
 The link below showed my code contributions to Kitchen Helper:
@@ -41,16 +43,15 @@ The link below showed my code contributions to Kitchen Helper:
 ### Contributions to the User Guide
 > Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.
 
-+ [Delete Ingredient](https://ay1920s2-cs2113t-m16-2.github.io/tp/UserGuide.html#333-delete-an-ingredient-deleteingredient)
-+ [Delete Recipe](https://ay1920s2-cs2113t-m16-2.github.io/tp/UserGuide.html#343-delete-a-recipe-deleterecipe)
-+ [Cook Recipe](https://ay1920s2-cs2113t-m16-2.github.io/tp/UserGuide.html#345-cooking-a-recipe-cookrecipe) 
-    + For this, as @alwayshuizhen shared this implementation with me, I edited some parts of the User Guide.
++ [Delete Ingredient](https://ay1920s2-cs2113t-m16-2.github.io/tp/UserGuide.html#333-delete-an-ingredient-deleteingredient-isabella-and-yan-ting)
++ [Delete Recipe](https://ay1920s2-cs2113t-m16-2.github.io/tp/UserGuide.html#343-delete-a-recipe-deleterecipe-yan-ting)
++ [Cook Recipe](https://ay1920s2-cs2113t-m16-2.github.io/tp/UserGuide.html#345-cooking-a-recipe-cookrecipe-hui-zhen-and-yan-ting) 
     
 ### Contributions to the Developer Guide 
 > Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project.
 
 + [Architecture](https://ay1920s2-cs2113t-m16-2.github.io/tp/DeveloperGuide.html#31-architecture)
-+ [Delete Ingredient](https://ay1920s2-cs2113t-m16-2.github.io/tp/DeveloperGuide.html#413-delete-all-specific-ingredientss)
-+ [Delete Recipe](https://ay1920s2-cs2113t-m16-2.github.io/tp/DeveloperGuide.html#424-delete-all-specific-recipes)
++ [Delete Ingredient](https://ay1920s2-cs2113t-m16-2.github.io/tp/DeveloperGuide.html#413-delete-specific-ingredientss)
++ [Delete Recipe](https://ay1920s2-cs2113t-m16-2.github.io/tp/DeveloperGuide.html#424-delete-a-specific-recipe)
 + [Cook Recipe](https://ay1920s2-cs2113t-m16-2.github.io/tp/DeveloperGuide.html#423-cooking-of-recipe)
 + Instructions for Manual Testing: [#Delete Ingredient](https://ay1920s2-cs2113t-m16-2.github.io/tp/DeveloperGuide.html#f4-delete-an-ingredient), [#Delete Recipe](https://ay1920s2-cs2113t-m16-2.github.io/tp/DeveloperGuide.html#f9-delete-a-recipe)
