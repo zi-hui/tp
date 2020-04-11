@@ -391,8 +391,11 @@ For example, `beef` ingredient's expired date is 02/02/2020 and have quantity of
 
 ##### Implementation  
 
+<<<<<<< HEAD
 ![NotificationIngredientCommand](images/notificationIngredient.png) 
 
+=======
+>>>>>>> 5c22bd3b295038e401b72ff85c04b6b2e53af6d4
 The following steps explained sequence diagram for `showNotification` command:  
 1. The user starts `KitchenHelper`.  
 2. `KitchenHelper` calls `showNotification()`.  
@@ -1204,7 +1207,7 @@ Extensions:
 
 1. Add an ingredient into Kitchen Helper.
    1. Prerequisites: List all the ingredient using the `listingredient all` command. 
-   2. Test case: `addingredient /n beef /c meat /q 3 /p 20.20 /e 03/03/2022`    
+   2. Test case: `addingredient /n beef /c meat /q 3 /p 20 /e 03/03/2022`    
    Expected: Entry can be seen using `listingredient all` command.
    3. Test case: `addingredient /n chicken /c meat /q 3 /p 3 /e 03/03/2020` 
    Expected: Expired ingredient detected in input. <br> Please enter a non-expired expiry date.
@@ -1240,13 +1243,13 @@ Extensions:
     
 #### F.5. Search for ingredient
 1. Search for ingredients in Kitchen Helper.
-   1. Prerequisites: The ingredient list should not be empty.
+   1. Prerequisites: The ingredient list should not be empty. You should at least add the following ingredient by using `addingredient /n beef /c meat /q 3 /p 20 /e 03/03/2022` before the search.  
    2. Test case: `searchingredient beef`  
    Expected: Ingredient entries that have the keyword matching `beef` names are listed.
-   3. Test case: 'searchingredient meat'  
+   3. Test case: `searchingredient meat`  
    Expected: Ingredient entries that have the keyword matching `meat` category are listed.
-   4. Test case: `searchingredient 02/02/2022`  
-   Expected: Ingredient entries that have the keyword matching `02/02/2022` date are listed.
+   4. Test case: `searchingredient 03/03/2022`  
+   Expected: Ingredient entries that have the keyword matching `03/03/2022` date are listed.
    5. Test case: `searchingredient $20`  
    Expected: Ingredient entries that have the keyword matching `$20` price are listed.
    
@@ -1288,8 +1291,8 @@ Extensions:
 
 #### F.10. Search for recipe
 1. Search for similar recipe in Kitchen Helper.
-   1. Prerequisites: The recipe list should not be empty.
-   2. Test case: 'searchrecipe chicken' 
+   1. Prerequisites: The recipe list should not be empty. You should at least add the following recipe by using `addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable` before the search.   
+   2. Test case: `searchrecipe chicken`
    Expected: Recipe's name entries that have the keyword matching `chicken' are listed. 
 
 #### F.11. Add a chore
@@ -1299,8 +1302,8 @@ Extensions:
 #### F.13. Delete a chore
    
 #### F.14. Search for chore
-1. Search for chores in Kitchen Helper.
-   1. Prerequisites: The chore list should not be empty.
+1. Search for chores in Kitchen Helper. 
+   1. Prerequisites: The chore list should not be empty. You should at least add the following chore by using `addchore buy groceries /by Tuesday 12pm` before the search.  
    2. Test case: `searchchore groceries`  
    Expected: Chore entries that have the keyword matching `groceries` description are listed.
    3. Test case: `searchchore Tuesday`  
@@ -1327,9 +1330,9 @@ Extensions:
 If any of the save files are empty, the user can choose to populate the files with their own user commands or alternatively, use any of the test cases below:
 
 1. `addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable`
-2. `addingredient /n Chicken Breast /c meat /q 3 /p 20 /e 18/03/2020`
-3. `addingredient /n kailan /c Vegetable /q 30 /p 30.45 /e 12/03/2020`
-4. `addingredient /n HL Milk /c Dairy /q 3 /p 12.2 /e 14/03/2020`
+2. `addingredient /n Chicken Breast /c meat /q 3 /p 20 /e 18/12/2020`
+3. `addingredient /n kailan /c Vegetable /q 30 /p 30.45 /e 12/12/2020`
+4. `addingredient /n HL Milk /c Dairy /q 3 /p 12.2 /e 14/12/2020`
 5. `addchore buy groceries /by Tuesday 12pm`
 
 Note that expenditure changes when `addingredient`, `deleteingredient`, or `cookrecipe` commands are used.
