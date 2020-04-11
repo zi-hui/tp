@@ -64,7 +64,8 @@ They showcase my ability to write documentation targeting end-users.
 
 ```
 Given below are sections I contributed to the Developer Guide. 
-They showcase my ability to write technical documentation and the technical depth of my contributions to the project.
+They showcase my ability to write technical documentation and the technical depth of my contributions
+to the project.
 ```
 
 + [Addition of ingredient](https://ay1920s2-cs2113t-m16-2.github.io/tp/DeveloperGuide#411-addition-of-ingredient)

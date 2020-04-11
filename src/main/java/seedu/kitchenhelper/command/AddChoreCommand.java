@@ -53,6 +53,18 @@ public class AddChoreCommand extends Command {
     }
 
     /**
+     * Gets the String deadline of this chore or empty String if Date deadline.
+     *
+     * @return the deadline in String or empty String.
+     */
+    public String getDateStr() {
+        if (dateStr == null) {
+            return "";
+        }
+        return dateStr;
+    }
+
+    /**
      * Adds a chore to the chore list.
      *
      * @param choreList the ArrayList of chores.

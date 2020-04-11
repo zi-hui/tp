@@ -41,6 +41,13 @@ public class ListIngredientCommand extends Command {
         assert category.length() > 0;
     }
 
+    /**
+     * Takes in parameter from user and prints out Ingredient belonging to the category name.
+     *
+     * @param category       category of the ingredient.
+     * @param ingredientList the ArrayList that stores ingredients.
+     * @return result a string which contains the results
+     */
     public String listIngredients(String category, ArrayList<Ingredient> ingredientList) {
         String result = "Here is the list of Ingredients in Inventory:\n"
                 + "Format : [Ingredient Index] Ingredient Name | Quantity | Price | Expiry\n";
