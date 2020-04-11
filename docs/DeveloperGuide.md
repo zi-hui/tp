@@ -68,8 +68,8 @@ By: `CS2113T-M16-2` Since: `2020`
       - [F.13. Delete a chore](#f13-delete-a-chore)
       - [F.14. Search for chore](#f14-search-for-chore)
       - [F.15. Mark a chore as done](#f15-mark-a-chore-as-done)
-      - [F.16. Saving data](#f15-saving-data)
-      - [F.17. Display expenditure](#f16-display-expenditure)
+      - [F.16. Saving data](#f16-saving-data)
+      - [F.17. Display expenditure](#f17-display-expenditure)
 
 ## 1. Introduction
 ### 1.1.  Background
@@ -299,7 +299,7 @@ The following shows the full sequence diagram for this command:
 
 ![Delete Ingredient Sequence Diagram](images/deleteIngredientSequenceDiagram.png)
 
-Other than deleting or reducing the quantity of an ingredient, `DeleteIngredientCommand` has an additional feature that is linked to [Display Expenditure](#45-display-expenditure) which will increase the cooking expenditure if the ingredients are used for cooking. 
+Other than deleting or reducing the quantity of an ingredient, `DeleteIngredientCommand` has an additional feature that is linked to [Display Expenditure](#451-display-expenditure) which will increase the cooking expenditure if the ingredients are used for cooking. 
 
 ##### Design Considerations
 + Aspect 1: How to differentiate `deleteingredientByQuantity` and `deleteIngredient` <br>
@@ -582,7 +582,7 @@ The following shows the full sequence diagram for this command:
 
 ![Cook Recipe Sequence Diagram](images/cookRecipeCommandSequenceDiagram.png)
 
-Other than reducing the quantity of ingredients if the recipe can be cooked successfully, `CookRecipeCommand` has an additional feature that is linked to [Display Expenditure](#45-display-expenditure) which will add the total cost of cooking this recipe into the total expenditure. 
+Other than reducing the quantity of ingredients if the recipe can be cooked successfully, `CookRecipeCommand` has an additional feature that is linked to [Display Expenditure](#451-display-expenditure) which will add the total cost of cooking this recipe into the total expenditure. 
 
 ##### Design considerations
 Aspect: Preparing the deduction of ingredients when cooking a recipe
