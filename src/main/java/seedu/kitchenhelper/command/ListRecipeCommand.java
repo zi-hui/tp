@@ -34,10 +34,21 @@ public class ListRecipeCommand extends Command {
         }
     }
 
+    /**
+     * Returns itemNumber (integer of the string, parameter).
+     *
+     */
     public int getItemNumber() {
         return this.itemNumber;
     }
 
+    /**
+     * Returns boolean of whether the itemNumber provided is valid in recipeArraylist()
+     *
+     * @param itemNumber item number of the recipe user wants to view
+     * @param recipeArrayList the ArrayList that stores Recipe.
+     * @return true if itemNumber exists in recipeArrayList, else return false.
+     */
     public boolean checkItemValid(int itemNumber, ArrayList<Recipe> recipeArrayList) {
         boolean validItem = false;
         if (itemNumber <= recipeArrayList.size() && itemNumber > 0) {
@@ -46,6 +57,14 @@ public class ListRecipeCommand extends Command {
         return validItem;
     }
 
+    /**
+     * Takes in parameter from user and prints out Recipe names OR recipe's ingredient list
+     * belonging to the recipe item.
+     *
+     * @param parameter       category of the ingredient.
+     * @param recipeArrayList the ArrayList that stores Recipe.
+     * @return result a string which contains the results
+     */
     public String listRecipe(String parameter, ArrayList<Recipe> recipeArrayList) {
         String result = "";
         if (parameter.equalsIgnoreCase("all")) {
