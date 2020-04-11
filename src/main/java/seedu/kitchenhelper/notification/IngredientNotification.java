@@ -63,7 +63,7 @@ public class IngredientNotification {
     }
 
     /**
-     * Returns Date format of a String date :
+     * Returns Date format of a String date.
      *
      * @param date1 date
      * @return date date format of the string date

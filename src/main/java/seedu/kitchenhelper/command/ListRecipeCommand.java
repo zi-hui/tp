@@ -43,7 +43,7 @@ public class ListRecipeCommand extends Command {
     }
 
     /**
-     * Returns boolean of whether the itemNumber provided is valid in recipeArraylist()
+     * Returns boolean of whether the itemNumber provided is valid in recipeArraylist().
      *
      * @param itemNumber item number of the recipe user wants to view
      * @param recipeArrayList the ArrayList that stores Recipe.
