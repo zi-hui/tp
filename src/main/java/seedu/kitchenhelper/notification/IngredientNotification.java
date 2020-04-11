@@ -1,8 +1,5 @@
 package seedu.kitchenhelper.notification;
 
-import seedu.kitchenhelper.command.ListChoreCommand;
-import seedu.kitchenhelper.exception.KitchenHelperException;
-import seedu.kitchenhelper.object.Chore;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
 import seedu.kitchenhelper.ui.Ui;
 
