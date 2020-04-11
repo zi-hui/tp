@@ -968,6 +968,8 @@ __Value proposition__: Manage food inventory quickly compared to a typical mouse
 |v2.0|user|reset all my ingredients, chores, recipes|restart the application.|
 |v2.0|user|deduct ingredients that expire first|do not waste my ingredients.|
 |v2.0|user|be informed if I have sufficient ingredients to cook a specific recipe|find other recipes to cook.|
+|v2.0|user|get the expenditure on the ingredients that I used to cook in the recipe|keep track of my expenditure.|
+|v2.0|user|get the expenditure on the ingredients that I used to cook|keep track of my expenditure.|
 
 [&#8593; Return to Top](#developer-guide)
 
