@@ -52,4 +52,4 @@ They showcase my ability to write technical documentation and the technical dept
 + [3.5. Storage Component](https://ay1920s2-cs2113t-m16-2.github.io/tp/DeveloperGuide.html#35-storage-component)
 + [4.4.1. Select files to load from and save to](https://ay1920s2-cs2113t-m16-2.github.io/tp/DeveloperGuide.html#441-select-files-to-load-from-and-save-to)
 + [4.4.2. Save current state](https://ay1920s2-cs2113t-m16-2.github.io/tp/DeveloperGuide.html#442-save-current-state)
-+ Appendix F: Instructions for Manual Testing: [F.15. Saving data](https://ay1920s2-cs2113t-m16-2.github.io/tp/DeveloperGuide.html#f15-saving-data)
++ Appendix F: Instructions for Manual Testing: [F.16. Saving data](https://ay1920s2-cs2113t-m16-2.github.io/tp/DeveloperGuide.html#f16-saving-data)
