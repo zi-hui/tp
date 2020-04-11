@@ -30,7 +30,7 @@ listingredient all
 listingredient all
 addchore buy groceries /by Tuesday 12pm
 addchore buy groceries
-addchore buy groceries /by 05/04/2020 08:30
+addchore buy groceries /by 05/04/2021 08:30
 listchore
 done 1
 searchchore groceries

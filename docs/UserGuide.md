@@ -16,13 +16,13 @@ By: `Team CS2113T-M16-2` Since: `March 2020` License: `MIT`
              
     + [3.3. Ingredient](#33-ingredient)  
        - [3.3.1. Adding an ingredient: `addingredient`](#331-adding-an-ingredient-addingredient-jin-fa)  
-       - [3.3.2. List ingredient: `listingredient`](#332-list-ingredient-listingredient)  
+       - [3.3.2. List ingredient: `listingredient`](#332-list-ingredient-listingredient-jin-xing)
        - [3.3.3. Delete an ingredient: `deleteingredient`](#333-delete-an-ingredient-deleteingredient-isabella-and-yan-ting)  
        - [3.3.4. Search for ingredient: `searchingredient`](#334-search-for-ingredient-searchingredient-jin-fa)  
 
     + [3.4. Recipe](#34-recipe)  
       - [3.4.1. Adding a recipe: `addrecipe`](#341-adding-a-recipe-addrecipe-hui-zhen)  
-      - [3.4.2. List recipe: `listrecipe`](#342-list-recipes-listrecipe)  
+      - [3.4.2. List recipe: `listrecipe`](#342-list-recipes-listrecipe-jin-xing)  
       - [3.4.3. Delete a recipe: `deleterecipe`](#343-delete-a-recipe-deleterecipe-yan-ting)
       - [3.4.4. Search for recipe: `searchrecipe`](#344-search-for-recipe-searchrecipe-jin-fa)  
       - [3.4.5. Cooking a recipe: `cookrecipe`](#345-cooking-a-recipe-cookrecipe-hui-zhen-and-yan-ting)
@@ -160,7 +160,7 @@ Ingredient entered with an expired expiry date. | **Command**: <br> `addingredie
 
 [&#8593; Return to Top](#kitchen-helper---user-guide)
 
-#### 3.3.2. List ingredient: `listingredient`
+#### 3.3.2. List ingredient: `listingredient` (Jin Xing)
 Displays all the items currently in the ingredient list in Kitchen Helper.
 
 __Format__: `listingredient <CATEGORY / ALL>`
@@ -251,7 +251,7 @@ Any `CATEGORY` that does not falls in the list could be put under `Miscellaneous
 
 [&#8593; Return to Top](#kitchen-helper---user-guide)
 
-#### 3.4.2. List recipes: `listrecipe`
+#### 3.4.2. List recipes: `listrecipe` (Jin Xing)
 Displays all recipe and its name or the items currently in a particular recipe in Kitchen Helper.
 
 
