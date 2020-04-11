@@ -1077,7 +1077,7 @@ Use case ends.
 1. Add a recipe into Kitchen Helper
     1. Prerequisites: List all the ingredient using the `listingredient all` command.
     1. Test case: `addrecipe /n warm milk /i HL Milk:1:Dairy`\
-    Expected: Entry can be found using `listingredient all` command. 
+    Expected: Entry can be found using `listrecipe all` command. 
 
 #### F.7. List recipe
 
