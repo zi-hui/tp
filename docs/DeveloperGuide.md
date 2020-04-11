@@ -63,8 +63,9 @@ By: `CS2113T-M16-2` Since: `2020`
       - [F.12. List chore](#f12-list-a-chore)
       - [F.13. Delete a chore](#f13-delete-a-chore)
       - [F.14. Search for chore](#f14-search-for-chore)
-      - [F.15. Saving data](#f15-saving-data)
-      - [F.16. Display expenditure](#f16-display-expenditure)
+      - [F.15. Mark a chore as done](#f15-mark-a-chore-as-done)
+      - [F.16. Saving data](#f15-saving-data)
+      - [F.17. Display expenditure](#f16-display-expenditure)
 
 ## 1. Introduction
 ### 1.1.  Background
@@ -1397,11 +1398,21 @@ Extensions:
    Expected: Recipe's name entries that have the keyword matching `chicken' are listed. 
 
 #### F.11. Add a chore
-
+1. Adds a chore into Kitchen Helper.
+    1. Test case (String deadline): `addchore buy groceries /by Monday 12pm`<br> Expected: The chore is added. Entry can be found using `listchore` command.
+    2. Test case (Date deadline): `addchore buy groceries /by 13/04/2020 12:00`<br> Expected: The chore is added. Entry can be found using `listchore` command.
+    3. Test case (Incorrect date format): `addchore buy groceries /by 13-04-2020` <br> Expected: Deadline will be a String object type. The chore is added. Entry can be found using `listchore` command.
+    4. Test case (Invalid format): `addchore buy groceries` <br>  Expected: The chore is not added. Entry cannot be found using `listchore` command.
 #### F.12. List a chore
-
+1. List the chores.
+    1. Test case (Empty list): `listchore` <br> Expected: "Your list of chores is currently empty."
+    2. Test case (Non-empty list): `listchore` <br> Expected: All the chore entries displayed.
+    3. Test case (Invalid format): `listchore aa` <br> Expected: "Invalid ListChore command." No chore entries displayed.
 #### F.13. Delete a chore
-   
+1. Delete a chore from Kitchen Helper.
+    1. Prerequisites: List all the chores using `listchore` command.
+    2. Test case (Index in list): `deletechore 1` <br> The chore is deleted. It can be noticed by using the `listchore` command.
+    3. Test case (Index not in list or incorrect format): `deletechore 10` OR `deletechore -1` OR `deletechore buy groceries` <br> Expected: The chore is not deleted. It can be noticed by using the `listchore` command.
 #### F.14. Search for chore
 1. Search for chores in Kitchen Helper.
    1. Prerequisites: The chore list should not be empty.
@@ -1409,8 +1420,14 @@ Extensions:
    Expected: Chore entries that have the keyword matching `groceries` description are listed.
    3. Test case: `searchchore Tuesday`  
    Expected: Chore entries that have the keyword matching `Tuesday` as a string are listed.  
+#### F.15. Mark a chore as done
+1. Change the completion status of a chore to done.
+    1. Prerequisites: List all the chores using `listchore` command.
+    2. Test case (Index in list): `done 1` <br> Expected: The chore is marked as done. The completion status icon becomes a tick.
+    3. Test case (Mark an already complete chore): `done 1` <br> Expected: "This chore has already been marked as done."
+    3. Test case (Index not in list or incorrect format): `done 10` OR `done -1` OR `done buy groceries` <br> Expected: The chore is not marked as done. It can be noticed by using the `listchore` command where the completion status icon of the chore remains a cross. 
    
-#### F.15. Saving data
+#### F.16. Saving data
 
 1. Load ingredient data into Kitchen Helper.
    1. Prerequisites: The ingredient list save file should not be empty. 
@@ -1422,7 +1439,7 @@ Extensions:
  
 1. Load chore data into Kitchen Helper.
    1. Prerequisites: The chore list save file should not be empty. 
-   1. Expected: Previously stored chore data can be seen using `listchore all` command.
+   1. Expected: Previously stored chore data can be seen using `listchore` command.
  
 1. Load expenditure data into Kitchen Helper.
    1. Prerequisites: The expenditure save file should not be empty. 
@@ -1438,6 +1455,14 @@ If any of the save files are empty, the user can choose to populate the files wi
 
 Note that expenditure changes when `addingredient`, `deleteingredient`, or `cookrecipe` commands are used.
 
-#### F.16. Display expenditure
-
+#### F.17. Display expenditure
+1. Displays user expenditure.
+    1. Prerequisite 1: Add an ingredient using `addingredient` command.
+    2. Test case 1: `displayexpenditure` <br> Expected: The value of total expenditure increases by the cost of ingredient multiplied by its quantity.
+    3. Prerequisite 2: Cook a recipe using `cookrecipe` command. 
+    4. Test case 2: `displayexpenditure` <br> Expected: The value of amount used in cooking increases by the cost of all the ingredients used in cooking.
+    5. Prerequisite 3: Delete an ingredient using `deleteingredient` command and respond with `yes` when prompted to remove cost of ingredient from total expenditure .
+    6. Test case 3: `displayexpenditure` <br> Expected: The value of total expenditure decreases by the cost of ingredient multiplied by the quantity deleted.
+    7. Prerequisite 4: Delete an ingredient using `deleteingredient` command and respond with `no` when prompted to remove cost of ingredient from total expenditure and respond with `yes` when prompted to add cost of ingredient to amount used in cooking.
+    8. Test case 4: `displayexpenditure` <br> Expected: The value of amount used in cooking increases by the cost of ingredient multiplied by the quantity deleted.
 [&#8593; Return to Top](#developer-guide)
