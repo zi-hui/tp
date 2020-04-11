@@ -161,7 +161,7 @@ The Model component contains `Ingredient`, `Recipe` and `Chore` classes, which s
 
 ![Storage Class Diagram](images/Storage.png)
 
-A Storage object is created by the KitchenHelper class to handle the loading and saving of ingredients, recipes and chores data.
+A Storage object is created by the KitchenHelper class to handle the loading and saving of ingredients, recipes, chores and expenditure data.
 
 The Storage() method acts as a constructor with filepaths to local save files for ingredients, recipes, chores and expenditure data.
 
