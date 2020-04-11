@@ -1206,11 +1206,11 @@ Extensions:
 
 1. Add an ingredient into Kitchen Helper.
    1. Prerequisites: List all the ingredient using the `listingredient all` command. 
-   2. Test case: `addingredient /n beef /c meat /q 3 /p 20 /e 03/03/2022`    
+   2. Test case: `addingredient /n beef /c meat /q 3 /p 20 /e 03/03/2022`  
    Expected: Entry can be seen using `listingredient all` command.
-   3. Test case: `addingredient /n chicken /c meat /q 3 /p 3 /e 03/03/2020` 
+   3. Test case: `addingredient /n chicken /c meat /q 3 /p 3 /e 03/03/2020`  
    Expected: Expired ingredient detected in input. <br> Please enter a non-expired expiry date.
-   4. Test case: `addingredient /n milo /c drink /q 0 /p 1 /e 03/03/2022`
+   4. Test case: `addingredient /n milo /c drink /q 0 /p 1 /e 03/03/2022`  
    Expected: Please enter a quantity more than 0.
    
 #### F.3. List ingredient 
@@ -1218,11 +1218,11 @@ Extensions:
    1. Prerequisites: Add ingredient using the `addingredient /n beef /c meat /q 3 /p 20.20 /e 03/03/2022` command. 
    2. Test case: `listingredient all`    
    Expected: Entry can be seen using `listingredient all` command and all other categories.
-   3. Test case: `listingredient meat` 
+   3. Test case: `listingredient meat`  
    Expected: Entry can be seen using `listingredient all` command and only `meat` category is shown.
-   4. Test case: `listingredient 1`
+   4. Test case: `listingredient 1`  
    Expected: Invalid Command, please check your format!
-   5. Test case: `listingredient airplane`
+   5. Test case: `listingredient airplane`  
    Expected: Invalid Command, please check your format!
 
    
@@ -1255,29 +1255,30 @@ Extensions:
 #### F.6. Add a recipe
 1. Add a recipe into Kitchen Helper
     1. Prerequisites: List all the ingredient using the `listingredient all` command.
-    1. Test case: `addrecipe /n warm milk /i HL Milk:1:Dairy`\
-    Expected: Entry can be found using `listrecipe all` command. 
+    1. Test case: `addrecipe /n warm milk /i HL Milk:1:Dairy`  
+    Expected: Entry can be found using `listingredient all` command. 
+
 
 #### F.7. List recipe
 1. List Recipe
    1. Prerequisites: Add ingredient using the `addrecipe /n warm milk /i HL Milk:1:Dairy` command. 
    2. Test case: `listrecipe all`    
    Expected: Entry can be seen using `listrecipe all` command, shows all recipe's name added.
-   3. Test case: `listrecipe 1` 
+   3. Test case: `listrecipe 1`  
    Expected: Entry can be seen using `listrecipe 1` command and shows all ingredients registered in the recipe.
-   4. Test case: `listrecipe 2`
+   4. Test case: `listrecipe 2`  
    Expected: The Recipe List is currently empty.
-   5. Test case: `listrecipe notsure`
+   5. Test case: `listrecipe notsure`  
    Expected: Invalid Command, please check your format!
 
 #### F.8. Cook a recipe
 1. Cooks the specified recipe and ingredients in the recipe will be automatically deducted.
     1. Prerequisites: List all the ingredient using the `listingredient all` command.
-    1. Test case (sufficient ingredient): `cookrecipe /n warm milk /p 2`\
+    1. Test case (sufficient ingredient): `cookrecipe /n warm milk /p 2`  
     Expected: A reduction of the ingredients' quantity multiplied by `2` can be noticed when listing the ingredients with `listingredient all`
-    1. Test case (Sufficient even with expired ingredients):  `cookrecipe /n warm milk /p 2`\
+    1. Test case (Sufficient even with expired ingredients):  `cookrecipe /n warm milk /p 2`  
     Expected: The automatic deduction will not be carried out and expired item will be notified to user.
-    1. Test case: (Insufficient even with expired ingredients): `cookrecipe /n warm milk /p 2`\
+    1. Test case: (Insufficient even with expired ingredients): `cookrecipe /n warm milk /p 2`  
     Expected: The automatic deduction will not be carried out.
     
 #### F.9. Delete a recipe 
@@ -1291,7 +1292,7 @@ Extensions:
 #### F.10. Search for recipe
 1. Search for similar recipe in Kitchen Helper.
    1. Prerequisites: The recipe list should not be empty. You should at least add the following recipe by using `addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable` before the search.   
-   2. Test case: `searchrecipe chicken`
+   2. Test case: `searchrecipe chicken`  
    Expected: Recipe's name entries that have the keyword matching `chicken' are listed. 
 
 #### F.11. Add a chore
