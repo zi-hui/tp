@@ -294,6 +294,8 @@ The following shows the full sequence diagram for this command:
 
 ![Delete Ingredient Sequence Diagram](images/deleteIngredientSequenceDiagram.png)
 
+Other than deleting or reducing the quantity of an ingredient, Delete Ingredient Command has an additional feature that is linked to [Display Expenditure](#45-display-expenditure).
+
 ##### Design Considerations
 + Aspect 1: How to differentiate `deleteingredientByQuantity` and `deleteIngredient` <br>
     + Alternative 1 (Current Choice): The `quantity` of ingredient in `DeleteIngredientCommand` constructor is set to the `quantity` that was inputted by the user. In the case where the user would like to delete an ingredient, the `quantity` variable will be set to `null`.
