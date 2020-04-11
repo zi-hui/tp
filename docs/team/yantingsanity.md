@@ -33,8 +33,8 @@ The link below showed my code contributions to Kitchen Helper:
     + Added the introduction and scope in Developer Guide
     
 + Community
-    + PR reviewed (with non-trivial review comments):  [#109](https://github.com/AY1920S2-CS2113T-M16-2/tp/pull/109), [#152](https://github.com/AY1920S2-CS2113T-M16-2/tp/pull/152), [#240](https://github.com/AY1920S2-CS2113T-M16-2/tp/pull/240), [#242](https://github.com/AY1920S2-CS2113T-M16-2/tp/pull/242)
-    + Reported bugs and suggestions for other teams in class (examples: [#1](https://github.com/yantingsanity/ped/issues/2), [#2](https://github.com/yantingsanity/ped/issues/6), [#3](https://github.com/yantingsanity/ped/issues/4))
+    + PR reviewed (with non-trivial review comments): [#38](https://github.com/AY1920S2-CS2113T-M16-2/tp/pull/38), [#93](https://github.com/AY1920S2-CS2113T-M16-2/tp/pull/93), [#109](https://github.com/AY1920S2-CS2113T-M16-2/tp/pull/109), [#123](https://github.com/AY1920S2-CS2113T-M16-2/tp/pull/123), [#152](https://github.com/AY1920S2-CS2113T-M16-2/tp/pull/152), [#226](https://github.com/AY1920S2-CS2113T-M16-2/tp/pull/226), [#227](https://github.com/AY1920S2-CS2113T-M16-2/tp/pull/227), [#240](https://github.com/AY1920S2-CS2113T-M16-2/tp/pull/240), [#242](https://github.com/AY1920S2-CS2113T-M16-2/tp/pull/242), [#253](https://github.com/AY1920S2-CS2113T-M16-2/tp/pull/253), [#285](https://github.com/AY1920S2-CS2113T-M16-2/tp/pull/285)
+    + Reported bugs and suggestions for other teams in class (examples: [#1](https://github.com/yantingsanity/ped/issues/1), [#2](https://github.com/yantingsanity/ped/issues/2), [#3](https://github.com/yantingsanity/ped/issues/3), [#4](https://github.com/yantingsanity/ped/issues/4), [#5](https://github.com/yantingsanity/ped/issues/5), [#6](https://github.com/yantingsanity/ped/issues/6), [#7](https://github.com/yantingsanity/ped/issues/7), [#8](https://github.com/yantingsanity/ped/issues/8), [#9](https://github.com/yantingsanity/ped/issues/9))
     + Did some testing and found bugs in teammates' codes 
 
 #### Documentation
