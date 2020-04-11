@@ -1,6 +1,5 @@
 package seedu.kitchenhelper.ui;
 
-import seedu.kitchenhelper.command.Command;
 import seedu.kitchenhelper.command.CommandResult;
 import seedu.kitchenhelper.command.ExitCommand;
 
@@ -160,5 +159,6 @@ public class Ui {
     public void showResultToUser(CommandResult result) {
         showToConsole(result.feedbackToUser);
     }
-    
+
+
 }

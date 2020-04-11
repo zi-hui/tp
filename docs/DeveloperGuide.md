@@ -2,6 +2,8 @@
 By: `CS2113T-M16-2` Since: `2020`
 
 ![Supported Java versions](https://img.shields.io/badge/Java-11-blue.svg) ![Supported OS](https://img.shields.io/badge/Supported%20OS-Windows|MacOS|Linux-yellow.svg) 
+![Java CI](https://github.com/AY1920S2-CS2113T-M16-2/tp/workflows/Java%20CI/badge.svg)
+
 - [Developer Guide](#developer-guide)
   * [1. Introduction](#1-introduction)
     + [1.1. Background](#11--background)
@@ -21,23 +23,28 @@ By: `CS2113T-M16-2` Since: `2020`
     + [4.1.Ingredient-related Features](#41ingredient-related-features)
       - [4.1.1. Addition of ingredient](#411-addition-of-ingredient)
       - [4.1.2. List all/ specific ingredient(s)](#412-list-all-specific-ingredients)
-      - [4.1.3. Delete all/ specific ingredients(s)](#413-delete-all-specific-ingredientss)
+      - [4.1.3. Delete specific ingredients(s)](#413-delete-specific-ingredientss)
       - [4.1.4. Search for ingredients based on keyword(s)](#414-search-for-ingredients-based-on-keywords)
+      - [4.1.5. Notification for ingredients warning](#415-notification-for-ingredients-warning)
     + [4.2. Recipe-related Features](#42-recipe-related-features)
       - [4.2.1. Addition of recipe](#421-addition-of-recipe)
       - [4.2.2. List all/ specific recipe(s)](#422-list-all-specific-recipes)
       - [4.2.3. Cooking of recipe](#423-cooking-of-recipe)
-      - [4.2.4. Delete all/ specific recipe(s)](#424-delete-all-specific-recipes)
+      - [4.2.4. Delete a specific recipe](#424-delete-a-specific-recipe)
       - [4.2.5. Search for recipe based on keyword(s)](#425-search-for-recipe-based-on-keywords)
     + [4.3. Chore-related Features](#43-chore-related-features)
       - [4.3.1. Addition of chore](#431-addition-of-chore)
-      - [4.3.2. List all/ specific chore(s)](#432-list-all-specific-chores)
-      - [4.3.3. Delete all/ specific chore(s)](#433-delete-all-specific-chores)
+      - [4.3.2. List all chores](#432-list-all-chores)
+      - [4.3.3. Delete a specific chore](#433-delete-a-specific-chore)
       - [4.3.4. Search for chore based on keyword(s)](#434-search-for-chore-based-on-keywords)
+      - [4.3.5. Mark chore as done](#435-mark-chore-as-done)
+      - [4.3.6. Notification for chores warning](#436-notification-for-chores-warning)
     + [4.4. Storage](#44-storage)
       - [4.4.1. Select files to load from and save to](#441-select-files-to-load-from-and-save-to)
       - [4.4.2. Save current state](#442-save-current-state)
-    + [4.5. Display Expenditure](#45-display-expenditure)  
+    + [4.5. Expenditure](#45-expenditure) 
+      - [4.5.1. Display expenditure](#451-display-expenditure)
+      - [4.5.2. Expenditure functionality](#452-expenditure-functionality)
     + [4.6. Logging](#46-logging)
   * [Appendices](#appendices)
     + [Appendix A: Product Scope](#appendix-a-product-scope)
@@ -60,8 +67,9 @@ By: `CS2113T-M16-2` Since: `2020`
       - [F.12. List chore](#f12-list-a-chore)
       - [F.13. Delete a chore](#f13-delete-a-chore)
       - [F.14. Search for chore](#f14-search-for-chore)
-      - [F.15. Saving data](#f15-saving-data)
-      - [F.16. Display expenditure](#f16-display-expenditure)
+      - [F.15. Mark a chore as done](#f15-mark-a-chore-as-done)
+      - [F.16. Saving data](#f16-saving-data)
+      - [F.17. Display expenditure](#f17-display-expenditure)
 
 ## 1. Introduction
 ### 1.1.  Background
@@ -71,6 +79,9 @@ Kitchen Helper, born from the need to keep track of kitchen inventory, is an app
 The document contains the specified architecture and software design specifications for the application, Kitchen Helper. 
 ### 1.3. Scope
 This describes the software architecture and software design requirements for Kitchen Helper. This guide is mainly for developers, designers and software engineers that are or going to work on Kitchen Helper. 
+
+[&#8593; Return to Top](#developer-guide)
+
 ## 2. Setting up
 
 ### 2.1. Prerequisites
@@ -155,13 +166,13 @@ The Model component contains `Ingredient`, `Recipe` and `Chore` classes, which s
 
 ![Storage Class Diagram](images/Storage.png)
 
-A Storage object is created by the KitchenHelper class to handle the loading and saving of ingredients, recipes and chores data.
+A Storage object is created by the KitchenHelper class to handle the loading and saving of ingredients, recipes, chores and expenditure data.
 
-The Storage() method acts as a constructor with filepaths to local save files for ingredients, recipes and chores data.
+The Storage() method acts as a constructor with filepaths to local save files for ingredients, recipes, chores and expenditure data.
 
-The getIngredientData(), getRecipeData() and getChoreData() methods are used to read saved data from local files into the current session of KitchenHelper. loadingIngredients() and loadingRecipeItems() methods are called in getIngredientData() and getRecipeData() respectively to sort out which Ingredient object class each object belongs to.
+The getIngredientData(), getRecipeData(), getChoreData() and loadExpenditureData() methods are used to read saved data from local files into the current session of KitchenHelper. loadingIngredients() and loadingRecipeItems() methods are called in getIngredientData() and getRecipeData() respectively to sort out which Ingredient object class each object belongs to.
 
-The saveIngredientData(), saveRecipeData() and saveChoreData() methods write the current state of KitchenHelper into the local save files by calling them in command classes such as AddChoreCommand and DeleteIngredientCommand.
+The saveIngredientData(), saveRecipeData(), saveChoreData() and saveExpenditureData() methods write the current state of KitchenHelper into the local save files by calling them in various command classes such as AddChoreCommand and DeleteIngredientCommand.
 
 [&#8593; Return to Top](#developer-guide)
 
@@ -200,22 +211,29 @@ to be added as a parameter. Failure to do so will trigger an exception where the
 
 ##### Implementation
 When the user attempts to list the details of a particular category of ingredients, the `listIngredientCommand`, ‘Parser’ and `Ingredient` class will be accessed and the following sequence of actions are called to list details of  a particular category Ingredient list: <br>
+The following image below shows the sequence of steps for step 1 and 2:
+![ListIngredient Sequence Diagram](images/listIngredientSequenceDiagramPart1.png)
 1. User executes `listingredient all` 
     2. A `Ui` object will be created and calls `Ui#getUserCommand()`
     3. Input will be parsed in `Command#parseUserCommand()` and identified with the keyword `listingredient`.
-    ![List Ingredient Step 1](images/AddRecipe1.png)
+    ![List Ingredient Step 1](images/listIngredient1.png)
 2. Parsing of user input and creation of command object
     2.This will automatically trigger the parsing of the user’s input string into a suitable format for the listing of a particular category of  `ingredient` object in `Command#prepareListIngredient()`.
     3. A `ListIngredientCommand` object will be created.
     ![List Ingredient Step 2](images/ListIngredientCommand.png)   
 3. Executing Command
+    The following image below shows the sequence for the next steps:
+    
+    ![ListIngredient Sequence Diagram](images/listIngredientSequenceDiagramPart2.png)
     2. The newly created object will call `#ListIngredientCommand#execute` which starts the process of listing a particular category’s ingredient details, thus calling `ListIngredientCommand#listIngredients()`.
     3. The existing ingredientList arraylist and the category of the chosen ingredient category  will be passed through to the `ListIngredientCommand#listIngredients()`.
     4. The function will find if the category name is valid, thus, creates `CommandResult` result storing the details of the ingredient belonging to the particular category.
     ![List Ingredient Step 3](images/ListIngredientCommand2.png)
 4. The details will then be printed onto the console using `Ui#showResultToUser(result)`.
     
+The following shows the full sequence diagram for this command:
 
+![List Ingredient Sequence Diagram](images/listIngredientSequenceDiagram.png)
 ##### Design Considerations
 Aspect: Finding the category name and print out ingredient belonging to the category
 
@@ -235,11 +253,11 @@ Alternative 2 (current choice): Creating a fixed array which includes the order 
 
 [&#8593; Return to Top](#developer-guide)
 
-#### 4.1.3. Delete all/ specific ingredients(s)
+#### 4.1.3. Delete specific ingredients(s)
 The deletion feature for ingredients allows the user to delete ingredients either by the name or index of the ingredients. In addition to that, it allows users to reduce the quantity of a specific ingredient. 
 
 ##### Implementation
-When the user attempts to reduce the quantity of ingredient at index 1 of the ingredients inventory by 4,  the `Kitchen Helper`, ‘Parser’ and ‘DeleteIngredientCommand` class will be called upon. The following sequence of steps will then occur: 
+When the user attempts to reduce the quantity of ingredient at index 1 of the ingredients inventory by 4,  the `Kitchen Helper`, `Parser` and `DeleteIngredientCommand` class will be called upon. The following sequence of steps will then occur: 
 
 The following image below shows the sequence of steps for step 1 and 2:
 ![DeleteIngredient Sequence Diagram](images/deleteIngredientSequenceDiagramPart1.png)
@@ -265,12 +283,14 @@ The following image below shows the sequence of steps for step 1 and 2:
     
     ![DeleteIngredient Sequence Diagram](images/deleteIngredientSequenceDiagramPart2.png)
     
-    1. The `DeleteIngredientCommand#execute()` will be called which in turned called DeleteIngredientCommand#deleteIngredientByIndex()`. 
+    1. The `DeleteIngredientCommand#execute()` will be called which in turned called `DeleteIngredientCommand#deleteIngredientByIndex()`. 
     1. Since the `quantity` of this ingredient is not null, the `DeleteIngredientCommand#deleteQuantity()` will be called to reduce the quantity of this ingredient.  
     1. When `DeleteIngredientCommand#deleteQuantity()` has returned, the program will get the quantity of the current ingredient after deduction. If the quantity is zero or null, the `DeleteIngredientCommand#deleteIngredient()` will be called to remove `ingredient` from the `ingredientsList` which contains all the ingredients. 
     1. Then, `Storage#saveIngredientData()` will be called to save the current `ingredientsList` into an output file.
     1. Lastly, a String called `feedbackToUser`will be returned to the user to inform the user of the outcome of the command. 
     
+    The following image shows the state diagram for the command execution:
+
     ![DeleteIngredient State 3](images/deleteIngredientState3.png)
     
 4.  The details will then be printed onto the console using `Ui#showResultToUser(result)`.
@@ -278,6 +298,8 @@ The following image below shows the sequence of steps for step 1 and 2:
 The following shows the full sequence diagram for this command:
 
 ![Delete Ingredient Sequence Diagram](images/deleteIngredientSequenceDiagram.png)
+
+Other than deleting or reducing the quantity of an ingredient, `DeleteIngredientCommand` has an additional feature that is linked to [Display Expenditure](#451-display-expenditure) which will increase the cooking expenditure if the ingredients are used for cooking. 
 
 ##### Design Considerations
 + Aspect 1: How to differentiate `deleteingredientByQuantity` and `deleteIngredient` <br>
@@ -366,33 +388,73 @@ Aspects: How `searchingredient` executes:
 |**Pros** | 1. More accurate searching of the ingredient is available for the user.|  
 |**Cons** | 1. Requires users to enter more precise predicate keywords which could be more inconvenient.|
 
+
 [&#8593; Return to Top](#developer-guide)
 
+#### 4.1.5. Notification for ingredients warning
+
+The notification for ingredients warning runs everytime the program starts. Checks the ingredient list for ingredient that is expiring in 3 days, expired or low quantity (< 5).
+For example, `beef` ingredient's expired date is 02/02/2020 and have quantity of 3. The program will list down the ingredient in the categories when the application start.
+
+##### Implementation  
+
+
+![NotificationIngredientCommand](images/notificationIngredient.png) 
+
+
+The following steps explained sequence diagram for `showNotification` method:  
+1. The user starts `KitchenHelper`.  
+2. `KitchenHelper` calls `showNotification()`.  
+3. `KitchenHelper#IngredientNotification` object is created when the method `IngredientNotification#getNotifications(ingredientList)` is called.  
+4. Result from `IngredientNotification#checkForExpiringIngr(ingredientList)`,`IngredientNotification#checkForLowQuantityIngr`, `IngredientNotification#checkForExpiredIngr` will be combined.
+    1. `IngredientNotification#checkForExpiringIngr(ingredientList)` checks for ingredients that is going to expire in 3 days.
+    1. `IngredientNotification#checkForLowQuantityIngr` checks for ingredients that has quantity of 5 or lower.
+    1. `IngredientNotification#checkForExpiredIngr` checks for ingredients that is expired.
+5. `IngredientNotification#getNotifications(ingredientList)` returns result to `KitchenHelper#ingredientNotification` and displays.
+
+##### Design considerations:
+
+Aspects: How `showNotification` executes:  
+
+- Alternative 1 (current choice): Create a function to compile results from the three different methods, 
+
+|     |     |
+|-----|-----|
+|**Pros** | 1. Decreases the need to indicate three lines of code to call out the three different methods.|  
+|**Cons** | 1. Developer have to go into `IngredientNotification#getNotifications(ingredientList)` to find out what function |
+
+- Alternative 2: Create three different methods in `KitchenHelper.java`
+
+|     |     |
+|-----|-----|
+|**Pros** | 1. Clear indication what the method is doing|  
+|**Cons** | 1. Not very 'OOP' like|
+
+
+[&#8593; Return to Top](#developer-guide)
 ### 4.2. Recipe-related Features
 #### 4.2.1. Addition of recipe
 Users can add a new recipe to the application where there must be at least one or more `ingredient`s. The failure to do so will trigger an exception where the user will be notified of an invalid command and the syntax of the addition of recipe will be displayed. 
 
 > It is important that the name of the new recipe has not appeared in the list of recipes in the application.
 
-When the user attempts to create a new recipe, the `AddRecipeCommand`, ‘Parser’ and `Recipe` class will be accessed and the following sequence of actions are called to create a `recipe` object:
-
 ##### Implementation 
-When the user attempts to create a new recipe, the `AddRecipeCommand`, ‘Parser’ and `Recipe` class will be accessed and the following sequence of actions are called to create a `recipe` object:
+When the user attempts to create a new recipe, the `AddRecipeCommand`, `Parser` and `Recipe` class will be accessed and the following sequence of actions are called to create a `recipe` object:
 
 1. User executes `addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable` 
     1. A `Ui` object will be created and calls `Ui#getUserCommand()`
-    1. Input will be parsed in `Command#parseUserCommand()` and identified with the keyword `addrecipe`.
+    1. Input will be parsed in `Parser#parseUserCommand()` and identified with the keyword `addrecipe`.
     
     ![Add Recipe Step 1](images/AddRecipe1.png)
 2. Parsing of user input and creation of command object
-    1. This will automatically trigger the parsing of the user’s input string into a suitable format for the addition of `recipe` object in `Command#prepareAddRecipe()`.
+    1. This will automatically trigger the parsing of the user’s input string into a suitable format for the addition of `recipe` object in `Parser#prepareAddRecipe()`.
     1. A `AddRecipeCommand` object will be created and calls `AddRecipeCommand#setAttributesOfCmd()` to set the contents of the command into reader friendly formats.
     
     ![Add Recipe Step 2](images/AddRecipe2.png)
 3. Executing Command
-    1. The newly created object will call `#AddRecipeCommand#execute` which starts the process of adding a recipe, thus calling `Recipe#AddRecipe()`.
+    1. The newly created object will call `AddRecipeCommand#execute()` which starts the process of adding a recipe, thus calling `Recipe#AddRecipe()`.
     1. A `Recipe` object will be created with its name that was parsed in step 2.
-    1. An additional step is included where a check for an existing recipe with the same name is conducted with `#AddRecipeCommand#checkIfRecipeExist()`. A `KitchenHelperException` exception will be triggered when there is an existing recipe.
+    1. An additional step is included where a check for an existing recipe with the same name is conducted with `AddRecipeCommand#checkIfRecipeExist()`. A `KitchenHelperException` exception will be triggered when there is an existing recipe.
     
     ![Add Recipe Step 3](images/AddRecipe3.png)
 4. `Ingredient`s parsed in step 2 will be added to the newly created recipe according to their category through the calling of `Recipe#addIngredientsToRecipe()`.
@@ -431,26 +493,33 @@ Alternative 3: User’s command are divided by space
 
 [&#8593; Return to Top](#developer-guide)
 
-#### 4.2.2. List all/ specific recipe(s)
+#### 4.2.2. List all/ specific recipe(s) 
 The list feature allows showing details of a particular recipe created by the user.  All ingredients added into the recipe will be shown in a sorted order and shown by categories. The function will require valid string of a integer or `all` to be added as a parameter. Failure to do so will trigger an exception where the user will be notified of an invalid command and the syntax of the listing of the recipe will be displayed. 
 
 ##### Implementation
 When the user attempts to list the details of a particular recipe, the `listRecipeCommand`, ‘Parser’ and `Recipe` class will be accessed and the following sequence of actions are called to list details of  a particular `recipe` object:
+The following image below shows the sequence of steps for step 1 and 2:
+![ListRecipe Sequence Diagram](images/listRecipeSequenceDiagramPart1.png)
 1. User executes `listrecipe 1`  
     2. A `Ui` object will be created and calls `Ui#getUserCommand()`
     3. Input will be parsed in `Command#parseUserCommand()` and identified with the keyword `listrecipe`.
-    ![List Ingredient Step 1](images/AddRecipe1.png)
+    ![List Recipe Step 1](images/listRecipe1.png)
 2. Parsing of user input and creation of command object
     2.This will automatically trigger the parsing of the user’s input string into a suitable format for the listing of `recipe` object in `Command#prepareListRecipe()`.
     3. A `ListRecipeCommand` object will be created.
-    ![List Ingredient Step 2](images/ListRecipeCommand.png)   
+    ![List Recipe Step 2](images/ListRecipeCommand.png)   
 3. Executing Command
+    The following image below shows the sequence for the next steps:
+    
+    ![Recipe Sequence Diagram](images/listRecipeSequenceDiagramPart2.png)
     2. The newly created object will call `ListRecipeCommand#execute` which starts the process of listing a particular recipe’s details, thus, calling `ListRecipeCommand#listRecipe()`.
     3. The existing recipeList arraylist and the item number of the chosen recipe will be passed through to the `ListRecipeCommand#listRecipe()`.
     4. The function will find if the item number is valid and contains details of the recipe, thus, creates a CommandResult storing the details of the particular recipe.
-    ![List Ingredient Step 3](images/ListRecipeCommand2.png)
+    ![List Recipe Step 3](images/ListRecipeCommand2.png)
 4. The details will then be printed onto the console using `Ui#showResultToUser(result)`.
-    
+The following shows the full sequence diagram for this command:
+
+![List Recipe Sequence Diagram](images/listRecipeSequenceDiagram.png)    
 
 ##### Design Considerations
 Aspect: Finding the recipe requested by the user.
@@ -476,11 +545,11 @@ The feature allows the user to cook a recipe if there are sufficient ingredients
 
 ##### Implementation 
 When the user attempts to cook `Chicken Salad` recipe from `Kitchen Helper`, the `Kitchen Helper`, `Parser` and `cookRecipeCommand` class will be called upon. The following sequence of steps will then occur:
-1. The user keyed in "cookrecipe /n `Chicken Salad`".
+1. The user keyed in `cookrecipe /n Chicken Salad /p 1`.
     
     1. A `UI` object will be created and it will call `UI#getUserCommand()` method to take in the input that the user has keyed in. 
-    2. A `String` object will be returned and saved into the `userCommandInput` variable in `Kitchen Helper`. 
-    3. The variable `userCommandInput` is being parsed into the `Parser` class as an argument for this method `Parser#parseUserCommand()`.
+    1. A `String` object will be returned and saved into the `userCommandInput` variable in `Kitchen Helper`. 
+    1. The variable `userCommandInput` is being parsed into the `Parser` class as an argument for this method `Parser#parseUserCommand()`.
    
     ![Cook Recipe State 1](images/cookRecipeState1.png)
     
@@ -493,27 +562,27 @@ When the user attempts to cook `Chicken Salad` recipe from `Kitchen Helper`, the
 3. The command is now being executed.
 
     1. The `CookRecipeCommand#execute()` will be called.
-    2. The `CookRecipeCommand#cookRecipe()` is called and it checks whether the recipe inputted by the user exists by calling the `CookRecipeCommand#checkIfRecipeExists()` method.
-    3. If recipe exists, the `CookRecipeCommand#checkIfRecipeExists()` method will return the index of the recipe, else it will return a number that is bigger than the size of `recipelist`. In this case, the recipe `Chicken Salad` exists, so it will return the index of the recipe 
-    4. Next, it is to check if there are sufficient non-expiring ingredients to be deducted from the ingredients' inventory to cater for the number of pax for the specific recipe by calling `CookRecipeCommand#checkForSufficientIngredients()` and `CookRecipeCommand#checkNotExpiredIngredientQty()` which their results are saved into `sufficientIngr` and `suffButLessExpiredIngr` boolean values respectively. 
+    1. The `CookRecipeCommand#cookRecipe()` is called and it checks whether the recipe inputted by the user exists by calling the `CookRecipeCommand#checkIfRecipeExists()` method.
+    1. If recipe exists, the `CookRecipeCommand#checkIfRecipeExists()` method will return the index of the recipe, else it will return a number that is bigger than the size of `recipelist`. In this case, the recipe `Chicken Salad` exists, so it will return the index of the recipe 
+    1. Next, it is to check if there are sufficient non-expiring ingredients to be deducted from the ingredients' inventory to cater for the number of pax for the specific recipe by calling `CookRecipeCommand#checkForSufficientIngredients()` and `CookRecipeCommand#checkNotExpiredIngredientQty()` which their results are saved into `sufficientIngr` and `suffButLessExpiredIngr` boolean values respectively. 
+        ![Cook Recipe Sequence Diagram Part 2](images/cookRecipeCommandSequenceDiagramPart2.png)
+    1. With respect to the point 4 above, the following cases may happen and has been summarised at the image above:
+       1. Case 1: If both `sufficientIngr` and `suffButLessExpiredIngr` return true
+            1. `CookRecipeCommand#deductIngredients()` will be called to deduct the ingredients in the ingredients' inventory.
+            1. Then, `Storage#saveIngredientData()` will be called to save the current `ingredientsList` into an output file.
+       2. Case 2:  If `sufficientIngr` returns true but `suffButLessExpiredIngr` returns false or both `sufficientIngr` and `suffButLessExpiredIngr` return false and the size of `expiredIngrNames` is not zero
+            1. `CookRecipeCommand#craftExpiredList()` will be called to craft the list of expired ingredients which will be returned to tell the users the ingredients that are expired. 
     
-    ![Cook Recipe Sequence Diagram Part 2](images/cookRecipeCommandSequenceDiagramPart2.png)
-    
-    5. Then, three of the following cases may happen:
-	   1. If both `sufficientIngr` and `suffButLessExpiredIngr` return true
-	       1. `CookRecipeCommand#deductIngredients()` will be called to deduct the ingredients in the ingredients' inventory.
-	       2. Then, `Storage#saveIngredientData()` will be called to save the current `ingredientsList` into an output file.
-	   2. If `sufficientIngr` returns true but `suffButLessExpiredIngr` returns false or both `sufficientIngr` and `suffButLessExpiredIngr` return false and the size of `expiredIngrNames` is not zero
-	       1. `CookRecipeCommand#craftExpiredList()` will be called to craft the list of expired ingredients which will be returned to tell the users the ingredients that are expired. 
-    6. Lastly, a String called `feedbackToUser` will be returned to the user to inform the user of the outcome of the command.
-    
-    ![Cook Recipe State 3](images/cookRecipeState3.png)
-    
+    The following image shows the state diagram for the command execution:
+        ![Cook Recipe State 3](images/cookRecipeState3.png)
+        
 4. The details will then be printed onto the console using `Ui#showResultToUser(result)`.
 
 The following shows the full sequence diagram for this command:
 
 ![Cook Recipe Sequence Diagram](images/cookRecipeCommandSequenceDiagram.png)
+
+Other than reducing the quantity of ingredients if the recipe can be cooked successfully, `CookRecipeCommand` has an additional feature that is linked to [Display Expenditure](#451-display-expenditure) which will add the total cost of cooking this recipe into the total expenditure. 
 
 ##### Design considerations
 Aspect: Preparing the deduction of ingredients when cooking a recipe
@@ -549,16 +618,16 @@ Alternative 2: building an index on the first letter of the recipe name
 
 [&#8593; Return to Top](#developer-guide)
 
-#### 4.2.4. Delete all/ specific recipe(s)
+#### 4.2.4. Delete a specific recipe
 The deletion feature for specific recipes allows the user to delete recipes either by the name or index of the recipe. 
 
 ##### Implementation
 When the user attempts to delete the `Chicken Rice` recipe from Kitchen Helper, the `Kitchen Helper`, `Parser` and `DeleteRecipeCommand` class will be called upon. The following sequence of steps will then occur: 
-1. The user keyed in “deleterecipe /n `Chicken Rice`".
+1. The user keyed in `deleterecipe /n Chicken Rice`.
     
     1. A `UI` object will be created and it will call `UI#getUserCommand()` method to take in the input that the user has keyed in. 
-    2. A `String` object will be returned and saved into the `userCommandInput` variable in `Kitchen Helper`. 
-    3. The variable `userCommandInput` is being parsed into the `Parser` class as an argument for this method `Parser#parseUserCommand()`.
+    1. A `String` object will be returned and saved into the `userCommandInput` variable in `Kitchen Helper`. 
+    1. The variable `userCommandInput` is being parsed into the `Parser` class as an argument for this method `Parser#parseUserCommand()`.
     
     ![Delete Recipe State 1](images/deleteRecipeState1.png)
     
@@ -571,10 +640,12 @@ When the user attempts to delete the `Chicken Rice` recipe from Kitchen Helper, 
 3. The command is now being executed.
     
     1. The `DeleteRecipeCommand#execute()` will be called.
-    2. As this is a deletion by recipe name, the `recipeIndex` variable is set as null. As the variable is null, `DeleteRecipeCommand#deleteRecipeByName()` will be called.
-    3. Next, the `DeleteRecipeCommand#getRecipeIndex()` to get the index based on the recipe name that the user has inputted. With the given index, `DeleteRecipeCommand#deleteRecipe()` will be called to delete the recipe. 
-    4. Lastly, a String called `feedbackToUser` will be returned to the user to inform the user of the outcome of the command. 
+    1. As this is a deletion by recipe name, the `recipeIndex` variable is set as null. As the variable is null, `DeleteRecipeCommand#deleteRecipeByName()` will be called.
+    1. Next, the `DeleteRecipeCommand#getRecipeIndex()` to get the index based on the recipe name that the user has inputted. With the given index, `DeleteRecipeCommand#deleteRecipe()` will be called to delete the recipe. 
+    1. Lastly, a String called `feedbackToUser` will be returned to the user to inform the user of the outcome of the command. 
     
+    The following image shows the state diagram for the command execution:
+
     ![Delete Recipe State 1](images/deleteRecipeState3.png)
     
 4. The details will then be printed onto the console using `Ui#showResultToUser(result)`.
@@ -660,60 +731,117 @@ and returns the recipe’s name and the index of recipe in the recipe’s list.
 
 ### 4.3. Chore-related Features
 #### 4.3.1. Addition of chore
-The feature for addition of `chore`s allows the user to add `chore`s to a list to keep track of their completion. For example, `addchore buy groceries /by Monday 12pm` adds the `chore` `buy groceries` with deadline `Monday 12pm` to the `chore` list, and marks it as undone. 
+The feature for addition of `chore`s allows the user to add `chore`s to a list to keep track of their completion. The deadline of the `chore` can be a String or Date object.  The status completion of a `chore` is always undone when it is created. 
 
 ##### Implementation  
+When the user attempts to add a `chore` `buy groceries` with deadline `13/04/2020 09:45`, the `Kitchen Helper`, `Parser` and `AddChoreCommand` class will be called upon. The following sequence of steps will then occur:
+1. The user keyed in `addchore buy groceries /by 13/04/2020 09:45`.
+    
+    1. A `UI` object will be created and calls `UI#getUserCommand()`. 
+    1. Input will be parsed in `Parser#parseUserCommand()` and identified with the keyword `addchore`.   
+    
+2. Parsing of user input and creation of command object
+    1. This will automatically trigger the parsing of the user’s input string into a suitable format for the addition of `chore` object in `Parser#prepareAddChore()`.
+    1. A `AddChoreCommand` object will be created with parameters `buy groceries` as String description and `13/04/2020 09:45` as Date deadline.
+    
+3. Executing Command
+    1. The newly created object will call `AddChoreCommand#execute()` which starts the process of adding a chore, thus calling `AddChoreCommand#addChore()`.
+    1. A `Chore` object will be created with the description and deadline that was parsed in step 2. Since the String deadline value is null, the deadline of the `Chore` will be a `Date` object.
+    1. The `Chore` will be added to the `choreList`.
+    1. Then, `Storage#saveChoreData()` will be called to save the current `choreList` into an output file.
+    1. Lastly, a String called `feedbackToUser` containing the outcome of the command will be returned to `KitchenHelper`. 
 
-![AddChoreCommand](images/AddChoreCommand.png)
+4. The outcome of the command will then be printed onto the console using `Ui#showResultToUser(result)`.
 
-Explanation of the sequence diagram above:
-1. The user inputs `addchore buy groceries /by Monday 12pm`.  
-2. The `Kitchen Helper` class calls `Parser#parseUserCommand()` which will split the user input into 2 substrings, the command and its attributes.  
-3. The `AddChoreCommand` has been determined by a switch case, and the `Parser#prepareAddChore` method is called. 
-4. If the method successfully extracts the task description and deadline, a new `AddChoreCommand` object is created. Otherwise, a new `InvalidCommand` object is created.  
-5. After which, the `AddChoreCommand` object will be returned to the `Kitchen Helper` class.
-6. The `Kitchen Helper` class will call the `execute()` method in the `AddChoreCommand` class, which calls its own `addChore()` method.
-7. This method will create a new `chore` and add it to the `chore` list.
-8. The execute() method returns a String to inform the user of the successful outcome. 
+The following sequence diagram shows how the `AddChoreCommand` works    
+    ![AddChoreCommand](images/AddChoreCommand.png)
 
 ##### Design considerations:
 
-- We came up with two ways that a user can set the deadline, either as a String or as a Date object. 
+- Alternative 1(current implementation): The `Chore` with different deadline types is created by constructor overloading. 
 
 |     |     |
 |-----|-----|
-|**Pros** | Increases flexibility if the user is unable to specify a date or time to complete the chore by.|  
-|**Cons** | Unable to alert the users of approaching deadlines that are set as Strings.|
+|**Pros** | It is neater and more OOP. It indicates that both `Chores` with different deadline types have the same object function, but just take in different parameters. |
+|**Cons** | The need to maintain both a String deadline and Date deadline variable within the `Chore` object even though one of them is not used.|
+
+- Alternative 2: Creation of `Chore` object by setting up variables using if-else loop.
+
+|     |     |
+|-----|-----|
+|**Pros** | More basic implementation.|  
+|**Cons** | Less OOP and does not make it obvious that deadline is an essential attribute of a `Chore` object that has two type signatures to choose from. 
 
 [&#8593; Return to Top](#developer-guide)
 
-#### 4.3.2. List all/ specific chore(s)
-The feature to list `chore`s allows the user to view the `chore`s currently in the list and their completion statuses. For example, `listchore`.
-##### Implementation  
+#### 4.3.2. List all chores
+The feature to list `chore`s allows the user to view the `chore`s currently in the `choreList` and their completion statuses. 
 
-1. The user inputs `listchore`.
-2. The `Kitchen Helper` class calls `Parser#parseUserCommand()` which will split the user input into 2 substrings, the command and its attributes, which would be empty in this case. 
-3.   The `ListChoreCommand` has been determined by a switch case, and the `Parser#prepareListChore` method is called.
-4.   If the substring of attributes is empty, a new `ListChoreCommand` object is created. Otherwise, an exception is thrown.
-5.   After which, the `ListChoreCommand` object will be returned to the `Kitchen Helper` class. 
-6.   The `Kitchen Helper` class will call the `execute()` method in the `ListChoreCommand` class, which calls its own `listChore()` method. 
-7.   This method will display each `chore` item in the list line by line or indicate an empty list if the list is empty.
-8.   The `execute()` method returns a String containing the formatted list of `chore`s to display. 
- 
+##### Implementation  
+When the user attempts to list `chore`s, the `Kitchen Helper`, `Parser` and `ListChoreCommand` class will be called upon. The following sequence of steps will then occur:
+1. The user keyed in `listchore`.  
+    1. A `UI` object will be created and calls `UI#getUserCommand()`. 
+    1. Input will be parsed in `Parser#parseUserCommand()` and identified with the keyword `listchore`.   
+2. Parsing of user input and creation of command object
+    1. This will automatically trigger the parsing of the user’s input string in `Parser#prepareListChore()` to ensure the parameters are empty, or an exception will be thrown.
+    1. The `ListChoreCommand` object will be created. 
+3. Executing Command
+    1. The newly created object will call `ListChoreCommand#execute()` which starts the process of displaying all the chores, thus calling `ListChoreCommand#listChore()`.
+    1. The `choreList` will be looped through, displaying each `Chore` in String format and its corresponding position in the list.
+    1. Lastly, a String called `feedbackToUser` containing the displayed list of chores will be returned to `KitchenHelper`. 
+4. The displayed list of chores will then be printed onto the console using `Ui#showResultToUser(result)`.
+
+##### Design considerations:
+
+- Alternative 1(current implementation): Using for-loop to loop through the `Chore` ArrayList.
+
+|     |     |
+|-----|-----|
+|**Pros** | It is easier to retrieve the position of each `Chore` in the list, just by looking at the iterator value.
+|**Cons** | More basic implementation.|
+
+- Alternative 2: Using ListIterator to loop through the `Chore` ArrayList.
+
+|     |     |
+|-----|-----|
+|**Pros** | Makes use of the Java Collection framework.|  
+|**Cons** | Requires another counter or variable to keep track of `Chore` position in the list.|
+
 [&#8593; Return to Top](#developer-guide)
 
-#### 4.3.3. Delete all/ specific chore(s)
-The feature for deletion of `chore`s allows the user to remove the `chore` specified by the index in the list. For example, `deletechore 1` deletes the first `chore` in the `chore` list. 
-##### Implementation  
+#### 4.3.3. Delete a specific chore
+The feature for deletion of `chore`s allows the user to remove the `chore` specified by the index in the list. 
 
-1. The user inputs `deletechore 1`.
-2.   The `Kitchen Helper` class calls `Parser#parseUserCommand()` which will split the user input into 2 substrings, the command and its attributes. 
-3.   The `DeleteChoreCommand` has been determined by a switch case, and the `Parser#prepareDeleteChore` method is called.
-4.   If the method successfully obtains an integer, a new `DeleteChoreCommand` object is created. Otherwise, a new `InvalidCommand` object is created.
-5.   After which, the `DeleteChoreCommand` object will be returned to the `Kitchen Helper` class. 
-6.   The `Kitchen Helper` class will call the `execute()` method in the `DeleteChoreCommand` class, which calls its own `deleteChore()` method. 
-7.   If the integer obtained is an index in the list, this method will remove the `chore` in that position from the `chore` list. Otherwise, an exception is thrown.
-8.   The execute() method returns a String to inform the user if the outcome is successful.
+##### Implementation  
+When the user attempts to delete a `chore` by its index, the `Kitchen Helper`, `Parser` and `DeleteChoreCommand` class will be called upon. The following sequence of steps will then occur:
+1. The user keyed in `deletechore 1`.
+    1. A `UI` object will be created and calls `UI#getUserCommand()`. 
+    1. Input will be parsed in `Parser#parseUserCommand()` and identified with the keyword `deletechore`.   
+2. Parsing of user input and creation of command object
+    1. This will automatically trigger the parsing of the user’s input string for the deletion of `chore` object in `Parser#prepareDeleteChore()` which ensures the parameter is a single number, or an exception will be thrown. 
+    1. If an exception is caught, an InvalidCommand will be created. Otherwise, a `DeleteChoreCommand` object will be created with parameters `1` as the index to delete.
+3. Executing Command
+    1. The newly created object will call `DeleteChoreCommand#execute()` which starts the process of deleting a chore, thus calling `DeleteChoreCommand#deleteChore()`.
+    1. The index is checked to be an index within the `choreList`, then the `Chore` specified by the index in the `choreList` is removed.
+    1. Then, `Storage#saveChoreData()` will be called to save the current `choreList` into an output file.
+    1. Lastly, a String called `feedbackToUser` containing the outcome of the command will be returned to `KitchenHelper`. 
+4. The outcome of the command will then be printed onto the console using `Ui#showResultToUser(result)`.
+
+##### Design considerations:
+
+- Alternative 1(current implementation): Delete `Chore` by specifying index of `Chore` in `choreList`.
+
+|     |     |
+|-----|-----|
+|**Pros** | Quick and easy deletion by using choreList.get() to retrieve Chore to delete. |
+|**Cons** | Lesser alternatives for the user and user would have to identify the index first by executing `listchore` to get index of `Chore` in `choreList`. |
+
+- Alternative 2: Delete `Chore` by specifying `Chore` description or keywords in `Chore` description.
+
+|     |     |
+|-----|-----|
+|**Pros** | More alternatives for user. |  
+|**Cons** |  1. Extra overhead required to search through entire `choreList` to identify `Chore` with similar description. <br> 2. Possible accidental deletion of wrong `Chore` with identical descriptions or keywords. <br> 3. More troublesome for the user to type out exact description of `Chore`. |
 
 [&#8593; Return to Top](#developer-guide)
 
@@ -752,19 +880,80 @@ The following steps explained sequence diagram for `searchchore` command:
 
 [&#8593; Return to Top](#developer-guide)
 
+#### 4.3.5. Mark chore as done
+The feature for marking of `chore` as done allows the user to change the completion status of the `chore` specified by the index in the list to done. 
+
+##### Implementation  
+When the user attempts to mark a `chore` as done, the `Kitchen Helper`, `Parser` and `DoneCommand` class will be called upon. The following sequence of steps will then occur:
+1. The user keyed in `done 1`.
+    1. A `UI` object will be created and calls `UI#getUserCommand()`. 
+    1. Input will be parsed in `Parser#parseUserCommand()` and identified with the keyword `done`.       
+2. Parsing of user input and creation of command object
+    1. This will automatically trigger the parsing of the user’s input string for the checking of `chore` object in `Parser#prepareDoneChore()` which ensures the parameter is a single number, or an exception will be thrown. 
+    1. If an exception is caught, an InvalidCommand will be created. Otherwise, a `DoneCommand` object will be created with parameters `1` as the index to check.   
+3. Executing Command
+    1. The newly created object will call `DoneCommand#execute()` which starts the process of marking a chore as done, thus calling `DoneChoreCommand#markChoreDone()`.
+    1. The index is checked to be an index within the `choreList` and completion status of the `Chore` specified by the index is checked to be undone. Otherwise, an exception will be thrown.
+    1. The Chore is then marked as done.
+    1. Then, `Storage#saveChoreData()` will be called to save the current `choreList` into an output file.
+    1. Lastly, a String called `feedbackToUser` containing the outcome of the command will be returned to `KitchenHelper`. 
+4. The outcome of the command will then be printed onto the console using `Ui#showResultToUser(result)`.
+
+
+##### Design considerations:
+
+- Similar to DeleteChoreCommand.
+
+#### 4.3.6. Notification for chores warning
+The notification for chores warning runs every time the program starts. It checks the `choreList` for `Chores` that are already overdue or have deadlines approaching in 3 days.
+For example, `take cake out of oven` is overdue since `11/04/2020 15:30`. Deadlines of `Chores` specified in String will not trigger notification warnings.
+
+##### Implementation   
+1. The user starts `KitchenHelper` and `KitchenHelper#run` is called.  
+2. `KitchenHelper` calls `showNotification()`.  
+3. `ChoreNotification` object is created and `ChoreNotification#getNotifications(choreList)` is called.   
+4. The results from `ChoreNotification#hasDateAsDeadline`, `ChoreNotification#isOverdue` and `ChoreNotification#isApproachingDeadline` will be combined.
+    1. `ChoreNotification#hasDateAsDeadline` checks for `Chores` that have Date object type deadline.
+    1. `ChoreNotification#isOverdue` checks for `Chores` that have exceeded their deadline.
+    1. `ChoreNotification#isApproachingDeadline` checks for `Chores` that have deadlines upcoming in the next 3 days.
+5. `ChoreNotification#getNotifications(choreList)` returns the String result containing the notifications to `KitchenHelper` and displays.
+
+##### Design considerations:
+
+Aspects: How `showNotification` executes:  
+
+- Alternative 1 (current choice): Create a function that creates a ChoreNotification class object that gathers the notifications to print. 
+
+|     |     |
+|-----|-----|
+|**Pros** | More OOP as there is a specific class handling the sole function of notification display. |  
+|**Cons** | Developer has to go into `ChoreNotification` class to find out how to notifications are gathered. |
+
+- Alternative 2: Create the methods to gather notifications in `KitchenHelper.java`
+
+|     |     |
+|-----|-----|
+|**Pros** | More basic implementation. |  
+|**Cons** | Less OOP and the `KitchenHelper` main class will be overpopulated with methods that do not concern the overall running of the application.|
+
+
+[&#8593; Return to Top](#developer-guide)
+
+
 ### 4.4. Storage
 #### 4.4.1. Select files to load from and save to
 
-The select files to load from and save to feature allows the user to choose an option to either load their data from the auto-save mode or the manual-save mode. The auto-save mode keeps track of and stores all changes made in the program and provides the user with the most recent representation of their inventory. While the manual-save mode stores the state of the program data from the most recent usage of the save command by the user. 
+The select files to load from and save to feature allows the user to choose an option to either load their data from the normal or restore mode. The normal mode will load Kitchen Helper from the main storage files which store the data from the last used session of the user, providing the most recent representation of their inventory. 
 
-If the user chooses the manual-save mode, it will overwrite all the data stored in auto-save mode. However, any subsequent changes made to the program data will be saved by auto-save mode regardless of initial load options. To save by manual-save mode, the user will have to use the save current state function with the save command (see section 4.4.2)[4.4.2. Save current state](#442-save-current-state).
+On the other hand, the restore mode will load Kitchen Helper from the backup storage files which store the version of data manually saved from the user’s last usage of the save command. The restore mode gives users access to the backup storage files, however, users will have to use the save command to update the backup storage files.
+
+Any subsequent changes made to the program data will be saved into the main storage files regardless of initial load options. To save a backup of the current session, the user will have to use the save current state function with the save command (see section 4.4.2)[4.4.2. Save current state](#442-save-current-state).
     
 ##### Implementation
 1. For instance, if the User selects to load files from auto-save mode, User executes `1`
 	1. A `Ui` object will be created and calls `Ui#getUserChoice()` and returns String `UserChoice`. 
 	1. The `Ui` object then calls `Ui#validUserChoice()` with `UserChoice` as the parameter. If `UserChoice` is invalid, `Ui#validUserChoice()` will call `Ui#askForReInput()`.
-	1. The variable `userCommandInput` is being parsed into the `Parser` class as an argument for this method `Parser#parseUserCommand()`.
-
+	
 2. Creation of storage object
     
     Ingredient data:
@@ -777,6 +966,9 @@ If the user chooses the manual-save mode, it will overwrite all the data stored 
 
     Chore data:
     1. A `Storage` object will be created and calls `Storage#getChoreData()` to load and parse the contents of chore save file into a newly created `choreList ArrayList<Chore>`.
+
+    Expenditure data:
+    1. `Storage#loadExpenditureData()` is called to load and parse the contents of expenditure save file and creates an instance of `Expenditure`.
 
 All description and warnings to the user utilises the UI class, which controls the printing of the text on the console.
 
@@ -802,7 +994,7 @@ Aspects: How saving of files executes:
 [&#8593; Return to Top](#developer-guide)
 
 #### 4.4.2. Save current state
-The save current state feature allows the user to store the current state of the program data by manual-save mode. Manual-save mode data will be updated and replaced with the current state when save command is implemented.
+The save current state feature allows the user to store the current state of the program data into the backup storage files. The contents of the backup storage files will be updated and replaced with the current state when save command is implemented by the user.
 
 ##### Implementation
 The following steps explain how `save` command works:
@@ -810,7 +1002,7 @@ The following steps explain how `save` command works:
 2. `KitchenHelper` calls `Parser#parseUserCommand()` which splits the user’s input into 2 parts 
 and enters a switch case for execution.  
 3. `parseUserCommand` in the Parser object will call a method `SaveStateCommand`.  
-4. On execute(), `Storage.copyFile()` will be called three times to copy contents of ingredients, recipes and chore save files into their respective manual-mode save files.
+4. On execute(), `Storage.copyFile()` will be called four times to copy contents of ingredients, recipes, chores and expenditure save files into their respective backup storage files.
 
 ##### Design considerations:
 Aspects: How saving of current state data executes:
@@ -831,7 +1023,104 @@ Aspects: How saving of current state data executes:
 
 [&#8593; Return to Top](#developer-guide)
 
-### 4.5. Display Expenditure
+### 4.5. Expenditure
+#### 4.5.1. Display Expenditure
+The feature for displayexpenditure allows the user to keep track of their total expenditure and the amount they used in their cooking each week.
+
+##### Implementation  
+When the user attempts to display `expenditure`, the `Kitchen Helper`, `Parser` and `DisplayExpenditureCommand` class will be called upon. The following sequence of steps will then occur:
+1. The user keyed in `displayexpenditure`.
+    1. A `UI` object will be created and calls `UI#getUserCommand()`. 
+    1. Input will be parsed in `Parser#parseUserCommand()` and identified with the keyword `displayexpenditure`.   
+2. Parsing of user input and creation of command object
+    1. This will automatically trigger the parsing of the user’s input string in `Parser#prepareDisplayExpenditure()` to ensure the parameters are empty, or an exception will be thrown.
+    1. The `DisplayExpenditureCommand` object will be created. 
+3. Executing Command
+    1. The newly created object will call `DisplayExpenditureCommand#execute()` which will format the expenditure information into how it will be displayed.
+    1. Lastly, a String called `feedbackToUser` containing the information to display will be returned to `KitchenHelper`. 
+4. The expenditure information will then be printed onto the console using `Ui#showResultToUser(result)`.
+
+##### Design considerations:
+
+- Alternative 1(current implementation): Create a class to handle display of expenditure.
+
+|     |     |
+|-----|-----|
+|**Pros** | More OOP. `displayexpenditure` is a supported user command so it should have its own class for its specific function just like other commands. |
+|**Cons** | Very abstract method and a lot of effort in order to print the value of two variables.|
+
+- Alternative 2: Have a method to display expenditure in `Parser` class.
+
+|     |     |
+|-----|-----|
+|**Pros** | Simpler and more basic implementation.|  
+|**Cons** | Less OOP and will ruin the code style because its execution would be different from other commands. | 
+
+    
+#### 4.5.2. Expenditure functionality
+The Expenditure function mainly keeps track of two variables, `totalExpenditure` and `amountUsedInCooking`. Total expenditure is the amount spent on purchase of ingredients for the week. Amount used in cooking indicates the price of all the ingredients used for cooking or consumption in the week. The latter variable reflects the extent to which the user makes use of his purchase and hence the amount of expenditure he benefited from.
+
+##### Implementation  
+The values of the variables in Expenditure change in the the following situations:
+
++ The user executes `addingredient`.  
+    1. During the execution of `Parser#prepareAddIngredient`, `Expenditure#addToExpenditure` retrieves the price and quantity values of the ingredient being added. 
+    1. `totalExpenditure` value increases by the value calculated by `Expenditure#addToExpenditure`. 
+    1. `Storage#saveExpenditureData` saves the updated value.  
++ The user executes `cookrecipe`.
+    1. During the execution of `CookRecipeCommand#checkIfIngredientExpired`, `Expenditure#addAmountForCooking` retrieves the quantity used in cooking for each ingredient in the recipe. 
+    2. `amountUsedInCooking` value increases by the value calculated by `Expenditure#addAmountForCooking`.
+    1. `Storage#saveExpenditureData` saves the updated value.  
++ The user executes `deleteingredient`.
+    1. During the execution of `DeleteIngredientCommand#updateNewQuantity` and `DeleteIngredientCommand#deleteIngredient`, `Expenditure#editExpenditure` retrieves the quantity of the ingredient to delete.
+    1. `Expenditure#editExpenditure` first executes `Expenditure#removeFromExpenditure`, which prompts the user whether the user would like to deduct the cost of the ingredient being deleted from the total expenditure, in the case the user is deleting the ingredient due to wrong addition and would not like to count its cost in total expenditure.
+    1. If the user responds with `yes`, the `totalExpenditure` value is decreased by the amount calculated by `Expenditure#changePrice`.
+    1. If the user responds with `no`, `Expenditure#editExpenditure` will then execute `Expenditure#addToAmountUsed`, which prompts the user whether the user would like to add the cost of the ingredient being deleted to the amount used in cooking, in the case the user manually deletes ingredients that have been cooked or consumed.
+    1. If the user responds with `yes`, the `amountUsedInCooking` value increases by the amount calculated by `Expenditure#changePrice`.
+    1. If the user responds with `no`, the `totalExpenditure` value and `amountUseInCooking` value remain unchanged.
+    1. `Storage#saveExpenditureData` saves the updated value.
+
+
+##### Design considerations:
+
+Aspect: Singleton pattern for Expenditure class.
+
+- Alternative 1(current implementation): Making Expenditure a Singleton.
+
+|     |     |
+|-----|-----|
+|**Pros** | The Expenditure values are accumulated, so the exact same variables have to be used every time. Using only one instance of the Expenditure object allows that. |
+|**Cons** | 1. Increases dependencies as it has a global state. It can be overused and be hard to track. <br> 2. Makes testing harder. |
+
+- Alternative 2: Making Expenditure variables and methods static.
+
+|     |     |
+|-----|-----|
+|**Pros** | Static variables can also update expenditure using the exact same variables.|  
+|**Cons** | Take up memory as they cannot be created and destroyed during program execution. |
+
+- Alternative 3: Loading expenditure values from expenditure output text file to a local variable every time.
+
+|     |     |
+|-----|-----|
+|**Pros** | Also allows the retrieval of most updated value.|  
+|**Cons** | A lot of storing and loading to and from text files, which increases overhead. |
+
+Aspect: Storage of Expenditure data in its own output file.
+
+- Alternative 1(current implementation): Storage in its own Expenditure output file.
+
+|     |     |
+|-----|-----|
+|**Pros** | Neater to have a specific output file solely for Expenditure data. |
+|**Cons** | Create an entire storage function and output file for three variables. |
+
+- Alternative 2: Storage together with Chore data. 
+
+|     |     |
+|-----|-----|
+|**Pros** | Does not require additional storage implementation and save space not creating another file. |
+|**Cons** | Whenever save Expenditure data, the whole data file overwritten and need to loop through entire choreList to save Chore data with the new Expenditure data.|
 
 [&#8593; Return to Top](#developer-guide)
 
@@ -911,6 +1200,8 @@ __Value proposition__: Manage food inventory quickly compared to a typical mouse
 |v2.0|user|reset all my ingredients, chores, recipes|restart the application.|
 |v2.0|user|deduct ingredients that expire first|do not waste my ingredients.|
 |v2.0|user|be informed if I have sufficient ingredients to cook a specific recipe|find other recipes to cook.|
+|v2.0|user|get the expenditure on the ingredients that I used to cook in the recipe|keep track of my expenditure.|
+|v2.0|user|get the expenditure on the ingredients that I used to cook|keep track of my expenditure.|
 
 [&#8593; Return to Top](#developer-guide)
 
@@ -933,7 +1224,8 @@ Extensions:
   2b1. Systems alerts you to enter a quantity more than zero.
   Use case resumes at step 2.
 2c. System detects a expired expiry date in the entered data.
-  2c1. System alerts you that Expired ingredient detected in input. Please enter a non-expired expiry date.
+  2c1. System alerts you that Expired ingredient detected in input. Please enter a non-expired expiry
+       date.
   Use case resumes at step 2.
 ```
 <br>
@@ -980,6 +1272,126 @@ Extentions:
 Use case resumes at step 2.
 Use case ends.
 ```
+<br>
+
+```
+Use case: UC05 - Delete an ingredient
+MSS: 
+1. User wants to delete a particular ingredient. 
+2. User can either enter a keyword to search in Kitchen Helper or list all ingredients to find the 
+   ingredient to delete.
+3. User makes use of the index received in step 2 to delete the ingredient.
+4. Kitchen Helper will display a successful message if deletion was successful. 
+Use case ends. 
+Extentions:
+4a. No matching ingredient related to the index. 
+  4a1. Kitchen Helper will show an error message stating that there is no such ingredient.
+Use case resumes at step 3.
+Use case ends. 
+```
+
+<br>
+
+```
+Use case: UC06 - Delete a recipe
+MSS: 
+1. User wants to delete a particular recipe. 
+2. User can either enter a keyword to search in Kitchen Helper or list all recipes
+   to find the recipe to delete.
+3. User makes use of the index or name received in step 2 to delete the recipe.
+4. Kitchen Helper will display a successful message if deletion was successful. 
+Use case ends. 
+Extentions:
+4a. No matching ingredient related to the index or name. 
+  4a1. Kitchen Helper will show an error message stating that there is no such recipe.
+Use case resumes at step 3.
+Use case ends. 
+```
+
+<br>
+
+```
+Use case: UC07 - Cook a recipe
+MSS:
+1. User wants to cook a recipe for a number of pax.
+2. User can search for the recipe that it wants to cook.
+3. User use the name obtained in step 2 to cook the recipe. 
+4. Kitchen Helper will display a successful message if it was able to cook the recipe. 
+Use case ends. 
+Extentions:
+4a. There are insufficient/missing ingredients in the ingredients' inventory.
+    4a1. Kitchen Helper will show an error message stating that there were insufficient/missing
+         ingredients to cook the recipe. 
+4b. There are insufficient ingredients due to some expired ingredients in the ingredients' invenory. 
+    4b1. Kitchen Helper will show an error message and a list of expired ingredients.
+Use case resumes at step 3.
+Use case ends.
+```
+
+<br>
+
+```
+Use case: UC08 - List Ingredients
+MSS:
+1. User wants to see the whole ingredient list.
+2. User use the category 'all' to display whole ingredient list.
+3. System displays all ingredients regardless of category.
+Use case ends.
+
+Extensions:
+2a. System detects invalid format in the entered data.
+  2a1. System throws invalid input format and shows a valid format example.
+  Use case resumes at step 2.
+```
+
+<br>
+
+```
+Use case: UC09 - List Ingredients from Meat category
+MSS:
+1. User wants to see the whole ingredient list.
+2. User use the category 'meat' to display whole ingredient list.
+3. System displays ingredients under the category, `meat`.
+Use case ends.
+
+Extensions:
+2a. System detects invalid format in the entered data.
+  2a1. System throws invalid input format and shows a valid format example.
+2b. System detects invalid category in the entered data.
+  2b1. System throws invalid category name and shows the valid category names.
+  Use case resumes at step 2.
+```
+
+<br>
+
+```
+Use case: UC10 - List Recipe name
+MSS:
+1. User wants to see the whole list of Recipe name.
+2. User use the category 'all' to display whole recipe name list.
+3. System displays all recipe name.
+Use case ends.
+
+Extensions:
+2a. System detects invalid format in the entered data.
+  2a1. System throws invalid input format and shows a valid format example.
+  Use case resumes at step 2.
+```
+
+<br>
+
+```
+Use case: UC11 - List of Ingredients in Recipe
+MSS:
+1. User wants to see the ingredient list inside a Recipe.
+2. User use the recipe number '1' to display the ingredient list needed to cook the recipe.
+3. System displays all ingredients under the recipe.
+Use case ends.
+
+Extensions:
+2a. System detects invalid format in the entered data.
+  2a1. System throws invalid input format and shows a valid format example.
+```
 
 [&#8593; Return to Top](#developer-guide)
 
@@ -1017,15 +1429,26 @@ Use case ends.
 
 1. Add an ingredient into Kitchen Helper.
    1. Prerequisites: List all the ingredient using the `listingredient all` command. 
-   2. Test case: `addingredient /n beef /c meat /q 3 /p 20.20 /e 03/03/2022`    
+   2. Test case: `addingredient /n beef /c meat /q 3 /p 20 /e 03/03/2022`  
    Expected: Entry can be seen using `listingredient all` command.
-   3. Test case: `addingredient /n chicken /c meat /q 3 /p 3 /e 03/03/2020` 
+   3. Test case: `addingredient /n chicken /c meat /q 3 /p 3 /e 03/03/2020`  
    Expected: Expired ingredient detected in input. <br> Please enter a non-expired expiry date.
-   4. Test case: `addingredient /n milo /c drink /q 0 /p 1 /e 03/03/2022`
+   4. Test case: `addingredient /n milo /c drink /q 0 /p 1 /e 03/03/2022`  
    Expected: Please enter a quantity more than 0.
    
 #### F.3. List ingredient 
+1. List Ingredient
+   1. Prerequisites: Add ingredient using the `addingredient /n beef /c meat /q 3 /p 20.20 /e 03/03/2022` command. 
+   2. Test case: `listingredient all`    
+   Expected: Entry can be seen using `listingredient all` command and all other categories.
+   3. Test case: `listingredient meat`  
+   Expected: Entry can be seen using `listingredient all` command and only `meat` category is shown.
+   4. Test case: `listingredient 1`  
+   Expected: Invalid Command, please check your format!
+   5. Test case: `listingredient airplane`  
+   Expected: Invalid Command, please check your format!
 
+   
 #### F.4. Delete an ingredient 
 1. Delete an ingredient from Kitchen Helper.
    1. Prerequisites: List all the recipes using the `listingredient all` command.
@@ -1042,32 +1465,42 @@ Use case ends.
     
 #### F.5. Search for ingredient
 1. Search for ingredients in Kitchen Helper.
-   1. Prerequisites: The ingredient list should not be empty.
+   1. Prerequisites: The ingredient list should not be empty. You should at least add the following ingredient by using `addingredient /n beef /c meat /q 3 /p 20 /e 03/03/2022` before the search.  
    2. Test case: `searchingredient beef`  
    Expected: Ingredient entries that have the keyword matching `beef` names are listed.
-   3. Test case: 'searchingredient meat'  
+   3. Test case: `searchingredient meat`  
    Expected: Ingredient entries that have the keyword matching `meat` category are listed.
-   4. Test case: `searchingredient 02/02/2022`  
-   Expected: Ingredient entries that have the keyword matching `02/02/2022` date are listed.
+   4. Test case: `searchingredient 03/03/2022`  
+   Expected: Ingredient entries that have the keyword matching `03/03/2022` date are listed.
    5. Test case: `searchingredient $20`  
    Expected: Ingredient entries that have the keyword matching `$20` price are listed.
    
 #### F.6. Add a recipe
 1. Add a recipe into Kitchen Helper
-    1. Prerequisites: List all the ingredient using the `listingredient all` command.
-    1. Test case: `addrecipe /n warm milk /i HL Milk:1:Dairy`\
-    Expected: Entry can be found using `listingredient all` command. 
+    1. Prerequisites: List all the recipes using the `listrecipe all` command.
+    1. Test case: `addrecipe /n warm milk /i HL Milk:1:Dairy`  
+    Expected: Entry can be found using `listrecipe all` command. 
 
 #### F.7. List recipe
+1. List Recipe
+   1. Prerequisites: Add ingredient using the `addrecipe /n warm milk /i HL Milk:1:Dairy` command. 
+   2. Test case: `listrecipe all`    
+   Expected: Entry can be seen using `listrecipe all` command, shows all recipe's name added.
+   3. Test case: `listrecipe 1`  
+   Expected: Entry can be seen using `listrecipe 1` command and shows all ingredients registered in the recipe.
+   4. Test case: `listrecipe 2`  
+   Expected: The Recipe List is currently empty.
+   5. Test case: `listrecipe notsure`  
+   Expected: Invalid Command, please check your format!
 
 #### F.8. Cook a recipe
 1. Cooks the specified recipe and ingredients in the recipe will be automatically deducted.
-    1. Prerequisites: List all the ingredient using the `listingredient all` command.
-    1. Test case (sufficient ingredient): `cookrecipe /n warm milk /p 2`\
+    1. Prerequisites: List all the recipes using the `listrecipe all` command.
+    1. Test case (sufficient ingredient): `cookrecipe /n warm milk /p 2`  
     Expected: A reduction of the ingredients' quantity multiplied by `2` can be noticed when listing the ingredients with `listingredient all`
-    1. Test case (Sufficient even with expired ingredients):  `cookrecipe /n warm milk /p 2`\
+    1. Test case (Sufficient even with expired ingredients):  `cookrecipe /n warm milk /p 2`  
     Expected: The automatic deduction will not be carried out and expired item will be notified to user.
-    1. Test case: (Insufficient even with expired ingredients): `cookrecipe /n warm milk /p 2`\
+    1. Test case: (Insufficient even with expired ingredients): `cookrecipe /n warm milk /p 2`  
     Expected: The automatic deduction will not be carried out.
     
 #### F.9. Delete a recipe 
@@ -1080,25 +1513,45 @@ Use case ends.
 
 #### F.10. Search for recipe
 1. Search for similar recipe in Kitchen Helper.
-   1. Prerequisites: The recipe list should not be empty.
-   2. Test case: 'searchrecipe chicken' 
+   1. Prerequisites: The recipe list should not be empty. You should at least add the following recipe by using `addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable` before the search.   
+   2. Test case: `searchrecipe chicken`  
    Expected: Recipe's name entries that have the keyword matching `chicken' are listed. 
 
 #### F.11. Add a chore
-
+1. Adds a chore into Kitchen Helper.
+    1. Test case (String deadline): `addchore buy groceries /by Monday 12pm`<br> Expected: The chore is added. Entry can be found using `listchore` command.
+    2. Test case (Date deadline): `addchore buy groceries /by 13/04/2020 12:00`<br> Expected: The chore is added. Entry can be found using `listchore` command.
+    3. Test case (Incorrect date format): `addchore buy groceries /by 13-04-2020` <br> Expected: Deadline will be a String object type. The chore is added. Entry can be found using `listchore` command.
+    4. Test case (Invalid format): `addchore buy groceries` <br>  Expected: The chore is not added. Entry cannot be found using `listchore` command.
+    
 #### F.12. List a chore
-
+1. List the chores.
+    1. Test case (Empty list): `listchore` <br> Expected: "Your list of chores is currently empty."
+    2. Test case (Non-empty list): `listchore` <br> Expected: All the chore entries displayed.
+    3. Test case (Invalid format): `listchore aa` <br> Expected: "Invalid ListChore command." No chore entries displayed.
+    
 #### F.13. Delete a chore
-   
+1. Delete a chore from Kitchen Helper.
+    1. Prerequisites: List all the chores using `listchore` command.
+    2. Test case (Index in list): `deletechore 1` <br> The chore is deleted. It can be noticed by using the `listchore` command.
+    3. Test case (Index not in list or incorrect format): `deletechore 10` OR `deletechore -1` OR `deletechore buy groceries` <br> Expected: The chore is not deleted. It can be noticed by using the `listchore` command.
+    
 #### F.14. Search for chore
-1. Search for chores in Kitchen Helper.
-   1. Prerequisites: The chore list should not be empty.
+1. Search for chores in Kitchen Helper. 
+   1. Prerequisites: The chore list should not be empty. You should at least add the following chore by using `addchore buy groceries /by Tuesday 12pm` before the search.  
    2. Test case: `searchchore groceries`  
    Expected: Chore entries that have the keyword matching `groceries` description are listed.
    3. Test case: `searchchore Tuesday`  
-   Expected: Chore entries that have the keyword matching `Tuesday` as a string are listed.  
+   Expected: Chore entries that have the keyword matching `Tuesday` as a string are listed. 
+    
+#### F.15. Mark a chore as done
+1. Change the completion status of a chore to done.
+    1. Prerequisites: List all the chores using `listchore` command.
+    2. Test case (Index in list): `done 1` <br> Expected: The chore is marked as done. The completion status icon becomes a tick.
+    3. Test case (Mark an already complete chore): `done 1` <br> Expected: "This chore has already been marked as done."
+    3. Test case (Index not in list or incorrect format): `done 10` OR `done -1` OR `done buy groceries` <br> Expected: The chore is not marked as done. It can be noticed by using the `listchore` command where the completion status icon of the chore remains a cross. 
    
-#### F.15. Saving data
+#### F.16. Saving data
 
 1. Load ingredient data into Kitchen Helper.
    1. Prerequisites: The ingredient list save file should not be empty. 
@@ -1110,16 +1563,31 @@ Use case ends.
  
 1. Load chore data into Kitchen Helper.
    1. Prerequisites: The chore list save file should not be empty. 
-   1. Expected: Previously stored chore data can be seen using `listchore all` command.
+   1. Expected: Previously stored chore data can be seen using `listchore` command.
+ 
+1. Load expenditure data into Kitchen Helper.
+   1. Prerequisites: The expenditure save file should not be empty. 
+   1. Expected: Previously stored expenditure data of the week can be seen using `displayexpenditure` command.
  
 If any of the save files are empty, the user can choose to populate the files with their own user commands or alternatively, use any of the test cases below:
 
 1. `addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable`
-2. `addingredient /n Chicken Breast /c meat /q 3 /p 20 /e 18/03/2020`
-3. `addingredient /n kailan /c Vegetable /q 30 /p 30.45 /e 12/03/2020`
-4. `addingredient /n HL Milk /c Dairy /q 3 /p 12.2 /e 14/03/2020`
+2. `addingredient /n Chicken Breast /c meat /q 3 /p 20 /e 18/12/2020`
+3. `addingredient /n kailan /c Vegetable /q 30 /p 30.45 /e 12/12/2020`
+4. `addingredient /n HL Milk /c Dairy /q 3 /p 12.2 /e 14/12/2020`
 5. `addchore buy groceries /by Tuesday 12pm`
 
-#### F.16. Display expenditure
+Note that expenditure changes when `addingredient`, `deleteingredient`, or `cookrecipe` commands are used.
 
+#### F.17. Display expenditure
+1. Displays user expenditure.
+    1. Prerequisite 1: Add an ingredient using `addingredient` command.
+    2. Test case 1: `displayexpenditure` <br> Expected: The value of total expenditure increases by the cost of ingredient multiplied by its quantity.
+    3. Prerequisite 2: Cook a recipe using `cookrecipe` command. 
+    4. Test case 2: `displayexpenditure` <br> Expected: The value of amount used in cooking increases by the cost of all the ingredients used in cooking.
+    5. Prerequisite 3: Delete an ingredient using `deleteingredient` command and respond with `yes` when prompted to remove cost of ingredient from total expenditure .
+    6. Test case 3: `displayexpenditure` <br> Expected: The value of total expenditure decreases by the cost of ingredient multiplied by the quantity deleted.
+    7. Prerequisite 4: Delete an ingredient using `deleteingredient` command and respond with `no` when prompted to remove cost of ingredient from total expenditure and respond with `yes` when prompted to add cost of ingredient to amount used in cooking.
+    8. Test case 4: `displayexpenditure` <br> Expected: The value of amount used in cooking increases by the cost of ingredient multiplied by the quantity deleted.
+    
 [&#8593; Return to Top](#developer-guide)

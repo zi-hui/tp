@@ -34,6 +34,17 @@ public class KitchenHelper {
     private Ui ui;
     private Storage storage;
 
+    /**
+     * Retrieves private ui from main class so other classes can use
+     * to write to standard output or read from standard input without
+     * triggering errors during runtest.
+     *
+     * @return private ui from this main class.
+     */
+    private Ui getUi() {
+        return ui;
+    }
+
     private void start() {
         ui = new Ui();
         String userChoice = ui.getUserChoice();
@@ -61,11 +72,13 @@ public class KitchenHelper {
             recipeList = new ArrayList<>(storage.getRecipeData());
             choreList = new ArrayList<>(storage.getChoreData());
             storage.loadExpenditureData();
+            Expenditure.getInstance().setUi(getUi());
         } catch (FileNotFoundException err) {
             ingredientList = new ArrayList<>();
             recipeList = new ArrayList<>();
             choreList = new ArrayList<>();
             Expenditure.getInstance().loadExpenditureVariables(0, 0, null);
+            Expenditure.getInstance().setUi(getUi());
         }
     }
 

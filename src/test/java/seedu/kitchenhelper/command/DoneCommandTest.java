@@ -19,8 +19,11 @@ public class DoneCommandTest {
         assertEquals(false, newChore.isDone);
         checkValidIndex.markChoreDone(choreList);
         assertEquals(true, newChore.isDone);
+        assertEquals("This chore has already been marked as done.",
+                checkValidIndex.markChoreDone(choreList));
 
         DoneCommand checkInvalidIndex = new DoneCommand(2);
-        assertEquals("Please choose an index in the chore list!", checkInvalidIndex.markChoreDone(choreList));
+        assertEquals("Please choose an index in the chore list!",
+                checkInvalidIndex.markChoreDone(choreList));
     }
 }

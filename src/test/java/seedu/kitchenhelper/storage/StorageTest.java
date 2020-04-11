@@ -1,13 +1,19 @@
 package seedu.kitchenhelper.storage;
 
 import org.junit.jupiter.api.Test;
+import seedu.kitchenhelper.object.Expenditure;
 import seedu.kitchenhelper.object.Recipe;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
 import seedu.kitchenhelper.object.Chore;
 
 import java.io.FileNotFoundException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -65,6 +71,17 @@ class StorageTest {
     }
 
     @Test
+    void loadExpenditureData() {
+        try {
+            Storage newStorage = new StubStorage();
+            storage.loadExpenditureData();
+            newStorage.loadExpenditureData();
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+    }
+
+    @Test
     void saveIngredientData() {
     }
 
@@ -84,7 +101,7 @@ class StorageTest {
         @Override
         public ArrayList<Ingredient> getIngredientData() throws FileNotFoundException {
             ArrayList<Ingredient> ingredients = new ArrayList<>();
-            loadingIngredients("Beef", "meat", 3, 20.0, "2020-03-18",ingredients);
+            loadingIngredients("Beef", "meat", 3, 20.0, "2020-03-18", ingredients);
             loadingIngredients("Chicken", "meat", 3, 20.0, "2020-03-18", ingredients);
             return ingredients;
         }
@@ -100,7 +117,6 @@ class StorageTest {
             freshRecipe.addIngredientsToRecipeFromArrayList(recipeItems);
             ArrayList<Recipe> recipe = new ArrayList<>();
             recipe.add(freshRecipe);
-            recipe.add(freshRecipe);
             return recipe;
         }
 
@@ -110,6 +126,23 @@ class StorageTest {
             Chore todo = Chore.createChoreWhenLoadFile("buy milk", "Tuesday 12pm");
             chore.add(todo);
             return chore;
+        }
+
+        @Override
+        public void loadExpenditureData() throws FileNotFoundException {
+            try {
+                DateFormat dateFormat = new SimpleDateFormat("EEE dd/MM/yyyy HH:mm:ss");
+                Date lastSavedDate = dateFormat.parse("Fri 10/04/2020 21:28:40");
+                Expenditure.getInstance().loadExpenditureVariables(1818.00, 242.40, lastSavedDate);
+                double total = 1818.00;
+                assertEquals(1818.00, total);
+                double amount = 242.40;
+                assertEquals(242.40, amount);
+                String date = "Fri Apr 10 21:28:40 SGT 2020";
+                assertEquals(date, "Fri Apr 10 21:28:40 SGT 2020");
+            } catch (NoSuchElementException | IndexOutOfBoundsException | ParseException e) {
+                Expenditure.getInstance().loadExpenditureVariables(0, 0, null);
+            }
         }
     }
 }
