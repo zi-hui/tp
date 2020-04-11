@@ -72,6 +72,9 @@ Kitchen Helper, born from the need to keep track of kitchen inventory, is an app
 The document contains the specified architecture and software design specifications for the application, Kitchen Helper. 
 ### 1.3. Scope
 This describes the software architecture and software design requirements for Kitchen Helper. This guide is mainly for developers, designers and software engineers that are or going to work on Kitchen Helper. 
+
+[&#8593; Return to Top](#developer-guide)
+
 ## 2. Setting up
 
 ### 2.1. Prerequisites
@@ -1256,6 +1259,7 @@ Extensions:
    Expected: The Recipe List is currently empty.
    5. Test case: `listrecipe notsure`
    Expected: Invalid Command, please check your format!
+
 #### F.8. Cook a recipe
 1. Cooks the specified recipe and ingredients in the recipe will be automatically deducted.
     1. Prerequisites: List all the ingredient using the `listingredient all` command.
