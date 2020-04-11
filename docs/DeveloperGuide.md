@@ -995,7 +995,8 @@ Extensions:
   2b1. Systems alerts you to enter a quantity more than zero.
   Use case resumes at step 2.
 2c. System detects a expired expiry date in the entered data.
-  2c1. System alerts you that Expired ingredient detected in input. Please enter a non-expired expiry date.
+  2c1. System alerts you that Expired ingredient detected in input. Please enter a non-expired expiry
+       date.
   Use case resumes at step 2.
 ```
 <br>
@@ -1048,7 +1049,8 @@ Use case ends.
 Use case: UC05 - Delete an ingredient
 MSS: 
 1. User wants to delete a particular ingredient. 
-2. User can either enter a keyword to search in Kitchen Helper or list all ingredients to find the ingredient to delete.
+2. User can either enter a keyword to search in Kitchen Helper or list all ingredients to find the 
+   ingredient to delete.
 3. User makes use of the index received in step 2 to delete the ingredient.
 4. Kitchen Helper will display a successful message if deletion was successful. 
 Use case ends. 
@@ -1065,7 +1067,8 @@ Use case ends.
 Use case: UC06 - Delete a recipe
 MSS: 
 1. User wants to delete a particular recipe. 
-2. User can either enter a keyword to search in Kitchen Helper or list all recipes to find the recipe to delete.
+2. User can either enter a keyword to search in Kitchen Helper or list all recipes
+   to find the recipe to delete.
 3. User makes use of the index or name received in step 2 to delete the recipe.
 4. Kitchen Helper will display a successful message if deletion was successful. 
 Use case ends. 
@@ -1088,7 +1091,8 @@ MSS:
 Use case ends. 
 Extentions:
 4a. There are insufficient/missing ingredients in the ingredients' inventory.
-    4a1. Kitchen Helper will show an error message stating that there were insufficient/missing ingredients to cook the recipe. 
+    4a1. Kitchen Helper will show an error message stating that there were insufficient/missing
+         ingredients to cook the recipe. 
 4b. There are insufficient ingredients due to some expired ingredients in the ingredients' invenory. 
     4b1. Kitchen Helper will show an error message and a list of expired ingredients.
 Use case resumes at step 3.
