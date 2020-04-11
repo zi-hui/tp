@@ -100,7 +100,6 @@ class StorageTest {
             freshRecipe.addIngredientsToRecipeFromArrayList(recipeItems);
             ArrayList<Recipe> recipe = new ArrayList<>();
             recipe.add(freshRecipe);
-            //recipe.add(freshRecipe);
             return recipe;
         }
 
