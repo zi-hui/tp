@@ -32,10 +32,11 @@ By: `CS2113T-M16-2` Since: `2020`
       - [4.2.5. Search for recipe based on keyword(s)](#425-search-for-recipe-based-on-keywords)
     + [4.3. Chore-related Features](#43-chore-related-features)
       - [4.3.1. Addition of chore](#431-addition-of-chore)
-      - [4.3.2. List all chores)](#432-list-all-chores)
+      - [4.3.2. List all chores](#432-list-all-chores)
       - [4.3.3. Delete a specific chore](#433-delete-a-specific-chore)
       - [4.3.4. Search for chore based on keyword(s)](#434-search-for-chore-based-on-keywords)
       - [4.3.5. Mark chore as done](#435-mark-chore-as-done)
+      - [4.3.6. Notification for chores warning](#436-notification-for-chores-warning)
     + [4.4. Storage](#44-storage)
       - [4.4.1. Select files to load from and save to](#441-select-files-to-load-from-and-save-to)
       - [4.4.2. Save current state](#442-save-current-state)
@@ -764,7 +765,7 @@ The following sequence diagram shows how the `AddChoreCommand` works
 
 [&#8593; Return to Top](#developer-guide)
 
-#### 4.3.2. List all/ specific chore(s)
+#### 4.3.2. List all chores
 The feature to list `chore`s allows the user to view the `chore`s currently in the `choreList` and their completion statuses. 
 
 ##### Implementation  
@@ -809,7 +810,7 @@ The following sequence diagram shows how the `AddChoreCommand` works
 
 [&#8593; Return to Top](#developer-guide)
 
-#### 4.3.3. Delete all/ specific chore(s)
+#### 4.3.3. Delete a specific chore
 The feature for deletion of `chore`s allows the user to remove the `chore` specified by the index in the list. 
 
 ##### Implementation  
@@ -922,6 +923,46 @@ The following sequence diagram shows how the `DoneCommand` works
 ##### Design considerations:
 
 - Similar to DeleteChoreCommand.
+
+#### 4.3.6. Notification for chores warning
+The notification for chores warning runs every time the program starts. It checks the `choreList` for `Chores` that are already overdue or have deadlines approaching in 3 days.
+For example, `take cake out of oven` is overdue since `11/04/2020 15:30`. Deadlines of `Chores` specified in String will not trigger notification warnings.
+
+##### Implementation  
+
+<Image to be added>
+
+The following steps explains the sequence diagram for this feature:  
+1. The user starts `KitchenHelper` and `KitchenHelper#run` is called.  
+2. `KitchenHelper` calls `showNotification()`.  
+3. `ChoreNotification` object is created and `ChoreNotification#getNotifications(choreList)` is called.  
+4. 
+5. The results from `ChoreNotification#hasDateAsDeadline`, `ChoreNotification#isOverdue` and `ChoreNotification#isApproachingDeadline` will be combined.
+    1. `ChoreNotification#hasDateAsDeadline` checks for `Chores` that have Date object type deadline.
+    1. `ChoreNotification#isOverdue` checks for `Chores` that have exceeded their deadline.
+    1. `ChoreNotification#isApproachingDeadline` checks for `Chores` that have deadlines upcoming in the next 3 days.
+5. `ChoreNotification#getNotifications(choreList)` returns the String result containing the notifications to `KitchenHelper` and displays.
+
+##### Design considerations:
+
+Aspects: How `showNotification` executes:  
+
+- Alternative 1 (current choice): Create a function that creates a ChoreNotification class object that gathers the notifications to print. 
+
+|     |     |
+|-----|-----|
+|**Pros** | More OOP as there is a specific class handling the sole function of notification display. |  
+|**Cons** | Developer has to go into `ChoreNotification` class to find out how to notifications are gathered. |
+
+- Alternative 2: Create the methods to gather notifications in `KitchenHelper.java`
+
+|     |     |
+|-----|-----|
+|**Pros** | More basic implementation. |  
+|**Cons** | Less OOP and the `KitchenHelper` main class will be overpopulated with methods that do not concern the overall running of the application.|
+
+
+[&#8593; Return to Top](#developer-guide)
 
 
 ### 4.4. Storage
