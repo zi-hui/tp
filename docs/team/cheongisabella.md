@@ -15,4 +15,9 @@ Kitchen Helper is a Command Line application to help users manage their kitchen 
     + What it does: It allows users to delete chores by specifying the index of the chore in the list. Similarly, users can mark chores as done by specifying the index of the chore in the list.
     + Justification: The ability to mark chores as done is what motivates users and what helps them track their chores. When the chores are no longer relevant, or if the user makes a mistake in addition of chores, they can delete the chore.
     + Highlights: Users can delete chores by their index in the list instead of by their names, which is less troublesome for users to type. By specifying index, it is also certain that the corresponding chore associated with that index is deleted.
-
++ Chore notification
+    + What it does: It notifies users during the startup of the application, if there are overdue chores or chores with deadlines upcoming in the next three days.
+    + Justification: This feature improves the product slightly because users can better manage their completion of chores when they can be reminded of more pressing chores.
+    + Highlights: This enhancement is possible because of the deadline specified by Date. 
++ Expenditure
+    + What it does: 
