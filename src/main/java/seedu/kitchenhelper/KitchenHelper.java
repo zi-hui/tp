@@ -1,4 +1,3 @@
-
 package seedu.kitchenhelper;
 
 import seedu.kitchenhelper.command.Command;
