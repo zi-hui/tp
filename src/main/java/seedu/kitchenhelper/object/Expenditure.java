@@ -4,6 +4,7 @@ import seedu.kitchenhelper.object.ingredient.Ingredient;
 import seedu.kitchenhelper.storage.Storage;
 import seedu.kitchenhelper.ui.Ui;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -78,9 +79,9 @@ public class Expenditure {
     /**
      * Loads the last saved values of the class variables .
      *
-     * @param totalExpenditure the last saved total weekly expenditure.
+     * @param totalExpenditure    the last saved total weekly expenditure.
      * @param amountUsedInCooking the last saved amount used in cooking this week.
-     * @param lastSavedDate the last time user made any changes to expenditure.
+     * @param lastSavedDate       the last time user made any changes to expenditure.
      */
     public void loadExpenditureVariables(double totalExpenditure, double amountUsedInCooking, Date lastSavedDate) {
         this.totalExpenditure = totalExpenditure;
@@ -111,7 +112,7 @@ public class Expenditure {
         Date today = new Date();
         Date pastMonday;
         if (anyMonday.after(today)) {
-            calendar.add(Calendar.DATE,-7);
+            calendar.add(Calendar.DATE, -7);
             pastMonday = calendar.getTime();
         } else {
             pastMonday = anyMonday;
@@ -126,7 +127,7 @@ public class Expenditure {
      * Add to total expenditure every time addingredient command
      * called to simulate new ingredient purchased.
      *
-     * @param price Unit price of the ingredient.
+     * @param price    Unit price of the ingredient.
      * @param quantity Quantity of ingredient bought.
      */
     public void addToExpenditure(double price, int quantity) {
@@ -140,7 +141,7 @@ public class Expenditure {
      * and does not want amount from incorrect addingredient to be included in total expenditure.
      *
      * @param ingredientToDelete ingredient to be deleted.
-     * @param quantityToDelete amount of the ingredient to be deleted.
+     * @param quantityToDelete   amount of the ingredient to be deleted.
      */
     public boolean removeFromExpenditure(Ingredient ingredientToDelete, Integer quantityToDelete) {
         String userResponse = promptUser(PROMPT_REMOVE_FROM_EXPENDITURE);
@@ -161,7 +162,7 @@ public class Expenditure {
      * or consuming.
      *
      * @param ingredientToDelete ingredient to be deleted.
-     * @param quantityToDelete amount of the ingredient to be deleted.
+     * @param quantityToDelete   amount of the ingredient to be deleted.
      */
     public void addToAmountUsed(Ingredient ingredientToDelete, Integer quantityToDelete) {
         String userResponse = promptUser(PROMPT_ADD_TO_AMOUNT_USED);
@@ -178,7 +179,7 @@ public class Expenditure {
      * Adds to amount used in cooking whenever user calls cookrecipe command.
      *
      * @param ingredientToDelete the ingredient to used in cooking.
-     * @param quantityToDelete the amount of the ingredient used in cooking.
+     * @param quantityToDelete   the amount of the ingredient used in cooking.
      */
     public void addAmountForCooking(Ingredient ingredientToDelete, Integer quantityToDelete) {
         amountUsedInCooking += changePrice(ingredientToDelete, quantityToDelete);
@@ -191,7 +192,7 @@ public class Expenditure {
      * when they call deleteingredient command.
      *
      * @param ingredientToDelete ingredient to be deleted.
-     * @param quantityToDelete amount of the ingredient to be deleted.
+     * @param quantityToDelete   amount of the ingredient to be deleted.
      */
     public void editExpenditure(Ingredient ingredientToDelete, Integer quantityToDelete) {
         try {
@@ -209,7 +210,7 @@ public class Expenditure {
      * amount used in cooking for each ingredient multiplied by their quantity deleted.
      *
      * @param ingredientToDelete the ingredient to be deleted.
-     * @param quantityToDelete amount of the ingredient to be deleted.
+     * @param quantityToDelete   amount of the ingredient to be deleted.
      * @return the total change in amount to corresponding class variable.
      */
     public double changePrice(Ingredient ingredientToDelete, Integer quantityToDelete) {
@@ -253,5 +254,15 @@ public class Expenditure {
         return false;
     }
 
-
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Expenditure) {
+            Expenditure i = (Expenditure) o;
+            return this.totalExpenditure == 1818.00
+                    && this.amountUsedInCooking == 242.40
+                    && this.lastSavedDate.equals("Fri Apr 10 21:28:40 SGT 2020");
+        } else {
+            return false;
+        }
+    }
 }
