@@ -1298,7 +1298,7 @@ Extensions:
    
 #### F.14. Search for chore
 1. Search for chores in Kitchen Helper. 
-   1. Prerequisites: The chore list should not be empty. You should at least add the following recipe by using `addchore buy groceries /by Tuesday 12pm` before the search.  
+   1. Prerequisites: The chore list should not be empty. You should at least add the following chore by using `addchore buy groceries /by Tuesday 12pm` before the search.  
    2. Test case: `searchchore groceries`  
    Expected: Chore entries that have the keyword matching `groceries` description are listed.
    3. Test case: `searchchore Tuesday`  
