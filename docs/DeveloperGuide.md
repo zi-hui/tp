@@ -2,6 +2,8 @@
 By: `CS2113T-M16-2` Since: `2020`
 
 ![Supported Java versions](https://img.shields.io/badge/Java-11-blue.svg) ![Supported OS](https://img.shields.io/badge/Supported%20OS-Windows|MacOS|Linux-yellow.svg) 
+![Java CI](https://github.com/AY1920S2-CS2113T-M16-2/tp/workflows/Java%20CI/badge.svg)
+
 - [Developer Guide](#developer-guide)
   * [1. Introduction](#1-introduction)
     + [1.1. Background](#11--background)
@@ -21,14 +23,14 @@ By: `CS2113T-M16-2` Since: `2020`
     + [4.1.Ingredient-related Features](#41ingredient-related-features)
       - [4.1.1. Addition of ingredient](#411-addition-of-ingredient)
       - [4.1.2. List all/ specific ingredient(s)](#412-list-all-specific-ingredients)
-      - [4.1.3. Delete all/ specific ingredients(s)](#413-delete-all-specific-ingredientss)
+      - [4.1.3. Delete specific ingredients(s)](#413-delete-specific-ingredientss)
       - [4.1.4. Search for ingredients based on keyword(s)](#414-search-for-ingredients-based-on-keywords)
       - [4.1.5. Notification for ingredients warning](#415-notification-for-ingredients-warning)
     + [4.2. Recipe-related Features](#42-recipe-related-features)
       - [4.2.1. Addition of recipe](#421-addition-of-recipe)
       - [4.2.2. List all/ specific recipe(s)](#422-list-all-specific-recipes)
       - [4.2.3. Cooking of recipe](#423-cooking-of-recipe)
-      - [4.2.4. Delete all/ specific recipe(s)](#424-delete-all-specific-recipes)
+      - [4.2.4. Delete a specific recipe](#424-delete-a-specific-recipe)
       - [4.2.5. Search for recipe based on keyword(s)](#425-search-for-recipe-based-on-keywords)
     + [4.3. Chore-related Features](#43-chore-related-features)
       - [4.3.1. Addition of chore](#431-addition-of-chore)
@@ -72,6 +74,9 @@ Kitchen Helper, born from the need to keep track of kitchen inventory, is an app
 The document contains the specified architecture and software design specifications for the application, Kitchen Helper. 
 ### 1.3. Scope
 This describes the software architecture and software design requirements for Kitchen Helper. This guide is mainly for developers, designers and software engineers that are or going to work on Kitchen Helper. 
+
+[&#8593; Return to Top](#developer-guide)
+
 ## 2. Setting up
 
 ### 2.1. Prerequisites
@@ -243,11 +248,11 @@ Alternative 2 (current choice): Creating a fixed array which includes the order 
 
 [&#8593; Return to Top](#developer-guide)
 
-#### 4.1.3. Delete all/ specific ingredients(s)
+#### 4.1.3. Delete specific ingredients(s)
 The deletion feature for ingredients allows the user to delete ingredients either by the name or index of the ingredients. In addition to that, it allows users to reduce the quantity of a specific ingredient. 
 
 ##### Implementation
-When the user attempts to reduce the quantity of ingredient at index 1 of the ingredients inventory by 4,  the `Kitchen Helper`, ‘Parser’ and ‘DeleteIngredientCommand` class will be called upon. The following sequence of steps will then occur: 
+When the user attempts to reduce the quantity of ingredient at index 1 of the ingredients inventory by 4,  the `Kitchen Helper`, `Parser` and `DeleteIngredientCommand` class will be called upon. The following sequence of steps will then occur: 
 
 The following image below shows the sequence of steps for step 1 and 2:
 ![DeleteIngredient Sequence Diagram](images/deleteIngredientSequenceDiagramPart1.png)
@@ -273,12 +278,14 @@ The following image below shows the sequence of steps for step 1 and 2:
     
     ![DeleteIngredient Sequence Diagram](images/deleteIngredientSequenceDiagramPart2.png)
     
-    1. The `DeleteIngredientCommand#execute()` will be called which in turned called DeleteIngredientCommand#deleteIngredientByIndex()`. 
+    1. The `DeleteIngredientCommand#execute()` will be called which in turned called `DeleteIngredientCommand#deleteIngredientByIndex()`. 
     1. Since the `quantity` of this ingredient is not null, the `DeleteIngredientCommand#deleteQuantity()` will be called to reduce the quantity of this ingredient.  
     1. When `DeleteIngredientCommand#deleteQuantity()` has returned, the program will get the quantity of the current ingredient after deduction. If the quantity is zero or null, the `DeleteIngredientCommand#deleteIngredient()` will be called to remove `ingredient` from the `ingredientsList` which contains all the ingredients. 
     1. Then, `Storage#saveIngredientData()` will be called to save the current `ingredientsList` into an output file.
     1. Lastly, a String called `feedbackToUser`will be returned to the user to inform the user of the outcome of the command. 
     
+    The following image shows the state diagram for the command execution:
+
     ![DeleteIngredient State 3](images/deleteIngredientState3.png)
     
 4.  The details will then be printed onto the console using `Ui#showResultToUser(result)`.
@@ -377,7 +384,47 @@ Aspects: How `searchingredient` executes:
 
 [&#8593; Return to Top](#developer-guide)
 
+#### 4.1.5. Notification for ingredients warning
 
+The notification for ingredients warning runs everytime the program starts. Checks the ingredient list for ingredient that is expiring in 3 days, expired or low quantity (< 5).
+For example, `beef` ingredient's expired date is 02/02/2020 and have quantity of 3. The program will list down the ingredient in the categories when the application start.
+
+##### Implementation  
+
+
+![NotificationIngredientCommand](images/notificationIngredient.png) 
+
+
+The following steps explained sequence diagram for `showNotification` method:  
+1. The user starts `KitchenHelper`.  
+2. `KitchenHelper` calls `showNotification()`.  
+3. `KitchenHelper#IngredientNotification` object is created when the method `IngredientNotification#getNotifications(ingredientList)` is called.  
+4. Result from `IngredientNotification#checkForExpiringIngr(ingredientList)`,`IngredientNotification#checkForLowQuantityIngr`, `IngredientNotification#checkForExpiredIngr` will be combined.
+    1. `IngredientNotification#checkForExpiringIngr(ingredientList)` checks for ingredients that is going to expire in 3 days.
+    1. `IngredientNotification#checkForLowQuantityIngr` checks for ingredients that has quantity of 5 or lower.
+    1. `IngredientNotification#checkForExpiredIngr` checks for ingredients that is expired.
+5. `IngredientNotification#getNotifications(ingredientList)` returns result to `KitchenHelper#ingredientNotification` and displays.
+
+##### Design considerations:
+
+Aspects: How `showNotification` executes:  
+
+- Alternative 1 (current choice): Create a function to compile results from the three different methods, 
+
+|     |     |
+|-----|-----|
+|**Pros** | 1. Decreases the need to indicate three lines of code to call out the three different methods.|  
+|**Cons** | 1. Developer have to go into `IngredientNotification#getNotifications(ingredientList)` to find out what function |
+
+- Alternative 2: Create three different methods in `KitchenHelper.java`
+
+|     |     |
+|-----|-----|
+|**Pros** | 1. Clear indication what the method is doing|  
+|**Cons** | 1. Not very 'OOP' like|
+
+
+[&#8593; Return to Top](#developer-guide)
 ### 4.2. Recipe-related Features
 #### 4.2.1. Addition of recipe
 Users can add a new recipe to the application where there must be at least one or more `ingredient`s. The failure to do so will trigger an exception where the user will be notified of an invalid command and the syntax of the addition of recipe will be displayed. 
@@ -491,11 +538,11 @@ The feature allows the user to cook a recipe if there are sufficient ingredients
 
 ##### Implementation 
 When the user attempts to cook `Chicken Salad` recipe from `Kitchen Helper`, the `Kitchen Helper`, `Parser` and `cookRecipeCommand` class will be called upon. The following sequence of steps will then occur:
-1. The user keyed in "cookrecipe /n `Chicken Salad`".
+1. The user keyed in `cookrecipe /n Chicken Salad /p 1`.
     
     1. A `UI` object will be created and it will call `UI#getUserCommand()` method to take in the input that the user has keyed in. 
-    2. A `String` object will be returned and saved into the `userCommandInput` variable in `Kitchen Helper`. 
-    3. The variable `userCommandInput` is being parsed into the `Parser` class as an argument for this method `Parser#parseUserCommand()`.
+    1. A `String` object will be returned and saved into the `userCommandInput` variable in `Kitchen Helper`. 
+    1. The variable `userCommandInput` is being parsed into the `Parser` class as an argument for this method `Parser#parseUserCommand()`.
    
     ![Cook Recipe State 1](images/cookRecipeState1.png)
     
@@ -508,22 +555,20 @@ When the user attempts to cook `Chicken Salad` recipe from `Kitchen Helper`, the
 3. The command is now being executed.
 
     1. The `CookRecipeCommand#execute()` will be called.
-    2. The `CookRecipeCommand#cookRecipe()` is called and it checks whether the recipe inputted by the user exists by calling the `CookRecipeCommand#checkIfRecipeExists()` method.
-    3. If recipe exists, the `CookRecipeCommand#checkIfRecipeExists()` method will return the index of the recipe, else it will return a number that is bigger than the size of `recipelist`. In this case, the recipe `Chicken Salad` exists, so it will return the index of the recipe 
-    4. Next, it is to check if there are sufficient non-expiring ingredients to be deducted from the ingredients' inventory to cater for the number of pax for the specific recipe by calling `CookRecipeCommand#checkForSufficientIngredients()` and `CookRecipeCommand#checkNotExpiredIngredientQty()` which their results are saved into `sufficientIngr` and `suffButLessExpiredIngr` boolean values respectively. 
+    1. The `CookRecipeCommand#cookRecipe()` is called and it checks whether the recipe inputted by the user exists by calling the `CookRecipeCommand#checkIfRecipeExists()` method.
+    1. If recipe exists, the `CookRecipeCommand#checkIfRecipeExists()` method will return the index of the recipe, else it will return a number that is bigger than the size of `recipelist`. In this case, the recipe `Chicken Salad` exists, so it will return the index of the recipe 
+    1. Next, it is to check if there are sufficient non-expiring ingredients to be deducted from the ingredients' inventory to cater for the number of pax for the specific recipe by calling `CookRecipeCommand#checkForSufficientIngredients()` and `CookRecipeCommand#checkNotExpiredIngredientQty()` which their results are saved into `sufficientIngr` and `suffButLessExpiredIngr` boolean values respectively. 
+        ![Cook Recipe Sequence Diagram Part 2](images/cookRecipeCommandSequenceDiagramPart2.png)
+    1. With respect to the point 4 above, the following cases may happen and has been summarised at the image above:
+       1. Case 1: If both `sufficientIngr` and `suffButLessExpiredIngr` return true
+            1. `CookRecipeCommand#deductIngredients()` will be called to deduct the ingredients in the ingredients' inventory.
+            1. Then, `Storage#saveIngredientData()` will be called to save the current `ingredientsList` into an output file.
+       2. Case 2:  If `sufficientIngr` returns true but `suffButLessExpiredIngr` returns false or both `sufficientIngr` and `suffButLessExpiredIngr` return false and the size of `expiredIngrNames` is not zero
+            1. `CookRecipeCommand#craftExpiredList()` will be called to craft the list of expired ingredients which will be returned to tell the users the ingredients that are expired. 
     
-    ![Cook Recipe Sequence Diagram Part 2](images/cookRecipeCommandSequenceDiagramPart2.png)
-    
-    5. Then, three of the following cases may happen:
-	   1. If both `sufficientIngr` and `suffButLessExpiredIngr` return true
-	       1. `CookRecipeCommand#deductIngredients()` will be called to deduct the ingredients in the ingredients' inventory.
-	       2. Then, `Storage#saveIngredientData()` will be called to save the current `ingredientsList` into an output file.
-	   2. If `sufficientIngr` returns true but `suffButLessExpiredIngr` returns false or both `sufficientIngr` and `suffButLessExpiredIngr` return false and the size of `expiredIngrNames` is not zero
-	       1. `CookRecipeCommand#craftExpiredList()` will be called to craft the list of expired ingredients which will be returned to tell the users the ingredients that are expired. 
-    6. Lastly, a String called `feedbackToUser` will be returned to the user to inform the user of the outcome of the command.
-    
-    ![Cook Recipe State 3](images/cookRecipeState3.png)
-    
+    The following image shows the state diagram for the command execution:
+        ![Cook Recipe State 3](images/cookRecipeState3.png)
+        
 4. The details will then be printed onto the console using `Ui#showResultToUser(result)`.
 
 The following shows the full sequence diagram for this command:
@@ -564,16 +609,16 @@ Alternative 2: building an index on the first letter of the recipe name
 
 [&#8593; Return to Top](#developer-guide)
 
-#### 4.2.4. Delete all/ specific recipe(s)
+#### 4.2.4. Delete a specific recipe
 The deletion feature for specific recipes allows the user to delete recipes either by the name or index of the recipe. 
 
 ##### Implementation
 When the user attempts to delete the `Chicken Rice` recipe from Kitchen Helper, the `Kitchen Helper`, `Parser` and `DeleteRecipeCommand` class will be called upon. The following sequence of steps will then occur: 
-1. The user keyed in “deleterecipe /n `Chicken Rice`".
+1. The user keyed in `deleterecipe /n Chicken Rice`.
     
     1. A `UI` object will be created and it will call `UI#getUserCommand()` method to take in the input that the user has keyed in. 
-    2. A `String` object will be returned and saved into the `userCommandInput` variable in `Kitchen Helper`. 
-    3. The variable `userCommandInput` is being parsed into the `Parser` class as an argument for this method `Parser#parseUserCommand()`.
+    1. A `String` object will be returned and saved into the `userCommandInput` variable in `Kitchen Helper`. 
+    1. The variable `userCommandInput` is being parsed into the `Parser` class as an argument for this method `Parser#parseUserCommand()`.
     
     ![Delete Recipe State 1](images/deleteRecipeState1.png)
     
@@ -586,10 +631,12 @@ When the user attempts to delete the `Chicken Rice` recipe from Kitchen Helper, 
 3. The command is now being executed.
     
     1. The `DeleteRecipeCommand#execute()` will be called.
-    2. As this is a deletion by recipe name, the `recipeIndex` variable is set as null. As the variable is null, `DeleteRecipeCommand#deleteRecipeByName()` will be called.
-    3. Next, the `DeleteRecipeCommand#getRecipeIndex()` to get the index based on the recipe name that the user has inputted. With the given index, `DeleteRecipeCommand#deleteRecipe()` will be called to delete the recipe. 
-    4. Lastly, a String called `feedbackToUser` will be returned to the user to inform the user of the outcome of the command. 
+    1. As this is a deletion by recipe name, the `recipeIndex` variable is set as null. As the variable is null, `DeleteRecipeCommand#deleteRecipeByName()` will be called.
+    1. Next, the `DeleteRecipeCommand#getRecipeIndex()` to get the index based on the recipe name that the user has inputted. With the given index, `DeleteRecipeCommand#deleteRecipe()` will be called to delete the recipe. 
+    1. Lastly, a String called `feedbackToUser` will be returned to the user to inform the user of the outcome of the command. 
     
+    The following image shows the state diagram for the command execution:
+
     ![Delete Recipe State 1](images/deleteRecipeState3.png)
     
 4. The details will then be printed onto the console using `Ui#showResultToUser(result)`.
@@ -930,6 +977,8 @@ __Value proposition__: Manage food inventory quickly compared to a typical mouse
 |v2.0|user|reset all my ingredients, chores, recipes|restart the application.|
 |v2.0|user|deduct ingredients that expire first|do not waste my ingredients.|
 |v2.0|user|be informed if I have sufficient ingredients to cook a specific recipe|find other recipes to cook.|
+|v2.0|user|get the expenditure on the ingredients that I used to cook in the recipe|keep track of my expenditure.|
+|v2.0|user|get the expenditure on the ingredients that I used to cook|keep track of my expenditure.|
 
 [&#8593; Return to Top](#developer-guide)
 
@@ -952,7 +1001,8 @@ Extensions:
   2b1. Systems alerts you to enter a quantity more than zero.
   Use case resumes at step 2.
 2c. System detects a expired expiry date in the entered data.
-  2c1. System alerts you that Expired ingredient detected in input. Please enter a non-expired expiry date.
+  2c1. System alerts you that Expired ingredient detected in input. Please enter a non-expired expiry
+       date.
   Use case resumes at step 2.
 ```
 <br>
@@ -999,6 +1049,126 @@ Extentions:
 Use case resumes at step 2.
 Use case ends.
 ```
+<br>
+
+```
+Use case: UC05 - Delete an ingredient
+MSS: 
+1. User wants to delete a particular ingredient. 
+2. User can either enter a keyword to search in Kitchen Helper or list all ingredients to find the 
+   ingredient to delete.
+3. User makes use of the index received in step 2 to delete the ingredient.
+4. Kitchen Helper will display a successful message if deletion was successful. 
+Use case ends. 
+Extentions:
+4a. No matching ingredient related to the index. 
+  4a1. Kitchen Helper will show an error message stating that there is no such ingredient.
+Use case resumes at step 3.
+Use case ends. 
+```
+
+<br>
+
+```
+Use case: UC06 - Delete a recipe
+MSS: 
+1. User wants to delete a particular recipe. 
+2. User can either enter a keyword to search in Kitchen Helper or list all recipes
+   to find the recipe to delete.
+3. User makes use of the index or name received in step 2 to delete the recipe.
+4. Kitchen Helper will display a successful message if deletion was successful. 
+Use case ends. 
+Extentions:
+4a. No matching ingredient related to the index or name. 
+  4a1. Kitchen Helper will show an error message stating that there is no such recipe.
+Use case resumes at step 3.
+Use case ends. 
+```
+
+<br>
+
+```
+Use case: UC07 - Cook a recipe
+MSS:
+1. User wants to cook a recipe for a number of pax.
+2. User can search for the recipe that it wants to cook.
+3. User use the name obtained in step 2 to cook the recipe. 
+4. Kitchen Helper will display a successful message if it was able to cook the recipe. 
+Use case ends. 
+Extentions:
+4a. There are insufficient/missing ingredients in the ingredients' inventory.
+    4a1. Kitchen Helper will show an error message stating that there were insufficient/missing
+         ingredients to cook the recipe. 
+4b. There are insufficient ingredients due to some expired ingredients in the ingredients' invenory. 
+    4b1. Kitchen Helper will show an error message and a list of expired ingredients.
+Use case resumes at step 3.
+Use case ends.
+```
+
+<br>
+
+```
+Use case: UC08 - List Ingredients
+MSS:
+1. User wants to see the whole ingredient list.
+2. User use the category 'all' to display whole ingredient list.
+3. System displays all ingredients regardless of category.
+Use case ends.
+
+Extensions:
+2a. System detects invalid format in the entered data.
+  2a1. System throws invalid input format and shows a valid format example.
+  Use case resumes at step 2.
+```
+
+<br>
+
+```
+Use case: UC09 - List Ingredients from Meat category
+MSS:
+1. User wants to see the whole ingredient list.
+2. User use the category 'meat' to display whole ingredient list.
+3. System displays ingredients under the category, `meat`.
+Use case ends.
+
+Extensions:
+2a. System detects invalid format in the entered data.
+  2a1. System throws invalid input format and shows a valid format example.
+2b. System detects invalid category in the entered data.
+  2b1. System throws invalid category name and shows the valid category names.
+  Use case resumes at step 2.
+```
+
+<br>
+
+```
+Use case: UC10 - List Recipe name
+MSS:
+1. User wants to see the whole list of Recipe name.
+2. User use the category 'all' to display whole recipe name list.
+3. System displays all recipe name.
+Use case ends.
+
+Extensions:
+2a. System detects invalid format in the entered data.
+  2a1. System throws invalid input format and shows a valid format example.
+  Use case resumes at step 2.
+```
+
+<br>
+
+```
+Use case: UC11 - List of Ingredients in Recipe
+MSS:
+1. User wants to see the ingredient list inside a Recipe.
+2. User use the recipe number '1' to display the ingredient list needed to cook the recipe.
+3. System displays all ingredients under the recipe.
+Use case ends.
+
+Extensions:
+2a. System detects invalid format in the entered data.
+  2a1. System throws invalid input format and shows a valid format example.
+```
 
 [&#8593; Return to Top](#developer-guide)
 
@@ -1036,15 +1206,26 @@ Use case ends.
 
 1. Add an ingredient into Kitchen Helper.
    1. Prerequisites: List all the ingredient using the `listingredient all` command. 
-   2. Test case: `addingredient /n beef /c meat /q 3 /p 20.20 /e 03/03/2022`    
+   2. Test case: `addingredient /n beef /c meat /q 3 /p 20 /e 03/03/2022`  
    Expected: Entry can be seen using `listingredient all` command.
-   3. Test case: `addingredient /n chicken /c meat /q 3 /p 3 /e 03/03/2020` 
+   3. Test case: `addingredient /n chicken /c meat /q 3 /p 3 /e 03/03/2020`  
    Expected: Expired ingredient detected in input. <br> Please enter a non-expired expiry date.
-   4. Test case: `addingredient /n milo /c drink /q 0 /p 1 /e 03/03/2022`
+   4. Test case: `addingredient /n milo /c drink /q 0 /p 1 /e 03/03/2022`  
    Expected: Please enter a quantity more than 0.
    
 #### F.3. List ingredient 
+1. List Ingredient
+   1. Prerequisites: Add ingredient using the `addingredient /n beef /c meat /q 3 /p 20.20 /e 03/03/2022` command. 
+   2. Test case: `listingredient all`    
+   Expected: Entry can be seen using `listingredient all` command and all other categories.
+   3. Test case: `listingredient meat`  
+   Expected: Entry can be seen using `listingredient all` command and only `meat` category is shown.
+   4. Test case: `listingredient 1`  
+   Expected: Invalid Command, please check your format!
+   5. Test case: `listingredient airplane`  
+   Expected: Invalid Command, please check your format!
 
+   
 #### F.4. Delete an ingredient 
 1. Delete an ingredient from Kitchen Helper.
    1. Prerequisites: List all the recipes using the `listingredient all` command.
@@ -1061,32 +1242,42 @@ Use case ends.
     
 #### F.5. Search for ingredient
 1. Search for ingredients in Kitchen Helper.
-   1. Prerequisites: The ingredient list should not be empty.
+   1. Prerequisites: The ingredient list should not be empty. You should at least add the following ingredient by using `addingredient /n beef /c meat /q 3 /p 20 /e 03/03/2022` before the search.  
    2. Test case: `searchingredient beef`  
    Expected: Ingredient entries that have the keyword matching `beef` names are listed.
-   3. Test case: 'searchingredient meat'  
+   3. Test case: `searchingredient meat`  
    Expected: Ingredient entries that have the keyword matching `meat` category are listed.
-   4. Test case: `searchingredient 02/02/2022`  
-   Expected: Ingredient entries that have the keyword matching `02/02/2022` date are listed.
+   4. Test case: `searchingredient 03/03/2022`  
+   Expected: Ingredient entries that have the keyword matching `03/03/2022` date are listed.
    5. Test case: `searchingredient $20`  
    Expected: Ingredient entries that have the keyword matching `$20` price are listed.
    
 #### F.6. Add a recipe
 1. Add a recipe into Kitchen Helper
     1. Prerequisites: List all the ingredient using the `listingredient all` command.
-    1. Test case: `addrecipe /n warm milk /i HL Milk:1:Dairy`\
-    Expected: Entry can be found using `listingredient all` command. 
+    1. Test case: `addrecipe /n warm milk /i HL Milk:1:Dairy`  
+    Expected: Entry can be found using `listrecipe all` command. 
 
 #### F.7. List recipe
+1. List Recipe
+   1. Prerequisites: Add ingredient using the `addrecipe /n warm milk /i HL Milk:1:Dairy` command. 
+   2. Test case: `listrecipe all`    
+   Expected: Entry can be seen using `listrecipe all` command, shows all recipe's name added.
+   3. Test case: `listrecipe 1`  
+   Expected: Entry can be seen using `listrecipe 1` command and shows all ingredients registered in the recipe.
+   4. Test case: `listrecipe 2`  
+   Expected: The Recipe List is currently empty.
+   5. Test case: `listrecipe notsure`  
+   Expected: Invalid Command, please check your format!
 
 #### F.8. Cook a recipe
 1. Cooks the specified recipe and ingredients in the recipe will be automatically deducted.
     1. Prerequisites: List all the ingredient using the `listingredient all` command.
-    1. Test case (sufficient ingredient): `cookrecipe /n warm milk /p 2`\
+    1. Test case (sufficient ingredient): `cookrecipe /n warm milk /p 2`  
     Expected: A reduction of the ingredients' quantity multiplied by `2` can be noticed when listing the ingredients with `listingredient all`
-    1. Test case (Sufficient even with expired ingredients):  `cookrecipe /n warm milk /p 2`\
+    1. Test case (Sufficient even with expired ingredients):  `cookrecipe /n warm milk /p 2`  
     Expected: The automatic deduction will not be carried out and expired item will be notified to user.
-    1. Test case: (Insufficient even with expired ingredients): `cookrecipe /n warm milk /p 2`\
+    1. Test case: (Insufficient even with expired ingredients): `cookrecipe /n warm milk /p 2`  
     Expected: The automatic deduction will not be carried out.
     
 #### F.9. Delete a recipe 
@@ -1099,8 +1290,8 @@ Use case ends.
 
 #### F.10. Search for recipe
 1. Search for similar recipe in Kitchen Helper.
-   1. Prerequisites: The recipe list should not be empty.
-   2. Test case: 'searchrecipe chicken' 
+   1. Prerequisites: The recipe list should not be empty. You should at least add the following recipe by using `addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable` before the search.   
+   2. Test case: `searchrecipe chicken`  
    Expected: Recipe's name entries that have the keyword matching `chicken' are listed. 
 
 #### F.11. Add a chore
@@ -1110,8 +1301,8 @@ Use case ends.
 #### F.13. Delete a chore
    
 #### F.14. Search for chore
-1. Search for chores in Kitchen Helper.
-   1. Prerequisites: The chore list should not be empty.
+1. Search for chores in Kitchen Helper. 
+   1. Prerequisites: The chore list should not be empty. You should at least add the following chore by using `addchore buy groceries /by Tuesday 12pm` before the search.  
    2. Test case: `searchchore groceries`  
    Expected: Chore entries that have the keyword matching `groceries` description are listed.
    3. Test case: `searchchore Tuesday`  
@@ -1138,9 +1329,9 @@ Use case ends.
 If any of the save files are empty, the user can choose to populate the files with their own user commands or alternatively, use any of the test cases below:
 
 1. `addrecipe /n Chicken Salad /i Chicken Breast:2:meat, Lettuce:4:vegetable`
-2. `addingredient /n Chicken Breast /c meat /q 3 /p 20 /e 18/03/2020`
-3. `addingredient /n kailan /c Vegetable /q 30 /p 30.45 /e 12/03/2020`
-4. `addingredient /n HL Milk /c Dairy /q 3 /p 12.2 /e 14/03/2020`
+2. `addingredient /n Chicken Breast /c meat /q 3 /p 20 /e 18/12/2020`
+3. `addingredient /n kailan /c Vegetable /q 30 /p 30.45 /e 12/12/2020`
+4. `addingredient /n HL Milk /c Dairy /q 3 /p 12.2 /e 14/12/2020`
 5. `addchore buy groceries /by Tuesday 12pm`
 
 Note that expenditure changes when `addingredient`, `deleteingredient`, or `cookrecipe` commands are used.
