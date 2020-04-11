@@ -299,6 +299,8 @@ The following shows the full sequence diagram for this command:
 
 ![Delete Ingredient Sequence Diagram](images/deleteIngredientSequenceDiagram.png)
 
+Other than deleting or reducing the quantity of an ingredient, `DeleteIngredientCommand` has an additional feature that is linked to [Display Expenditure](#45-display-expenditure) which will increase the cooking expenditure if the ingredients are used for cooking. 
+
 ##### Design Considerations
 + Aspect 1: How to differentiate `deleteingredientByQuantity` and `deleteIngredient` <br>
     + Alternative 1 (Current Choice): The `quantity` of ingredient in `DeleteIngredientCommand` constructor is set to the `quantity` that was inputted by the user. In the case where the user would like to delete an ingredient, the `quantity` variable will be set to `null`.
@@ -579,6 +581,8 @@ When the user attempts to cook `Chicken Salad` recipe from `Kitchen Helper`, the
 The following shows the full sequence diagram for this command:
 
 ![Cook Recipe Sequence Diagram](images/cookRecipeCommandSequenceDiagram.png)
+
+Other than reducing the quantity of ingredients if the recipe can be cooked successfully, `CookRecipeCommand` has an additional feature that is linked to [Display Expenditure](#45-display-expenditure) which will add the total cost of cooking this recipe into the total expenditure. 
 
 ##### Design considerations
 Aspect: Preparing the deduction of ingredients when cooking a recipe
