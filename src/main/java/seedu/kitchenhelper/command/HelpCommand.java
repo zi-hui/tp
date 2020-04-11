@@ -41,6 +41,7 @@ public class HelpCommand extends Command {
                 + HelpCommand.MESSAGE_USAGE + LS_LS
                 + ResetCommand.MESSAGE_USAGE + LS_LS
                 + SaveStateCommand.MESSAGE_USAGE + LS_LS
+                + DisplayExpenditureCommand.MESSAGE_USAGE + LS_LS
                 + ExitCommand.MESSAGE_USAGE + LS_LS
                 + INGREDIENT_LOGO
                 + AddIngredientCommand.MESSAGE_USAGE + LS_LS
