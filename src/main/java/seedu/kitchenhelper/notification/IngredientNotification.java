@@ -23,6 +23,13 @@ public class IngredientNotification {
     public static final String EMPTYEXPIRED_NOTIFICATION = "You have no ingredients that are expired.\n";
     private String notification = "";
 
+    /**
+     * Returns the result of notification gotten from three methods :
+     * checkForExpiringIngr, checkForLowQuantityIngr and checkForExpiredIngr.
+     *
+     * @param ingredientArrayList the ArrayList that stores ingredients.
+     * @return result a string which contains the results
+     */
     public String getNotifications(ArrayList<Ingredient> ingredientArrayList) {
         ArrayList<Ingredient> ingredientExpiring = checkForExpiringIngr(ingredientArrayList);
         ArrayList<Ingredient> ingredientLowQuantity = checkForLowQuantityIngr(ingredientArrayList);
@@ -55,6 +62,12 @@ public class IngredientNotification {
         return notification;
     }
 
+    /**
+     * Returns Date format of a String date.
+     *
+     * @param date1 date
+     * @return date date format of the string date
+     */
     public Date stringToDate(String date1) {
         Date date = new Date();
         try {
@@ -66,6 +79,11 @@ public class IngredientNotification {
         return date;
     }
 
+    /**
+     * Adds data from ingredientArrayList into notification result.
+     *
+     * @param ingredientArrayList the Arraylist that stores Ingredient
+     */
     public void addToNotification(ArrayList<Ingredient> ingredientArrayList) {
         int counter = 1;
         for (Ingredient i : ingredientArrayList) {
@@ -76,6 +94,13 @@ public class IngredientNotification {
         }
     }
 
+    /**
+     * Checks all inggredients in ingredientArrayList and returns a newly formed arraylist which contains
+     * ingredients that are expiring in 3 days.
+     *
+     * @param ingredientArrayList the Arraylist that stores Ingredient
+     * @return ingredientExpiring the Arraylist that contains data of ingredients that is expiring in 3 days.
+     */
     public ArrayList<Ingredient> checkForExpiringIngr(ArrayList<Ingredient> ingredientArrayList) {
         ArrayList<Ingredient> ingredientExpiring = new ArrayList<Ingredient>();
         for (Ingredient i : ingredientArrayList) {
@@ -93,7 +118,13 @@ public class IngredientNotification {
         return ingredientExpiring;
     }
 
-
+    /**
+     * Checks all inggredients in ingredientArrayList and returns a newly formed arraylist which contains
+     * ingredients that have low quantity of below 5.
+     *
+     * @param ingredientArrayList the Arraylist that stores Ingredient
+     * @return ingredientExpiring the Arraylist that contains data of ingredients that is expiring in 3 days.
+     */
     public ArrayList<Ingredient> checkForLowQuantityIngr(ArrayList<Ingredient> ingredientArrayList) {
         ArrayList<Ingredient> ingredientLowQuantity = new ArrayList<Ingredient>();
         for (Ingredient i : ingredientArrayList) {
@@ -104,6 +135,13 @@ public class IngredientNotification {
         return ingredientLowQuantity;
     }
 
+    /**
+     * Checks all inggredients in ingredientArrayList and returns a newly formed arraylist which contains
+     * ingredients that are expired.
+     *
+     * @param ingredientArrayList the Arraylist that stores Ingredient
+     * @return ingredientExpiring the Arraylist that contains data of ingredients that has expired.
+     */
     public ArrayList<Ingredient> checkForExpiredIngr(ArrayList<Ingredient> ingredientArrayList) {
         ArrayList<Ingredient> ingredientExpired = new ArrayList<Ingredient>();
         for (Ingredient i : ingredientArrayList) {
