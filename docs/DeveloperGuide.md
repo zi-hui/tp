@@ -391,6 +391,10 @@ For example, `beef` ingredient's expired date is 02/02/2020 and have quantity of
 
 ##### Implementation  
 
+
+![NotificationIngredientCommand](images/notificationIngredient.png) 
+
+
 The following steps explained sequence diagram for `showNotification` command:  
 1. The user starts `KitchenHelper`.  
 2. `KitchenHelper` calls `showNotification()`.  
@@ -1253,6 +1257,7 @@ Extensions:
     1. Prerequisites: List all the ingredient using the `listingredient all` command.
     1. Test case: `addrecipe /n warm milk /i HL Milk:1:Dairy`  
     Expected: Entry can be found using `listingredient all` command. 
+
 
 #### F.7. List recipe
 1. List Recipe
