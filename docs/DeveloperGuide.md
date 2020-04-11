@@ -42,8 +42,9 @@ By: `CS2113T-M16-2` Since: `2020`
     + [4.4. Storage](#44-storage)
       - [4.4.1. Select files to load from and save to](#441-select-files-to-load-from-and-save-to)
       - [4.4.2. Save current state](#442-save-current-state)
-    + [4.5. Expenditure](#45-display-expenditure) 
+    + [4.5. Expenditure](#45-expenditure) 
       - [4.5.1. Display expenditure](#451-display-expenditure)
+      - [4.5.2. Expenditure functionality](#452-expenditure-functionality)
     + [4.6. Logging](#46-logging)
   * [Appendices](#appendices)
     + [Appendix A: Product Scope](#appendix-a-product-scope)
@@ -942,9 +943,8 @@ For example, `take cake out of oven` is overdue since `11/04/2020 15:30`. Deadli
 The following steps explains the sequence diagram for this feature:  
 1. The user starts `KitchenHelper` and `KitchenHelper#run` is called.  
 2. `KitchenHelper` calls `showNotification()`.  
-3. `ChoreNotification` object is created and `ChoreNotification#getNotifications(choreList)` is called.  
-4. 
-5. The results from `ChoreNotification#hasDateAsDeadline`, `ChoreNotification#isOverdue` and `ChoreNotification#isApproachingDeadline` will be combined.
+3. `ChoreNotification` object is created and `ChoreNotification#getNotifications(choreList)` is called.   
+4. The results from `ChoreNotification#hasDateAsDeadline`, `ChoreNotification#isOverdue` and `ChoreNotification#isApproachingDeadline` will be combined.
     1. `ChoreNotification#hasDateAsDeadline` checks for `Chores` that have Date object type deadline.
     1. `ChoreNotification#isOverdue` checks for `Chores` that have exceeded their deadline.
     1. `ChoreNotification#isApproachingDeadline` checks for `Chores` that have deadlines upcoming in the next 3 days.
@@ -1055,7 +1055,116 @@ Aspects: How saving of current state data executes:
 
 [&#8593; Return to Top](#developer-guide)
 
-### 4.5. Display Expenditure
+### 4.5. Expenditure
+#### 4.5.1. Display Expenditure
+The feature for displayexpenditure allows the user to keep track of their total expenditure and the amount they used in their cooking each week.
+
+##### Implementation  
+When the user attempts to display `expenditure`, the `Kitchen Helper`, `Parser` and `DisplayExpenditureCommand` class will be called upon. The following sequence of steps will then occur:
+1. The user keyed in `displayexpenditure`.
+    
+    1. A `UI` object will be created and calls `UI#getUserCommand()`. 
+    1. Input will be parsed in `Parser#parseUserCommand()` and identified with the keyword `displayexpenditure`.   
+    
+    ![Add Recipe Step 1](images/AddRecipe1.png)
+2. Parsing of user input and creation of command object
+    1. This will automatically trigger the parsing of the user’s input string in `Parser#prepareDisplayExpenditure()` to ensure the parameters are empty, or an exception will be thrown.
+    1. The `DisplayExpenditureCommand` object will be created. 
+    ![Add Recipe Step 2](images/AddRecipe2.png)
+3. Executing Command
+    1. The newly created object will call `DisplayExpenditureCommand#execute()` which will format the expenditure information into how it will be displayed.
+    1. Lastly, a String called `feedbackToUser` containing the information to display will be returned to `KitchenHelper`. 
+    ![Add Recipe Step 3](images/AddRecipe3.png)
+
+4. The expenditure information will then be printed onto the console using `Ui#showResultToUser(result)`.
+
+The following sequence diagram shows how the `DisplayExpenditureCommand` works    
+    ![AddChoreCommand](images/AddChoreCommand.png)
+
+##### Design considerations:
+
+- Alternative 1(current implementation): Create a class to handle display of expenditure.
+
+|     |     |
+|-----|-----|
+|**Pros** | More OOP. `displayexpenditure` is a supported user command so it should have its own class for its specific function just like other commands. |
+|**Cons** | Very abstract method and a lot of effort in order to print the value of two variables.|
+
+- Alternative 2: Have a method to display expenditure in `Parser` class.
+
+|     |     |
+|-----|-----|
+|**Pros** | Simpler and more basic implementation.|  
+|**Cons** | Less OOP and will ruin the code style because its execution would be different from other commands. | 
+
+    
+#### 4.5.2. Expenditure functionality
+The Expenditure function mainly keeps track of two variables, `totalExpenditure` and `amountUsedInCooking`. Total expenditure is the amount spent on purchase of ingredients for the week. Amount used in cooking indicates the price of all the ingredients used for cooking or consumption in the week. The latter variable reflects the extent to which the user makes use of his purchase and hence the amount of expenditure he benefited from.
+<br> 
+
+##### Implementation  
+The values of the variables in Expenditure change in the the following situations:
+
++ The user executes `addingredient`.  
+    1. During the execution of `Parser#prepareAddIngredient`, `Expenditure#addToExpenditure` retrieves the price and quantity values of the ingredient being added. 
+    1. `totalExpenditure` value increases by the value calculated by `Expenditure#addToExpenditure`. 
+    1. `Storage#saveExpenditureData` saves the updated value.  
++ The user executes `cookrecipe`.
+    1. During the execution of `CookRecipeCommand#checkIfIngredientExpired`, `Expenditure#addAmountForCooking` retrieves the quantity used in cooking for each ingredient in the recipe. 
+    2. `amountUsedInCooking` value increases by the value calculated by `Expenditure#addAmountForCooking`.
+    1. `Storage#saveExpenditureData` saves the updated value.  
++ The user executes `deleteingredient`.
+    1. During the execution of `DeleteIngredientCommand#updateNewQuantity` and `DeleteIngredientCommand#deleteIngredient`, `Expenditure#editExpenditure` retrieves the quantity of the ingredient to delete.
+    1. `Expenditure#editExpenditure` first executes `Expenditure#removeFromExpenditure`, which prompts the user whether the user would like to deduct the cost of the ingredient being deleted from the total expenditure, in the case the user is deleting the ingredient due to wrong addition and would not like to count its cost in total expenditure.
+    1. If the user responds with `yes`, the `totalExpenditure` value is decreased by the amount calculated by `Expenditure#changePrice`.
+    1. If the user responds with `no`, `Expenditure#editExpenditure` will then execute `Expenditure#addToAmountUsed`, which prompts the user whether the user would like to add the cost of the ingredient being deleted to the amount used in cooking, in the case the user manually deletes ingredients that have been cooked or consumed.
+    1. If the user responds with `yes`, the `amountUsedInCooking` value increases by the amount calculated by `Expenditure#changePrice`.
+    1. If the user responds with `no`, the `totalExpenditure` value and `amountUseInCooking` value remain unchanged.
+    1. `Storage#saveExpenditureData` saves the updated value.
+
+The following sequence diagram shows how the `DisplayExpenditureCommand` works    
+<insert diagram
+
+##### Design considerations:
+
+Aspect: Singleton pattern for Expenditure class.
+
+- Alternative 1(current implementation): Making Expenditure a Singleton.
+
+|     |     |
+|-----|-----|
+|**Pros** | The Expenditure values are accumulated, so the exact same variables have to be used every time. Using only one instance of the Expenditure object allows that. |
+|**Cons** | 1. Increases dependencies as it has a global state. It can be overused and be hard to track. <br> 2. Makes testing harder. |
+
+- Alternative 2: Making Expenditure variables and methods static.
+
+|     |     |
+|-----|-----|
+|**Pros** | Static variables can also update expenditure using the exact same variables.|  
+|**Cons** | Take up memory as they cannot be created and destroyed during program execution. |
+
+- Alternative 3: Loading expenditure values from expenditure output text file to a local variable every time.
+
+|     |     |
+|-----|-----|
+|**Pros** | Also allows the retrieval of most updated value.|  
+|**Cons** | A lot of storing and loading to and from text files, which increases overhead. |
+
+Aspect: Storage of Expenditure data in its own output file.
+
+- Alternative 1(current implementation): Storage in its own Expenditure output file.
+
+|     |     |
+|-----|-----|
+|**Pros** | Neater to have a specific output file solely for Expenditure data. |
+|**Cons** | Create an entire storage function and output file for three variables. |
+
+- Alternative 2: Storage together with Chore data. 
+
+|     |     |
+|-----|-----|
+|**Pros** | Does not require additional storage implementation and save space not creating another file. |
+|**Cons** | Whenever save Expenditure data, the whole data file overwritten and need to loop through entire choreList to save Chore data with the new Expenditure data.|
 
 [&#8593; Return to Top](#developer-guide)
 
