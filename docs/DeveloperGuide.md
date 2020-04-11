@@ -2,6 +2,8 @@
 By: `CS2113T-M16-2` Since: `2020`
 
 ![Supported Java versions](https://img.shields.io/badge/Java-11-blue.svg) ![Supported OS](https://img.shields.io/badge/Supported%20OS-Windows|MacOS|Linux-yellow.svg) 
+![Java CI](https://github.com/AY1920S2-CS2113T-M16-2/tp/workflows/Java%20CI/badge.svg)
+
 - [Developer Guide](#developer-guide)
   * [1. Introduction](#1-introduction)
     + [1.1. Background](#11--background)
@@ -72,6 +74,9 @@ Kitchen Helper, born from the need to keep track of kitchen inventory, is an app
 The document contains the specified architecture and software design specifications for the application, Kitchen Helper. 
 ### 1.3. Scope
 This describes the software architecture and software design requirements for Kitchen Helper. This guide is mainly for developers, designers and software engineers that are or going to work on Kitchen Helper. 
+
+[&#8593; Return to Top](#developer-guide)
+
 ## 2. Setting up
 
 ### 2.1. Prerequisites
@@ -385,8 +390,6 @@ The notification for ingredients warning runs everytime the program starts. Chec
 For example, `beef` ingredient's expired date is 02/02/2020 and have quantity of 3. The program will list down the ingredient in the categories when the application start.
 
 ##### Implementation  
-
-<Image to be added>
 
 The following steps explained sequence diagram for `showNotification` command:  
 1. The user starts `KitchenHelper`.  
@@ -970,6 +973,8 @@ __Value proposition__: Manage food inventory quickly compared to a typical mouse
 |v2.0|user|reset all my ingredients, chores, recipes|restart the application.|
 |v2.0|user|deduct ingredients that expire first|do not waste my ingredients.|
 |v2.0|user|be informed if I have sufficient ingredients to cook a specific recipe|find other recipes to cook.|
+|v2.0|user|get the expenditure on the ingredients that I used to cook in the recipe|keep track of my expenditure.|
+|v2.0|user|get the expenditure on the ingredients that I used to cook|keep track of my expenditure.|
 
 [&#8593; Return to Top](#developer-guide)
 
@@ -992,7 +997,8 @@ Extensions:
   2b1. Systems alerts you to enter a quantity more than zero.
   Use case resumes at step 2.
 2c. System detects a expired expiry date in the entered data.
-  2c1. System alerts you that Expired ingredient detected in input. Please enter a non-expired expiry date.
+  2c1. System alerts you that Expired ingredient detected in input. Please enter a non-expired expiry
+       date.
   Use case resumes at step 2.
 ```
 <br>
@@ -1045,7 +1051,8 @@ Use case ends.
 Use case: UC05 - Delete an ingredient
 MSS: 
 1. User wants to delete a particular ingredient. 
-2. User can either enter a keyword to search in Kitchen Helper or list all ingredients to find the ingredient to delete.
+2. User can either enter a keyword to search in Kitchen Helper or list all ingredients to find the 
+   ingredient to delete.
 3. User makes use of the index received in step 2 to delete the ingredient.
 4. Kitchen Helper will display a successful message if deletion was successful. 
 Use case ends. 
@@ -1062,7 +1069,8 @@ Use case ends.
 Use case: UC06 - Delete a recipe
 MSS: 
 1. User wants to delete a particular recipe. 
-2. User can either enter a keyword to search in Kitchen Helper or list all recipes to find the recipe to delete.
+2. User can either enter a keyword to search in Kitchen Helper or list all recipes
+   to find the recipe to delete.
 3. User makes use of the index or name received in step 2 to delete the recipe.
 4. Kitchen Helper will display a successful message if deletion was successful. 
 Use case ends. 
@@ -1085,7 +1093,8 @@ MSS:
 Use case ends. 
 Extentions:
 4a. There are insufficient/missing ingredients in the ingredients' inventory.
-    4a1. Kitchen Helper will show an error message stating that there were insufficient/missing ingredients to cook the recipe. 
+    4a1. Kitchen Helper will show an error message stating that there were insufficient/missing
+         ingredients to cook the recipe. 
 4b. There are insufficient ingredients due to some expired ingredients in the ingredients' invenory. 
     4b1. Kitchen Helper will show an error message and a list of expired ingredients.
 Use case resumes at step 3.
@@ -1243,7 +1252,7 @@ Extensions:
 1. Add a recipe into Kitchen Helper
     1. Prerequisites: List all the ingredient using the `listingredient all` command.
     1. Test case: `addrecipe /n warm milk /i HL Milk:1:Dairy`\
-    Expected: Entry can be found using `listingredient all` command. 
+    Expected: Entry can be found using `listrecipe all` command. 
 
 #### F.7. List recipe
 1. List Recipe
@@ -1256,6 +1265,7 @@ Extensions:
    Expected: The Recipe List is currently empty.
    5. Test case: `listrecipe notsure`
    Expected: Invalid Command, please check your format!
+
 #### F.8. Cook a recipe
 1. Cooks the specified recipe and ingredients in the recipe will be automatically deducted.
     1. Prerequisites: List all the ingredient using the `listingredient all` command.

@@ -193,7 +193,6 @@ public class Storage {
             }
             freshRecipe.addIngredientsToRecipeFromArrayList(recipeItems);
             recipeList.add(freshRecipe);
-            //recipeList.add(freshRecipe);
         }
         scanner.close();
         return recipeList;
@@ -292,7 +291,6 @@ public class Storage {
 
         File file = new File(filePathExpenditure);
         Scanner scanner = new Scanner(file);
-        //String userData = scanner.nextLine();
 
         try {
             String userData = scanner.nextLine();
