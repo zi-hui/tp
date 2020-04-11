@@ -261,9 +261,14 @@ public class Parser {
         try {
             DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
             Date date = dateFormat.parse(dateStr);
+            if (isOverdueChore(date)) {
+                throw new ExpiredException();
+            }
             return new AddChoreCommand(description, date);
         } catch (ParseException e) {
             return new AddChoreCommand(description, dateStr);
+        } catch (ExpiredException ee) {
+            return new InvalidCommand(Messages.MESSAGE_OVERDUE_CHORE);
         }
     }
 
@@ -421,14 +426,17 @@ public class Parser {
             int indexToDelete = Integer.parseInt(parameters.trim());
             return new DeleteChoreCommand(indexToDelete);
         } catch (NumberFormatException e) {
-            if (parameters.trim().equalsIgnoreCase("all")) {
-                return new DeleteChoreCommand();
-            }
             return new InvalidCommand(
                     String.format("%s\n%s", InvalidCommand.MESSAGE_INVALID, DeleteChoreCommand.COMMAND_FORMAT));
         }
     }
 
+    /**
+     * Prepares the command that marks chore as done.
+     *
+     * @param parameters full user input string.
+     * @return the prepared command.
+     */
     public Command prepareDoneChore(String parameters) {
         try {
             int indexToCheck = Integer.parseInt(parameters.trim());
@@ -440,6 +448,13 @@ public class Parser {
     }
 
 
+    /**
+     * Prepares the display of expenditure amounts.
+     *
+     * @param parameters user input string following the command word.
+     * @return the prepared command.
+     * @throws KitchenHelperException if user adds input after command word.
+     */
     public Command prepareDisplayExpenditure(String parameters) throws KitchenHelperException {
         try {
             if (! parameters.isEmpty()) {
@@ -521,4 +536,20 @@ public class Parser {
         LocalDate dt2 = LocalDate.parse(LocalDate.now().toString());
         return dt2.isBefore(dt1);
     }
+
+    /**
+     * Check if the chore is overdue prior to adding.
+     *
+     * @param choreDate the user input chore deadline.
+     * @return true if chore is overdue, false otherwise.
+     */
+    public boolean isOverdueChore(Date choreDate) {
+        Date currentDate = new Date();
+        if (choreDate.before(currentDate)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

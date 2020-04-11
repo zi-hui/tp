@@ -23,10 +23,19 @@ Chicken Stew Recipe has been created with 2 ingredients inside.
 ===================================================
 warm milk Recipe has been created with 1 ingredients inside.
 ===================================================
+This is the total amount you spent on buying Ingredients so far this week: $0.00
+This is the amount you actually spent for Ingredients used in your cooking this week: $0.00
+===================================================
 KitchenHelper has added: Ingredient:HL Milk Category:Dairy Quantity:3 Price:$12.20 Expiry:01/03/2022
+===================================================
+This is the total amount you spent on buying Ingredients so far this week: $36.60
+This is the amount you actually spent for Ingredients used in your cooking this week: $0.00
 ===================================================
 Kitchen Helper is trying to cook!
 warm milk was cooked with a pax of 2
+===================================================
+This is the total amount you spent on buying Ingredients so far this week: $36.60
+This is the amount you actually spent for Ingredients used in your cooking this week: $24.40
 ===================================================
 
 Here is the list of Recipe:
@@ -191,16 +200,16 @@ You have added this chore:
 Now you have 1 chore in the list.
 ===================================================
 Invalid Command Format!
-Adds a chore to the chore list. TASK /by DATE
-Example: addchore buy groceries /by Tuesday 12pm
+Adds a chore to the chore list. TASK /by DEADLINE OR TASK /by <dd/MM/yyyy HH:mm>
+Example: addchore buy groceries /by Tuesday 12pm OR addchore buy groceries /by 14/04/2020 12:00
 ===================================================
 You have added this chore:
-[x] buy groceries (by: 05/04/2020 08:30)
+[x] buy groceries (by: 05/04/2021 08:30)
 Now you have 2 chores in the list.
 ===================================================
 Here are the chores in your list:
 1. [x] buy groceries (by: Tuesday 12pm)
-2. [x] buy groceries (by: 05/04/2020 08:30)
+2. [x] buy groceries (by: 05/04/2021 08:30)
 ===================================================
 You have completed this chore:
 [/] buy groceries (by: Tuesday 12pm)
@@ -208,7 +217,7 @@ You have completed this chore:
 ===================================================
 Here are your matching chores in your list
 1.[/] buy groceries (by: Tuesday 12pm) [Location: Index 1]
-2.[x] buy groceries (by: 05/04/2020 08:30) [Location: Index 2]
+2.[x] buy groceries (by: 05/04/2021 08:30) [Location: Index 2]
 ===================================================
 Here are your matching ingredients in your list
 1.[Meat] Beef Qty:3 $20.00 Exp:18/03/2022 [Location: Index 4]
@@ -230,6 +239,9 @@ This recipe does not exist! Please type in a correct recipe name/index.
 ===================================================
 Chicken Stew has been deleted
 ===================================================
+This is the total amount you spent on buying Ingredients so far this week: $1591.10
+This is the amount you actually spent for Ingredients used in your cooking this week: $264.40
+===================================================
 Invalid Command, please check your format!
 Deletes an ingredient.
 Usage: deleteingredient /i INGREDIENTINDEX [/q QUANTITY]
@@ -239,14 +251,38 @@ Please enter a valid quantity to delete!
 Currently:
 Apple : 1
 ===================================================
+The amount of money spent on this ingredient has already been recorded.
+Would you like to remove the amount spent on this item from the total expenditure?
+===================================================
+Ok! There are no changes to expenditure.
+===================================================
+Would you like to add the amount spent on this item to the amount used for cooking or consumption?
+===================================================
+Ok! There are no changes to expenditure.
+===================================================
 The quantity of Apple has been changed!
 This ingredient has a quantity of 0 after deduction, so it has been deleted.
+===================================================
+This is the total amount you spent on buying Ingredients so far this week: $1591.10
+This is the amount you actually spent for Ingredients used in your cooking this week: $264.40
 ===================================================
 Please enter a valid quantity to delete!
 Currently:
 Apple : 2
 ===================================================
+The amount of money spent on this ingredient has already been recorded.
+Would you like to remove the amount spent on this item from the total expenditure?
+===================================================
+Ok! There are no changes to expenditure.
+===================================================
+Would you like to add the amount spent on this item to the amount used for cooking or consumption?
+===================================================
+Ok! $1.00 is added to amount used in cooking or consumption.
+===================================================
 The quantity of Apple has been changed!
+===================================================
+This is the total amount you spent on buying Ingredients so far this week: $1591.10
+This is the amount you actually spent for Ingredients used in your cooking this week: $265.40
 ===================================================
 Invalid Command, please check your format!
 Deletes an ingredient.
@@ -260,13 +296,59 @@ Deletes an ingredient.
 Usage: deleteingredient /i INGREDIENTINDEX [/q QUANTITY]
 Example: deleteingredient /i 1 /q 2
 ===================================================
+The amount of money spent on this ingredient has already been recorded.
+Would you like to remove the amount spent on this item from the total expenditure?
+===================================================
+Ok! $160.00 is deducted from total expenditure.
+===================================================
 Beef cubes has been deleted.
+===================================================
+This is the total amount you spent on buying Ingredients so far this week: $1431.10
+This is the amount you actually spent for Ingredients used in your cooking this week: $265.40
+===================================================
+The amount of money spent on this ingredient has already been recorded.
+Would you like to remove the amount spent on this item from the total expenditure?
+===================================================
+Please enter either "Yes"/"No"
+===================================================
+Ok! There are no changes to expenditure.
+===================================================
+Would you like to add the amount spent on this item to the amount used for cooking or consumption?
+===================================================
+Ok! There are no changes to expenditure.
 ===================================================
 Beef has been deleted.
 ===================================================
-Apple has been deleted.
+The amount of money spent on this ingredient has already been recorded.
+Would you like to remove the amount spent on this item from the total expenditure?
+===================================================
+Ok! There are no changes to expenditure.
+===================================================
+Would you like to add the amount spent on this item to the amount used for cooking or consumption?
+===================================================
+Ok! There are no changes to expenditure.
 ===================================================
 Apple has been deleted.
+===================================================
+The amount of money spent on this ingredient has already been recorded.
+Would you like to remove the amount spent on this item from the total expenditure?
+===================================================
+Ok! There are no changes to expenditure.
+===================================================
+Would you like to add the amount spent on this item to the amount used for cooking or consumption?
+===================================================
+Ok! There are no changes to expenditure.
+===================================================
+Apple has been deleted.
+===================================================
+The amount of money spent on this ingredient has already been recorded.
+Would you like to remove the amount spent on this item from the total expenditure?
+===================================================
+Ok! There are no changes to expenditure.
+===================================================
+Would you like to add the amount spent on this item to the amount used for cooking or consumption?
+===================================================
+Ok! There are no changes to expenditure.
 ===================================================
 Chicken Breast has been deleted.
 ===================================================

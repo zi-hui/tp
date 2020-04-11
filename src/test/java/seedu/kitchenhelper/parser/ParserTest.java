@@ -4,12 +4,13 @@ import org.junit.jupiter.api.Test;
 import seedu.kitchenhelper.KitchenHelper;
 import seedu.kitchenhelper.command.AddChoreCommand;
 import seedu.kitchenhelper.command.AddIngredientCommand;
-import seedu.kitchenhelper.command.SearchChoreCommand;
-import seedu.kitchenhelper.command.SearchIngredientCommand;
-import seedu.kitchenhelper.command.SearchRecipeCommand;
+import seedu.kitchenhelper.command.DeleteRecipeCommand;
 import seedu.kitchenhelper.command.DeleteChoreCommand;
 import seedu.kitchenhelper.command.DeleteIngredientCommand;
 import seedu.kitchenhelper.command.InvalidCommand;
+import seedu.kitchenhelper.command.SearchChoreCommand;
+import seedu.kitchenhelper.command.SearchRecipeCommand;
+import seedu.kitchenhelper.command.SearchIngredientCommand;
 import seedu.kitchenhelper.common.Messages;
 import seedu.kitchenhelper.exception.KitchenHelperException;
 
@@ -59,15 +60,19 @@ class ParserTest {
     
     @Test
     void prepareAddChore_testPass() {
-        String correctAttributes = "buy groceries /by Tuesday 12pm";
-        assertTrue(new Parser().prepareAddChore(correctAttributes) instanceof AddChoreCommand);
+        String correctAttributesWithString = "buy groceries /by Tuesday 12pm";
+        assertTrue(new Parser().prepareAddChore(correctAttributesWithString) instanceof AddChoreCommand);
+        String correctAttributesWithDate = "buy groceries /by 14/04/2020 12:00";
+        assertTrue(new Parser().prepareAddChore(correctAttributesWithDate) instanceof AddChoreCommand);
     }
     
     @Test
     void prepareAddChore_testFail() {
         String incorrectAttributes = "buy groceries";
-        String output = "Invalid Command Format!\n" + "Adds a chore to the chore list. TASK /by DATE\n"
-                        + "Example: addchore buy groceries /by Tuesday 12pm";
+        String output = "Invalid Command Format!\nAdds a chore to the chore list. "
+                + "TASK /by DEADLINE OR TASK /by <dd/MM/yyyy HH:mm>\n"
+                        + "Example: addchore buy groceries /by Tuesday 12pm "
+                + "OR addchore buy groceries /by 14/04/2020 12:00";
         assertEquals(output, showToConsole(
                 new KitchenHelper().executeCommand(new Parser().prepareAddChore(incorrectAttributes)).feedbackToUser));
     }
@@ -87,6 +92,40 @@ class ParserTest {
         String output = String.format(DeleteIngredientCommand.COMMAND_FAILURE);
         assertEquals(output, showToConsole(new KitchenHelper()
                 .executeCommand(new Parser().prepareDeleteIngredient(incorrectAttributes)).feedbackToUser));
+    }
+
+    @Test
+    void prepareDeleteRecipeIndex_testPass() throws KitchenHelperException {
+        String correctAttributes = "/i 1";
+        //checking the instance of the DeleteRecipeCommand
+        assertTrue(new Parser().prepareDeleteRecipe(correctAttributes) instanceof DeleteRecipeCommand);
+    }
+
+    @Test
+    void prepareDeleteRecipeIndex_testFail() throws KitchenHelperException {
+        String incorrectAttributes = "/i -1";
+        //checking the instance of the DeleteRecipeCommand
+        assertTrue(new Parser().prepareDeleteRecipe(incorrectAttributes) instanceof DeleteRecipeCommand);
+        String output = String.format(DeleteRecipeCommand.COMMAND_FAILURE);
+        assertEquals(output, showToConsole(new KitchenHelper()
+                .executeCommand(new Parser().prepareDeleteRecipe(incorrectAttributes)).feedbackToUser));
+    }
+
+    @Test
+    void prepareDeleteRecipeName_testPass() throws KitchenHelperException {
+        String correctAttributes = "/n Chicken Salad";
+        //checking the instance of the DeleteRecipeCommand
+        assertTrue(new Parser().prepareDeleteRecipe(correctAttributes) instanceof DeleteRecipeCommand);
+    }
+
+    @Test
+    void prepareDeleteRecipeName_testFail() throws KitchenHelperException {
+        String incorrectAttributes = "/n Chicken";
+        //checking the instance of the DeleteRecipeCommand
+        assertTrue(new Parser().prepareDeleteRecipe(incorrectAttributes) instanceof DeleteRecipeCommand);
+        String output = String.format(DeleteRecipeCommand.COMMAND_FAILURE);
+        assertEquals(output, showToConsole(new KitchenHelper()
+                .executeCommand(new Parser().prepareDeleteRecipe(incorrectAttributes)).feedbackToUser));
     }
     
     @Test

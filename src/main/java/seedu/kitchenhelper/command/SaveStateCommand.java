@@ -7,7 +7,6 @@ import seedu.kitchenhelper.storage.Storage;
 import seedu.kitchenhelper.ui.Ui;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -20,7 +19,8 @@ public class SaveStateCommand extends Command {
     public static final String MESSAGE_SUCCESS = "You have saved the current state in the following files: ";
     public static final String FILE_PATH_INGREDIENT = "outputIngredientCopy.txt, ";
     public static final String FILE_PATH_RECIPE = "outputRecipeCopy.txt, ";
-    public static final String FILE_PATH_CHORE = "outputChoreCopy.txt";
+    public static final String FILE_PATH_CHORE = "outputChoreCopy.txt, ";
+    public static final String FILE_PATH_EXPENDITURE = "outputExpenditureCopy.txt";
     public static final String COMMAND_DESC = "Stores the current state of program into backup storage files.";
     public static final String MESSAGE_USAGE =
             String.format("%s: %s", COMMAND_WORD, COMMAND_DESC) + Ui.LS + String.format("Example: %s", COMMAND_WORD);
@@ -33,7 +33,8 @@ public class SaveStateCommand extends Command {
      */
     public String saveState() throws IOException {
         chooseSaveOption();
-        return MESSAGE_SUCCESS + FILE_PATH_INGREDIENT + FILE_PATH_RECIPE +  FILE_PATH_CHORE;
+        return MESSAGE_SUCCESS + FILE_PATH_INGREDIENT + FILE_PATH_RECIPE +  FILE_PATH_CHORE
+                + FILE_PATH_EXPENDITURE;
     }
 
     /**
@@ -43,13 +44,16 @@ public class SaveStateCommand extends Command {
         var sourceIngredient = new File("outputIngredient.txt");
         var sourceRecipe = new File("outputRecipe.txt");
         var sourceChore = new File("outputChore.txt");
+        var sourceExpenditure = new File("outputExpenditure.txt");
         var destIngredient = new File("outputIngredientCopy.txt");
         var destRecipe = new File("outputRecipeCopy.txt");
         var destChore = new File("outputChoreCopy.txt");
+        var destExpenditure = new File("outputExpenditureCopy.txt");
 
         Storage.copyFile(sourceIngredient, destIngredient);
         Storage.copyFile(sourceRecipe, destRecipe);
         Storage.copyFile(sourceChore, destChore);
+        Storage.copyFile(sourceExpenditure, destExpenditure);
     }
 
     /**

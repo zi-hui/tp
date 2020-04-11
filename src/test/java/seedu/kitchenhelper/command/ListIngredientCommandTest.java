@@ -13,8 +13,6 @@ class ListIngredientCommandTest {
     @Test
     public void listCommandIngredient_validCategoryName_correctlyConstructed() throws Exception {
         ListIngredientCommand command = new ListIngredientCommand("all");
-        // TODO: add comparison of tags to person.equals and equality methods to
-        // individual fields that compare privacy to simplify this
         assertEquals("all",command.getCategory());
         assertTrue(command.checkCategoryValid());
     }
@@ -22,13 +20,16 @@ class ListIngredientCommandTest {
     @Test
     public void listCommandIngredient_invalidCategoryName_correctlyConstructed() throws Exception {
         ListIngredientCommand command = new ListIngredientCommand("laptop");
-        // TODO: add comparison of tags to person.equals and equality methods to
-        // individual fields that compare privacy to simplify this
         assertEquals("laptop",command.getCategory());
         assertFalse(command.checkCategoryValid());
     }
 
-
+    @Test
+    public void listCommandIngredient_invalidCategoryName2_correctlyConstructed() throws Exception {
+        ListIngredientCommand command = new ListIngredientCommand("123");
+        assertEquals("123",command.getCategory());
+        assertFalse(command.checkCategoryValid());
+    }
 
 
 
