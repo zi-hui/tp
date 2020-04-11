@@ -3,7 +3,6 @@ package seedu.kitchenhelper.command;
 import seedu.kitchenhelper.object.Chore;
 import seedu.kitchenhelper.object.Recipe;
 import seedu.kitchenhelper.object.ingredient.Ingredient;
-import seedu.kitchenhelper.exception.KitchenHelperException;
 import seedu.kitchenhelper.ui.Ui;
 
 import java.util.ArrayList;
@@ -41,6 +40,7 @@ public class HelpCommand extends Command {
                 + HelpCommand.MESSAGE_USAGE + LS_LS
                 + ResetCommand.MESSAGE_USAGE + LS_LS
                 + SaveStateCommand.MESSAGE_USAGE + LS_LS
+                + DisplayExpenditureCommand.MESSAGE_USAGE + LS_LS
                 + ExitCommand.MESSAGE_USAGE + LS_LS
                 + INGREDIENT_LOGO
                 + AddIngredientCommand.MESSAGE_USAGE + LS_LS
