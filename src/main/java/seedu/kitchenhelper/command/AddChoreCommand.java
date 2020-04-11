@@ -59,7 +59,7 @@ public class AddChoreCommand extends Command {
      */
     public String getDateStr() {
         if (dateStr == null) {
-           return "";
+            return "";
         }
         return dateStr;
     }

@@ -63,9 +63,9 @@ class ParserTest {
         String correctAttributesWithString = "buy groceries /by Tuesday 12pm";
         assertTrue(new Parser().prepareAddChore(correctAttributesWithString) instanceof AddChoreCommand);
         String correctAttributesWithDate = "buy groceries /by 14/04/2020 12:00";
-        AddChoreCommand AddChoreCommandDate =
-                (AddChoreCommand) new Parser().prepareAddChore(correctAttributesWithDate);
-        assertTrue(AddChoreCommandDate.getDateStr().isEmpty());
+        AddChoreCommand addChoreCommandDate
+                = (AddChoreCommand) new Parser().prepareAddChore(correctAttributesWithDate);
+        assertTrue(addChoreCommandDate.getDateStr().isEmpty());
         String overdueDate = "buy groceries /by 14/03/2020 12:00";
         assertTrue(new Parser().prepareAddChore(overdueDate) instanceof InvalidCommand);
     }
